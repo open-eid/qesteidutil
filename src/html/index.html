@@ -1,0 +1,455 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link rel="stylesheet" href="qrc:/html/style.css" type="text/css" />
+	<script type="text/javascript" src="qrc:/html/lang.js" />
+	<script type="text/javascript" src="qrc:/html/script.js" />
+</head>
+<body onSelectStart="return false;">
+  <div id="top">
+    <div id="headerBackground">
+      <div id="headerLogo">&nbsp;</div>
+      <div id="headerMenus">
+        <ul>
+          <li><a href="#" onClick="cardManager.showDiagnostics();" accesskey="D"><trtag trcode="linkDiagnostics"></trtag></a></li>
+          <li><a href="#" onClick="extender.showSettings();" accesskey="DT"><trtag trcode="linkSettings"></trtag></a></li>
+          <li><a href="#" onClick="openHelp();" accesskey="AH"><trtag trcode="linkHelp"></trtag></a></li>
+        </ul>
+	  </div>
+          <div id="readerSelectDiv" style="display: none;"><select id="readerSelect" onChange="selectReader();"></select></div>
+          <div id="headerSelectDiv">
+        <select id="headerSelect" onChange="selectLanguage();">
+          <option value="et">Estonian</option>
+          <option value="en">English</option>
+          <option value="ru">Russian</option>
+        </select>
+      </div>
+    </div>
+    <div id="topBackground">&nbsp;</div>
+    <div id="logo">&nbsp;</div>
+    <div id="logotext">&nbsp;</div>
+    <div id="linegray">&nbsp;</div>
+    <div id="personalInfo">
+      <ul>
+        <li><trtag trcode="personName"></trtag>: <span id="firstName"></span> <span id="middleName"></span> <span id="surName"></span></li>
+        <li style="display:none" id="liDepartment"><trtag trcode="personDepartment"></trtag>: <span id="department"></span></li>
+        <li><trtag trcode="personCode" id="personCode"></trtag>: <span id="id"></span></li>
+		<li id="liPersonBirth"><trtag trcode="personBirth"></trtag>: <span id="birthDate"></span><span id="birthPlace"></span></li>
+        <li id="liPersonCitizen"><trtag trcode="personCitizen"></trtag>: <span id="citizen"></span></li>
+        <li><trtag trcode="personEmail"></trtag>: <span id="email"></span></li>
+      </ul>
+    </div>
+    <div id="photo">
+	
+    </div>
+    <div id="savePhoto">
+		<a href="#" onClick="savePicture();"><trtag trcode="savePicture"></trtag></a>
+    </div>	
+    <div id="leftMenus">
+      <ul>
+		<li><input type="button" accesskey="C" trcode="inputCert" id="buttonCert" name="cert" onClick="setActive('cert',this);" onKeyPress="checkEnter( event, this );" class="buttonSelected" /></li>
+        <li><input type="button" accesskey="E" trcode="inputEmail" name="email" onClick="setActive('email',this);" onKeyPress="checkEnter( event, this );" class="button" /></li>
+        <li><input type="button" accesskey="M" trcode="inputMobile" name="mobile" onClick="setActive('mobile',this);" onKeyPress="checkEnter( event, this );" class="button" /></li>
+		<li><input type="button" accesskey="P" trcode="inputPUK" id="buttonPUK" name="puk" onClick="setActive('puk',this);" onKeyPress="checkEnter( event, this );" class="button" /></li>
+      </ul>
+    </div>
+    <div id="cardInfo" class="cardInfo">
+      <ul>
+        <li><trtag trcode="labelCardInReaderID"></trtag> <span id="documentId" style="color: #355670;"></span></li>
+		<li><trtag trcode="labelThisIs"></trtag> <span id="labelCardValidity"></span> <trtag trcode="labelDocument"></trtag></li>
+        <li><span style="font-size:12px; font-weight: normal; color: #355670;" id="labelCardValidTo"></span></li>
+      </ul>
+    </div>
+    <div id="cardInfoNoCard" class="cardInfo" style="display:none; text-align:center;">
+        <p class="noCard" id="cardInfoNoCardText"></p>
+    </div>
+  </div>
+
+  <!-- sertifikaatide sisu algus-->
+  <div id="certContent" class="content" style="display: none;">
+    <div class="leftContent">
+      <span class="contentHeader"><trtag trcode="labelAuthCert"></trtag></span>
+      <p>
+        <trtag trcode="labelCertIs"></trtag> <span id="authCertStatus"></span><br />
+        <trtag trcode="labelCertIsValidTill"></trtag> <span id="authCertValidTo"></span><br />
+		<span id="authCertWillExpire" class="certBlocked" style="display:none;"></span>
+      </p>
+      <p id="authKeyText">
+        <trtag trcode="labelAuthUsed"></trtag> <span id="authKeyUsage"></span> <trtag trcode="labelTimes"></trtag>
+      </p>
+      <div id="authKeyBlocked" class="keyBlocked">
+        <trtag trcode="labelAuthKeyBlocked"></trtag><br /><trtag trcode="labelCertBlocked"></trtag>
+      </div>
+	  <div id="authUpdateDiv" style="display: none;">
+		<input id="authUpdateButton" type="button" trcode="inputUpdateCert" onClick="updateCert();" onKeyPress="checkEnter( event, this );" class="buttonBottom" />
+	  </div>
+      <div id="authBottomButtons">
+        <div id="authValidButtons">
+          <input id="authValidButtons1" type="button" trcode="inputChangePIN1" onClick="setActive('pin1','');" onKeyPress="checkEnter( event, this );" class="buttonBottom" />
+          <input id="authValidButtons2" type="button" trcode="inputCertDetails" onClick="esteidData.showCert(1)" onKeyPress="checkEnter( event, this );" class="buttonBottom" />
+        </div>
+        <div id="authBlockedButtons" style="position: absolute; bottom: 5px; left: 50px;">
+          <input id="authBlockedButtons1" type="button" trcode="inputUnblock" onclick="setActive('bpin1','');" onKeyPress="checkEnter( event, this );" class="buttonBottom" />
+        </div>
+      </div>
+    </div>
+    <div class="rightContent">
+      <span class="contentHeader"><trtag trcode="labelSignCert"></trtag></span>
+      <p>
+        <trtag trcode="labelCertIs"></trtag> <span id="signCertStatus"></span><br />
+        <trtag trcode="labelCertIsValidTill"></trtag> <span id="signCertValidTo"></span><br />
+		<span id="signCertWillExpire" class="certBlocked" style="display:none;"></span>
+      </p>
+      <p id="signKeyText">
+        <trtag trcode="labelSignUsed"></trtag> <span id="signKeyUsage"></span> <trtag trcode="labelTimes"></trtag>
+      </p>
+      <div id="signKeyBlocked" class="keyBlocked">
+        <trtag trcode="labelSignKeyBlocked"></trtag><br /><trtag trcode="labelCertBlocked"></trtag>
+      </div>
+      <div id="signBottomButtons" style="padding-left: 30px;">
+        <div id="signValidButtons">
+          <input id="signValidButtons1" type="button" trcode="inputChangePIN2" onclick="setActive('pin2','');" onKeyPress="checkEnter( event, this );" class="buttonBottom" />
+          <input id="signValidButtons2" type="button" trcode="inputCertDetails" onClick="esteidData.showCert(2)" onKeyPress="checkEnter( event, this );" class="buttonBottom" />
+        </div>
+        <div id="signBlockedButtons" style="position: absolute; bottom: 5px; left: 90px;">
+          <input id="signBlockedButtons1" type="button" trcode="inputUnblock" onclick="setActive('bpin2','');" onKeyPress="checkEnter( event, this );" class="buttonBottom" />
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- sertifikaatide sisu l6pp -->
+
+  <!-- PIN1 blokeeringu algus -->
+  <div id="bpin1Content" class="content" style="display: none;">
+	<span class="contentHeader"><trtag trcode="labelAuthCertBlocked"></trtag></span>
+	<div class="leftContent">
+		<p>
+			<trtag trcode="labelCertUnblock"></trtag>
+		</p>
+		<p>
+			<trtag trcode="labelCertUnblock1"></trtag>
+		</p>
+		<p>
+			<trtag trcode="labelCertUnblock2"></trtag>
+		</p>
+	</div>
+	<div class="rightContent">
+		<label>
+			<trtag trcode="labelPUK"></trtag><br />
+			<input type="password" name="bpin1OldPin" id="bpin1OldPin" maxlength="12" onKeyPress="handlekey('bpin1NewPin'); return checkNumeric(event);">
+		</label>
+		<br />
+		<label>
+			<trtag trcode="labelNewPIN1"></trtag>
+			<input type="password" name="bpin1NewPin" id="bpin1NewPin" maxlength="12" onKeyPress="handlekey('bpin1NewPin2'); return checkNumeric(event);">
+		</label>
+		<br />
+		<label>
+			<trtag trcode="labelNewPIN12"></trtag>
+			<input type="password" name="bpin1NewPin2" id="bpin1NewPin2" maxlength="12" onKeyPress="handlekey('inputUnblockPin1'); return checkNumeric(event);">
+		</label>
+		<br />
+        <input type="button" trcode="inputChange" onClick="unblockPin1();" onKeyPress="checkEnter( event, this );" class="buttonBottom" id="inputUnblockPin1" />
+        <input type="button" trcode="inputCancel" onClick="setActive('cert','');" onKeyPress="checkEnter( event, this );" class="buttonBottom" />		
+	</div>
+  </div>
+  <!-- PIN1 blokeeringu l6pp -->
+  
+  <!-- PIN1 muutmine algus -->
+  <div id="pin1Content" class="content" style="display: none;">
+	<span class="contentHeader"><trtag trcode="labelChangingPIN1"></trtag></span>
+	<div class="leftContent">
+		<p>
+			<trtag trcode="labelChangingPIN11"></trtag>
+		</p>
+		<p>
+			<trtag trcode="labelChangingPIN12"></trtag>
+		</p>
+		<a href="#" style="font-size:12px;" onClick="setActive('ppin1','');"><trtag trcode="linkPIN1withPUK"></trtag></a>
+	</div>
+	<div class="rightContent">
+		<label>
+			<trtag trcode="labelCurrentPIN1"></trtag>
+			<input type="password" name="pin1OldPin" id="pin1OldPin" maxlength="12" onKeyPress="handlekey('pin1NewPin'); return checkNumeric(event);">
+		</label>
+		<br />
+		<label>
+			<trtag trcode="labelNewPIN1"></trtag>
+			<input type="password" name="pin1NewPin" id="pin1NewPin" maxlength="12" onKeyPress="handlekey('pin1NewPin2'); return checkNumeric(event);">
+		</label>
+		<br />
+		<label>
+			<trtag trcode="labelNewPIN12"></trtag>
+			<input type="password" name="pin1NewPin2" id="pin1NewPin2" maxlength="12" onKeyPress="handlekey('inputChangePin1'); return checkNumeric(event);">
+		</label>
+		<br />
+        <input type="button" trcode="inputChange" onClick="changePin1();" onKeyPress="checkEnter( event, this );" class="buttonBottom" id="inputChangePin1" />
+        <input type="button" trcode="inputCancel" onClick="setActive('cert','');" onKeyPress="checkEnter( event, this );" class="buttonBottom" />		
+	</div>
+  </div>
+  <!-- PIN1 muutmine l6pp -->
+  
+  <!-- PIN1 muutmine PUKiga algus -->
+  <div id="ppin1Content" class="content" style="display: none;">
+	<span class="contentHeader"><trtag trcode="labelChangingPIN1"></trtag></span>
+	<div class="leftContent">
+		<p>
+			<trtag trcode="labelChangingPIN11"></trtag>
+		</p>
+		<p>
+			<trtag trcode="labelChangingPIN13"></trtag>
+		</p>
+	</div>
+	<div class="rightContent">
+		<label>
+			<trtag trcode="labelPUK"></trtag>
+			 <br />
+			<input type="password" name="pin1OldPin" id="ppin1OldPin" maxlength="12" onKeyPress="handlekey('ppin1NewPin'); return checkNumeric(event);">
+		</label>
+		<br />
+		<label>
+			<trtag trcode="labelNewPIN1"></trtag>
+			<input type="password" name="pin1NewPin" id="ppin1NewPin" maxlength="12" onKeyPress="handlekey('ppin1NewPin2'); return checkNumeric(event);">
+		</label>
+		<br />
+		<label>
+			<trtag trcode="labelNewPIN12"></trtag>
+			<input type="password" name="pin1NewPin2" id="ppin1NewPin2" maxlength="12" onKeyPress="handlekey('inputChangePin1p'); return checkNumeric(event);">
+		</label>
+		<br />
+		<input type="button" trcode="inputChange" onClick="changePin1PUK();" onKeyPress="checkEnter( event, this );" class="buttonBottom" id="inputChangePin1p" />
+		<input type="button" trcode="inputCancel" onClick="setActive('cert','');" onKeyPress="checkEnter( event, this );" class="buttonBottom" />
+	</div>
+  </div>
+  <!-- PIN1 muutmine PUKiga l6pp -->
+
+  <!-- PIN2 blokeeringu algus -->
+  <div id="bpin2Content" class="content" style="display: none;">
+	<span class="contentHeader"><trtag trcode="labelSignCertBlocked"></trtag></span>
+	<div class="leftContent">
+		<p>
+			<trtag trcode="labelCertUnblock"></trtag>
+		</p>
+		<p>
+			<trtag trcode="labelCertUnblock1"></trtag>
+		</p>
+		<p>
+			<trtag trcode="labelCertUnblock2"></trtag>
+		</p>
+	</div>
+	<div class="rightContent">
+		<label>
+			<trtag trcode="labelPUK"></trtag><br />
+			<input type="password" name="bpin2OldPin" id="bpin2OldPin" maxlength="12" onKeyPress="handlekey('bpin2NewPin'); return checkNumeric(event);">
+		</label>
+		<br />
+		<label>
+			<trtag trcode="labelNewPIN2"></trtag>
+			<input type="password" name="bpin2NewPin" id="bpin2NewPin" maxlength="12" onKeyPress="handlekey('bpin2NewPin2'); return checkNumeric(event);">
+		</label>
+		<br />
+		<label>
+			<trtag trcode="labelNewPIN22"></trtag>
+			<input type="password" name="bpin2NewPin2" id="bpin2NewPin2" maxlength="12" onKeyPress="handlekey('inputUnblockPin2'); return checkNumeric(event);">
+		</label>
+		<br />
+        <input type="button" trcode="inputChange" onClick="unblockPin2();" onKeyPress="checkEnter( event, this );" class="buttonBottom" id="inputUnblockPin2" />
+        <input type="button" trcode="inputCancel" onClick="setActive('cert','');" onKeyPress="checkEnter( event, this );" class="buttonBottom" />		
+	</div>
+  </div>
+  <!-- PIN2 blokeeringu l6pp -->
+  
+  <!-- PIN2 muutmine algus -->
+  <div id="pin2Content" class="content" style="display: none;">
+	<span class="contentHeader"><trtag trcode="labelChangingPIN2"></trtag></span>
+	<div class="leftContent">
+		<p>
+			<trtag trcode="labelChangingPIN21"></trtag>
+		</p>
+		<p>
+			<trtag trcode="labelChangingPIN22"></trtag>
+		</p>
+		<a href="#" style="font-size:12px;" onClick="setActive('ppin2','');"><trtag trcode="linkPIN2withPUK"></trtag></a>
+	</div>
+	<div class="rightContent">
+		<label>
+			<trtag trcode="labelCurrentPIN2"></trtag>
+			 <br />
+			<input type="password" name="pin2OldPin" id="pin2OldPin" maxlength="12" onKeyPress="handlekey('pin2NewPin'); return checkNumeric(event);">
+		</label>
+		<br />
+		<label>
+			<trtag trcode="labelNewPIN2"></trtag>
+			<input type="password" name="pin2NewPin" id="pin2NewPin" maxlength="12" onKeyPress="handlekey('pin2NewPin2'); return checkNumeric(event);">
+		</label>
+		<br />
+		<label>
+			<trtag trcode="labelNewPIN22"></trtag>
+			<input type="password" name="pin2NewPin2" id="pin2NewPin2" maxlength="12" onKeyPress="handlekey('inputChangePin2'); return checkNumeric(event);">
+		</label>
+		<br />
+        <input type="button" trcode="inputChange" onClick="changePin2();" onKeyPress="checkEnter( event, this );" class="buttonBottom" id="inputChangePin2" />
+        <input type="button" trcode="inputCancel" onClick="setActive('cert','');" onKeyPress="checkEnter( event, this );" class="buttonBottom" />		
+	</div>
+  </div>
+  <!-- PIN2 muutmine l6pp -->
+  
+  <!-- PIN2 muutmine PUKiga algus -->
+  <div id="ppin2Content" class="content" style="display: none;">
+	<span class="contentHeader"><trtag trcode="labelChangingPIN2"></trtag></span>
+	<div class="leftContent">
+		<p>
+			<trtag trcode="labelChangingPIN21"></trtag>
+		</p>
+		<p>
+			<trtag trcode="labelChangingPIN23"></trtag>
+		</p>
+	</div>
+	<div class="rightContent">
+		<label>
+			<trtag trcode="labelPUK"></trtag>
+			 <br />
+			<input type="password" name="pin2OldPin" id="ppin2OldPin" maxlength="12" onKeyPress="handlekey('ppin2NewPin'); return checkNumeric(event);">
+		</label>
+		<br />
+		<label>
+			<trtag trcode="labelNewPIN2"></trtag>
+			<input type="password" name="pin2NewPin" id="ppin2NewPin" maxlength="12" onKeyPress="handlekey('ppin2NewPin2'); return checkNumeric(event);">
+		</label>
+		<br />
+		<label>
+			<trtag trcode="labelNewPIN22"></trtag>
+			<input type="password" name="pin2NewPin2" id="ppin2NewPin2" maxlength="12" onKeyPress="handlekey('inputChangePin2p'); return checkNumeric(event);">
+		</label>
+		<br />
+		<input type="button" trcode="inputChange" onClick="changePin2PUK();" onKeyPress="checkEnter( event, this );" class="buttonBottom" id="inputChangePin2p" />
+		<input type="button" trcode="inputCancel" onClick="setActive('cert','');" onKeyPress="checkEnter( event, this );" class="buttonBottom" />
+	</div>
+  </div>
+  <!-- PIN2 muutmine PUKiga l6pp -->
+
+  <!-- Eposti sisu algus -->
+  <div id="emailContent" class="content" style="display: none;">
+	<span class="contentHeader"><trtag trcode="inputEmail"></trtag></span>
+	<p id="emailsContent">
+		&nbsp;
+	</p>
+	<p id="emailsContentCheckID" style="display:none;">
+		<trtag trcode="emailCheckID"></trtag>
+	</p>
+	<p id="emailsContentActivate" style="display:none;">
+		<label>
+			<trtag trcode="labelEmailAddress"></trtag>
+			<input type="text" name="emailAddress" id="emailAddress" onKeyPress="handlekey('buttonActivateEmail'); return true;">
+		</label>
+		<br />
+		<input type="button" trcode="inputActivateEmail" onclick="activateEmail()" onKeyPress="checkEnter( event, this );" class="buttonBottom" id="buttonActivateEmail" />
+	</p>
+	<p id="emailsContentCheck" style="display:none;">
+		<input type="button" trcode="inputCheckEmails" onClick="loadEmails()" onKeyPress="checkEnter( event, this );" class="buttonBottom" />
+	</p>
+	<p>
+		<trtag trcode="labelEmailUrl"></trtag> <a href="#" onClick="extender.openUrl('http://www.eesti.ee/est/');">eesti.ee</a>
+	</p>
+  </div>
+  <!-- Eposti sisu l6pp -->
+  
+  <!-- Mobiil-ID sisu algus -->
+  <div id="mobileContent" class="content" style="display: none;">
+	<span class="contentHeader"><trtag trcode="inputMobile"></trtag></span>
+	<p>
+		<trtag trcode="labelMobile"></trtag><br />
+		<a href="#" onClick="extender.openUrl('http://id.ee/?id=10971');"><trtag trcode="labelMobileReadMore"></trtag></a>
+	</p>
+	<p>
+		<trtag trcode="labelMobile2"></trtag>
+	</p>
+	<p>
+		<input type="button" id="inputCheckMobile" trcode="inputCheckMobile" onClick="checkMobile()" onKeyPress="checkEnter( event, this );" class="buttonBottom" />
+	</p>
+  </div>
+  <!-- Mobiil-ID sisu l6pp -->
+  
+  <!-- Mobiil-ID staatus sisu algus -->
+  <div id="smobileContent" class="content" style="display: none;">
+	<span class="contentHeader"><trtag trcode="inputMobile"></trtag></span>
+	<p>
+		
+	</p>
+	<p>
+	  <ul>
+		<li><trtag trcode="mobileNumber"></trtag>: <span id="mobileNumber"></span></li>
+		<li><trtag trcode="mobileOperator"></trtag>: <span id="mobileOperator"></span></li>
+		<li><trtag trcode="mobileStatus"></trtag>: <span id="mobileStatus"></span></li>
+	  </ul>
+	</p>
+	<p id="activateMobileButton" style="display: none;">
+		<input id="inputActivateMobile" type="button" onClick="" trcode="inputActivateMobile" onKeyPress="checkEnter( event, this );" class="buttonBottom" />
+	</p>
+  </div>
+  <!-- Mobiil-ID staatus sisu l6pp -->
+  
+  <!-- PUK sisu algus -->
+  <div id="pukContent" class="content" style="display: none;">
+	<span class="contentHeader"><trtag trcode="inputPUK"></trtag></span>
+    <p>
+		<trtag trcode="labelInputPUK"></trtag>
+	</p>
+	<p>
+		<trtag trcode="labelInputPUK2"></trtag>
+    </p>
+	<p id="labelPUKBlocked" style="display: none; text-align: center;">
+	  <span class="pukBlocked"><trtag trcode="labelPUKBlocked"></trtag></span>
+	</p>
+	<p>
+		<input type="button" trcode="inputChangePUK" id="buttonChangePUK2" onClick="setActive('cpuk','');" onKeyPress="checkEnter( event, this );" class="buttonBottom" />
+	</p>
+	<p id="chanePIN4PUK">
+		<a href="#" style="font-size:12px;" onClick="setActive('ppin1','buttonCert');"><trtag trcode="linkPIN1withPUK"></trtag></a><br />
+		<a href="#" style="font-size:12px;" onClick="setActive('ppin2','buttonCert');"><trtag trcode="linkPIN2withPUK"></trtag></a>
+	</p>
+  </div>
+  <!-- PUK sisu l6pp -->
+  
+  <!-- PUK muutmine algus -->
+  <div id="cpukContent" class="content" style="display: none;">
+	<span class="contentHeader"><trtag trcode="labelChangingPUK"></trtag></span>
+	<div class="leftContent">
+		<p>
+			<trtag trcode="labelChangingPUK2"></trtag>
+		</p>
+	</div>
+	<div class="rightContent">
+		<label>
+			<trtag trcode="labelCurrentPUK"></trtag>
+			<input type="password" name="pukOldPin" id="pukOldPin" maxlength="12" onKeyPress="handlekey('pukNewPin'); return checkNumeric(event);">
+		</label>
+		<br />
+		<label>
+			<trtag trcode="labelNewPUK"></trtag>
+			<input type="password" name="pukNewPin" id="pukNewPin" maxlength="12" onKeyPress="handlekey('pukNewPin2'); return checkNumeric(event);">
+		</label>
+		<br />
+		<label>
+			<trtag trcode="labelNewPUK2"></trtag>
+			<input type="password" name="pukNewPin2" id="pukNewPin2" maxlength="12" onKeyPress="handlekey('buttonChangePuk'); return checkNumeric(event);">
+		</label>
+		<br />
+        <input type="button" trcode="inputChange" onClick="changePuk();" onKeyPress="checkEnter( event, this );" class="buttonBottom" id="buttonChangePuk" />
+        <input type="button" trcode="inputCancel" onClick="setActive('puk','');" onKeyPress="checkEnter( event, this );" class="buttonBottom" />		
+	</div>
+  </div>
+  <div id="forUpdate" style="color: #FFFFFF; position: absolute; bottom: 20px; width: 400px; height: 1px; z-index: -100"></div>
+  <!-- PUK muutmine l6pp -->
+
+<script type="text/javascript">
+language = extender.locale();
+document.getElementById('headerSelect').value = language;
+
+translateHTML();
+
+disableFields();
+</script>
+
+</body>
+</html>

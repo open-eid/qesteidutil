@@ -1,0 +1,19 @@
+<!DOCTYPE RCC><RCC version="1.0">
+  <qresource>
+    <file>html/index.html</file>
+    <file>html/lang.js</file>
+    <file>html/script.js</file>
+    <file>html/style.css</file>
+    <file>html/images/button.png</file>
+    <file>html/images/buttonSelected.png</file>
+    <file>html/images/linegray.png</file>
+    <file>html/images/logo.png</file>
+    <file>html/images/topLogo.png</file>
+    <file>html/images/logotext.png</file>
+    <file>html/images/id_icon_48x48.png</file>
+    <file>html/images/flag_estonian.png</file>
+    <file>html/images/flag_english.png</file>
+    <file>html/images/flag_russian.png</file>
+    <file alias="stamp">../common/images/ico_stamp_blue_75.png</file>
+  </qresource>
+</RCC>
