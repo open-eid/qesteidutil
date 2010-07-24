@@ -77,21 +77,29 @@ table.annotated td {
 
 table tr pre
 {
-  padding-top: none;
-  padding-bottom: none;
-  padding-left: none;
-  padding-right: none;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
   border: none;
   background: none
 }
 
 tr.qt-style
 {
-  background: #a2c511;
+  background: #96E066;
   color: black
 }
 
 body pre
+{
+  padding: 0.2em;
+  border: #e7e7e7 1px solid;
+  background: #f1f1f1;
+  color: black
+}
+
+table tr.qt-code pre
 {
   padding: 0.2em;
   border: #e7e7e7 1px solid;

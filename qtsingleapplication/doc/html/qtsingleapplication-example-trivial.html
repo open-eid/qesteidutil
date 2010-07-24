@@ -2,7 +2,7 @@
 <!DOCTYPE html
     PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<!-- qtsingleapplication-2.6-opensource/examples/trivial/trivial.qdoc -->
+<!-- qtsingleapplication-2.6_1-opensource/examples/trivial/trivial.qdoc -->
 <head>
   <title>A Trivial Example</title>
   <link href="classic.css" rel="stylesheet" type="text/css" />
@@ -15,14 +15,14 @@
 </tr></table><h1 class="title">A Trivial Example<br /><span class="subtitle"></span>
 </h1>
 <p>The application in this example has a log-view that displays messages sent by further instances of the same application.</p>
-<p>The example demonstrates the use of the <a href="qtsingleapplication.html">QtSingleApplication</a> class to detect and communicate with a running instance of the application using the sendMessage() API. The messageReceived() signal is used to display received messages in a <a href="http://doc.trolltech.com/4.4/qtextedit.html">QTextEdit</a> log.</p>
+<p>The example demonstrates the use of the <a href="qtsingleapplication.html">QtSingleApplication</a> class to detect and communicate with a running instance of the application using the sendMessage() API. The messageReceived() signal is used to display received messages in a <a href="http://qt.nokia.com/doc/4.5/qtextedit.html">QTextEdit</a> log.</p>
 <pre><span class="comment"> /****************************************************************************
  **
- ** This file is part of a Qt Solutions component.
- **
  ** Copyright (c) 2009 Nokia Corporation and/or its subsidiary(-ies).
+ ** All rights reserved.
+ ** Contact: Nokia Corporation (qt-info@nokia.com)
  **
- ** Contact:  Qt Software Information (qt-info@nokia.com)
+ ** This file is part of a Qt Solutions component.
  **
  ** Commercial Usage
  ** Licensees holding valid Qt Commercial licenses may use this file in
@@ -40,7 +40,7 @@
  **
  ** In addition, as a special exception, Nokia gives you certain
  ** additional rights. These rights are described in the Nokia Qt LGPL
- ** Exception version 1.0, included in the file LGPL_EXCEPTION.txt in this
+ ** Exception version 1.1, included in the file LGPL_EXCEPTION.txt in this
  ** package.
  **
  ** GNU General Public License Usage
@@ -58,7 +58,7 @@
  ** Party Software they are using.
  **
  ** If you are unsure which license is appropriate for your use, please
- ** contact the sales department at qt-sales@nokia.com.
+ ** contact Nokia at qt-info@nokia.com.
  **
  ****************************************************************************/</span>
 
@@ -99,12 +99,12 @@
 
      return instance.exec();</pre>
 <p>The <tt>logview</tt> object is also set as the application's activation window. Every time a message is received, the window will be raised and activated automatically.</p>
-<p>The messageReceived() signal is also connected to the <a href="http://doc.trolltech.com/4.4/qtextedit.html">QTextEdit</a>'s append() slot. Every message received from further instances of this application will be displayed in the log.</p>
+<p>The messageReceived() signal is also connected to the <a href="http://qt.nokia.com/doc/4.5/qtextedit.html">QTextEdit</a>'s append() slot. Every message received from further instances of this application will be displayed in the log.</p>
 <p>Finally the event loop is entered.</p>
 <p /><address><hr /><div align="center">
 <table width="100%" cellspacing="0" border="0"><tr class="address">
-<td width="30%" align="left">Copyright &copy; 2009 Nokia</td>
-<td width="40%" align="center"><a href="http://doc.trolltech.com/trademarks.html">Trademarks</a></td>
+<td width="30%" align="left">Copyright &copy; 2009 Nokia Corporation and/or its subsidiary(-ies)</td>
+<td width="40%" align="center"><a href="http://qt.nokia.com/doc/trademarks.html">Trademarks</a></td>
 <td width="30%" align="right"><div align="right">Qt Solutions</div></td>
 </tr></table></div></address></body>
 </html>
