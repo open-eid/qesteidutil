@@ -40,6 +40,7 @@
 #include <QProcess>
 #elif defined(Q_OS_MAC)
 #include <Carbon/Carbon.h>
+#include <QProcess>
 #endif
 
 DiagnosticsDialog::DiagnosticsDialog( QWidget *parent )
@@ -56,14 +57,57 @@ DiagnosticsDialog::DiagnosticsDialog( QWidget *parent )
 
 	s << "<b>" << tr("OS:") << "</b> ";
 #if defined(Q_OS_WIN32)
-	switch( QSysInfo::WindowsVersion )
+	OSVERSIONINFOEX osvi;
+	ZeroMemory( &osvi, sizeof( OSVERSIONINFOEX ) );
+	osvi.dwOSVersionInfoSize = sizeof( OSVERSIONINFOEX );
+	if( !GetVersionEx( (OSVERSIONINFO *) &osvi) )
 	{
-	case QSysInfo::WV_2000: s << "Windows 2000"; break;
-	case QSysInfo::WV_XP: s << "Windows XP"; break;
-	case QSysInfo::WV_2003: s << "Windows 2003"; break;
-	case QSysInfo::WV_VISTA: s << "Windows Vista"; break;
-	case QSysInfo::WV_WINDOWS7: s << "Windows 7"; break;
-	default: s << "Unknown version (" << QSysInfo::WindowsVersion << ")";
+		switch( QSysInfo::WindowsVersion )
+		{
+		case QSysInfo::WV_2000: s << "Windows 2000"; break;
+		case QSysInfo::WV_XP: s << "Windows XP"; break;
+		case QSysInfo::WV_2003: s << "Windows 2003"; break;
+		case QSysInfo::WV_VISTA: s << "Windows Vista"; break;
+		case QSysInfo::WV_WINDOWS7: s << "Windows 7"; break;
+		default: s << "Unknown version (" << QSysInfo::WindowsVersion << ")";
+		}
+	} else {
+		switch( osvi.dwMajorVersion )
+		{
+		case 5:
+			{
+				switch( osvi.dwMinorVersion )
+				{
+				case 0:
+					s << "Windows 2000 ";
+					s << ( osvi.wProductType == VER_NT_WORKSTATION ? "Professional" : "Server" );
+					break;
+				case 1:
+					s << "Windows XP ";
+					s << ( osvi.wSuiteMask & VER_SUITE_PERSONAL ? "Home" : "Professional" );
+					break;
+				case 2:
+					if ( GetSystemMetrics( SM_SERVERR2 ) )
+						s << "Windows Server 2003 R2";
+					else if ( osvi.wProductType == VER_NT_WORKSTATION )
+						s << "Windows XP Professional";
+					else
+						s << "Windows Server 2003";
+					break;
+				}
+				break;
+			}	
+		case 6:
+			{
+				switch( osvi.dwMinorVersion )
+				{
+					case 0: s << ( osvi.wProductType == VER_NT_WORKSTATION ? "Windows Vista" : "Windows Server 2008" ); break;
+					case 1: s << ( osvi.wProductType == VER_NT_WORKSTATION ? "Windows 7" : "Windows Server 2008 R2" ); break;
+				}
+				break;
+			}
+		default: s << "Unknown version (" << QSysInfo::WindowsVersion << ")";
+		}
 	}
 #elif defined(Q_OS_LINUX)
 	QProcess p;
@@ -213,6 +257,14 @@ bool DiagnosticsDialog::isPCSCRunning() const
 {
 	QProcess p;
 	p.start( "pidof", QStringList() << "pcscd" );
+	p.waitForFinished();
+	return !p.readAll().trimmed().isEmpty();
+}
+#elif defined(Q_OS_MAC)
+bool DiagnosticsDialog::isPCSCRunning() const
+{
+	QProcess p;
+	p.start( "sh -c \"ps ax | grep -v grep | grep pcscd\"" );
 	p.waitForFinished();
 	return !p.readAll().trimmed().isEmpty();
 }
