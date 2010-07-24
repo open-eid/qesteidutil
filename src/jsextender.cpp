@@ -31,7 +31,6 @@
 #include "CertUpdate.h"
 #include "mainwindow.h"
 #include "jsextender.h"
-#include "common/PinDialog.h"
 #include "common/Settings.h"
 #include "SettingsDialog.h"
 
@@ -476,10 +475,7 @@ bool JsExtender::updateCert()
 		CertUpdate *c = new CertUpdate( m_mainWindow->cardManager()->activeReaderNum(), this );
 		if ( c->checkUpdateAllowed() && m_mainWindow->eidCard()->m_authCert )
 		{
-			PinDialog p( PinDialog::Pin1Type, m_mainWindow->eidCard()->m_authCert->cert(), qApp->activeWindow() );
-			if( !p.exec() )
-				return false;
-			c->startUpdate( p.text() );
+			c->startUpdate();
 			result = true;
 		}
 	} catch ( std::runtime_error &e ) {
