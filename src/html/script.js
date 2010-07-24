@@ -62,7 +62,7 @@ function checkEnter( e, obj )
 
 function cardInserted(i)
 {
-	//alert("Kaart sisestati lugejasse " + cardManager.getReaderName(i))
+	//alert("Kaart sisestati lugejasse " + i + " - " + cardManager.getReaderName(i))
 	checkReaderCount();
 	setActive('cert',document.getElementById('buttonCert'));
 
@@ -193,21 +193,23 @@ function checkReaderCount()
 	}
 }
 
-function readCardData()
+function readCardData( translate )
 {
 	try {
-		if ( cardManager.getReaderCount() == 0 || !esteidData.canReadCard() )
+		if ( translate == null )
 		{
-			disableFields();
-			return;
-		} else
-			enableFields();
+			if ( cardManager.getReaderCount() == 0 || !esteidData.canReadCard() )
+			{
+				disableFields();
+				return;
+			} else
+				enableFields();
 
-		if ( activeCardId == "" )
-			activeCardId = esteidData.getDocumentId();
+			if ( activeCardId == "" )
+				activeCardId = esteidData.getDocumentId();
 
-		checkReaderCount();
-
+			checkReaderCount();
+		}
 		var pukRetry = esteidData.getPukRetryCount();
 		var esteidIsValid = esteidData.isValid();
 		
@@ -243,7 +245,7 @@ function readCardData()
 		
 		document.getElementById('authCertValidTo').innerHTML = esteidData.authCert.getValidTo( language );
 		var days = esteidData.authCert.validDays();
-		if ( days >= 0 && days <= 105 )
+		if ( days >= 0 && days <= 105 && pin1Retry != 0 )
 		{
 			document.getElementById('authCertWillExpire').style.display = 'block';
 			document.getElementById('authCertWillExpire').innerHTML = _( 'labelCertWillExpire' ).replace( /%d/, days );
@@ -254,7 +256,7 @@ function readCardData()
 
 		document.getElementById('signCertValidTo').innerHTML = esteidData.signCert.getValidTo( language );
 		days = esteidData.signCert.validDays();
-		if ( days >= 0 && days <= 105 )
+		if ( days >= 0 && days <= 105 && pin2Retry != 0 )
 		{
 			document.getElementById('signCertWillExpire').style.display = 'block';
 			document.getElementById('signCertWillExpire').innerHTML = _( 'labelCertWillExpire' ).replace( /%d/, days );
@@ -275,6 +277,9 @@ function readCardData()
 			document.getElementById('authCertStatus').innerHTML=_( esteidData.authCert.isValid() ? 'validBlocked' : 'invalidBlocked' );
 			document.getElementById('authKeyText').style.display='none';
 			document.getElementById('authKeyBlocked').style.display='block';
+			document.getElementById('spanAuthKeyBlocked').innerHTML=_("labelAuthKeyBlocked");
+			if ( language != "ru" )
+				document.getElementById('spanAuthKeyBlocked').innerHTML+="<br />"+_("labelCertBlocked");
 			document.getElementById('authValidButtons').style.display='none';
 			document.getElementById('authBlockedButtons').style.display=(pukRetry == 0 ? 'none' : 'block');
 		}
@@ -293,6 +298,9 @@ function readCardData()
 			document.getElementById('signCertStatus').innerHTML=_( esteidData.signCert.isValid() ? 'validBlocked' : 'invalidBlocked' );
 			document.getElementById('signKeyText').style.display='none';
 			document.getElementById('signKeyBlocked').style.display='block';
+			document.getElementById('spanSignKeyBlocked').innerHTML=_("labelSignKeyBlocked");
+			if ( language != "ru" )
+				document.getElementById('spanSignKeyBlocked').innerHTML+="<br />"+_("labelCertBlocked");
 			document.getElementById('signValidButtons').style.display='none';
 			document.getElementById('signBlockedButtons').style.display=(pukRetry == 0 ? 'none' : 'block');;
 		}
@@ -543,7 +551,7 @@ function handleNotice(msg)
 	_alert( 'notice', _( msg ) )
 }
 
-function disableFields( translate )
+function disableFields()
 {
 	var divs = document.getElementsByTagName('div');
 	for( i=0;i<divs.length;i++ )
@@ -554,9 +562,6 @@ function disableFields( translate )
 	}
 
 	emailsLoaded = false;
-	
-	if ( translate != null )
-		return;
 
 	document.getElementById('documentId').innerHTML = "";
 	document.getElementById('firstName').innerHTML = "";
@@ -579,10 +584,15 @@ function disableFields( translate )
 	try {
 		if ( !cardManager.anyCardsInReader() )
 		{
+			cardManager.disableRead();
+			activeCardId = "";
 			document.getElementById('cardInfoNoCard').style.display='block';
-			document.getElementById('cardInfoNoCardText').innerHTML=_( cardManager.getReaderCount() == 0 ? 'noReaders' : 'noCard' );
+			document.getElementById('cardInfoNoCardText').innerHTML='<trtag trcode="' + ( cardManager.getReaderCount() == 0 ? 'noReaders' : 'noCard' ) + '">' + _( cardManager.getReaderCount() == 0 ? 'noReaders' : 'noCard' ) + '</trtag>';
+			if ( cardManager.getReaderCount() == 0 )
+				cardManager.newManager();
+			cardManager.allowRead();
 		}
-	} catch( err ) {}
+	} catch( err ) { cardManager.allowRead(); }
 }
 
 function enableFields()
@@ -642,10 +652,12 @@ function setMobile( result )
 
 function updateCert()
 {
+	cardManager.disableRead();
 	extender.showLoading( _('updateCert') );
 	if ( !extender.updateCertAllowed() )
 	{
 		extender.closeLoading();
+		cardManager.allowRead();
 		return;
 	}
 	var ok = false;
@@ -657,10 +669,11 @@ function updateCert()
 		extender.closeLoading();
 		_alert( 'info', _( 'updateCertOk' ) );
 		activeCardId = "";
-		cardManager.disableRead();
-		cardInserted( cardManager.activeReaderNum() );
-		cardManager.allowRead();
+		var activeNum = cardManager.activeReaderNum();
+		cardManager.newManager();
+		cardInserted( activeNum );
 	}
+	cardManager.allowRead();
 	extender.closeLoading();
 }
 

@@ -39,7 +39,7 @@ public:
 	~CertUpdate();
 
 	bool checkUpdateAllowed();
-	void startUpdate( const QString &pin );
+	void startUpdate();
 
 private:
 	void throwError( const QString &msg );

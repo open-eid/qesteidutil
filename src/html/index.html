@@ -11,9 +11,9 @@
       <div id="headerLogo">&nbsp;</div>
       <div id="headerMenus">
         <ul>
-          <li><a href="#" onClick="cardManager.showDiagnostics();" accesskey="D"><trtag trcode="linkDiagnostics"></trtag></a></li>
-          <li><a href="#" onClick="extender.showSettings();" accesskey="DT"><trtag trcode="linkSettings"></trtag></a></li>
-          <li><a href="#" onClick="openHelp();" accesskey="AH"><trtag trcode="linkHelp"></trtag></a></li>
+          <li><span onMouseOver="this.style.textDecoration='underline'" onMouseOut="this.style.textDecoration='none'" onClick="cardManager.showDiagnostics();" accesskey="D"><trtag trcode="linkDiagnostics"></trtag></span></li>
+          <li><span onMouseOver="this.style.textDecoration='underline'" onMouseOut="this.style.textDecoration='none'" onClick="extender.showSettings();" accesskey="DT"><trtag trcode="linkSettings"></trtag></span></li>
+          <li><span onMouseOver="this.style.textDecoration='underline'" onMouseOut="this.style.textDecoration='none'" onClick="openHelp();" accesskey="AH"><trtag trcode="linkHelp"></trtag></span></li>
         </ul>
 	  </div>
           <div id="readerSelectDiv" style="display: none;"><select id="readerSelect" onChange="selectReader();"></select></div>
@@ -78,7 +78,7 @@
         <trtag trcode="labelAuthUsed"></trtag> <span id="authKeyUsage"></span> <trtag trcode="labelTimes"></trtag>
       </p>
       <div id="authKeyBlocked" class="keyBlocked">
-        <trtag trcode="labelAuthKeyBlocked"></trtag><br /><trtag trcode="labelCertBlocked"></trtag>
+		<span id="spanAuthKeyBlocked"></span>
       </div>
 	  <div id="authUpdateDiv" style="display: none;">
 		<input id="authUpdateButton" type="button" trcode="inputUpdateCert" onClick="updateCert();" onKeyPress="checkEnter( event, this );" class="buttonBottom" />
@@ -104,7 +104,7 @@
         <trtag trcode="labelSignUsed"></trtag> <span id="signKeyUsage"></span> <trtag trcode="labelTimes"></trtag>
       </p>
       <div id="signKeyBlocked" class="keyBlocked">
-        <trtag trcode="labelSignKeyBlocked"></trtag><br /><trtag trcode="labelCertBlocked"></trtag>
+		<span id="spanSignKeyBlocked"></span>
       </div>
       <div id="signBottomButtons" style="padding-left: 30px;">
         <div id="signValidButtons">

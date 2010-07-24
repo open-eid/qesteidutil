@@ -31,6 +31,10 @@
 #include <QRegExpValidator>
 #include <QVBoxLayout>
 
+PinDialog::PinDialog( QWidget *parent )
+:	QDialog( parent )
+{}
+
 PinDialog::PinDialog( PinType type, const QSslCertificate &cert, QWidget *parent )
 :	QDialog( parent )
 {

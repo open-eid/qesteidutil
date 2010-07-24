@@ -150,16 +150,22 @@ bool JsEsteidCard::changePin1(QString newVal, QString oldVal)
 
     byte retriesLeft = 0;
 
-    try {
-		return m_card->changeAuthPin( PinString( newVal.toLatin1() ),
+	int retry = 3;
+	while( retry > 0 )
+	{
+		try {
+			return m_card->changeAuthPin( PinString( newVal.toLatin1() ),
                                      PinString( oldVal.toLatin1() ),
                                      retriesLeft);
-	} catch(AuthError &) {
-        return false;
-    } catch (std::runtime_error &err) {
-        handleError(err.what());
-        return false;
-    }
+		} catch(AuthError &) {
+		    return false;
+		} catch (std::runtime_error &err) {
+		    handleError(err.what());
+		    m_card->reconnectWithT0();
+		}
+		retry--;
+	}
+	return false;
 }
 
 bool JsEsteidCard::validatePin2(QString oldVal)
@@ -197,16 +203,22 @@ bool JsEsteidCard::changePin2(QString newVal, QString oldVal)
 
     byte retriesLeft = 0;
 
-    try {
-		return m_card->changeSignPin( PinString( newVal.toLatin1() ),
+	int retry = 3;
+	while( retry > 0 )
+	{
+		try {
+			return m_card->changeSignPin( PinString( newVal.toLatin1() ),
                                      PinString( oldVal.toLatin1() ),
                                      retriesLeft);
-	} catch(AuthError &) {
-        return false;
-    } catch (std::runtime_error &err) {
-        handleError(err.what());
-        return false;
+		} catch(AuthError &) {
+		    return false;
+		} catch (std::runtime_error &err) {
+		    handleError(err.what());
+			m_card->reconnectWithT0();
+		}
+		retry--;
     }
+	return false;
 }
 
 bool JsEsteidCard::validatePuk(QString oldVal)
@@ -244,16 +256,22 @@ bool JsEsteidCard::changePuk(QString newVal, QString oldVal)
 
     byte retriesLeft = 0;
 
-    try {
-		return m_card->changePUK( PinString( newVal.toLatin1() ),
+	int retry = 3;
+	while( retry > 0 )
+	{
+		try {
+			return m_card->changePUK( PinString( newVal.toLatin1() ),
                                  PinString( oldVal.toLatin1() ),
                                  retriesLeft);
-    } catch(AuthError &) {
-        return false;
-    } catch (std::runtime_error &err) {
-        handleError(err.what());
-        return false;
+	    } catch(AuthError &) {
+	        return false;
+	    } catch (std::runtime_error &err) {
+	        handleError(err.what());
+	        m_card->reconnectWithT0();
+		}
+		retry--;
     }
+	return false;
 }
 
 bool JsEsteidCard::unblockPin1(QString newVal, QString puk)
@@ -265,16 +283,22 @@ bool JsEsteidCard::unblockPin1(QString newVal, QString puk)
 
     byte retriesLeft = 0;
 
-    try {
-		return m_card->unblockAuthPin( PinString( newVal.toLatin1() ),
+	int retry = 3;
+	while( retry > 0 )
+	{
+		try {
+			return m_card->unblockAuthPin( PinString( newVal.toLatin1() ),
                                       PinString( puk.toLatin1() ),
                                       retriesLeft);
-    } catch(AuthError &) {
-        return false;
-    } catch (std::runtime_error &err) {
-        handleError(err.what());
-        return false;
-    }
+	    } catch(AuthError &) {
+	        return false;
+	    } catch (std::runtime_error &err) {
+	        handleError(err.what());
+	        m_card->reconnectWithT0();
+	    }
+		retry--;
+	}
+	return false;
 }
 
 bool JsEsteidCard::unblockPin2(QString newVal, QString puk)
@@ -286,16 +310,22 @@ bool JsEsteidCard::unblockPin2(QString newVal, QString puk)
 
     byte retriesLeft = 0;
 
-    try {
-		return m_card->unblockSignPin( PinString( newVal.toLatin1() ),
+	int retry = 3;
+	while( retry > 0 )
+	{
+		try {
+			return m_card->unblockSignPin( PinString( newVal.toLatin1() ),
                                       PinString( puk.toLatin1() ),
                                       retriesLeft);
-	} catch(AuthError &) {
-        return false;
-    } catch (std::runtime_error &err) {
-        handleError(err.what());
-        return false;
-    }
+		} catch(AuthError &) {
+	        return false;
+	    } catch (std::runtime_error &err) {
+	        handleError(err.what());
+	        m_card->reconnectWithT0();
+	    }
+		retry--;
+	}
+	return false;
 }
 
 QString JsEsteidCard::getSurName()

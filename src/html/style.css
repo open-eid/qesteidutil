@@ -1,5 +1,7 @@
 body { cursor: default; margin: 0px; }
 input[type="button"] { cursor: hand; }
+a:link {color: #509b00; text-decoration: none;}	
+a:hover, a:focus {color: #509b00; text-decoration: underline;}	
 
 #headerBackground {position: relative; background: #00355f; height: 45px;}
 #headerLogo { float: left; margin: 8px 0px 0px 20px; background-image: url('qrc:/html/images/topLogo.png'); z-index: 20; width: 92px; height: 28px; }
@@ -13,8 +15,7 @@ input[type="button"] { cursor: hand; }
 #headerMenus ul { display: inline; }
 #headerMenus ul li { list-style: none; padding: 0px 5px 0px 10px; margin: 0px; display: inline; border-left: 1px solid #325e80; font-weight: bold; }
 #headerMenus ul li:first-child { border-left: none; padding-left: 0px;}
-#headerMenus a:link {color: #afc6d1; text-decoration: none;}
-#headerMenus a:hover, #headerMenus a:focus {color: #afc6d1; text-decoration: underline;}	
+#headerMenus span {color: #afc6d1;}
 
 #topBackground {position: relative; background: #c6ddfa; height: 200px; z-index: -10;}
 
@@ -68,9 +69,6 @@ input[type="button"] { cursor: hand; }
 .keyBlocked { position: absolute; bottom: 35px; width: 220px; padding: 5px;
 	font-family: "Arial, Liberation Sans"; font-size: 12px; font-weight: bold; color: #e80303; border: 1px solid #e80303; -webkit-border-radius: 5px; }
 				
-a:link {color: #509b00; text-decoration: none;}	
-a:hover, a:focus {color: #509b00; text-decoration: underline;}	
-
 label	 {color: #355670; font-weight: bold;}
 
 #statusBar { position: absolute; left: 10px; bottom:5px; width: 500px; height: 20px; }

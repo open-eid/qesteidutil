@@ -206,10 +206,10 @@ function selectLanguage()
 {
 	var select = document.getElementById('headerSelect'); 
 	language = select.options[select.selectedIndex].value;
-	disableFields( true );
 	translateHTML();
-	readCardData();
+	readCardData( true );
 	extender.setLanguage( language );
+	document.getElementById( 'forUpdate' ).innerHTML += ".";
 }
 
 function tr( est, eng, rus )

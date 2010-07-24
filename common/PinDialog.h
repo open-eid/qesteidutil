@@ -40,8 +40,10 @@ public:
 		Pin1PinpadType,
 		Pin2PinpadType,
 	};
+	PinDialog( QWidget *parent = 0 );
 	PinDialog( PinType type, const QSslCertificate &cert, QWidget *parent = 0 );
 	PinDialog( PinType type, const QString &title, QWidget *parent = 0 );
+	void init( PinType type, const QString &title );
 
 	QString text() const;
 
@@ -49,7 +51,6 @@ private Q_SLOTS:
 	void textEdited( const QString &text );
 
 private:
-	void init( PinType type, const QString &title );
 
 	QLineEdit	*m_text;
 	QPushButton	*ok;

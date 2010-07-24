@@ -70,6 +70,7 @@ public slots:
 	int activeReaderNum();
     void allowRead();
 	void disableRead();
+	void newManager();
 
 private slots:
     void pollCard();

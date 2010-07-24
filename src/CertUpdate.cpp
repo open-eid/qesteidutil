@@ -22,6 +22,8 @@
 
 #include "CertUpdate.h"
 
+#include "common/PinDialog.h"
+#include "common/SslCertificate.h"
 #include <smartcardpp/helperMacro.h>
 
 #include <QApplication>
@@ -89,9 +91,8 @@ bool CertUpdate::checkUpdateAllowed()
 	return true;
 }
 
-void CertUpdate::startUpdate( const QString &pin )
+void CertUpdate::startUpdate()
 {
-	m_pin = pin;
 	QByteArray result;
 	for( step = 1; step < 36; step++ )
 		result = runStep( step, result );
@@ -123,11 +124,26 @@ QByteArray CertUpdate::runStep( int s, QByteArray result )
 		break;
 	case 4:
 		{
+			PinDialog *p = new PinDialog( qApp->activeWindow() );
 			try {
+				SslCertificate c = m_authCert->cert();
+				if ( !card->isSecureConnection() && m_pin.isEmpty() )
+				{
+					p->init( PinDialog::Pin1Type, c.toString( c.isTempel() ? "CN serialNumber" : "GN SN serialNumber" ) );
+					if( !p->exec() )
+						throw std::runtime_error( "" );
+					m_pin = p->text();
+				} else if ( card->isSecureConnection() ) {
+					p->init( PinDialog::Pin1PinpadType, c.toString( c.isTempel() ? "CN serialNumber" : "GN SN serialNumber" ) );
+					p->show();
+					QApplication::processEvents();
+				}
 				card->enterPin( EstEidCard::PIN_AUTH, PinString( m_pin.toLatin1() ) );
 			} catch( const AuthError &e ) {
+				delete p;
 				throw std::runtime_error( "step4 auth error: " + e.desc );
 			}
+			delete p;
 			break;
 		}
 	case 5: break;

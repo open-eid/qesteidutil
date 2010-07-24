@@ -292,10 +292,20 @@ void JsCardManager::handleError(QString msg)
 }
 
 void JsCardManager::showDiagnostics()
-{ (new DiagnosticsDialog( qApp->activeWindow() ) )->show(); }
+{
+	(new DiagnosticsDialog( qApp->activeWindow() ) )->exec();
+	m_jsEsteidCard->reconnect();
+}
 
 void JsCardManager::allowRead()
 { readAllowed = true; }
 
 void JsCardManager::disableRead()
 { readAllowed = false; }
+
+void JsCardManager::newManager()
+{
+	m_jsEsteidCard->setCard( 0 );
+	delete cardMgr;
+	cardMgr = 0;
+}
