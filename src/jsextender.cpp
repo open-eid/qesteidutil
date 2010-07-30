@@ -109,32 +109,15 @@ QVariant JsExtender::jsCall( const QString &function, const QString &argument, c
 void JsExtender::openUrl( const QString &url )
 { QDesktopServices::openUrl( QUrl( url ) ); }
 
-QString JsExtender::checkPin()
-{
-	if ( !m_mainWindow->eidCard() || !m_mainWindow->eidCard()->m_card )
-		throw std::runtime_error( "noCard" );
-	if ( activeDocument.isEmpty() || activeDocument != m_mainWindow->eidCard()->getDocumentId() || pin.isEmpty() || 
-		Settings().value( "Util/sessionTime").toInt() == 0 || 
-		!m_dateTime.isValid() || m_dateTime.addSecs( Settings().value( "Util/sessionTime").toInt() * 60 ) < QDateTime::currentDateTime() )
-	{
-		activeDocument = m_mainWindow->eidCard()->getDocumentId();
-		m_dateTime = QDateTime::currentDateTime();
-		return QString();
-	}
-	return pin;
-}
-
 QByteArray JsExtender::getUrl( SSLConnect::RequestType type, const QString &def )
 {
 	QByteArray buffer;
 
 	try {
 		SSLConnect sslConnect;
-		sslConnect.setPin( checkPin() );
 		sslConnect.setCard( m_mainWindow->cardManager()->cardId(
 			m_mainWindow->cardManager()->activeReaderNum() ) );
 		buffer = sslConnect.getUrl( type, def );
-		pin = Settings().value( "Util/sessionTime").toInt() ? sslConnect.pin() : QString();
 	} catch( const std::runtime_error &e ) {
 		throw std::runtime_error( e );
 	}

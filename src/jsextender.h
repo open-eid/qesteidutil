@@ -57,11 +57,8 @@ private:
 	QString m_tempFile;
 	QXmlStreamReader xml;
 	QString m_locale;
-	QDateTime m_dateTime;
 	QLabel *m_loading;
 	QByteArray getUrl( SSLConnect::RequestType, const QString &def );
-	QString pin;
-	QString activeDocument;
 	QHttp m_http;
 
 public slots:
@@ -70,7 +67,6 @@ public slots:
     QVariant jsCall( const QString &function, int argument );
     QVariant jsCall( const QString &function, const QString &argument );
 	QVariant jsCall( const QString &function, const QString &argument, const QString &argument2 );
-	QString checkPin();
 	void openUrl( const QString &url );
 	
 	void loadEmails();

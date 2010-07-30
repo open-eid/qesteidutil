@@ -33,7 +33,6 @@ SettingsDialog::SettingsDialog( QWidget *parent )
 
 	Settings s;
 	s.beginGroup( "Util" );
-	sessionTime->setValue( s.value( "sessionTime", 0 ).toInt() );
 
 #ifdef WIN32
 	updateInterval->addItem( tr("Once a day"), "-daily" );
@@ -57,7 +56,6 @@ void SettingsDialog::accept()
 {
 	Settings s;
 	s.beginGroup( "Util" );
-	s.setValue( "sessionTime", sessionTime->value() );
 	
 	s.setValue( "updateInterval", updateInterval->currentText() );
 	s.setValue( "autoUpdate", autoUpdate->isChecked() );

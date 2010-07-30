@@ -161,30 +161,20 @@ bool SSLConnectPrivate::connectToHost( SSLConnect::RequestType type )
 		if( !slot->token->secureLogin )
 		{
 			QString validatePin;
-			if( pin.isNull() )
+			if( !p->exec() )
 			{
-				if( !p->exec() )
-				{
-					p->deleteLater();
-					throw std::runtime_error( "" );
-				}
-				validatePin = p->text();
 				p->deleteLater();
-				QCoreApplication::processEvents();
+				throw std::runtime_error( "" );
 			}
-			else
-				validatePin = pin;
+			validatePin = p->text();
+			p->deleteLater();
+			QCoreApplication::processEvents();
+
 			if( PKCS11_login(slot, 0, validatePin.toUtf8()) < 0 )
-			{
-				pin = QString();
 				err = ERR_GET_REASON( ERR_get_error() );
-			}
-			else
-				pin = validatePin;
 		}
 		else
 		{
-			pin.clear();
 			p->show();
 			SSLThread *t = new SSLThread( slot );
 			t->start();
@@ -365,10 +355,8 @@ QByteArray SSLConnect::getUrl( RequestType type, const QString &value )
 
 SSLConnect::ErrorType SSLConnect::error() const { return d->error; }
 QString SSLConnect::errorString() const { return d->errorString; }
-QString SSLConnect::pin() const { return d->pin; }
 QByteArray SSLConnect::result() const { return d->result; }
 void SSLConnect::setCard( const QString &card ) { d->card = card; }
-void SSLConnect::setPin( const QString &pin ) { d->pin = pin; }
 void SSLConnect::setPKCS11( const QString &pkcs11, bool unload )
 {
 	if( d->p11loaded && d->unload )

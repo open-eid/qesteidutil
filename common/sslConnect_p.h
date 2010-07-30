@@ -46,7 +46,6 @@ public:
 	SSL		*ssl;
 
 	QString card;
-	QString pin;
 	int		reader;
 
 	unsigned int nslots;
