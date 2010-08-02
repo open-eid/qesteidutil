@@ -1,8 +1,8 @@
 /*
  * QEstEidCommon
  *
- * Copyright (C) 2009 Jargo Kõster <jargo@innovaatik.ee>
- * Copyright (C) 2009 Raul Metsma <raul@innovaatik.ee>
+ * Copyright (C) 2009,2010 Jargo KÃµster <jargo@innovaatik.ee>
+ * Copyright (C) 2009,2010 Raul Metsma <raul@innovaatik.ee>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -103,7 +103,7 @@ SSLConnectPrivate::~SSLConnectPrivate()
 	SSL_CTX_free( sctx );
 	if( nslots )
 		PKCS11_release_all_slots( p11, pslots, nslots );
-	if( unload )
+	if( p11loaded && unload )
 		PKCS11_CTX_unload( p11 );
 	PKCS11_CTX_free( p11 );
 
