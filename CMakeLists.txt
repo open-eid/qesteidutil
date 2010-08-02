@@ -12,7 +12,9 @@ endif(PKCS11_MODULE)
 
 find_package(Qt4 4.4.0 COMPONENTS QtCore QtGui QtNetwork QtWebkit QtXml REQUIRED)
 find_package(OpenSSL REQUIRED)
+if(${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION} LESS 2.8)
 find_package(OpenSSLCrypto REQUIRED)
+endif(${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION} LESS 2.8)
 find_package(LibP11 REQUIRED)
 find_package(SmartCardpp REQUIRED)
 
@@ -20,10 +22,6 @@ if(MSVC)
     # Needed for smartcardpp
     add_definitions(-D_SECURE_SCL=0)
 endif(MSVC)
-
-set(QT_USE_QTNETWORK true)
-set(QT_USE_QTWEBKIT true)
-set(QT_USE_QTXML true)
 
 set(qesteidutil_MOC_HDRS
     common/CertificateWidget.h
