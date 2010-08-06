@@ -5,6 +5,10 @@ var helpUrl_et = "http://support.sk.ee/";
 var helpUrl_en = "http://support.sk.ee/eng/";
 var helpUrl_ru = "http://support.sk.ee/ru/";
 
+var eestiEmailUrl_et = "http://www.eesti.ee/portaal/portaal.options?a=keel&b=postisysteem.abi";
+var eestiEmailUrl_en = "http://www.eesti.ee/portaal/portaal.options?a=keelen&b=postisysteem.abi";
+var eestiEmailUrl_ru = "http://www.eesti.ee/portaal/portaal.options?a=keelru&b=postisysteem.abi";
+
 //code: (est, eng, rus)
 var htmlStrings = {
 	"Active": new tr( "sertifikaadid on aktiivsed ja Mobiil-ID kasutamine on võimalik.", "certificates are active and Mobile-ID is usable.", "сертификаты активны, и использование Modiil-ID возможно." ),
@@ -252,10 +256,10 @@ function translateHTML()
 			iTags[i].value = _( iTags[i].getAttribute('trcode'), iTags[i].value );
 }
 
-function openHelp()
+function openUrl( str )
 {
-	if ( typeof eval( 'helpUrl_' + language ) != "undefined" )
-		extender.openUrl( eval( 'helpUrl_' + language ) );
+	if ( typeof eval( str + language ) != "undefined" )
+		extender.openUrl( eval( str + language ) );
 	else
-		extender.openUrl( eval( 'helpUrl_' + defaultLanguage ) );
+		extender.openUrl( eval( str + defaultLanguage ) );
 }

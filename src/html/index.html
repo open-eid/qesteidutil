@@ -13,7 +13,7 @@
         <ul>
           <li><span onMouseOver="this.style.textDecoration='underline'" onMouseOut="this.style.textDecoration='none'" onClick="cardManager.showDiagnostics();" accesskey="D"><trtag trcode="linkDiagnostics"></trtag></span></li>
           <li><span onMouseOver="this.style.textDecoration='underline'" onMouseOut="this.style.textDecoration='none'" onClick="extender.showSettings();" accesskey="DT"><trtag trcode="linkSettings"></trtag></span></li>
-          <li><span onMouseOver="this.style.textDecoration='underline'" onMouseOut="this.style.textDecoration='none'" onClick="openHelp();" accesskey="AH"><trtag trcode="linkHelp"></trtag></span></li>
+          <li><span onMouseOver="this.style.textDecoration='underline'" onMouseOut="this.style.textDecoration='none'" onClick="openUrl('helpUrl_');" accesskey="AH"><trtag trcode="linkHelp"></trtag></span></li>
         </ul>
 	  </div>
           <div id="readerSelectDiv" style="display: none;"><select id="readerSelect" onChange="selectReader();"></select></div>
@@ -349,7 +349,7 @@
 		<input type="button" trcode="inputCheckEmails" onClick="loadEmails()" onKeyPress="checkEnter( event, this );" class="buttonBottom" />
 	</p>
 	<p>
-		<trtag trcode="labelEmailUrl"></trtag> <a href="#" onClick="extender.openUrl('http://www.eesti.ee/est/');">eesti.ee</a>
+		<trtag trcode="labelEmailUrl"></trtag> <a href="#" onClick="openUrl('eestiEmailUrl_');">eesti.ee</a>
 	</p>
   </div>
   <!-- Eposti sisu l6pp -->
