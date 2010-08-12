@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.6)
+cmake_minimum_required(VERSION 2.8)
 project(qesteidutil)
 
 # Custom cmake modules
@@ -10,11 +10,8 @@ if(PKCS11_MODULE)
     add_definitions(-DPKCS11_MODULE="${PKCS11_MODULE}")
 endif(PKCS11_MODULE)
 
-find_package(Qt4 4.4.0 COMPONENTS QtCore QtGui QtNetwork QtWebkit QtXml REQUIRED)
+find_package(Qt4 4.6.0 COMPONENTS QtCore QtGui QtNetwork QtWebkit QtXml REQUIRED)
 find_package(OpenSSL REQUIRED)
-if(${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION} LESS 2.8)
-find_package(OpenSSLCrypto REQUIRED)
-endif(${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION} LESS 2.8)
 find_package(LibP11 REQUIRED)
 find_package(SmartCardpp REQUIRED)
 
