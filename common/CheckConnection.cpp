@@ -26,24 +26,13 @@
 
 #include <QCoreApplication>
 #include <QNetworkProxy>
-#include <QNetworkReply>
 #include <QNetworkRequest>
 
 CheckConnection::CheckConnection( QObject *parent )
 :	QNetworkAccessManager( parent )
+,	m_error( QNetworkReply::NoError )
 {
 	connect( this, SIGNAL(finished(QNetworkReply*)), SLOT(stop(QNetworkReply*)) );
-	Settings s;
-	s.beginGroup( "Client" );
-	if( !s.value( "proxyHost" ).toString().isEmpty() )
-	{
-		setProxy( QNetworkProxy(
-			QNetworkProxy::HttpProxy,
-			s.value( "proxyHost" ).toString(),
-			s.value( "proxyPort" ).toInt(),
-			s.value( "proxyUser" ).toString(),
-			s.value( "proxyPass" ).toString() ) );
-	}
 }
 
 bool CheckConnection::check( const QString &url )
@@ -54,6 +43,7 @@ bool CheckConnection::check( const QString &url )
 	while( running )
 		qApp->processEvents();
 
+	m_error = reply->error();
 	switch( reply->error() )
 	{
 	case QNetworkReply::NoError:
@@ -62,17 +52,17 @@ bool CheckConnection::check( const QString &url )
 	case QNetworkReply::ProxyConnectionClosedError:
 	case QNetworkReply::ProxyNotFoundError:
 	case QNetworkReply::ProxyTimeoutError:
-		m_error = tr("Check proxy settings");
+		m_errorString = tr("Check proxy settings");
 		return false;
 	case QNetworkReply::ProxyAuthenticationRequiredError:
-		m_error = tr("Check proxy username and password");
+		m_errorString = tr("Check proxy username and password");
 		return false;
 	default:
-		m_error = tr("Check internet connection");
+		m_errorString = tr("Check internet connection");
 		return false;
 	}
 }
 
-QString CheckConnection::error() const { return m_error; }
-
+QNetworkReply::NetworkError CheckConnection::error() const { return m_error; }
+QString CheckConnection::errorString() const { return m_errorString; }
 void CheckConnection::stop( QNetworkReply * ) { running = false; }

@@ -23,8 +23,7 @@
 #pragma once
 
 #include <QNetworkAccessManager>
-
-class QNetworkReply;
+#include <QNetworkReply>
 
 class CheckConnection: public QNetworkAccessManager
 {
@@ -34,12 +33,14 @@ public:
 	CheckConnection( QObject *parent = 0 );
 
 	bool check( const QString &url );
-	QString error() const;
+	QNetworkReply::NetworkError error() const;
+	QString errorString() const;
 
 private Q_SLOTS:
 	void stop( QNetworkReply *reply );
 
 private:
-	QString m_error;
+	QNetworkReply::NetworkError m_error;
+	QString m_errorString;
 	bool	running;
 };
