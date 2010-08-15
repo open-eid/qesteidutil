@@ -22,6 +22,9 @@
 
 #include "Common.h"
 
+#include "SslCertificate.h"
+#include "TokenData.h"
+
 #include <QDateTime>
 #include <QDesktopServices>
 #include <QFileInfo>
@@ -41,8 +44,6 @@
 #ifdef Q_OS_MAC
 #include <Carbon/Carbon.h>
 #endif
-
-#include "SslCertificate.h"
 
 Common::Common( QObject *parent ): QObject( parent ) {}
 
@@ -269,11 +270,11 @@ bool Common::startDetached( const QString &program, const QStringList &arguments
 #endif
 }
 
-QString Common::tokenInfo( CertType type, const QString &card, const QSslCertificate &cert )
+QString Common::tokenInfo( CertType type, const TokenData &data )
 {
 	QString content;
 	QTextStream s( &content );
-	SslCertificate c( cert );
+	SslCertificate c( data.cert() );
 
 	s << "<table width=\"100%\"><tr><td>";
 	if( c.isTempel() )
@@ -290,7 +291,7 @@ QString Common::tokenInfo( CertType type, const QString &card, const QSslCertifi
 		s << tr("Personal code") << ": <font color=\"black\">"
 			<< c.subjectInfo( "serialNumber" ) << "</font><br />";
 	}
-	s << tr("Card in reader") << ": <font color=\"black\">" << card << "</font><br />";
+	s << tr("Card in reader") << ": <font color=\"black\">" << data.card() << "</font><br />";
 
 	bool willExpire = c.expiryDate().toLocalTime() <= QDateTime::currentDateTime().addDays( 105 );
 	s << (type == AuthCert ? tr("Auth certificate is") : tr("Sign certificate is") ) << " ";
@@ -302,9 +303,11 @@ QString Common::tokenInfo( CertType type, const QString &card, const QSslCertifi
 	}
 	else
 		s << "<font color=\"red\">" << tr("expired") << "</font>";
+	if( data.flags() & TokenData::PinLocked )
+		s << "<br /><font color=\"red\">" << tr("PIN is locked") << "</font>";
 
 	s << "</td><td align=\"center\" width=\"75\">";
-	if( !c.isValid() || willExpire )
+	if( !c.isValid() || willExpire || data.flags() & TokenData::PinLocked )
 	{
 		s << "<a href=\"openUtility\"><img src=\":/images/warning.png\"><br />"
 			"<font color=\"red\">" << tr("Open utility") << "</font></a>";

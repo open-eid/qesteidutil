@@ -27,6 +27,7 @@
 class QSslCertificate;
 class QStringList;
 class QUrl;
+class TokenData;
 
 class Common: public QObject
 {
@@ -44,7 +45,7 @@ public:
 	static void showHelp( const QString &msg );
 	static bool startDetached( const QString &program );
 	static bool startDetached( const QString &program, const QStringList &arguments );
-	static QString tokenInfo( CertType type, const QString &card, const QSslCertificate &cert );
+	static QString tokenInfo( CertType type, const TokenData &data );
 
 public Q_SLOTS:
 	void browse( const QUrl &url );

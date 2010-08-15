@@ -153,9 +153,18 @@ bool SSLConnectPrivate::connectToHost( SSLConnect::RequestType type )
 	// Login token
 	if( slot->token->loginRequired )
 	{
+		TokenData::TokenFlags flags;
+#ifdef LIBP11_TOKEN_FLAGS
+		if( slot->token->soPinCountLow || slot->token->userPinCountLow )
+			flags |= TokenData::PinCountLow;
+		if( slot->token->soPinFinalTry || slot->token->userPinFinalTry )
+			flags |= TokenData::PinCountLow;
+		if( slot->token->soPinLocked || slot->token->userPinLocked )
+			flags |= TokenData::PinCountLow;
+#endif
 		PinDialog *p = new PinDialog(
 			slot->token->secureLogin ? PinDialog::Pin1PinpadType : PinDialog::Pin1Type,
-			SslCertificate::fromX509( Qt::HANDLE(authcert->x509) ), qApp->activeWindow() );
+			SslCertificate::fromX509( Qt::HANDLE(authcert->x509) ), flags, qApp->activeWindow() );
 		p->setWindowModality( Qt::ApplicationModal );
 		unsigned long err = CKR_OK;
 		if( !slot->token->secureLogin )

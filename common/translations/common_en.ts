@@ -177,6 +177,10 @@
         <source>Your certificates will expire soon</source>
         <translation>Your certificates will expire soon</translation>
     </message>
+    <message>
+        <source>PIN is locked</source>
+        <translation>PIN is locked</translation>
+    </message>
 </context>
 <context>
     <name>PinDialog</name>
@@ -203,6 +207,14 @@
     <message>
         <source>For using sign certificate enter PIN2 with pinpad</source>
         <translation>For using sign certificate enter PIN2 with pinpad</translation>
+    </message>
+    <message>
+        <source>PIN has been entered incorrectly one or more times</source>
+        <translation>PIN has been entered incorrectly one or more times</translation>
+    </message>
+    <message>
+        <source>PIN will be locked next failed attempt</source>
+        <translation>PIN will be locked next failed attempt</translation>
     </message>
 </context>
 <context>

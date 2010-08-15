@@ -24,6 +24,8 @@
 
 #include <QDialog>
 
+#include "TokenData.h"
+
 #include <QRegExp>
 
 class QLineEdit;
@@ -41,9 +43,9 @@ public:
 		Pin2PinpadType,
 	};
 	PinDialog( QWidget *parent = 0 );
-	PinDialog( PinType type, const QSslCertificate &cert, QWidget *parent = 0 );
-	PinDialog( PinType type, const QString &title, QWidget *parent = 0 );
-	void init( PinType type, const QString &title );
+	PinDialog( PinType type, const QSslCertificate &cert, TokenData::TokenFlags flags, QWidget *parent = 0 );
+	PinDialog( PinType type, const QString &title, TokenData::TokenFlags flags, QWidget *parent = 0 );
+	void init( PinType type, const QString &title, TokenData::TokenFlags flags );
 
 	QString text() const;
 
@@ -51,7 +53,6 @@ private Q_SLOTS:
 	void textEdited( const QString &text );
 
 private:
-
 	QLineEdit	*m_text;
 	QPushButton	*ok;
 	QRegExp		regexp;

@@ -177,6 +177,10 @@
         <source>Your certificates will expire soon</source>
         <translation>Сертификаты скоро будут недействительны</translation>
     </message>
+    <message>
+        <source>PIN is locked</source>
+        <translation>PIN заблокирован</translation>
+    </message>
 </context>
 <context>
     <name>PinDialog</name>
@@ -203,6 +207,14 @@
     <message>
         <source>For using sign certificate enter PIN2 with pinpad</source>
         <translation>Для использования сертификата подписи  введите PIN2 с клавиатуры считывателя</translation>
+    </message>
+    <message>
+        <source>PIN has been entered incorrectly one or more times</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>PIN will be locked next failed attempt</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

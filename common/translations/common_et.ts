@@ -177,6 +177,10 @@
         <source>Your certificates will expire soon</source>
         <translation>Sertifikaadid hakkavad aeguma</translation>
     </message>
+    <message>
+        <source>PIN is locked</source>
+        <translation>PIN on lukus</translation>
+    </message>
 </context>
 <context>
     <name>PinDialog</name>
@@ -203,6 +207,14 @@
     <message>
         <source>For using sign certificate enter PIN2 with pinpad</source>
         <translation>Sertifikaadi kasutamiseks sisesta PIN2 kaardilugeja sõrmistikult</translation>
+    </message>
+    <message>
+        <source>PIN has been entered incorrectly one or more times</source>
+        <translation>PIN-i on sisestatud vigaselt üks või enam korda</translation>
+    </message>
+    <message>
+        <source>PIN will be locked next failed attempt</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

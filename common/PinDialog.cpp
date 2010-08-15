@@ -35,18 +35,18 @@ PinDialog::PinDialog( QWidget *parent )
 :	QDialog( parent )
 {}
 
-PinDialog::PinDialog( PinType type, const QSslCertificate &cert, QWidget *parent )
+PinDialog::PinDialog( PinType type, const QSslCertificate &cert, TokenData::TokenFlags flags, QWidget *parent )
 :	QDialog( parent )
 {
 	SslCertificate c = cert;
-	init( type, c.toString( c.isTempel() ? "CN serialNumber" : "GN SN serialNumber" ) );
+	init( type, c.toString( c.isTempel() ? "CN serialNumber" : "GN SN serialNumber" ), flags );
 }
 
-PinDialog::PinDialog( PinType type, const QString &title, QWidget *parent )
+PinDialog::PinDialog( PinType type, const QString &title, TokenData::TokenFlags flags, QWidget *parent )
 :	QDialog( parent )
-{ init( type, title ); }
+{ init( type, title, flags ); }
 
-void PinDialog::init( PinType type, const QString &title )
+void PinDialog::init( PinType type, const QString &title, TokenData::TokenFlags flags )
 {
 	setWindowModality( Qt::ApplicationModal );
 	setWindowTitle( title );
@@ -55,39 +55,43 @@ void PinDialog::init( PinType type, const QString &title )
 	QVBoxLayout *l = new QVBoxLayout( this );
 	l->addWidget( label );
 
+	QString text = QString( "<b>%1</b><br />" ).arg( title );
 	switch( type )
 	{
 	case Pin1Type:
-		label->setText( QString( "<b>%1</b><br />%2<br />%3" )
-			.arg( title )
+		text.append( QString( "%2<br />%3" )
 			.arg( tr("Selected action requires auth certificate.") )
 			.arg( tr("For using auth certificate enter PIN1") ) );
 		regexp.setPattern( "\\d{4,12}" );
 		break;
 	case Pin2Type:
-		label->setText( QString( "<b>%1</b><br />%2<br />%3" )
-			.arg( title )
+		text.append( QString( "%2<br />%3" )
 			.arg( tr("Selected action requires sign certificate.") )
 			.arg( tr("For using sign certificate enter PIN2") ) );
 		regexp.setPattern( "\\d{5,12}" );
 		break;
 	case Pin1PinpadType:
-#if QT_VERSION >= 0x040500
-		setWindowFlags( (windowFlags() | Qt::CustomizeWindowHint) & ~Qt::WindowCloseButtonHint );
-#endif
-		label->setText( QString( "<b>%1</b><br />%2<br />%3" )
-			.arg( title )
+		text.append( QString( "%2<br />%3" )
 			.arg( tr("Selected action requires auth certificate.") )
 			.arg( tr("For using auth certificate enter PIN1 with pinpad") ) );
-		return;
+		break;
 	case Pin2PinpadType:
+		text.append( QString( "%2<br />%3" )
+			.arg( tr("Selected action requires sign certificate.") )
+			.arg( tr("For using sign certificate enter PIN2 with pinpad") ) );
+		break;
+	}
+	if( flags & TokenData::PinFinalTry )
+		text.append( QString( "<br />").append( tr("PIN will be locked next failed attempt") ) );
+	else if( flags & TokenData::PinCountLow )
+		text.append( QString( "<br />").append( tr("PIN has been entered incorrectly one or more times") ) );
+	label->setText( text );
+
+	if( type == Pin1PinpadType || type == Pin2PinpadType )
+	{
 #if QT_VERSION >= 0x040500
 		setWindowFlags( (windowFlags() | Qt::CustomizeWindowHint) & ~Qt::WindowCloseButtonHint );
 #endif
-		label->setText( QString( "<b>%1</b><br />%2<br />%3" )
-			.arg( title )
-			.arg( tr("Selected action requires sign certificate.") )
-			.arg( tr("For using sign certificate enter PIN2 with pinpad") ) );
 		return;
 	}
 
