@@ -1,8 +1,8 @@
 /*
  * QEstEidUtil
  *
- * Copyright (C) 2009 Jargo Kõster <jargo@innovaatik.ee>
- * Copyright (C) 2009 Raul Metsma <raul@innovaatik.ee>
+ * Copyright (C) 2009,2010 Jargo KÃµster <jargo@innovaatik.ee>
+ * Copyright (C) 2009,2010 Raul Metsma <raul@innovaatik.ee>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -129,12 +129,12 @@ QByteArray CertUpdate::runStep( int s, QByteArray result )
 				SslCertificate c = m_authCert->cert();
 				if ( !card->isSecureConnection() && m_pin.isEmpty() )
 				{
-					p->init( PinDialog::Pin1Type, c.toString( c.isTempel() ? "CN serialNumber" : "GN SN serialNumber" ) );
+					p->init( PinDialog::Pin1Type, c.toString( c.isTempel() ? "CN serialNumber" : "GN SN serialNumber" ), 0 );
 					if( !p->exec() )
 						throw std::runtime_error( "" );
 					m_pin = p->text();
 				} else if ( card->isSecureConnection() ) {
-					p->init( PinDialog::Pin1PinpadType, c.toString( c.isTempel() ? "CN serialNumber" : "GN SN serialNumber" ) );
+					p->init( PinDialog::Pin1PinpadType, c.toString( c.isTempel() ? "CN serialNumber" : "GN SN serialNumber" ), 0 );
 					p->show();
 					QApplication::processEvents();
 				}
@@ -724,7 +724,7 @@ QByteArray CertUpdate::queryServer( int s, QByteArray result )
 			case 0x02:
 			case 0x03:
 			case 0x07:
-			case 0x08: throw std::runtime_error( tr( "Serveri töös tekkisid vead, samm: %1" ).arg( s ).toStdString() );
+			case 0x08: throw std::runtime_error( tr( "Serveri tÃ¶Ã¶s tekkisid vead, samm: %1" ).arg( s ).toStdString() );
 			case 0x04: throw std::runtime_error( tr( "Kaardi vastuse parsimisel tekkis viga, samm: %1" ).arg( s ).toStdString() );
 			case 0x05: throw std::runtime_error( tr( "Sertifitseerimiskeskus ei vasta, samm: %1" ).arg( s ).toStdString() );
 		}
