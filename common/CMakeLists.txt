@@ -16,6 +16,7 @@ set( HEADERS
 	${MOC_HEADERS}
 	${UI_HEADERS}
 	SslCertificate.h
+	TokenData.h
 	)
 QT4_WRAP_CPP( MOC_SOURCES ${MOC_HEADERS} )
 set( SOURCES
@@ -29,6 +30,7 @@ set( SOURCES
 	PinDialog.cpp
 	SslCertificate.cpp
 	sslConnect.cpp
+	TokenData.cpp
 	)
 
 INCLUDE_DIRECTORIES(
