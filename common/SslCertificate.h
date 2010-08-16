@@ -52,6 +52,7 @@ public:
 	static QSslKey keyFromEVP( Qt::HANDLE evp );
 	QString		issuerInfo( SubjectInfo info ) const;
 	QString		issuerInfo( const QByteArray &tag ) const;
+	bool		isDigiID() const;
 	bool		isTempel() const;
 	bool		isTest() const;
 	QHash<int,QString> keyUsage() const;

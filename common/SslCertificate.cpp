@@ -184,21 +184,14 @@ QString SslCertificate::issuerInfo( const QByteArray &tag ) const
 	return mapFromOnlineName( string ).value( tag );
 }
 
+bool SslCertificate::isDigiID() const
+{ return policies().indexOf( QRegExp( "^1\.3\.6\.1\.4\.1\.10015\.1\.2.*" ) ) != -1; }
+
 bool SslCertificate::isTempel() const
-{
-	Q_FOREACH( const QString &p, policies() )
-		if( p.left( 19 ) == "1.3.6.1.4.1.10015.7" )
-			return true;
-	return false;
-}
+{ return policies().indexOf( QRegExp( "^1\.3\.6\.1\.4\.1\.10015\.7.*" ) ) != -1; }
 
 bool SslCertificate::isTest() const
-{
-	Q_FOREACH( const QString &p, policies() )
-		if( p.left( 19 ) == "1.3.6.1.4.1.10015.3" )
-			return true;
-	return false;
-}
+{ return policies().indexOf( QRegExp( "^1\.3\.6\.1\.4\.1\.10015\.3.*" ) ) != -1; }
 
 QHash<int,QString> SslCertificate::keyUsage() const
 {
