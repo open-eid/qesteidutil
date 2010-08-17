@@ -55,7 +55,7 @@ QStringList SslCertificate::enhancedKeyUsage() const
 {
 	EXTENDED_KEY_USAGE *usage = (EXTENDED_KEY_USAGE*)getExtension( NID_ext_key_usage );
 	if( !usage )
-		return QStringList() << QCoreApplication::translate("SslCertificate", "All application policies");
+		return QStringList() << tr("All application policies");
 
 	QStringList list;
 	for( int i = 0; i < sk_ASN1_OBJECT_num( usage ); ++i )
@@ -64,11 +64,11 @@ QStringList SslCertificate::enhancedKeyUsage() const
 		switch( OBJ_obj2nid( obj ) )
 		{
 		case NID_client_auth:
-			list << QCoreApplication::translate("SslCertificate", "Proves your identity to a remote computer"); break;
+			list << tr("Proves your identity to a remote computer"); break;
 		case NID_email_protect:
-			list << QCoreApplication::translate("SslCertificate", "Protects e-mail messages"); break;
+			list << tr("Protects e-mail messages"); break;
 		case NID_OCSP_sign:
-			list << QCoreApplication::translate("SslCertificate", "OCSP signing"); break;
+			list << tr("OCSP signing"); break;
 		default: break;
 		}
 	}
@@ -185,13 +185,13 @@ QString SslCertificate::issuerInfo( const QByteArray &tag ) const
 }
 
 bool SslCertificate::isDigiID() const
-{ return policies().indexOf( QRegExp( "^1\.3\.6\.1\.4\.1\.10015\.1\.2.*" ) ) != -1; }
+{ return policies().indexOf( QRegExp( "^1\\.3\\.6\\.1\\.4\\.1\\.10015\\.1\\.2.*" ) ) != -1; }
 
 bool SslCertificate::isTempel() const
-{ return policies().indexOf( QRegExp( "^1\.3\.6\.1\.4\.1\.10015\.7.*" ) ) != -1; }
+{ return policies().indexOf( QRegExp( "^1\\.3\\.6\\.1\\.4\\.1\\.10015\\.7.*" ) ) != -1; }
 
 bool SslCertificate::isTest() const
-{ return policies().indexOf( QRegExp( "^1\.3\.6\.1\.4\.1\.10015\.3.*" ) ) != -1; }
+{ return policies().indexOf( QRegExp( "^1\\.3\\.6\\.1\\.4\\.1\\.10015\\.3.*" ) ) != -1; }
 
 QHash<int,QString> SslCertificate::keyUsage() const
 {
@@ -206,15 +206,15 @@ QHash<int,QString> SslCertificate::keyUsage() const
 		{
 			switch( n )
 			{
-			case DigitalSignature: list[n] = QCoreApplication::translate("SslCertificate", "Digital signature"); break;
-			case NonRepudiation: list[n] = QCoreApplication::translate("SslCertificate", "Non repudiation"); break;
-			case KeyEncipherment: list[n] = QCoreApplication::translate("SslCertificate", "Key encipherment"); break;
-			case DataEncipherment: list[n] = QCoreApplication::translate("SslCertificate", "Data encipherment"); break;
-			case KeyAgreement: list[n] = QCoreApplication::translate("SslCertificate", "Key agreement"); break;
-			case KeyCertificateSign: list[n] = QCoreApplication::translate("SslCertificate", "Key certificate sign"); break;
-			case CRLSign: list[n] = QCoreApplication::translate("SslCertificate", "CRL sign"); break;
-			case EncipherOnly: list[n] = QCoreApplication::translate("SslCertificate", "Encipher only"); break;
-			case DecipherOnly: list[n] = QCoreApplication::translate("SslCertificate", "Decipher only"); break;
+			case DigitalSignature: list[n] = tr("Digital signature"); break;
+			case NonRepudiation: list[n] = tr("Non repudiation"); break;
+			case KeyEncipherment: list[n] = tr("Key encipherment"); break;
+			case DataEncipherment: list[n] = tr("Data encipherment"); break;
+			case KeyAgreement: list[n] = tr("Key agreement"); break;
+			case KeyCertificateSign: list[n] = tr("Key certificate sign"); break;
+			case CRLSign: list[n] = tr("CRL sign"); break;
+			case EncipherOnly: list[n] = tr("Encipher only"); break;
+			case DecipherOnly: list[n] = tr("Decipher only"); break;
 			default: break;
 			}
 		}
@@ -337,6 +337,9 @@ QString SslCertificate::toString( const QString &format ) const
 	}
 	return formatName( ret );
 }
+
+QString SslCertificate::tr( const char *data ) const
+{ return QCoreApplication::translate( "SslCertificate", data ); }
 
 #if QT_VERSION < 0x040600
 // Workaround qt bugs < 4.6

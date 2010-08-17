@@ -72,6 +72,7 @@ public:
 private:
 	void*	getExtension( int nid ) const;
 	QByteArray subjectInfoToString( SubjectInfo info ) const;
+	QString tr( const char *data ) const;
 	QMap<QString,QString> mapFromOnlineName( const QString &name ) const;
 };
 
