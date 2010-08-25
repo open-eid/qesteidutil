@@ -133,7 +133,7 @@ endif(APPLE)
 
 IF(WIN32)
     SET(qesteidutil_SRCS ${qesteidutil_SRCS} src/qesteidutil.rc)
-    SET(WIN_LIBRARIES ws2_32)
+	SET(ADDITIONAL_LIBRARIES ws2_32)
 ENDIF(WIN32)
     
 add_executable(qesteidutil WIN32 MACOSX_BUNDLE
@@ -145,15 +145,17 @@ add_executable(qesteidutil WIN32 MACOSX_BUNDLE
 )
 
 if(APPLE)
-    configure_file(
-        ${APP_CONTENTS_DIR}/Info.plist.cmake
-        ${APP_CONTENTS_DIR}/Info.plist
-        @ONLY)
-    
+	configure_file(
+		${APP_CONTENTS_DIR}/Info.plist.cmake
+		${APP_CONTENTS_DIR}/Info.plist
+		@ONLY
+	)
+
     set_target_properties(qesteidutil
-    	PROPERTIES
-    	MACOSX_BUNDLE_INFO_PLIST ${APP_CONTENTS_DIR}/Info.plist
-   )
+		PROPERTIES
+		MACOSX_BUNDLE_INFO_PLIST ${APP_CONTENTS_DIR}/Info.plist
+	)
+	SET(ADDITIONAL_LIBRARIES "-framework CoreServices")
 endif(APPLE)
 
 target_link_libraries(qesteidutil
@@ -163,7 +165,7 @@ target_link_libraries(qesteidutil
     ${OPENSSLCRYPTO_LIBRARIES}
     ${LIBP11_LIBRARIES}
     ${SMARTCARDPP_LIBRARIES}
-	${WIN_LIBRARIES}
+	${ADDITIONAL_LIBRARIES}
     qtsingleapplication
 )
 
