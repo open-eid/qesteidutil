@@ -378,11 +378,12 @@ void JsExtender::getMidStatus()
 			jsCall( "handleNotice", mNotice );
 			return;
 		}
-		mResString = QString( "%1;%2;%3;%4" )
+		mResString = QString( "%1;%2;%3;%4;%5" )
 						.arg( e.elementsByTagName( "MSISDN" ).item(0).toElement().text() )
 						.arg( e.elementsByTagName( "Operator" ).item(0).toElement().text() )
 						.arg( e.elementsByTagName( "Status" ).item(0).toElement().text() )
-						.arg( e.elementsByTagName( "URL" ).item(0).toElement().text() );
+						.arg( e.elementsByTagName( "URL" ).item(0).toElement().text() )
+						.arg( e.elementsByTagName( "MIDCertsValidTo" ).item(0).toElement().text() );
 		jsCall( "setMobile", mResString );
 	}
 }

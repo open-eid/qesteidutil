@@ -644,9 +644,10 @@ function setMobile( result )
 			document.getElementById('inputActivateMobile').attributes["onclick"].value = "extender.openUrl('" + strings[3] + "');";
 			document.getElementById('activateMobileButton').style.display = "block";
 		}
-		document.getElementById('mobileNumber').innerHTML = strings[0];
+		//document.getElementById('mobileNumber').innerHTML = strings[0];
 		document.getElementById('mobileOperator').innerHTML = strings[1];
 		document.getElementById('mobileStatus').innerHTML = _(strings[2]);
+		document.getElementById('mobileCertValid').innerHTML = strings[4];
 	}
 }
 

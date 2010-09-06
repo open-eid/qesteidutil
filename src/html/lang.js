@@ -118,6 +118,7 @@ var htmlStrings = {
 	"mobileNumber": new tr( "Mobiili number", "Mobile number", "Номер моб. телефона" ),
 	"mobileOperator": new tr( "Mobiili operaator", "Mobile operator", "Оператор моб. телефона" ),
 	"mobileStatus": new tr( "Staatus", "Mobile status", "Статус" ),
+	"mobileCertValid": new tr( "Sertifikaadid kehtivad kuni", "Certificates are valid till", "Сертификаты действителен до" ),
 	
 	"errorFound": new tr( "Tekkis viga: ", "Error occured: ", "Возникла ошибка:" ),
 	"loadEmail": new tr( "Laen e-posti seadeid", "Loading e-mail settings", "Загружаю настройки эл. почты" ),
