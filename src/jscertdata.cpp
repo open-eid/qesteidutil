@@ -110,6 +110,14 @@ QString JsCertData::getSerialNum()
     return m_qcert->subjectInfo("serialNumber");
 }
 
+QString JsCertData::getString( const QString &str )
+{
+    if (!m_qcert)
+        return "";
+
+	return SslCertificate( *m_qcert ).toString( str );
+}
+
 QString JsCertData::getSubjCN()
 {
     if (!m_qcert)
@@ -180,6 +188,14 @@ QString JsCertData::getIssuerOU()
         return "";
 
     return m_qcert->issuerInfo(QSslCertificate::OrganizationalUnitName);
+}
+
+bool JsCertData::isDigiID()
+{
+	if (!m_qcert)
+		return false;
+
+	return SslCertificate( *m_qcert ).isDigiID();
 }
 
 bool JsCertData::isTempel()

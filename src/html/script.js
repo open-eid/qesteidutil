@@ -221,16 +221,33 @@ function readCardData( translate )
 
 		if ( esteidData.authCert.isTempel() )
 		{
+			document.getElementById('liPersonBirth').style.display = 'none';
+			document.getElementById('liPersonCitizen').style.display = 'none';
+			document.getElementById('liCardValidTo').style.display = 'block';
+			document.getElementById('liCardThisIs').style.display = 'block';
+			document.getElementById('liCardThisIsDigiID').style.display = 'none';
 			document.getElementById('photo').innerHTML = '<div style="padding-top:25px;"><img width="75" height="75" src="qrc:/stamp"></div>';
 			document.getElementById('id').innerHTML = esteidData.authCert.getSerialNum();
 			document.getElementById('personCode').innerHTML = _('regcode');
 			document.getElementById('firstName').innerHTML = esteidData.authCert.getSubjCN();
+		} else if ( esteidData.authCert.isDigiID() ) {
 			document.getElementById('liPersonBirth').style.display = 'none';
-			document.getElementById('liPersonCitizen').style.display = 'none';
+			document.getElementById('liPersonCitizen').style.display = 'none';		    
+			document.getElementById('liEmail').style.display = 'none';
+			document.getElementById('liCardValidTo').style.display = 'none';
+			document.getElementById('liCardThisIs').style.display = 'none';
+			document.getElementById('liCardThisIsDigiID').style.display = 'block';
+		    document.getElementById('firstName').innerHTML = esteidData.authCert.getString( "GN SN" );
+		    document.getElementById('personCode').innerHTML = _('personCode');
+		    document.getElementById('id').innerHTML = esteidData.authCert.getSerialNum();
 		} else {
-			document.getElementById('personCode').innerHTML = _('personCode');
 			document.getElementById('liPersonBirth').style.display = 'block';
 			document.getElementById('liPersonCitizen').style.display = 'block';
+			document.getElementById('liEmail').style.display = 'block';
+			document.getElementById('liCardValidTo').style.display = 'block';
+			document.getElementById('liCardThisIs').style.display = 'block';
+			document.getElementById('liCardThisIsDigiID').style.display = 'none';
+			document.getElementById('personCode').innerHTML = _('personCode');
 			document.getElementById('firstName').innerHTML = esteidData.getFirstName();
 			document.getElementById('middleName').innerHTML = esteidData.getMiddleName();
 			document.getElementById('surName').innerHTML = esteidData.getSurName();
@@ -248,7 +265,10 @@ function readCardData( translate )
 		if ( days >= 0 && days <= 105 && pin1Retry != 0 )
 		{
 			document.getElementById('authCertWillExpire').style.display = 'block';
-			document.getElementById('authCertWillExpire').innerHTML = _( 'labelCertWillExpire' ).replace( /%d/, days );
+			if ( days == 0 )
+			    document.getElementById('authCertWillExpire').innerHTML = _( 'labelCertIsExpired' );
+			else
+			    document.getElementById('authCertWillExpire').innerHTML = _( 'labelCertWillExpire' ).replace( /%d/, days );
 		} else
 			document.getElementById('authCertWillExpire').style.display = 'none';
 
@@ -259,7 +279,10 @@ function readCardData( translate )
 		if ( days >= 0 && days <= 105 && pin2Retry != 0 )
 		{
 			document.getElementById('signCertWillExpire').style.display = 'block';
-			document.getElementById('signCertWillExpire').innerHTML = _( 'labelCertWillExpire' ).replace( /%d/, days );
+			if ( days == 0 )
+			    document.getElementById('signCertWillExpire').innerHTML = _( 'labelCertIsExpired' );
+			else
+			    document.getElementById('signCertWillExpire').innerHTML = _( 'labelCertWillExpire' ).replace( /%d/, days );
 		} else
 			document.getElementById('signCertWillExpire').style.display = 'none';
 		document.getElementById('signKeyUsage').innerHTML = esteidData.getSignUsageCount();

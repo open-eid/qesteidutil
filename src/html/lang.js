@@ -39,6 +39,7 @@ var htmlStrings = {
 	"labelIsValid": new tr( "kehtiv", "valid", "действующий" ),
 	"labelIsInValid": new tr( "kehtetu", "expired", "недействителен" ),
 	"labelDocument": new tr( "dokument", "document", "документ" ),
+	"labelThisIsDigiID": new tr( "See on digitaalne isikutunnitus", "You’re using Digital identity card", "В считывающем устройстве дигитальное удостоверение личности" ),
 	"labelCardValidTill": new tr( "Kaart on kehtiv kuni ", "Card is valid till ", "Карта действительна до " ),
 	"labelCardGetNew": new tr( "Juhised uue ID-kaardi taotlemiseks leiad <a href='#' onClick='extender.openUrl(\"http://www.politsei.ee/et/teenused/isikut-toendavad-dokumendid-/id-kaart/taiskasvanule/\");'>siit</a>", "Instructions how to get a new ID card you can find <a href='#' onClick='extender.openUrl(\"http://www.politsei.ee/et/teenused/isikut-toendavad-dokumendid-/id-kaart/taiskasvanule/\");'>here</a>", "Инструкции по ходатайству новой ID карты находятся <a href='#' onClick='extender.openUrl(\"http://www.politsei.ee/et/teenused/isikut-toendavad-dokumendid-/id-kaart/taiskasvanule/\");'>здесь</a>" ),
 	
@@ -47,6 +48,7 @@ var htmlStrings = {
 	"labelCertIs": new tr( "Sertifikaat on", "Certificate is", "Сертификат" ),
 	"labelCertIsValidTill": new tr( "Sertifikaat kehtib kuni", "Certificate is valid till", "Сертификат действителен до" ),
 	"labelCertWillExpire": new tr( "Sertifikaat aegub %d päeva pärast", "Certificate will expire in %d days", "Сертификат истекает через %d дня" ),
+	"labelCertIsExpired": new tr( "Sertifikaat on aegunud", "Certificate is expired", "Срок действия сертификатов истёк" ),
 	"labelAuthUsed": new tr( "ID-kaarti on kasutatud isikutuvastamiseks", "Authentication key has been used", "Сертификат использован" ),
 	"labelSignUsed": new tr( "ID-kaarti on kasutatud allkirjastamiseks", "Signature key has been used", "Сертификат использован" ),
 	"labelTimes": new tr( "korda", "times", "раз" ),

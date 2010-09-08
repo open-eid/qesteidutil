@@ -62,7 +62,9 @@ public slots:
     QString getIssuerO();
     QString getIssuerOU();
 	QString getSerialNum();
+	QString getString( const QString &str );
 
+	bool	isDigiID();
 	bool	isTempel();
 	bool	isTest();
 	bool	isValid();
