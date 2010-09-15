@@ -12,5 +12,5 @@ set( SOURCES
 	src/qtlocalpeer.cpp
 	src/qtsingleapplication.cpp
 	)
-
-ADD_LIBRARY( qtsingleapplication STATIC ${SOURCES} )
+add_definitions( -DUNICODE )
+add_library( qtsingleapplication STATIC ${SOURCES} )
