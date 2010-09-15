@@ -10,26 +10,16 @@ function checkAccessKeys(e)
 		
 	var letter = String.fromCharCode(e.keyCode);
 	
-	var buttons = document.getElementById('leftMenus').getElementsByTagName('input');
-	for( i=0;i<buttons.length;i++)
+    var buttonsAll = document.querySelectorAll( "#leftMenus input, #headerMenus a, #headerMenus span" );
+	for( i=0;i<buttonsAll.length;i++)
 	{
-		if ( (typeof buttons[i].attributes["accesskey"] != "undefined") && buttons[i].attributes["accesskey"].value.indexOf(letter) >= 0 )
+		if ( (typeof buttonsAll[i].attributes["accesskey"] != "undefined") && buttonsAll[i].attributes["accesskey"].value.indexOf(letter) >= 0 )
 		{
-			buttons[i].focus();
-			buttons[i].click();
+		    buttonsAll[i].focus();
+			buttonsAll[i].onclick();
 			return;
 		}
 	}	
-	var ahrefs = document.getElementById('headerMenus').getElementsByTagName('a');
-	for( i=0;i<ahrefs.length;i++)
-	{
-		if ( (typeof ahrefs[i].attributes["accesskey"] != "undefined") && ahrefs[i].attributes["accesskey"].value.indexOf(letter) >= 0 )
-		{
-			ahrefs[i].focus();
-			ahrefs[i].onclick();
-			return;
-		}
-	}		
 }
 
 function checkNumeric(e)
