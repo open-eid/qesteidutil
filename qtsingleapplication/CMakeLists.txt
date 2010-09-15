@@ -12,5 +12,7 @@ set( SOURCES
 	src/qtlocalpeer.cpp
 	src/qtsingleapplication.cpp
 	)
-add_definitions( -DUNICODE )
+if( WIN32 )
+	add_definitions( -DUNICODE )
+endif( WIN32 )
 add_library( qtsingleapplication STATIC ${SOURCES} )
