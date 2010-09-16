@@ -158,6 +158,12 @@ if(APPLE)
 	SET(ADDITIONAL_LIBRARIES "-framework CoreServices")
 endif(APPLE)
 
+if(WIN32)
+	SET_TARGET_PROPERTIES(qesteidutil
+		PROPERTIES
+		LINK_FLAGS "/MANIFESTDEPENDENCY:\"type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'\"")
+endif(WIN32)
+
 target_link_libraries(qesteidutil
     ${QT_QTMAIN_LIBRARY}
     ${QT_LIBRARIES}
