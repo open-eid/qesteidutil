@@ -45,7 +45,12 @@
 #include <Carbon/Carbon.h>
 #endif
 
-Common::Common( QObject *parent ): QObject( parent ) {}
+Common::Common( QObject *parent )
+:	QObject( parent )
+{
+	QDesktopServices::setUrlHandler( "browse", this, "browse" );
+	QDesktopServices::setUrlHandler( "mailto", this, "mailTo" );
+}
 
 bool Common::canWrite( const QString &filename )
 {
