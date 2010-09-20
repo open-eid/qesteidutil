@@ -2,6 +2,13 @@
 <!DOCTYPE TS>
 <TS version="2.0" language="ru">
 <context>
+    <name>AboutWidget</name>
+    <message>
+        <source>About</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>CertificateDialog</name>
     <message>
         <source>Save certificate</source>

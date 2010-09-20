@@ -2,6 +2,13 @@
 <!DOCTYPE TS>
 <TS version="2.0" language="et">
 <context>
+    <name>AboutWidget</name>
+    <message>
+        <source>About</source>
+        <translation>Info</translation>
+    </message>
+</context>
+<context>
     <name>CertificateDialog</name>
     <message>
         <source>Save certificate</source>

@@ -1,4 +1,5 @@
 set( MOC_HEADERS
+	AboutWidget.h
 	CheckConnection.h
 	CertificateWidget.h
 	ComboBox.h
@@ -10,6 +11,7 @@ set( MOC_HEADERS
 	sslConnect_p.h
 	)
 QT4_WRAP_UI( UI_HEADERS
+	ui/AboutWidget.ui
 	ui/CertificateWidget.ui
 	)
 set( HEADERS
@@ -22,6 +24,7 @@ QT4_WRAP_CPP( MOC_SOURCES ${MOC_HEADERS} )
 set( SOURCES
 	${HEADERS}
 	${MOC_SOURCES}
+	AboutWidget.cpp
 	CheckConnection.cpp
 	CertificateWidget.cpp
 	ComboBox.cpp
