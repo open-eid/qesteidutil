@@ -1,5 +1,6 @@
 set( MOC_HEADERS
 	AboutWidget.h
+	Application_mac.h
 	CheckConnection.h
 	CertificateWidget.h
 	ComboBox.h
@@ -25,6 +26,7 @@ set( SOURCES
 	${HEADERS}
 	${MOC_SOURCES}
 	AboutWidget.cpp
+	Application_mac.mm
 	CheckConnection.cpp
 	CertificateWidget.cpp
 	ComboBox.cpp

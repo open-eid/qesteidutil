@@ -64,7 +64,7 @@ static OSStatus appleEventHandler( const AppleEvent *event, AppleEvent *, long )
 }
 #endif
 
-void mac_install_event_handler( QApplication *app )
+void mac_install_event_handler( QObject *app )
 {
 #ifdef QT_MAC_USE_COCOA
 	new ApplicationObj( app );

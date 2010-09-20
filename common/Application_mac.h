@@ -22,3 +22,5 @@ public:
 	enum { Type = QEvent::User + 1 };
 	REOpenEvent(): QEvent( QEvent::Type(Type) ) {}
 };
+
+void mac_install_event_handler( QObject *app );
