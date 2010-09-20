@@ -37,13 +37,11 @@
 - (id) init
 {
 	NSAutoreleasePool *pool = [NSAutoreleasePool new];
-	if( self = [super init] )
-	{
-		[[NSAppleEventManager sharedAppleEventManager] setEventHandler:self
-			andSelector:@selector(appReopen:withReplyEvent:)
-			forEventClass:kCoreEventClass
-			andEventID:kAEReopenApplication];
-	}
+	[super init];
+	[[NSAppleEventManager sharedAppleEventManager] setEventHandler:self
+		andSelector:@selector(appReopen:withReplyEvent:)
+		forEventClass:kCoreEventClass
+		andEventID:kAEReopenApplication];
 	[pool release];
 	return self;
 }
@@ -91,6 +89,7 @@ void mac_install_event_handler( QObject *app )
 #ifdef QT_MAC_USE_COCOA
 	new ApplicationObj( app );
 #else
+	Q_UNUSED( app )
 	AEEventHandlerUPP appleEventHandlerPP = AEEventHandlerUPP(appleEventHandler);
 	AEInstallEventHandler( kCoreEventClass, kAEReopenApplication, appleEventHandlerPP, 0, false );
 #endif
