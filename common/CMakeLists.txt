@@ -1,6 +1,5 @@
 set( MOC_HEADERS
 	AboutWidget.h
-	Application_mac.h
 	CheckConnection.h
 	CertificateWidget.h
 	ComboBox.h
@@ -21,12 +20,20 @@ set( HEADERS
 	SslCertificate.h
 	TokenData.h
 	)
+
+if( APPLE )
+	# xCode hacks
+	include_directories(/usr/local/include/../include)
+	set( MOC_HEADERS ${MOC_HEADERS} Application_mac.h )
+	set( SOURCES Application_mac.mm )
+endif( APPLE )
+
 QT4_WRAP_CPP( MOC_SOURCES ${MOC_HEADERS} )
 set( SOURCES
+	${SOURCES}
 	${HEADERS}
 	${MOC_SOURCES}
 	AboutWidget.cpp
-	Application_mac.mm
 	CheckConnection.cpp
 	CertificateWidget.cpp
 	ComboBox.cpp
@@ -38,20 +45,11 @@ set( SOURCES
 	TokenData.cpp
 	)
 
-INCLUDE_DIRECTORIES(
+include_directories(
 	${CMAKE_CURRENT_SOURCE_DIR}
 	${CMAKE_CURRENT_BINARY_DIR}
 	${OPENSSL_INCLUDE_DIR}
 	${LIBP11_INCLUDE_DIR}
 	)
 
-if(APPLE)
-    # xCode hacks
-    include_directories(/usr/local/include/../include)
-endif(APPLE)
-
-ADD_LIBRARY(
-	qdigidoccommon
-	STATIC
-	${SOURCES}
-	)
+add_library( qdigidoccommon STATIC ${SOURCES} )
