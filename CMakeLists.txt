@@ -6,14 +6,13 @@ set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/modules")
 
 include(InstallSettings)
 
-if(PKCS11_MODULE)
-    add_definitions(-DPKCS11_MODULE="${PKCS11_MODULE}")
-endif(PKCS11_MODULE)
-
 find_package(Qt4 4.6.0 COMPONENTS QtCore QtGui QtNetwork QtWebkit QtXml REQUIRED)
 find_package(OpenSSL REQUIRED)
+find_package(PKCS11 REQUERED)
 find_package(LibP11 REQUIRED)
 find_package(SmartCardpp REQUIRED)
+
+add_definitions(-DPKCS11_MODULE="${PKCS11_MODULE}")
 
 if(MSVC)
     # Needed for smartcardpp
@@ -155,7 +154,7 @@ if(APPLE)
 		PROPERTIES
 		MACOSX_BUNDLE_INFO_PLIST ${APP_CONTENTS_DIR}/Info.plist
 	)
-	SET(ADDITIONAL_LIBRARIES "-framework CoreServices")
+	find_library( ADDITIONAL_LIBRARIES CoreServices )
 endif(APPLE)
 
 if(WIN32)
