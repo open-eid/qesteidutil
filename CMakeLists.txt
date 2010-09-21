@@ -8,7 +8,7 @@ include(InstallSettings)
 
 find_package(Qt4 4.6.0 COMPONENTS QtCore QtGui QtNetwork QtWebkit QtXml REQUIRED)
 find_package(OpenSSL REQUIRED)
-find_package(PKCS11 REQUERED)
+find_package(PKCS11)
 find_package(LibP11 REQUIRED)
 find_package(SmartCardpp REQUIRED)
 
