@@ -112,7 +112,7 @@ var htmlStrings = {
 	"labelPUK": new tr( "PUK kood", "PUK code", "PUK код" ),
 	
 	"labelEmailAddress": new tr( "E-posti aadress, kuhu suunatakse sinu @eesti.ee kirjad", "Email addres where your @eesti.ee emails will be forwarded", "Адрес эл. почты, куда перенаправляют Вашу почту с @eesti.ee" ),
-	"labelEmailUrl": new tr( "Täiuslikuma ametliku e-posti suunamise häälestamisvahendi leiad portaalist", "For more detailed official email address forwarding, please visit", "Более подробную информацию по настройке пересылки электронной почты найдёте на портале eesti.ee" ),
+	"labelEmailUrl": new tr( "Täiuslikuma ametliku e-posti suunamise häälestamisvahendi leiad portaalist", "For more detailed official email address forwarding, please visit", "Более подробную информацию по настройке пересылки электронной почты найдёте на портале" ),
 	
 	"labelMobile": new tr( "Mobiil-ID on võimalus kasutada isikutuvastamiseks ja digitaalallkirja andmiseks ID-kaardi asemel mobiiltelefoni.", "Mobile-id is possibility to use mobile phone instead of ID-card for identification and digital signing.", "Mobiil-ID - это возможность идентифицировать личность и ставить цифровую подпись при помощи мобильного телефона, наравне с ID-картой." ),
 	"labelMobile2": new tr( "Mobiil-ID kasutamiseks on vajalik uus SIM-kaart, mille sa saad endale mobiilsideoperaatori käest. Kui selline kaart on sul juba olemas, tuleb teenus aktiveerida.", "To use Mobile-id it is needed to use a SIM card that supports this feature. If such a SIM card is already purchased, then it has to be activated.", "Для пользования Mobiil-ID вам понадобится SIM-карта с поддержкой этой технологии. Новую карту можно получить у вашего мобильного оператора. Если такая карта уже установлена, следует активировать услугу." ),
