@@ -155,14 +155,12 @@ DiagnosticsDialog::DiagnosticsDialog( QWidget *parent )
 	s << getLibVersion( "advapi32") << "<br />";
 	s << getLibVersion( "libeay32" ) << "<br />";
 	s << getLibVersion( "ssleay32" ) << "<br />";
+	s << getLibVersion( "opensc-pkcs11" ) << "<br />";
 #elif defined(Q_OS_MAC)
 	s << getLibVersion( "PCSC" ) << "<br />";
 #elif defined(Q_OS_LINUX)
-	s << getLibVersion( "pcsclite" ) << "<br />";
-	s << getLibVersion( "ssl" ) << "<br />";
-	s << getLibVersion( "crypto" ) << "<br />";
+	s << getPackageVersion( QStringList() << "openssl" << "libpcsclite1" << "opensc" );
 #endif
-	s << getLibVersion( "opensc-pkcs11" ) << "<br />";
 	s << "QT (" << qVersion() << ")<br />";
 	s << "<br />";
 
@@ -190,6 +188,40 @@ QString DiagnosticsDialog::getLibVersion( const QString &lib ) const
 	}
 	catch( const std::runtime_error & )
 	{ return tr("%1 - failed to get version info").arg( lib ); }
+}
+
+QString DiagnosticsDialog::getPackageVersion( const QStringList &list ) const
+{
+	QString ret;
+	QStringList params;
+	QProcess p;
+	p.start( "which", QStringList() << "dpkg-query" );
+	p.waitForReadyRead();
+	QByteArray cmd = p.readAll();
+	if ( cmd.isEmpty() )
+	{
+		p.start( "which", QStringList() << "rpm" );
+		p.waitForReadyRead();
+		cmd = p.readAll();
+		if ( cmd.isEmpty() )
+			return ret;
+		cmd = "rpm";
+		params << "-q" << "--qf" << "'%{VERSION}'";
+	} else {
+		cmd = "dpkg-query";
+		params << "-W" << "-f='${Version}'";
+	}
+	p.close();
+
+	Q_FOREACH( QString package, list )
+	{
+		p.start( cmd, QStringList() << params << package );
+		p.waitForReadyRead();
+		ret += package + " " + p.readAll() + "<BR />";
+		p.close();
+	}
+
+	return ret;
 }
 
 QString DiagnosticsDialog::getReaderInfo() const

@@ -36,5 +36,6 @@ private slots:
 private:
 	bool	isPCSCRunning() const;
 	QString getLibVersion( const QString &lib ) const;
+	QString getPackageVersion( const QStringList &list ) const;
 	QString getReaderInfo() const;
 };
