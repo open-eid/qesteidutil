@@ -190,7 +190,7 @@ void JsExtender::loadEmails()
 	}
 	if ( emails.length() > 4 )
 		emails = emails.right( emails.length() - 4 );
-	jsCall( "setEmails", result, QByteArray( QUrl::toPercentEncoding( emails, "<BR>@()- " ) ).constData() );
+	jsCall( "setEmails", result, emails );
 }
 
 QString JsExtender::readEmailAddresses()
