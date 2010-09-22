@@ -216,11 +216,11 @@
         <translation>Для использования сертификата подписи  введите PIN2 с клавиатуры считывателя</translation>
     </message>
     <message>
-        <source>PIN has been entered incorrectly one or more times</source>
+        <source>PIN will be locked next failed attempt</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>PIN will be locked next failed attempt</source>
+        <source>PIN has been entered incorrectly one time</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

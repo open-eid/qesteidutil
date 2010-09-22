@@ -216,12 +216,12 @@
         <translation>Sertifikaadi kasutamiseks sisesta PIN2 kaardilugeja sõrmistikult</translation>
     </message>
     <message>
-        <source>PIN has been entered incorrectly one or more times</source>
-        <translation>PIN-i on sisestatud vigaselt üks või enam korda</translation>
-    </message>
-    <message>
         <source>PIN will be locked next failed attempt</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>PIN has been entered incorrectly one time</source>
+        <translation>PIN-i on sisestatud vigaselt üks kord</translation>
     </message>
 </context>
 <context>

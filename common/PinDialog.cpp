@@ -84,7 +84,7 @@ void PinDialog::init( PinType type, const QString &title, TokenData::TokenFlags 
 	if( flags & TokenData::PinFinalTry )
 		text.append( QString( "<br />").append( tr("PIN will be locked next failed attempt") ) );
 	else if( flags & TokenData::PinCountLow )
-		text.append( QString( "<br />").append( tr("PIN has been entered incorrectly one or more times") ) );
+		text.append( QString( "<br />").append( tr("PIN has been entered incorrectly one time") ) );
 	label->setText( text );
 
 	if( type == Pin1PinpadType || type == Pin2PinpadType )

@@ -216,12 +216,12 @@
         <translation>For using sign certificate enter PIN2 with pinpad</translation>
     </message>
     <message>
-        <source>PIN has been entered incorrectly one or more times</source>
-        <translation>PIN has been entered incorrectly one or more times</translation>
-    </message>
-    <message>
         <source>PIN will be locked next failed attempt</source>
         <translation>PIN will be locked next failed attempt</translation>
+    </message>
+    <message>
+        <source>PIN has been entered incorrectly one time</source>
+        <translation>PIN has been entered incorrectly one time</translation>
     </message>
 </context>
 <context>
