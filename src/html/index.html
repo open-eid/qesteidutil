@@ -12,7 +12,7 @@
       <div id="headerMenus">
         <ul>
           <li><span onMouseOver="this.style.textDecoration='underline'" onMouseOut="this.style.textDecoration='none'" onClick="cardManager.showDiagnostics();" accesskey="D"><trtag trcode="linkDiagnostics"></trtag></span></li>
-          <li><span onMouseOver="this.style.textDecoration='underline'" onMouseOut="this.style.textDecoration='none'" onClick="extender.showSettings();" accesskey="DT"><trtag trcode="linkSettings"></trtag></span></li>
+          <li id="showSettingsLink"><span onMouseOver="this.style.textDecoration='underline'" onMouseOut="this.style.textDecoration='none'" onClick="extender.showSettings();" accesskey="DT"><trtag trcode="linkSettings"></trtag></span></li>
           <li><span onMouseOver="this.style.textDecoration='underline'" onMouseOut="this.style.textDecoration='none'" onClick="openUrl('helpUrl_');" accesskey="AH"><trtag trcode="linkHelp"></trtag></span></li>
         </ul>
 	  </div>
@@ -451,6 +451,9 @@ document.getElementById('headerSelect').value = language;
 translateHTML();
 
 disableFields();
+
+if ( navigator.appVersion.indexOf("Win") == -1 )
+    document.getElementById('showSettingsLink').style.display='none';
 </script>
 
 </body>
