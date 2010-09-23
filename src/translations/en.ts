@@ -13,11 +13,11 @@
     </message>
     <message>
         <source>Server sai vale arvu baite, samm: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Server got wrong amount of bytes: %1</translation>
     </message>
     <message>
         <source>Serveri töös tekkisid vead, samm: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Server error, step: %1</translation>
     </message>
     <message>
         <source>Kaardi vastuse parsimisel tekkis viga, samm: %1</source>
@@ -25,7 +25,7 @@
     </message>
     <message>
         <source>Sertifitseerimiskeskus ei vasta, samm: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>SK server is not responding: %1</translation>
     </message>
 </context>
 <context>
@@ -97,6 +97,10 @@
     <message>
         <source>%1 - failed to get version info</source>
         <translation>%1 - failed to get version info</translation>
+    </message>
+    <message>
+        <source>ID-card package version:</source>
+        <translation>ID-card package version:</translation>
     </message>
 </context>
 <context>
@@ -186,7 +190,7 @@
     <message>
         <source>Save PIN1 for specified period in minutes
 0 - always ask</source>
-        <translation>Save PIN1 for specified period in minutes
+        <translation type="obsolete">Save PIN1 for specified period in minutes
 0 - always ask</translation>
     </message>
 </context>

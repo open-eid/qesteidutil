@@ -52,8 +52,15 @@ DiagnosticsDialog::DiagnosticsDialog( QWidget *parent )
 	QString info;
 	QTextStream s( &info );
 
-	s << "<b>" << tr("ID-card utility version:") << "</b> ";
-	s << QCoreApplication::applicationVersion() << "<br />";
+	QString package = getPackageVersion( QStringList() << "estonianidcard", false );
+	if ( package.isEmpty() )
+	{
+		s << "<b>" << tr("ID-card utility version:") << "</b> ";
+		s << QCoreApplication::applicationVersion() << "<br />";
+	} else {
+		s << "<b>" << tr("ID-card package version:") << "</b> ";
+		s << package << "<br />";
+	}
 
 	s << "<b>" << tr("OS:") << "</b> ";
 #if defined(Q_OS_WIN32)
@@ -190,7 +197,7 @@ QString DiagnosticsDialog::getLibVersion( const QString &lib ) const
 	{ return tr("%1 - failed to get version info").arg( lib ); }
 }
 
-QString DiagnosticsDialog::getPackageVersion( const QStringList &list ) const
+QString DiagnosticsDialog::getPackageVersion( const QStringList &list, bool returnPackageName ) const
 {
 	QString ret;
 	QStringList params;
@@ -206,10 +213,10 @@ QString DiagnosticsDialog::getPackageVersion( const QStringList &list ) const
 		if ( cmd.isEmpty() )
 			return ret;
 		cmd = "rpm";
-		params << "-q" << "--qf" << "'%{VERSION}'";
+		params << "-q" << "--qf" << "%{VERSION}";
 	} else {
 		cmd = "dpkg-query";
-		params << "-W" << "-f='${Version}'";
+		params << "-W" << "-f=${Version}";
 	}
 	p.close();
 
@@ -217,7 +224,13 @@ QString DiagnosticsDialog::getPackageVersion( const QStringList &list ) const
 	{
 		p.start( cmd, QStringList() << params << package );
 		p.waitForReadyRead();
-		ret += package + " " + p.readAll() + "<BR />";
+		QByteArray result = p.readAll();
+		if ( !result.isEmpty() )
+		{
+			if ( returnPackageName )
+				ret += package + " ";
+			ret += result + "<BR />";
+		}
 		p.close();
 	}
 

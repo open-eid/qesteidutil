@@ -98,6 +98,10 @@
         <source>Diagnostics</source>
         <translation>Диагностика</translation>
     </message>
+    <message>
+        <source>ID-card package version:</source>
+        <translation>Версия:</translation>
+    </message>
 </context>
 <context>
     <name>JsExtender</name>
@@ -162,7 +166,7 @@
     <message>
         <source>Save PIN1 for specified period in minutes
 0 - always ask</source>
-        <translation>Сохранять PIN1 на обозначенный период в минутах
+        <translation type="obsolete">Сохранять PIN1 на обозначенный период в минутах
 0 - всегда спрашивать</translation>
     </message>
     <message>

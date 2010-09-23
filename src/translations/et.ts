@@ -98,6 +98,10 @@
         <source>%1 - failed to get version info</source>
         <translation>%1 - viga versiooniinfo lugemisel</translation>
     </message>
+    <message>
+        <source>ID-card package version:</source>
+        <translation>ID-kaardi paki versioon: </translation>
+    </message>
 </context>
 <context>
     <name>JsExtender</name>
@@ -186,7 +190,7 @@
     <message>
         <source>Save PIN1 for specified period in minutes
 0 - always ask</source>
-        <translation>Salvesta PIN1 määratud minutiteks
+        <translation type="obsolete">Salvesta PIN1 määratud minutiteks
 0 - küsi iga kord</translation>
     </message>
 </context>
