@@ -52,15 +52,19 @@ DiagnosticsDialog::DiagnosticsDialog( QWidget *parent )
 	QString info;
 	QTextStream s( &info );
 
+#ifndef Q_OS_WIN32
 	QString package = getPackageVersion( QStringList() << "estonianidcard", false );
 	if ( package.isEmpty() )
 	{
+#endif
 		s << "<b>" << tr("ID-card utility version:") << "</b> ";
 		s << QCoreApplication::applicationVersion() << "<br />";
+#ifndef Q_OS_WIN32
 	} else {
 		s << "<b>" << tr("ID-card package version:") << "</b> ";
 		s << package << "<br />";
 	}
+#endif
 
 	s << "<b>" << tr("OS:") << "</b> ";
 #if defined(Q_OS_WIN32)
@@ -200,6 +204,7 @@ QString DiagnosticsDialog::getLibVersion( const QString &lib ) const
 QString DiagnosticsDialog::getPackageVersion( const QStringList &list, bool returnPackageName ) const
 {
 	QString ret;
+#ifndef Q_OS_WIN32
 	QStringList params;
 	QProcess p;
 	p.start( "which", QStringList() << "dpkg-query" );
@@ -233,6 +238,7 @@ QString DiagnosticsDialog::getPackageVersion( const QStringList &list, bool retu
 		}
 		p.close();
 	}
+#endif
 
 	return ret;
 }
