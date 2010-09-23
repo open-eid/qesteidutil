@@ -52,14 +52,14 @@ DiagnosticsDialog::DiagnosticsDialog( QWidget *parent )
 	QString info;
 	QTextStream s( &info );
 
-#ifndef Q_OS_WIN32
+#if defined(Q_OS_LINUX)
 	QString package = getPackageVersion( QStringList() << "estonianidcard", false );
 	if ( package.isEmpty() )
 	{
 #endif
 		s << "<b>" << tr("ID-card utility version:") << "</b> ";
 		s << QCoreApplication::applicationVersion() << "<br />";
-#ifndef Q_OS_WIN32
+#if defined(Q_OS_LINUX)
 	} else {
 		s << "<b>" << tr("ID-card package version:") << "</b> ";
 		s << package << "<br />";
