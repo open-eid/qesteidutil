@@ -77,7 +77,7 @@ SSLThread::~SSLThread() { wait(); }
 void SSLThread::run()
 {
 	if( PKCS11_login( m_slot, 0, 0 ) < 0 )
-		loginResult = ERR_GET_REASON( ERR_get_error() );
+		loginResult = ERR_get_error();
 }
 
 
@@ -162,29 +162,21 @@ bool SSLConnectPrivate::connectToHost( SSLConnect::RequestType type )
 		if( slot->token->soPinLocked || slot->token->userPinLocked )
 			flags |= TokenData::PinCountLow;
 #endif
-		PinDialog *p = new PinDialog(
-			slot->token->secureLogin ? PinDialog::Pin1PinpadType : PinDialog::Pin1Type,
-			SslCertificate::fromX509( Qt::HANDLE(authcert->x509) ), flags, qApp->activeWindow() );
-		p->setWindowModality( Qt::ApplicationModal );
 		unsigned long err = CKR_OK;
 		if( !slot->token->secureLogin )
 		{
-			QString validatePin;
-			if( !p->exec() )
-			{
-				p->deleteLater();
+			PinDialog p( PinDialog::Pin1Type,
+				SslCertificate::fromX509( Qt::HANDLE(authcert->x509) ), flags, qApp->activeWindow() );
+			if( !p.exec() )
 				throw std::runtime_error( "" );
-			}
-			validatePin = p->text();
-			p->deleteLater();
-			QCoreApplication::processEvents();
-
-			if( PKCS11_login(slot, 0, validatePin.toUtf8()) < 0 )
-				err = ERR_GET_REASON( ERR_get_error() );
+			if( PKCS11_login(slot, 0, p.text().toUtf8()) < 0 )
+				err = ERR_get_error();
 		}
 		else
 		{
-			p->show();
+			PinDialog p( PinDialog::Pin1PinpadType,
+				SslCertificate::fromX509( Qt::HANDLE(authcert->x509) ), flags, qApp->activeWindow() );
+			p.open();
 			SSLThread *t = new SSLThread( slot );
 			t->start();
 			do
@@ -193,11 +185,10 @@ bool SSLConnectPrivate::connectToHost( SSLConnect::RequestType type )
 				t->wait( 1 );
 			}
 			while( t->isRunning() );
-			delete p;
 			err = t->loginResult;
 			delete t;
 		}
-		switch( err )
+		switch( ERR_GET_REASON(err) )
 		{
 		case CKR_OK: break;
 		case CKR_CANCEL:
