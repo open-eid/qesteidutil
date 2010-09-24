@@ -76,7 +76,7 @@ SSLThread::~SSLThread() { wait(); }
 
 void SSLThread::run()
 {
-	if( PKCS11_login( m_slot, 0, NULL ) < 0 )
+	if( PKCS11_login( m_slot, 0, 0 ) < 0 )
 		loginResult = ERR_GET_REASON( ERR_get_error() );
 }
 
@@ -86,8 +86,8 @@ SSLConnectPrivate::SSLConnectPrivate()
 :	unload( true )
 ,	p11( PKCS11_CTX_new() )
 ,	p11loaded( false )
-,	sctx( NULL )
-,	ssl( NULL )
+,	sctx( SSL_CTX_new( SSLv23_client_method() ) )
+,	ssl( 0 )
 ,	reader( -1 )
 ,	nslots( 0 )
 ,	error( SSLConnect::UnknownError )
@@ -218,13 +218,20 @@ bool SSLConnectPrivate::connectToHost( SSLConnect::RequestType type )
 		throw std::runtime_error( SSLConnect::tr("no key matching certificate available").toStdString() );
 	EVP_PKEY *pkey = PKCS11_get_private_key( authkey );
 
-	sctx = SSL_CTX_new( SSLv23_client_method() );
-	sslError::check( SSL_CTX_use_certificate(sctx, authcert->x509 ) );
-	sslError::check( SSL_CTX_use_PrivateKey(sctx,pkey) );
-	sslError::check( SSL_CTX_check_private_key(sctx) );
-	sslError::check( SSL_CTX_set_mode( sctx, SSL_MODE_AUTO_RETRY ) );
-
 	ssl = SSL_new( sctx );
+	sslError::check( SSL_use_certificate( ssl, authcert->x509 ) );
+	sslError::check( SSL_use_PrivateKey( ssl, pkey ) );
+	sslError::check( SSL_check_private_key( ssl ) );
+	sslError::check( SSL_set_mode( ssl, SSL_MODE_AUTO_RETRY ) );
+
+#ifdef Q_OS_MAC
+#ifdef SSL_OP_ALLOW_UNSAFE_LEGACY_RENEGOTIATION
+	SSL_set_options( ssl, SSL_OP_ALLOW_UNSAFE_LEGACY_RENEGOTIATION );
+#else
+#define SSL3_FLAGS_ALLOW_UNSAFE_LEGACY_RENEGOTIATION	0x0010
+	ssl->s3->flags |= SSL3_FLAGS_ALLOW_UNSAFE_LEGACY_RENEGOTIATION;
+#endif
+#endif
 
 	BIO *sock;
 	switch( type )
@@ -240,13 +247,6 @@ bool SSLConnectPrivate::connectToHost( SSLConnect::RequestType type )
 
 	SSL_set_bio( ssl, sock, sock );
 	sslError::check( SSL_connect( ssl ) );
-
-#ifdef Q_OS_MAC
-#ifndef SSL3_FLAGS_ALLOW_UNSAFE_LEGACY_RENEGOTIATION
-#define SSL3_FLAGS_ALLOW_UNSAFE_LEGACY_RENEGOTIATION	0x0010
-#endif
-	ssl->s3->flags |= SSL3_FLAGS_ALLOW_UNSAFE_LEGACY_RENEGOTIATION;
-#endif
 
 	return true;
 }
@@ -273,7 +273,7 @@ QByteArray SSLConnectPrivate::getRequest( const QString &request ) const
 			case SSL_ERROR_ZERO_RETURN: // Disconnect
 				break;
 			default:
-				sslError::check( 0 );
+				sslError::check( true );
 				break;
 			}
 		}
