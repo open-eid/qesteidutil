@@ -347,6 +347,9 @@ QByteArray SSLConnect::getUrl( RequestType type, const QString &value )
 	QByteArray data = header.toUtf8();
 	sslError::check( SSL_write( d->ssl, data.constData(), data.length() ) );
 	QProgressBar p( qApp->activeWindow() );
+#if QT_VERSION >= 0x040500
+	p.setWindowFlags( (p.windowFlags() | Qt::CustomizeWindowHint) & ~Qt::WindowCloseButtonHint );
+#endif
 	p.setWindowModality( Qt::WindowModal );
 	p.setWindowFlags( Qt::Sheet );
 	p.setRange( 0, 0 );
