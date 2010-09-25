@@ -52,15 +52,22 @@ public:
 
 
 
-SSLThread::SSLThread( PKCS11_SLOT *slot, QObject *parent )
-: QThread(parent), loginResult(CKR_OK), m_slot(slot) {}
-
-SSLThread::~SSLThread() { wait(); }
-
-void SSLThread::run()
+void PINPADThread::run()
 {
 	if( PKCS11_login( m_slot, 0, 0 ) < 0 )
-		loginResult = ERR_get_error();
+		result = ERR_get_error();
+}
+
+unsigned long PINPADThread::waitForDone()
+{
+	start();
+	do
+	{
+		QCoreApplication::processEvents();
+		wait( 1 );
+	}
+	while( isRunning() );
+	return result;
 }
 
 
@@ -160,16 +167,7 @@ bool SSLConnectPrivate::connectToHost( SSLConnect::RequestType type )
 			PinDialog p( PinDialog::Pin1PinpadType,
 				SslCertificate::fromX509( Qt::HANDLE(authcert->x509) ), flags, qApp->activeWindow() );
 			p.open();
-			SSLThread *t = new SSLThread( slot );
-			t->start();
-			do
-			{
-				QCoreApplication::processEvents();
-				t->wait( 1 );
-			}
-			while( t->isRunning() );
-			err = t->loginResult;
-			delete t;
+			err = PINPADThread( slot ).waitForDone();
 		}
 		switch( ERR_GET_REASON(err) )
 		{

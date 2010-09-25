@@ -71,16 +71,18 @@ public:
 	QByteArray result;
 };
 
-class SSLThread: public QThread
+class PINPADThread: public QThread
 {
 	Q_OBJECT
 public:
-	SSLThread( PKCS11_SLOT *slot, QObject *parent = 0 );
-	~SSLThread();
-	unsigned long loginResult;
+	explicit PINPADThread( PKCS11_SLOT *slot, QObject *parent = 0 )
+	: QThread(parent), result(CKR_OK), m_slot(slot) {}
+
+	unsigned long waitForDone();
 
 private:
 	void run();
 
+	unsigned long result;
 	PKCS11_SLOT *m_slot;
 };
