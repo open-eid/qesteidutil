@@ -72,6 +72,52 @@ unsigned long PINPADThread::waitForDone()
 
 
 
+void SSLReadThread::run()
+{
+	int bytesRead = 0;
+	char readBuffer[4096];
+	QByteArray buffer;
+	do
+	{
+		bytesRead = SSL_read( m_ssl, &readBuffer, 4096 );
+
+		if( bytesRead <= 0 )
+		{
+			switch( SSL_get_error( m_ssl, bytesRead ) )
+			{
+			case SSL_ERROR_NONE:
+			case SSL_ERROR_WANT_READ:
+			case SSL_ERROR_WANT_WRITE:
+			case SSL_ERROR_ZERO_RETURN: // Disconnect
+				break;
+			default:
+				sslError::check( true );
+				break;
+			}
+		}
+
+		if( bytesRead > 0 )
+			buffer += QByteArray( (const char*)&readBuffer, bytesRead );
+	} while( bytesRead > 0 );
+
+	int pos = buffer.indexOf( "\r\n\r\n" );
+	result = pos ? buffer.mid( pos + 4 ) : buffer;
+}
+
+QByteArray SSLReadThread::waitForDone()
+{
+	start();
+	do
+	{
+		QCoreApplication::processEvents();
+		wait( 1 );
+	}
+	while( isRunning() );
+	return result;
+}
+
+
+
 SSLConnectPrivate::SSLConnectPrivate()
 :	unload( true )
 ,	p11( PKCS11_CTX_new() )
@@ -223,41 +269,6 @@ bool SSLConnectPrivate::connectToHost( SSLConnect::RequestType type )
 	return true;
 }
 
-QByteArray SSLConnectPrivate::getRequest( const QString &request ) const
-{
-	QByteArray data = request.toUtf8();
-	sslError::check( SSL_write( ssl, data.constData(), data.length() ) );
-
-	int bytesRead = 0;
-	char readBuffer[4096];
-	QByteArray buffer;
-	do
-	{
-		bytesRead = SSL_read( ssl, &readBuffer, 4096 );
-
-		if( bytesRead <= 0 )
-		{
-			switch( SSL_get_error( ssl, bytesRead ) )
-			{
-			case SSL_ERROR_NONE:
-			case SSL_ERROR_WANT_READ:
-			case SSL_ERROR_WANT_WRITE:
-			case SSL_ERROR_ZERO_RETURN: // Disconnect
-				break;
-			default:
-				sslError::check( true );
-				break;
-			}
-		}
-
-		if( bytesRead > 0 )
-			buffer += QByteArray( (const char*)&readBuffer, bytesRead );
-	} while( bytesRead > 0 );
-
-	int pos = buffer.indexOf( "\r\n\r\n" );
-	return pos ? buffer.mid( pos + 4 ) : buffer;
-}
-
 
 
 SSLConnect::SSLConnect( QObject *parent )
@@ -331,7 +342,10 @@ QByteArray SSLConnect::getUrl( RequestType type, const QString &value )
 		break;
 	default: return QByteArray();
 	}
-	return d->getRequest( header );
+
+	QByteArray data = header.toUtf8();
+	sslError::check( SSL_write( d->ssl, data.constData(), data.length() ) );
+	return SSLReadThread( d->ssl ).waitForDone();
 }
 
 SSLConnect::ErrorType SSLConnect::error() const { return d->error; }

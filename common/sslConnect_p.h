@@ -52,7 +52,6 @@ public:
 	~SSLConnectPrivate();
 
 	bool connectToHost( SSLConnect::RequestType type );
-	QByteArray getRequest( const QString &request ) const;
 
 	bool	unload;
 	PKCS11_CTX *p11;
@@ -85,4 +84,19 @@ private:
 
 	unsigned long result;
 	PKCS11_SLOT *m_slot;
+};
+
+class SSLReadThread: public QThread
+{
+	Q_OBJECT
+public:
+	explicit SSLReadThread( SSL *ssl, QObject *parent = 0 ): QThread( parent ), m_ssl(ssl) {}
+
+	QByteArray waitForDone();
+
+private:
+	void run();
+
+	QByteArray result;
+	SSL *m_ssl;
 };
