@@ -31,6 +31,7 @@
 #include <QApplication>
 #include <QDateTime>
 #include <QLocale>
+#include <QProgressBar>
 
 class sslError: public std::runtime_error
 {
@@ -345,6 +346,11 @@ QByteArray SSLConnect::getUrl( RequestType type, const QString &value )
 
 	QByteArray data = header.toUtf8();
 	sslError::check( SSL_write( d->ssl, data.constData(), data.length() ) );
+	QProgressBar p( qApp->activeWindow() );
+	p.setWindowModality( Qt::WindowModal );
+	p.setWindowFlags( Qt::Sheet );
+	p.setRange( 0, 0 );
+	p.show();
 	return SSLReadThread( d->ssl ).waitForDone();
 }
 
