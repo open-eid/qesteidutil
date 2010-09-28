@@ -361,7 +361,7 @@ QByteArray SslCertificate::version() const
 class PKCS12CertificatePrivate
 {
 public:
-	PKCS12CertificatePrivate(): error(PKCS12Certificate::Unknown) {}
+	PKCS12CertificatePrivate(): error(PKCS12Certificate::NullError) {}
 	void init( const QByteArray &data, const QByteArray &pin );
 	void setLastError();
 
@@ -399,17 +399,24 @@ void PKCS12CertificatePrivate::init( const QByteArray &data, const QByteArray &p
 void PKCS12CertificatePrivate::setLastError()
 {
 	unsigned long err = ERR_get_error();
-	if( ERR_GET_LIB(err) == ERR_LIB_PKCS12 )
+	if( err == 0 )
+	{
+		   error = PKCS12Certificate::NullError;
+		   errorString.clear();
+	}
+	else if( ERR_GET_LIB(err) == ERR_LIB_PKCS12 )
 	{
 		switch( ERR_GET_REASON(err) )
 		{
-		case PKCS12_R_MAC_VERIFY_FAILURE: error = PKCS12Certificate::InvalidPassword; break;
-		default: error = PKCS12Certificate::Unknown; break;
+		case PKCS12_R_MAC_VERIFY_FAILURE: error = PKCS12Certificate::InvalidPasswordError; break;
+		default: error = PKCS12Certificate::UnknownError; break;
 		}
 	}
 	else
-		error = PKCS12Certificate::Unknown;
-	errorString = ERR_error_string( err, NULL );
+	{
+		error = PKCS12Certificate::UnknownError;
+		errorString = ERR_error_string( err, NULL );
+	}
 }
 
 

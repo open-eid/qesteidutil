@@ -81,8 +81,9 @@ class PKCS12Certificate
 public:
 	enum ErrorType
 	{
-		InvalidPassword = 1,
-		Unknown = -1,
+		NullError = 0,
+		InvalidPasswordError = 1,
+		UnknownError = -1,
 	};
 	PKCS12Certificate( QIODevice *device, const QByteArray &pin );
 	PKCS12Certificate( const QByteArray &data, const QByteArray &pin );
