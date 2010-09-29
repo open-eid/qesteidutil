@@ -11,6 +11,7 @@ find_package(OpenSSL REQUIRED)
 find_package(PKCS11)
 find_package(LibP11 REQUIRED)
 find_package(SmartCardpp REQUIRED)
+find_package(LibDL REQUIRED)
 
 add_definitions(-DPKCS11_MODULE="${PKCS11_MODULE}")
 
@@ -171,6 +172,7 @@ target_link_libraries(qesteidutil
     ${LIBP11_LIBRARIES}
     ${SMARTCARDPP_LIBRARIES}
 	${ADDITIONAL_LIBRARIES}
+    ${LIBDL_LIBRARIES}
     qtsingleapplication
 )
 
