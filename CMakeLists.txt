@@ -112,6 +112,10 @@ include_directories(
 
 if(APPLE)
     set(APP_CONTENTS_DIR "${CMAKE_SOURCE_DIR}/mac")
+    if(NOT DEFINED QT_PLUGINS_DIR)
+	SET(QT_PLUGINS_DIR "/Developer/Applications/Qt/")
+    endif(NOT DEFINED QT_PLUGINS_DIR)
+
     set(LIBQJPEG_FILE "${QT_PLUGINS_DIR}/imageformats/libqjpeg.dylib")
     
     # xCode hacks
