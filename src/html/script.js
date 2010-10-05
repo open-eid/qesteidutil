@@ -210,7 +210,9 @@ function readCardData( translate )
 		
 		document.getElementById('documentId').innerHTML = activeCardId;
 		document.getElementById('email').innerHTML = esteidData.authCert.getEmail();
-		document.getElementById('labelCardValidity').innerHTML = _( esteidIsValid ? 'labelIsValid' : 'labelIsInValid' );
+		var validSpan = "<span id='labelCardValidity'>%s</span>";
+		validSpan = validSpan.replace( /%s/, _( esteidIsValid ? 'labelIsValid' : 'labelIsInValid' ) );
+		document.getElementById('labelThisIs').innerHTML = _( 'labelThisIs' ).replace( /%s/, validSpan );
 		document.getElementById('labelCardValidity').style.color = esteidIsValid ? '#509b00' : '#e80303';
 		document.getElementById('labelCardValidTo').innerHTML = !esteidIsValid ? _('labelCardGetNew') : _('labelCardValidTill') + '<span id="expiry" style="color: #355670;">' + esteidData.getExpiry( language ) + '</span>';
 

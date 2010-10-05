@@ -41,6 +41,8 @@ a:hover, a:focus {color: #509b00; text-decoration: underline;}
 #smobileContent {color: #355670; font-family: "Arial, Liberation Sans"; font-size: 12px;}
 
 #photo {position: absolute; top:90px; left:467px; width:90px; height:120px; border: 1px solid black; z-index:1; background: #FFFFFF; text-align: center;}
+#photo a { font-size: 14px; }
+
 #savePhoto {position: absolute; top:194px; left:468px; width: 90px; height:16px; border-top: 1px solid black; z-index:2; background: rgba(255,255,255,0.8); text-align: center; display: none;}
 
 .cardInfo { position: absolute; top:226px; left:180px; width:385; height:72px;
