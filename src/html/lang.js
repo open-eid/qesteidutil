@@ -211,12 +211,10 @@ var eidStrings = {
 
 function selectLanguage()
 {
-	var select = document.getElementById('headerSelect'); 
-	language = select.options[select.selectedIndex].value;
+	language = $('headerSelect').getValue();
 	translateHTML();
 	readCardData( true );
 	extender.setLanguage( language );
-	document.getElementById( 'forUpdate' ).innerHTML += ".";
 }
 
 function tr( est, eng, rus )
@@ -247,16 +245,17 @@ function _( code, defaultString )
 
 function translateHTML()
 {
-	var trTags = document.getElementsByTagName('trTag');
-	for( i=0;i<trTags.length;i++)
-	{
-		if ( (typeof trTags[i].getAttribute != "undefined") && trTags[i].getAttribute('trcode') != null )
-			trTags[i].innerHTML = _( trTags[i].getAttribute('trcode'), trTags[i].innerHTML );
-	}
-	var iTags = document.getElementsByTagName('input');
-	for( i=0;i<iTags.length;i++)
-		if ( iTags[i].type == "button" && (typeof iTags[i].getAttribute != "undefined") && iTags[i].getAttribute('trcode') != null )
-			iTags[i].value = _( iTags[i].getAttribute('trcode'), iTags[i].value );
+    $$('input, trTag').each( function(obj) {
+        if ( obj.hasAttribute('trcode') )
+        {
+            if ( obj.tagName.toLowerCase() == 'input' )
+            {
+                if ( ['button', 'submit'].include( obj.type ) )
+                    obj.setValue( _( obj.getAttribute('trcode'), obj.getValue() ) );
+            } else
+                obj.innerHTML = _( obj.getAttribute('trcode'), obj.innerHTML );
+        }
+    });
 }
 
 function openUrl( str )

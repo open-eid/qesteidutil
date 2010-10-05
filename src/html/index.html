@@ -2,6 +2,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<link rel="stylesheet" href="qrc:/html/style.css" type="text/css" />
+	<script type="text/javascript" src="qrc:/html/prototype.js" />
 	<script type="text/javascript" src="qrc:/html/lang.js" />
 	<script type="text/javascript" src="qrc:/html/script.js" />
 </head>
@@ -446,14 +447,14 @@
 
 <script type="text/javascript">
 language = extender.locale();
-document.getElementById('headerSelect').value = language;
+$('headerSelect').value = language;
 
 translateHTML();
 
 disableFields();
 
 if ( navigator.appVersion.indexOf("Win") == -1 )
-    document.getElementById('showSettingsLink').style.display='none';
+    $('showSettingsLink').hide();
 </script>
 
 </body>

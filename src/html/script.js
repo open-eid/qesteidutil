@@ -13,8 +13,13 @@ function checkAccessKeys(e)
     var buttonsAll = document.querySelectorAll( "#leftMenus input, #headerMenus a, #headerMenus span" );
 	for( i=0;i<buttonsAll.length;i++)
 	{
-		if ( (typeof buttonsAll[i].attributes["accesskey"] != "undefined") && buttonsAll[i].attributes["accesskey"].value.indexOf(letter) >= 0 )
+		if ( (typeof buttonsAll[i].attributes["accesskey"] != "undefined") && 
+		        buttonsAll[i].attributes["accesskey"].value.indexOf(letter) >= 0 && 
+		        buttonsAll[i].style.display != 'none' )
 		{
+		    var offset = buttonsAll[i].viewportOffset();
+		    if ( offset.left == 0 || offset.top == 0 )
+		        continue;
 		    buttonsAll[i].focus();
 			buttonsAll[i].onclick();
 			return;

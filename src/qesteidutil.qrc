@@ -2,6 +2,7 @@
   <qresource>
     <file>html/index.html</file>
     <file>html/lang.js</file>
+    <file>html/prototype.js</file>
     <file>html/script.js</file>
     <file>html/style.css</file>
     <file>html/images/button.png</file>
