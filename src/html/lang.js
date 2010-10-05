@@ -54,7 +54,7 @@ var htmlStrings = {
 	"labelTimes": new tr( "korda", "times", "раз" ),
 	
 	"labelCertBlocked": new tr( "Sertifikaat on blokeeritud.", "Certificate is blocked.", "Сертификат заблокирован." ),
-	"labelAuthKeyBlocked": new tr( "Selle ID-kaardiga ei ole hetkel võimalik autentida, kuna PIN1 koodi on sisestatud 3 korda valesti.", "It is not possible to authenticate with this ID-card, because PIN1 was inserted 3 times incorrectly.", "С данной ID-картой невозможно идентифицироваться, т.к. PIN1 был введён 3 раза неверно." ),
+	"labelAuthKeyBlocked": new tr( "Selle ID-kaardiga ei ole hetkel võimalik autentida, kuna PIN1 koodi on sisestatud 3 korda valesti.", "It is not possible to authenticate with this ID-card, because PIN1 was inserted 3 times incorrectly.", "С данной ID-картой невозможно идентифицировать, т.к. PIN1 был введён 3 раза неверно." ),
 	"labelSignKeyBlocked": new tr( "Selle ID-kaardiga ei ole hetkel võimalik anda digitaalallkirja, kuna PIN2 koodi on sisestatud 3 korda valesti.", "It is not possible to digitally sign with this ID-card, because PIN2 was inserted 3 times incorrectly.", "С данной ID-картой невозможно создать цифровую подпись, т.к. PIN2 был введён 3 раза неверно." ),
 	"labelAuthCertBlocked": new tr( "Isikutuvastamise sertifikaat on blokeeritud.", "Authentication certificate is blocked." , "Идентификационный сертификат заблокирован." ),
 	"labelSignCertBlocked": new tr( "Allkirjastamise sertifikaat on blokeeritud.", "Signing certificate is blocked.", "Сертификат подписи заблокирован." ),
@@ -161,7 +161,7 @@ var eidStrings = {
 	"noReaders": new tr( "Ühtegi kiipkaardi lugejat pole ühendatud", "No readers found", "Считывающее устройство не обнаружено" ),
 	"certValid": new tr( "kehtiv ja kasutatav", "valid and applicable", "действителен и пригоден" ),
 	"certBlocked": new tr( "kehtetu", "expired", "недействительно" ),
-	"validBlocked": new tr( "kehtiv kuid blokeeritud", "valid but blocked", "действительно, но заблокировано" ),
+	"validBlocked": new tr( "kehtiv kuid blokeeritud", "valid but blocked", "действителен, но заблокирован" ),
 	"invalidBlocked": new tr( "kehtetu ja blokeeritud", "invalid and blocked", "недействительно и заблокировано" ),
 	
 	"PINCheck": new tr( "PIN1 ja PIN2 ei tohi sisaldada sünnikuupäeva ja -aastat", "PIN1 and PIN2 have to be different than date of birth or year of birth", "PIN1 и PIN2 не должны содержать дату рождения" ),
