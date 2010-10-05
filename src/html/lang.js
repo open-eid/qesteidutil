@@ -165,7 +165,7 @@ var eidStrings = {
 	"invalidBlocked": new tr( "kehtetu ja blokeeritud", "invalid and blocked", "недействительно и заблокировано" ),
 	
 	"PINCheck": new tr( "PIN1 ja PIN2 ei tohi sisaldada sünnikuupäeva ja -aastat", "PIN1 and PIN2 have to be different than date of birth or year of birth", "PIN1 и PIN2 не должны содержать дату рождения" ),
-	"PIN1Enter": new tr( "Sisesta kehtiv PIN1 kood", "Current PIN1 code", "Введите старый PIN1 код" ),
+	"PIN1Enter": new tr( "Sisesta kehtiv PIN1 kood", "Enter current PIN1 code", "Введите старый PIN1 код" ),
 	"PIN1Length": new tr( "PIN1 pikkus peab olema 4-12 numbrit", "PIN1 length has to be between 4 and 12", "Длина PIN1 должна быть 4-12 номера" ),
 	"PIN1InvalidRetry": new tr( "Vale PIN1 kood. Saad veel proovida %d korda.", "Wrong PIN1 code. You can try %d more times.", "Неверный PIN1 код. Попыток ещё: %d" ),
 	"PIN1Invalid": new tr( "Vale PIN1 kood.", "Wrong PIN1 code.", "Неверный PIN1 код." ),
@@ -180,7 +180,7 @@ var eidStrings = {
 	"PIN1NewOldSame": new tr( "Kehtiv ja uus PIN1 peavad olema erinevad!", "Old and new PIN1 has to be different!", "Старый и новый PIN1 должны отличаться!" ),
 	"PIN1ValidateFailed": new tr( "PIN1 koodi valideerimine ebaõnnestus", "PIN1 validation failed", "Не удалось распознать PIN1" ),
 
-	"PIN2Enter": new tr( "Sisesta kehtiv PIN2 kood", "Current PIN2 code", "Введите старый PIN2 код" ),
+	"PIN2Enter": new tr( "Sisesta kehtiv PIN2 kood", "Enter current PIN2 code", "Введите старый PIN2 код" ),
 	"PIN2Length": new tr( "PIN2 pikkus peab olema 5-12 numbrit", "PIN2 length has to be between 5 and 12", "Длина PIN2 должна быть 5-12 номера" ),
 	"PIN2InvalidRetry": new tr( "Vale PIN2 kood. Saad veel proovida %d korda.", "Wrong PIN2 code. You can try %d more times.", "Неверный PIN2 код. Попыток ещё: %d" ),
 	"PIN2NewDifferent": new tr( "Uued PIN2 koodid on erinevad.", "New PIN2 codes doesn't match", "Новые PIN2 коды не сходятся" ),
