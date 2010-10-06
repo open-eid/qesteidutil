@@ -41,6 +41,14 @@ public:
 		EncipherOnly,
 		DecipherOnly,
 	};
+	enum CertType
+	{
+		DigiIDType = 0,
+		DigiIDTestType,
+		EstEidType,
+		EstEidTestType,
+		TempelType,
+	};
 
 	SslCertificate( const QSslCertificate &cert );
 
@@ -63,6 +71,7 @@ public:
 	QByteArray	subjectKeyIdentifier() const;
 	static QByteArray	toHex( const QByteArray &in, QChar separator = ' ' );
 	QString		toString( const QString &format ) const;
+	CertType	type() const;
 
 #if QT_VERSION < 0x040600
 	QByteArray	serialNumber() const;

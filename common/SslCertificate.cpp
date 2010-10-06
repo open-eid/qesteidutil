@@ -184,14 +184,10 @@ QString SslCertificate::issuerInfo( const QByteArray &tag ) const
 	return mapFromOnlineName( string ).value( tag );
 }
 
-bool SslCertificate::isDigiID() const
-{ return policies().indexOf( QRegExp( "^1\\.3\\.6\\.1\\.4\\.1\\.10015\\.1\\.2.*" ) ) != -1; }
-
-bool SslCertificate::isTempel() const
-{ return policies().indexOf( QRegExp( "^1\\.3\\.6\\.1\\.4\\.1\\.10015\\.7.*" ) ) != -1; }
-
+bool SslCertificate::isDigiID() const { return type() == DigiIDType; }
+bool SslCertificate::isTempel() const { return type() == TempelType; }
 bool SslCertificate::isTest() const
-{ return policies().indexOf( QRegExp( "^1\\.3\\.6\\.1\\.4\\.1\\.10015\\.3.*" ) ) != -1; }
+{ CertType t = type(); return t == DigiIDTestType || t == EstEidTestType; }
 
 QHash<int,QString> SslCertificate::keyUsage() const
 {
@@ -336,6 +332,21 @@ QString SslCertificate::toString( const QString &format ) const
 		pos += r.matchedLength();
 	}
 	return formatName( ret );
+}
+
+SslCertificate::CertType SslCertificate::type() const
+{
+	QStringList p = policies();
+	if( p.indexOf( QRegExp( "^1\\.3\\.6\\.1\\.4\\.1\\.10015\\.1\\.1.*" ) ) != -1 )
+		return EstEidType;
+	if( p.indexOf( QRegExp( "^1\\.3\\.6\\.1\\.4\\.1\\.10015\\.1\\.2.*" ) ) != -1 )
+		return DigiIDType;
+	if( p.indexOf( QRegExp( "^1\\.3\\.6\\.1\\.4\\.1\\.10015\\.3\\.1.*" ) ) != -1 )
+		return EstEidTestType;
+	if( p.indexOf( QRegExp( "^1\\.3\\.6\\.1\\.4\\.1\\.10015\\.3\\.2.*" ) ) != -1 )
+		return DigiIDTestType;
+	if( p.indexOf( QRegExp( "^1\\.3\\.6\\.1\\.4\\.1\\.10015\\.7.*" ) ) != -1 )
+		return TempelType;
 }
 
 #if QT_VERSION < 0x040600
