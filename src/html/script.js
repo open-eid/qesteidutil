@@ -480,7 +480,7 @@ function setPicture( img, code )
 		var codes = code.split( "|" );
 		_alert( 'error', _(codes[0]) + ( typeof codes[1] != "undefined" ? "\n" + codes[1] : "") );
 	} else {
-		document.getElementById('photo').innerHTML = '<img width="90" height="120" src="' + img + '">';
+		document.getElementById('photo').innerHTML = '<img width="90" height="120" src="' + img + '_small.jpg">';
 		document.getElementById('savePhoto').style.display = 'block';
 	}
 	extender.closeLoading();

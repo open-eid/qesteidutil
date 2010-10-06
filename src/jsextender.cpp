@@ -60,8 +60,10 @@ JsExtender::~JsExtender()
 {
 	if ( m_loading )
 		m_loading->deleteLater();
-	if ( QFile::exists( m_tempFile ) )
-		QFile::remove( m_tempFile );
+	if ( QFile::exists( m_tempFile + "_small.jpg" ) )
+		QFile::remove( m_tempFile + "_small.jpg" );
+	if ( QFile::exists( m_tempFile + "_big.jpg" ) )
+		QFile::remove( m_tempFile + "_big.jpg" );
 }
 
 void JsExtender::setLanguage( const QString &lang )
@@ -258,13 +260,14 @@ void JsExtender::loadPicture()
 	QPixmap pix;
 	if ( pix.loadFromData( buffer ) )
 	{
-		QTemporaryFile file( QString( "%1%2XXXXXX.jpg" )
+		QPixmap small = pix.scaled( 90, 120, Qt::IgnoreAspectRatio, Qt::SmoothTransformation );
+		QTemporaryFile file( QString( "%1%2XXXXXX" )
 			.arg( QDir::tempPath() ).arg( QDir::separator() ) );
 		file.setAutoRemove( false );
 		if ( file.open() )
 		{
 			m_tempFile = file.fileName();
-			if ( pix.save( &file ) )
+			if ( small.save( m_tempFile + "_small.jpg" ) && pix.save( m_tempFile + "_big.jpg" ) )
 			{
 				jsCall( "setPicture", QUrl::fromLocalFile(m_tempFile).toString(), "" );
 				return;
@@ -305,7 +308,7 @@ void JsExtender::savePicture()
 	if( ext != "png" && ext != "jpg" && ext != "jpeg" && ext != "tiff" && ext != "bmp" )
 		file.append( ".jpg" );
 	QPixmap pix;
-	if ( !pix.load( m_tempFile ) )
+	if ( !pix.load( m_tempFile + "_big.jpg" ) )
 	{
 		jsCall( "handleError", "savePicFailed" );
 		return;
