@@ -133,7 +133,7 @@ void JsExtender::activateEmail( const QString &email )
 	try {
 		buffer = getUrl( SSLConnect::ActivateEmails, email );
 	} catch( std::runtime_error &e ) {
-		jsCall( "handleError", e.what() );
+		jsCall( "handleError", QString::fromUtf8( e.what() ) );
 		jsCall( "setEmails", "forwardFailed", "" );
 		return;
 	}
@@ -163,7 +163,7 @@ void JsExtender::loadEmails()
 	try {
 		buffer = getUrl( SSLConnect::EmailInfo, "" );
 	} catch( std::runtime_error &e ) {
-		jsCall( "handleError", e.what() );
+		jsCall( "handleError", QString::fromUtf8( e.what() ) );
 		jsCall( "setEmails", "loadFailed", "" );
 		return;
 	}
@@ -247,7 +247,7 @@ void JsExtender::loadPicture()
 	try {
 		buffer = getUrl( SSLConnect::PictureInfo, "" );
 	} catch( std::runtime_error &e ) {
-		jsCall( "handleError", e.what() );
+		jsCall( "handleError", QString::fromUtf8( e.what() ) );
 		jsCall( "setPicture", "", result );
 		return;
 	}
@@ -335,7 +335,7 @@ void JsExtender::getMidStatus()
 	try {
 		buffer = getUrl( SSLConnect::MobileInfo, header + data );
 	} catch( std::runtime_error &e ) {
-		jsCall( "handleError", e.what() );
+		jsCall( "handleError", QString::fromUtf8( e.what() ) );
 		jsCall( "setMobile", "", result );
 		return;
 	}

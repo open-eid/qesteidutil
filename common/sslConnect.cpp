@@ -47,6 +47,7 @@ public:
 
 	virtual const char *what() const throw() { return desc.c_str(); }
 	void static check( bool result ) { if( !result ) throw sslError(); }
+	void static error( const QString &msg ) { throw std::runtime_error( msg.toStdString() ); }
 
 	std::string desc;
 };
@@ -150,17 +151,17 @@ SSLConnectPrivate::~SSLConnectPrivate()
 bool SSLConnectPrivate::connectToHost( SSLConnect::RequestType type )
 {
 	if( !p11loaded )
-		throw std::runtime_error( errorString.toStdString() );
+		sslError::error( errorString.toUtf8() );
 
 	if( PKCS11_enumerate_slots( p11, &pslots, &nslots ) || !nslots )
-		throw std::runtime_error( SSLConnect::tr( "failed to list slots" ).toStdString() );
+		sslError::error( SSLConnect::tr( "failed to list slots" ).toUtf8() );
 
 	// Find token
 	PKCS11_SLOT *slot = 0;
 	if( reader >= 0 )
 	{
 		if ( (unsigned int)reader*4 > nslots )
-			throw std::runtime_error( SSLConnect::tr( "token failed" ).toStdString() );
+			sslError::error( SSLConnect::tr( "token failed" ).toUtf8() );
 		slot = &pslots[reader*4];
 	}
 	else
@@ -176,16 +177,16 @@ bool SSLConnectPrivate::connectToHost( SSLConnect::RequestType type )
 		}
 	}
 	if( !slot || !slot->token )
-		throw std::runtime_error( SSLConnect::tr("no token available").toStdString() );
+		sslError::error( SSLConnect::tr("no token available").toUtf8() );
 
 	// Find token cert
 	PKCS11_CERT *certs;
 	unsigned int ncerts;
 	if( PKCS11_enumerate_certs(slot->token, &certs, &ncerts) || !ncerts )
-		throw std::runtime_error( SSLConnect::tr("no certificate available").toStdString() );
+		sslError::error( SSLConnect::tr("no certificate available").toUtf8() );
 	PKCS11_CERT *authcert = &certs[0];
 	if( !SslCertificate::fromX509( Qt::HANDLE(authcert->x509) ).isValid() )
-		throw std::runtime_error( SSLConnect::tr("Certificate is not valid").toStdString() );
+		sslError::error( SSLConnect::tr("Certificate is not valid").toUtf8() );
 
 	// Login token
 	if( slot->token->loginRequired )
@@ -234,7 +235,7 @@ bool SSLConnectPrivate::connectToHost( SSLConnect::RequestType type )
 	// Find token key
 	PKCS11_KEY *authkey = PKCS11_find_key( authcert );
 	if ( !authkey )
-		throw std::runtime_error( SSLConnect::tr("no key matching certificate available").toStdString() );
+		sslError::error( SSLConnect::tr("no key matching certificate available").toUtf8() );
 	EVP_PKEY *pkey = PKCS11_get_private_key( authkey );
 
 	ssl = SSL_new( sctx );
@@ -262,7 +263,7 @@ bool SSLConnectPrivate::connectToHost( SSLConnect::RequestType type )
 
 	BIO_set_conn_port( sock, "https" );
 	if( BIO_do_connect( sock ) <= 0 )
-		throw std::runtime_error( SSLConnect::tr( "Failed to connect to host. Are you connected to the internet?" ).toStdString() );
+		sslError::error( SSLConnect::tr( "Failed to connect to host. Are you connected to the internet?" ).toUtf8() );
 
 	SSL_set_bio( ssl, sock, sock );
 	sslError::check( SSL_connect( ssl ) );
