@@ -346,6 +346,8 @@ SslCertificate::CertType SslCertificate::type() const
 		return EstEidTestType;
 	if( p.indexOf( QRegExp( "^1\\.3\\.6\\.1\\.4\\.1\\.10015\\.3\\.2.*" ) ) != -1 )
 		return DigiIDTestType;
+	if( p.indexOf( QRegExp( "^1\\.3\\.6\\.1\\.4\\.1\\.10015\\.4.*" ) ) != -1 ) // 1.2
+		return OCSPType;
 	if( p.indexOf( QRegExp( "^1\\.3\\.6\\.1\\.4\\.1\\.10015\\.7.*" ) ) != -1 )
 		return TempelType;
 	return UnknownType;

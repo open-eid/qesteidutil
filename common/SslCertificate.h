@@ -47,6 +47,7 @@ public:
 		DigiIDTestType,
 		EstEidType,
 		EstEidTestType,
+		OCSPType,
 		TempelType,
 		UnknownType,
 	};
