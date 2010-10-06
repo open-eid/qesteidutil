@@ -1,6 +1,6 @@
 body { cursor: default; margin: 0px; }
 input[type="button"] { cursor: hand; }
-a:link {color: #509b00; text-decoration: none;}	
+a:link, a:visited {color: #509b00; text-decoration: none;}	
 a:hover, a:focus {color: #509b00; text-decoration: underline;}	
 
 #headerBackground {position: relative; background: #00355f; height: 45px;}
@@ -15,7 +15,8 @@ a:hover, a:focus {color: #509b00; text-decoration: underline;}
 #headerMenus ul { display: inline; }
 #headerMenus ul li { list-style: none; padding: 0px 5px 0px 10px; margin: 0px; display: inline; border-left: 1px solid #325e80; font-weight: bold; }
 #headerMenus ul li:first-child { border-left: none; padding-left: 0px;}
-#headerMenus span {color: #afc6d1;}
+#headerMenus a:link, #headerMenus a:visited {color: #afc6d1;text-decoration: none;}
+#headerMenus a:hover, #headerMenus a:focus {color: #afc6d1; text-decoration: underline;}
 
 #topBackground {position: relative; background: #c6ddfa; height: 200px; z-index: -10;}
 

@@ -12,9 +12,9 @@
       <div id="headerLogo">&nbsp;</div>
       <div id="headerMenus">
         <ul>
-          <li><span onMouseOver="this.style.textDecoration='underline'" onMouseOut="this.style.textDecoration='none'" onClick="cardManager.showDiagnostics();" accesskey="D"><trtag trcode="linkDiagnostics"></trtag></span></li>
-          <li id="showSettingsLink"><span onMouseOver="this.style.textDecoration='underline'" onMouseOut="this.style.textDecoration='none'" onClick="extender.showSettings();" accesskey="DT"><trtag trcode="linkSettings"></trtag></span></li>
-          <li><span onMouseOver="this.style.textDecoration='underline'" onMouseOut="this.style.textDecoration='none'" onClick="openUrl('helpUrl_');" accesskey="AH"><trtag trcode="linkHelp"></trtag></span></li>
+          <li><a href="#" onClick="cardManager.showDiagnostics();" accesskey="D"><trtag trcode="linkDiagnostics"></trtag></a></li>
+          <li id="showSettingsLink"><a href="#" onClick="extender.showSettings();" accesskey="DT"><trtag trcode="linkSettings"></trtag></a></li>
+          <li><a href="#" onClick="openHelp();" accesskey="AH"><trtag trcode="linkHelp"></trtag></a></li>
         </ul>
 	  </div>
           <div id="readerSelectDiv" style="display: none;"><select id="readerSelect" onChange="selectReader();"></select></div>
