@@ -184,7 +184,8 @@ QString SslCertificate::issuerInfo( const QByteArray &tag ) const
 	return mapFromOnlineName( string ).value( tag );
 }
 
-bool SslCertificate::isDigiID() const { return type() == DigiIDType; }
+bool SslCertificate::isDigiID() const
+{ CertType t = type(); return t == DigiIDType || t==DigiIDTestType; }
 bool SslCertificate::isTempel() const { return type() == TempelType; }
 bool SslCertificate::isTest() const
 { CertType t = type(); return t == DigiIDTestType || t == EstEidTestType; }
@@ -347,6 +348,7 @@ SslCertificate::CertType SslCertificate::type() const
 		return DigiIDTestType;
 	if( p.indexOf( QRegExp( "^1\\.3\\.6\\.1\\.4\\.1\\.10015\\.7.*" ) ) != -1 )
 		return TempelType;
+	return UnknownType;
 }
 
 #if QT_VERSION < 0x040600

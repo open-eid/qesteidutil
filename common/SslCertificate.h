@@ -48,6 +48,7 @@ public:
 		EstEidType,
 		EstEidTestType,
 		TempelType,
+		UnknownType,
 	};
 
 	SslCertificate( const QSslCertificate &cert );
