@@ -48,6 +48,7 @@ public:
 		EstEidType,
 		EstEidTestType,
 		OCSPType,
+		OCSPTestType,
 		TempelType,
 		UnknownType,
 	};
