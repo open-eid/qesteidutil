@@ -32,6 +32,18 @@ bool IKValidator::isValid( const QString &ik )
 {
 	if( ik.size() != 11 ) return false;
 
+	// Mobile-ID test IK-s
+	if( ik == "14212128020" ||
+		ik == "14212128021" ||
+		ik == "14212128022" ||
+		ik == "14212128023" ||
+		ik == "14212128024" ||
+		ik == "14212128025" ||
+		ik == "14212128026" ||
+		ik == "14212128027" ||
+		ik == "38002240211" )
+		return true;
+
 	// Validate date
 	int year = 0;
 	switch( ik.left( 1 ).toUInt() )
