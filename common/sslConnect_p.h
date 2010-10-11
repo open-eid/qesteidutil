@@ -60,7 +60,6 @@ public:
 	SSL		*ssl;
 
 	QString card;
-	int		reader;
 
 	unsigned int nslots;
 	PKCS11_SLOT *pslots;

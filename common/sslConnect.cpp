@@ -126,7 +126,6 @@ SSLConnectPrivate::SSLConnectPrivate()
 ,	p11loaded( false )
 ,	sctx( SSL_CTX_new( SSLv23_client_method() ) )
 ,	ssl( 0 )
-,	reader( -1 )
 ,	nslots( 0 )
 ,	error( SSLConnect::UnknownError )
 {}
@@ -158,22 +157,13 @@ bool SSLConnectPrivate::connectToHost( SSLConnect::RequestType type )
 
 	// Find token
 	PKCS11_SLOT *slot = 0;
-	if( reader >= 0 )
+	for( unsigned int i = 0; i < nslots; ++i )
 	{
-		if ( (unsigned int)reader*4 > nslots )
-			sslError::error( SSLConnect::tr( "token failed" ).toUtf8() );
-		slot = &pslots[reader*4];
-	}
-	else
-	{
-		for( unsigned int i = 0; i < nslots; ++i )
+		if( (&pslots[i])->token &&
+			card.contains( (&pslots[i])->token->serialnr ) )
 		{
-			if( (&pslots[i])->token &&
-				card.contains( (&pslots[i])->token->serialnr ) )
-			{
-				slot = &pslots[i];
-				break;
-			}
+			slot = &pslots[i];
+			break;
 		}
 	}
 	if( !slot || !slot->token )
@@ -374,7 +364,6 @@ void SSLConnect::setPKCS11( const QString &pkcs11, bool unload )
 		d->errorString = tr("failed to load pkcs11 module '%1'").arg( pkcs11 );
 	}
 }
-void SSLConnect::setReader( int reader ) { d->reader = reader; }
 
 void SSLConnect::waitForFinished( RequestType type, const QString &value )
 {

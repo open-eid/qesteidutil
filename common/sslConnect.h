@@ -58,7 +58,6 @@ public:
 	void setCard( const QString &card );
 	void setPin( const QString &pin );
 	void setPKCS11( const QString &pkcs11, bool unload = true );
-	void setReader( int reader );
 	void waitForFinished( RequestType type, const QString &value = "" );
 
 private:
