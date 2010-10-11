@@ -24,8 +24,6 @@
 
 #include "sslConnect.h"
 
-#include "TokenData.h"
-
 #include <QThread>
 
 #include <libp11.h>

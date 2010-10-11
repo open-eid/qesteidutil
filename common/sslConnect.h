@@ -24,6 +24,8 @@
 
 #include <QObject>
 
+#include "TokenData.h"
+
 #define EESTI "sisene.www.eesti.ee"
 #define SK "www.openxades.org"
 
@@ -52,6 +54,7 @@ public:
 
 	ErrorType error() const;
 	QString errorString() const;
+	TokenData::TokenFlags flags() const;
 	QByteArray getUrl( RequestType type, const QString &value = "" );
 	QString pin() const;
 	QByteArray result() const;

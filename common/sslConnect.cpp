@@ -126,6 +126,7 @@ SSLConnectPrivate::SSLConnectPrivate()
 ,	p11loaded( false )
 ,	sctx( SSL_CTX_new( SSLv23_client_method() ) )
 ,	ssl( 0 )
+,	flags( 0 )
 ,	nslots( 0 )
 ,	error( SSLConnect::UnknownError )
 {}
@@ -366,8 +367,9 @@ QByteArray SSLConnect::getUrl( RequestType type, const QString &value )
 
 SSLConnect::ErrorType SSLConnect::error() const { return d->error; }
 QString SSLConnect::errorString() const { return d->errorString; }
+TokenData::TokenFlags SSLConnect::flags() const { return d->flags; }
 QByteArray SSLConnect::result() const { return d->result; }
-void SSLConnect::setCard( const QString &card ) { d->card = card; }
+void SSLConnect::setCard( const QString &card ) { d->card = card; d->selectSlot(); }
 void SSLConnect::setPKCS11( const QString &pkcs11, bool unload )
 {
 	if( d->p11loaded && d->unload )
