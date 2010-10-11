@@ -17,7 +17,7 @@
     </message>
     <message>
         <source>Serveri töös tekkisid vead, samm: %1</source>
-        <translation>Server error, step: %1</translation>
+        <translation type="obsolete">Server error, step: %1</translation>
     </message>
     <message>
         <source>Kaardi vastuse parsimisel tekkis viga, samm: %1</source>
@@ -26,6 +26,19 @@
     <message>
         <source>Sertifitseerimiskeskus ei vasta, samm: %1</source>
         <translation>SK server is not responding: %1</translation>
+    </message>
+    <message>
+        <source>Server sai vale arvu baite, samm: %1.
+Oodati: %2, saadi: %3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Serveri tÃ¶Ã¶s tekkisid vead, samm: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Wrong PIN1 code.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -141,7 +141,7 @@ QByteArray CertUpdate::runStep( int s, QByteArray result )
 				card->enterPin( EstEidCard::PIN_AUTH, PinString( m_pin.toLatin1() ) );
 			} catch( const AuthError &e ) {
 				delete p;
-				throw std::runtime_error( "step4 auth error: " + e.desc );
+				throwError( tr("Wrong PIN1 code.").toUtf8() );;
 			}
 			delete p;
 			break;
