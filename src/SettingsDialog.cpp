@@ -34,7 +34,7 @@ SettingsDialog::SettingsDialog( QWidget *parent )
 	Settings s;
 	s.beginGroup( "Util" );
 
-#ifdef WIN32
+#ifndef Q_OS_LINUX
 	updateInterval->addItem( tr("Once a day"), "-daily" );
 	updateInterval->addItem( tr("Once a week"), "-weekly" );
 	updateInterval->addItem( tr("Once a month"), "-monthly" );
@@ -60,7 +60,7 @@ void SettingsDialog::accept()
 	s.setValue( "updateInterval", updateInterval->currentText() );
 	s.setValue( "autoUpdate", autoUpdate->isChecked() );
 
-#ifdef WIN32
+#ifndef Q_OS_LINUX
 	QStringList list;
 	if ( !autoUpdate->isChecked() )
 		list << "-remove";
