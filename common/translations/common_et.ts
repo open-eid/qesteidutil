@@ -235,14 +235,6 @@
         <translation>Vale PIN</translation>
     </message>
     <message>
-        <source>failed to list slots</source>
-        <translation>viga pkcs11 slottide lugemisel</translation>
-    </message>
-    <message>
-        <source>token failed</source>
-        <translation>viga &quot;tokeni&quot; laadimisel</translation>
-    </message>
-    <message>
         <source>no token available</source>
         <translation>ei leitud ühtegi &quot;tokenit&quot;</translation>
     </message>

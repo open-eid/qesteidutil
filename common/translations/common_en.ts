@@ -235,14 +235,6 @@
         <translation>Invalid PIN</translation>
     </message>
     <message>
-        <source>failed to list slots</source>
-        <translation>failed to list slots</translation>
-    </message>
-    <message>
-        <source>token failed</source>
-        <translation>token failed</translation>
-    </message>
-    <message>
         <source>no token available</source>
         <translation>no token available</translation>
     </message>

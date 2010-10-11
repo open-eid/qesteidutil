@@ -235,14 +235,6 @@
         <translation>Неверный PIN</translation>
     </message>
     <message>
-        <source>failed to list slots</source>
-        <translation>ошибка при чтении слотов pkcs11</translation>
-    </message>
-    <message>
-        <source>token failed</source>
-        <translation>ошибка при загрузке &quot;token&quot;-а</translation>
-    </message>
-    <message>
         <source>no token available</source>
         <translation>не найдено ни одного &quot;token&quot;-а</translation>
     </message>
