@@ -24,6 +24,8 @@
 
 #include "sslConnect.h"
 
+#include "TokenData.h"
+
 #include <QThread>
 
 #include <libp11.h>
@@ -52,6 +54,7 @@ public:
 	~SSLConnectPrivate();
 
 	bool connectToHost( SSLConnect::RequestType type );
+	bool selectSlot();
 
 	bool	unload;
 	PKCS11_CTX *p11;
@@ -60,6 +63,8 @@ public:
 	SSL		*ssl;
 
 	QString card;
+	TokenData::TokenFlags flags;
+	PKCS11_SLOT *pslot;
 
 	unsigned int nslots;
 	PKCS11_SLOT *pslots;

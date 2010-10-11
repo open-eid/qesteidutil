@@ -152,52 +152,29 @@ bool SSLConnectPrivate::connectToHost( SSLConnect::RequestType type )
 	if( !p11loaded )
 		sslError::error( errorString.toUtf8() );
 
-	if( PKCS11_enumerate_slots( p11, &pslots, &nslots ) || !nslots )
-		sslError::error( SSLConnect::tr( "failed to list slots" ).toUtf8() );
-
-	// Find token
-	PKCS11_SLOT *slot = 0;
-	for( unsigned int i = 0; i < nslots; ++i )
-	{
-		if( (&pslots[i])->token &&
-			card.contains( (&pslots[i])->token->serialnr ) )
-		{
-			slot = &pslots[i];
-			break;
-		}
-	}
-	if( !slot || !slot->token )
+	if( !selectSlot() )
 		sslError::error( SSLConnect::tr("no token available").toUtf8() );
 
 	// Find token cert
 	PKCS11_CERT *certs;
 	unsigned int ncerts;
-	if( PKCS11_enumerate_certs(slot->token, &certs, &ncerts) || !ncerts )
+	if( PKCS11_enumerate_certs( pslot->token, &certs, &ncerts ) || !ncerts )
 		sslError::error( SSLConnect::tr("no certificate available").toUtf8() );
 	PKCS11_CERT *authcert = &certs[0];
 	if( !SslCertificate::fromX509( Qt::HANDLE(authcert->x509) ).isValid() )
 		sslError::error( SSLConnect::tr("Certificate is not valid").toUtf8() );
 
 	// Login token
-	if( slot->token->loginRequired )
+	if( pslot->token->loginRequired )
 	{
-		TokenData::TokenFlags flags;
-#ifdef LIBP11_TOKEN_FLAGS
-		if( slot->token->soPinCountLow || slot->token->userPinCountLow )
-			flags |= TokenData::PinCountLow;
-		if( slot->token->soPinFinalTry || slot->token->userPinFinalTry )
-			flags |= TokenData::PinCountLow;
-		if( slot->token->soPinLocked || slot->token->userPinLocked )
-			flags |= TokenData::PinCountLow;
-#endif
 		unsigned long err = CKR_OK;
-		if( !slot->token->secureLogin )
+		if( !pslot->token->secureLogin )
 		{
 			PinDialog p( PinDialog::Pin1Type,
 				SslCertificate::fromX509( Qt::HANDLE(authcert->x509) ), flags, qApp->activeWindow() );
 			if( !p.exec() )
 				throw std::runtime_error( "" );
-			if( PKCS11_login(slot, 0, p.text().toUtf8()) < 0 )
+			if( PKCS11_login( pslot, 0, p.text().toUtf8() ) < 0 )
 				err = ERR_get_error();
 		}
 		else
@@ -205,8 +182,9 @@ bool SSLConnectPrivate::connectToHost( SSLConnect::RequestType type )
 			PinDialog p( PinDialog::Pin1PinpadType,
 				SslCertificate::fromX509( Qt::HANDLE(authcert->x509) ), flags, qApp->activeWindow() );
 			p.open();
-			err = PINPADThread( slot ).waitForDone();
+			err = PINPADThread( pslot ).waitForDone();
 		}
+		selectSlot();
 		switch( ERR_GET_REASON(err) )
 		{
 		case CKR_OK: break;
@@ -258,6 +236,44 @@ bool SSLConnectPrivate::connectToHost( SSLConnect::RequestType type )
 	SSL_set_bio( ssl, sock, sock );
 	sslError::check( SSL_connect( ssl ) );
 
+	return true;
+}
+
+bool SSLConnectPrivate::selectSlot()
+{
+	if( !p11loaded )
+		return false;
+
+	if( nslots )
+	{
+		PKCS11_release_all_slots( p11, pslots, nslots );
+		nslots = 0;
+	}
+	if( PKCS11_enumerate_slots( p11, &pslots, &nslots ) || !nslots )
+		return false;
+
+	pslot = 0;
+	for( unsigned int i = 0; i < nslots; ++i )
+	{
+		if( (&pslots[i])->token &&
+			card.contains( (&pslots[i])->token->serialnr ) )
+		{
+			pslot = &pslots[i];
+			break;
+		}
+	}
+
+	if( !pslot || !pslot->token )
+		return false;
+
+#ifdef LIBP11_TOKEN_FLAGS
+	if( pslot->token->soPinCountLow || pslot->token->userPinCountLow )
+		flags |= TokenData::PinCountLow;
+	if( pslot->token->soPinFinalTry || pslot->token->userPinFinalTry )
+		flags |= TokenData::PinCountLow;
+	if( pslot->token->soPinLocked || pslot->token->userPinLocked )
+		flags |= TokenData::PinCountLow;
+#endif
 	return true;
 }
 
