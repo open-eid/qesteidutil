@@ -271,9 +271,9 @@ bool SSLConnectPrivate::selectSlot()
 	if( pslot->token->soPinCountLow || pslot->token->userPinCountLow )
 		flags |= TokenData::PinCountLow;
 	if( pslot->token->soPinFinalTry || pslot->token->userPinFinalTry )
-		flags |= TokenData::PinCountLow;
+		flags |= TokenData::PinFinalTry;
 	if( pslot->token->soPinLocked || pslot->token->userPinLocked )
-		flags |= TokenData::PinCountLow;
+		flags |= TokenData::PinLocked;
 #endif
 	return true;
 }
