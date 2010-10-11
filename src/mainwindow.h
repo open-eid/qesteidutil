@@ -28,6 +28,7 @@ class JsCardManager;
 class JsEsteidCard;
 class JsExtender;
 class QTranslator;
+class QMenuBar;
 
 class MainWindow : public QWebView
 {
@@ -35,6 +36,7 @@ class MainWindow : public QWebView
 
 public:
 	MainWindow( QWidget *parent = 0 );
+	~MainWindow();
 	JsEsteidCard* eidCard() { return jsEsteidCard; }
 	JsCardManager* cardManager() { return jsCardManager; }
 	void retranslate( const QString &lang );
@@ -44,4 +46,7 @@ private:
 	JsCardManager *jsCardManager;
 	JsEsteidCard *jsEsteidCard;
 	QTranslator *appTranslator, *qtTranslator, *commonTranslator;
+	QMenuBar *bar;
+	QMenu *menu;
+	QAction *pref, *close;
 };

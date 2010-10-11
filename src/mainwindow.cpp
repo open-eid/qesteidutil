@@ -52,6 +52,15 @@ MainWindow::MainWindow( QWidget *parent )
 	QApplication::instance()->installTranslator( qtTranslator );
 	QApplication::instance()->installTranslator( commonTranslator );
 
+#if defined(Q_OS_MAC)
+	bar = new QMenuBar;
+	menu = bar->addMenu( tr("&File") );
+	pref = menu->addAction( tr("Settings"), m_jsExtender, SLOT(showSettings()) );
+	close = menu->addAction( tr("Close"), qApp, SLOT(quit()) );
+	pref->setMenuRole( QAction::PreferencesRole );
+	close->setShortcut( Qt::CTRL + Qt::Key_W );
+#endif
+
 	m_jsExtender = new JsExtender( this );
 	
 	jsEsteidCard = new JsEsteidCard( this );
@@ -67,16 +76,14 @@ MainWindow::MainWindow( QWidget *parent )
  	m_jsExtender->registerObject("esteidData", jsEsteidCard);
 	m_jsExtender->registerObject("cardManager", jsCardManager);
 
-#if defined(Q_OS_MAC)
-	QMenuBar *bar = new QMenuBar;
-	QMenu *menu = bar->addMenu( tr("&File") );
-	QAction *pref = menu->addAction( tr("Settings"), m_jsExtender, SLOT(showSettings()) );
-	QAction *close = menu->addAction( tr("Close"), qApp, SLOT(quit()) );
-	pref->setMenuRole( QAction::PreferencesRole );
-	close->setShortcut( Qt::CTRL + Qt::Key_W );
-#endif
-
 	load(QUrl("qrc:/html/index.html"));
+}
+
+MainWindow::~MainWindow()
+{
+#ifdef Q_OS_MAC
+	delete bar;
+#endif
 }
 
 void MainWindow::retranslate( const QString &lang )
@@ -85,4 +92,9 @@ void MainWindow::retranslate( const QString &lang )
 	qtTranslator->load( ":/translations/qt_" + lang );
 	commonTranslator->load( ":/translations/common_" + lang );
 	setWindowTitle(QApplication::translate("MainWindow", "ID-card utility", 0, QApplication::UnicodeUTF8));
+#ifdef Q_OS_MAC
+	menu->setTitle( tr("&File") );
+	pref->setText( tr("Settings") );
+	close->setText( tr("Close") );
+#endif
 }
