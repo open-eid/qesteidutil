@@ -108,19 +108,19 @@
     </message>
     <message>
         <source>Enhanched key usage</source>
-        <translation>Täiendatud võtme kasutus</translation>
+        <translation>Täiendav võtme kasutusala</translation>
     </message>
     <message>
         <source>Key usage</source>
-        <translation>Võtme kasutus</translation>
+        <translation>Võtme kasutusala</translation>
     </message>
     <message>
         <source>Authority key identifier</source>
-        <translation>Juurdepääsutõendi identifikaator</translation>
+        <translation>Väljaandja võtmelühend</translation>
     </message>
     <message>
         <source>Subject key identifier</source>
-        <translation>Objektivõtme identifikaator</translation>
+        <translation>Subjekti võtmelühend</translation>
     </message>
 </context>
 <context>
@@ -275,11 +275,11 @@
     <name>SslCertificate</name>
     <message>
         <source>All application policies</source>
-        <translation>Kõik tarkvara poliisid</translation>
+        <translation>Kõik kasutusalad</translation>
     </message>
     <message>
         <source>Proves your identity to a remote computer</source>
-        <translation>Tuvastab sinu isiksust arvuti kaugopereerimisel</translation>
+        <translation>Tuvastab isikut serverarvutile</translation>
     </message>
     <message>
         <source>Protects e-mail messages</source>
