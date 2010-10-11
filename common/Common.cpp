@@ -66,24 +66,27 @@ void Common::browse( const QUrl &url )
 {
 	QUrl u = url;
 	u.setScheme( "file" );
-	bool started = false;
 #if defined(Q_OS_WIN32)
-	started = QProcess::startDetached( "explorer", QStringList() << "/select," <<
-		QDir::toNativeSeparators( u.toLocalFile() ) );
-#elif defined(Q_OS_MAC)
-	started = QProcess::startDetached("/usr/bin/osascript", QStringList() <<
-									  "-e" << "on run argv" <<
-									  "-e" << "set vfile to POSIX file (item 1 of argv)" <<
-									  "-e" << "tell application \"Finder\"" <<
-									  "-e" << "select vfile" <<
-									  "-e" << "activate" <<
-									  "-e" << "end tell" <<
-									  "-e" << "end run" <<
-									  // Commandline arguments
-									  u.toLocalFile());
-#endif
-	if( started )
+	if( QProcess::startDetached( "explorer", QStringList() << "/select," <<
+		QDir::toNativeSeparators( u.toLocalFile() ) ) )
 		return;
+#elif defined(Q_OS_MAC)
+	QProcess p;
+	p.start( "/usr/bin/osascript", QStringList() << "-" << u.toLocalFile() );
+	p.waitForStarted();
+	QTextStream s( &p );
+	s << "on run argv" << endl
+		<< "set vfile to POSIX file (item 1 of argv)" << endl
+		<< "tell application \"Finder\"" << endl
+		<< "select vfile" << endl
+		<< "activate" << endl
+		<< "end tell" << endl
+		<< "end run" << endl;
+	p.closeWriteChannel();
+	p.waitForFinished();
+	if( p.exitCode() == 0 )
+		return;
+#endif
 	QDesktopServices::openUrl( QUrl::fromLocalFile( QFileInfo( u.toLocalFile() ).absolutePath() ) );
 }
 
@@ -144,63 +147,65 @@ void Common::mailTo( const QUrl &url )
 		return;
 	}
 #elif defined(Q_OS_MAC)
-	CFURLRef emailUrl = CFURLCreateWithString(kCFAllocatorDefault, CFSTR("mailto:info@example.com"), NULL), appUrl = NULL;
-	bool started = false;
-	if(LSGetApplicationForURL(emailUrl, kLSRolesEditor, NULL, &appUrl) == noErr)
+	CFURLRef emailUrl = CFURLCreateWithString( kCFAllocatorDefault, CFSTR("mailto:"), 0 );
+	CFURLRef appUrl = 0;
+	CFStringRef appPath = 0;
+	if( LSGetApplicationForURL( emailUrl, kLSRolesAll, NULL, &appUrl ) == noErr )
 	{
-		CFStringRef appPath = CFURLCopyFileSystemPath(appUrl, kCFURLPOSIXPathStyle);
-		if(appPath != NULL)
-		{
-			if(CFStringCompare(appPath, CFSTR("/Applications/Mail.app"), 0) == kCFCompareEqualTo)
-			{
-				started = QProcess::startDetached("/usr/bin/osascript", QStringList() <<
-					"-e" << "on run argv" <<
-					"-e" << "set vattachment to (item 1 of argv)" <<
-					"-e" << "set vsubject to (item 2 of argv)" <<
-					"-e" << "tell application \"Mail\"" <<
-					"-e" << "set composeMessage to make new outgoing message at beginning with properties {visible:true}" <<
-					"-e" << "tell composeMessage" <<
-					"-e" << "set subject to vsubject" <<
-					"-e" << "set content to \" \"" <<
-					"-e" << "tell content" <<
-					"-e" << "make new attachment with properties {file name: vattachment} at after the last word of the last paragraph" <<
-					"-e" << "end tell" <<
-					"-e" << "end tell" <<
-					"-e" << "activate" <<
-					"-e" << "end tell" <<
-					"-e" << "end run" <<
-					// Commandline arguments
-					url.queryItemValue("attachment") <<
-					url.queryItemValue("subject"));
-			}
-			else if(CFStringFind(appPath, CFSTR("Entourage"), 0).location != kCFNotFound)
-			{
-				started = QProcess::startDetached("/usr/bin/osascript", QStringList() <<
-					"-e" << "on run argv" <<
-					"-e" << "set vattachment to (item 1 of argv)" <<
-					"-e" << "set vsubject to (item 2 of argv)" <<
-					"-e" << "tell application \"Microsoft Entourage\"" <<
-					"-e" << "set vmessage to make new outgoing message with properties" <<
-					"-e" << "{subject:vsubject, attachments:vattachment}" <<
-					"-e" << "open vmessage" <<
-					"-e" << "activate" <<
-					"-e" << "end tell" <<
-					"-e" << "end run" <<
-					// Commandline arguments
-					url.queryItemValue("attachment") <<
-					url.queryItemValue("subject"));
-			}
-			else if(CFStringCompare(appPath, CFSTR("/Applications/Thunderbird.app"), 0) == kCFCompareEqualTo)
-			{
-				// TODO: Handle Thunderbird here? Impossible?
-			}
-			CFRelease(appPath);
-		}
-		CFRelease(appUrl);
+		appPath = CFURLCopyFileSystemPath( appUrl, kCFURLPOSIXPathStyle );
+		CFRelease( appUrl );
 	}
-	CFRelease(emailUrl);
-	if( started )
-		return;
+	CFRelease( emailUrl );
+
+	if( appPath )
+	{
+		QProcess p;
+		p.start( "/usr/bin/osascript", QStringList() << "-" << url.queryItemValue("attachment") << url.queryItemValue("subject") );
+		p.waitForStarted();
+		QTextStream s( &p );
+		if( CFStringCompare( appPath, CFSTR("/Applications/Mail.app"), 0 ) == kCFCompareEqualTo )
+		{
+			s << "on run argv" << endl
+				<< "set vattachment to (item 1 of argv)" << endl
+				<< "set vsubject to (item 2 of argv)" << endl
+				<< "tell application \"Mail\"" << endl
+				<< "set composeMessage to make new outgoing message at beginning with properties {visible:true}" << endl
+				<< "tell composeMessage" << endl
+				<< "set subject to vsubject" << endl
+				<< "set content to \" \"" << endl
+				<< "tell content" << endl
+				<< "make new attachment with properties {file name: vattachment} at after the last word of the last paragraph" << endl
+				<< "end tell" << endl
+				<< "end tell" << endl
+				<< "activate" << endl
+				<< "end tell" << endl
+				<< "end run" << endl;
+		}
+		else if( CFStringFind( appPath, CFSTR("Entourage"), 0 ).location != kCFNotFound )
+		{
+			s << "on run argv" << endl
+				<< "set vattachment to (item 1 of argv)" << endl
+				<< "set vsubject to (item 2 of argv)" << endl
+				<< "tell application \"Microsoft Entourage\"" << endl
+				<< "set vmessage to make new outgoing message with properties" << endl
+				<< "{subject:vsubject, attachments:vattachment}" << endl
+				<< "open vmessage" << endl
+				<< "activate" << endl
+				<< "end tell" << endl
+				<< "end run" << endl;
+		}
+#if 0
+		else if(CFStringCompare(appPath, CFSTR("/Applications/Thunderbird.app"), 0) == kCFCompareEqualTo)
+		{
+			// TODO: Handle Thunderbird here? Impossible?
+		}
+#endif
+		CFRelease( appPath );
+		p.closeWriteChannel();
+		p.waitForFinished();
+		if( p.exitCode() == 0 )
+			return;
+	}
 #elif defined(Q_OS_LINUX)
 	QByteArray thunderbird;
 	QProcess p;
