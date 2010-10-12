@@ -31,7 +31,6 @@
 JsCertData::JsCertData( QObject *parent )
 :	QObject( parent )
 {
-    m_card = NULL;
 	m_qcert = NULL;
 }
 
@@ -45,12 +44,8 @@ QSslCertificate JsCertData::cert() const { return *m_qcert; }
 
 void JsCertData::loadCert(EstEidCard *card, CertType ct)
 {
-    m_card = card;
-
-    if (!m_card) {
-        qDebug("No card");
-        return;
-    }
+	if ( !card )
+		return;
 
 	if( m_qcert )
 	{
@@ -63,9 +58,9 @@ void JsCertData::loadCert(EstEidCard *card, CertType ct)
     try {
         // Read certificate
         if (ct == AuthCert)
-            certBytes = m_card->getAuthCert();
+			certBytes = card->getAuthCert();
         else
-            certBytes = m_card->getSignCert();
+			certBytes = card->getSignCert();
 
 		if( certBytes.size() )
 			m_qcert = new QSslCertificate(QByteArray((char *)&certBytes[0], certBytes.size()), QSsl::Der);

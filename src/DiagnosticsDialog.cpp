@@ -31,6 +31,8 @@
 #include <QFile>
 #include <QFileDialog>
 #include <QHash>
+#include <QImageReader>
+#include <QLibraryInfo>
 #include <QMessageBox>
 #include <QTextStream>
 

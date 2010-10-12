@@ -44,10 +44,9 @@ class JsCardManager : public QObject
 
 public:
     JsCardManager(JsEsteidCard *jsEsteidCard);
-	~JsCardManager();
 
 private:
-    SmartCardManager *cardMgr;
+	SmartCardManager cardMgr;
 	JsEsteidCard *m_jsEsteidCard;
     QTimer pollTimer;
 

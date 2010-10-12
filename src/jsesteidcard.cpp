@@ -40,8 +40,8 @@ static QString getName( const std::string &data )
 
 JsEsteidCard::JsEsteidCard( QObject *parent )
 :	QObject( parent )
+,	m_card( 0 )
 {
-    m_card = NULL;
     m_authCert = new JsCertData( this );
     m_signCert = new JsCertData( this );
 	authUsageCount = 0;
@@ -49,22 +49,24 @@ JsEsteidCard::JsEsteidCard( QObject *parent )
 	cardOK = false;
 }
 
-void JsEsteidCard::setCard(EstEidCard *card, int reader)
+void JsEsteidCard::resetCard()
 {
-	if ( m_card )
+	if( m_card )
 	{
 		delete m_card;
 		m_card = 0;
 	}
+	cardOK = false;
+}
 
-	if ( !card )
-		return;
-
+void JsEsteidCard::setCard(SmartCardManager &cardMgr, int reader)
+{
 	cardOK = false;
 	m_reader = reader;
-    m_card = card;
-	m_authCert->loadCert(card, JsCertData::AuthCert);
-	m_signCert->loadCert(card, JsCertData::SignCert);
+	ConnectionBase *c = cardMgr.connect( reader, false );
+	m_card = new EstEidCard( cardMgr, c );
+	m_authCert->loadCert(m_card, JsCertData::AuthCert);
+	m_signCert->loadCert(m_card, JsCertData::SignCert);
     reloadData();
 }
 
@@ -75,7 +77,7 @@ void JsEsteidCard::handleError(QString msg)
 }
 
 void JsEsteidCard::reloadData() {
-    if (!m_card) {
+	if (!m_card) {
         qDebug("No card");
         return;
     }
@@ -83,7 +85,7 @@ void JsEsteidCard::reloadData() {
     std::vector<std::string> tmp;
     try {
         // Read all personal data
-        m_card->readPersonalData(tmp,EstEidCard::SURNAME,EstEidCard::COMMENT4);
+		m_card->readPersonalData(tmp,EstEidCard::SURNAME,EstEidCard::COMMENT4);
 
 		surName = getName( tmp[EstEidCard::SURNAME]  );
 		firstName = getName( tmp[EstEidCard::FIRSTNAME] );
@@ -118,7 +120,7 @@ bool JsEsteidCard::canReadCard()
 
 bool JsEsteidCard::validatePin1(QString oldVal)
 {
-    if (!m_card) {
+	if (!m_card) {
         qDebug("No card");
         return false;
     }
@@ -143,7 +145,7 @@ bool JsEsteidCard::validatePin1(QString oldVal)
 
 bool JsEsteidCard::changePin1(QString newVal, QString oldVal)
 {
-    if (!m_card) {
+	if (!m_card) {
         qDebug("No card");
         return false;
     }
@@ -161,7 +163,7 @@ bool JsEsteidCard::changePin1(QString newVal, QString oldVal)
 		    return false;
 		} catch (std::runtime_error &err) {
 		    handleError(err.what());
-		    m_card->reconnectWithT0();
+			m_card->reconnectWithT0();
 		}
 		retry--;
 	}
@@ -170,7 +172,7 @@ bool JsEsteidCard::changePin1(QString newVal, QString oldVal)
 
 bool JsEsteidCard::validatePin2(QString oldVal)
 {
-    if (!m_card) {
+	if (!m_card) {
         qDebug("No card");
         return false;
     }
@@ -196,7 +198,7 @@ bool JsEsteidCard::validatePin2(QString oldVal)
 
 bool JsEsteidCard::changePin2(QString newVal, QString oldVal)
 {
-    if (!m_card) {
+	if (!m_card) {
         qDebug("No card");
         return false;
     }
@@ -223,7 +225,7 @@ bool JsEsteidCard::changePin2(QString newVal, QString oldVal)
 
 bool JsEsteidCard::validatePuk(QString oldVal)
 {
-    if (!m_card) {
+	if (!m_card) {
         qDebug("No card");
         return false;
     }
@@ -249,7 +251,7 @@ bool JsEsteidCard::validatePuk(QString oldVal)
 
 bool JsEsteidCard::changePuk(QString newVal, QString oldVal)
 {
-    if (!m_card) {
+	if (!m_card) {
         qDebug("No card");
         return false;
     }
@@ -267,7 +269,7 @@ bool JsEsteidCard::changePuk(QString newVal, QString oldVal)
 	        return false;
 	    } catch (std::runtime_error &err) {
 	        handleError(err.what());
-	        m_card->reconnectWithT0();
+			m_card->reconnectWithT0();
 		}
 		retry--;
     }
@@ -276,7 +278,7 @@ bool JsEsteidCard::changePuk(QString newVal, QString oldVal)
 
 bool JsEsteidCard::unblockPin1(QString newVal, QString puk)
 {
-    if (!m_card) {
+	if (!m_card) {
         qDebug("No card");
         return false;
     }
@@ -294,7 +296,7 @@ bool JsEsteidCard::unblockPin1(QString newVal, QString puk)
 	        return false;
 	    } catch (std::runtime_error &err) {
 	        handleError(err.what());
-	        m_card->reconnectWithT0();
+			m_card->reconnectWithT0();
 	    }
 		retry--;
 	}
@@ -303,7 +305,7 @@ bool JsEsteidCard::unblockPin1(QString newVal, QString puk)
 
 bool JsEsteidCard::unblockPin2(QString newVal, QString puk)
 {
-    if (!m_card) {
+	if (!m_card) {
         qDebug("No card");
         return false;
     }
@@ -321,7 +323,7 @@ bool JsEsteidCard::unblockPin2(QString newVal, QString puk)
 	        return false;
 	    } catch (std::runtime_error &err) {
 	        handleError(err.what());
-	        m_card->reconnectWithT0();
+			m_card->reconnectWithT0();
 	    }
 		retry--;
 	}
@@ -410,7 +412,7 @@ QString JsEsteidCard::getComment4()
 
 int JsEsteidCard::getPin1RetryCount( bool connect )
 {
-    if (!m_card)
+	if (!m_card)
         return -1;
     
 	byte puk = -1;
@@ -430,7 +432,7 @@ int JsEsteidCard::getPin1RetryCount( bool connect )
 
 int JsEsteidCard::getPin2RetryCount()
 {
-    if (!m_card)
+	if (!m_card)
         return -1;
 
 	byte puk = -1;
@@ -448,7 +450,7 @@ int JsEsteidCard::getPin2RetryCount()
 
 int JsEsteidCard::getPukRetryCount()
 {
-    if (!m_card)
+	if (!m_card)
         return -1;
 
 	byte puk = -1;

@@ -43,11 +43,8 @@ public:
     };
 
 	QSslCertificate cert() const;
-    void loadCert(EstEidCard *card, CertType ct);
+	void loadCert(EstEidCard *card, CertType ct);
 	QSslCertificate *m_qcert;
-
-private:
-    EstEidCard *m_card;
 
 public slots:
     QString toPem();

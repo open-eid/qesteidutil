@@ -34,16 +34,13 @@
 CertUpdate::CertUpdate( int reader, QObject *parent )
 :	QObject( parent )
 ,	card( 0 )
-,	cardMgr( 0 )
 ,	sock( 0 )
 ,	step( 0 )
 ,	serverStep( 0 )
 ,	generateKeys( false )
 ,	m_authCert( 0 )
 {
-	cardMgr = new SmartCardManager();
-
-	card = new EstEidCard(*cardMgr);
+	card = new EstEidCard(cardMgr);
 	if ( !card->isInReader( reader ) )
 		throw std::runtime_error( "no card in specified reader" );
 	card->connect( reader );
@@ -64,8 +61,6 @@ CertUpdate::~CertUpdate()
 		delete m_authCert;
 	if ( card )
 		delete card;
-	if ( cardMgr )
-		delete cardMgr;
 }
 
 bool CertUpdate::checkConnection() const

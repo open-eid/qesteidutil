@@ -46,7 +46,7 @@ private:
 
 	QString m_pin;
 	EstEidCard *card;
-	SmartCardManager *cardMgr;
+	SmartCardManager cardMgr;
 	QTcpSocket *sock;
 	char challenge[8];
 	char personCode[11], documentNumber[8], tmpResult[36], certInfo[33][114];
