@@ -161,8 +161,8 @@ bool SSLConnectPrivate::connectToHost( SSLConnect::RequestType type )
 	unsigned int ncerts;
 	if( PKCS11_enumerate_certs( pslot->token, &certs, &ncerts ) || !ncerts )
 		sslError::error( SSLConnect::tr("no certificate available").toUtf8() );
-	PKCS11_CERT *authcert = &certs[0];
-	if( !SslCertificate::fromX509( Qt::HANDLE(authcert->x509) ).isValid() )
+	QSslCertificate cert = SslCertificate::fromX509( Qt::HANDLE((&certs[0])->x509) );
+	if( !cert.isValid() )
 		sslError::error( SSLConnect::tr("Certificate is not valid").toUtf8() );
 
 	// Login token
@@ -171,8 +171,7 @@ bool SSLConnectPrivate::connectToHost( SSLConnect::RequestType type )
 		unsigned long err = CKR_OK;
 		if( !pslot->token->secureLogin )
 		{
-			PinDialog p( PinDialog::Pin1Type,
-				SslCertificate::fromX509( Qt::HANDLE(authcert->x509) ), flags, qApp->activeWindow() );
+			PinDialog p( PinDialog::Pin1Type, cert, flags, qApp->activeWindow() );
 			if( !p.exec() )
 				throw std::runtime_error( "" );
 			if( PKCS11_login( pslot, 0, p.text().toUtf8() ) < 0 )
@@ -180,12 +179,10 @@ bool SSLConnectPrivate::connectToHost( SSLConnect::RequestType type )
 		}
 		else
 		{
-			PinDialog p( PinDialog::Pin1PinpadType,
-				SslCertificate::fromX509( Qt::HANDLE(authcert->x509) ), flags, qApp->activeWindow() );
+			PinDialog p( PinDialog::Pin1PinpadType, cert, flags, qApp->activeWindow() );
 			p.open();
 			err = PINPADThread( pslot ).waitForDone();
 		}
-		selectSlot();
 		switch( ERR_GET_REASON(err) )
 		{
 		case CKR_OK: break;
@@ -193,6 +190,7 @@ bool SSLConnectPrivate::connectToHost( SSLConnect::RequestType type )
 		case CKR_FUNCTION_CANCELED:
 			throw std::runtime_error( "" ); break;
 		case CKR_PIN_INCORRECT:
+			selectSlot();
 			throw std::runtime_error( "PIN1Invalid" ); break;
 		case CKR_PIN_LOCKED:
 			throw std::runtime_error( "PINLocked" ); break;
@@ -202,13 +200,13 @@ bool SSLConnectPrivate::connectToHost( SSLConnect::RequestType type )
 	}
 
 	// Find token key
-	PKCS11_KEY *authkey = PKCS11_find_key( authcert );
+	PKCS11_KEY *authkey = PKCS11_find_key( &certs[0] );
 	if ( !authkey )
 		sslError::error( SSLConnect::tr("no key matching certificate available").toUtf8() );
 	EVP_PKEY *pkey = PKCS11_get_private_key( authkey );
 
 	ssl = SSL_new( sctx );
-	sslError::check( SSL_use_certificate( ssl, authcert->x509 ) );
+	sslError::check( SSL_use_certificate( ssl, (&certs[0])->x509 ) );
 	sslError::check( SSL_use_PrivateKey( ssl, pkey ) );
 	sslError::check( SSL_check_private_key( ssl ) );
 	sslError::check( SSL_set_mode( ssl, SSL_MODE_AUTO_RETRY ) );
@@ -406,7 +404,7 @@ void SSLConnect::waitForFinished( RequestType type, const QString &value )
 		else
 		{
 			d->error = SSLConnect::UnknownError;
-			d->errorString = e.what();
+			d->errorString = QString::fromUtf8( e.what() );
 		}
 		return;
 	}
