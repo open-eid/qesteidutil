@@ -111,7 +111,7 @@ void JsCardManager::pollCard()
 
 		if ( !remove.isEmpty() )
 		{
-			if ( m_jsEsteidCard->cardOK && m_jsEsteidCard->getDocumentId() == cardReaders[remove].cardId )
+			if ( m_jsEsteidCard->m_card && m_jsEsteidCard->getDocumentId() == cardReaders[remove].cardId )
 				m_jsEsteidCard->resetCard();
 			cardReaders = tmp;
             readAllowed = false;
