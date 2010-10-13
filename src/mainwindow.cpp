@@ -52,6 +52,8 @@ MainWindow::MainWindow( QWidget *parent )
 	QApplication::instance()->installTranslator( qtTranslator );
 	QApplication::instance()->installTranslator( commonTranslator );
 
+	m_jsExtender = new JsExtender( this );
+
 #if defined(Q_OS_MAC)
 	bar = new QMenuBar;
 	menu = bar->addMenu( tr("&File") );
@@ -60,8 +62,6 @@ MainWindow::MainWindow( QWidget *parent )
 	pref->setMenuRole( QAction::PreferencesRole );
 	close->setShortcut( Qt::CTRL + Qt::Key_W );
 #endif
-
-	m_jsExtender = new JsExtender( this );
 	
 	jsEsteidCard = new JsEsteidCard( this );
 	jsCardManager = new JsCardManager( jsEsteidCard );
