@@ -38,7 +38,7 @@ public:
     JsEsteidCard( QObject *parent );
 
 	void resetCard();
-	void setCard(SmartCardManager &card, int reader = 0);
+	void setCard(SmartCardManager *card, int reader = 0);
     void reloadData();
 	void reconnect();
 

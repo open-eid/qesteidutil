@@ -59,12 +59,12 @@ void JsEsteidCard::resetCard()
 	cardOK = false;
 }
 
-void JsEsteidCard::setCard(SmartCardManager &cardMgr, int reader)
+void JsEsteidCard::setCard(SmartCardManager *cardMgr, int reader)
 {
 	cardOK = false;
 	m_reader = reader;
-	ConnectionBase *c = cardMgr.connect( reader, false );
-	m_card = new EstEidCard( cardMgr, c );
+	ConnectionBase *c = cardMgr->connect( reader, false );
+	m_card = new EstEidCard( *cardMgr, c );
 	m_authCert->loadCert(m_card, JsCertData::AuthCert);
 	m_signCert->loadCert(m_card, JsCertData::SignCert);
     reloadData();

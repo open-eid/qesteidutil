@@ -46,7 +46,7 @@ public:
     JsCardManager(JsEsteidCard *jsEsteidCard);
 
 private:
-	SmartCardManager cardMgr;
+	SmartCardManager *cardMgr;
 	JsEsteidCard *m_jsEsteidCard;
     QTimer pollTimer;
 

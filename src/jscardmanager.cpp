@@ -34,8 +34,13 @@ using namespace std;
 JsCardManager::JsCardManager(JsEsteidCard *jsEsteidCard)
 :	QObject( jsEsteidCard )
 ,	m_jsEsteidCard( jsEsteidCard )
+,	cardMgr( 0 )
 ,   readAllowed( true )
 {
+	try {
+		cardMgr = new SmartCardManager();
+	} catch (std::runtime_error &e) {}
+
 	connect(&pollTimer, SIGNAL(timeout()),
             this, SLOT(pollCard()));
 
@@ -49,11 +54,14 @@ void JsCardManager::pollCard()
 	if ( !pollTimer.isActive() )
 		pollTimer.start( 500 );
 
-    if ( !readAllowed )
+	if ( !readAllowed )
         return;
 
 	int numReaders = 0;
     try {
+		if (!cardMgr)
+			cardMgr = new SmartCardManager();
+
 		QString insert,remove;
 		bool foundConnected = false;
 
@@ -63,8 +71,8 @@ void JsCardManager::pollCard()
         for (int i = 0; i < numReaders; i++) {
             ReaderState reader;
 			reader.id = i;
-			reader.state = QString::fromStdString( cardMgr.getReaderState(i) );
-			reader.name = QString::fromStdString( cardMgr.getReaderName(i) );
+			reader.state = QString::fromStdString( cardMgr->getReaderState(i) );
+			reader.name = QString::fromStdString( cardMgr->getReaderName(i) );
 			if ( reader.state.contains( "PRESENT" ) )
 				reader.state = "PRESENT";
 			reader.connected = false;
@@ -73,12 +81,12 @@ void JsCardManager::pollCard()
 				//card in use
 				if ( !reader.state.contains( "EMPTY" ) )
 				{
-					EstEidCard card(cardMgr);
+					EstEidCard card(*cardMgr);
 					if ( card.isInReader(i) )
 					{
-						ConnectionBase *c = cardMgr.connect(i,false);
+						ConnectionBase *c = cardMgr->connect(i,false);
 						//card.connect( i );
-						EstEidCard e( cardMgr, c );
+						EstEidCard e( *cardMgr, c );
 						reader.cardId = QString::fromStdString( e.readDocumentID() );
 						reader.connected = true;
 						foundConnected = true;
@@ -218,6 +226,8 @@ bool JsCardManager::selectReader(int i)
 
 bool JsCardManager::selectReader( const ReaderState &reader )
 {
+	if (!cardMgr)
+		return false;
 	QCoreApplication::processEvents();
     try {
 		QCoreApplication::processEvents();
@@ -242,8 +252,11 @@ int JsCardManager::activeReaderNum()
 int JsCardManager::getReaderCount()
 {
 	int readers = 0;
+	if (!cardMgr)
+		return readers;
+
 	try {
-		readers = cardMgr.getReaderCount( true );
+		readers = cardMgr->getReaderCount( true );
 	} catch( std::runtime_error & ) {}
 
     return readers;
@@ -251,7 +264,10 @@ int JsCardManager::getReaderCount()
 
 QString JsCardManager::getReaderName(int i)
 {
-	return QString::fromStdString(cardMgr.getReaderName(i));
+	if (!cardMgr)
+		return "";
+
+	return QString::fromStdString(cardMgr->getReaderName(i));
 }
 
 void JsCardManager::handleError(QString msg)
