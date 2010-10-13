@@ -242,7 +242,7 @@ void Common::mailTo( const QUrl &url )
 	if( !thunderbird.isEmpty() )
 	{
 		if( p.startDetached( thunderbird, QStringList() << "-compose"
-			<< QString( "subject='%1',attachment='%2,'" )
+			<< QString( "subject='%1',attachment='%2'" )
 				.arg( url.queryItemValue( "subject" ) )
 				.arg( QUrl::fromLocalFile( url.queryItemValue( "attachment" ) ).toString() ) ) );
 			return;
