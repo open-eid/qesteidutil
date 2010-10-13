@@ -32,6 +32,7 @@
 
 MainWindow::MainWindow( QWidget *parent )
 :	QWebView( parent )
+,	menu( 0 )
 {
 	setWindowFlags( Qt::Window | Qt::CustomizeWindowHint | Qt::WindowMinimizeButtonHint );
 #if QT_VERSION >= 0x040500
@@ -93,8 +94,11 @@ void MainWindow::retranslate( const QString &lang )
 	commonTranslator->load( ":/translations/common_" + lang );
 	setWindowTitle(QApplication::translate("MainWindow", "ID-card utility", 0, QApplication::UnicodeUTF8));
 #ifdef Q_OS_MAC
-	menu->setTitle( tr("&File") );
-	pref->setText( tr("Settings") );
-	close->setText( tr("Close") );
+	if ( menu )
+	{
+		menu->setTitle( tr("&File") );
+		pref->setText( tr("Settings") );
+		close->setText( tr("Close") );
+	}
 #endif
 }
