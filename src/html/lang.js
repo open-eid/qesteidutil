@@ -34,7 +34,7 @@ var htmlStrings = {
 	"personCitizen": new tr( "Kodakondsus", "Citizenship", "Гражданство" ),
 	"personEmail": new tr( "E-post", "E-mail", "Эл. почта" ),
 
-	"labelCardInReaderID": new tr( "Lugejas on ID-kaart", "Card in reader", "В считывателе карта" ),
+	"labelCardInReaderID": new tr( "Lugejas on dokument", "Card in reader", "В считывателе карта" ),
 	"labelThisIs": new tr( "See on %s dokument", "This is %s document", "Этот документ %s" ),
 	"labelIsValid": new tr( "kehtiv", "valid", "действующий" ),
 	"labelIsInValid": new tr( "kehtetu", "expired", "недействителен" ),
@@ -48,8 +48,8 @@ var htmlStrings = {
 	"labelCertIsValidTill": new tr( "Sertifikaat kehtib kuni", "Certificate is valid till", "Сертификат действителен до" ),
 	"labelCertWillExpire": new tr( "Sertifikaat aegub %d päeva pärast", "Certificate will expire in %d days", "Сертификат истекает через %d дня" ),
 	"labelCertIsExpired": new tr( "Sertifikaat on aegunud", "Certificate is expired", "Срок действия сертификатов истёк" ),
-	"labelAuthUsed": new tr( "ID-kaarti on kasutatud isikutuvastamiseks", "Authentication key has been used", "Сертификат использован" ),
-	"labelSignUsed": new tr( "ID-kaarti on kasutatud allkirjastamiseks", "Signature key has been used", "Сертификат использован" ),
+	"labelAuthUsed": new tr( "Sertifikaati on kasutatud isikutuvastamiseks", "Authentication key has been used", "Сертификат использован" ),
+	"labelSignUsed": new tr( "Sertifikaati on kasutatud allkirjastamiseks", "Signature key has been used", "Сертификат использован" ),
 	"labelTimes": new tr( "korda", "times", "раз" ),
 	
 	"labelCertBlocked": new tr( "Sertifikaat on blokeeritud.", "Certificate is blocked.", "Сертификат заблокирован." ),
