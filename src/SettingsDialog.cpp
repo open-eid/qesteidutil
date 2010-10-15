@@ -23,7 +23,9 @@
 #include "SettingsDialog.h"
 #include "common/Settings.h"
 
+#include <QDesktopServices>
 #include <QProcess>
+#include <QUrl>
 
 SettingsDialog::SettingsDialog( QWidget *parent )
 :	QDialog( parent )
@@ -34,7 +36,7 @@ SettingsDialog::SettingsDialog( QWidget *parent )
 	Settings s;
 	s.beginGroup( "Util" );
 
-#ifndef Q_OS_LINUX
+#ifdef Q_OS_WIN32
 	updateInterval->addItem( tr("Once a day"), "-daily" );
 	updateInterval->addItem( tr("Once a week"), "-weekly" );
 	updateInterval->addItem( tr("Once a month"), "-monthly" );
@@ -49,6 +51,12 @@ SettingsDialog::SettingsDialog( QWidget *parent )
 	updateIntervalLabel->hide();
 	autoUpdate->hide();
 	autoUpdateLabel->hide();
+#endif
+
+#ifndef Q_OS_MAC
+	checkUpdates->hide();
+#else
+	buttonBox->setStandardButtons( QDialogButtonBox::Close );
 #endif
 }
 
@@ -69,5 +77,13 @@ void SettingsDialog::accept()
 	QProcess::startDetached( "id-updater.exe", list );
 #endif
 
+	done( 1 );
+}
+
+void SettingsDialog::on_checkUpdates_clicked()
+{
+	QDesktopServices::openUrl( QUrl(
+			QString("https://installer.id.ee/update/mac/?ver=%1")
+				  .arg( QCoreApplication::applicationVersion() ) ) );
 	done( 1 );
 }

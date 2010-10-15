@@ -32,4 +32,5 @@ public:
 
 public slots:
 	void accept();
+	void on_checkUpdates_clicked();
 };
