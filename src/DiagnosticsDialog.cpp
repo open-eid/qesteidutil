@@ -197,14 +197,17 @@ DiagnosticsDialog::DiagnosticsDialog( QWidget *parent )
 	s << getReaderInfo();
 	s << "<br />";
 
+	QString browsers;
 #if defined(Q_OS_LINUX)
-	QString browsers = getPackageVersion( QStringList() << "firefox" << "chromium-browser" );
+	browsers = getPackageVersion( QStringList() << "chromium-browser" << "firefox" );
+#elif defined(Q_OS_MAC)
+	browsers = getPackageVersion( QStringList() << "Google Chrome" << "Firefox" << "Safari" );
+#endif
 	if ( !browsers.isEmpty() )
 	{
 		s << "<b>" << tr("Browsers:") << "</b><br />";
 		s << browsers << "<br /><br />";
 	}
-#endif
 
 	diagnosticsText->setHtml( info );
 }
@@ -223,7 +226,7 @@ QString DiagnosticsDialog::getLibVersion( const QString &lib ) const
 QString DiagnosticsDialog::getPackageVersion( const QStringList &list, bool returnPackageName ) const
 {
 	QString ret;
-#ifndef Q_OS_WIN32
+#if defined(Q_OS_LINUX)
 	QStringList params;
 	QProcess p;
 	p.start( "which", QStringList() << "dpkg-query" );
@@ -247,6 +250,24 @@ QString DiagnosticsDialog::getPackageVersion( const QStringList &list, bool retu
 	Q_FOREACH( QString package, list )
 	{
 		p.start( cmd, QStringList() << params << package );
+		p.waitForReadyRead();
+		QByteArray result = p.readAll();
+		if ( !result.isEmpty() )
+		{
+			if ( returnPackageName )
+				ret += package + " ";
+			ret += result + "<BR />";
+		}
+		p.close();
+	}
+#elif defined(Q_OS_MAC)
+	QProcess p;
+	Q_FOREACH( QString package, list )
+	{
+		QString app = "/Applications/" + package + ".app/Contents/Info";
+		if ( !QFile::exists( app + ".plist") )
+			continue;
+		p.start( "defaults", QStringList() << "read" << app << "CFBundleShortVersionString" );
 		p.waitForReadyRead();
 		QByteArray result = p.readAll();
 		if ( !result.isEmpty() )
