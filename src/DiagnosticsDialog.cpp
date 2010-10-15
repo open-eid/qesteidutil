@@ -56,16 +56,20 @@ DiagnosticsDialog::DiagnosticsDialog( QWidget *parent )
 
 #if defined(Q_OS_LINUX)
 	QString package = getPackageVersion( QStringList() << "estonianidcard", false );
-	if ( package.isEmpty() )
+	QString utility = getPackageVersion( QStringList() << "qesteidutil", false );
+	if ( !package.isEmpty() )
 	{
-#endif
-		s << "<b>" << tr("ID-card utility version:") << "</b> ";
-		s << QCoreApplication::applicationVersion() << "<br />";
-#if defined(Q_OS_LINUX)
-	} else {
 		s << "<b>" << tr("ID-card package version:") << "</b> ";
 		s << package << "<br />";
 	}
+	if ( !utility.isEmpty() )
+	{
+		s << "<b>" << tr("ID-card utility version:") << "</b> ";
+		s << utility << "<br />";
+	}
+#else
+	s << "<b>" << tr("ID-card utility version:") << "</b> ";
+	s << QCoreApplication::applicationVersion() << "<br />";
 #endif
 
 	s << "<b>" << tr("OS:") << "</b> ";
