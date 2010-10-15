@@ -21,7 +21,7 @@
     </message>
     <message>
         <source>Kaardi vastuse parsimisel tekkis viga, samm: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Неверный ответ карты, шаг: %1</translation>
     </message>
     <message>
         <source>Sertifitseerimiskeskus ei vasta, samm: %1</source>
@@ -33,7 +33,7 @@
     </message>
     <message>
         <source>Serveri tÃ¶Ã¶s tekkisid vead, samm: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>В работе сервера произошла ошибка, шаг: %1</translation>
     </message>
 </context>
 <context>
@@ -112,11 +112,11 @@
     </message>
     <message>
         <source>Locale:</source>
-        <translation type="unfinished"></translation>
+        <translation>Языковые настройки:</translation>
     </message>
     <message>
         <source>Browsers:</source>
-        <translation type="unfinished"></translation>
+        <translation>Браузеры:</translation>
     </message>
     <message>
         <source>No readers found</source>

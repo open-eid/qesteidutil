@@ -33,7 +33,7 @@
     </message>
     <message>
         <source>Serveri tÃ¶Ã¶s tekkisid vead, samm: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Server error, step: %1</translation>
     </message>
 </context>
 <context>
@@ -112,11 +112,11 @@
     </message>
     <message>
         <source>Locale:</source>
-        <translation type="unfinished"></translation>
+        <translation>Locale:</translation>
     </message>
     <message>
         <source>Browsers:</source>
-        <translation type="unfinished"></translation>
+        <translation>Browsers:</translation>
     </message>
     <message>
         <source>No readers found</source>
