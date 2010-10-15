@@ -289,32 +289,41 @@ QString DiagnosticsDialog::getReaderInfo() const
 	QTextStream s( &d );
 
 	QHash<QString,QString> readers;
-	SmartCardManager *m = 0;
 	QString reader;
+	SmartCardManager *m = 0;
 	try {
 		m = new SmartCardManager();
-		int readersCount = m->getReaderCount( true );
-		for( int i = 0; i < readersCount; i++ )
-		{
-			reader = QString::fromStdString( m->getReaderName( i ) );
-			if ( !QString::fromStdString( m->getReaderState( i ) ).contains( "EMPTY" ) )
-			{
-				EstEidCard card( *m );
-				card.connect( i );
-				readers[reader] = tr( "ID - %1" ).arg( QString::fromStdString( card.readCardID() ) );
-			}
-			else
-				readers[reader] = "";
-		}
 	} catch( const std::runtime_error &e ) {
-		readers[reader] = tr("Error reading card data:") + e.what();
+		readers[reader] = tr("No readers found");
 	}
-	delete m;
+	if ( m )
+	{
+		try {
+			int readersCount = m->getReaderCount( true );
+			for( int i = 0; i < readersCount; i++ )
+			{
+				reader = QString::fromStdString( m->getReaderName( i ) );
+				if ( !QString::fromStdString( m->getReaderState( i ) ).contains( "EMPTY" ) )
+				{
+					ConnectionBase *c = m->connect(i,false);
+					EstEidCard card( *m, c );
+					card.connect( i );
+					readers[reader] = tr( "ID - %1" ).arg( QString::fromStdString( card.readCardID() ) );
+				} else
+					readers[reader] = "";
+			}
+		} catch( const std::runtime_error &e ) {
+			readers[reader] = tr("Error reading card data:") + e.what();
+		}
+	}
+	if ( m )
+		delete m;
 
 	for( QHash<QString,QString>::const_iterator i = readers.constBegin();
 		i != readers.constEnd(); ++i )
 	{
-		s << "* " << i.key();
+		if ( !i.key().isEmpty() )
+			s << "* " << i.key();
 		if( !i.value().isEmpty() )
 			s << "<p style='margin-left: 10px; margin-top: 0px; margin-bottom: 0px; margin-right: 0px;'>" << i.value() << "</p>";
 		else

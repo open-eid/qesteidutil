@@ -17,7 +17,7 @@
     </message>
     <message>
         <source>Serveri töös tekkisid vead, samm: %1</source>
-        <translation>Serveri töös tekkisid vead, samm: %1</translation>
+        <translation type="obsolete">Serveri töös tekkisid vead, samm: %1</translation>
     </message>
     <message>
         <source>Kaardi vastuse parsimisel tekkis viga, samm: %1</source>
@@ -30,6 +30,10 @@
     <message>
         <source>Wrong PIN1 code.</source>
         <translation>Vale PIN1 kood.</translation>
+    </message>
+    <message>
+        <source>Serveri tÃ¶Ã¶s tekkisid vead, samm: %1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -113,6 +117,10 @@
     <message>
         <source>Browsers:</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No readers found</source>
+        <translation>Ühtegi kiipkaardi lugejat pole ühendatud</translation>
     </message>
 </context>
 <context>
