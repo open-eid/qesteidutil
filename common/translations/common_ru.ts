@@ -193,7 +193,7 @@
     <name>PinDialog</name>
     <message>
         <source>Selected action requires auth certificate.</source>
-        <translation type="unfinished">Данная операция требует личный сертификат.</translation>
+        <translation>Данная операция требует личный сертификат.</translation>
     </message>
     <message>
         <source>For using auth certificate enter PIN1</source>

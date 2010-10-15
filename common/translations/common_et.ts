@@ -217,7 +217,7 @@
     </message>
     <message>
         <source>PIN will be locked next failed attempt</source>
-        <translation type="unfinished"></translation>
+        <translation>Järgmise vale sisestusega lukustub PIN</translation>
     </message>
     <message>
         <source>PIN has been entered incorrectly one time</source>
