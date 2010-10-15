@@ -17,7 +17,7 @@
     </message>
     <message>
         <source>Serveri töös tekkisid vead, samm: %1</source>
-        <translation type="obsolete">Server error, step: %1</translation>
+        <translation>Server error, step: %1</translation>
     </message>
     <message>
         <source>Kaardi vastuse parsimisel tekkis viga, samm: %1</source>
@@ -28,17 +28,8 @@
         <translation>SK server is not responding: %1</translation>
     </message>
     <message>
-        <source>Server sai vale arvu baite, samm: %1.
-Oodati: %2, saadi: %3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Serveri tÃ¶Ã¶s tekkisid vead, samm: %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Wrong PIN1 code.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wrong PIN1 code.</translation>
     </message>
 </context>
 <context>
@@ -114,6 +105,14 @@ Oodati: %2, saadi: %3</source>
     <message>
         <source>ID-card package version:</source>
         <translation>ID-card package version:</translation>
+    </message>
+    <message>
+        <source>Locale:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Browsers:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

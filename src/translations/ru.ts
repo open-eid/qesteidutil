@@ -17,7 +17,7 @@
     </message>
     <message>
         <source>Serveri töös tekkisid vead, samm: %1</source>
-        <translation type="obsolete">В работе сервера произошла ошибка, шаг: %1</translation>
+        <translation>В работе сервера произошла ошибка, шаг: %1</translation>
     </message>
     <message>
         <source>Kaardi vastuse parsimisel tekkis viga, samm: %1</source>
@@ -26,15 +26,6 @@
     <message>
         <source>Sertifitseerimiskeskus ei vasta, samm: %1</source>
         <translation>Центр сертифицирования не отвечает, шаг: %1</translation>
-    </message>
-    <message>
-        <source>Server sai vale arvu baite, samm: %1.
-Oodati: %2, saadi: %3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Serveri tÃ¶Ã¶s tekkisid vead, samm: %1</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Wrong PIN1 code.</source>
@@ -114,6 +105,14 @@ Oodati: %2, saadi: %3</source>
     <message>
         <source>ID-card package version:</source>
         <translation>Версия:</translation>
+    </message>
+    <message>
+        <source>Locale:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Browsers:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
