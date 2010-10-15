@@ -54,6 +54,10 @@ DiagnosticsDialog::DiagnosticsDialog( QWidget *parent )
 	QString info;
 	QTextStream s( &info );
 
+	s << "<b>" << tr("Locale:") << "</b> ";
+	QString locale = QLocale::c().name();
+	s << (locale == "C" ? "en_us" : locale) << "<br /><br />";
+
 #if defined(Q_OS_LINUX)
 	QString package = getPackageVersion( QStringList() << "estonianidcard", false );
 	QString utility = getPackageVersion( QStringList() << "qesteidutil", false );
@@ -167,7 +171,7 @@ DiagnosticsDialog::DiagnosticsDialog( QWidget *parent )
 	s << "<b>" << tr("Library paths:") << "</b> ";
 	s << QCoreApplication::libraryPaths().join( ";" ) << "<br />";
 
-	s << "<b>" << tr("Libraries") << "</b><br />";
+	s << "<b>" << tr("Libraries") << ":</b><br />";
 #if defined(Q_OS_WIN32)
 	s << getLibVersion( "advapi32") << "<br />";
 	s << getLibVersion( "libeay32" ) << "<br />";
@@ -189,9 +193,18 @@ DiagnosticsDialog::DiagnosticsDialog( QWidget *parent )
 	s << " " << (isPCSCRunning() ? tr("Running") : tr("Not running"));
 	s << "<br /><br />";
 
-	s << "<b>" << tr("Card readers") << "</b><br />";
+	s << "<b>" << tr("Card readers") << ":</b><br />";
 	s << getReaderInfo();
 	s << "<br />";
+
+#if defined(Q_OS_LINUX)
+	QString browsers = getPackageVersion( QStringList() << "firefox" << "chromium-browser" );
+	if ( !browsers.isEmpty() )
+	{
+		s << "<b>" << tr("Browsers:") << "</b><br />";
+		s << browsers << "<br /><br />";
+	}
+#endif
 
 	diagnosticsText->setHtml( info );
 }

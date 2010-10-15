@@ -6,17 +6,11 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>600</width>
+    <height>600</height>
    </rect>
   </property>
   <property name="minimumSize">
-   <size>
-    <width>400</width>
-    <height>300</height>
-   </size>
-  </property>
-  <property name="maximumSize">
    <size>
     <width>400</width>
     <height>300</height>
@@ -52,9 +46,7 @@ QPushButton::hover, QPushButton::focus { background-image: url(:/html/images/but
    </item>
   </layout>
  </widget>
- <resources>
-  <include location="../qesteidutil.qrc"/>
- </resources>
+ <resources/>
  <connections>
   <connection>
    <sender>buttonBox</sender>
