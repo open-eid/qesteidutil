@@ -155,7 +155,7 @@ Oodati: %2, saadi: %3</source>
     <name>MainWindow</name>
     <message>
         <source>ID-card utility</source>
-        <translation>Oбсуживание ID-карты</translation>
+        <translation>Обслуживание ID-карты</translation>
     </message>
     <message>
         <source>&amp;File</source>
