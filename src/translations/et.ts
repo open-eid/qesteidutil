@@ -35,6 +35,11 @@
         <source>Serveri tÃ¶Ã¶s tekkisid vead, samm: %1</source>
         <translation>Serveri töös tekkisid vead, samm: %1</translation>
     </message>
+    <message>
+        <source>Server sai vale arvu baite, samm: %1.
+Oodati: %2, saadi: %3</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DiagnosticsDialog</name>
@@ -212,6 +217,10 @@
 0 - always ask</source>
         <translation type="obsolete">Salvesta PIN1 määratud minutiteks
 0 - küsi iga kord</translation>
+    </message>
+    <message>
+        <source>Check for updates</source>
+        <translation>Kontrolli uuendusi</translation>
     </message>
 </context>
 </TS>

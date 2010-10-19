@@ -35,6 +35,11 @@
         <source>Serveri tÃ¶Ã¶s tekkisid vead, samm: %1</source>
         <translation>В работе сервера произошла ошибка, шаг: %1</translation>
     </message>
+    <message>
+        <source>Server sai vale arvu baite, samm: %1.
+Oodati: %2, saadi: %3</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DiagnosticsDialog</name>
@@ -212,6 +217,10 @@
     <message>
         <source>Never</source>
         <translation>Никогда</translation>
+    </message>
+    <message>
+        <source>Check for updates</source>
+        <translation>Проверить обновления</translation>
     </message>
 </context>
 </TS>
