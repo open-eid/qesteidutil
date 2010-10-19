@@ -326,8 +326,8 @@ void JsExtender::getMidStatus()
 						"<m:GetMIDTokens xmlns:m=\"urn:GetMIDTokens\" SOAP-ENV:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\"/>"
 						"</SOAP-ENV:Body>"
 						"</SOAP-ENV:Envelope>";
-	QString header = "POST /id/midstatusinfolive/ HTTP/1.1\r\n"
-					 "Host: " + QString(SK) + "\r\n"
+	QString header = "POST /MIDInfoWS/ HTTP/1.1\r\n"
+					 "Host: " + QString(SK_MOBILE) + "\r\n"
 					 "Content-Type: text/xml\r\n"
 					 "Content-Length: " + QString::number( data.size() ) + "\r\n"
 					 "SOAPAction: \"\"\r\n"

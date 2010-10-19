@@ -224,7 +224,7 @@ bool SSLConnectPrivate::connectToHost( SSLConnect::RequestType type )
 	switch( type )
 	{
 	case SSLConnect::AccessCert:
-	case SSLConnect::MobileInfo: sock = BIO_new_connect( const_cast<char*>(SK) ); break;
+	case SSLConnect::MobileInfo: sock = BIO_new_connect( const_cast<char*>(SK_MOBILE) ); break;
 	default: sock = BIO_new_connect( const_cast<char*>(EESTI) ); break;
 	}
 
