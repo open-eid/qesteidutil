@@ -485,6 +485,9 @@ bool JsEsteidCard::isValid()
 
 bool JsEsteidCard::checkPin( const QString &pin )
 {
+	if ( m_authCert && m_authCert->isDigiID() )
+		return true;
+
 	QDate date( QDate::fromString( birthDate, "dd.MM.yyyy" ) );
     if ( pin.contains( date.toString( "yyyy" ) ) || 
 			pin.contains( date.toString( "ddMM" ) ) ||
