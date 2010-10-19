@@ -199,7 +199,7 @@ DiagnosticsDialog::DiagnosticsDialog( QWidget *parent )
 
 	QString browsers;
 #if defined(Q_OS_LINUX)
-	browsers = getPackageVersion( QStringList() << "chromium-browser" << "firefox" );
+	browsers = getPackageVersion( QStringList() << "chromium-browser" << "firefox" << "MozillaFirefox");
 #elif defined(Q_OS_MAC)
 	browsers = getPackageVersion( QStringList() << "Google Chrome" << "Firefox" << "Safari" );
 #endif
@@ -293,7 +293,7 @@ QString DiagnosticsDialog::getReaderInfo() const
 	SmartCardManager *m = 0;
 	try {
 		m = new SmartCardManager();
-	} catch( const std::runtime_error &e ) {
+	} catch( const std::runtime_error & ) {
 		readers[reader] = tr("No readers found");
 	}
 	if ( m )
