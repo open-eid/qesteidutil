@@ -220,13 +220,14 @@ bool SSLConnectPrivate::connectToHost( SSLConnect::RequestType type )
 #endif
 #endif
 
-	BIO *sock;
+	const char *url = 0;
 	switch( type )
 	{
 	case SSLConnect::AccessCert:
-	case SSLConnect::MobileInfo: sock = BIO_new_connect( const_cast<char*>(SK_MOBILE) ); break;
-	default: sock = BIO_new_connect( const_cast<char*>(EESTI) ); break;
+	case SSLConnect::MobileInfo: url = SK_MOBILE; break;
+	default: url = EESTI; break;
 	}
+	BIO *sock = BIO_new_connect( const_cast<char*>(url) );
 
 	BIO_set_conn_port( sock, "https" );
 	if( BIO_do_connect( sock ) <= 0 )
@@ -325,14 +326,14 @@ QByteArray SSLConnect::getUrl( RequestType type, const QString &value )
 			"</SOAP-ENV:Envelope>" )
 			.arg( lang.toUpper() );
 		header = QString(
-			"POST /id/GetAccessTokenWSProxy/ HTTP/1.1\r\n"
+			"POST /GetAccessTokenWS/ HTTP/1.1\r\n"
 			"Host: %1\r\n"
 			"Content-Type: text/xml\r\n"
 			"Content-Length: %2\r\n"
 			"SOAPAction: \"\"\r\n"
 			"Connection: close\r\n\r\n"
 			"%3" )
-			.arg( SK ).arg( request.size() ).arg( request );
+			.arg( SK_MOBILE ).arg( request.size() ).arg( request );
 		break;
 	}
 	case EmailInfo:
