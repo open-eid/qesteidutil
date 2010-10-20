@@ -33,8 +33,8 @@ using namespace std;
 
 JsCardManager::JsCardManager(JsEsteidCard *jsEsteidCard)
 :	QObject( jsEsteidCard )
-,	m_jsEsteidCard( jsEsteidCard )
 ,	cardMgr( 0 )
+,	m_jsEsteidCard( jsEsteidCard )
 ,   readAllowed( true )
 {
 	try {
