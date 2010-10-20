@@ -224,7 +224,7 @@ bool SSLConnectPrivate::connectToHost( SSLConnect::RequestType type )
 	switch( type )
 	{
 	case SSLConnect::AccessCert:
-	case SSLConnect::MobileInfo: url = SK_MOBILE; break;
+	case SSLConnect::MobileInfo: url = SK; break;
 	default: url = EESTI; break;
 	}
 	BIO *sock = BIO_new_connect( const_cast<char*>(url) );
@@ -333,7 +333,7 @@ QByteArray SSLConnect::getUrl( RequestType type, const QString &value )
 			"SOAPAction: \"\"\r\n"
 			"Connection: close\r\n\r\n"
 			"%3" )
-			.arg( SK_MOBILE ).arg( request.size() ).arg( request );
+			.arg( SK ).arg( request.size() ).arg( request );
 		break;
 	}
 	case EmailInfo:
