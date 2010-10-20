@@ -327,7 +327,7 @@ void JsExtender::getMidStatus()
 						"</SOAP-ENV:Body>"
 						"</SOAP-ENV:Envelope>";
 	QString header = "POST /MIDInfoWS/ HTTP/1.1\r\n"
-					 "Host: " + QString(SK_MOBILE) + "\r\n"
+					 "Host: " + QString(SK) + "\r\n"
 					 "Content-Type: text/xml\r\n"
 					 "Content-Length: " + QString::number( data.size() ) + "\r\n"
 					 "SOAPAction: \"\"\r\n"
