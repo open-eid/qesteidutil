@@ -22,7 +22,7 @@
 
 #pragma once
 
-#include <QEvent>
+#include <QtGlobal>
 
 #ifdef QT_MAC_USE_COCOA
 #include <QObject>
@@ -34,15 +34,11 @@ public:
 	ApplicationObj( QObject *parent = 0 );
 	~ApplicationObj();
 private:
+	bool eventFilter( QObject *o, QEvent *e );
+
+	bool eventsLoaded;
 	ApplicationStruct *d;
 };
 #endif
-
-class REOpenEvent: public QEvent
-{
-public:
-	enum { Type = QEvent::User + 1 };
-	REOpenEvent(): QEvent( QEvent::Type(Type) ) {}
-};
 
 void mac_install_event_handler( QObject *app );

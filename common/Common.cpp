@@ -42,6 +42,8 @@
 #endif
 
 #ifdef Q_OS_MAC
+#include "Application_mac.h"
+
 #include <Carbon/Carbon.h>
 #endif
 
@@ -50,6 +52,9 @@ Common::Common( QObject *parent )
 {
 	QDesktopServices::setUrlHandler( "browse", this, "browse" );
 	QDesktopServices::setUrlHandler( "mailto", this, "mailTo" );
+#ifdef Q_OS_MAC
+	mac_install_event_handler( parent );
+#endif
 }
 
 bool Common::canWrite( const QString &filename )

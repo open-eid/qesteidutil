@@ -20,8 +20,10 @@
  *
  */
 
-#include <QApplication>
 #include "Application_mac.h"
+#include "Common.h"
+
+#include <QApplication>
 
 #ifdef QT_MAC_USE_COCOA
 #include <Cocoa/Cocoa.h>
@@ -65,9 +67,11 @@ struct ApplicationStruct { ApplicationObjC *applicationObjC; };
 
 ApplicationObj::ApplicationObj( QObject *parent )
 : QObject( parent )
+, eventsLoaded( false )
 , d( new ApplicationStruct )
 {
 	d->applicationObjC = [[ApplicationObjC alloc] init];
+	qApp->installEventFilter( this );
 }
 
 ApplicationObj::~ApplicationObj()
@@ -75,6 +79,18 @@ ApplicationObj::~ApplicationObj()
 	[d->applicationObjC release];
 	delete d;
 }
+
+bool ApplicationObj::eventFilter( QObject *o, QEvent *e )
+{
+	// Load here because cocoa NSApplication overides events
+	if( o == qApp && e->type() == QEvent::ApplicationActivate && !eventsLoaded )
+	{
+		mac_install_event_handler( this );
+		eventsLoaded = true;
+	}
+	return QObject::eventFilter( o, e );
+}
+
 #else
 #include <Carbon/Carbon.h>
 static OSStatus appleEventHandler( const AppleEvent *event, AppleEvent *, long )

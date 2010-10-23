@@ -51,3 +51,14 @@ public Q_SLOTS:
 	void browse( const QUrl &url );
 	void mailTo( const QUrl &url );
 };
+
+#ifdef Q_OS_MAC
+#include <QEvent>
+
+class REOpenEvent: public QEvent
+{
+public:
+	enum { Type = QEvent::User + 1 };
+	REOpenEvent(): QEvent( QEvent::Type(Type) ) {}
+};
+#endif
