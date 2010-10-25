@@ -24,6 +24,8 @@
 
 #include <QObject>
 
+#include <QFileDialog>
+
 class QSslCertificate;
 class QStringList;
 class QUrl;
@@ -41,6 +43,7 @@ public:
 	Common( QObject *parent = 0 );
 
 	static bool canWrite( const QString &filename );
+	static QFileDialog::Options defaultFileDialogOptions();
 	static QString fileSize( quint64 bytes );
 	static void showHelp( const QString &msg );
 	static bool startDetached( const QString &program );

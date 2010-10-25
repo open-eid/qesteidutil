@@ -95,6 +95,15 @@ void Common::browse( const QUrl &url )
 	QDesktopServices::openUrl( QUrl::fromLocalFile( QFileInfo( u.toLocalFile() ).absolutePath() ) );
 }
 
+QFileDialog::Options Common::defaultFileDialogOptions()
+{
+#if defined(Q_OS_MAC) && defined(QT_MAC_USE_COCOA)
+	return QFileDialog::DontUseNativeDialog;
+#else
+	return 0;
+#endif
+}
+
 QString Common::fileSize( quint64 bytes )
 {
 	const quint64 kb = 1024;
