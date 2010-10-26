@@ -62,13 +62,10 @@ void PINPADThread::run()
 
 unsigned long PINPADThread::waitForDone()
 {
+	QEventLoop e;
+	connect( this, SIGNAL(finished()), &e, SLOT(quit()) );
 	start();
-	do
-	{
-		QCoreApplication::processEvents();
-		wait( 1 );
-	}
-	while( isRunning() );
+	e.exec();
 	return result;
 }
 
@@ -108,13 +105,10 @@ void SSLReadThread::run()
 
 QByteArray SSLReadThread::waitForDone()
 {
+	QEventLoop e;
+	connect( this, SIGNAL(finished()), &e, SLOT(quit()) );
 	start();
-	do
-	{
-		QCoreApplication::processEvents();
-		wait( 1 );
-	}
-	while( isRunning() );
+	e.exec();
 	return result;
 }
 
