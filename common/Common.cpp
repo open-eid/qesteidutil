@@ -95,15 +95,6 @@ void Common::browse( const QUrl &url )
 	QDesktopServices::openUrl( QUrl::fromLocalFile( QFileInfo( u.toLocalFile() ).absolutePath() ) );
 }
 
-QFileDialog::Options Common::defaultFileDialogOptions()
-{
-#if defined(Q_OS_MAC) && defined(QT_MAC_USE_COCOA)
-	return QFileDialog::DontUseNativeDialog;
-#else
-	return 0;
-#endif
-}
-
 QString Common::fileSize( quint64 bytes )
 {
 	const quint64 kb = 1024;
@@ -270,6 +261,27 @@ void Common::mailTo( const QUrl &url )
 	}
 #endif
 	QDesktopServices::openUrl( url );
+}
+
+QString Common::normalized( const QString &str )
+{
+#if defined(Q_OS_MAC) && defined(QT_MAC_USE_COCOA)
+	return str.normalized( QString::NormalizationForm_C );
+#else
+	return str;
+#endif
+}
+
+QStringList Common::normalized( const QStringList &list )
+{
+#if defined(Q_OS_MAC) && defined(QT_MAC_USE_COCOA)
+	QStringList l;
+	Q_FOREACH( const QString &str, list )
+		l << str.normalized( QString::NormalizationForm_C );
+	return l;
+#else
+	return list;
+#endif
 }
 
 void Common::showHelp( const QString &msg )

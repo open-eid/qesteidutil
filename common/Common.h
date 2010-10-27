@@ -43,8 +43,9 @@ public:
 	Common( QObject *parent = 0 );
 
 	static bool canWrite( const QString &filename );
-	static QFileDialog::Options defaultFileDialogOptions();
 	static QString fileSize( quint64 bytes );
+	static QString normalized( const QString &str );
+	static QStringList normalized( const QStringList &list );
 	static void showHelp( const QString &msg );
 	static bool startDetached( const QString &program );
 	static bool startDetached( const QString &program, const QStringList &arguments );
