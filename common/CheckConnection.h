@@ -36,11 +36,7 @@ public:
 	QNetworkReply::NetworkError error() const;
 	QString errorString() const;
 
-private Q_SLOTS:
-	void stop( QNetworkReply *reply );
-
 private:
 	QNetworkReply::NetworkError m_error;
 	QString m_errorString;
-	bool	running;
 };

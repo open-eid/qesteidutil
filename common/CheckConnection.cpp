@@ -22,26 +22,20 @@
 
 #include "CheckConnection.h"
 
-#include "Settings.h"
-
-#include <QCoreApplication>
-#include <QNetworkProxy>
+#include <QEventLoop>
 #include <QNetworkRequest>
 
 CheckConnection::CheckConnection( QObject *parent )
 :	QNetworkAccessManager( parent )
 ,	m_error( QNetworkReply::NoError )
-{
-	connect( this, SIGNAL(finished(QNetworkReply*)), SLOT(stop(QNetworkReply*)) );
-}
+{}
 
 bool CheckConnection::check( const QString &url )
 {
-	running = true;
+	QEventLoop e;
+	connect( this, SIGNAL(finished(QNetworkReply*)), &e, SLOT(quit()) );
 	QNetworkReply *reply = get( QNetworkRequest( QUrl( url ) ) );
-
-	while( running )
-		qApp->processEvents();
+	e.exec();
 
 	m_error = reply->error();
 	switch( reply->error() )
@@ -65,4 +59,3 @@ bool CheckConnection::check( const QString &url )
 
 QNetworkReply::NetworkError CheckConnection::error() const { return m_error; }
 QString CheckConnection::errorString() const { return m_errorString; }
-void CheckConnection::stop( QNetworkReply * ) { running = false; }
