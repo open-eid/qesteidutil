@@ -153,8 +153,7 @@ bool QPKCS11::decrypt( const QByteArray &data, unsigned char *decrypted, unsigne
 	if( (d->err = d->f->C_Decrypt( d->session, (unsigned char*)data.constData(), data.size(), 0, len )) != CKR_OK )
 		return false;
 
-	d->err = d->f->C_Decrypt( d->session, (unsigned char*)data.constData(), data.size(), decrypted, len );
-	return d->err == CKR_OK;
+	return (d->err = d->f->C_Decrypt( d->session, (unsigned char*)data.constData(), data.size(), decrypted, len )) == CKR_OK;
 }
 
 bool QPKCS11::loadDriver( const QString &driver )
@@ -171,47 +170,53 @@ bool QPKCS11::loadDriver( const QString &driver )
 	return (d->err = d->f->C_Initialize( 0 )) == CKR_OK;
 }
 
-QPKCS11::PinStatus QPKCS11::login( const TokenData &t )
+QPKCS11::PinStatus QPKCS11::login( const TokenData &_t )
 {
-	if( d->slot < 0 )
-		return PinUnknown;
-
 	CK_TOKEN_INFO token;
-	if( (d->err = d->f->C_GetTokenInfo( d->slot, &token )) != CKR_OK )
+	if( d->slot < 0 || (d->err = d->f->C_GetTokenInfo( d->slot, &token )) != CKR_OK )
 		return PinUnknown;
 
-	if( token.flags & CKF_LOGIN_REQUIRED )
+	if( !(token.flags & CKF_LOGIN_REQUIRED) )
+		return PinOK;
+
+	TokenData t = _t;
+	if( token.flags & CKF_SO_PIN_COUNT_LOW || token.flags & CKF_USER_PIN_COUNT_LOW )
+		t.setFlag( TokenData::PinCountLow );
+	if( token.flags & CKF_SO_PIN_FINAL_TRY || token.flags & CKF_USER_PIN_FINAL_TRY )
+		t.setFlag( TokenData::PinFinalTry );
+	if( token.flags & CKF_SO_PIN_LOCKED || token.flags & CKF_USER_PIN_FINAL_TRY )
+		t.setFlag( TokenData::PinLocked );
+
+	if( d->session >= 0 )
+		d->err = d->f->C_CloseSession( d->session );
+	if( (d->err = d->f->C_OpenSession( d->slot, CKF_SERIAL_SESSION, 0, 0, &d->session )) != CKR_OK )
+		return PinUnknown;
+
+	bool pin2 = SslCertificate( t.cert() ).keyUsage().keys().contains( SslCertificate::NonRepudiation );
+	if( token.flags & CKF_PROTECTED_AUTHENTICATION_PATH )
 	{
-		if( d->session >= 0 )
-			d->err = d->f->C_CloseSession( d->session );
-		if( (d->err = d->f->C_OpenSession( d->slot, CKF_SERIAL_SESSION, 0, 0, &d->session )) != CKR_OK )
-			return PinUnknown;
-		bool pin2 = SslCertificate( t.cert() ).keyUsage().keys().contains( SslCertificate::NonRepudiation );
-		if( token.flags & CKF_PROTECTED_AUTHENTICATION_PATH )
-		{
-			PinDialog p( pin2 ? PinDialog::Pin2PinpadType : PinDialog::Pin1PinpadType, t, qApp->activeWindow() );
-			p.open();
-			d->err = QPKCS11Thread( d ).waitForDone();
-		}
-		else
-		{
-			PinDialog p( pin2 ? PinDialog::Pin2Type : PinDialog::Pin1Type, t, qApp->activeWindow() );
-			if( !p.exec() )
-				return PinCanceled;
-			QByteArray pin = p.text().toUtf8();
-			d->err = d->f->C_Login( d->session, CKU_USER, (unsigned char*)pin.constData(), pin.size() );
-		}
-		switch( d->err )
-		{
-		case CKR_OK: return PinOK;
-		case CKR_CANCEL:
-		case CKR_FUNCTION_CANCELED: return PinCanceled;
-		case CKR_PIN_INCORRECT: return PinIncorrect;
-		case CKR_PIN_LOCKED: return PinLocked;
-		default: return PinUnknown;
-		}
+		PinDialog p( pin2 ? PinDialog::Pin2PinpadType : PinDialog::Pin1PinpadType, t, qApp->activeWindow() );
+		p.open();
+		d->err = QPKCS11Thread( d ).waitForDone();
 	}
-	return PinOK;
+	else
+	{
+		PinDialog p( pin2 ? PinDialog::Pin2Type : PinDialog::Pin1Type, t, qApp->activeWindow() );
+		if( !p.exec() )
+			return PinCanceled;
+		QByteArray pin = p.text().toUtf8();
+		d->err = d->f->C_Login( d->session, CKU_USER, (unsigned char*)pin.constData(), pin.size() );
+	}
+
+	switch( d->err )
+	{
+	case CKR_OK: return PinOK;
+	case CKR_CANCEL:
+	case CKR_FUNCTION_CANCELED: return PinCanceled;
+	case CKR_PIN_INCORRECT: return PinIncorrect;
+	case CKR_PIN_LOCKED: return PinLocked;
+	default: return PinUnknown;
+	}
 }
 
 bool QPKCS11::logout() { return (d->err = d->f->C_Logout( d->session )) == CKR_OK; }
