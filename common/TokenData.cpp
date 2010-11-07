@@ -39,31 +39,26 @@ public:
 
 
 TokenData::TokenData(): d( new TokenDataPrivate ) {}
-
 TokenData::TokenData( const TokenData &other ): d( other.d ) {}
-
 TokenData::~TokenData() {}
 
 QString TokenData::card() const { return d->card; }
-
 void TokenData::setCard( const QString &card ) { d->card = card; }
 
 QStringList TokenData::cards() const { return d->cards; }
-
 void TokenData::setCards( const QStringList &cards ) { d->cards = cards; }
 
 QSslCertificate TokenData::cert() const { return d->cert; }
-
 void TokenData::setCert( const QSslCertificate &cert ) { d->cert = cert; }
 
-TokenData::TokenFlags TokenData::flags() const { return d->flags; }
+void TokenData::clear() { d = new TokenDataPrivate; }
 
-void TokenData::setFlag( TokenFlags flag, bool enabled)
+TokenData::TokenFlags TokenData::flags() const { return d->flags; }
+void TokenData::setFlag( TokenFlags flag, bool enabled )
 {
 	if( enabled ) d->flags |= flag;
 	else d->flags &= ~flag;
 }
-
 void TokenData::setFlags( TokenFlags flags ) { d->flags = flags; }
 
 TokenData TokenData::operator =( const TokenData &other ) { d = other.d; return *this; }

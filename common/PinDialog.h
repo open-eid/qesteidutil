@@ -43,6 +43,7 @@ public:
 		Pin2PinpadType,
 	};
 	PinDialog( QWidget *parent = 0 );
+	PinDialog( PinType type, const TokenData &t, QWidget *parent = 0 );
 	PinDialog( PinType type, const QSslCertificate &cert, TokenData::TokenFlags flags, QWidget *parent = 0 );
 	PinDialog( PinType type, const QString &title, TokenData::TokenFlags flags, QWidget *parent = 0 );
 	void init( PinType type, const QString &title, TokenData::TokenFlags flags );

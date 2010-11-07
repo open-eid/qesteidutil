@@ -35,6 +35,12 @@ PinDialog::PinDialog( QWidget *parent )
 :	QDialog( parent )
 {}
 
+PinDialog::PinDialog( PinType type, const TokenData &t, QWidget *parent )
+{
+	SslCertificate c = t.cert();
+	init( type, c.toString( c.isTempel() ? "CN serialNumber" : "GN SN serialNumber" ), t.flags() );
+}
+
 PinDialog::PinDialog( PinType type, const QSslCertificate &cert, TokenData::TokenFlags flags, QWidget *parent )
 :	QDialog( parent )
 {

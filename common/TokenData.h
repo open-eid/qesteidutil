@@ -54,7 +54,7 @@ public:
 	void clear();
 
 	TokenFlags flags() const;
-	void setFlag( TokenFlags flag, bool enabled );
+	void setFlag( TokenFlags flag, bool enabled = true );
 	void setFlags( TokenFlags flags );
 
 	TokenData operator =( const TokenData &other );

@@ -6,6 +6,8 @@ set( MOC_HEADERS
 	Common.h
 	IKValidator.h
 	PinDialog.h
+	QPKCS11.h
+	QPKCS11_p.h
 	Settings.h
 	sslConnect.h
 	sslConnect_p.h
@@ -17,6 +19,7 @@ QT4_WRAP_UI( UI_HEADERS
 set( HEADERS
 	${MOC_HEADERS}
 	${UI_HEADERS}
+	pkcs11.h
 	SslCertificate.h
 	TokenData.h
 	)
@@ -40,6 +43,7 @@ set( SOURCES
 	Common.cpp
 	IKValidator.cpp
 	PinDialog.cpp
+	QPKCS11.cpp
 	SslCertificate.cpp
 	sslConnect.cpp
 	TokenData.cpp
