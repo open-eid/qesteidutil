@@ -128,7 +128,7 @@ void CertificateDialog::setCertificate( const QSslCertificate &cert )
 	addItem( tr("Serial number"), QString( "%1 (0x%2)" )
 		.arg( c.serialNumber().constData() )
 		.arg( QString::number( c.serialNumber().toInt(), 16 ) ) );
-	addItem( tr("Signature algorithm"), "sha1RSA" );
+	addItem( tr("Signature algorithm"), c.signatureAlgorithm() );
 
 	QStringList text, textExt;
 	QList<QByteArray> subjects;
@@ -163,7 +163,7 @@ void CertificateDialog::setCertificate( const QSslCertificate &cert )
 			.arg( c.publicKey().length() ),
 		c.toHex( c.publicKey().toDer() ) );
 
-	QStringList enhancedKeyUsage = c.enhancedKeyUsage();
+	QStringList enhancedKeyUsage = c.enhancedKeyUsage().values();
 	if( !enhancedKeyUsage.isEmpty() )
 		addItem( tr("Enhanched key usage"), enhancedKeyUsage.join( ", " ), enhancedKeyUsage.join( "\n" ) );
 	QStringList policies = c.policies();

@@ -73,9 +73,10 @@ public:
 	bool		isDigiID() const;
 	bool		isTempel() const;
 	bool		isTest() const;
-	QHash<int,QString> keyUsage() const;
+	QHash<KeyUsage,QString> keyUsage() const;
 	QStringList policies() const;
 	QString		policyInfo( const QString &oid ) const;
+	QString		signatureAlgorithm() const;
 	QString		subjectInfo( SubjectInfo subject ) const;
 	QString		subjectInfo( const QByteArray &tag ) const;
 	QByteArray	subjectKeyIdentifier() const;

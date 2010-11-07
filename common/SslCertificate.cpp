@@ -193,30 +193,33 @@ bool SslCertificate::isTempel() const { return type() == TempelType; }
 bool SslCertificate::isTest() const
 { CertType t = type(); return t == DigiIDTestType || t == EstEidTestType; }
 
-QHash<int,QString> SslCertificate::keyUsage() const
+QHash<SslCertificate::KeyUsage,QString> SslCertificate::keyUsage() const
 {
 	ASN1_BIT_STRING *keyusage = (ASN1_BIT_STRING*)getExtension( NID_key_usage );
 	if( !keyusage )
-		return QHash<int,QString>();
+		return QHash<KeyUsage,QString>();
 
-	QHash<int,QString> list;
+	QHash<KeyUsage,QString> list;
 	for( int n = 0; n < 9; ++n )
 	{
 		if( ASN1_BIT_STRING_get_bit( keyusage, n ) )
 		{
+			QString usage;
 			switch( n )
 			{
-			case DigitalSignature: list[n] = QCoreApplication::translate("SslCertificate", "Digital signature"); break;
-			case NonRepudiation: list[n] = QCoreApplication::translate("SslCertificate", "Non repudiation"); break;
-			case KeyEncipherment: list[n] = QCoreApplication::translate("SslCertificate", "Key encipherment"); break;
-			case DataEncipherment: list[n] = QCoreApplication::translate("SslCertificate", "Data encipherment"); break;
-			case KeyAgreement: list[n] = QCoreApplication::translate("SslCertificate", "Key agreement"); break;
-			case KeyCertificateSign: list[n] = QCoreApplication::translate("SslCertificate", "Key certificate sign"); break;
-			case CRLSign: list[n] = QCoreApplication::translate("SslCertificate", "CRL sign"); break;
-			case EncipherOnly: list[n] = QCoreApplication::translate("SslCertificate", "Encipher only"); break;
-			case DecipherOnly: list[n] = QCoreApplication::translate("SslCertificate", "Decipher only"); break;
+			case DigitalSignature: usage = QCoreApplication::translate("SslCertificate", "Digital signature"); break;
+			case NonRepudiation: usage = QCoreApplication::translate("SslCertificate", "Non repudiation"); break;
+			case KeyEncipherment: usage = QCoreApplication::translate("SslCertificate", "Key encipherment"); break;
+			case DataEncipherment: usage = QCoreApplication::translate("SslCertificate", "Data encipherment"); break;
+			case KeyAgreement: usage = QCoreApplication::translate("SslCertificate", "Key agreement"); break;
+			case KeyCertificateSign: usage = QCoreApplication::translate("SslCertificate", "Key certificate sign"); break;
+			case CRLSign: usage = QCoreApplication::translate("SslCertificate", "CRL sign"); break;
+			case EncipherOnly: usage = QCoreApplication::translate("SslCertificate", "Encipher only"); break;
+			case DecipherOnly: usage = QCoreApplication::translate("SslCertificate", "Decipher only"); break;
 			default: break;
 			}
+			if( !usage.isEmpty() )
+				list[KeyUsage(n)] = usage;
 		}
 	}
 	ASN1_BIT_STRING_free( keyusage );
@@ -267,6 +270,17 @@ QString SslCertificate::policyInfo( const QString &index ) const
 	}
 #endif
 	return QString();
+}
+
+QString SslCertificate::signatureAlgorithm() const
+{
+	if( !handle() )
+		return QString();
+
+	char buf[50];
+	memset( buf, 0, 50 );
+	i2t_ASN1_OBJECT( buf, 50, ((X509*)handle())->cert_info->signature->algorithm );
+	return buf;
 }
 
 QString SslCertificate::subjectInfo( SubjectInfo subject ) const
