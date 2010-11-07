@@ -52,11 +52,16 @@ QSslCertificate QPKCS11Private::readCert( CK_SLOT_ID slot )
 	if( !attribute( obj, CKA_VALUE, 0, size ) )
 		return QSslCertificate();
 
-	QScopedArrayPointer<unsigned char> cert_data( new unsigned char[size] );
-	if( !attribute( obj, CKA_VALUE, &cert_data, size ) )
+	char *cert_data = new char[size];
+	if( !attribute( obj, CKA_VALUE, (unsigned char*)cert_data, size ) )
+	{
+		delete [] cert_data;
 		return QSslCertificate();
+	}
 
-	return QSslCertificate( QByteArray( (char*)&cert_data, size ), QSsl::Der );
+	QSslCertificate cert = QSslCertificate( QByteArray( cert_data, size ), QSsl::Der );
+	delete [] cert_data;
+	return cert;
 }
 
 bool QPKCS11Private::findObject( CK_OBJECT_CLASS cls, CK_OBJECT_HANDLE *ret )
