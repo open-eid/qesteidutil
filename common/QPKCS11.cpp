@@ -186,7 +186,7 @@ QPKCS11::PinStatus QPKCS11::login( const TokenData &t )
 		{
 			PinDialog p( pin2 ? PinDialog::Pin2PinpadType : PinDialog::Pin1PinpadType, t, qApp->activeWindow() );
 			p.open();
-			d->err = PINPADThread( d ).waitForDone();
+			d->err = QPKCS11Thread( d ).waitForDone();
 		}
 		else
 		{

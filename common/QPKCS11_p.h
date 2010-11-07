@@ -55,11 +55,11 @@ public:
 	unsigned long	nslots, err;
 };
 
-class PINPADThread: public QThread
+class QPKCS11Thread: public QThread
 {
 	Q_OBJECT
 public:
-	explicit PINPADThread( QPKCS11Private *p, QObject *parent = 0 )
+	explicit QPKCS11Thread( QPKCS11Private *p, QObject *parent = 0 )
 	: QThread(parent), d(p), result(CKR_OK) {}
 
 	unsigned long waitForDone()
