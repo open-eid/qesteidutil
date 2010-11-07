@@ -39,6 +39,7 @@ set(qesteidutil_MOC_HDRS
 set(qesteidutil_HDRS
     ${qesteidutil_MOC_HDRS}
     common/SslCertificate.h
+    common/TokenData.h
     src/version.h
 )
 
@@ -49,6 +50,7 @@ set(qesteidutil_SRCS
     common/CertificateWidget.cpp
     common/PinDialog.cpp
     common/SslCertificate.cpp
+    common/TokenData.cpp
     common/sslConnect.cpp
     src/CertUpdate.cpp
     src/DiagnosticsDialog.cpp
