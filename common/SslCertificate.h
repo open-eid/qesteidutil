@@ -29,6 +29,13 @@
 class SslCertificate: public QSslCertificate
 {
 public:
+	enum EnhancedKeyUsage
+	{
+		All = 0,
+		ClientAuth,
+		EmailProtect,
+		OCSPSign,
+	};
 	enum KeyUsage
 	{
 		DigitalSignature = 0,
@@ -56,7 +63,7 @@ public:
 	SslCertificate( const QSslCertificate &cert );
 
 	QByteArray	authorityKeyIdentifier() const;
-	QStringList enhancedKeyUsage() const;
+	QHash<EnhancedKeyUsage,QString> enhancedKeyUsage() const;
 	static QString formatDate( const QDateTime &date, const QString &format );
 	static QString formatName( const QString &name );
 	static QSslCertificate fromX509( Qt::HANDLE x509 );

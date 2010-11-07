@@ -51,24 +51,27 @@ QByteArray SslCertificate::authorityKeyIdentifier() const
 	return out;
 }
 
-QStringList SslCertificate::enhancedKeyUsage() const
+QHash<SslCertificate::EnhancedKeyUsage,QString> SslCertificate::enhancedKeyUsage() const
 {
+	QHash<EnhancedKeyUsage,QString> list;
 	EXTENDED_KEY_USAGE *usage = (EXTENDED_KEY_USAGE*)getExtension( NID_ext_key_usage );
 	if( !usage )
-		return QStringList() << QCoreApplication::translate("SslCertificate", "All application policies");
+	{
+		list[All] = QCoreApplication::translate("SslCertificate", "All application policies");
+		return list;
+	}
 
-	QStringList list;
 	for( int i = 0; i < sk_ASN1_OBJECT_num( usage ); ++i )
 	{
 		ASN1_OBJECT *obj = sk_ASN1_OBJECT_value( usage, i );
 		switch( OBJ_obj2nid( obj ) )
 		{
 		case NID_client_auth:
-			list << QCoreApplication::translate("SslCertificate", "Proves your identity to a remote computer"); break;
+			list[ClientAuth] = QCoreApplication::translate("SslCertificate", "Proves your identity to a remote computer"); break;
 		case NID_email_protect:
-			list << QCoreApplication::translate("SslCertificate", "Protects e-mail messages"); break;
+			list[EmailProtect] = QCoreApplication::translate("SslCertificate", "Protects e-mail messages"); break;
 		case NID_OCSP_sign:
-			list << QCoreApplication::translate("SslCertificate", "OCSP signing"); break;
+			list[OCSPSign] = QCoreApplication::translate("SslCertificate", "OCSP signing"); break;
 		default: break;
 		}
 	}
@@ -105,7 +108,7 @@ QString SslCertificate::formatName( const QString &name )
 
 QSslCertificate SslCertificate::fromX509( Qt::HANDLE x509 )
 {
-	unsigned char *cert = NULL;
+	unsigned char *cert = 0;
 	int len = i2d_X509( (X509*)x509, &cert );
 	QByteArray der;
 	if( len >= 0 )
@@ -117,7 +120,7 @@ QSslCertificate SslCertificate::fromX509( Qt::HANDLE x509 )
 QSslKey SslCertificate::keyFromEVP( Qt::HANDLE evp )
 {
 	EVP_PKEY *key = (EVP_PKEY*)evp;
-	unsigned char *data = NULL;
+	unsigned char *data = 0;
 	int len = 0;
 	QSsl::KeyAlgorithm alg;
 	QSsl::KeyType type;
@@ -156,8 +159,8 @@ QSslKey SslCertificate::keyFromEVP( Qt::HANDLE evp )
 void* SslCertificate::getExtension( int nid ) const
 {
 	if( !handle() )
-		return NULL;
-	return X509_get_ext_d2i( (X509*)handle(), nid, NULL, NULL );
+		return 0;
+	return X509_get_ext_d2i( (X509*)handle(), nid, 0, 0 );
 }
 
 QString SslCertificate::issuerInfo( SubjectInfo subject ) const
@@ -177,7 +180,7 @@ QString SslCertificate::issuerInfo( const QByteArray &tag ) const
 		XN_FLAG_DUMP_UNKNOWN_FIELDS |
 		XN_FLAG_FN_SN );
 
-	char *data = NULL;
+	char *data = 0;
 	long len = BIO_get_mem_data( bio, &data );
 	QString string = QString::fromUtf8( data, len );
 	BIO_free( bio );
@@ -283,7 +286,7 @@ QString SslCertificate::subjectInfo( const QByteArray &tag ) const
 		XN_FLAG_DUMP_UNKNOWN_FIELDS |
 		XN_FLAG_FN_SN );
 
-	char *data = NULL;
+	char *data = 0;
 	long len = BIO_get_mem_data( bio, &data );
 	QString string = QString::fromUtf8( data, len );
 	BIO_free( bio );
@@ -337,6 +340,12 @@ QString SslCertificate::toString( const QString &format ) const
 
 SslCertificate::CertType SslCertificate::type() const
 {
+	if( enhancedKeyUsage().keys().contains( OCSPSign ) )
+	{
+		return subjectInfo( QSslCertificate::CommonName ).indexOf( QRegExp( "TEST\\-SK.*OCSP.*") ) != -1 ?
+			OCSPTestType : OCSPType;
+	}
+
 	QStringList p = policies();
 	if( p.indexOf( QRegExp( "^1\\.3\\.6\\.1\\.4\\.1\\.10015\\.1\\.1.*" ) ) != -1 )
 		return EstEidType;
@@ -346,10 +355,6 @@ SslCertificate::CertType SslCertificate::type() const
 		return EstEidTestType;
 	if( p.indexOf( QRegExp( "^1\\.3\\.6\\.1\\.4\\.1\\.10015\\.3\\.2.*" ) ) != -1 )
 		return DigiIDTestType;
-	if( p.indexOf( QRegExp( "^1\\.3\\.6\\.1\\.4\\.1\\.10015\\.4.*" ) ) != -1 )
-		return OCSPType;
-	if( subjectInfo( QSslCertificate::CommonName ).indexOf( QRegExp( "TEST\\-SK.*OCSP.*") ) != -1 )
-		return OCSPTestType;
 	if( p.indexOf( QRegExp( "^1\\.3\\.6\\.1\\.4\\.1\\.10015\\.7.*" ) ) != -1 )
 		return TempelType;
 	return UnknownType;
@@ -394,14 +399,14 @@ void PKCS12CertificatePrivate::init( const QByteArray &data, const QByteArray &p
 	if( !bio )
 		return setLastError();
 
-	PKCS12 *p12 = d2i_PKCS12_bio( bio, NULL );
+	PKCS12 *p12 = d2i_PKCS12_bio( bio, 0 );
 	BIO_free( bio );
 	if( !p12 )
 		return setLastError();
 
-	X509 *c = NULL;
-	EVP_PKEY *k = NULL;
-	int ret = PKCS12_parse( p12, pin.constData(), &k, &c, NULL );
+	X509 *c = 0;
+	EVP_PKEY *k = 0;
+	int ret = PKCS12_parse( p12, pin.constData(), &k, &c, 0 );
 	PKCS12_free( p12 );
 	if( !ret )
 		return setLastError();
@@ -432,7 +437,7 @@ void PKCS12CertificatePrivate::setLastError()
 	else
 	{
 		error = PKCS12Certificate::UnknownError;
-		errorString = ERR_error_string( err, NULL );
+		errorString = ERR_error_string( err, 0 );
 	}
 }
 
