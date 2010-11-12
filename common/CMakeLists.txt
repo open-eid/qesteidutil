@@ -56,4 +56,9 @@ include_directories(
 	${LIBP11_INCLUDE_DIR}
 	)
 
+if( LIBP11_TOKEN_FLAGS )
+	add_definitions( -DLIBP11_TOKEN_FLAGS )
+endif( LIBP11_TOKEN_FLAGS )
+include_directories( ${LIBP11_INCLUDE_DIR} )
+
 add_library( qdigidoccommon STATIC ${SOURCES} )
