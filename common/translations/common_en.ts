@@ -262,6 +262,23 @@
         <source>Certificate is not valid</source>
         <translation>Certificate is not valid</translation>
     </message>
+    <message>
+        <source>Loading server access certificate. Please wait.</source>
+        <translation>Loading server access certificate. Please wait.</translation>
+    </message>
+    <message>
+        <source>Loading Email info</source>
+        <translation>Loading Email info</translation>
+    </message>
+    <message>
+        <source>Loading Mobile info</source>
+        <translatorcomment>Loading Mobile info</translatorcomment>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Downloading picture</source>
+        <translation type="unfinished">Downloading picture</translation>
+    </message>
 </context>
 <context>
     <name>SslCertificate</name>

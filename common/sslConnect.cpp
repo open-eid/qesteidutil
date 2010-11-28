@@ -31,7 +31,7 @@
 #include <QApplication>
 #include <QDateTime>
 #include <QLocale>
-#include <QProgressBar>
+#include <QProgressDialog>
 
 class sslError: public std::runtime_error
 {
@@ -288,10 +288,12 @@ QByteArray SSLConnect::getUrl( RequestType type, const QString &value )
 		return QByteArray();
 
 	QString header;
+	QString label;
 	switch( type )
 	{
 	case AccessCert:
 	{
+		label = tr("Loading server access certificate. Please wait.");
 		QString lang;
 		switch( QLocale().language() )
 		{
@@ -331,15 +333,19 @@ QByteArray SSLConnect::getUrl( RequestType type, const QString &value )
 		break;
 	}
 	case EmailInfo:
+		label = tr("Loading Email info");
 		header = "GET /idportaal/postisysteem.naita_suunamised HTTP/1.0\r\n\r\n";
 		break;
 	case ActivateEmails:
+		label = tr("Loading Email info");
 		header = QString( "GET /idportaal/postisysteem.lisa_suunamine?%1 HTTP/1.0\r\n\r\n" ).arg( value );
 		break;
 	case MobileInfo:
+		label = tr("Loading Mobile info");
 		header = value;
 		break;
 	case PictureInfo:
+		label = tr("Downloading picture");
 		header = "GET /idportaal/portaal.idpilt HTTP/1.0\r\n\r\n";
 		break;
 	default: return QByteArray();
@@ -347,14 +353,9 @@ QByteArray SSLConnect::getUrl( RequestType type, const QString &value )
 
 	QByteArray data = header.toUtf8();
 	sslError::check( SSL_write( d->ssl, data.constData(), data.length() ) );
-	QProgressBar p( qApp->activeWindow() );
-#if QT_VERSION >= 0x040500
+	QProgressDialog p( label, QString(), 0, 0, qApp->activeWindow() );
 	p.setWindowFlags( (p.windowFlags() | Qt::CustomizeWindowHint) & ~Qt::WindowCloseButtonHint );
-#endif
-	p.setWindowModality( Qt::WindowModal );
-	p.setWindowFlags( Qt::Sheet );
-	p.setRange( 0, 0 );
-	p.show();
+	p.open();
 	return SSLReadThread( d->ssl ).waitForDone();
 }
 

@@ -262,6 +262,22 @@
         <source>Certificate is not valid</source>
         <translation>Sertifikaat ei ole kehtiv</translation>
     </message>
+    <message>
+        <source>Loading server access certificate. Please wait.</source>
+        <translation>Laen juurdepääsutõendit… palume kannatust.</translation>
+    </message>
+    <message>
+        <source>Loading Email info</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Loading Mobile info</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Downloading picture</source>
+        <translation>Laen pilti</translation>
+    </message>
 </context>
 <context>
     <name>SslCertificate</name>

@@ -262,6 +262,22 @@
         <source>Certificate is not valid</source>
         <translation>Сертификат не действителен</translation>
     </message>
+    <message>
+        <source>Loading server access certificate. Please wait.</source>
+        <translation>Загрузка сертификата доступа. Пожалуйста подождите.</translation>
+    </message>
+    <message>
+        <source>Loading Email info</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Loading Mobile info</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Downloading picture</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SslCertificate</name>
