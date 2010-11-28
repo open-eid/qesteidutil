@@ -25,6 +25,7 @@
 #include "ui_AboutWidget.h"
 
 #include <QApplication>
+#include <QProcess>
 
 class AboutWidgetPrivate: public Ui::AboutWidget
 {};
@@ -36,7 +37,22 @@ AboutWidget::AboutWidget(QWidget *parent)
 	d->setupUi( this );
 	setAttribute( Qt::WA_DeleteOnClose, true );
 	setWindowFlags( Qt::Sheet );
-	d->content->setText( QString("<center>%1<br />%2%3</center>").arg( qApp->applicationName(), qApp->applicationVersion(), package ) );
+
+	QProcess p;
+	p.start( "dpkg-query", QStringList() << "-W" << "-f=${Package} ${Version}" << "estonianidcard" );
+	if( !p.waitForStarted() && p.error() == QProcess::FailedToStart )
+	{
+		p.start( "rpm", QStringList() << "-q" << "--qf" << "'%{VERSION}'" << "estonianidcard" );
+		p.waitForStarted();
+	}
+	p.waitForFinished();
+	QString package;
+	if( !p.exitCode() )
+		package = QString::fromUtf8( p.readAll() );
+	p.close();
+
+	d->content->setText( QString("<center>%1<br />%2<br />%3</center>")
+		.arg( qApp->applicationName(), qApp->applicationVersion(), package ) );
 }
 
 AboutWidget::~AboutWidget() { delete d; }
