@@ -36,7 +36,7 @@ AboutWidget::AboutWidget(QWidget *parent)
 	d->setupUi( this );
 	setAttribute( Qt::WA_DeleteOnClose, true );
 	setWindowFlags( Qt::Sheet );
-	d->content->setText( QString("%1\n%2").arg( qApp->applicationName(), qApp->applicationVersion() ) );
+	d->content->setText( QString("<center>%1<br />%2%3</center>").arg( qApp->applicationName(), qApp->applicationVersion(), package ) );
 }
 
 AboutWidget::~AboutWidget() { delete d; }

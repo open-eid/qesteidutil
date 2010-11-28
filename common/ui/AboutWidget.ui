@@ -16,14 +16,10 @@
   <property name="windowTitle">
    <string>About</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">#content { background-color: transparent; }</string>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
-   <item>
-    <widget class="QLabel" name="content">
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
-     </property>
-    </widget>
-   </item>
    <item>
     <widget class="QLabel" name="elLogo">
      <property name="pixmap">
@@ -31,6 +27,13 @@
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QTextBrowser" name="content">
+     <property name="frameShape">
+      <enum>QFrame::NoFrame</enum>
      </property>
     </widget>
    </item>
