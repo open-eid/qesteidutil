@@ -27,17 +27,17 @@
     <message>
         <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/kernel/qapplication.cpp" line="+2390"/>
         <source>Services</source>
-        <translation type="unfinished"></translation>
+        <translation>Teenused</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Hide %1</source>
-        <translation>Varja %</translation>
+        <translation>Peida %1</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Hide Others</source>
-        <translation>Varja teised</translation>
+        <translation>Peida teised</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -9244,7 +9244,6 @@ Palun vali mõni muu failinimi.</translation>
         <comment>number of chosen file</comment>
         <translation type="unfinished">
             <numerusform></numerusform>
-            <numerusform></numerusform>
         </translation>
     </message>
     <message>
@@ -10198,14 +10197,12 @@ Palun vali mõni muu failinimi.</translation>
         <source>%1 takes at most %n argument(s). %2 is therefore invalid.</source>
         <translation type="unfinished">
             <numerusform></numerusform>
-            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <location line="+11"/>
         <source>%1 requires at least %n argument(s). %2 is therefore invalid.</source>
         <translation type="unfinished">
-            <numerusform></numerusform>
             <numerusform></numerusform>
         </translation>
     </message>
