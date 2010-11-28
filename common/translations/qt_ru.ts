@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="ru_RU">
+<TS version="2.0" language="ru">
 <context>
     <name>CloseButton</name>
     <message>
-        <location filename="../src/gui/widgets/qtabbar.cpp" line="+2303"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/widgets/qtabbar.cpp" line="+2319"/>
         <source>Close Tab</source>
         <translation>Закрыть вкладку</translation>
     </message>
@@ -12,20 +12,58 @@
 <context>
     <name>FakeReply</name>
     <message>
-        <location filename="../src/3rdparty/webkit/WebKit/qt/tests/qwebframe/tst_qwebframe.cpp" line="+2199"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/3rdparty/webkit/WebKit/qt/tests/qwebframe/tst_qwebframe.cpp" line="+2279"/>
         <source>Fake error !</source>
-        <translation type="unfinished"></translation>
+        <translation>Фиктивная ошибка !</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>Invalid URL</source>
-        <translation>Некорректный URL</translation>
+        <translation>Некорректный адрес URL</translation>
+    </message>
+</context>
+<context>
+    <name>MAC_APPLICATION_MENU</name>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/kernel/qapplication.cpp" line="+2390"/>
+        <source>Services</source>
+        <translation>Службы</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Hide %1</source>
+        <translation>Скрыть %1</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Hide Others</source>
+        <translation>Скрыть остальные</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Show All</source>
+        <translation>Показать все</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Preferences...</source>
+        <translation>Настройки…</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Quit %1</source>
+        <translation>Завершить %1</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>About %1</source>
+        <translation>О программе %1</translation>
     </message>
 </context>
 <context>
     <name>Phonon::</name>
     <message>
-        <location filename="../src/3rdparty/phonon/phonon/phononnamespace.cpp" line="+55"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/3rdparty/phonon/phonon/phononnamespace.cpp" line="+55"/>
         <source>Notifications</source>
         <translation>Уведомления</translation>
     </message>
@@ -58,25 +96,32 @@
 <context>
     <name>Phonon::AudioOutput</name>
     <message>
-        <location filename="../src/3rdparty/phonon/phonon/audiooutput.cpp" line="+385"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/3rdparty/phonon/phonon/audiooutput.cpp" line="+444"/>
+        <location line="+34"/>
         <source>&lt;html&gt;The audio playback device &lt;b&gt;%1&lt;/b&gt; does not work.&lt;br/&gt;Falling back to &lt;b&gt;%2&lt;/b&gt;.&lt;/html&gt;</source>
         <translation>&lt;html&gt;Звуковое устройство &lt;b&gt;%1&lt;/b&gt; не работает.&lt;br/&gt;Будет использоваться &lt;b&gt;%2&lt;/b&gt;.&lt;/html&gt;</translation>
     </message>
     <message>
-        <location line="+13"/>
+        <location line="-21"/>
         <source>&lt;html&gt;Switching to the audio playback device &lt;b&gt;%1&lt;/b&gt;&lt;br/&gt;which just became available and has higher preference.&lt;/html&gt;</source>
-        <translation>&lt;html&gt;Переключение на звуковое устройство &lt;b&gt;%1&lt;/b&gt;&lt;br/&gt;, которое доступно и имеет высший приоритет.&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;Переключение на звуковое устройство &lt;b&gt;%1&lt;/b&gt;&lt;br/&gt;, которое стало доступно и имеет высший приоритет.&lt;/html&gt;</translation>
     </message>
     <message>
         <location line="+3"/>
+        <location line="+14"/>
         <source>Revert back to device &apos;%1&apos;</source>
-        <translation>Возвращение к устройству &apos;%1&apos;</translation>
+        <translation>Возвращение к устройству &quot;%1&quot;</translation>
+    </message>
+    <message>
+        <location line="-3"/>
+        <source>&lt;html&gt;Switching to the audio playback device &lt;b&gt;%1&lt;/b&gt;&lt;br/&gt;which has higher preference or is specifically configured for this stream.&lt;/html&gt;</source>
+        <translation>&lt;html&gt;Переключение на устройство вывода звука &lt;b&gt;%1&lt;/b&gt;&lt;br/&gt;, которое имеет высший приоритет или настроено для обработки данного потока.&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
     <name>Phonon::Gstreamer::Backend</name>
     <message>
-        <location filename="../src/3rdparty/phonon/gstreamer/backend.cpp" line="+182"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/3rdparty/phonon/gstreamer/backend.cpp" line="+188"/>
         <source>Warning: You do not seem to have the package gstreamer0.10-plugins-good installed.
           Some video features have been disabled.</source>
         <translation>Внимание: Похоже, пакет gstreamer0.10-plugins-good не установлен.
@@ -93,40 +138,50 @@
 <context>
     <name>Phonon::Gstreamer::MediaObject</name>
     <message>
-        <location filename="../src/3rdparty/phonon/gstreamer/mediaobject.cpp" line="+90"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/3rdparty/phonon/gstreamer/mediaobject.cpp" line="+93"/>
         <source>Cannot start playback. 
 
 Check your GStreamer installation and make sure you 
 have libgstreamer-plugins-base installed.</source>
         <translation>Невозможно начать воспроизведение.
 
-Проверьте установку GStreamer и убедитесь, 
+Проверьте правильность установки GStreamer и убедитесь, 
 что пакет libgstreamer-plugins-base установлен.</translation>
     </message>
     <message>
-        <location line="+113"/>
+        <location line="+129"/>
+        <source>Missing codec helper script assistant.</source>
+        <translation>Отсутствует сценарий установки кодека.</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Plugin codec installation failed for codec: %0</source>
+        <translation>Не удалось установить модуль кодека: %0</translation>
+    </message>
+    <message>
+        <location line="+11"/>
         <source>A required codec is missing. You need to install the following codec(s) to play this content: %0</source>
         <translation>Отсутствует необходимый кодек. Вам нужно установить следующие кодеки для воспроизведения данного содержимого: %0</translation>
     </message>
     <message>
-        <location line="+702"/>
-        <location line="+8"/>
-        <location line="+15"/>
-        <location line="+26"/>
+        <location line="+730"/>
         <location line="+6"/>
-        <location line="+19"/>
-        <location line="+339"/>
+        <location line="+13"/>
+        <location line="+24"/>
+        <location line="+6"/>
+        <location line="+18"/>
+        <location line="+434"/>
         <location line="+24"/>
         <source>Could not open media source.</source>
         <translation>Не удалось открыть источник медиа-данных.</translation>
     </message>
     <message>
-        <location line="-424"/>
+        <location line="-514"/>
         <source>Invalid source type.</source>
-        <translation>Неверный тип источника медиа-данных.</translation>
+        <translation>Некорректный тип источника медиа-данных.</translation>
     </message>
     <message>
-        <location line="+398"/>
+        <location line="+488"/>
         <source>Could not locate media source.</source>
         <translation>Не удалось найти источник медиа-данных.</translation>
     </message>
@@ -144,7 +199,7 @@ have libgstreamer-plugins-base installed.</source>
 <context>
     <name>Phonon::MMF</name>
     <message>
-        <location filename="../src/3rdparty/phonon/mmf/audiooutput.cpp" line="+103"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/3rdparty/phonon/mmf/audiooutput.cpp" line="+106"/>
         <source>Audio Output</source>
         <translation>Воспроизведение звука</translation>
     </message>
@@ -154,14 +209,14 @@ have libgstreamer-plugins-base installed.</source>
         <translation>Устройство воспроизведения звука</translation>
     </message>
     <message>
-        <location filename="../src/3rdparty/phonon/mmf/utils.cpp" line="+89"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/3rdparty/phonon/mmf/utils.cpp" line="+89"/>
         <source>No error</source>
         <translation>Нет ошибки</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Not found</source>
-        <translation>Не найден</translation>
+        <translation>Не найдено</translation>
     </message>
     <message>
         <location line="+2"/>
@@ -176,12 +231,12 @@ have libgstreamer-plugins-base installed.</source>
     <message>
         <location line="+2"/>
         <source>Overflow</source>
-        <translation type="unfinished"></translation>
+        <translation>Переполнение</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Underflow</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Переполнение</translation>
     </message>
     <message>
         <location line="+2"/>
@@ -201,7 +256,7 @@ have libgstreamer-plugins-base installed.</source>
     <message>
         <location line="+2"/>
         <source>Not ready</source>
-        <translation>Не готов</translation>
+        <translation>Не готово</translation>
     </message>
     <message>
         <location line="+2"/>
@@ -226,7 +281,7 @@ have libgstreamer-plugins-base installed.</source>
     <message>
         <location line="+4"/>
         <source>Insufficient bandwidth</source>
-        <translation type="unfinished">Недостаточная ширина канала</translation>
+        <translation>Недостаточная скорость передачи данных</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -236,17 +291,17 @@ have libgstreamer-plugins-base installed.</source>
     <message>
         <location line="+4"/>
         <source>Network communication error</source>
-        <translation type="unfinished">Ошибка сетевого обмена данными</translation>
+        <translation>Ошибка сетевого обмена данными</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Streaming not supported</source>
-        <translation type="unfinished"></translation>
+        <translation>Потоковое воспроизведение не поддерживается</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Server alert</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Сигнал сервера</translation>
     </message>
     <message>
         <location line="+2"/>
@@ -256,12 +311,12 @@ have libgstreamer-plugins-base installed.</source>
     <message>
         <location line="+2"/>
         <source>Invalid URL</source>
-        <translation>Некорректный URL</translation>
+        <translation>Некорректный адрес URL</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Multicast error</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка широковещательной передачи</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -307,30 +362,40 @@ have libgstreamer-plugins-base installed.</source>
 <context>
     <name>Phonon::MMF::AbstractMediaPlayer</name>
     <message>
-        <location filename="../src/3rdparty/phonon/mmf/abstractmediaplayer.cpp" line="+73"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/3rdparty/phonon/mmf/abstractmediaplayer.cpp" line="+74"/>
         <source>Not ready to play</source>
         <translation>Не готов к воспроизведению</translation>
     </message>
     <message>
-        <location line="+161"/>
-        <location line="+10"/>
+        <location line="+164"/>
+        <location line="+11"/>
         <source>Error opening file</source>
         <translation>Ошибка открытия файла</translation>
     </message>
     <message>
         <location line="+4"/>
         <source>Error opening URL</source>
-        <translation>Ошибка открытия URL</translation>
+        <translation>Ошибка открытия адреса URL</translation>
     </message>
     <message>
-        <location line="+83"/>
+        <location line="+12"/>
+        <source>Error opening resource</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Error opening source: resource not opened</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+82"/>
         <source>Setting volume failed</source>
         <translation>Не удалось установить уровень громкости</translation>
     </message>
     <message>
         <location line="+45"/>
         <source>Loading clip failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось загрузить клип</translation>
     </message>
     <message>
         <location line="+24"/>
@@ -341,30 +406,30 @@ have libgstreamer-plugins-base installed.</source>
 <context>
     <name>Phonon::MMF::AbstractVideoPlayer</name>
     <message>
-        <location filename="../src/3rdparty/phonon/mmf/abstractvideoplayer.cpp" line="+108"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/3rdparty/phonon/mmf/abstractvideoplayer.cpp" line="+110"/>
         <source>Pause failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось приостановить воспроизведение</translation>
     </message>
     <message>
         <location line="+16"/>
         <source>Seek failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось установить позицию</translation>
     </message>
     <message>
-        <location line="+54"/>
+        <location line="+60"/>
         <source>Getting position failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось получить позицию</translation>
     </message>
     <message>
-        <location line="+66"/>
+        <location line="+68"/>
         <source>Opening clip failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось открыть клип</translation>
     </message>
 </context>
 <context>
     <name>Phonon::MMF::AudioEqualizer</name>
     <message>
-        <location filename="../src/3rdparty/phonon/mmf/audioequalizer.cpp" line="+92"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/3rdparty/phonon/mmf/audioequalizer.cpp" line="+92"/>
         <source>%1 Hz</source>
         <translation>%1 Гц</translation>
     </message>
@@ -372,111 +437,122 @@ have libgstreamer-plugins-base installed.</source>
 <context>
     <name>Phonon::MMF::AudioPlayer</name>
     <message>
-        <location filename="../src/3rdparty/phonon/mmf/audioplayer.cpp" line="+173"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/3rdparty/phonon/mmf/audioplayer.cpp" line="+179"/>
         <source>Getting position failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось получить позицию</translation>
     </message>
 </context>
 <context>
     <name>Phonon::MMF::DsaVideoPlayer</name>
     <message>
-        <location filename="../src/3rdparty/phonon/mmf/videoplayer_dsa.cpp" line="+238"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/3rdparty/phonon/mmf/videoplayer_dsa.cpp" line="+241"/>
         <location line="+15"/>
         <location line="+8"/>
         <location line="+22"/>
         <location line="+22"/>
         <source>Video display error</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка отображения видео</translation>
     </message>
 </context>
 <context>
     <name>Phonon::MMF::EffectFactory</name>
     <message>
-        <location filename="../src/3rdparty/phonon/mmf/effectfactory.cpp" line="+181"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/3rdparty/phonon/mmf/effectfactory.cpp" line="+181"/>
         <source>Enabled</source>
-        <translation type="unfinished">Активно</translation>
+        <translation>Включено</translation>
     </message>
 </context>
 <context>
     <name>Phonon::MMF::EnvironmentalReverb</name>
     <message>
-        <location filename="../src/3rdparty/phonon/mmf/environmentalreverb.cpp" line="+146"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/3rdparty/phonon/mmf/environmentalreverb.cpp" line="+146"/>
         <source>Decay HF ratio (%)</source>
         <extracomment>DecayHFRatio: Ratio of high-frequency decay time to the value specified by DecayTime.</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Коэффициент затухания ВЧ (%)</translation>
     </message>
     <message>
         <location line="+6"/>
         <source>Decay time (ms)</source>
         <extracomment>DecayTime: Time over which reverberation is diminished.</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Время затухания (мс)</translation>
     </message>
     <message>
         <location line="+7"/>
         <source>Density (%)</source>
         <extracomment>Density Delay between first and subsequent reflections. Note that the S60 platform documentation does not make clear the distinction between this value and the Diffusion value.</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Плотность (%)</translation>
     </message>
     <message>
         <location line="+6"/>
         <source>Diffusion (%)</source>
         <extracomment>Diffusion: Delay between first and subsequent reflections. Note that the S60 platform documentation does not make clear the distinction between this value and the Density value.</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Рассеивание (%)</translation>
     </message>
     <message>
         <location line="+5"/>
         <source>Reflections delay (ms)</source>
         <extracomment>ReflectionsDelay: Amount of delay between the arrival the direct path from the source and the arrival of the first reflection.</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Затухание отражений (мс)</translation>
     </message>
     <message>
         <location line="+7"/>
         <source>Reflections level (mB)</source>
         <extracomment>ReflectionsLevel: Amplitude of reflections. This value is corrected by the RoomLevel to give the final reflection amplitude.</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Уровень отражений (мБар)</translation>
     </message>
     <message>
         <location line="+7"/>
         <source>Reverb delay (ms)</source>
         <extracomment>ReverbDelay: Amount of time between arrival of the first reflection and start of the late reverberation.</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Задержка эха (мс)</translation>
     </message>
     <message>
         <location line="+8"/>
         <source>Reverb level (mB)</source>
         <extracomment>ReverbLevel Amplitude of reverberations. This value is corrected by the RoomLevel to give the final reverberation amplitude.</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Уровень эха (мБар)</translation>
     </message>
     <message>
         <location line="+7"/>
         <source>Room HF level</source>
         <extracomment>RoomHFLevel: Amplitude of low-pass filter used to attenuate the high frequency component of reflected sound.</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Уровень ВЧ отражений</translation>
     </message>
     <message>
         <location line="+6"/>
         <source>Room level (mB)</source>
         <extracomment>RoomLevel: Master volume control for all reflected sound.</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Уровень отражений (мБар)</translation>
     </message>
 </context>
 <context>
     <name>Phonon::MMF::MediaObject</name>
     <message>
-        <location filename="../src/3rdparty/phonon/mmf/mediaobject.cpp" line="+276"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/3rdparty/phonon/mmf/mediaobject.cpp" line="+309"/>
+        <location line="+18"/>
         <source>Error opening source: type not supported</source>
-        <translation>Ошибка открытыия источника: тип не поддерживается</translation>
+        <translation>Ошибка открытия источника: тип не поддерживается</translation>
     </message>
     <message>
-        <location line="+18"/>
+        <location line="-7"/>
+        <source>Error opening source: resource is compressed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Error opening source: resource not valid</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+26"/>
         <source>Error opening source: media type could not be determined</source>
-        <translation>Ошибка открытыия источника: тип медиа-данных не определён</translation>
+        <translation>Ошибка открытия источника: не удалось определить тип медиа-данных</translation>
     </message>
 </context>
 <context>
     <name>Phonon::MMF::StereoWidening</name>
     <message>
-        <location filename="../src/3rdparty/phonon/mmf/stereowidening.cpp" line="+79"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/3rdparty/phonon/mmf/stereowidening.cpp" line="+79"/>
         <source>Level (%)</source>
         <translation>Уровень (%)</translation>
     </message>
@@ -484,16 +560,16 @@ have libgstreamer-plugins-base installed.</source>
 <context>
     <name>Phonon::MMF::SurfaceVideoPlayer</name>
     <message>
-        <location filename="../src/3rdparty/phonon/mmf/videoplayer_surface.cpp" line="+126"/>
-        <location line="+16"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/3rdparty/phonon/mmf/videoplayer_surface.cpp" line="+139"/>
+        <location line="+26"/>
         <source>Video display error</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка отображения видео</translation>
     </message>
 </context>
 <context>
     <name>Phonon::VolumeSlider</name>
     <message>
-        <location filename="../src/3rdparty/phonon/phonon/volumeslider.cpp" line="+42"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/3rdparty/phonon/phonon/volumeslider.cpp" line="+42"/>
         <location line="+18"/>
         <location line="+129"/>
         <location line="+15"/>
@@ -505,7 +581,7 @@ have libgstreamer-plugins-base installed.</source>
         <location line="+18"/>
         <location line="+54"/>
         <source>Use this slider to adjust the volume. The leftmost position is 0%, the rightmost is %1%</source>
-        <translation>Используйте данный ползунок для настройки громкости. Крайнее левое положение соответствует 0%, крайнее правое - %1%</translation>
+        <translation>Используйте данный регулятор для настройки громкости. Крайнее левое положение соответствует 0%, крайнее правое - %1%</translation>
     </message>
     <message>
         <location line="+67"/>
@@ -516,9 +592,9 @@ have libgstreamer-plugins-base installed.</source>
 <context>
     <name>Q3Accel</name>
     <message>
-        <location filename="../src/qt3support/other/q3accel.cpp" line="+481"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/other/q3accel.cpp" line="+481"/>
         <source>%1, %2 not defined</source>
-        <translation type="unfinished">%1, %2 не определён</translation>
+        <translation>%1, %2 не определён</translation>
     </message>
     <message>
         <location line="+36"/>
@@ -529,7 +605,7 @@ have libgstreamer-plugins-base installed.</source>
 <context>
     <name>Q3DataTable</name>
     <message>
-        <location filename="../src/qt3support/sql/q3datatable.cpp" line="+285"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/sql/q3datatable.cpp" line="+285"/>
         <source>True</source>
         <translation>Да</translation>
     </message>
@@ -557,7 +633,7 @@ have libgstreamer-plugins-base installed.</source>
 <context>
     <name>Q3FileDialog</name>
     <message>
-        <location filename="../src/qt3support/dialogs/q3filedialog.cpp" line="+835"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/dialogs/q3filedialog.cpp" line="+835"/>
         <source>Copy or Move a File</source>
         <translation>Копировать или переместить файл</translation>
     </message>
@@ -582,7 +658,7 @@ have libgstreamer-plugins-base installed.</source>
         <location line="-157"/>
         <location line="+49"/>
         <location line="+2149"/>
-        <location filename="../src/qt3support/dialogs/q3filedialog_mac.cpp" line="+133"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/dialogs/q3filedialog_mac.cpp" line="+133"/>
         <source>All Files (*)</source>
         <translation>Все файлы (*)</translation>
     </message>
@@ -722,13 +798,13 @@ have libgstreamer-plugins-base installed.</source>
     <message>
         <location line="+704"/>
         <location line="+1999"/>
-        <location filename="../src/qt3support/dialogs/q3filedialog_win.cpp" line="+209"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/dialogs/q3filedialog_win.cpp" line="+209"/>
         <source>Open</source>
         <translation>Открыть</translation>
     </message>
     <message>
         <location line="-1889"/>
-        <location filename="../src/qt3support/dialogs/q3filedialog_win.cpp" line="+71"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/dialogs/q3filedialog_win.cpp" line="+71"/>
         <source>Save As</source>
         <translation>Сохранить как</translation>
     </message>
@@ -872,7 +948,7 @@ Check path and filename.</source>
 Проверьте правильность пути и имени файла.</translation>
     </message>
     <message>
-        <location filename="../src/qt3support/dialogs/q3filedialog_win.cpp" line="-191"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/dialogs/q3filedialog_win.cpp" line="-191"/>
         <source>All Files (*.*)</source>
         <translation>Все файлы (*.*)</translation>
     </message>
@@ -890,7 +966,7 @@ Check path and filename.</source>
 <context>
     <name>Q3LocalFs</name>
     <message>
-        <location filename="../src/qt3support/network/q3localfs.cpp" line="+130"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/network/q3localfs.cpp" line="+130"/>
         <location line="+10"/>
         <source>Could not read directory
 %1</source>
@@ -940,7 +1016,7 @@ to
 <context>
     <name>Q3MainWindow</name>
     <message>
-        <location filename="../src/qt3support/widgets/q3mainwindow.cpp" line="+2051"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/widgets/q3mainwindow.cpp" line="+2051"/>
         <source>Line up</source>
         <translation>Выровнять</translation>
     </message>
@@ -953,7 +1029,7 @@ to
 <context>
     <name>Q3NetworkProtocol</name>
     <message>
-        <location filename="../src/qt3support/network/q3networkprotocol.cpp" line="+854"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/network/q3networkprotocol.cpp" line="+854"/>
         <source>Operation stopped by the user</source>
         <translation>Операция остановлена пользователем</translation>
     </message>
@@ -961,7 +1037,7 @@ to
 <context>
     <name>Q3ProgressDialog</name>
     <message>
-        <location filename="../src/qt3support/dialogs/q3progressdialog.cpp" line="+224"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/dialogs/q3progressdialog.cpp" line="+224"/>
         <location line="+61"/>
         <source>Cancel</source>
         <translation>Отмена</translation>
@@ -970,7 +1046,7 @@ to
 <context>
     <name>Q3TabDialog</name>
     <message>
-        <location filename="../src/qt3support/dialogs/q3tabdialog.cpp" line="+190"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/dialogs/q3tabdialog.cpp" line="+190"/>
         <location line="+824"/>
         <source>OK</source>
         <translation>ОК</translation>
@@ -999,7 +1075,7 @@ to
 <context>
     <name>Q3TextEdit</name>
     <message>
-        <location filename="../src/qt3support/text/q3textedit.cpp" line="+5429"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/text/q3textedit.cpp" line="+5429"/>
         <source>&amp;Undo</source>
         <translation>&amp;Отменить действие</translation>
     </message>
@@ -1038,7 +1114,7 @@ to
 <context>
     <name>Q3TitleBar</name>
     <message>
-        <location filename="../src/plugins/accessible/compat/q3complexwidgets.cpp" line="+246"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/plugins/accessible/compat/q3complexwidgets.cpp" line="+246"/>
         <source>System</source>
         <translation>Системное меню</translation>
     </message>
@@ -1106,7 +1182,7 @@ to
 <context>
     <name>Q3ToolBar</name>
     <message>
-        <location filename="../src/qt3support/widgets/q3toolbar.cpp" line="+692"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/widgets/q3toolbar.cpp" line="+692"/>
         <source>More...</source>
         <translation>Больше...</translation>
     </message>
@@ -1114,47 +1190,47 @@ to
 <context>
     <name>Q3UrlOperator</name>
     <message>
-        <location filename="../src/qt3support/network/q3urloperator.cpp" line="+386"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/network/q3urloperator.cpp" line="+386"/>
         <location line="+260"/>
         <location line="+4"/>
         <source>The protocol `%1&apos; is not supported</source>
-        <translation>Протокол &apos;%1&apos; не поддерживается</translation>
+        <translation>Протокол &quot;%1&quot; не поддерживается</translation>
     </message>
     <message>
         <location line="-260"/>
         <source>The protocol `%1&apos; does not support listing directories</source>
-        <translation>Протокол &apos;%1&apos; не поддерживает просмотр каталогов</translation>
+        <translation>Протокол &quot;%1&quot; не поддерживает просмотр каталогов</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>The protocol `%1&apos; does not support creating new directories</source>
-        <translation>Протокол &apos;%1&apos; не поддерживает создание каталогов</translation>
+        <translation>Протокол &quot;%1&quot; не поддерживает создание каталогов</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>The protocol `%1&apos; does not support removing files or directories</source>
-        <translation>Протокол &apos;%1&apos; не поддерживает удаление файлов или каталогов</translation>
+        <translation>Протокол &quot;%1&quot; не поддерживает удаление файлов или каталогов</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>The protocol `%1&apos; does not support renaming files or directories</source>
-        <translation>Протокол &apos;%1&apos; не поддерживает переименование файлов или каталогов</translation>
+        <translation>Протокол &quot;%1&quot; не поддерживает переименование файлов или каталогов</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>The protocol `%1&apos; does not support getting files</source>
-        <translation>Протокол &apos;%1&apos; не поддерживает доставку файлов</translation>
+        <translation>Протокол &quot;%1&quot; не поддерживает доставку файлов</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>The protocol `%1&apos; does not support putting files</source>
-        <translation>Протокол &apos;%1&apos; не поддерживает отправку файлов</translation>
+        <translation>Протокол &quot;%1&quot; не поддерживает отправку файлов</translation>
     </message>
     <message>
         <location line="+243"/>
         <location line="+4"/>
         <source>The protocol `%1&apos; does not support copying or moving files or directories</source>
-        <translation>Протокол &apos;%1&apos; не поддерживает копирование или перемещение файлов или каталогов</translation>
+        <translation>Протокол &quot;%1&quot; не поддерживает копирование или перемещение файлов или каталогов</translation>
     </message>
     <message>
         <location line="+237"/>
@@ -1166,7 +1242,7 @@ to
 <context>
     <name>Q3Wizard</name>
     <message>
-        <location filename="../src/qt3support/dialogs/q3wizard.cpp" line="+177"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/dialogs/q3wizard.cpp" line="+177"/>
         <source>&amp;Cancel</source>
         <translation>От&amp;мена</translation>
     </message>
@@ -1194,17 +1270,17 @@ to
 <context>
     <name>QAbstractSocket</name>
     <message>
-        <location filename="../src/network/socket/qabstractsocket.cpp" line="+916"/>
-        <location filename="../src/network/socket/qhttpsocketengine.cpp" line="+629"/>
-        <location filename="../src/network/socket/qsocks5socketengine.cpp" line="+661"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/socket/qabstractsocket.cpp" line="+916"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/socket/qhttpsocketengine.cpp" line="+629"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/socket/qsocks5socketengine.cpp" line="+661"/>
         <location line="+26"/>
         <source>Host not found</source>
         <translation>Узел не найден</translation>
     </message>
     <message>
         <location line="+50"/>
-        <location filename="../src/network/socket/qhttpsocketengine.cpp" line="+3"/>
-        <location filename="../src/network/socket/qsocks5socketengine.cpp" line="+4"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/socket/qhttpsocketengine.cpp" line="+3"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/socket/qsocks5socketengine.cpp" line="+4"/>
         <source>Connection refused</source>
         <translation>Отказано в соединении</translation>
     </message>
@@ -1221,18 +1297,18 @@ to
         <translation>Операция с сокетом не поддерживается</translation>
     </message>
     <message>
-        <location filename="../src/network/access/qhttpnetworkconnection.cpp" line="+618"/>
-        <location filename="../src/network/socket/qabstractsocket.cpp" line="+203"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/access/qhttpnetworkconnection.cpp" line="+620"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/socket/qabstractsocket.cpp" line="+203"/>
         <source>Socket operation timed out</source>
         <translation>Время на операцию с сокетом истекло</translation>
     </message>
     <message>
-        <location filename="../src/network/socket/qabstractsocket.cpp" line="+380"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/socket/qabstractsocket.cpp" line="+380"/>
         <source>Socket is not connected</source>
         <translation>Сокет не подключён</translation>
     </message>
     <message>
-        <location filename="../src/network/socket/qsocks5socketengine.cpp" line="-8"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/socket/qsocks5socketengine.cpp" line="-8"/>
         <source>Network unreachable</source>
         <translation>Сеть недоступна</translation>
     </message>
@@ -1240,7 +1316,7 @@ to
 <context>
     <name>QAbstractSpinBox</name>
     <message>
-        <location filename="../src/gui/widgets/qabstractspinbox.cpp" line="+1260"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/widgets/qabstractspinbox.cpp" line="+1263"/>
         <source>&amp;Step up</source>
         <translation>Шаг вв&amp;ерх</translation>
     </message>
@@ -1258,7 +1334,7 @@ to
 <context>
     <name>QAccessibleButton</name>
     <message>
-        <location filename="../src/plugins/accessible/widgets/simplewidgets.cpp" line="+250"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/plugins/accessible/widgets/simplewidgets.cpp" line="+250"/>
         <source>Press</source>
         <translation>Нажать</translation>
     </message>
@@ -1266,14 +1342,9 @@ to
 <context>
     <name>QApplication</name>
     <message>
-        <location filename="../src/gui/accessible/qaccessibleobject.cpp" line="+376"/>
-        <source>Activate</source>
-        <translation>Активировать</translation>
-    </message>
-    <message>
-        <location filename="../src/gui/dialogs/qmessagebox.h" line="+354"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qmessagebox.h" line="+354"/>
         <source>Executable &apos;%1&apos; requires Qt %2, found Qt %3.</source>
-        <translation>Программный модуль &apos;%1&apos; требует Qt %2, найдена версия %3.</translation>
+        <translation>Программный модуль &quot;%1&quot; требует Qt %2, найдена версия %3.</translation>
     </message>
     <message>
         <location line="+2"/>
@@ -1281,21 +1352,26 @@ to
         <translation>Ошибка совместимости библиотеки Qt</translation>
     </message>
     <message>
-        <location filename="../src/gui/kernel/qapplication.cpp" line="+2289"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/accessible/qaccessibleobject.cpp" line="+376"/>
+        <source>Activate</source>
+        <translation>Активировать</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Activates the program&apos;s main window</source>
+        <translation>Активирует главное окно программы</translation>
+    </message>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/kernel/qapplication.cpp" line="-13"/>
         <source>QT_LAYOUT_DIRECTION</source>
         <comment>Translate this string to the string &apos;LTR&apos; in left-to-right languages or to &apos;RTL&apos; in right-to-left languages (such as Hebrew and Arabic) to get proper widget layout.</comment>
         <translation>LTR</translation>
-    </message>
-    <message>
-        <location filename="../src/gui/accessible/qaccessibleobject.cpp" line="+2"/>
-        <source>Activates the program&apos;s main window</source>
-        <translation>Активирует главное окно программы</translation>
     </message>
 </context>
 <context>
     <name>QAxSelect</name>
     <message>
-        <location filename="../src/activeqt/container/qaxselect.ui"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/activeqt/container/qaxselect.ui"/>
         <source>Select ActiveX Control</source>
         <translation>Выбор компоненты ActiveX</translation>
     </message>
@@ -1318,7 +1394,7 @@ to
 <context>
     <name>QCheckBox</name>
     <message>
-        <location filename="../src/plugins/accessible/widgets/simplewidgets.cpp" line="-136"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/plugins/accessible/widgets/simplewidgets.cpp" line="-136"/>
         <source>Uncheck</source>
         <translation>Снять отметку</translation>
     </message>
@@ -1336,7 +1412,7 @@ to
 <context>
     <name>QColorDialog</name>
     <message>
-        <location filename="../src/gui/dialogs/qcolordialog.cpp" line="+1378"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qcolordialog.cpp" line="+1378"/>
         <source>Hu&amp;e:</source>
         <translation>&amp;Тон:</translation>
     </message>
@@ -1394,13 +1470,13 @@ to
 <context>
     <name>QComboBox</name>
     <message>
-        <location filename="../src/plugins/accessible/widgets/complexwidgets.cpp" line="+1772"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/plugins/accessible/widgets/complexwidgets.cpp" line="+1776"/>
         <location line="+65"/>
         <source>Open</source>
         <translation>Открыть</translation>
     </message>
     <message>
-        <location filename="../src/gui/itemviews/qitemeditorfactory.cpp" line="+556"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/itemviews/qitemeditorfactory.cpp" line="+556"/>
         <source>False</source>
         <translation>Нет</translation>
     </message>
@@ -1410,7 +1486,7 @@ to
         <translation>Да</translation>
     </message>
     <message>
-        <location filename="../src/plugins/accessible/widgets/complexwidgets.cpp" line="+0"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/plugins/accessible/widgets/complexwidgets.cpp" line="+0"/>
         <source>Close</source>
         <translation>Закрыть</translation>
     </message>
@@ -1418,7 +1494,7 @@ to
 <context>
     <name>QCoreApplication</name>
     <message>
-        <location filename="../src/corelib/kernel/qsystemsemaphore_unix.cpp" line="+119"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/kernel/qsystemsemaphore_unix.cpp" line="+119"/>
         <source>%1: key is empty</source>
         <comment>QSystemSemaphore</comment>
         <translation>%1: пустой ключ</translation>
@@ -1436,7 +1512,7 @@ to
         <translation>%1: ошибка ftok</translation>
     </message>
     <message>
-        <location filename="../src/corelib/kernel/qsystemsemaphore_symbian.cpp" line="+65"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/kernel/qsystemsemaphore_symbian.cpp" line="+65"/>
         <source>%1: already exists</source>
         <comment>QSystemSemaphore</comment>
         <translation>%1: уже существует</translation>
@@ -1463,7 +1539,7 @@ to
 <context>
     <name>QDB2Driver</name>
     <message>
-        <location filename="../src/sql/drivers/db2/qsql_db2.cpp" line="+1253"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/sql/drivers/db2/qsql_db2.cpp" line="+1253"/>
         <source>Unable to connect</source>
         <translation>Невозможно соединиться</translation>
     </message>
@@ -1520,7 +1596,7 @@ to
 <context>
     <name>QDateTimeEdit</name>
     <message>
-        <location filename="../src/gui/widgets/qdatetimeedit.cpp" line="+2287"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/widgets/qdatetimeedit.cpp" line="+2274"/>
         <source>AM</source>
         <translation>AM</translation>
     </message>
@@ -1541,9 +1617,1130 @@ to
     </message>
 </context>
 <context>
+    <name>QDeclarativeAbstractAnimation</name>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/declarative/util/qdeclarativeanimation.cpp" line="+172"/>
+        <source>Cannot animate non-existent property &quot;%1&quot;</source>
+        <translation>Невозможно анимировать несуществуещее свойство &quot;%1&quot;</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Cannot animate read-only property &quot;%1&quot;</source>
+        <translation>Невозможно анимировать свойство только для чтения &quot;%1&quot;</translation>
+    </message>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/declarative/util/qdeclarativeutilmodule.cpp" line="+120"/>
+        <location line="+45"/>
+        <source>Animation is an abstract class</source>
+        <translation>Animation - это абстрактный класс</translation>
+    </message>
+</context>
+<context>
+    <name>QDeclarativeAnchorAnimation</name>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/declarative/util/qdeclarativeanimation.cpp" line="+2687"/>
+        <source>Cannot set a duration of &lt; 0</source>
+        <translation>Невозможно установить длительность &lt; 0</translation>
+    </message>
+</context>
+<context>
+    <name>QDeclarativeAnchors</name>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/declarative/graphicsitems/qdeclarativeanchors.cpp" line="+195"/>
+        <source>Possible anchor loop detected on fill.</source>
+        <translation type="unfinished">Обнаружена возможная цикличная привязка на fill.</translation>
+    </message>
+    <message>
+        <location line="+26"/>
+        <source>Possible anchor loop detected on centerIn.</source>
+        <translation type="unfinished">Обнаружена возможная цикличная привязка на centerIn.</translation>
+    </message>
+    <message>
+        <location line="+201"/>
+        <location line="+34"/>
+        <location line="+610"/>
+        <location line="+37"/>
+        <source>Cannot anchor to an item that isn&apos;t a parent or sibling.</source>
+        <translation type="unfinished">Невозможно установить привязку к элементу, не являющемуся родителем или соседом.</translation>
+    </message>
+    <message>
+        <location line="-534"/>
+        <source>Possible anchor loop detected on vertical anchor.</source>
+        <translation type="unfinished">Обнаружена возможная цикличная привязка к вертикальной привязке.</translation>
+    </message>
+    <message>
+        <location line="+59"/>
+        <source>Possible anchor loop detected on horizontal anchor.</source>
+        <translation type="unfinished">Обнаружена возможная цикличная привязка к горизонтальной привязке.</translation>
+    </message>
+    <message>
+        <location line="+422"/>
+        <source>Cannot specify left, right, and hcenter anchors.</source>
+        <translation type="unfinished">Невозможно задать левую, правую и среднюю привязки.</translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <location line="+37"/>
+        <source>Cannot anchor to a null item.</source>
+        <translation type="unfinished">Невозможно привязаться к нулевому элементу.</translation>
+    </message>
+    <message>
+        <location line="-34"/>
+        <source>Cannot anchor a horizontal edge to a vertical edge.</source>
+        <translation type="unfinished">Невозможно привязать горизонтальный край к вертикальному.</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+37"/>
+        <source>Cannot anchor item to self.</source>
+        <translation type="unfinished">Невозможно привязать элемент к самому себе.</translation>
+    </message>
+    <message>
+        <location line="-25"/>
+        <source>Cannot specify top, bottom, and vcenter anchors.</source>
+        <translation type="unfinished">Невозможно задать верхнюю, нижнюю и среднюю привязки.</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Baseline anchor cannot be used in conjunction with top, bottom, or vcenter anchors.</source>
+        <translation type="unfinished">Невозможно использовать базовую привязку вместе с верхней, нижней и центральной по вертикали.</translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>Cannot anchor a vertical edge to a horizontal edge.</source>
+        <translation type="unfinished">Невозможно привязать вертикальный край к горизонтальному.</translation>
+    </message>
+</context>
+<context>
+    <name>QDeclarativeAnimatedImage</name>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/declarative/graphicsitems/qdeclarativeitemsmodule.cpp" line="+102"/>
+        <location line="+78"/>
+        <source>Qt was built without support for QMovie</source>
+        <translation>Qt было собрано без поддержки QMovie</translation>
+    </message>
+</context>
+<context>
+    <name>QDeclarativeBehavior</name>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/declarative/util/qdeclarativebehavior.cpp" line="+126"/>
+        <source>Cannot change the animation assigned to a Behavior.</source>
+        <translation type="unfinished">Невозможно изменить анимацию, назначенную поведению.</translation>
+    </message>
+</context>
+<context>
+    <name>QDeclarativeBinding</name>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/declarative/qml/qdeclarativebinding.cpp" line="+242"/>
+        <source>Binding loop detected for property &quot;%1&quot;</source>
+        <translation type="unfinished">Обнаружена цикличная привязка для свойства &quot;%1&quot;</translation>
+    </message>
+</context>
+<context>
+    <name>QDeclarativeCompiledBindings</name>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/declarative/qml/qdeclarativecompiledbindings.cpp" line="+372"/>
+        <source>Binding loop detected for property &quot;%1&quot;</source>
+        <translation type="unfinished">Обнаружена цикличная привязка для свойства &quot;%1&quot;</translation>
+    </message>
+</context>
+<context>
+    <name>QDeclarativeCompiler</name>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/declarative/qml/qdeclarativecompiler.cpp" line="+185"/>
+        <location line="+1593"/>
+        <location line="+188"/>
+        <location line="+81"/>
+        <location line="+75"/>
+        <location line="+514"/>
+        <source>Invalid property assignment: &quot;%1&quot; is a read-only property</source>
+        <translation>Некорректное присваивание свойства: &quot;%1&quot; свойство только для чтения</translation>
+    </message>
+    <message>
+        <location line="-2442"/>
+        <source>Invalid property assignment: unknown enumeration</source>
+        <translation>Некорректное присваивание свойства: неизвестное перечисление</translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>Invalid property assignment: string expected</source>
+        <translation>Некорректное присваивание свойства: ожидается значение типа &quot;string&quot;</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Invalid property assignment: url expected</source>
+        <translation>Некорректное присваивание свойства: ожидается значение типа &quot;url&quot;</translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>Invalid property assignment: unsigned int expected</source>
+        <translation>Некорректное присваивание свойства: ожидается значение типа &quot;unsigned int&quot;</translation>
+    </message>
+    <message>
+        <location line="+11"/>
+        <source>Invalid property assignment: int expected</source>
+        <translation>Некорректное присваивание свойства: ожидается значение типа &quot;int&quot;</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <location line="+3"/>
+        <source>Invalid property assignment: number expected</source>
+        <translation>Некорректное присваивание свойства: ожидается число</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Invalid property assignment: color expected</source>
+        <translation>Некорректное присваивание свойства: ожидается значение типа &quot;color&quot;</translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>Invalid property assignment: date expected</source>
+        <translation>Некорректное присваивание свойства: ожидается значение типа &quot;date&quot;</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Invalid property assignment: time expected</source>
+        <translation>Некорректное присваивание свойства: ожидается значение типа &quot;time&quot;</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Invalid property assignment: datetime expected</source>
+        <translation>Некорректное присваивание свойства: ожидается значение типа &quot;datetime&quot;</translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>Invalid property assignment: point expected</source>
+        <translation>Некорректное присваивание свойства: ожидается значение типа &quot;point&quot;</translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>Invalid property assignment: size expected</source>
+        <translation>Некорректное присваивание свойства: ожидается значение типа &quot;size&quot;</translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>Invalid property assignment: rect expected</source>
+        <translation>Некорректное присваивание свойства: ожидается значение типа &quot;rect&quot;</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Invalid property assignment: boolean expected</source>
+        <translation>Некорректное присваивание свойства: ожидается значение булевого типа</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Invalid property assignment: 3D vector expected</source>
+        <translation>Некорректное присваивание свойства: ожидается значение типа &quot;трёхмерный вектор&quot;</translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>Invalid property assignment: unsupported type &quot;%1&quot;</source>
+        <translation>Некорректное присваивание свойства: неподдерживаемый тип &quot;%1&quot;</translation>
+    </message>
+    <message>
+        <location line="+282"/>
+        <source>Element is not creatable.</source>
+        <translation>Элемент не является создаваемым.</translation>
+    </message>
+    <message>
+        <location line="+608"/>
+        <source>Component elements may not contain properties other than id</source>
+        <translation type="unfinished">Элементы Component не могут содержать свойств кроме id</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Invalid component id specification</source>
+        <translation type="unfinished">Некорректная спецификация id компонента</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <location line="+482"/>
+        <source>id is not unique</source>
+        <translation>id не уникален</translation>
+    </message>
+    <message>
+        <location line="-472"/>
+        <source>Invalid component body specification</source>
+        <translation type="unfinished">Некорректная спецификация тела компонента</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Component objects cannot declare new properties.</source>
+        <translation type="unfinished">Объекты Component не могут объявлять новые свойства.</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Component objects cannot declare new signals.</source>
+        <translation type="unfinished">Объекты Component не могут объявлять новые сигналы.</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Component objects cannot declare new functions.</source>
+        <translation type="unfinished">Объекты Component не могут объявлять новые функции.</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Cannot create empty component specification</source>
+        <translation type="unfinished">Невозможно создать пустую спецификацю компонента</translation>
+    </message>
+    <message>
+        <location line="+89"/>
+        <source>Incorrectly specified signal assignment</source>
+        <translation type="unfinished">Неверно указано назначение сигнала</translation>
+    </message>
+    <message>
+        <location line="+12"/>
+        <source>Cannot assign a value to a signal (expecting a script to be run)</source>
+        <translation type="unfinished">Невозможно назначить значение сигналу (сценарий должен быть запущен)</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Empty signal assignment</source>
+        <translation type="unfinished">Пустое назначение сигнала</translation>
+    </message>
+    <message>
+        <location line="+38"/>
+        <source>Empty property assignment</source>
+        <translation type="unfinished">Пустое назначение свойства</translation>
+    </message>
+    <message>
+        <location line="+12"/>
+        <source>Attached properties cannot be used here</source>
+        <translatorcomment>здесь - в данном контексте?</translatorcomment>
+        <translation type="unfinished">Прикреплённые свойства не могут быть использованы здесь</translation>
+    </message>
+    <message>
+        <location line="+14"/>
+        <location line="+107"/>
+        <source>Non-existent attached object</source>
+        <translation type="unfinished">Несуществующий прикреплённый объект</translation>
+    </message>
+    <message>
+        <location line="-103"/>
+        <location line="+106"/>
+        <source>Invalid attached object assignment</source>
+        <translation type="unfinished">Некорректное назначение прикреплённого объекта</translation>
+    </message>
+    <message>
+        <location line="-48"/>
+        <source>Cannot assign to non-existent default property</source>
+        <translation type="unfinished">Невозможно назначить несуществующему свойству по умолчанию</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <location line="+350"/>
+        <location line="+3"/>
+        <source>Cannot assign to non-existent property &quot;%1&quot;</source>
+        <translation type="unfinished">Невозможно назначить несуществующему свойству &quot;%1&quot;</translation>
+    </message>
+    <message>
+        <location line="-323"/>
+        <source>Invalid use of namespace</source>
+        <translation>Некорректное использование пространства имён</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Not an attached property name</source>
+        <translation type="unfinished">Не является именем привязанного свойства</translation>
+    </message>
+    <message>
+        <location line="+182"/>
+        <source>Invalid use of id property</source>
+        <translation type="unfinished">Некорректное использование свойства id</translation>
+    </message>
+    <message>
+        <location line="+87"/>
+        <location line="+2"/>
+        <source>Property has already been assigned a value</source>
+        <translation type="unfinished">Свойству уже назначено значение</translation>
+    </message>
+    <message>
+        <location line="+12"/>
+        <location line="+7"/>
+        <source>Invalid grouped property access</source>
+        <translation type="unfinished">Некорректный доступ к сгруппированному свойству</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Cannot assign a value directly to a grouped property</source>
+        <translation type="unfinished">Невозможно присвоить значение непосредственно сгруппированному свойству</translation>
+    </message>
+    <message>
+        <location line="+16"/>
+        <source>Invalid property use</source>
+        <translation>Некорректное использование свойства</translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>Property assignment expected</source>
+        <translation type="unfinished">Ожидается назначение свойства</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Single property assignment expected</source>
+        <translation type="unfinished">Ожидается одиночное назначение свойства</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Unexpected object assignment</source>
+        <translation type="unfinished">Неожиданное назначение объекта</translation>
+    </message>
+    <message>
+        <location line="+57"/>
+        <source>Cannot assign object to list</source>
+        <translation type="unfinished">Невозможно назначить объект списку</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Can only assign one binding to lists</source>
+        <translation type="unfinished">Можно назначить только одну связь для списка</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Cannot assign primitives to lists</source>
+        <translation type="unfinished">Невозможно назначить примитивы списку</translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>Cannot assign multiple values to a script property</source>
+        <translation type="unfinished">Невозможно назначить множественное значение свойству сценария</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Invalid property assignment: script expected</source>
+        <translation type="unfinished">Некорректное присваивание свойства: ожидается сценарий</translation>
+    </message>
+    <message>
+        <location line="+105"/>
+        <source>Cannot assign object to property</source>
+        <translation type="unfinished">Невозможно назначить объектсвойству</translation>
+    </message>
+    <message>
+        <location line="+50"/>
+        <source>&quot;%1&quot; cannot operate on &quot;%2&quot;</source>
+        <translation>&quot;%1&quot; не может воздействовать на &quot;%2&quot;</translation>
+    </message>
+    <message>
+        <location line="+127"/>
+        <source>Duplicate default property</source>
+        <translation type="unfinished">Дублирование свойства по умолчанию</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Duplicate property name</source>
+        <translation type="unfinished">Дублирование названия свойства</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Property names cannot begin with an upper case letter</source>
+        <translation>Названия свойств не могут начинаться с заглавной буквы</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Illegal property name</source>
+        <translation>Недопустимое название свойства</translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>Duplicate signal name</source>
+        <translation type="unfinished">Дублирование названия сигнала</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Signal names cannot begin with an upper case letter</source>
+        <translation>Названия сигналов не могут начинаться с заглавной буквы</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Illegal signal name</source>
+        <translation>Недопустимое название сигнала</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>Duplicate method name</source>
+        <translation type="unfinished">Дублирование название метода</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Method names cannot begin with an upper case letter</source>
+        <translation>Названия методов не могут начинаться с заглавной буквы</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Illegal method name</source>
+        <translation>Недопустимое название метода</translation>
+    </message>
+    <message>
+        <location line="+21"/>
+        <source>Property value set multiple times</source>
+        <translation type="unfinished">Значение свойства задано несколько раз</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Invalid property nesting</source>
+        <translation type="unfinished">Некорректное вложенность свойств</translation>
+    </message>
+    <message>
+        <location line="+53"/>
+        <source>Cannot override FINAL property</source>
+        <translation>Невозможно переопределить свойство FINAL</translation>
+    </message>
+    <message>
+        <location line="+23"/>
+        <source>Invalid property type</source>
+        <translation>Некорректный тип свойства</translation>
+    </message>
+    <message>
+        <location line="+164"/>
+        <source>Invalid empty ID</source>
+        <translation>Некорректный пустой идентификатор</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>IDs cannot start with an uppercase letter</source>
+        <translation>Идентификаторы не могут начинаться с заглавной буквы</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>IDs must start with a letter or underscore</source>
+        <translation>Идентификаторы должны начинаться с буквы или подчёркивания</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>IDs must contain only letters, numbers, and underscores</source>
+        <translation>Идентификаторы должны содержать только буквы, цифры и подчёркивания</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>ID illegally masks global JavaScript property</source>
+        <translation type="unfinished">Идентификатор неверно маскирует глобальное свойство JavaScript</translation>
+    </message>
+    <message>
+        <location line="+31"/>
+        <location line="+9"/>
+        <source>No property alias location</source>
+        <translation type="unfinished">Отсутствует размещение псевдонима свойства</translation>
+    </message>
+    <message>
+        <location line="-4"/>
+        <location line="+25"/>
+        <location line="+4"/>
+        <source>Invalid alias location</source>
+        <translation type="unfinished">Некорректное размещение псевдонима</translation>
+    </message>
+    <message>
+        <location line="-20"/>
+        <source>Invalid alias reference. An alias reference must be specified as &lt;id&gt; or &lt;id&gt;.&lt;property&gt;</source>
+        <translation type="unfinished">Некорректная ссылка на псевдоним. Ссылка на псевдоним должна быть указана, как &lt;id&gt; или &lt;id&gt;.&lt;property&gt;</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Invalid alias reference. Unable to find id &quot;%1&quot;</source>
+        <translation type="unfinished">Некорректная ссылка на псевдоним. Не удалось найти id &quot;%1&quot;</translation>
+    </message>
+</context>
+<context>
+    <name>QDeclarativeComponent</name>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/declarative/qml/qdeclarativecomponent.cpp" line="+489"/>
+        <source>Invalid empty URL</source>
+        <translation>Пустой адрес URL</translation>
+    </message>
+</context>
+<context>
+    <name>QDeclarativeConnections</name>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/declarative/util/qdeclarativeconnections.cpp" line="+204"/>
+        <location line="+60"/>
+        <source>Cannot assign to non-existent property &quot;%1&quot;</source>
+        <translation type="unfinished">Невозможно назначить несуществующему свойству &quot;%1&quot;</translation>
+    </message>
+    <message>
+        <location line="-50"/>
+        <source>Connections: nested objects not allowed</source>
+        <translation>Подключения: вложенные объекты недопустимы</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Connections: syntax error</source>
+        <translation>Подключения: синтаксическая ошибка</translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>Connections: script expected</source>
+        <translation>Подключения: ожидается сценарий</translation>
+    </message>
+</context>
+<context>
+    <name>QDeclarativeEngine</name>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/declarative/qml/qdeclarativesqldatabase.cpp" line="+204"/>
+        <source>executeSql called outside transaction()</source>
+        <translation>executeSql() вызван вне transaction()</translation>
+    </message>
+    <message>
+        <location line="+58"/>
+        <source>Read-only Transaction</source>
+        <translation>Транзакция только для чтения</translation>
+    </message>
+    <message>
+        <location line="+20"/>
+        <source>Version mismatch: expected %1, found %2</source>
+        <translation>Несовпадение версий: ожидалась %1, найдена %2</translation>
+    </message>
+    <message>
+        <location line="+14"/>
+        <source>SQL transaction failed</source>
+        <translation>Не удалось выполнить транзакцию SQL</translation>
+    </message>
+    <message>
+        <location line="+21"/>
+        <source>transaction: missing callback</source>
+        <translation>транзакция: отсутствует обратный вызов</translation>
+    </message>
+    <message>
+        <location line="+57"/>
+        <location line="+16"/>
+        <source>SQL: database version mismatch</source>
+        <translation>Не совпадает версия базы данных SQL</translation>
+    </message>
+</context>
+<context>
+    <name>QDeclarativeFlipable</name>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/declarative/graphicsitems/qdeclarativeflipable.cpp" line="+137"/>
+        <source>front is a write-once property</source>
+        <translation>front - свойство для однократной записи</translation>
+    </message>
+    <message>
+        <location line="+19"/>
+        <source>back is a write-once property</source>
+        <translation>back - свойство для однократной записи</translation>
+    </message>
+</context>
+<context>
+    <name>QDeclarativeImportDatabase</name>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/declarative/qml/qdeclarativeimport.cpp" line="+361"/>
+        <source>module &quot;%1&quot; definition &quot;%2&quot; not readable</source>
+        <translation type="unfinished">невозможно прочитать определение &quot;%2&quot; модуля &quot;%1&quot;</translation>
+    </message>
+    <message>
+        <location line="+20"/>
+        <source>plugin cannot be loaded for module &quot;%1&quot;: %2</source>
+        <translation type="unfinished">модуль не может быть загружен для подмодуля &quot;%1&quot;: %2</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>module &quot;%1&quot; plugin &quot;%2&quot; not found</source>
+        <translation type="unfinished">подмодуль &quot;%1&quot; модуля &quot;%2&quot; не найден</translation>
+    </message>
+    <message>
+        <location line="+79"/>
+        <location line="+69"/>
+        <source>module &quot;%1&quot; version %2.%3 is not installed</source>
+        <translation>модуль &quot;%1&quot; версии %2.%3 не установлен</translation>
+    </message>
+    <message>
+        <location line="-67"/>
+        <source>module &quot;%1&quot; is not installed</source>
+        <translation>модуль &quot;%1&quot; не установлен</translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <location line="+20"/>
+        <source>&quot;%1&quot;: no such directory</source>
+        <translation>&quot;%1&quot;: каталог не существует</translation>
+    </message>
+    <message>
+        <location line="-2"/>
+        <source>import &quot;%1&quot; has no qmldir and no namespace</source>
+        <translation type="unfinished">каталог &quot;%1&quot; не содержит ни qmldir, ни namespace</translation>
+    </message>
+    <message>
+        <location line="+58"/>
+        <source>- %1 is not a namespace</source>
+        <translation>- %1 - некорректное пространство имён</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>- nested namespaces not allowed</source>
+        <translation>- вложенные пространства имён недопустимы</translation>
+    </message>
+    <message>
+        <location line="+47"/>
+        <location line="+4"/>
+        <source>local directory</source>
+        <translation>локальный каталог</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>is ambiguous. Found in %1 and in %2</source>
+        <translation>неоднозначно. Найдено в %1 и %2</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>is ambiguous. Found in %1 in version %2.%3 and %4.%5</source>
+        <translation>неоднозначно. Найдено в %1 версий %2.%3 и %4.%5</translation>
+    </message>
+    <message>
+        <location line="+14"/>
+        <source>is instantiated recursively</source>
+        <translation>обрабатывается рекурсивно</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>is not a type</source>
+        <translation>не является типом</translation>
+    </message>
+</context>
+<context>
+    <name>QDeclarativeKeyNavigationAttached</name>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/declarative/graphicsitems/qdeclarativeitemsmodule.cpp" line="-6"/>
+        <location line="+58"/>
+        <source>KeyNavigation is only available via attached properties</source>
+        <translation type="unfinished">KeyNavigation доступна только через прикреплённые свойства</translation>
+    </message>
+</context>
+<context>
+    <name>QDeclarativeKeysAttached</name>
+    <message>
+        <location line="-57"/>
+        <location line="+58"/>
+        <source>Keys is only available via attached properties</source>
+        <translation type="unfinished">Keys доступны только через прикреплённые свойства</translation>
+    </message>
+</context>
+<context>
+    <name>QDeclarativeListModel</name>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/declarative/util/qdeclarativelistmodel.cpp" line="+400"/>
+        <source>remove: index %1 out of range</source>
+        <translation>remove: индекс %1 вне диапазона</translation>
+    </message>
+    <message>
+        <location line="+33"/>
+        <source>insert: value is not an object</source>
+        <translation>insert: значение не является объектом</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>insert: index %1 out of range</source>
+        <translation>insert: индекс %1 вне диапазона</translation>
+    </message>
+    <message>
+        <location line="+30"/>
+        <source>move: out of range</source>
+        <translation>move: индекс вне диапазона</translation>
+    </message>
+    <message>
+        <location line="+40"/>
+        <source>append: value is not an object</source>
+        <translation>append: значение не является объектом</translation>
+    </message>
+    <message>
+        <location line="+62"/>
+        <source>set: value is not an object</source>
+        <translation>set: значение не является объектом</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <location line="+34"/>
+        <source>set: index %1 out of range</source>
+        <translation>set: индекс %1 вне диапазона</translation>
+    </message>
+    <message>
+        <location line="+41"/>
+        <location line="+17"/>
+        <source>ListElement: cannot contain nested elements</source>
+        <translation>ListElement: не может содержать вложенные элементы</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>ListElement: cannot use reserved &quot;id&quot; property</source>
+        <translation>ListElement: невозможно использовать зарезервированное свойство &quot;id&quot;</translation>
+    </message>
+    <message>
+        <location line="+53"/>
+        <source>ListElement: cannot use script for property value</source>
+        <translation>ListElement: невозможно использовать сценарий в качестве значения свойства</translation>
+    </message>
+    <message>
+        <location line="+31"/>
+        <source>ListModel: undefined property &apos;%1&apos;</source>
+        <translation>ListModel: неопределённое свойство &quot;%1&quot;</translation>
+    </message>
+</context>
+<context>
+    <name>QDeclarativeLoader</name>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/declarative/graphicsitems/qdeclarativeloader.cpp" line="+362"/>
+        <source>Loader does not support loading non-visual elements.</source>
+        <translation>Загрузчик не поддерживает загрузку невизуальных элементов.</translation>
+    </message>
+</context>
+<context>
+    <name>QDeclarativeParentAnimation</name>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/declarative/util/qdeclarativeanimation.cpp" line="-166"/>
+        <source>Unable to preserve appearance under complex transform</source>
+        <translation>Невозможно сохранить внешний вид при сложном преобразовании</translation>
+    </message>
+    <message>
+        <location line="+11"/>
+        <location line="+7"/>
+        <source>Unable to preserve appearance under non-uniform scale</source>
+        <translation>Невозможно сохранить внешний вид при неоднородном масштабе</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Unable to preserve appearance under scale of 0</source>
+        <translation>Невозможно сохранить внешний вид при масштабе 0</translation>
+    </message>
+</context>
+<context>
+    <name>QDeclarativeParentChange</name>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/declarative/util/qdeclarativestateoperations.cpp" line="+96"/>
+        <source>Unable to preserve appearance under complex transform</source>
+        <translation>Невозможно сохранить внешний вид при сложном преобразовании</translation>
+    </message>
+    <message>
+        <location line="+11"/>
+        <location line="+7"/>
+        <source>Unable to preserve appearance under non-uniform scale</source>
+        <translation>Невозможно сохранить внешний вид при неоднородном масштабе</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Unable to preserve appearance under scale of 0</source>
+        <translation>Невозможно сохранить внешний вид при масштабе 0</translation>
+    </message>
+</context>
+<context>
+    <name>QDeclarativeParser</name>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/declarative/qml/parser/qdeclarativejslexer.cpp" line="+542"/>
+        <location line="+123"/>
+        <location line="+54"/>
+        <source>Illegal unicode escape sequence</source>
+        <translation type="unfinished">Неверная unicode esc-последовательность</translation>
+    </message>
+    <message>
+        <location line="-140"/>
+        <source>Illegal character</source>
+        <translation>Недопустимый символ</translation>
+    </message>
+    <message>
+        <location line="+14"/>
+        <source>Unclosed string at end of line</source>
+        <translation>Незакрытый текст в конце строки</translation>
+    </message>
+    <message>
+        <location line="+26"/>
+        <source>Illegal escape squence</source>
+        <translation type="unfinished">Неверная esc-последовательность</translation>
+    </message>
+    <message>
+        <location line="+72"/>
+        <source>Unclosed comment at end of file</source>
+        <translation>Незакрытый комментарий в конце строки</translation>
+    </message>
+    <message>
+        <location line="+102"/>
+        <source>Illegal syntax for exponential number</source>
+        <translation type="unfinished">Недопустимый синтаксис для экспоненциального числа</translation>
+    </message>
+    <message>
+        <location line="+26"/>
+        <source>Identifier cannot start with numeric literal</source>
+        <translation>Идентификатор не может начинаться с цифры</translation>
+    </message>
+    <message>
+        <location line="+338"/>
+        <source>Unterminated regular expression literal</source>
+        <translation>Незаконченный литерал регулярного выражения</translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>Invalid regular expression flag &apos;%0&apos;</source>
+        <translation>Некорректный флаг &quot;%0&quot; в регулярном выражении</translation>
+    </message>
+    <message>
+        <location line="+16"/>
+        <location line="+22"/>
+        <source>Unterminated regular expression backslash sequence</source>
+        <translation>Регулярное выражение содержит незавершённую экранированную последовательность</translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>Unterminated regular expression class</source>
+        <translation>Регулярное выражение содержит незавершённый класс</translation>
+    </message>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/declarative/qml/parser/qdeclarativejsparser.cpp" line="+1828"/>
+        <location line="+67"/>
+        <source>Syntax error</source>
+        <translation>Синтаксическая ошибка</translation>
+    </message>
+    <message>
+        <location line="-65"/>
+        <source>Unexpected token `%1&apos;</source>
+        <translation>Неожиданный символ &quot;%1&quot;</translation>
+    </message>
+    <message>
+        <location line="+28"/>
+        <location line="+24"/>
+        <source>Expected token `%1&apos;</source>
+        <translation>Ожидается символ &quot;%1&quot;</translation>
+    </message>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/declarative/qml/qdeclarativescriptparser.cpp" line="+260"/>
+        <location line="+430"/>
+        <location line="+59"/>
+        <source>Property value set multiple times</source>
+        <translation type="unfinished">Значение свойства установлено несколько раз</translation>
+    </message>
+    <message>
+        <location line="-478"/>
+        <source>Expected type name</source>
+        <translation>Ожидается название типа</translation>
+    </message>
+    <message>
+        <location line="+135"/>
+        <source>Invalid import qualifier ID</source>
+        <translation type="unfinished">Некорректный ID спецификатора импорта</translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>Reserved name &quot;Qt&quot; cannot be used as an qualifier</source>
+        <translation type="unfinished">Зарезервированное имя &quot;Qt&quot; не может быть использовано в качестве спецификатора</translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>Script import qualifiers must be unique.</source>
+        <translation type="unfinished">Спецификаторы импорта сценария должны быть уникальными.</translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>Script import requires a qualifier</source>
+        <translation type="unfinished">Для импорта сценария требуется спецификатор</translation>
+    </message>
+    <message>
+        <location line="+11"/>
+        <source>Library import requires a version</source>
+        <translation type="unfinished">Импорт библиотеки требует версию</translation>
+    </message>
+    <message>
+        <location line="+59"/>
+        <source>Expected parameter type</source>
+        <translation>Ожидается тип параметра</translation>
+    </message>
+    <message>
+        <location line="+42"/>
+        <source>Invalid property type modifier</source>
+        <translation>Некорректный модификатор типа свойства</translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>Unexpected property type modifier</source>
+        <translation>Неожиданный модификатор типа свойства</translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>Expected property type</source>
+        <translation>Ожидается тип свойства</translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>Readonly not yet supported</source>
+        <translation type="unfinished">Readonly ещё не поддерживается</translation>
+    </message>
+    <message>
+        <location line="+215"/>
+        <source>JavaScript declaration outside Script element</source>
+        <translation>Определение JavaScript вне элемента Script</translation>
+    </message>
+</context>
+<context>
+    <name>QDeclarativePauseAnimation</name>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/declarative/util/qdeclarativeanimation.cpp" line="-2116"/>
+        <source>Cannot set a duration of &lt; 0</source>
+        <translation>Невозможно установить длительность &lt; 0</translation>
+    </message>
+</context>
+<context>
+    <name>QDeclarativePixmap</name>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/declarative/util/qdeclarativepixmapcache.cpp" line="+309"/>
+        <source>Error decoding: %1: %2</source>
+        <translation>Ошибка декодирования: %1: %2</translation>
+    </message>
+    <message>
+        <location line="+151"/>
+        <location line="+343"/>
+        <source>Failed to get image from provider: %1</source>
+        <translation>Не удалось получить изображение от постащика изображений: %1</translation>
+    </message>
+    <message>
+        <location line="-324"/>
+        <location line="+342"/>
+        <source>Cannot open: %1</source>
+        <translation>Не удалось открыть: %1</translation>
+    </message>
+</context>
+<context>
+    <name>QDeclarativePropertyAnimation</name>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/declarative/util/qdeclarativeanimation.cpp" line="+1246"/>
+        <source>Cannot set a duration of &lt; 0</source>
+        <translation>Невозможно установить длительность &lt; 0</translation>
+    </message>
+</context>
+<context>
+    <name>QDeclarativePropertyChanges</name>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/declarative/util/qdeclarativepropertychanges.cpp" line="+240"/>
+        <source>PropertyChanges does not support creating state-specific objects.</source>
+        <translation type="unfinished">PropertyChanges не поддерживают создание объектов, зависимых от состояния.</translation>
+    </message>
+    <message>
+        <location line="+157"/>
+        <source>Cannot assign to non-existent property &quot;%1&quot;</source>
+        <translation type="unfinished">Невозможно назначить несуществующему свойству &quot;%1&quot;</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Cannot assign to read-only property &quot;%1&quot;</source>
+        <translation type="unfinished">Невозможно назначить свойству только для чтения &quot;%1&quot;</translation>
+    </message>
+</context>
+<context>
+    <name>QDeclarativeTextInput</name>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/declarative/graphicsitems/qdeclarativetextinput.cpp" line="+812"/>
+        <location line="+8"/>
+        <source>Could not load cursor delegate</source>
+        <translation type="unfinished">Не удалось загрузить делегат курсора</translation>
+    </message>
+    <message>
+        <location line="+11"/>
+        <source>Could not instantiate cursor delegate</source>
+        <translation type="unfinished">Не удалось инстанциировать делегат курсора</translation>
+    </message>
+</context>
+<context>
+    <name>QDeclarativeTypeLoader</name>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/declarative/qml/qdeclarativetypeloader.cpp" line="+807"/>
+        <source>Script %1 unavailable</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+18"/>
+        <source>Type %1 unavailable</source>
+        <translation type="unfinished">Тип &quot;%1&quot; недоступен</translation>
+    </message>
+    <message>
+        <location line="+173"/>
+        <source>Namespace %1 cannot be used as a type</source>
+        <translation type="unfinished">Пространство имён &quot;%1&quot; не может быть использовано в качестве типа</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>%1 %2</source>
+        <translation type="unfinished">%1 %2</translation>
+    </message>
+</context>
+<context>
+    <name>QDeclarativeVME</name>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/declarative/qml/qdeclarativevme.cpp" line="+194"/>
+        <source>Unable to create object of type %1</source>
+        <translation>Невозможно создать объект типа &quot;%1&quot;</translation>
+    </message>
+    <message>
+        <location line="+390"/>
+        <source>Cannot assign value %1 to property %2</source>
+        <translation>Невозможно установить значение &quot;%1&quot; свойству &quot;%2&quot;</translation>
+    </message>
+    <message>
+        <location line="+22"/>
+        <source>Cannot assign object type %1 with no default method</source>
+        <translation type="unfinished">Невозможно назначить объект типа %1 без метода по умолчанию</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Cannot connect mismatched signal/slot %1 %vs. %2</source>
+        <translation type="unfinished">Невозможно подключить отсутствующий сигнал/слот %1 к %2</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Cannot assign an object to signal property %1</source>
+        <translation type="unfinished">Невозможно назначить объект к свойству сигнала %1</translation>
+    </message>
+    <message>
+        <location line="+147"/>
+        <source>Cannot assign object to list</source>
+        <translation type="unfinished">Невозможно назначить объект списку</translation>
+    </message>
+    <message>
+        <location line="+41"/>
+        <source>Cannot assign object to interface property</source>
+        <translation type="unfinished">Невозможно назначить объект свойству интерфейса</translation>
+    </message>
+    <message>
+        <location line="+11"/>
+        <source>Unable to create attached object</source>
+        <translation type="unfinished">Не удалось создать вложенный объект</translation>
+    </message>
+    <message>
+        <location line="+32"/>
+        <source>Cannot set properties on %1 as it is null</source>
+        <translation type="unfinished">Невозможно установить свойства для %1, так как он нулевой</translation>
+    </message>
+</context>
+<context>
+    <name>QDeclarativeVisualDataModel</name>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/declarative/graphicsitems/qdeclarativevisualitemmodel.cpp" line="+1087"/>
+        <source>Delegate component must be Item type.</source>
+        <translation type="unfinished">Компинент делегата должен быть типа Item.</translation>
+    </message>
+</context>
+<context>
+    <name>QDeclarativeXmlListModel</name>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/declarative/util/qdeclarativeutilmodule.cpp" line="-57"/>
+        <location line="+2"/>
+        <location line="+47"/>
+        <location line="+2"/>
+        <source>Qt was built without support for xmlpatterns</source>
+        <translation>Qt было собрано без поддержки xmlpatterns</translation>
+    </message>
+</context>
+<context>
+    <name>QDeclarativeXmlListModelRole</name>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/declarative/util/qdeclarativexmllistmodel_p.h" line="+174"/>
+        <source>An XmlRole query must not start with &apos;/&apos;</source>
+        <translation type="unfinished">Запрос XmlRole не должен начинаться с &apos;/&apos;</translation>
+    </message>
+</context>
+<context>
+    <name>QDeclarativeXmlRoleList</name>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/declarative/util/qdeclarativexmllistmodel.cpp" line="+732"/>
+        <source>An XmlListModel query must start with &apos;/&apos; or &quot;//&quot;</source>
+        <translation type="unfinished">Запрос XmlListModel должен начинаться с &apos;/&apos; или &quot;//&quot;</translation>
+    </message>
+</context>
+<context>
     <name>QDial</name>
     <message>
-        <location filename="../src/plugins/accessible/widgets/rangecontrols.cpp" line="+951"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/plugins/accessible/widgets/rangecontrols.cpp" line="+951"/>
         <source>QDial</source>
         <translation>QDial</translation>
     </message>
@@ -1561,12 +2758,12 @@ to
 <context>
     <name>QDialog</name>
     <message>
-        <location filename="../src/gui/dialogs/qdialog.cpp" line="+645"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qdialog.cpp" line="+651"/>
         <source>What&apos;s This?</source>
         <translation>Что это?</translation>
     </message>
     <message>
-        <location line="-122"/>
+        <location line="-127"/>
         <source>Done</source>
         <translation>Готово</translation>
     </message>
@@ -1574,26 +2771,21 @@ to
 <context>
     <name>QDialogButtonBox</name>
     <message>
-        <location filename="../src/gui/dialogs/qmessagebox.cpp" line="+1890"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qmessagebox.cpp" line="+1920"/>
         <location line="+464"/>
-        <location filename="../src/gui/widgets/qdialogbuttonbox.cpp" line="+650"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/widgets/qdialogbuttonbox.cpp" line="+649"/>
         <source>OK</source>
         <translation>ОК</translation>
     </message>
     <message>
-        <location filename="../src/gui/widgets/qdialogbuttonbox.cpp" line="+0"/>
-        <source>&amp;OK</source>
-        <translation>&amp;ОК</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>&amp;Save</source>
-        <translation>&amp;Сохранить</translation>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/widgets/qdialogbuttonbox.cpp" line="+3"/>
+        <source>Save</source>
+        <translation>Сохранить</translation>
     </message>
     <message>
         <location line="+0"/>
-        <source>Save</source>
-        <translation>Сохранить</translation>
+        <source>&amp;Save</source>
+        <translation>&amp;Сохранить</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -1602,23 +2794,23 @@ to
     </message>
     <message>
         <location line="+3"/>
-        <source>&amp;Cancel</source>
-        <translation>От&amp;мена</translation>
-    </message>
-    <message>
-        <location line="+0"/>
         <source>Cancel</source>
         <translation>Отмена</translation>
     </message>
     <message>
+        <location line="+0"/>
+        <source>&amp;Cancel</source>
+        <translation>От&amp;мена</translation>
+    </message>
+    <message>
         <location line="+3"/>
-        <source>&amp;Close</source>
-        <translation>&amp;Закрыть</translation>
+        <source>Close</source>
+        <translation>Закрыть</translation>
     </message>
     <message>
         <location line="+0"/>
-        <source>Close</source>
-        <translation>Закрыть</translation>
+        <source>&amp;Close</source>
+        <translation>&amp;Закрыть</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -1695,11 +2887,16 @@ to
         <source>Close without Saving</source>
         <translation>Закрыть без сохранения</translation>
     </message>
+    <message>
+        <location line="-27"/>
+        <source>&amp;OK</source>
+        <translation>&amp;ОК</translation>
+    </message>
 </context>
 <context>
     <name>QDirModel</name>
     <message>
-        <location filename="../src/gui/itemviews/qdirmodel.cpp" line="+457"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/itemviews/qdirmodel.cpp" line="+457"/>
         <source>Name</source>
         <translation>Имя</translation>
     </message>
@@ -1729,25 +2926,25 @@ to
 <context>
     <name>QDockWidget</name>
     <message>
-        <location filename="../src/plugins/accessible/widgets/qaccessiblewidgets.cpp" line="+1239"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/plugins/accessible/widgets/qaccessiblewidgets.cpp" line="+1239"/>
         <source>Close</source>
         <translation>Закрыть</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Dock</source>
-        <translation>Прикрепить</translation>
+        <translation type="unfinished">Прикрепить</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Float</source>
-        <translation>Открепить</translation>
+        <translation type="unfinished">Открепить</translation>
     </message>
 </context>
 <context>
     <name>QDoubleSpinBox</name>
     <message>
-        <location filename="../src/plugins/accessible/widgets/rangecontrols.cpp" line="-537"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/plugins/accessible/widgets/rangecontrols.cpp" line="-537"/>
         <source>More</source>
         <translation>Больше</translation>
     </message>
@@ -1760,7 +2957,17 @@ to
 <context>
     <name>QErrorMessage</name>
     <message>
-        <location filename="../src/gui/dialogs/qerrormessage.cpp" line="+208"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qerrormessage.cpp" line="+414"/>
+        <source>&amp;Show this message again</source>
+        <translation>&amp;Показывать это сообщение в дальнейшем</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>&amp;OK</source>
+        <translation>&amp;Закрыть</translation>
+    </message>
+    <message>
+        <location line="-207"/>
         <source>Debug Message:</source>
         <translation>Отладочное сообщение:</translation>
     </message>
@@ -1774,21 +2981,11 @@ to
         <source>Fatal Error:</source>
         <translation>Критическая ошибка:</translation>
     </message>
-    <message>
-        <location line="+200"/>
-        <source>&amp;Show this message again</source>
-        <translation>&amp;Показывать это сообщение в дальнейшем</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>&amp;OK</source>
-        <translation>&amp;Закрыть</translation>
-    </message>
 </context>
 <context>
     <name>QFile</name>
     <message>
-        <location filename="../src/corelib/io/qfile.cpp" line="+703"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/io/qfile.cpp" line="+703"/>
         <location line="+155"/>
         <source>Destination file exists</source>
         <translation>Файл существует</translation>
@@ -1827,155 +3024,31 @@ to
 <context>
     <name>QFileDialog</name>
     <message>
-        <location filename="../src/gui/dialogs/qfiledialog.cpp" line="+557"/>
-        <location line="+471"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qfiledialog.cpp" line="+558"/>
+        <location line="+481"/>
         <source>All Files (*)</source>
         <translation>Все файлы (*)</translation>
     </message>
     <message>
-        <location line="+216"/>
-        <source>Directories</source>
-        <translation>Каталоги</translation>
-    </message>
-    <message>
-        <location line="-3"/>
-        <location line="+55"/>
-        <location line="+1532"/>
-        <source>&amp;Open</source>
-        <translation>&amp;Открыть</translation>
-    </message>
-    <message>
-        <location line="-1587"/>
-        <location line="+55"/>
-        <source>&amp;Save</source>
-        <translation>&amp;Сохранить</translation>
-    </message>
-    <message>
-        <location line="-756"/>
-        <source>Open</source>
-        <translation>Открыть</translation>
-    </message>
-    <message>
-        <location line="+1527"/>
-        <source>%1 already exists.
-Do you want to replace it?</source>
-        <translation>%1 уже существует.
-Хотите заменить его?</translation>
-    </message>
-    <message>
-        <location line="+20"/>
-        <source>%1
-File not found.
-Please verify the correct file name was given.</source>
-        <translation>%1
-Файл не найден.
-Проверьте правильность указанного имени файла.</translation>
-    </message>
-    <message>
-        <location filename="../src/gui/itemviews/qdirmodel.cpp" line="+402"/>
-        <source>My Computer</source>
-        <translation>Мой компьютер</translation>
-    </message>
-    <message>
-        <location filename="../src/gui/dialogs/qfiledialog.cpp" line="-1516"/>
-        <source>&amp;Rename</source>
-        <translation>&amp;Переименовать</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>&amp;Delete</source>
-        <translation>&amp;Удалить</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Show &amp;hidden files</source>
-        <translation>Показать ск&amp;рытые файлы</translation>
-    </message>
-    <message>
-        <location filename="../src/gui/dialogs/qfiledialog.ui"/>
-        <location filename="../src/gui/dialogs/qfiledialog_embedded.ui"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qfiledialog.ui"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qfiledialog_embedded.ui"/>
         <source>Back</source>
         <translation>Назад</translation>
     </message>
     <message>
         <location/>
-        <location filename="../src/gui/dialogs/qfiledialog_embedded.ui"/>
-        <source>Parent Directory</source>
-        <translation>Родительский каталог</translation>
-    </message>
-    <message>
-        <location/>
-        <location filename="../src/gui/dialogs/qfiledialog_embedded.ui"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qfiledialog_embedded.ui"/>
         <source>List View</source>
         <translation>Список</translation>
     </message>
     <message>
         <location/>
-        <location filename="../src/gui/dialogs/qfiledialog_embedded.ui"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qfiledialog_embedded.ui"/>
         <source>Detail View</source>
         <translation>Подробный вид</translation>
     </message>
     <message>
-        <location/>
-        <location filename="../src/gui/dialogs/qfiledialog_embedded.ui"/>
-        <source>Files of type:</source>
-        <translation>Типы файлов:</translation>
-    </message>
-    <message>
-        <location filename="../src/gui/dialogs/qfiledialog.cpp" line="+6"/>
-        <location line="+669"/>
-        <source>Directory:</source>
-        <translation>Каталог:</translation>
-    </message>
-    <message>
-        <location line="+785"/>
-        <location line="+862"/>
-        <source>%1
-Directory not found.
-Please verify the correct directory name was given.</source>
-        <translation>%1
-Каталог не найден.
-Проверьте правильность указанного имени каталога.</translation>
-    </message>
-    <message>
-        <location line="-218"/>
-        <source>&apos;%1&apos; is write protected.
-Do you want to delete it anyway?</source>
-        <translation>&apos;%1&apos; защищён от записи.
-Всё-равно хотите удалить?</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Are sure you want to delete &apos;%1&apos;?</source>
-        <translation>Вы действительно хотите удалить &apos;%1&apos;?</translation>
-    </message>
-    <message>
-        <location line="+15"/>
-        <source>Could not delete directory.</source>
-        <translation>Не удалось удалить каталог.</translation>
-    </message>
-    <message>
-        <location line="+404"/>
-        <source>Recent Places</source>
-        <translation>Недавние документы</translation>
-    </message>
-    <message>
-        <location filename="../src/gui/dialogs/qfiledialog_win.cpp" line="+174"/>
-        <source>All Files (*.*)</source>
-        <translation>Все файлы (*.*)</translation>
-    </message>
-    <message>
-        <location filename="../src/gui/dialogs/qfiledialog.cpp" line="-2559"/>
-        <source>Save As</source>
-        <translation>Сохранить как</translation>
-    </message>
-    <message>
-        <location filename="../src/gui/itemviews/qfileiconprovider.cpp" line="+464"/>
-        <source>Drive</source>
-        <translation>Диск</translation>
-    </message>
-    <message>
-        <location line="+3"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/itemviews/qfileiconprovider.cpp" line="+478"/>
         <location line="+1"/>
         <source>File</source>
         <translation>Файл</translation>
@@ -2005,105 +3078,253 @@ Do you want to delete it anyway?</source>
         <translation>Ярлык</translation>
     </message>
     <message>
-        <location line="+7"/>
-        <source>Unknown</source>
-        <translation>Неизвестный</translation>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qfiledialog.cpp" line="-498"/>
+        <source>Open</source>
+        <translation>Открыть</translation>
     </message>
     <message>
-        <location filename="../src/gui/dialogs/qfiledialog.cpp" line="-4"/>
-        <source>Find Directory</source>
-        <translation>Найти каталог</translation>
+        <location line="+2"/>
+        <source>Save As</source>
+        <translation>Сохранить как</translation>
     </message>
     <message>
-        <location line="+29"/>
-        <source>Show </source>
-        <translation>Показать </translation>
+        <location line="+709"/>
+        <location line="+55"/>
+        <location line="+1532"/>
+        <source>&amp;Open</source>
+        <translation>&amp;Открыть</translation>
     </message>
     <message>
-        <location filename="../src/gui/dialogs/qfiledialog.ui"/>
-        <location filename="../src/gui/dialogs/qfiledialog_embedded.ui"/>
-        <source>Forward</source>
-        <translation>Вперёд</translation>
+        <location line="-1587"/>
+        <location line="+55"/>
+        <source>&amp;Save</source>
+        <translation>&amp;Сохранить</translation>
     </message>
     <message>
-        <location filename="../src/gui/dialogs/qfiledialog.cpp" line="+1982"/>
+        <location line="+1381"/>
+        <source>&apos;%1&apos; is write protected.
+Do you want to delete it anyway?</source>
+        <translation>&quot;%1&quot; защищён от записи.
+Действительно желаете удалить?</translation>
+    </message>
+    <message>
+        <location line="+424"/>
+        <source>Recent Places</source>
+        <translation>Недавние документы</translation>
+    </message>
+    <message>
+        <location line="-2540"/>
+        <source>&amp;Rename</source>
+        <translation>&amp;Переименовать</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>&amp;Delete</source>
+        <translation>&amp;Удалить</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Show &amp;hidden files</source>
+        <translation>Показать ск&amp;рытые файлы</translation>
+    </message>
+    <message>
+        <location line="+1986"/>
         <source>New Folder</source>
         <translation>Новая папка</translation>
     </message>
     <message>
-        <location line="-1975"/>
+        <location line="-2021"/>
+        <source>Find Directory</source>
+        <translation>Найти каталог</translation>
+    </message>
+    <message>
+        <location line="+716"/>
+        <source>Directories</source>
+        <translation>Каталоги</translation>
+    </message>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qfiledialog_win.cpp" line="+148"/>
+        <source>All Files (*.*)</source>
+        <translation>Все файлы (*.*)</translation>
+    </message>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qfiledialog.cpp" line="-675"/>
+        <location line="+679"/>
+        <source>Directory:</source>
+        <translation>Каталог:</translation>
+    </message>
+    <message>
+        <location line="+819"/>
+        <source>%1 already exists.
+Do you want to replace it?</source>
+        <translation>%1 уже существует.
+Хотите заменить его?</translation>
+    </message>
+    <message>
+        <location line="+20"/>
+        <source>%1
+File not found.
+Please verify the correct file name was given.</source>
+        <translation>%1
+Файл не найден.
+Проверьте правильность указанного имени файла.</translation>
+    </message>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/itemviews/qdirmodel.cpp" line="+402"/>
+        <source>My Computer</source>
+        <translation>Мой компьютер</translation>
+    </message>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qfiledialog.ui"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qfiledialog_embedded.ui"/>
+        <source>Parent Directory</source>
+        <translation>Родительский каталог</translation>
+    </message>
+    <message>
+        <location/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qfiledialog_embedded.ui"/>
+        <source>Files of type:</source>
+        <translation>Типы файлов:</translation>
+    </message>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qfiledialog.cpp" line="-54"/>
+        <location line="+862"/>
+        <source>%1
+Directory not found.
+Please verify the correct directory name was given.</source>
+        <translation>%1
+Каталог не найден.
+Проверьте правильность указанного имени каталога.</translation>
+    </message>
+    <message>
+        <location line="-213"/>
+        <source>Are sure you want to delete &apos;%1&apos;?</source>
+        <translation>Вы действительно хотите удалить &quot;%1&quot;?</translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>Could not delete directory.</source>
+        <translation>Не удалось удалить каталог.</translation>
+    </message>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/itemviews/qfileiconprovider.cpp" line="-22"/>
+        <source>Drive</source>
+        <translation>Диск</translation>
+    </message>
+    <message>
+        <location line="+29"/>
+        <source>Unknown</source>
+        <translation>Неизвестный</translation>
+    </message>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qfiledialog.cpp" line="-2140"/>
+        <source>Show </source>
+        <translation>Показать </translation>
+    </message>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qfiledialog.ui"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qfiledialog_embedded.ui"/>
+        <source>Forward</source>
+        <translation>Вперёд</translation>
+    </message>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qfiledialog.cpp" line="+7"/>
         <source>&amp;New Folder</source>
         <translation>&amp;Новая папка</translation>
     </message>
     <message>
-        <location line="+677"/>
+        <location line="+687"/>
         <location line="+43"/>
         <source>&amp;Choose</source>
         <translation>&amp;Выбрать</translation>
     </message>
     <message>
-        <location filename="../src/gui/dialogs/qsidebar.cpp" line="+442"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qsidebar.cpp" line="+442"/>
         <source>Remove</source>
         <translation>Удалить</translation>
     </message>
     <message>
-        <location filename="../src/gui/dialogs/qfiledialog.cpp" line="-713"/>
-        <location line="+673"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qfiledialog.cpp" line="-723"/>
+        <location line="+683"/>
         <source>File &amp;name:</source>
         <translation>&amp;Имя файла:</translation>
     </message>
     <message>
-        <location filename="../src/gui/dialogs/qfiledialog.ui"/>
-        <location filename="../src/gui/dialogs/qfiledialog_embedded.ui"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qfiledialog.ui"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qfiledialog_embedded.ui"/>
         <source>Look in:</source>
         <translation>Перейти к:</translation>
     </message>
     <message>
         <location/>
-        <location filename="../src/gui/dialogs/qfiledialog_embedded.ui"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qfiledialog_embedded.ui"/>
         <source>Create New Folder</source>
         <translation>Создать папку</translation>
     </message>
     <message>
         <location/>
         <source>Go back</source>
-        <translation type="unfinished"></translation>
+        <translation>Назад</translation>
     </message>
     <message>
         <location/>
         <source>Go forward</source>
-        <translation type="unfinished"></translation>
+        <translation>Вперёд</translation>
     </message>
     <message>
         <location/>
         <source>Go to the parent directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Перейти в родительский каталог</translation>
     </message>
     <message>
         <location/>
         <source>Create a New Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Создать новую папку</translation>
     </message>
     <message>
         <location/>
         <source>Change to list view mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Переключить в режим списка</translation>
     </message>
     <message>
         <location/>
         <source>Change to detail view mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Переключить в подробный режим</translation>
     </message>
 </context>
 <context>
     <name>QFileSystemModel</name>
     <message>
-        <location filename="../src/gui/itemviews/qdirmodel.cpp" line="+483"/>
-        <source>%1 byte(s)</source>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qfilesystemmodel.cpp" line="+740"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/itemviews/qdirmodel.cpp" line="+482"/>
+        <source>%1 TB</source>
+        <translation>%1 Тб</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/itemviews/qdirmodel.cpp" line="+2"/>
+        <source>%1 GB</source>
+        <translation>%1 Гб</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/itemviews/qdirmodel.cpp" line="+2"/>
+        <source>%1 MB</source>
+        <translation>%1 Мб</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/itemviews/qdirmodel.cpp" line="+2"/>
+        <source>%1 KB</source>
+        <translation>%1 Кб</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>%1 bytes</source>
         <translation>%1 байт</translation>
     </message>
     <message>
-        <location filename="../src/gui/dialogs/qfilesystemmodel.cpp" line="+828"/>
+        <location line="+89"/>
         <source>Invalid filename</source>
         <translation>Некорректное имя файла</translation>
     </message>
@@ -2140,7 +3361,7 @@ Do you want to delete it anyway?</source>
         <translation>Дата изменения</translation>
     </message>
     <message>
-        <location filename="../src/gui/dialogs/qfilesystemmodel_p.h" line="+258"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qfilesystemmodel_p.h" line="+261"/>
         <source>My Computer</source>
         <translation>Мой компьютер</translation>
     </message>
@@ -2150,83 +3371,59 @@ Do you want to delete it anyway?</source>
         <translation>Компьютер</translation>
     </message>
     <message>
-        <location filename="../src/gui/dialogs/qfilesystemmodel.cpp" line="-164"/>
-        <location filename="../src/gui/itemviews/qdirmodel.cpp" line="-7"/>
-        <source>%1 TB</source>
-        <translation>%1 Тб</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <location filename="../src/gui/itemviews/qdirmodel.cpp" line="+2"/>
-        <source>%1 GB</source>
-        <translation>%1 Гб</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <location filename="../src/gui/itemviews/qdirmodel.cpp" line="+2"/>
-        <source>%1 MB</source>
-        <translation>%1 Мб</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <location filename="../src/gui/itemviews/qdirmodel.cpp" line="+2"/>
-        <source>%1 KB</source>
-        <translation>%1 Кб</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>%1 bytes</source>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/itemviews/qdirmodel.cpp" line="+1"/>
+        <source>%1 byte(s)</source>
         <translation>%1 байт</translation>
     </message>
 </context>
 <context>
     <name>QFontDatabase</name>
     <message>
-        <location filename="../src/gui/text/qfontdatabase.cpp" line="+102"/>
-        <location line="+1342"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/text/qfontdatabase.cpp" line="+102"/>
+        <location line="+1347"/>
         <source>Normal</source>
         <translation>Обычный</translation>
     </message>
     <message>
-        <location line="-1339"/>
+        <location line="-1344"/>
         <location line="+12"/>
-        <location line="+1315"/>
+        <location line="+1320"/>
         <source>Bold</source>
         <translation>Жирный</translation>
     </message>
     <message>
-        <location line="-1324"/>
-        <location line="+1326"/>
+        <location line="-1329"/>
+        <location line="+1331"/>
         <source>Demi Bold</source>
         <translation>Полужирный</translation>
     </message>
     <message>
-        <location line="-1323"/>
+        <location line="-1328"/>
         <location line="+18"/>
-        <location line="+1301"/>
+        <location line="+1306"/>
         <source>Black</source>
         <translation>Чёрный</translation>
     </message>
     <message>
-        <location line="-1311"/>
+        <location line="-1316"/>
         <source>Demi</source>
         <translation>Средний</translation>
     </message>
     <message>
         <location line="+6"/>
-        <location line="+1311"/>
+        <location line="+1316"/>
         <source>Light</source>
         <translation>Светлый</translation>
     </message>
     <message>
-        <location line="-1165"/>
-        <location line="+1168"/>
+        <location line="-1170"/>
+        <location line="+1173"/>
         <source>Italic</source>
         <translation>Курсив</translation>
     </message>
     <message>
-        <location line="-1165"/>
-        <location line="+1167"/>
+        <location line="-1170"/>
+        <location line="+1172"/>
         <source>Oblique</source>
         <translation>Наклонный</translation>
     </message>
@@ -2318,7 +3515,7 @@ Do you want to delete it anyway?</source>
     <message>
         <location line="+3"/>
         <source>Malayalam</source>
-        <translation>Малаяльская</translation>
+        <translation>Малайялам</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -2343,7 +3540,7 @@ Do you want to delete it anyway?</source>
     <message>
         <location line="+3"/>
         <source>Myanmar</source>
-        <translation>Майанмарская</translation>
+        <translation>Мьянма</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -2404,7 +3601,7 @@ Do you want to delete it anyway?</source>
 <context>
     <name>QFontDialog</name>
     <message>
-        <location filename="../src/gui/dialogs/qfontdialog.cpp" line="+776"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qfontdialog.cpp" line="+768"/>
         <source>&amp;Font</source>
         <translation>&amp;Шрифт</translation>
     </message>
@@ -2439,34 +3636,61 @@ Do you want to delete it anyway?</source>
         <translation>Пример</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>Wr&amp;iting System</source>
-        <translation>&amp;Система письма</translation>
-    </message>
-    <message>
-        <location line="-609"/>
-        <location line="+257"/>
+        <location line="-595"/>
         <source>Select Font</source>
         <translation>Выбор шрифта</translation>
+    </message>
+    <message>
+        <location line="+596"/>
+        <source>Wr&amp;iting System</source>
+        <translation>&amp;Система письма</translation>
     </message>
 </context>
 <context>
     <name>QFtp</name>
     <message>
-        <location filename="../src/network/access/qftp.cpp" line="+828"/>
-        <location filename="../src/qt3support/network/q3ftp.cpp" line="+683"/>
-        <source>Not connected</source>
-        <translation>Соединение не установлено</translation>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/network/q3ftp.cpp" line="+2303"/>
+        <source>Host %1 found</source>
+        <translation>Узел %1 найден</translation>
     </message>
     <message>
-        <location line="+68"/>
-        <location filename="../src/qt3support/network/q3ftp.cpp" line="+65"/>
+        <location line="+7"/>
+        <source>Host found</source>
+        <translation>Узел найден</translation>
+    </message>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/access/qftp.cpp" line="+1008"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/network/q3ftp.cpp" line="-1456"/>
+        <location line="+1451"/>
+        <source>Connected to host %1</source>
+        <translation>Установлено соединение с узлом %1</translation>
+    </message>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/network/q3ftp.cpp" line="+7"/>
+        <source>Connected to host</source>
+        <translation>Соединение с узлом установлено</translation>
+    </message>
+    <message>
+        <location line="-5"/>
+        <source>Connection to %1 closed</source>
+        <translation>Соединение с %1 закрыто</translation>
+    </message>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/access/qftp.cpp" line="+1383"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/network/q3ftp.cpp" line="-243"/>
+        <location line="+250"/>
+        <source>Connection closed</source>
+        <translation>Соединение закрыто</translation>
+    </message>
+    <message>
+        <location line="-1495"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/network/q3ftp.cpp" line="-1566"/>
         <source>Host %1 not found</source>
         <translation>Узел %1 не найден</translation>
     </message>
     <message>
         <location line="+4"/>
-        <location filename="../src/qt3support/network/q3ftp.cpp" line="+4"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/network/q3ftp.cpp" line="+4"/>
         <source>Connection refused to host %1</source>
         <translation>В соединении с узлом %1 отказано</translation>
     </message>
@@ -2476,29 +3700,16 @@ Do you want to delete it anyway?</source>
         <translation>Время на соединение с узлом %1 истекло</translation>
     </message>
     <message>
-        <location line="+104"/>
-        <location filename="../src/qt3support/network/q3ftp.cpp" line="+102"/>
-        <location line="+1451"/>
-        <source>Connected to host %1</source>
-        <translation>Установлено соединение с узлом %1</translation>
-    </message>
-    <message>
-        <location line="+219"/>
-        <location filename="../src/qt3support/network/q3ftp.cpp" line="-1290"/>
-        <source>Connection refused for data connection</source>
-        <translation>Отказ в соединении для передачи данных</translation>
-    </message>
-    <message>
-        <location line="+178"/>
+        <location line="+501"/>
         <location line="+29"/>
-        <location filename="../src/qt3support/network/q3ftp.cpp" line="+195"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/network/q3ftp.cpp" line="+458"/>
         <location line="+728"/>
         <source>Unknown error</source>
         <translation>Неизвестная ошибка</translation>
     </message>
     <message>
         <location line="+897"/>
-        <location filename="../src/qt3support/network/q3ftp.cpp" line="+77"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/network/q3ftp.cpp" line="+77"/>
         <source>Connecting to host failed:
 %1</source>
         <translation>Не удалось соединиться с узлом:
@@ -2506,7 +3717,7 @@ Do you want to delete it anyway?</source>
     </message>
     <message>
         <location line="+4"/>
-        <location filename="../src/qt3support/network/q3ftp.cpp" line="+3"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/network/q3ftp.cpp" line="+3"/>
         <source>Login failed:
 %1</source>
         <translation>Не удалось авторизоваться:
@@ -2514,7 +3725,7 @@ Do you want to delete it anyway?</source>
     </message>
     <message>
         <location line="+4"/>
-        <location filename="../src/qt3support/network/q3ftp.cpp" line="+3"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/network/q3ftp.cpp" line="+3"/>
         <source>Listing directory failed:
 %1</source>
         <translation>Не удалось прочитать каталог:
@@ -2522,7 +3733,7 @@ Do you want to delete it anyway?</source>
     </message>
     <message>
         <location line="+4"/>
-        <location filename="../src/qt3support/network/q3ftp.cpp" line="+3"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/network/q3ftp.cpp" line="+3"/>
         <source>Changing directory failed:
 %1</source>
         <translation>Не удалось сменить каталог:
@@ -2530,7 +3741,7 @@ Do you want to delete it anyway?</source>
     </message>
     <message>
         <location line="+4"/>
-        <location filename="../src/qt3support/network/q3ftp.cpp" line="+3"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/network/q3ftp.cpp" line="+3"/>
         <source>Downloading file failed:
 %1</source>
         <translation>Не удалось загрузить файл:
@@ -2538,7 +3749,7 @@ Do you want to delete it anyway?</source>
     </message>
     <message>
         <location line="+4"/>
-        <location filename="../src/qt3support/network/q3ftp.cpp" line="+3"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/network/q3ftp.cpp" line="+3"/>
         <source>Uploading file failed:
 %1</source>
         <translation>Не удалось отгрузить файл:
@@ -2546,7 +3757,7 @@ Do you want to delete it anyway?</source>
     </message>
     <message>
         <location line="+4"/>
-        <location filename="../src/qt3support/network/q3ftp.cpp" line="+3"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/network/q3ftp.cpp" line="+3"/>
         <source>Removing file failed:
 %1</source>
         <translation>Не удалось удалить файл:
@@ -2554,7 +3765,7 @@ Do you want to delete it anyway?</source>
     </message>
     <message>
         <location line="+4"/>
-        <location filename="../src/qt3support/network/q3ftp.cpp" line="+3"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/network/q3ftp.cpp" line="+3"/>
         <source>Creating directory failed:
 %1</source>
         <translation>Не удалось создать каталог:
@@ -2562,54 +3773,44 @@ Do you want to delete it anyway?</source>
     </message>
     <message>
         <location line="+4"/>
-        <location filename="../src/qt3support/network/q3ftp.cpp" line="+3"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/network/q3ftp.cpp" line="+3"/>
         <source>Removing directory failed:
 %1</source>
         <translation>Не удалось удалить каталог:
 %1</translation>
     </message>
     <message>
-        <location line="+28"/>
-        <location filename="../src/qt3support/network/q3ftp.cpp" line="+25"/>
-        <location line="+250"/>
-        <source>Connection closed</source>
-        <translation>Соединение закрыто</translation>
+        <location line="-1535"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/network/q3ftp.cpp" line="-1356"/>
+        <source>Not connected</source>
+        <translation>Соединение не установлено</translation>
     </message>
     <message>
-        <location filename="../src/qt3support/network/q3ftp.cpp" line="-11"/>
-        <source>Host %1 found</source>
-        <translation>Узел %1 найден</translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <source>Connection to %1 closed</source>
-        <translation>Соединение с %1 закрыто</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Host found</source>
-        <translation>Узел найден</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Connected to host</source>
-        <translation>Соединение с узлом установлено</translation>
+        <location line="+399"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/network/q3ftp.cpp" line="+332"/>
+        <source>Connection refused for data connection</source>
+        <translation>Отказ в соединении для передачи данных</translation>
     </message>
 </context>
 <context>
     <name>QHostInfo</name>
     <message>
-        <location filename="../src/network/kernel/qhostinfo_p.h" line="+103"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/kernel/qhostinfo_p.h" line="+103"/>
         <source>Unknown error</source>
         <translation>Неизвестная ошибка</translation>
+    </message>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/kernel/qhostinfo.cpp" line="+171"/>
+        <source>No host name given</source>
+        <translation>Имя узла не задано</translation>
     </message>
 </context>
 <context>
     <name>QHostInfoAgent</name>
     <message>
-        <location filename="../src/network/kernel/qhostinfo_unix.cpp" line="+258"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/kernel/qhostinfo_unix.cpp" line="+277"/>
         <location line="+32"/>
-        <location filename="../src/network/kernel/qhostinfo_win.cpp" line="+215"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/kernel/qhostinfo_win.cpp" line="+215"/>
         <location line="+27"/>
         <source>Host not found</source>
         <translation>Узел не найден</translation>
@@ -2617,25 +3818,27 @@ Do you want to delete it anyway?</source>
     <message>
         <location line="-45"/>
         <location line="+39"/>
-        <location filename="../src/network/kernel/qhostinfo_win.cpp" line="-34"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/kernel/qhostinfo_win.cpp" line="-34"/>
         <location line="+29"/>
         <source>Unknown address type</source>
         <translation>Неизвестный тип адреса</translation>
     </message>
     <message>
         <location line="+10"/>
-        <location filename="../src/network/kernel/qhostinfo_win.cpp" line="-19"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/kernel/qhostinfo_win.cpp" line="-19"/>
         <location line="+27"/>
         <source>Unknown error</source>
         <translation>Неизвестная ошибка</translation>
     </message>
     <message>
-        <location filename="../src/network/kernel/qhostinfo_win.cpp" line="-67"/>
+        <location line="-115"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/kernel/qhostinfo_win.cpp" line="-67"/>
         <source>No host name given</source>
         <translation>Имя узла не задано</translation>
     </message>
     <message>
-        <location line="+0"/>
+        <location line="+1"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/kernel/qhostinfo_win.cpp" line="+0"/>
         <source>Invalid hostname</source>
         <translation>Некорректное имя узла</translation>
     </message>
@@ -2643,113 +3846,113 @@ Do you want to delete it anyway?</source>
 <context>
     <name>QHttp</name>
     <message>
-        <location filename="../src/network/access/qhttp.cpp" line="+1582"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/access/qhttpnetworkconnection.cpp" line="-6"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/network/q3http.cpp" line="+1835"/>
+        <source>Connection refused</source>
+        <translation>Отказано в соединении</translation>
+    </message>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/access/qhttp.cpp" line="+2639"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/access/qhttpnetworkconnection.cpp" line="-4"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/network/q3http.cpp" line="+3"/>
+        <source>Host %1 not found</source>
+        <translation>Узел %1 не найден</translation>
+    </message>
+    <message>
+        <location line="-62"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/network/q3http.cpp" line="-45"/>
+        <source>Wrong content length</source>
+        <translation>Неверная длина содержимого</translation>
+    </message>
+    <message>
+        <location line="+82"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/network/q3http.cpp" line="+48"/>
+        <source>HTTP request failed</source>
+        <translation>HTTP-запрос не удался</translation>
+    </message>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/network/q3http.cpp" line="+450"/>
+        <source>Host %1 found</source>
+        <translation>Узел %1 найден</translation>
+    </message>
+    <message>
+        <location line="+14"/>
+        <source>Host found</source>
+        <translation>Узел найден</translation>
+    </message>
+    <message>
+        <location line="-11"/>
+        <source>Connected to host %1</source>
+        <translation>Установлено соединение с узлом %1</translation>
+    </message>
+    <message>
+        <location line="+14"/>
+        <source>Connected to host</source>
+        <translation>Соединение с узлом установлено</translation>
+    </message>
+    <message>
+        <location line="-11"/>
+        <source>Connection to %1 closed</source>
+        <translation>Соединение с узлом %1 закрыто</translation>
+    </message>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/access/qhttpnetworkconnection.cpp" line="+7"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/network/q3http.cpp" line="+14"/>
+        <source>Connection closed</source>
+        <translation>Соединение закрыто</translation>
+    </message>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/access/qhttp.cpp" line="-1077"/>
         <location line="+820"/>
-        <location filename="../src/qt3support/network/q3http.cpp" line="+1159"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/network/q3http.cpp" line="-1152"/>
         <location line="+567"/>
         <source>Unknown error</source>
         <translation>Неизвестная ошибка</translation>
     </message>
     <message>
         <location line="-568"/>
-        <location filename="../src/qt3support/network/q3http.cpp" line="-370"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/network/q3http.cpp" line="-370"/>
         <source>Request aborted</source>
         <translation>Запрос прерван</translation>
     </message>
     <message>
         <location line="+579"/>
-        <location filename="../src/qt3support/network/q3http.cpp" line="+381"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/network/q3http.cpp" line="+381"/>
         <source>No server set to connect to</source>
         <translation>Не указан сервер для подключения</translation>
     </message>
     <message>
-        <location line="+164"/>
-        <location filename="../src/qt3support/network/q3http.cpp" line="+56"/>
-        <source>Wrong content length</source>
-        <translation>Неверная длина содержимого</translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <location filename="../src/qt3support/network/q3http.cpp" line="+4"/>
+        <location line="+168"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/network/q3http.cpp" line="+60"/>
         <source>Server closed connection unexpectedly</source>
         <translation>Сервер неожиданно разорвал соединение</translation>
     </message>
     <message>
-        <location line="+200"/>
-        <source>Unknown authentication method</source>
-        <translation>Неизвестный метод авторизации</translation>
-    </message>
-    <message>
-        <location line="+183"/>
-        <source>Error writing response to device</source>
-        <translation>Ошибка записи ответа на устройство</translation>
-    </message>
-    <message>
-        <location filename="../src/network/access/qhttpnetworkconnection.cpp" line="-6"/>
-        <location filename="../src/qt3support/network/q3http.cpp" line="+38"/>
-        <source>Connection refused</source>
-        <translation>Отказано в соединении</translation>
-    </message>
-    <message>
-        <location filename="../src/network/access/qhttp.cpp" line="-325"/>
-        <location filename="../src/network/access/qhttpnetworkconnection.cpp" line="-4"/>
-        <location filename="../src/qt3support/network/q3http.cpp" line="+3"/>
-        <source>Host %1 not found</source>
-        <translation>Узел %1 не найден</translation>
-    </message>
-    <message>
-        <location line="+20"/>
-        <location filename="../src/qt3support/network/q3http.cpp" line="+3"/>
-        <source>HTTP request failed</source>
-        <translation>HTTP-запрос не удался</translation>
-    </message>
-    <message>
-        <location line="+94"/>
-        <location filename="../src/qt3support/network/q3http.cpp" line="+69"/>
+        <location line="+172"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/network/q3http.cpp" line="+113"/>
         <source>Invalid HTTP response header</source>
         <translation>Некорректный HTTP-заголовок ответа</translation>
     </message>
     <message>
-        <location line="+125"/>
+        <location line="+28"/>
+        <source>Unknown authentication method</source>
+        <translation>Неизвестный метод авторизации</translation>
+    </message>
+    <message>
+        <location line="+97"/>
         <location line="+48"/>
-        <location filename="../src/qt3support/network/q3http.cpp" line="+40"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/network/q3http.cpp" line="+40"/>
         <location line="+47"/>
         <source>Invalid HTTP chunked body</source>
         <translation>Некорректное HTTP-фрагментирование данных</translation>
     </message>
     <message>
-        <location filename="../src/qt3support/network/q3http.cpp" line="+294"/>
-        <source>Host %1 found</source>
-        <translation>Узел %1 найден</translation>
+        <location line="+38"/>
+        <source>Error writing response to device</source>
+        <translation>Ошибка записи ответа на устройство</translation>
     </message>
     <message>
-        <location line="+3"/>
-        <source>Connected to host %1</source>
-        <translation>Установлено соединение с узлом %1</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Connection to %1 closed</source>
-        <translation>Соединение с узлом %1 закрыто</translation>
-    </message>
-    <message>
-        <location line="+8"/>
-        <source>Host found</source>
-        <translation>Узел найден</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>Connected to host</source>
-        <translation>Соединение с узлом установлено</translation>
-    </message>
-    <message>
-        <location filename="../src/network/access/qhttpnetworkconnection.cpp" line="+7"/>
-        <location filename="../src/qt3support/network/q3http.cpp" line="+3"/>
-        <source>Connection closed</source>
-        <translation>Соединение закрыто</translation>
-    </message>
-    <message>
-        <location filename="../src/network/access/qhttp.cpp" line="-135"/>
+        <location line="-173"/>
         <source>Proxy authentication required</source>
         <translation>Требуется авторизация на прокси-сервере</translation>
     </message>
@@ -2759,12 +3962,7 @@ Do you want to delete it anyway?</source>
         <translation>Требуется авторизация</translation>
     </message>
     <message>
-        <location line="-159"/>
-        <source>Connection refused (or timed out)</source>
-        <translation>В соединении отказано (или время ожидания истекло)</translation>
-    </message>
-    <message>
-        <location filename="../src/network/access/qhttpnetworkconnection.cpp" line="+6"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/access/qhttpnetworkconnection.cpp" line="+6"/>
         <source>Proxy requires authentication</source>
         <translation>Прокси-сервер требует авторизацию</translation>
     </message>
@@ -2779,17 +3977,22 @@ Do you want to delete it anyway?</source>
         <translation>Данные повреждены</translation>
     </message>
     <message>
-        <location line="+3"/>
-        <source>Unknown protocol specified</source>
-        <translation>Указан неизвестный протокол</translation>
-    </message>
-    <message>
-        <location line="+3"/>
+        <location line="+6"/>
         <source>SSL handshake failed</source>
         <translation>Квитирование SSL не удалось</translation>
     </message>
     <message>
-        <location filename="../src/network/access/qhttp.cpp" line="-2266"/>
+        <location line="-3"/>
+        <source>Unknown protocol specified</source>
+        <translation>Указан неизвестный протокол</translation>
+    </message>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/access/qhttp.cpp" line="-159"/>
+        <source>Connection refused (or timed out)</source>
+        <translation>В соединении отказано (или время ожидания истекло)</translation>
+    </message>
+    <message>
+        <location line="-2266"/>
         <source>HTTPS connection requested but SSL support not compiled in</source>
         <translation>Запрошено соединение по протоколу HTTPS, но поддержка SSL не скомпилирована</translation>
     </message>
@@ -2797,7 +4000,7 @@ Do you want to delete it anyway?</source>
 <context>
     <name>QHttpSocketEngine</name>
     <message>
-        <location filename="../src/network/socket/qhttpsocketengine.cpp" line="-89"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/socket/qhttpsocketengine.cpp" line="-89"/>
         <source>Did not receive HTTP response from proxy</source>
         <translation>Не получен HTTP-ответ от прокси-сервера</translation>
     </message>
@@ -2845,7 +4048,7 @@ Do you want to delete it anyway?</source>
 <context>
     <name>QIBaseDriver</name>
     <message>
-        <location filename="../src/sql/drivers/ibase/qsql_ibase.cpp" line="+1491"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/sql/drivers/ibase/qsql_ibase.cpp" line="+1491"/>
         <source>Error opening database</source>
         <translation>Ошибка открытия базы данных</translation>
     </message>
@@ -2958,7 +4161,7 @@ Do you want to delete it anyway?</source>
 <context>
     <name>QIODevice</name>
     <message>
-        <location filename="../src/corelib/global/qglobal.cpp" line="+2115"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/global/qglobal.cpp" line="+2131"/>
         <source>Permission denied</source>
         <translation>Доступ запрещён</translation>
     </message>
@@ -2978,7 +4181,7 @@ Do you want to delete it anyway?</source>
         <translation>Нет свободного места на устройстве</translation>
     </message>
     <message>
-        <location filename="../src/corelib/io/qiodevice.cpp" line="+1598"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/io/qiodevice.cpp" line="+1618"/>
         <source>Unknown error</source>
         <translation>Неизвестная ошибка</translation>
     </message>
@@ -2986,7 +4189,7 @@ Do you want to delete it anyway?</source>
 <context>
     <name>QInputContext</name>
     <message>
-        <location filename="../src/gui/inputmethod/qinputcontextfactory.cpp" line="+301"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/inputmethod/qinputcontextfactory.cpp" line="+301"/>
         <source>XIM</source>
         <translation>Метод ввода X-сервера</translation>
     </message>
@@ -3019,7 +4222,7 @@ Do you want to delete it anyway?</source>
 <context>
     <name>QInputDialog</name>
     <message>
-        <location filename="../src/gui/dialogs/qinputdialog.cpp" line="+223"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qinputdialog.cpp" line="+223"/>
         <source>Enter a value:</source>
         <translation>Укажите значение:</translation>
     </message>
@@ -3027,29 +4230,19 @@ Do you want to delete it anyway?</source>
 <context>
     <name>QLibrary</name>
     <message>
-        <location filename="../src/corelib/plugin/qlibrary.cpp" line="+383"/>
-        <source>Could not mmap &apos;%1&apos;: %2</source>
-        <translation>Не удалось выполнить mmap &apos;%1&apos;: %2</translation>
-    </message>
-    <message>
-        <location line="+22"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/plugin/qlibrary.cpp" line="+378"/>
         <source>Plugin verification data mismatch in &apos;%1&apos;</source>
-        <translation>Проверочная информация для модуля &apos;%1&apos; не совпадает</translation>
+        <translation>Проверочная информация для модуля &quot;%1&quot; не совпадает</translation>
     </message>
     <message>
-        <location line="+6"/>
-        <source>Could not unmap &apos;%1&apos;: %2</source>
-        <translation>Не удалось выполнить unmap &apos;%1&apos;: %2</translation>
-    </message>
-    <message>
-        <location line="+345"/>
+        <location line="+370"/>
         <source>The plugin &apos;%1&apos; uses incompatible Qt library. (%2.%3.%4) [%5]</source>
-        <translation>Модуль &apos;%1&apos; использует несоместимую библиотеку Qt. (%2.%3.%4) [%5]</translation>
+        <translation>Модуль &quot;%1&quot; использует несоместимую библиотеку Qt. (%2.%3.%4) [%5]</translation>
     </message>
     <message>
-        <location line="+20"/>
+        <location line="+23"/>
         <source>The plugin &apos;%1&apos; uses incompatible Qt library. Expected build key &quot;%2&quot;, got &quot;%3&quot;</source>
-        <translation>Модуль &apos;%1&apos; использует несоместимую библиотеку Qt. Ожидается ключ &quot;%2&quot;, но получен ключ &quot;%3&quot;</translation>
+        <translation>Модуль &quot;%1&quot; использует несоместимую библиотеку Qt. Ожидается ключ &quot;%2&quot;, но получен ключ &quot;%3&quot;</translation>
     </message>
     <message>
         <location line="+365"/>
@@ -3057,36 +4250,37 @@ Do you want to delete it anyway?</source>
         <translation>Неизвестная ошибка</translation>
     </message>
     <message>
-        <location line="-402"/>
-        <location filename="../src/corelib/plugin/qpluginloader.cpp" line="+343"/>
+        <location line="-543"/>
+        <location line="+138"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/plugin/qpluginloader.cpp" line="+343"/>
         <source>The shared library was not found.</source>
         <translation>Динамическая библиотека не найдена.</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>The file &apos;%1&apos; is not a valid Qt plugin.</source>
-        <translation>Файл &apos;%1&apos; - не является корректным модулем Qt.</translation>
+        <translation>Файл &quot;%1&quot; - не является корректным модулем Qt.</translation>
     </message>
     <message>
-        <location line="+43"/>
+        <location line="+46"/>
         <source>The plugin &apos;%1&apos; uses incompatible Qt library. (Cannot mix debug and release libraries.)</source>
-        <translation>Модуль &apos;%1&apos; использует несоместимую библиотеку Qt. (Невозможно совместить релизные и отладочные библиотеки.)</translation>
+        <translation>Модуль &quot;%1&quot; использует несоместимую библиотеку Qt. (Невозможно совместить релизные и отладочные библиотеки.)</translation>
     </message>
     <message>
-        <location filename="../src/corelib/plugin/qlibrary_unix.cpp" line="+236"/>
-        <location filename="../src/corelib/plugin/qlibrary_win.cpp" line="+87"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/plugin/qlibrary_unix.cpp" line="+236"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/plugin/qlibrary_win.cpp" line="+87"/>
         <source>Cannot load library %1: %2</source>
         <translation>Невозможно загрузить библиотеку %1: %2</translation>
     </message>
     <message>
         <location line="+17"/>
-        <location filename="../src/corelib/plugin/qlibrary_win.cpp" line="+22"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/plugin/qlibrary_win.cpp" line="+22"/>
         <source>Cannot unload library %1: %2</source>
         <translation>Невозможно выгрузить библиотеку %1: %2</translation>
     </message>
     <message>
         <location line="+34"/>
-        <location filename="../src/corelib/plugin/qlibrary_win.cpp" line="+15"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/plugin/qlibrary_win.cpp" line="+15"/>
         <source>Cannot resolve symbol &quot;%1&quot; in %2: %3</source>
         <translation>Невозможно разрешить символ &quot;%1&quot; в %2: %3</translation>
     </message>
@@ -3094,7 +4288,12 @@ Do you want to delete it anyway?</source>
 <context>
     <name>QLineEdit</name>
     <message>
-        <location filename="../src/gui/widgets/qlineedit.cpp" line="+2078"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/widgets/qlineedit.cpp" line="+2124"/>
+        <source>Select All</source>
+        <translation>Выделить всё</translation>
+    </message>
+    <message>
+        <location line="-40"/>
         <source>&amp;Undo</source>
         <translation>&amp;Отменить действие</translation>
     </message>
@@ -3123,22 +4322,17 @@ Do you want to delete it anyway?</source>
         <source>Delete</source>
         <translation>Удалить</translation>
     </message>
-    <message>
-        <location line="+8"/>
-        <source>Select All</source>
-        <translation>Выделить всё</translation>
-    </message>
 </context>
 <context>
     <name>QLocalServer</name>
     <message>
-        <location filename="../src/network/socket/qlocalserver.cpp" line="+224"/>
-        <location filename="../src/network/socket/qlocalserver_unix.cpp" line="+246"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/socket/qlocalserver.cpp" line="+224"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/socket/qlocalserver_unix.cpp" line="+246"/>
         <source>%1: Name error</source>
         <translation>%1: Некорректное имя</translation>
     </message>
     <message>
-        <location filename="../src/network/socket/qlocalserver_unix.cpp" line="-8"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/socket/qlocalserver_unix.cpp" line="-8"/>
         <source>%1: Permission denied</source>
         <translation>%1: Доступ запрещён</translation>
     </message>
@@ -3156,59 +4350,59 @@ Do you want to delete it anyway?</source>
 <context>
     <name>QLocalSocket</name>
     <message>
-        <location filename="../src/network/socket/qlocalsocket_tcp.cpp" line="+132"/>
-        <location filename="../src/network/socket/qlocalsocket_unix.cpp" line="+139"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/socket/qlocalsocket_tcp.cpp" line="+132"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/socket/qlocalsocket_unix.cpp" line="+139"/>
         <source>%1: Connection refused</source>
         <translation>%1: Отказано в соединении</translation>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../src/network/socket/qlocalsocket_unix.cpp" line="+3"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/socket/qlocalsocket_unix.cpp" line="+3"/>
         <source>%1: Remote closed</source>
         <translation>%1: Закрыто удаленной стороной</translation>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../src/network/socket/qlocalsocket_unix.cpp" line="+3"/>
-        <location filename="../src/network/socket/qlocalsocket_win.cpp" line="+79"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/socket/qlocalsocket_unix.cpp" line="+3"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/socket/qlocalsocket_win.cpp" line="+79"/>
         <location line="+59"/>
         <source>%1: Invalid name</source>
         <translation>%1: Некорректное имя</translation>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../src/network/socket/qlocalsocket_unix.cpp" line="+3"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/socket/qlocalsocket_unix.cpp" line="+3"/>
         <source>%1: Socket access error</source>
         <translation>%1: Ошибка обращения к сокету</translation>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../src/network/socket/qlocalsocket_unix.cpp" line="+3"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/socket/qlocalsocket_unix.cpp" line="+3"/>
         <source>%1: Socket resource error</source>
         <translation>%1: Ошибка выделения ресурсов сокета</translation>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../src/network/socket/qlocalsocket_unix.cpp" line="+3"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/socket/qlocalsocket_unix.cpp" line="+3"/>
         <source>%1: Socket operation timed out</source>
         <translation>%1: Время на операцию с сокетом истекло</translation>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../src/network/socket/qlocalsocket_unix.cpp" line="+3"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/socket/qlocalsocket_unix.cpp" line="+3"/>
         <source>%1: Datagram too large</source>
         <translation>%1: Датаграмма слишком большая</translation>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../src/network/socket/qlocalsocket_unix.cpp" line="+3"/>
-        <location filename="../src/network/socket/qlocalsocket_win.cpp" line="-64"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/socket/qlocalsocket_unix.cpp" line="+3"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/socket/qlocalsocket_win.cpp" line="-64"/>
         <source>%1: Connection error</source>
         <translation>%1: Ошибка соединения</translation>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../src/network/socket/qlocalsocket_unix.cpp" line="+3"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/socket/qlocalsocket_unix.cpp" line="+3"/>
         <source>%1: The socket operation is not supported</source>
         <translation>%1: Операция с сокетом не поддерживается</translation>
     </message>
@@ -3218,8 +4412,8 @@ Do you want to delete it anyway?</source>
         <translation>%1: Неизвестная ошибка</translation>
     </message>
     <message>
-        <location filename="../src/network/socket/qlocalsocket_unix.cpp" line="+4"/>
-        <location filename="../src/network/socket/qlocalsocket_win.cpp" line="+10"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/socket/qlocalsocket_unix.cpp" line="+4"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/socket/qlocalsocket_win.cpp" line="+10"/>
         <source>%1: Unknown error %2</source>
         <translation>%1: Неизвестная ошибка %2</translation>
     </message>
@@ -3227,7 +4421,7 @@ Do you want to delete it anyway?</source>
 <context>
     <name>QMYSQLDriver</name>
     <message>
-        <location filename="../src/sql/drivers/mysql/qsql_mysql.cpp" line="+1287"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/sql/drivers/mysql/qsql_mysql.cpp" line="+1287"/>
         <source>Unable to open database &apos;</source>
         <translation>Невозможно открыть базу данных &apos;</translation>
     </message>
@@ -3316,7 +4510,7 @@ Do you want to delete it anyway?</source>
 <context>
     <name>QMdiArea</name>
     <message>
-        <location filename="../src/gui/widgets/qmdiarea.cpp" line="+290"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/widgets/qmdiarea.cpp" line="+290"/>
         <source>(Untitled)</source>
         <translation>(Неозаглавлено)</translation>
     </message>
@@ -3324,7 +4518,7 @@ Do you want to delete it anyway?</source>
 <context>
     <name>QMdiSubWindow</name>
     <message>
-        <location filename="../src/gui/widgets/qmdisubwindow.cpp" line="+280"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/widgets/qmdisubwindow.cpp" line="+280"/>
         <source>%1 - [%2]</source>
         <translation>%1 - [%2]</translation>
     </message>
@@ -3379,12 +4573,7 @@ Do you want to delete it anyway?</source>
         <translation>&amp;Закрыть</translation>
     </message>
     <message>
-        <location line="-787"/>
-        <source>- [%1]</source>
-        <translation>- [%1]</translation>
-    </message>
-    <message>
-        <location line="+58"/>
+        <location line="-729"/>
         <source>Maximize</source>
         <translation>Распахнуть</translation>
     </message>
@@ -3413,11 +4602,16 @@ Do you want to delete it anyway?</source>
         <source>Menu</source>
         <translation>Меню</translation>
     </message>
+    <message>
+        <location line="-79"/>
+        <source>- [%1]</source>
+        <translation>- [%1]</translation>
+    </message>
 </context>
 <context>
     <name>QMenu</name>
     <message>
-        <location filename="../src/plugins/accessible/widgets/qaccessiblemenu.cpp" line="+157"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/plugins/accessible/widgets/qaccessiblemenu.cpp" line="+157"/>
         <location line="+225"/>
         <source>Close</source>
         <translation>Закрыть</translation>
@@ -3439,7 +4633,7 @@ Do you want to delete it anyway?</source>
 <context>
     <name>QMenuBar</name>
     <message>
-        <location filename="../src/gui/widgets/qmenu_symbian.cpp" line="+456"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/widgets/qmenu_symbian.cpp" line="+456"/>
         <source>Actions</source>
         <translation>Действия</translation>
     </message>
@@ -3447,35 +4641,15 @@ Do you want to delete it anyway?</source>
 <context>
     <name>QMessageBox</name>
     <message>
-        <location filename="../src/gui/dialogs/qmessagebox.cpp" line="-1116"/>
-        <source>Help</source>
-        <translation>Справка</translation>
-    </message>
-    <message>
-        <location line="-848"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qmessagebox.cpp" line="-1964"/>
         <location line="+847"/>
-        <location filename="../src/gui/dialogs/qmessagebox.h" line="-52"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qmessagebox.h" line="-52"/>
         <location line="+8"/>
         <source>OK</source>
         <translation>Закрыть</translation>
     </message>
     <message>
-        <location line="+513"/>
-        <source>About Qt</source>
-        <translation>О Qt</translation>
-    </message>
-    <message>
-        <location line="-1624"/>
-        <source>Show Details...</source>
-        <translation>Показать подробности...</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Hide Details...</source>
-        <translation>Скрыть подробности...</translation>
-    </message>
-    <message>
-        <location line="+1587"/>
+        <location line="+477"/>
         <source>&lt;h3&gt;About Qt&lt;/h3&gt;&lt;p&gt;This program uses Qt version %1.&lt;/p&gt;</source>
         <translation>&lt;h3&gt;О Qt&lt;/h3&gt;&lt;p&gt;Данная программа использует Qt версии %1.&lt;/p&gt;</translation>
     </message>
@@ -3484,11 +4658,31 @@ Do you want to delete it anyway?</source>
         <source>&lt;p&gt;Qt is a C++ toolkit for cross-platform application development.&lt;/p&gt;&lt;p&gt;Qt provides single-source portability across MS&amp;nbsp;Windows, Mac&amp;nbsp;OS&amp;nbsp;X, Linux, and all major commercial Unix variants. Qt is also available for embedded devices as Qt for Embedded Linux and Qt for Windows CE.&lt;/p&gt;&lt;p&gt;Qt is available under three different licensing options designed to accommodate the needs of our various users.&lt;/p&gt;&lt;p&gt;Qt licensed under our commercial license agreement is appropriate for development of proprietary/commercial software where you do not want to share any source code with third parties or otherwise cannot comply with the terms of the GNU LGPL version 2.1 or GNU GPL version 3.0.&lt;/p&gt;&lt;p&gt;Qt licensed under the GNU LGPL version 2.1 is appropriate for the development of Qt applications (proprietary or open source) provided you can comply with the terms and conditions of the GNU LGPL version 2.1.&lt;/p&gt;&lt;p&gt;Qt licensed under the GNU General Public License version 3.0 is appropriate for the development of Qt applications where you wish to use such applications in combination with software subject to the terms of the GNU GPL version 3.0 or where you are otherwise willing to comply with the terms of the GNU GPL version 3.0.&lt;/p&gt;&lt;p&gt;Please see &lt;a href=&quot;http://qt.nokia.com/products/licensing&quot;&gt;qt.nokia.com/products/licensing&lt;/a&gt; for an overview of Qt licensing.&lt;/p&gt;&lt;p&gt;Copyright (C) 2010 Nokia Corporation and/or its subsidiary(-ies).&lt;/p&gt;&lt;p&gt;Qt is a Nokia product. See &lt;a href=&quot;http://qt.nokia.com/&quot;&gt;qt.nokia.com&lt;/a&gt; for more information.&lt;/p&gt;</source>
         <translation>&lt;p&gt;Qt - это инструментарий для разработки кроссплатформенных приложений на C++.&lt;/p&gt;&lt;p&gt;Qt предоставляет совместимость на уровне исходных текстов между MS&amp;nbsp;Windows, Mac&amp;nbsp;OS&amp;nbsp;X, Linux и всеми популярными коммерческими вариантами Unix. Также Qt доступна для встраиваемых устройств в виде Qt для Embedded Linux и Qt для Windows CE.&lt;/p&gt;&lt;p&gt;Qt доступна под тремя различными лицензиями, разработанными для удовлетворения различных требований.&lt;/p&gt;&lt;p&gt;Qt под нашей коммерческой лицензией предназначена для развития проприетарного/коммерческого программного обеспечения, когда Вы не желаете предоставлять исходные тексты третьим сторонам, или в случае невозможности принятия условий лицензий GNU LGPL версии 2.1 или GNU GPL версии 3.0.&lt;/p&gt;&lt;p&gt;Qt под лицензией GNU LGPL версии 2.1 предназначена для разработки программного обеспечения с открытыми исходными текстами или коммерческого программного обеспечения при соблюдении условий лицензии GNU LGPL версии 2.1.&lt;/p&gt;&lt;p&gt;Qt под лицензией GNU General Public License версии 3.0 предназначена для разработки программных приложений в тех случаях, когда Вы хотели бы использовать такие приложения в сочетании с программным обеспечением на условиях лицензии GNU GPL с версии 3.0 или если Вы готовы соблюдать условия лицензии GNU GPL версии 3.0.&lt;/p&gt;&lt;p&gt;Обратитесь к &lt;a href=&quot;http://qt.nokia.com/products/licensing&quot;&gt;qt.nokia.com/products/licensing&lt;/a&gt; для обзора лицензий Qt.&lt;/p&gt;&lt;p&gt;Copyright (C) 2010 Корпорация Nokia и/или её дочерние подразделения.&lt;/p&gt;&lt;p&gt;Qt - продукт компании Nokia. Обратитесь к &lt;a href=&quot;http://qt.nokia.com/&quot;&gt;qt.nokia.com&lt;/a&gt; для получения дополнительной информации.&lt;/p&gt;</translation>
     </message>
+    <message>
+        <location line="+31"/>
+        <source>About Qt</source>
+        <translation>О Qt</translation>
+    </message>
+    <message>
+        <location line="-512"/>
+        <source>Help</source>
+        <translation>Справка</translation>
+    </message>
+    <message>
+        <location line="-1129"/>
+        <source>Show Details...</source>
+        <translation>Показать подробности...</translation>
+    </message>
+    <message>
+        <location line="+0"/>
+        <source>Hide Details...</source>
+        <translation>Скрыть подробности...</translation>
+    </message>
 </context>
 <context>
     <name>QMultiInputContext</name>
     <message>
-        <location filename="../src/plugins/inputmethods/imsw-multi/qmultiinputcontext.cpp" line="+88"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/plugins/inputmethods/imsw-multi/qmultiinputcontext.cpp" line="+88"/>
         <source>Select IM</source>
         <translation>Выбор режима ввода</translation>
     </message>
@@ -3496,21 +4690,20 @@ Do you want to delete it anyway?</source>
 <context>
     <name>QMultiInputContextPlugin</name>
     <message>
-        <location filename="../src/plugins/inputmethods/imsw-multi/qmultiinputcontextplugin.cpp" line="+95"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/plugins/inputmethods/imsw-multi/qmultiinputcontextplugin.cpp" line="+95"/>
         <source>Multiple input method switcher</source>
-        <translation type="unfinished">Переключатель режима множественного ввода</translation>
+        <translation>Переключатель режима множественного ввода</translation>
     </message>
     <message>
         <location line="+7"/>
         <source>Multiple input method switcher that uses the context menu of the text widgets</source>
-        <translatorcomment>текстовых виджетов &lt;-?-&gt; текстовых редакторов</translatorcomment>
-        <translation type="unfinished">Переключатель режима множественного ввода, используемый в контекстном меню текстовых виджетов</translation>
+        <translation>Переключатель режима множественного ввода, используемый в контекстном меню текстовых редакторов</translation>
     </message>
 </context>
 <context>
     <name>QNativeSocketEngine</name>
     <message>
-        <location filename="../src/network/socket/qnativesocketengine.cpp" line="+206"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/socket/qnativesocketengine.cpp" line="+209"/>
         <source>The remote host closed the connection</source>
         <translation>Удалённый узел закрыл соединение</translation>
     </message>
@@ -3643,46 +4836,69 @@ Do you want to delete it anyway?</source>
 <context>
     <name>QNetworkAccessCacheBackend</name>
     <message>
-        <location filename="../src/network/access/qnetworkaccesscachebackend.cpp" line="+66"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/access/qnetworkaccesscachebackend.cpp" line="+66"/>
         <source>Error opening %1</source>
         <translation>Ошибка открытия %1</translation>
     </message>
 </context>
 <context>
+    <name>QNetworkAccessDataBackend</name>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/access/qnetworkaccessdatabackend.cpp" line="+76"/>
+        <source>Operation not supported on %1</source>
+        <translation>Операция не поддерживается для %1</translation>
+    </message>
+    <message>
+        <location line="+25"/>
+        <source>Invalid URI: %1</source>
+        <translation>Некорректный URI: %1</translation>
+    </message>
+</context>
+<context>
     <name>QNetworkAccessDebugPipeBackend</name>
     <message>
-        <location filename="../src/network/access/qnetworkaccessdebugpipebackend.cpp" line="+195"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/access/qnetworkaccessdebugpipebackend.cpp" line="+195"/>
         <source>Write error writing to %1: %2</source>
         <translation>Ошибка записи в %1: %2</translation>
+    </message>
+    <message>
+        <location line="+60"/>
+        <source>Socket error on %1: %2</source>
+        <translation>Ошика сокета для %1: %2</translation>
+    </message>
+    <message>
+        <location line="+15"/>
+        <source>Remote host closed the connection prematurely on %1</source>
+        <translation>Удалённый узел неожиданно прервал соединение для %1</translation>
     </message>
 </context>
 <context>
     <name>QNetworkAccessFileBackend</name>
     <message>
-        <location filename="../src/network/access/qfilenetworkreply.cpp" line="+85"/>
-        <location filename="../src/network/access/qnetworkaccessfilebackend.cpp" line="+100"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/access/qfilenetworkreply.cpp" line="+85"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/access/qnetworkaccessfilebackend.cpp" line="+100"/>
         <source>Request for opening non-local file %1</source>
         <translation>Запрос на открытие файла вне файловой системы %1</translation>
     </message>
     <message>
-        <location line="+33"/>
-        <location filename="../src/network/access/qnetworkaccessfilebackend.cpp" line="+45"/>
+        <location line="+36"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/access/qnetworkaccessfilebackend.cpp" line="+45"/>
         <source>Error opening %1: %2</source>
         <translation>Ошибка открытия %1: %2</translation>
     </message>
     <message>
-        <location filename="../src/network/access/qnetworkaccessfilebackend.cpp" line="+38"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/access/qnetworkaccessfilebackend.cpp" line="+38"/>
         <source>Write error writing to %1: %2</source>
         <translation>Ошибка записи в %1: %2</translation>
     </message>
     <message>
-        <location filename="../src/network/access/qfilenetworkreply.cpp" line="-13"/>
-        <location filename="../src/network/access/qnetworkaccessfilebackend.cpp" line="+48"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/access/qfilenetworkreply.cpp" line="-13"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/access/qnetworkaccessfilebackend.cpp" line="+48"/>
         <source>Cannot open %1: Path is a directory</source>
         <translation>Невозможно открыть %1: Указан путь к каталогу</translation>
     </message>
     <message>
-        <location filename="../src/network/access/qnetworkaccessfilebackend.cpp" line="+21"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/access/qnetworkaccessfilebackend.cpp" line="+21"/>
         <source>Read error reading from %1: %2</source>
         <translation>Ошибка чтения из %1: %2</translation>
     </message>
@@ -3690,7 +4906,7 @@ Do you want to delete it anyway?</source>
 <context>
     <name>QNetworkAccessFtpBackend</name>
     <message>
-        <location filename="../src/network/access/qnetworkaccessftpbackend.cpp" line="+131"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/access/qnetworkaccessftpbackend.cpp" line="+131"/>
         <source>No suitable proxy found</source>
         <translation>Подходящий прокси-сервер не найден</translation>
     </message>
@@ -3718,48 +4934,123 @@ Do you want to delete it anyway?</source>
 <context>
     <name>QNetworkAccessHttpBackend</name>
     <message>
-        <location filename="../src/network/access/qnetworkaccesshttpbackend.cpp" line="+599"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/access/qnetworkaccesshttpbackend.cpp" line="+652"/>
         <source>No suitable proxy found</source>
         <translation>Подходящий прокси-сервер не найден</translation>
     </message>
 </context>
 <context>
+    <name>QNetworkAccessManager</name>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/access/qnetworkreplyimpl.cpp" line="+943"/>
+        <source>Network access is disabled.</source>
+        <translation>Доступ в сеть отключён.</translation>
+    </message>
+</context>
+<context>
     <name>QNetworkReply</name>
     <message>
-        <location line="+100"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/access/qnetworkaccesshttpbackend.cpp" line="+100"/>
         <source>Error downloading %1 - server replied: %2</source>
         <translation>Ошибка загрузки %1 - ответ сервера: %2</translation>
     </message>
     <message>
-        <location filename="../src/network/access/qnetworkreplyimpl.cpp" line="+80"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/access/qnetworkreplyimpl.cpp" line="-861"/>
         <source>Protocol &quot;%1&quot; is unknown</source>
         <translation>Неизвестный протокол &quot;%1&quot;</translation>
+    </message>
+    <message>
+        <location line="+192"/>
+        <source>Network session error.</source>
+        <translation>Ошибка сетевой сессии.</translation>
+    </message>
+    <message>
+        <location line="+353"/>
+        <source>Temporary network failure.</source>
+        <translation>Временная ошибка сети.</translation>
     </message>
 </context>
 <context>
     <name>QNetworkReplyImpl</name>
     <message>
-        <location line="+553"/>
+        <location line="+120"/>
         <location line="+28"/>
         <source>Operation canceled</source>
         <translation>Операция отменена</translation>
     </message>
 </context>
 <context>
-    <name>QOCIDriver</name>
+    <name>QNetworkSession</name>
     <message>
-        <location filename="../src/sql/drivers/oci/qsql_oci.cpp" line="+2083"/>
-        <source>Unable to logon</source>
-        <translation>Невозможно авторизоваться</translation>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/bearer/qnetworksession.cpp" line="+449"/>
+        <source>Invalid configuration.</source>
+        <translation>Некорректная конфигурация.</translation>
+    </message>
+</context>
+<context>
+    <name>QNetworkSessionPrivateImpl</name>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/plugins/bearer/icd/qnetworksession_impl.cpp" line="+1024"/>
+        <source>Roaming error</source>
+        <translatorcomment>или перемещения?</translatorcomment>
+        <translation type="unfinished">Ошибка роуминга</translation>
     </message>
     <message>
-        <location line="-144"/>
+        <location line="+3"/>
+        <source>Session aborted by user or system</source>
+        <translation>Сессия прервана пользователем или системой</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Unidentified Error</source>
+        <translation>Неопределённая ошибка</translation>
+    </message>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/plugins/bearer/qnetworksession_impl.cpp" line="+272"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/plugins/bearer/symbian/qnetworksession_impl.cpp" line="+306"/>
+        <source>Unknown session error.</source>
+        <translation>Неизвестная ошибка сессии.</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/plugins/bearer/symbian/qnetworksession_impl.cpp" line="+2"/>
+        <source>The session was aborted by the user or system.</source>
+        <translation>Сессия была прервана пользователем или системой.</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/plugins/bearer/symbian/qnetworksession_impl.cpp" line="+2"/>
+        <source>The requested operation is not supported by the system.</source>
+        <translation>Требуемая операция не поддерживается системой.</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/plugins/bearer/symbian/qnetworksession_impl.cpp" line="+2"/>
+        <source>The specified configuration cannot be used.</source>
+        <translation>Невозможно использовать указанную конфигурацию.</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/plugins/bearer/symbian/qnetworksession_impl.cpp" line="+2"/>
+        <source>Roaming was aborted or is not possible.</source>
+        <translation type="unfinished">Роуминг прерван или невозможен.</translation>
+    </message>
+</context>
+<context>
+    <name>QOCIDriver</name>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/sql/drivers/oci/qsql_oci.cpp" line="+1976"/>
         <source>Unable to initialize</source>
         <comment>QOCIDriver</comment>
         <translation>Невозможно инициализировать</translation>
     </message>
     <message>
-        <location line="+215"/>
+        <location line="+144"/>
+        <source>Unable to logon</source>
+        <translation>Невозможно авторизоваться</translation>
+    </message>
+    <message>
+        <location line="+71"/>
         <source>Unable to begin transaction</source>
         <translation>Невозможно начать транзакцию</translation>
     </message>
@@ -3822,12 +5113,12 @@ Do you want to delete it anyway?</source>
 <context>
     <name>QODBCDriver</name>
     <message>
-        <location filename="../src/sql/drivers/odbc/qsql_odbc.cpp" line="+1909"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/sql/drivers/odbc/qsql_odbc.cpp" line="+1888"/>
         <source>Unable to connect</source>
         <translation>Невозможно соединиться</translation>
     </message>
     <message>
-        <location line="+274"/>
+        <location line="+269"/>
         <source>Unable to disable autocommit</source>
         <translation>Невозможно отключить автозавершение транзакций</translation>
     </message>
@@ -3847,7 +5138,7 @@ Do you want to delete it anyway?</source>
         <translation>Невозможно включить автозавершение транзакций</translation>
     </message>
     <message>
-        <location line="-317"/>
+        <location line="-312"/>
         <source>Unable to connect - Driver doesn&apos;t support all functionality required</source>
         <translation>Невозможно соединиться - Драйвер не поддерживает требуемый функционал</translation>
     </message>
@@ -3855,19 +5146,19 @@ Do you want to delete it anyway?</source>
 <context>
     <name>QODBCResult</name>
     <message>
-        <location line="-943"/>
+        <location line="-941"/>
         <location line="+351"/>
         <source>QODBCResult::reset: Unable to set &apos;SQL_CURSOR_STATIC&apos; as statement attribute. Please check your ODBC driver configuration</source>
-        <translation>QODBCResult::reset: Невозможно установить &apos;SQL_CURSOR_STATIC&apos; атрибутом выражение. Проверьте настройки драйвера ODBC</translation>
+        <translation>QODBCResult::reset: Невозможно установить &quot;SQL_CURSOR_STATIC&quot; атрибутом выражение. Проверьте настройки драйвера ODBC</translation>
     </message>
     <message>
         <location line="-334"/>
-        <location line="+629"/>
+        <location line="+627"/>
         <source>Unable to execute statement</source>
         <translation>Невозможно выполнить выражение</translation>
     </message>
     <message>
-        <location line="-548"/>
+        <location line="-546"/>
         <source>Unable to fetch next</source>
         <translation>Невозможно получить следующую строку</translation>
     </message>
@@ -3877,19 +5168,19 @@ Do you want to delete it anyway?</source>
         <translation>Невозможно подготовить выражение</translation>
     </message>
     <message>
-        <location line="+269"/>
+        <location line="+267"/>
         <source>Unable to bind variable</source>
         <translation>Невозможно привязать значение</translation>
     </message>
     <message>
-        <location filename="../src/sql/drivers/db2/qsql_db2.cpp" line="+189"/>
-        <location filename="../src/sql/drivers/odbc/qsql_odbc.cpp" line="-468"/>
-        <location line="+580"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/sql/drivers/db2/qsql_db2.cpp" line="+189"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/sql/drivers/odbc/qsql_odbc.cpp" line="-466"/>
+        <location line="+578"/>
         <source>Unable to fetch last</source>
         <translation>Невозможно получить последнюю строку</translation>
     </message>
     <message>
-        <location filename="../src/sql/drivers/odbc/qsql_odbc.cpp" line="-674"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/sql/drivers/odbc/qsql_odbc.cpp" line="-672"/>
         <source>Unable to fetch</source>
         <translation>Невозможно получить данные</translation>
     </message>
@@ -3907,41 +5198,27 @@ Do you want to delete it anyway?</source>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../src/network/kernel/qhostinfo_unix.cpp" line="-97"/>
-        <source>Invalid hostname</source>
-        <translation>Некорректное имя узла</translation>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/declarative/util/qdeclarativexmllistmodel.cpp" line="-249"/>
+        <source>&quot;%1&quot; duplicates a previous role name and will be disabled.</source>
+        <translation>&quot;%1&quot; повторяет имя предыдущей роли и не будет использовано.</translation>
     </message>
     <message>
-        <location filename="../src/network/access/qnetworkaccessdatabackend.cpp" line="+74"/>
-        <source>Operation not supported on %1</source>
-        <translation>Операция не поддерживается для %1</translation>
+        <location line="+530"/>
+        <location line="+4"/>
+        <source>invalid query: &quot;%1&quot;</source>
+        <translation>Некорректный запрос: &quot;%1&quot;</translation>
     </message>
     <message>
-        <location line="+57"/>
-        <source>Invalid URI: %1</source>
-        <translation>Некорректный URI: %1</translation>
-    </message>
-    <message>
-        <location filename="../src/network/access/qnetworkaccessdebugpipebackend.cpp" line="+60"/>
-        <source>Socket error on %1: %2</source>
-        <translation>Ошика сокета для %1: %2</translation>
-    </message>
-    <message>
-        <location line="+15"/>
-        <source>Remote host closed the connection prematurely on %1</source>
-        <translation>Удалённый узел неожиданно прервал соединение для %1</translation>
-    </message>
-    <message>
-        <location filename="../src/network/kernel/qhostinfo.cpp" line="+171"/>
-        <location filename="../src/network/kernel/qhostinfo_unix.cpp" line="+0"/>
-        <source>No host name given</source>
-        <translation>Имя узла не задано</translation>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/3rdparty/phonon/phonon/pulsesupport.cpp" line="+162"/>
+        <location line="+11"/>
+        <source>PulseAudio Sound Server</source>
+        <translation>Звуковой сервер PulseAudio</translation>
     </message>
 </context>
 <context>
     <name>QPPDOptionsModel</name>
     <message>
-        <location filename="../src/gui/dialogs/qprintdialog_unix.cpp" line="+1233"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qprintdialog_unix.cpp" line="+1238"/>
         <source>Name</source>
         <translation>Имя</translation>
     </message>
@@ -3954,7 +5231,7 @@ Do you want to delete it anyway?</source>
 <context>
     <name>QPSQLDriver</name>
     <message>
-        <location filename="../src/sql/drivers/psql/qsql_psql.cpp" line="+782"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/sql/drivers/psql/qsql_psql.cpp" line="+782"/>
         <source>Unable to connect</source>
         <translation>Невозможно соединиться</translation>
     </message>
@@ -4000,7 +5277,7 @@ Do you want to delete it anyway?</source>
 <context>
     <name>QPageSetupWidget</name>
     <message>
-        <location filename="../src/gui/dialogs/qpagesetupdialog_unix.cpp" line="+304"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qpagesetupdialog_unix.cpp" line="+304"/>
         <source>Centimeters (cm)</source>
         <translation>Сантиметры (cm)</translation>
     </message>
@@ -4020,7 +5297,7 @@ Do you want to delete it anyway?</source>
         <translation>Точки (pt)</translation>
     </message>
     <message>
-        <location filename="../src/gui/dialogs/qpagesetupwidget.ui"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qpagesetupwidget.ui"/>
         <source>Form</source>
         <translation>Форма</translation>
     </message>
@@ -4103,7 +5380,7 @@ Do you want to delete it anyway?</source>
 <context>
     <name>QPluginLoader</name>
     <message>
-        <location filename="../src/corelib/plugin/qpluginloader.cpp" line="+24"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/plugin/qpluginloader.cpp" line="+24"/>
         <source>Unknown error</source>
         <translation>Неизвестная ошибка</translation>
     </message>
@@ -4116,7 +5393,7 @@ Do you want to delete it anyway?</source>
 <context>
     <name>QPrintDialog</name>
     <message>
-        <location filename="../src/gui/painting/qprinterinfo_unix.cpp" line="+110"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/painting/qprinterinfo_unix.cpp" line="+110"/>
         <source>locally connected</source>
         <translation>соединено локально</translation>
     </message>
@@ -4133,7 +5410,22 @@ Do you want to delete it anyway?</source>
         <translation>неизвестно</translation>
     </message>
     <message>
-        <location filename="../src/gui/dialogs/qprintdialog_qws.cpp" line="+329"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qprintdialog_win.cpp" line="+272"/>
+        <source>OK</source>
+        <translation>Закрыть</translation>
+    </message>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qprintdialog_qws.cpp" line="+379"/>
+        <source>Print all</source>
+        <translation>Все страницы</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Print range</source>
+        <translation>Диапазон страниц</translation>
+    </message>
+    <message>
+        <location line="-48"/>
         <source>A0 (841 x 1189 mm)</source>
         <translation>A0 (841 x 1189 мм)</translation>
     </message>
@@ -4153,12 +5445,7 @@ Do you want to delete it anyway?</source>
         <translation>A3 (297 x 420 мм)</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>A4 (210 x 297 mm, 8.26 x 11.7 inches)</source>
-        <translation>A4 (210 x 297 мм, 8.26 x 11.7 дюймов)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
+        <location line="+2"/>
         <source>A5 (148 x 210 mm)</source>
         <translation>A5 (148 x 210 мм)</translation>
     </message>
@@ -4208,12 +5495,7 @@ Do you want to delete it anyway?</source>
         <translation>B4 (250 x 353 мм)</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>B5 (176 x 250 mm, 6.93 x 9.84 inches)</source>
-        <translation>B5 (176 x 250 мм, 6.93 x 9.84 дюймов)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
+        <location line="+2"/>
         <source>B6 (125 x 176 mm)</source>
         <translation>B6 (125 x 176 мм)</translation>
     </message>
@@ -4248,12 +5530,7 @@ Do you want to delete it anyway?</source>
         <translation>DLE (110 x 220 мм)</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>Executive (7.5 x 10 inches, 191 x 254 mm)</source>
-        <translation>Executive (191 x 254 мм, 7.5 x 10 дюймов)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
+        <location line="+2"/>
         <source>Folio (210 x 330 mm)</source>
         <translation>Folio (210 x 330 мм)</translation>
     </message>
@@ -4263,17 +5540,7 @@ Do you want to delete it anyway?</source>
         <translation>Ledger (432 x 279 мм)</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>Legal (8.5 x 14 inches, 216 x 356 mm)</source>
-        <translation>Legal (216 x 356 мм, 8.5 x 14 дюймов)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Letter (8.5 x 11 inches, 216 x 279 mm)</source>
-        <translation>Letter (216 x 279 мм, 8.5 x 11 дюймов)</translation>
-    </message>
-    <message>
-        <location line="+1"/>
+        <location line="+3"/>
         <source>Tabloid (279 x 432 mm)</source>
         <translation>Tabloid (279 x 432 мм)</translation>
     </message>
@@ -4283,34 +5550,54 @@ Do you want to delete it anyway?</source>
         <translation>Конверт US #10 (105x241 мм)</translation>
     </message>
     <message>
-        <location filename="../src/gui/dialogs/qprintdialog_win.cpp" line="+266"/>
-        <source>OK</source>
-        <translation>Закрыть</translation>
+        <location line="+20"/>
+        <source>Print current page</source>
+        <translation>Текущая страница</translation>
     </message>
     <message>
-        <location filename="../src/gui/dialogs/qabstractprintdialog.cpp" line="+112"/>
+        <location line="-45"/>
+        <source>A4 (210 x 297 mm, 8.26 x 11.7 inches)</source>
+        <translation>A4 (210 x 297 мм, 8.26 x 11.7 дюймов)</translation>
+    </message>
+    <message>
+        <location line="+11"/>
+        <source>B5 (176 x 250 mm, 6.93 x 9.84 inches)</source>
+        <translation>B5 (176 x 250 мм, 6.93 x 9.84 дюймов)</translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>Executive (7.5 x 10 inches, 191 x 254 mm)</source>
+        <translation>Executive (191 x 254 мм, 7.5 x 10 дюймов)</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Legal (8.5 x 14 inches, 216 x 356 mm)</source>
+        <translation>Legal (216 x 356 мм, 8.5 x 14 дюймов)</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Letter (8.5 x 11 inches, 216 x 279 mm)</source>
+        <translation>Letter (216 x 279 мм, 8.5 x 11 дюймов)</translation>
+    </message>
+    <message>
+        <location line="+20"/>
+        <source>Print selection</source>
+        <translation>Выделенный фрагмент</translation>
+    </message>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qabstractprintdialog.cpp" line="+113"/>
         <location line="+13"/>
-        <location filename="../src/gui/dialogs/qprintdialog_win.cpp" line="-2"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qprintdialog_win.cpp" line="-2"/>
         <source>Print</source>
         <translation>Печать</translation>
     </message>
     <message>
-        <location filename="../src/gui/dialogs/qprintdialog_unix.cpp" line="-392"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qprintdialog_unix.cpp" line="-392"/>
         <source>Print To File ...</source>
         <translation>Печать в файл ...</translation>
     </message>
     <message>
-        <location filename="../src/gui/dialogs/qprintdialog_qws.cpp" line="+19"/>
-        <source>Print range</source>
-        <translation>Печатать диапазон</translation>
-    </message>
-    <message>
-        <location line="-2"/>
-        <source>Print all</source>
-        <translation>Печатать все</translation>
-    </message>
-    <message>
-        <location filename="../src/gui/dialogs/qprintdialog_unix.cpp" line="+82"/>
+        <location line="+82"/>
         <source>File %1 is not writable.
 Please choose a different file name.</source>
         <translation>%1 недоступен для записи.
@@ -4324,7 +5611,7 @@ Do you want to overwrite it?</source>
 Хотите заменить его?</translation>
     </message>
     <message>
-        <location filename="../src/gui/dialogs/qprintdialog_qws.cpp" line="-227"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qprintdialog_qws.cpp" line="-232"/>
         <source>File exists</source>
         <translation>Файл существует</translation>
     </message>
@@ -4334,19 +5621,19 @@ Do you want to overwrite it?</source>
         <translation>&lt;qt&gt;Хотите заменить?&lt;/qt&gt;</translation>
     </message>
     <message>
-        <location line="+227"/>
-        <source>Print selection</source>
-        <translation>Выделенный фрагмент</translation>
-    </message>
-    <message>
-        <location filename="../src/gui/dialogs/qprintdialog_unix.cpp" line="-8"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qprintdialog_unix.cpp" line="-8"/>
         <source>%1 is a directory.
 Please choose a different file name.</source>
         <translation>%1 - это каталог.
 Выберите другое имя файла.</translation>
     </message>
     <message>
-        <location filename="../src/gui/dialogs/qpagesetupdialog_unix.cpp" line="-232"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qprintdialog_win.cpp" line="+1"/>
+        <source>The &apos;From&apos; value cannot be greater than the &apos;To&apos; value.</source>
+        <translation>Значение &quot;с&quot; не может быть больше значения &quot;по&quot;.</translation>
+    </message>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qpagesetupdialog_unix.cpp" line="-232"/>
         <source>A0</source>
         <translation>A0</translation>
     </message>
@@ -4501,23 +5788,18 @@ Please choose a different file name.</source>
         <translation>Пользовательский</translation>
     </message>
     <message>
-        <location filename="../src/gui/dialogs/qprintdialog_unix.cpp" line="-523"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qprintdialog_unix.cpp" line="-530"/>
         <location line="+68"/>
         <source>&amp;Options &gt;&gt;</source>
         <translation>&amp;Параметры &gt;&gt;</translation>
     </message>
     <message>
-        <location line="-63"/>
-        <source>&amp;Print</source>
-        <translation>&amp;Печать</translation>
-    </message>
-    <message>
-        <location line="+67"/>
+        <location line="+4"/>
         <source>&amp;Options &lt;&lt;</source>
         <translation>&amp;Параметры &lt;&lt;</translation>
     </message>
     <message>
-        <location line="+253"/>
+        <location line="+260"/>
         <source>Print to File (PDF)</source>
         <translation>Печать в файл (PDF)</translation>
     </message>
@@ -4537,21 +5819,15 @@ Please choose a different file name.</source>
         <translation>Запись %1 файла</translation>
     </message>
     <message>
-        <location filename="../src/gui/dialogs/qprintdialog_win.cpp" line="+1"/>
-        <source>The &apos;From&apos; value cannot be greater than the &apos;To&apos; value.</source>
-        <translation>Значение &apos;от&apos; не может быть больше значения &apos;до&apos;.</translation>
+        <location line="-376"/>
+        <source>&amp;Print</source>
+        <translation>&amp;Печать</translation>
     </message>
 </context>
 <context>
     <name>QPrintPreviewDialog</name>
     <message>
-        <location filename="../src/gui/dialogs/qabstractpagesetupdialog.cpp" line="+68"/>
-        <location line="+12"/>
-        <source>Page Setup</source>
-        <translation>Параметры страницы</translation>
-    </message>
-    <message>
-        <location filename="../src/gui/dialogs/qprintpreviewdialog.cpp" line="+249"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qprintpreviewdialog.cpp" line="+249"/>
         <source>%1%</source>
         <translation>%1%</translation>
     </message>
@@ -4650,11 +5926,17 @@ Please choose a different file name.</source>
         <source>Export to PostScript</source>
         <translation>Экспорт в Postscript</translation>
     </message>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qabstractpagesetupdialog.cpp" line="+68"/>
+        <location line="+12"/>
+        <source>Page Setup</source>
+        <translation>Параметры страницы</translation>
+    </message>
 </context>
 <context>
     <name>QPrintPropertiesWidget</name>
     <message>
-        <location filename="../src/gui/dialogs/qprintpropertieswidget.ui"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qprintpropertieswidget.ui"/>
         <source>Form</source>
         <translation>Форма</translation>
     </message>
@@ -4672,7 +5954,7 @@ Please choose a different file name.</source>
 <context>
     <name>QPrintSettingsOutput</name>
     <message>
-        <location filename="../src/gui/dialogs/qprintsettingsoutput.ui"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qprintsettingsoutput.ui"/>
         <source>Form</source>
         <translation>Форма</translation>
     </message>
@@ -4694,12 +5976,12 @@ Please choose a different file name.</source>
     <message>
         <location/>
         <source>Pages from</source>
-        <translation>Страницы от</translation>
+        <translation>Страницы с</translation>
     </message>
     <message>
         <location/>
         <source>to</source>
-        <translation>до</translation>
+        <translation>по</translation>
     </message>
     <message>
         <location/>
@@ -4719,7 +6001,7 @@ Please choose a different file name.</source>
     <message>
         <location/>
         <source>Collate</source>
-        <translation>Разобрать про копиям</translation>
+        <translation>Разобрать по копиям</translation>
     </message>
     <message>
         <location/>
@@ -4766,11 +6048,16 @@ Please choose a different file name.</source>
         <source>Short side</source>
         <translation>По короткой стороне</translation>
     </message>
+    <message>
+        <location/>
+        <source>Current Page</source>
+        <translation>Текущая страница</translation>
+    </message>
 </context>
 <context>
     <name>QPrintWidget</name>
     <message>
-        <location filename="../src/gui/dialogs/qprintwidget.ui"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qprintwidget.ui"/>
         <source>Form</source>
         <translation>Форма</translation>
     </message>
@@ -4818,14 +6105,14 @@ Please choose a different file name.</source>
 <context>
     <name>QProcess</name>
     <message>
-        <location filename="../src/corelib/io/qprocess_unix.cpp" line="+406"/>
-        <location filename="../src/corelib/io/qprocess_win.cpp" line="+137"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/io/qprocess_unix.cpp" line="+406"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/io/qprocess_win.cpp" line="+137"/>
         <source>Could not open input redirection for reading</source>
         <translation>Не удалось открыть перенаправление ввода для чтения</translation>
     </message>
     <message>
         <location line="+12"/>
-        <location filename="../src/corelib/io/qprocess_win.cpp" line="+20"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/io/qprocess_win.cpp" line="+20"/>
         <source>Could not open output redirection for writing</source>
         <translation>Не удалось открыть перенаправление вывода для записи</translation>
     </message>
@@ -4839,7 +6126,7 @@ Please choose a different file name.</source>
         <location line="+52"/>
         <location line="+74"/>
         <location line="+66"/>
-        <location filename="../src/corelib/io/qprocess_win.cpp" line="+406"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/io/qprocess_win.cpp" line="+411"/>
         <location line="+50"/>
         <location line="+75"/>
         <location line="+42"/>
@@ -4848,32 +6135,32 @@ Please choose a different file name.</source>
         <translation>Время на операцию с процессом истекло</translation>
     </message>
     <message>
-        <location filename="../src/corelib/io/qprocess.cpp" line="+866"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/io/qprocess.cpp" line="+866"/>
         <location line="+52"/>
-        <location filename="../src/corelib/io/qprocess_win.cpp" line="-211"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/io/qprocess_win.cpp" line="-211"/>
         <location line="+50"/>
         <source>Error reading from process</source>
         <translation>Ошибка получения данных от процесса</translation>
     </message>
     <message>
         <location line="+47"/>
-        <location line="+826"/>
-        <location filename="../src/corelib/io/qprocess_win.cpp" line="+140"/>
+        <location line="+870"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/io/qprocess_win.cpp" line="+140"/>
         <source>Error writing to process</source>
         <translation>Ошибка отправки данных процессу</translation>
     </message>
     <message>
-        <location line="-756"/>
+        <location line="-800"/>
         <source>Process crashed</source>
         <translation>Процесс завершился с ошибкой</translation>
     </message>
     <message>
-        <location line="+959"/>
+        <location line="+1002"/>
         <source>No program defined</source>
         <translation>Программа не указана</translation>
     </message>
     <message>
-        <location filename="../src/corelib/io/qprocess_win.cpp" line="-360"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/io/qprocess_win.cpp" line="-360"/>
         <source>Process failed to start: %1</source>
         <translation>Не удалось запустить процесс: %1</translation>
     </message>
@@ -4881,7 +6168,7 @@ Please choose a different file name.</source>
 <context>
     <name>QProgressDialog</name>
     <message>
-        <location filename="../src/gui/dialogs/qprogressdialog.cpp" line="+196"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qprogressdialog.cpp" line="+203"/>
         <source>Cancel</source>
         <translation>Отмена</translation>
     </message>
@@ -4889,7 +6176,7 @@ Please choose a different file name.</source>
 <context>
     <name>QPushButton</name>
     <message>
-        <location filename="../src/plugins/accessible/widgets/simplewidgets.cpp" line="-8"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/plugins/accessible/widgets/simplewidgets.cpp" line="-8"/>
         <source>Open</source>
         <translation>Открыть</translation>
     </message>
@@ -4905,7 +6192,7 @@ Please choose a different file name.</source>
 <context>
     <name>QRegExp</name>
     <message>
-        <location filename="../src/corelib/tools/qregexp.cpp" line="+65"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/tools/qregexp.cpp" line="+65"/>
         <source>no error occurred</source>
         <translation>ошибки отсутствуют</translation>
     </message>
@@ -4963,7 +6250,7 @@ Please choose a different file name.</source>
 <context>
     <name>QSQLite2Driver</name>
     <message>
-        <location filename="../src/sql/drivers/sqlite2/qsql_sqlite2.cpp" line="+399"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/sql/drivers/sqlite2/qsql_sqlite2.cpp" line="+399"/>
         <source>Error opening database</source>
         <translation>Ошибка открытия базы данных</translation>
     </message>
@@ -4999,7 +6286,7 @@ Please choose a different file name.</source>
 <context>
     <name>QSQLiteDriver</name>
     <message>
-        <location filename="../src/sql/drivers/sqlite/qsql_sqlite.cpp" line="+539"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/sql/drivers/sqlite/qsql_sqlite.cpp" line="+539"/>
         <source>Error opening database</source>
         <translation>Ошибка открытия базы данных</translation>
     </message>
@@ -5062,14 +6349,14 @@ Please choose a different file name.</source>
 <context>
     <name>QScriptBreakpointsModel</name>
     <message>
-        <location filename="../src/scripttools/debugging/qscriptbreakpointsmodel.cpp" line="+455"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/scripttools/debugging/qscriptbreakpointsmodel.cpp" line="+455"/>
         <source>ID</source>
         <translation>ID</translation>
     </message>
     <message>
         <location line="+2"/>
         <source>Location</source>
-        <translation>Расположение</translation>
+        <translation>Размещение</translation>
     </message>
     <message>
         <location line="+2"/>
@@ -5095,7 +6382,7 @@ Please choose a different file name.</source>
 <context>
     <name>QScriptBreakpointsWidget</name>
     <message>
-        <location filename="../src/scripttools/debugging/qscriptbreakpointswidget.cpp" line="+298"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/scripttools/debugging/qscriptbreakpointswidget.cpp" line="+298"/>
         <source>New</source>
         <translation>Новая</translation>
     </message>
@@ -5108,7 +6395,7 @@ Please choose a different file name.</source>
 <context>
     <name>QScriptDebugger</name>
     <message>
-        <location filename="../src/scripttools/debugging/qscriptdebugger.cpp" line="+885"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/scripttools/debugging/qscriptdebugger.cpp" line="+885"/>
         <location line="+1013"/>
         <source>Go to Line</source>
         <translation>Перейти к строке</translation>
@@ -5252,7 +6539,7 @@ Please choose a different file name.</source>
 <context>
     <name>QScriptDebuggerCodeFinderWidget</name>
     <message>
-        <location filename="../src/scripttools/debugging/qscriptdebuggercodefinderwidget.cpp" line="+141"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/scripttools/debugging/qscriptdebuggercodefinderwidget.cpp" line="+141"/>
         <source>Close</source>
         <translation>Закрыть</translation>
     </message>
@@ -5285,7 +6572,7 @@ Please choose a different file name.</source>
 <context>
     <name>QScriptDebuggerLocalsModel</name>
     <message>
-        <location filename="../src/scripttools/debugging/qscriptdebuggerlocalsmodel.cpp" line="+872"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/scripttools/debugging/qscriptdebuggerlocalsmodel.cpp" line="+897"/>
         <source>Name</source>
         <translation>Название</translation>
     </message>
@@ -5298,7 +6585,7 @@ Please choose a different file name.</source>
 <context>
     <name>QScriptDebuggerStackModel</name>
     <message>
-        <location filename="../src/scripttools/debugging/qscriptdebuggerstackmodel.cpp" line="+161"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/scripttools/debugging/qscriptdebuggerstackmodel.cpp" line="+161"/>
         <source>Level</source>
         <translation>Уровень</translation>
     </message>
@@ -5316,7 +6603,7 @@ Please choose a different file name.</source>
 <context>
     <name>QScriptEdit</name>
     <message>
-        <location filename="../src/scripttools/debugging/qscriptedit.cpp" line="+411"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/scripttools/debugging/qscriptedit.cpp" line="+411"/>
         <source>Toggle Breakpoint</source>
         <translation>Установить/убрать точку останова</translation>
     </message>
@@ -5339,7 +6626,7 @@ Please choose a different file name.</source>
 <context>
     <name>QScriptEngineDebugger</name>
     <message>
-        <location filename="../src/scripttools/debugging/qscriptenginedebugger.cpp" line="+523"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/scripttools/debugging/qscriptenginedebugger.cpp" line="+523"/>
         <source>Loaded Scripts</source>
         <translation>Загруженные сценарии</translation>
     </message>
@@ -5392,7 +6679,7 @@ Please choose a different file name.</source>
 <context>
     <name>QScriptNewBreakpointWidget</name>
     <message>
-        <location filename="../src/scripttools/debugging/qscriptbreakpointswidget.cpp" line="-223"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/scripttools/debugging/qscriptbreakpointswidget.cpp" line="-223"/>
         <source>Close</source>
         <translation>Закрыть</translation>
     </message>
@@ -5400,7 +6687,7 @@ Please choose a different file name.</source>
 <context>
     <name>QScrollBar</name>
     <message>
-        <location filename="../src/gui/widgets/qscrollbar.cpp" line="+454"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/widgets/qscrollbar.cpp" line="+454"/>
         <source>Scroll here</source>
         <translation>Прокрутить сюда</translation>
     </message>
@@ -5431,7 +6718,7 @@ Please choose a different file name.</source>
     </message>
     <message>
         <location line="+0"/>
-        <location filename="../src/plugins/accessible/widgets/rangecontrols.cpp" line="+143"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/plugins/accessible/widgets/rangecontrols.cpp" line="+143"/>
         <source>Page up</source>
         <translation>На страницу вверх</translation>
     </message>
@@ -5442,7 +6729,7 @@ Please choose a different file name.</source>
     </message>
     <message>
         <location line="+0"/>
-        <location filename="../src/plugins/accessible/widgets/rangecontrols.cpp" line="+4"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/plugins/accessible/widgets/rangecontrols.cpp" line="+4"/>
         <source>Page down</source>
         <translation>На страницу вниз</translation>
     </message>
@@ -5467,7 +6754,7 @@ Please choose a different file name.</source>
         <translation>Прокрутить вниз</translation>
     </message>
     <message>
-        <location filename="../src/plugins/accessible/widgets/rangecontrols.cpp" line="-6"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/plugins/accessible/widgets/rangecontrols.cpp" line="-6"/>
         <source>Line up</source>
         <translation>На строку вверх</translation>
     </message>
@@ -5485,18 +6772,13 @@ Please choose a different file name.</source>
 <context>
     <name>QSharedMemory</name>
     <message>
-        <location filename="../src/corelib/kernel/qsharedmemory.cpp" line="+223"/>
-        <source>%1: unable to set key on lock</source>
-        <translation>%1: невозможно установить ключ на блокировку</translation>
-    </message>
-    <message>
-        <location line="+81"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/kernel/qsharedmemory.cpp" line="+304"/>
         <source>%1: create size is less then 0</source>
         <translation>%1: размер меньше нуля</translation>
     </message>
     <message>
         <location line="+168"/>
-        <location filename="../src/corelib/kernel/qsharedmemory_p.h" line="+155"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/kernel/qsharedmemory_p.h" line="+155"/>
         <source>%1: unable to lock</source>
         <translation>%1: невозможно заблокировать</translation>
     </message>
@@ -5506,16 +6788,16 @@ Please choose a different file name.</source>
         <translation>%1: невозможно разблокировать</translation>
     </message>
     <message>
-        <location filename="../src/corelib/kernel/qsharedmemory_symbian.cpp" line="+83"/>
-        <location filename="../src/corelib/kernel/qsharedmemory_unix.cpp" line="+81"/>
-        <location filename="../src/corelib/kernel/qsharedmemory_win.cpp" line="+87"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/kernel/qsharedmemory_symbian.cpp" line="+83"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/kernel/qsharedmemory_unix.cpp" line="+81"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/kernel/qsharedmemory_win.cpp" line="+87"/>
         <source>%1: permission denied</source>
         <translation>%1: доступ запрещён</translation>
     </message>
     <message>
         <location line="-16"/>
-        <location filename="../src/corelib/kernel/qsharedmemory_unix.cpp" line="+4"/>
-        <location filename="../src/corelib/kernel/qsharedmemory_win.cpp" line="-22"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/kernel/qsharedmemory_unix.cpp" line="+4"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/kernel/qsharedmemory_win.cpp" line="-22"/>
         <source>%1: already exists</source>
         <translation>%1: уже существует</translation>
     </message>
@@ -5526,26 +6808,38 @@ Please choose a different file name.</source>
     </message>
     <message>
         <location line="+8"/>
-        <location filename="../src/corelib/kernel/qsharedmemory_unix.cpp" line="+10"/>
-        <location filename="../src/corelib/kernel/qsharedmemory_win.cpp" line="+18"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/kernel/qsharedmemory_unix.cpp" line="+10"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/kernel/qsharedmemory_win.cpp" line="+18"/>
         <source>%1: out of resources</source>
         <translation>%1: недостаточно ресурсов</translation>
     </message>
     <message>
         <location line="+7"/>
-        <location filename="../src/corelib/kernel/qsharedmemory_unix.cpp" line="+4"/>
-        <location filename="../src/corelib/kernel/qsharedmemory_win.cpp" line="+7"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/kernel/qsharedmemory_unix.cpp" line="+4"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/kernel/qsharedmemory_win.cpp" line="+7"/>
         <source>%1: unknown error %2</source>
         <translation>%1: неизвестная ошибка %2</translation>
     </message>
     <message>
-        <location filename="../src/corelib/kernel/qsharedmemory_unix.cpp" line="+21"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/kernel/qsharedmemory_unix.cpp" line="+21"/>
         <source>%1: key is empty</source>
         <translation>%1: пустой ключ</translation>
     </message>
     <message>
-        <location line="-31"/>
-        <location filename="../src/corelib/kernel/qsharedmemory_win.cpp" line="-16"/>
+        <location line="+15"/>
+        <source>%1: ftok failed</source>
+        <translation>%1: ошибка ftok</translation>
+    </message>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/kernel/qsharedmemory_symbian.cpp" line="+56"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/kernel/qsharedmemory_unix.cpp" line="+51"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/kernel/qsharedmemory_win.cpp" line="+15"/>
+        <source>%1: unable to make key</source>
+        <translation>%1: невозможно создать ключ</translation>
+    </message>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/kernel/qsharedmemory_unix.cpp" line="-97"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/kernel/qsharedmemory_win.cpp" line="-31"/>
         <source>%1: doesn&apos;t exist</source>
         <translation>%1: не существует</translation>
     </message>
@@ -5555,19 +6849,7 @@ Please choose a different file name.</source>
         <translation>%1: специфический ключ UNIX не существует</translation>
     </message>
     <message>
-        <location line="+7"/>
-        <source>%1: ftok failed</source>
-        <translation>%1: ошибка ftok</translation>
-    </message>
-    <message>
-        <location filename="../src/corelib/kernel/qsharedmemory_symbian.cpp" line="+56"/>
-        <location filename="../src/corelib/kernel/qsharedmemory_unix.cpp" line="+51"/>
-        <location filename="../src/corelib/kernel/qsharedmemory_win.cpp" line="+31"/>
-        <source>%1: unable to make key</source>
-        <translation>%1: невозможно создать ключ</translation>
-    </message>
-    <message>
-        <location filename="../src/corelib/kernel/qsharedmemory_unix.cpp" line="+20"/>
+        <location line="+78"/>
         <source>%1: system-imposed size restrictions</source>
         <translation>%1: системой наложены ограничения на размер</translation>
     </message>
@@ -5577,28 +6859,34 @@ Please choose a different file name.</source>
         <translation>%1: не приложенный</translation>
     </message>
     <message>
-        <location filename="../src/corelib/kernel/qsharedmemory_symbian.cpp" line="-67"/>
-        <location filename="../src/corelib/kernel/qsharedmemory_win.cpp" line="-27"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/kernel/qsharedmemory_symbian.cpp" line="-67"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/kernel/qsharedmemory_win.cpp" line="+4"/>
         <source>%1: invalid size</source>
         <translation>%1: некорректный размер</translation>
     </message>
     <message>
         <location line="+40"/>
-        <location filename="../src/corelib/kernel/qsharedmemory_win.cpp" line="+63"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/kernel/qsharedmemory_win.cpp" line="+63"/>
         <source>%1: key error</source>
         <translation>%1: некорректный ключ</translation>
     </message>
     <message>
-        <location filename="../src/corelib/kernel/qsharedmemory_win.cpp" line="+32"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/kernel/qsharedmemory_win.cpp" line="+32"/>
         <source>%1: size query failed</source>
         <translation>%1: не удалось запросить размер</translation>
+    </message>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/kernel/qsharedmemory.cpp" line="-271"/>
+        <source>%1: unable to set key on lock</source>
+        <translation>%1: невозможно установить ключ блокировки</translation>
     </message>
 </context>
 <context>
     <name>QShortcut</name>
     <message>
-        <location filename="../src/gui/kernel/qkeysequence.cpp" line="+393"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/kernel/qkeysequence.cpp" line="+396"/>
         <source>Space</source>
+        <extracomment>This and all following &quot;incomprehensible&quot; strings in QShortcut context are key names. Please use the localized names appearing on actual keyboards or whatever is commonly used.</extracomment>
         <translation type="unfinished">Пробел</translation>
     </message>
     <message>
@@ -5649,7 +6937,7 @@ Please choose a different file name.</source>
     <message>
         <location line="+1"/>
         <source>Print</source>
-        <translation>Print</translation>
+        <translation type="unfinished">Print</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -5659,7 +6947,7 @@ Please choose a different file name.</source>
     <message>
         <location line="+1"/>
         <source>Home</source>
-        <translation>Home</translation>
+        <translation type="unfinished">Home</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -5674,7 +6962,7 @@ Please choose a different file name.</source>
     <message>
         <location line="+1"/>
         <source>Up</source>
-        <translation>Вверх</translation>
+        <translation type="unfinished">Вверх</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -5719,12 +7007,12 @@ Please choose a different file name.</source>
     <message>
         <location line="+1"/>
         <source>Help</source>
-        <translation>Справка</translation>
+        <translation type="unfinished">Справка</translation>
     </message>
     <message>
         <location line="+5"/>
         <source>Back</source>
-        <translation>Назад</translation>
+        <translation type="unfinished">Назад</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -5774,17 +7062,17 @@ Please choose a different file name.</source>
     <message>
         <location line="+1"/>
         <source>Treble Up</source>
-        <translation type="unfinished">Высокие частоты выше</translation>
+        <translation type="unfinished">ВЧ выше</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Treble Down</source>
-        <translation type="unfinished">Высокие частоты ниже</translation>
+        <translation type="unfinished">ВЧ ниже</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Media Play</source>
-        <translation type="unfinished">Воспроизведение</translation>
+        <translation type="unfinished">Начать воспроизведение</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -5804,7 +7092,19 @@ Please choose a different file name.</source>
     <message>
         <location line="+1"/>
         <source>Media Record</source>
-        <translation type="unfinished">Запись</translation>
+        <translation type="unfinished">Начать запись</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Media Pause</source>
+        <extracomment>Media player pause button</extracomment>
+        <translation type="unfinished">Приостановить воспроизведение</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Toggle Media Play/Pause</source>
+        <extracomment>Media player button to toggle between playing and paused</extracomment>
+        <translation type="unfinished">Приостановить/продолжить воспроизведение</translation>
     </message>
     <message>
         <location line="+2"/>
@@ -5919,32 +7219,32 @@ Please choose a different file name.</source>
     <message>
         <location line="+1"/>
         <source>Monitor Brightness Up</source>
-        <translation type="unfinished">Яркость монитора выше</translation>
+        <translation type="unfinished">Увеличить яркость монитора</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Monitor Brightness Down</source>
-        <translation type="unfinished">Яркость монитора ниже</translation>
+        <translation type="unfinished">Уменьшить яркость монитора</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Keyboard Light On/Off</source>
-        <translation type="unfinished">Вкл/выкл подсветку клавиатуры</translation>
+        <translation type="unfinished">Вкл./Откл. подсветку клавиатуры</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Keyboard Brightness Up</source>
-        <translation type="unfinished">Подсветка клавиатуры ярче</translation>
+        <translation type="unfinished">Увеличить яркость подсветки клавиатуры</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Keyboard Brightness Down</source>
-        <translation type="unfinished">Подсветка клавиатуры бледнее</translation>
+        <translation type="unfinished">Уменьшить яркость подсветки клавиатуры</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Power Off</source>
-        <translation type="unfinished">Выключение питания</translation>
+        <translation type="unfinished">Отключение питания</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -5954,28 +7254,27 @@ Please choose a different file name.</source>
     <message>
         <location line="+1"/>
         <source>Eject</source>
-        <translation type="unfinished">Извлечение</translation>
+        <translation type="unfinished">Извлечь</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Screensaver</source>
-        <translation type="unfinished">Хранитель экрана</translation>
+        <translation type="unfinished">Экранная заставка</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>WWW</source>
-        <translation>WWW</translation>
+        <translation type="unfinished">WWW</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Sleep</source>
-        <translation type="unfinished">Засыпание</translation>
+        <translation type="unfinished">Спящий режим</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>LightBulb</source>
-        <translatorcomment>лампочка?</translatorcomment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Лампочка</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -6015,7 +7314,7 @@ Please choose a different file name.</source>
     <message>
         <location line="+1"/>
         <source>Audio Rewind</source>
-        <translation type="unfinished">Перемотка</translation>
+        <translation type="unfinished">Перемотка аудио назад</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -6040,7 +7339,7 @@ Please choose a different file name.</source>
     <message>
         <location line="+1"/>
         <source>CD</source>
-        <translation>CD</translation>
+        <translation type="unfinished">CD</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -6060,7 +7359,7 @@ Please choose a different file name.</source>
     <message>
         <location line="+1"/>
         <source>Close</source>
-        <translation>Закрыть</translation>
+        <translation type="unfinished">Закрыть</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -6195,7 +7494,7 @@ Please choose a different file name.</source>
     <message>
         <location line="+1"/>
         <source>Save</source>
-        <translation>Сохранить</translation>
+        <translation type="unfinished">Сохранить</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -6240,7 +7539,7 @@ Please choose a different file name.</source>
     <message>
         <location line="+1"/>
         <source>Video</source>
-        <translation>Видео</translation>
+        <translation type="unfinished">Видео</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -6290,7 +7589,7 @@ Please choose a different file name.</source>
     <message>
         <location line="+1"/>
         <source>Music</source>
-        <translation>Музыка</translation>
+        <translation type="unfinished">Музыка</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -6310,22 +7609,22 @@ Please choose a different file name.</source>
     <message>
         <location line="+1"/>
         <source>Ultra Wide Band</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Сверхширокополосная связь</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Audio Forward</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Последовательное воспроизведение</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Audio Repeat</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Воспроизведение по кругу</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Audio Random Play</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Случайное воспроизведение</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -6335,7 +7634,7 @@ Please choose a different file name.</source>
     <message>
         <location line="+1"/>
         <source>Audio Cycle Track</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Зацикленное воспроизведение дорожки</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -6345,7 +7644,7 @@ Please choose a different file name.</source>
     <message>
         <location line="+2"/>
         <source>View</source>
-        <translation>Вид</translation>
+        <translation type="unfinished">Вид</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -6355,12 +7654,12 @@ Please choose a different file name.</source>
     <message>
         <location line="+1"/>
         <source>Suspend</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Приостановить</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Hibernate</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Усыпить</translation>
     </message>
     <message>
         <location line="+4"/>
@@ -6405,7 +7704,7 @@ Please choose a different file name.</source>
     <message>
         <location line="+1"/>
         <source>Delete</source>
-        <translation>Удалить</translation>
+        <translation type="unfinished">Удалить</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -6418,7 +7717,187 @@ Please choose a different file name.</source>
         <translation type="unfinished">Системный запрос</translation>
     </message>
     <message>
-        <location line="-18"/>
+        <location line="+19"/>
+        <source>Toggle Call/Hangup</source>
+        <extracomment>Button that will hang up if we&apos;re in call, or make a call if we&apos;re not.</extracomment>
+        <translation type="unfinished">Снять/положить трубку</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>Voice Dial</source>
+        <extracomment>Button to trigger voice dialing</extracomment>
+        <translation type="unfinished">Голосовой вызов</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Last Number Redial</source>
+        <extracomment>Button to redial the last number called</extracomment>
+        <translation type="unfinished">Повторный набор</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Camera Shutter</source>
+        <extracomment>Button to trigger the camera shutter (take a picture)</extracomment>
+        <translation type="unfinished">Затвор камеры</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Camera Focus</source>
+        <extracomment>Button to focus the camera</extracomment>
+        <translation type="unfinished">Фокусировка камеры</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Kanji</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Muhenkan</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Henkan</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Romaji</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Hiragana</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Katakana</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Hiragana Katakana</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Zenkaku</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Hankaku</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Zenkaku Hankaku</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Touroku</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Massyo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Kana Lock</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Kana Shift</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Eisu Shift</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Eisu toggle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Code input</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Multiple Candidate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Previous Candidate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>Hangul</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Hangul Start</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Hangul End</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Hangul Hanja</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Hangul Jamo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Hangul Romaja</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Hangul Jeonja</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Hangul Banja</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Hangul PreHanja</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Hangul PostHanja</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Hangul Special</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location line="-82"/>
         <location line="+22"/>
         <source>Select</source>
         <translation type="unfinished">Выбрать</translation>
@@ -6426,7 +7905,7 @@ Please choose a different file name.</source>
     <message>
         <location line="+1"/>
         <source>Yes</source>
-        <translation>Да</translation>
+        <translation type="unfinished">Да</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -6454,22 +7933,24 @@ Please choose a different file name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="+2"/>
         <source>Call</source>
+        <extracomment>Button to start a call (note: a separate button is used to end the call)</extracomment>
         <translation type="unfinished">Позвонить</translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="+2"/>
         <source>Hangup</source>
+        <extracomment>Button to end a call (note: a separate button is used to start the call)</extracomment>
         <translation type="unfinished">Положить трубку</translation>
     </message>
     <message>
-        <location line="+1"/>
+        <location line="+3"/>
         <source>Flip</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+575"/>
+        <location line="+646"/>
         <location line="+135"/>
         <source>Ctrl</source>
         <translation type="unfinished">Ctrl</translation>
@@ -6503,7 +7984,7 @@ Please choose a different file name.</source>
         <translation type="unfinished">F%1</translation>
     </message>
     <message>
-        <location line="-871"/>
+        <location line="-946"/>
         <source>Home Page</source>
         <translation type="unfinished">Домашняя страница</translation>
     </message>
@@ -6511,7 +7992,7 @@ Please choose a different file name.</source>
 <context>
     <name>QSlider</name>
     <message>
-        <location filename="../src/plugins/accessible/widgets/rangecontrols.cpp" line="+151"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/plugins/accessible/widgets/rangecontrols.cpp" line="+151"/>
         <source>Page left</source>
         <translation>Страница влево</translation>
     </message>
@@ -6539,7 +8020,7 @@ Please choose a different file name.</source>
 <context>
     <name>QSocks5SocketEngine</name>
     <message>
-        <location filename="../src/network/socket/qsocks5socketengine.cpp" line="-67"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/socket/qsocks5socketengine.cpp" line="-67"/>
         <source>Connection to proxy refused</source>
         <translation>В соединении с прокси-сервером отказано</translation>
     </message>
@@ -6612,7 +8093,7 @@ Please choose a different file name.</source>
 <context>
     <name>QSoftKeyManager</name>
     <message>
-        <location filename="../src/gui/kernel/qsoftkeymanager.cpp" line="+63"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/kernel/qsoftkeymanager.cpp" line="+63"/>
         <source>Ok</source>
         <translation>ОК</translation>
     </message>
@@ -6637,7 +8118,7 @@ Please choose a different file name.</source>
         <translation>Отмена</translation>
     </message>
     <message>
-        <location filename="../src/gui/kernel/qsoftkeymanager_s60.cpp" line="+320"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/kernel/qsoftkeymanager_s60.cpp" line="+321"/>
         <source>Exit</source>
         <translation>Выход</translation>
     </message>
@@ -6645,7 +8126,7 @@ Please choose a different file name.</source>
 <context>
     <name>QSpinBox</name>
     <message>
-        <location filename="../src/plugins/accessible/widgets/rangecontrols.cpp" line="-574"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/plugins/accessible/widgets/rangecontrols.cpp" line="-574"/>
         <source>More</source>
         <translation>Больше</translation>
     </message>
@@ -6658,7 +8139,7 @@ Please choose a different file name.</source>
 <context>
     <name>QSql</name>
     <message>
-        <location filename="../src/qt3support/sql/q3sqlmanager_p.cpp" line="+890"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/sql/q3sqlmanager_p.cpp" line="+890"/>
         <source>Delete</source>
         <translation>Удалить</translation>
     </message>
@@ -6715,7 +8196,7 @@ Please choose a different file name.</source>
 <context>
     <name>QSslSocket</name>
     <message>
-        <location filename="../src/network/ssl/qsslsocket_openssl.cpp" line="+546"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/ssl/qsslsocket_openssl.cpp" line="+850"/>
         <source>Unable to write data: %1</source>
         <translation>Невозможно записать данные: %1</translation>
     </message>
@@ -6725,7 +8206,8 @@ Please choose a different file name.</source>
         <translation>Невозможно расшифровать данные: %1</translation>
     </message>
     <message>
-        <location line="+76"/>
+        <location line="+78"/>
+        <location line="+10"/>
         <source>Error while reading: %1</source>
         <translation>Ошибка чтения: %1</translation>
     </message>
@@ -6735,17 +8217,17 @@ Please choose a different file name.</source>
         <translation>Ошибка квитирования SSL: %1</translation>
     </message>
     <message>
-        <location line="-521"/>
+        <location line="-822"/>
         <source>Error creating SSL context (%1)</source>
         <translation>Ошибка создания контекста SSL: (%1)</translation>
     </message>
     <message>
         <location line="+25"/>
         <source>Invalid or empty cipher list (%1)</source>
-        <translation>Неправильный или пустой список шифров (%1)</translation>
+        <translation>Некорректный или пустой список шифров (%1)</translation>
     </message>
     <message>
-        <location line="+42"/>
+        <location line="+57"/>
         <source>Private key does not certify public key, %1</source>
         <translation>Закрытый ключ не соответствует открытому ключу, %1</translation>
     </message>
@@ -6760,7 +8242,7 @@ Please choose a different file name.</source>
         <translation>Ошибка создания сессии SSL: %1</translation>
     </message>
     <message>
-        <location line="-61"/>
+        <location line="-64"/>
         <source>Cannot provide a certificate with no key, %1</source>
         <translation>Невозможно предоставить сертификат без ключа, %1</translation>
     </message>
@@ -6770,20 +8252,19 @@ Please choose a different file name.</source>
         <translation>Ошибка загрузки локального сертификата, %1</translation>
     </message>
     <message>
-        <location line="+12"/>
+        <location line="+15"/>
         <source>Error loading private key, %1</source>
         <translation>Ошибка загрузки закрытого ключа, %1</translation>
     </message>
     <message>
-        <location filename="../src/network/ssl/qsslerror.cpp" line="+213"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/ssl/qsslerror.cpp" line="+213"/>
         <source>No error</source>
         <translation>Нет ошибки</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>The issuer certificate could not be found</source>
-        <translatorcomment>издателя ?</translatorcomment>
-        <translation type="unfinished">Не удалось найти сертификат запрашивающей стороны</translation>
+        <translation>Не удалось найти сертификат издателя</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -6813,27 +8294,27 @@ Please choose a different file name.</source>
     <message>
         <location line="+3"/>
         <source>The certificate&apos;s notBefore field contains an invalid time</source>
-        <translation>Поле сертификата notBefore содержит некорректное время</translation>
+        <translation>Поле notBefore сертификата содержит некорректное время</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>The certificate&apos;s notAfter field contains an invalid time</source>
-        <translation>Поле сертификата notAfter содержит некорректное время</translation>
+        <translation>Поле notAfter сертификата содержит некорректное время</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>The certificate is self-signed, and untrusted</source>
-        <translation type="unfinished">Самоподписанный сертификат не является заверенным</translation>
+        <translation>Сертификат самоподписанный и не является заверенным</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>The root certificate of the certificate chain is self-signed, and untrusted</source>
-        <translation type="unfinished">Корневой сертификат цепочки сертификатов самоподписанный и не является заверенным</translation>
+        <translation>Корневой сертификат цепочки сертификатов самоподписанный и не является заверенным</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>The issuer certificate of a locally looked up certificate could not be found</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось найти сертификат издателя локального сертификата</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -6843,47 +8324,47 @@ Please choose a different file name.</source>
     <message>
         <location line="+3"/>
         <source>One of the CA certificates is invalid</source>
-        <translation>Один из CA сертификатов некорректный</translation>
+        <translation>Один из сертификатов центра сертификации некорректен</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>The basicConstraints path length parameter has been exceeded</source>
-        <translation type="unfinished">Путь параметра basicConstraints слишком длинный</translation>
+        <translation>Превышено значение параметра длины пути поля basicConstraints сертификата</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>The supplied certificate is unsuitable for this purpose</source>
-        <translation type="unfinished">Представленный сертификат не предназначен для данного использования</translation>
+        <translation>Представленный сертификат непригоден для данной цели</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>The root CA certificate is not trusted for this purpose</source>
-        <translation type="unfinished">Корневой CA сертификат не является заверенным для данного использования</translation>
+        <translation>Корневой сертификат центра сертификации не является заверенным для данной цели</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>The root CA certificate is marked to reject the specified purpose</source>
-        <translation type="unfinished">Корневой CA сертификат отмечен как &apos;отказывать&apos; для данного использования</translation>
+        <translation>Корневой сертификат центра сертификации отмечен на отклонение для данной цели</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>The current candidate issuer certificate was rejected because its subject name did not match the issuer name of the current certificate</source>
-        <translation type="unfinished"></translation>
+        <translation>Текущий сертификат издателя был отклонён, так как название темы не совпадает с названием издателя сертификата</translation>
     </message>
     <message>
         <location line="+4"/>
         <source>The current candidate issuer certificate was rejected because its issuer name and serial number was present and did not match the authority key identifier of the current certificate</source>
-        <translation type="unfinished"></translation>
+        <translation>Текущий сертификат издателя был отклонён, так как название издателя и серийный номер не совпадают с идентификатором ключа сертификата</translation>
     </message>
     <message>
         <location line="+5"/>
         <source>The peer did not present any certificate</source>
-        <translation>Узел не предоставил сертификат</translation>
+        <translation>Сертификат не был предоставлен</translation>
     </message>
     <message>
         <location line="+3"/>
         <source>The host name did not match any of the valid hosts for this certificate</source>
-        <translation>Название узла не совпадает ни с одним из допустимых узлов данного сертификата</translation>
+        <translation>Название узла не совпадает с допустимыми названиями узлов сертификата</translation>
     </message>
     <message>
         <location line="+6"/>
@@ -6894,19 +8375,19 @@ Please choose a different file name.</source>
 <context>
     <name>QStateMachine</name>
     <message>
-        <location filename="../src/corelib/statemachine/qstatemachine.cpp" line="+1028"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/statemachine/qstatemachine.cpp" line="+1028"/>
         <source>Missing initial state in compound state &apos;%1&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Отсутствует исходное состояние в составном состоянии &quot;%1&quot;</translation>
     </message>
     <message>
         <location line="+7"/>
         <source>Missing default state in history state &apos;%1&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Отсутствует состояние по умолчанию в историческом состоянии &quot;%1&quot;</translation>
     </message>
     <message>
         <location line="+7"/>
         <source>No common ancestor for targets and source of transition from state &apos;%1&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Нет общего предка у источника и цели перехода из состояния &quot;%1&quot;</translation>
     </message>
     <message>
         <location line="+4"/>
@@ -6917,14 +8398,19 @@ Please choose a different file name.</source>
 <context>
     <name>QSystemSemaphore</name>
     <message>
-        <location filename="../src/corelib/kernel/qsystemsemaphore_unix.cpp" line="-41"/>
-        <location filename="../src/corelib/kernel/qsystemsemaphore_win.cpp" line="+66"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/kernel/qsystemsemaphore_unix.cpp" line="-46"/>
+        <source>%1: does not exist</source>
+        <translation>%1: не существует</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/kernel/qsystemsemaphore_win.cpp" line="+66"/>
         <source>%1: out of resources</source>
         <translation>%1: недостаточно ресурсов</translation>
     </message>
     <message>
         <location line="-13"/>
-        <location filename="../src/corelib/kernel/qsystemsemaphore_win.cpp" line="+4"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/kernel/qsystemsemaphore_win.cpp" line="+4"/>
         <source>%1: permission denied</source>
         <translation>%1: доступ запрещён</translation>
     </message>
@@ -6934,13 +8420,8 @@ Please choose a different file name.</source>
         <translation>%1: уже существует</translation>
     </message>
     <message>
-        <location line="+4"/>
-        <source>%1: does not exist</source>
-        <translation>%1: не существует</translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <location filename="../src/corelib/kernel/qsystemsemaphore_win.cpp" line="+3"/>
+        <location line="+13"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/kernel/qsystemsemaphore_win.cpp" line="+3"/>
         <source>%1: unknown error %2</source>
         <translation>%1: неизвестная ошибка %2</translation>
     </message>
@@ -6948,7 +8429,7 @@ Please choose a different file name.</source>
 <context>
     <name>QTDSDriver</name>
     <message>
-        <location filename="../src/sql/drivers/tds/qsql_tds.cpp" line="+595"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/sql/drivers/tds/qsql_tds.cpp" line="+595"/>
         <source>Unable to open connection</source>
         <translation>Невозможно открыть соединение</translation>
     </message>
@@ -6961,7 +8442,7 @@ Please choose a different file name.</source>
 <context>
     <name>QTabBar</name>
     <message>
-        <location filename="../src/plugins/accessible/widgets/complexwidgets.cpp" line="-326"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/plugins/accessible/widgets/complexwidgets.cpp" line="-330"/>
         <source>Scroll Left</source>
         <translation>Прокрутить влево</translation>
     </message>
@@ -6974,7 +8455,7 @@ Please choose a different file name.</source>
 <context>
     <name>QTcpServer</name>
     <message>
-        <location filename="../src/network/socket/qtcpserver.cpp" line="+292"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/socket/qtcpserver.cpp" line="+292"/>
         <source>Operation on socket is not supported</source>
         <translation>Операция с сокетом не поддерживается</translation>
     </message>
@@ -6982,7 +8463,7 @@ Please choose a different file name.</source>
 <context>
     <name>QTextControl</name>
     <message>
-        <location filename="../src/gui/text/qtextcontrol.cpp" line="+2029"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/text/qtextcontrol.cpp" line="+2032"/>
         <source>&amp;Undo</source>
         <translation>&amp;Отменить действие</translation>
     </message>
@@ -7025,7 +8506,7 @@ Please choose a different file name.</source>
 <context>
     <name>QToolButton</name>
     <message>
-        <location filename="../src/plugins/accessible/widgets/simplewidgets.cpp" line="+310"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/plugins/accessible/widgets/simplewidgets.cpp" line="+310"/>
         <location line="+6"/>
         <source>Press</source>
         <translation>Нажать</translation>
@@ -7040,7 +8521,7 @@ Please choose a different file name.</source>
 <context>
     <name>QUdpSocket</name>
     <message>
-        <location filename="../src/network/socket/qudpsocket.cpp" line="+189"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/socket/qudpsocket.cpp" line="+189"/>
         <source>This platform does not support IPv6</source>
         <translation>Данная платформа не поддерживает IPv6</translation>
     </message>
@@ -7048,7 +8529,7 @@ Please choose a different file name.</source>
 <context>
     <name>QUndoGroup</name>
     <message>
-        <location filename="../src/gui/util/qundogroup.cpp" line="+385"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/util/qundogroup.cpp" line="+385"/>
         <source>Undo</source>
         <translation>Отменить действие</translation>
     </message>
@@ -7061,7 +8542,7 @@ Please choose a different file name.</source>
 <context>
     <name>QUndoModel</name>
     <message>
-        <location filename="../src/gui/util/qundoview.cpp" line="+101"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/util/qundoview.cpp" line="+101"/>
         <source>&lt;empty&gt;</source>
         <translation>&lt;пусто&gt;</translation>
     </message>
@@ -7069,7 +8550,7 @@ Please choose a different file name.</source>
 <context>
     <name>QUndoStack</name>
     <message>
-        <location filename="../src/gui/util/qundostack.cpp" line="+832"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/util/qundostack.cpp" line="+832"/>
         <source>Undo</source>
         <translation>Отменить действие</translation>
     </message>
@@ -7082,54 +8563,54 @@ Please choose a different file name.</source>
 <context>
     <name>QUnicodeControlCharacterMenu</name>
     <message>
-        <location filename="../src/gui/text/qtextcontrol.cpp" line="+899"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/text/qtextcontrol.cpp" line="+899"/>
         <source>LRM Left-to-right mark</source>
-        <translation type="unfinished">LRM Индикатор написания слева направо</translation>
+        <translation>LRM Признак написания слева направо</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>RLM Right-to-left mark</source>
-        <translation type="unfinished">RLM Индикатор написания справа налево</translation>
+        <translation>RLM Признак написания справа налево</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>ZWJ Zero width joiner</source>
-        <translation type="unfinished">ZWJ Объединяющий символ нулевой ширины</translation>
+        <translation>ZWJ Объединяющий символ нулевой ширины</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>ZWNJ Zero width non-joiner</source>
-        <translation type="unfinished">ZWNJ Разделитель нулевой ширины</translation>
+        <translation>ZWNJ Необъединяющий символ нулевой ширины</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>ZWSP Zero width space</source>
-        <translation type="unfinished">ZWSP Пробел нулевой ширины</translation>
+        <translation>ZWSP Пробел нулевой ширины</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>LRE Start of left-to-right embedding</source>
-        <translation type="unfinished">LRE Индикатор написания слева направо внутри текста, написанного справа налево</translation>
+        <translation>LRE Начало встраивания написания слева направо</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>RLE Start of right-to-left embedding</source>
-        <translation type="unfinished">RLE Индикатор написания справа налево внутри текста, написанного слева направо</translation>
+        <translation>LRE Начало встраивания написания справа налево</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>LRO Start of left-to-right override</source>
-        <translation type="unfinished">LRO Перекрывающий индикатор написания слева направо</translation>
+        <translation>LRO Начало замены написания слева направо</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>RLO Start of right-to-left override</source>
-        <translation type="unfinished">RLO Перекрывающий индикатор написания справа налево</translation>
+        <translation>RLO Начало замены написания справа налево</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>PDF Pop directional formatting</source>
-        <translation type="unfinished">PDF Индикатор конца текста с другим направлением</translation>
+        <translation>PDF Признак окончания написания с другим направлением</translation>
     </message>
     <message>
         <location line="+6"/>
@@ -7140,7 +8621,7 @@ Please choose a different file name.</source>
 <context>
     <name>QWebFrame</name>
     <message>
-        <location filename="../src/3rdparty/webkit/WebKit/qt/WebCoreSupport/FrameLoaderClientQt.cpp" line="+712"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/3rdparty/webkit/WebKit/qt/WebCoreSupport/FrameLoaderClientQt.cpp" line="+756"/>
         <source>Request cancelled</source>
         <translation>Запрос отменён</translation>
     </message>
@@ -7173,547 +8654,22 @@ Please choose a different file name.</source>
 <context>
     <name>QWebPage</name>
     <message>
-        <location filename="../src/3rdparty/webkit/WebCore/platform/network/qt/QNetworkReplyHandler.cpp" line="+416"/>
-        <source>Bad HTTP request</source>
-        <translation>Некорректный HTTP-запрос</translation>
-    </message>
-    <message>
-        <location filename="../src/3rdparty/webkit/WebCore/platform/qt/Localizations.cpp" line="+42"/>
-        <source>Submit</source>
-        <comment>default label for Submit buttons in forms on web pages</comment>
-        <translation>Отправить</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Submit</source>
-        <comment>Submit (input element) alt text for &lt;input&gt; elements with no alt, title, or value</comment>
-        <translation>Отправить</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Reset</source>
-        <comment>default label for Reset buttons in forms on web pages</comment>
-        <translation>Сбросить</translation>
-    </message>
-    <message>
-        <location line="+11"/>
-        <source>This is a searchable index. Enter search keywords: </source>
-        <comment>text that appears at the start of nearly-obsolete web pages in the form of a &apos;searchable index&apos;</comment>
-        <translation>Индекс поиска. Введите ключевые слова для поиска: </translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Choose File</source>
-        <comment>title for file button used in HTML forms</comment>
-        <translation>Обзор...</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>No file selected</source>
-        <comment>text to display in file button used in HTML forms when no file is selected</comment>
-        <translation>Файл не указан</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Open in New Window</source>
-        <comment>Open in New Window context menu item</comment>
-        <translation>Открыть в новом окне</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Save Link...</source>
-        <comment>Download Linked File context menu item</comment>
-        <translation>Сохранить по ссылке как...</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Copy Link</source>
-        <comment>Copy Link context menu item</comment>
-        <translation>Копировать адрес ссылки</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Open Image</source>
-        <comment>Open Image in New Window context menu item</comment>
-        <translation>Открыть изображение</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Save Image</source>
-        <comment>Download Image context menu item</comment>
-        <translation>Сохранить изображение</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Copy Image</source>
-        <comment>Copy Link context menu item</comment>
-        <translation>Копировать изображение в буффер обмена</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Open Frame</source>
-        <comment>Open Frame in New Window context menu item</comment>
-        <translation>Открыть фрейм</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Copy</source>
-        <comment>Copy context menu item</comment>
-        <translation>Копировать</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Go Back</source>
-        <comment>Back context menu item</comment>
-        <translation>Назад</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Go Forward</source>
-        <comment>Forward context menu item</comment>
-        <translation>Вперёд</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Stop</source>
-        <comment>Stop context menu item</comment>
-        <translation>Остановить</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Reload</source>
-        <comment>Reload context menu item</comment>
-        <translation>Обновить</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Cut</source>
-        <comment>Cut context menu item</comment>
-        <translation>Вырезать</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Paste</source>
-        <comment>Paste context menu item</comment>
-        <translation>Вставить</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>No Guesses Found</source>
-        <comment>No Guesses Found context menu item</comment>
-        <translation type="unfinished">Неверное слово</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Ignore</source>
-        <comment>Ignore Spelling context menu item</comment>
-        <translatorcomment>?Пропускать</translatorcomment>
-        <translation>Пропустить</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Add To Dictionary</source>
-        <comment>Learn Spelling context menu item</comment>
-        <translation>Добавить в словарь</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Search The Web</source>
-        <comment>Search The Web context menu item</comment>
-        <translation type="unfinished">Искать в Интернет</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Look Up In Dictionary</source>
-        <comment>Look Up in Dictionary context menu item</comment>
-        <translation type="unfinished">Искать в словаре</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Open Link</source>
-        <comment>Open Link context menu item</comment>
-        <translation>Открыть ссылку</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Ignore</source>
-        <comment>Ignore Grammar context menu item</comment>
-        <translatorcomment>?Пропускать</translatorcomment>
-        <translation>Пропустить</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Spelling</source>
-        <comment>Spelling and Grammar context sub-menu item</comment>
-        <translation>Орфография</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Show Spelling and Grammar</source>
-        <comment>menu item title</comment>
-        <translation type="unfinished">Показать панель проверки правописания</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>Hide Spelling and Grammar</source>
-        <comment>menu item title</comment>
-        <translation type="unfinished">Скрыть панель проверки правописания</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Check Spelling</source>
-        <comment>Check spelling context menu item</comment>
-        <translation>Проверка орфографии</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Check Spelling While Typing</source>
-        <comment>Check spelling while typing context menu item</comment>
-        <translation>Проверять орфографию при наборе текста</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Check Grammar With Spelling</source>
-        <comment>Check grammar with spelling context menu item</comment>
-        <translation>Проверять грамматику с орфографией</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Fonts</source>
-        <comment>Font context sub-menu item</comment>
-        <translation>Шрифты</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Bold</source>
-        <comment>Bold context menu item</comment>
-        <translation>Жирный</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Italic</source>
-        <comment>Italic context menu item</comment>
-        <translation>Курсив</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Underline</source>
-        <comment>Underline context menu item</comment>
-        <translation>Подчёркнутый</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Outline</source>
-        <comment>Outline context menu item</comment>
-        <translation>Перечёркнутый</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Direction</source>
-        <comment>Writing direction context sub-menu item</comment>
-        <translation>Направление письма</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Text Direction</source>
-        <comment>Text direction context sub-menu item</comment>
-        <translation>Направление текста</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Default</source>
-        <comment>Default writing direction context menu item</comment>
-        <translation>По умолчанию</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Left to Right</source>
-        <comment>Left to Right context menu item</comment>
-        <translation>Слева направо</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Right to Left</source>
-        <comment>Right to Left context menu item</comment>
-        <translation>Справа налево</translation>
-    </message>
-    <message>
-        <location line="+105"/>
-        <source>Loading...</source>
-        <comment>Media controller status message when the media is loading</comment>
-        <translation>Загрузка...</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Live Broadcast</source>
-        <comment>Media controller status message when watching a live broadcast</comment>
-        <translation>Потоковое вещание</translation>
-    </message>
-    <message>
-        <location line="+8"/>
-        <source>Audio Element</source>
-        <comment>Media controller element</comment>
-        <translation type="unfinished">Аудио-элемент</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Video Element</source>
-        <comment>Media controller element</comment>
-        <translation type="unfinished">Видео-элемент</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Mute Button</source>
-        <comment>Media controller element</comment>
-        <translation type="unfinished">Кнопка &quot;приглушить&quot;</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Unmute Button</source>
-        <comment>Media controller element</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Play Button</source>
-        <comment>Media controller element</comment>
-        <translation type="unfinished">Кнопка &quot;воспроизведение&quot;</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Pause Button</source>
-        <comment>Media controller element</comment>
-        <translation type="unfinished">Кнопка &quot;пауза&quot;</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Slider</source>
-        <comment>Media controller element</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Slider Thumb</source>
-        <comment>Media controller element</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Rewind Button</source>
-        <comment>Media controller element</comment>
-        <translation type="unfinished">Кнопка &quot;перемотать&quot;</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Return to Real-time Button</source>
-        <comment>Media controller element</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Elapsed Time</source>
-        <comment>Media controller element</comment>
-        <translation type="unfinished">Прошло времени</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Remaining Time</source>
-        <comment>Media controller element</comment>
-        <translation type="unfinished">Осталось времени</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Status Display</source>
-        <comment>Media controller element</comment>
-        <translation type="unfinished">Отображение состояния</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Fullscreen Button</source>
-        <comment>Media controller element</comment>
-        <translation type="unfinished">Кнопка &quot;полноэкранный режим&quot;</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Seek Forward Button</source>
-        <comment>Media controller element</comment>
-        <translation type="unfinished">Кнопка &quot;перемотка вперёд&quot;</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Seek Back Button</source>
-        <comment>Media controller element</comment>
-        <translation type="unfinished">Кнопка &quot;перемотка назад&quot;</translation>
-    </message>
-    <message>
-        <location line="+8"/>
-        <source>Audio element playback controls and status display</source>
-        <comment>Media controller element</comment>
-        <translation type="unfinished">Элементы управления воспроизведением звука и отображения состояния</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Video element playback controls and status display</source>
-        <comment>Media controller element</comment>
-        <translation type="unfinished">Элементы управления воспроизведением видео и отображения состояния</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Mute audio tracks</source>
-        <comment>Media controller element</comment>
-        <translation type="unfinished">Выключить звуковые дорожки</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Unmute audio tracks</source>
-        <comment>Media controller element</comment>
-        <translation type="unfinished">Включить звуковые дорожки</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Begin playback</source>
-        <comment>Media controller element</comment>
-        <translation>Начать воспроизведение</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Pause playback</source>
-        <comment>Media controller element</comment>
-        <translation>Приостановить воспроизведение</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Movie time scrubber</source>
-        <comment>Media controller element</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Movie time scrubber thumb</source>
-        <comment>Media controller element</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Rewind movie</source>
-        <comment>Media controller element</comment>
-        <translation type="unfinished">Начать фильм сначала</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Return streaming movie to real-time</source>
-        <comment>Media controller element</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Current movie time</source>
-        <comment>Media controller element</comment>
-        <translation type="unfinished">Текущее время фильма</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Remaining movie time</source>
-        <comment>Media controller element</comment>
-        <translation type="unfinished">Осталось времени фильма</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Current movie status</source>
-        <comment>Media controller element</comment>
-        <translation type="unfinished">Текущее состояние фильма</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Play movie in full-screen mode</source>
-        <comment>Media controller element</comment>
-        <translation type="unfinished">Воспроизводить фильм в полноэкранном режиме</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Seek quickly back</source>
-        <comment>Media controller element</comment>
-        <translation type="unfinished">Быстрая перемотка назад</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Seek quickly forward</source>
-        <comment>Media controller element</comment>
-        <translation type="unfinished">Быстрая перемотка вперёд</translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <source>Indefinite time</source>
-        <comment>Media time description</comment>
-        <translation type="unfinished">Время не определено</translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <source>%1 days %2 hours %3 minutes %4 seconds</source>
-        <comment>Media time description</comment>
-        <translation>%1 дней %2 часов %3 минут %4 секунд</translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <source>%1 hours %2 minutes %3 seconds</source>
-        <comment>Media time description</comment>
-        <translation>%1 часов %2 минут %3 секунд</translation>
-    </message>
-    <message>
-        <location line="+4"/>
-        <source>%1 minutes %2 seconds</source>
-        <comment>Media time description</comment>
-        <translation>%1 минут %2 секунд</translation>
-    </message>
-    <message>
-        <location line="+3"/>
-        <source>%1 seconds</source>
-        <comment>Media time description</comment>
-        <translation>%1 секунд</translation>
-    </message>
-    <message>
-        <location line="-210"/>
-        <source>Inspect</source>
-        <comment>Inspect Element context menu item</comment>
-        <translation>Проверить</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>No recent searches</source>
-        <comment>Label for only item in menu that appears when clicking on the search field image, when no searches have been performed</comment>
-        <translation>История поиска пуста</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Recent searches</source>
-        <comment>label for first item in the menu that appears when clicking on the search field image, used as embedded menu title</comment>
-        <translation>История поиска</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>Clear recent searches</source>
-        <comment>menu item in Recent Searches menu that empties menu&apos;s contents</comment>
-        <translation>Очистить историю поиска</translation>
-    </message>
-    <message>
-        <location line="+75"/>
-        <source>Unknown</source>
-        <comment>Unknown filesize FTP directory listing item</comment>
-        <translation>Неизвестно</translation>
-    </message>
-    <message>
-        <location line="+5"/>
-        <source>%1 (%2x%3 pixels)</source>
-        <comment>Title string for images</comment>
-        <translation>%1 (%2x%3 px)</translation>
-    </message>
-    <message>
-        <location filename="../src/3rdparty/webkit/WebKit/qt/WebCoreSupport/InspectorClientQt.cpp" line="+167"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/3rdparty/webkit/WebKit/qt/WebCoreSupport/InspectorClientQt.cpp" line="+256"/>
         <source>Web Inspector - %2</source>
         <translation>Web-инспектор  - %2</translation>
     </message>
     <message>
-        <location filename="../src/3rdparty/webkit/WebCore/platform/qt/ScrollbarQt.cpp" line="+58"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/3rdparty/webkit/WebCore/platform/network/qt/QNetworkReplyHandler.cpp" line="+355"/>
+        <source>Redirection limit reached</source>
+        <translation>Достигнут предел переадресации</translation>
+    </message>
+    <message>
+        <location line="+121"/>
+        <source>Bad HTTP request</source>
+        <translation>Некорректный HTTP-запрос</translation>
+    </message>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/3rdparty/webkit/WebCore/platform/qt/ScrollbarQt.cpp" line="+58"/>
         <source>Scroll here</source>
         <translation>Прокрутить сюда</translation>
     </message>
@@ -7777,33 +8733,23 @@ Please choose a different file name.</source>
         <source>Scroll down</source>
         <translation>Прокрутить вниз</translation>
     </message>
-    <message numerus="yes">
-        <location filename="../src/3rdparty/webkit/WebCore/platform/qt/FileChooserQt.cpp" line="+45"/>
-        <source>%n file(s)</source>
-        <comment>number of chosen file</comment>
-        <translation>
-            <numerusform>%n файл(а)</numerusform>
-            <numerusform>%n файла</numerusform>
-            <numerusform>%n файлов</numerusform>
-        </translation>
-    </message>
     <message>
-        <location filename="../src/3rdparty/webkit/WebKit/qt/Api/qwebpage.cpp" line="+1833"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/3rdparty/webkit/WebKit/qt/Api/qwebpage.cpp" line="+2083"/>
         <source>JavaScript Alert - %1</source>
         <translation>JavaScript: Предупреждение - %1</translation>
     </message>
     <message>
-        <location line="+16"/>
+        <location line="+17"/>
         <source>JavaScript Confirm - %1</source>
         <translation>JavaScript: Подтверждение - %1</translation>
     </message>
     <message>
-        <location line="+19"/>
+        <location line="+20"/>
         <source>JavaScript Prompt - %1</source>
         <translation>JavaScript: Запрос - %1</translation>
     </message>
     <message>
-        <location line="+25"/>
+        <location line="+26"/>
         <source>JavaScript Problem - %1</source>
         <translation>JavaScript: Проблема - %1</translation>
     </message>
@@ -7813,7 +8759,7 @@ Please choose a different file name.</source>
         <translation>Сбой выполнения сценария на данной странице. Желаете остановить выполение сценария?</translation>
     </message>
     <message>
-        <location line="+381"/>
+        <location line="+395"/>
         <source>Move the cursor to the next character</source>
         <translation>Переместить указатель к следующему символу</translation>
     </message>
@@ -8022,11 +8968,557 @@ Please choose a different file name.</source>
         <source>Align Right</source>
         <translation>По правому краю</translation>
     </message>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/3rdparty/webkit/WebCore/platform/qt/Localizations.cpp" line="+44"/>
+        <source>Submit</source>
+        <comment>default label for Submit buttons in forms on web pages</comment>
+        <translation>Отправить</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Submit</source>
+        <comment>Submit (input element) alt text for &lt;input&gt; elements with no alt, title, or value</comment>
+        <translation>Отправить</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Reset</source>
+        <comment>default label for Reset buttons in forms on web pages</comment>
+        <translation>Сбросить</translation>
+    </message>
+    <message>
+        <location line="+11"/>
+        <source>This is a searchable index. Enter search keywords: </source>
+        <comment>text that appears at the start of nearly-obsolete web pages in the form of a &apos;searchable index&apos;</comment>
+        <translation>Индекс поиска. Введите ключевые слова для поиска: </translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Choose File</source>
+        <comment>title for file button used in HTML forms</comment>
+        <translation>Обзор...</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>No file selected</source>
+        <comment>text to display in file button used in HTML forms when no file is selected</comment>
+        <translation>Файл не указан</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Open in New Window</source>
+        <comment>Open in New Window context menu item</comment>
+        <translation>Открыть в новом окне</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Save Link...</source>
+        <comment>Download Linked File context menu item</comment>
+        <translation>Сохранить по ссылке как...</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Copy Link</source>
+        <comment>Copy Link context menu item</comment>
+        <translation>Копировать адрес ссылки</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Open Image</source>
+        <comment>Open Image in New Window context menu item</comment>
+        <translation>Открыть изображение</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Save Image</source>
+        <comment>Download Image context menu item</comment>
+        <translation>Сохранить изображение</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Copy Image</source>
+        <comment>Copy Link context menu item</comment>
+        <translation>Копировать изображение</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Open Frame</source>
+        <comment>Open Frame in New Window context menu item</comment>
+        <translation>Открыть фрейм</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Copy</source>
+        <comment>Copy context menu item</comment>
+        <translation>Копировать</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Go Back</source>
+        <comment>Back context menu item</comment>
+        <translation>Назад</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Go Forward</source>
+        <comment>Forward context menu item</comment>
+        <translation>Вперёд</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Stop</source>
+        <comment>Stop context menu item</comment>
+        <translation>Остановить</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Reload</source>
+        <comment>Reload context menu item</comment>
+        <translation>Обновить</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Cut</source>
+        <comment>Cut context menu item</comment>
+        <translation>Вырезать</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Paste</source>
+        <comment>Paste context menu item</comment>
+        <translation>Вставить</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>No Guesses Found</source>
+        <comment>No Guesses Found context menu item</comment>
+        <translation type="unfinished">Совпадений не найдено</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Ignore</source>
+        <comment>Ignore Spelling context menu item</comment>
+        <translatorcomment>?Пропускать</translatorcomment>
+        <translation type="unfinished">Пропустить</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Add To Dictionary</source>
+        <comment>Learn Spelling context menu item</comment>
+        <translation>Добавить в словарь</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Search The Web</source>
+        <comment>Search The Web context menu item</comment>
+        <translation type="unfinished">Искать в Интернет</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Look Up In Dictionary</source>
+        <comment>Look Up in Dictionary context menu item</comment>
+        <translation type="unfinished">Искать в словаре</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Open Link</source>
+        <comment>Open Link context menu item</comment>
+        <translation>Открыть ссылку</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Ignore</source>
+        <comment>Ignore Grammar context menu item</comment>
+        <translatorcomment>?Пропускать</translatorcomment>
+        <translation type="unfinished">Пропустить</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Spelling</source>
+        <comment>Spelling and Grammar context sub-menu item</comment>
+        <translation>Орфография</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Show Spelling and Grammar</source>
+        <comment>menu item title</comment>
+        <translation type="unfinished">Показать панель проверки правописания</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Hide Spelling and Grammar</source>
+        <comment>menu item title</comment>
+        <translation type="unfinished">Скрыть панель проверки правописания</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Check Spelling</source>
+        <comment>Check spelling context menu item</comment>
+        <translation>Проверка орфографии</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Check Spelling While Typing</source>
+        <comment>Check spelling while typing context menu item</comment>
+        <translation>Проверять орфографию при наборе текста</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Check Grammar With Spelling</source>
+        <comment>Check grammar with spelling context menu item</comment>
+        <translation>Проверять грамматику с орфографией</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Fonts</source>
+        <comment>Font context sub-menu item</comment>
+        <translation>Шрифты</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Bold</source>
+        <comment>Bold context menu item</comment>
+        <translation>Жирный</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Italic</source>
+        <comment>Italic context menu item</comment>
+        <translation>Курсив</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Underline</source>
+        <comment>Underline context menu item</comment>
+        <translation>Подчёркнутый</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Outline</source>
+        <comment>Outline context menu item</comment>
+        <translation>Перечёркнутый</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Direction</source>
+        <comment>Writing direction context sub-menu item</comment>
+        <translation>Направление письма</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Text Direction</source>
+        <comment>Text direction context sub-menu item</comment>
+        <translation>Направление текста</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Default</source>
+        <comment>Default writing direction context menu item</comment>
+        <translation>По умолчанию</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Left to Right</source>
+        <comment>Left to Right context menu item</comment>
+        <translation>Слева направо</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Right to Left</source>
+        <comment>Right to Left context menu item</comment>
+        <translation>Справа налево</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Inspect</source>
+        <comment>Inspect Element context menu item</comment>
+        <translation>Проверить</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>No recent searches</source>
+        <comment>Label for only item in menu that appears when clicking on the search field image, when no searches have been performed</comment>
+        <translation>История поиска пуста</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Recent searches</source>
+        <comment>label for first item in the menu that appears when clicking on the search field image, used as embedded menu title</comment>
+        <translation>История поиска</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Clear recent searches</source>
+        <comment>menu item in Recent Searches menu that empties menu&apos;s contents</comment>
+        <translation>Очистить историю поиска</translation>
+    </message>
+    <message>
+        <location line="+80"/>
+        <source>Missing Plug-in</source>
+        <comment>Label text to be used when a plug-in is missing</comment>
+        <translation>Модуль отсутствует</translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>Unknown</source>
+        <comment>Unknown filesize FTP directory listing item</comment>
+        <translation>Неизвестно</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>%1 (%2x%3 pixels)</source>
+        <comment>Title string for images</comment>
+        <translation>%1 (%2x%3 px)</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Loading...</source>
+        <comment>Media controller status message when the media is loading</comment>
+        <translation>Загрузка...</translation>
+    </message>
+    <message>
+        <location line="+5"/>
+        <source>Live Broadcast</source>
+        <comment>Media controller status message when watching a live broadcast</comment>
+        <translation>Потоковое вещание</translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>Audio Element</source>
+        <comment>Media controller element</comment>
+        <translation>Аудио-элемент</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Video Element</source>
+        <comment>Media controller element</comment>
+        <translation>Видео-элемент</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Mute Button</source>
+        <comment>Media controller element</comment>
+        <translation>Кнопка &quot;Отключить звук&quot;</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Unmute Button</source>
+        <comment>Media controller element</comment>
+        <translation>Кнопка &quot;Включить звук&quot;</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Play Button</source>
+        <comment>Media controller element</comment>
+        <translation>Кнопка &quot;Воспроизведение&quot;</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Pause Button</source>
+        <comment>Media controller element</comment>
+        <translation>Кнопка &quot;Пауза&quot;</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Slider</source>
+        <comment>Media controller element</comment>
+        <translation>Регулятор</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Slider Thumb</source>
+        <comment>Media controller element</comment>
+        <translation>Указатель регулятора</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Rewind Button</source>
+        <comment>Media controller element</comment>
+        <translation>Кнопка &quot;Перемотка назад&quot;</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Return to Real-time Button</source>
+        <comment>Media controller element</comment>
+        <translation type="unfinished">Кнопка &quot;Вернуть в реальное время&quot;</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Elapsed Time</source>
+        <comment>Media controller element</comment>
+        <translation>Прошло времени</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Remaining Time</source>
+        <comment>Media controller element</comment>
+        <translation>Осталось времени</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Status Display</source>
+        <comment>Media controller element</comment>
+        <translation>Отображение состояния</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Fullscreen Button</source>
+        <comment>Media controller element</comment>
+        <translation>Кнопка &quot;На весь экран&quot;</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Seek Forward Button</source>
+        <comment>Media controller element</comment>
+        <translation>Кнопка &quot;Перемотка вперёд&quot;</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Seek Back Button</source>
+        <comment>Media controller element</comment>
+        <translation>Кнопка &quot;Перемотка назад&quot;</translation>
+    </message>
+    <message>
+        <location line="+8"/>
+        <source>Audio element playback controls and status display</source>
+        <comment>Media controller element</comment>
+        <translation>Элементы управления воспроизведением звука и отображением состояния</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Video element playback controls and status display</source>
+        <comment>Media controller element</comment>
+        <translation>Элементы управления воспроизведением видео и отображением состояния</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Mute audio tracks</source>
+        <comment>Media controller element</comment>
+        <translation>Отключить звуковые дорожки</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Unmute audio tracks</source>
+        <comment>Media controller element</comment>
+        <translation>Включить звуковые дорожки</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Begin playback</source>
+        <comment>Media controller element</comment>
+        <translation>Начать воспроизведение</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Pause playback</source>
+        <comment>Media controller element</comment>
+        <translation>Приостановить воспроизведение</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Movie time scrubber</source>
+        <comment>Media controller element</comment>
+        <translation type="unfinished">Перемотка</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Movie time scrubber thumb</source>
+        <comment>Media controller element</comment>
+        <translation type="unfinished">Позиция перемотки</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Rewind movie</source>
+        <comment>Media controller element</comment>
+        <translation>Перемотка в начало</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Return streaming movie to real-time</source>
+        <comment>Media controller element</comment>
+        <translation type="unfinished">Возвращает потоковое видео к воспроизведению в реальном времени</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Current movie time</source>
+        <comment>Media controller element</comment>
+        <translation>Текущее время фильма</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Remaining movie time</source>
+        <comment>Media controller element</comment>
+        <translation>Оставшееся время фильма</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Current movie status</source>
+        <comment>Media controller element</comment>
+        <translation>Текущее состояние фильма</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Play movie in full-screen mode</source>
+        <comment>Media controller element</comment>
+        <translation>Воспроизведение в режиме отображения на весь экран</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Seek quickly back</source>
+        <comment>Media controller element</comment>
+        <translation>Быстрая перемотка назад</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Seek quickly forward</source>
+        <comment>Media controller element</comment>
+        <translation>Быстрая перемотка вперёд</translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>Indefinite time</source>
+        <comment>Media time description</comment>
+        <translation>Время не определено</translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>%1 days %2 hours %3 minutes %4 seconds</source>
+        <comment>Media time description</comment>
+        <translation>%1 дней %2 часов %3 минут %4 секунд</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>%1 hours %2 minutes %3 seconds</source>
+        <comment>Media time description</comment>
+        <translation>%1 часов %2 минут %3 секунд</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>%1 minutes %2 seconds</source>
+        <comment>Media time description</comment>
+        <translation>%1 минут %2 секунд</translation>
+    </message>
+    <message>
+        <location line="+3"/>
+        <source>%1 seconds</source>
+        <comment>Media time description</comment>
+        <translation>%1 секунд</translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/3rdparty/webkit/WebCore/platform/qt/FileChooserQt.cpp" line="+45"/>
+        <source>%n file(s)</source>
+        <comment>number of chosen file</comment>
+        <translation>
+            <numerusform>%n файл(а)</numerusform>
+            <numerusform>%n файла</numerusform>
+            <numerusform>%n файлов</numerusform>
+        </translation>
+    </message>
 </context>
 <context>
     <name>QWhatsThisAction</name>
     <message>
-        <location filename="../src/gui/kernel/qwhatsthis.cpp" line="+527"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/kernel/qwhatsthis.cpp" line="+527"/>
         <source>What&apos;s This?</source>
         <translation>Что это?</translation>
     </message>
@@ -8034,7 +9526,7 @@ Please choose a different file name.</source>
 <context>
     <name>QWidget</name>
     <message>
-        <location filename="../src/gui/kernel/qwidget.cpp" line="+5761"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/kernel/qwidget.cpp" line="+5896"/>
         <source>*</source>
         <translation>*</translation>
     </message>
@@ -8042,7 +9534,32 @@ Please choose a different file name.</source>
 <context>
     <name>QWizard</name>
     <message>
-        <location filename="../src/gui/dialogs/qwizard.cpp" line="+649"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qwizard.cpp" line="+701"/>
+        <source>Cancel</source>
+        <translation>Отмена</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>Help</source>
+        <translation>Справка</translation>
+    </message>
+    <message>
+        <location line="-14"/>
+        <source>&lt; &amp;Back</source>
+        <translation>&lt; &amp;Назад</translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>&amp;Finish</source>
+        <translation>&amp;Завершить</translation>
+    </message>
+    <message>
+        <location line="+4"/>
+        <source>&amp;Help</source>
+        <translation>&amp;Справка</translation>
+    </message>
+    <message>
+        <location line="-14"/>
         <source>Go Back</source>
         <translation>Назад</translation>
     </message>
@@ -8062,32 +9579,7 @@ Please choose a different file name.</source>
         <translation>Готово</translation>
     </message>
     <message>
-        <location line="+4"/>
-        <source>Help</source>
-        <translation>Справка</translation>
-    </message>
-    <message>
-        <location line="-14"/>
-        <source>&lt; &amp;Back</source>
-        <translation>&lt; &amp;Назад</translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>&amp;Finish</source>
-        <translation>&amp;Завершить</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>Cancel</source>
-        <translation>Отмена</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>&amp;Help</source>
-        <translation>&amp;Справка</translation>
-    </message>
-    <message>
-        <location line="-8"/>
+        <location line="-4"/>
         <source>&amp;Next</source>
         <translation>&amp;Далее</translation>
     </message>
@@ -8100,7 +9592,7 @@ Please choose a different file name.</source>
 <context>
     <name>QWorkspace</name>
     <message>
-        <location filename="../src/gui/widgets/qworkspace.cpp" line="+1089"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/widgets/qworkspace.cpp" line="+1089"/>
         <source>&amp;Restore</source>
         <translation>&amp;Восстановить</translation>
     </message>
@@ -8135,19 +9627,7 @@ Please choose a different file name.</source>
         <translation>Оставаться &amp;сверху</translation>
     </message>
     <message>
-        <location line="+3"/>
-        <location line="+1059"/>
-        <source>Sh&amp;ade</source>
-        <translation>Св&amp;ернуть в заголовок</translation>
-    </message>
-    <message>
-        <location line="-278"/>
-        <location line="+60"/>
-        <source>%1 - [%2]</source>
-        <translation>%1 - [%2]</translation>
-    </message>
-    <message>
-        <location line="-1832"/>
+        <location line="-988"/>
         <source>Minimize</source>
         <translation>Свернуть</translation>
     </message>
@@ -8162,7 +9642,19 @@ Please choose a different file name.</source>
         <translation>Закрыть</translation>
     </message>
     <message>
-        <location line="+2048"/>
+        <location line="+993"/>
+        <location line="+1059"/>
+        <source>Sh&amp;ade</source>
+        <translation>Св&amp;ернуть в заголовок</translation>
+    </message>
+    <message>
+        <location line="-278"/>
+        <location line="+60"/>
+        <source>%1 - [%2]</source>
+        <translation>%1 - [%2]</translation>
+    </message>
+    <message>
+        <location line="+214"/>
         <source>&amp;Unshade</source>
         <translation>В&amp;осстановить из заголовка</translation>
     </message>
@@ -8170,7 +9662,7 @@ Please choose a different file name.</source>
 <context>
     <name>QXml</name>
     <message>
-        <location filename="../src/xml/sax/qxml.cpp" line="+58"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xml/sax/qxml.cpp" line="+58"/>
         <source>no error occurred</source>
         <translation>ошибки отсутствуют</translation>
     </message>
@@ -8225,17 +9717,7 @@ Please choose a different file name.</source>
         <translation>некорректное значение параметра standalone</translation>
     </message>
     <message>
-        <location line="+1"/>
-        <source>encoding declaration or standalone declaration expected while reading the XML declaration</source>
-        <translation>в объявлении XML ожидаются параметры encoding или standalone</translation>
-    </message>
-    <message>
-        <location line="+1"/>
-        <source>standalone declaration expected while reading the XML declaration</source>
-        <translation>в объявлении XML ожидается параметр standalone</translation>
-    </message>
-    <message>
-        <location line="+1"/>
+        <location line="+3"/>
         <source>error occurred while parsing document type definition</source>
         <translation>ошибка разбора объявления типа документа</translation>
     </message>
@@ -8272,7 +9754,7 @@ Please choose a different file name.</source>
     <message>
         <location line="+1"/>
         <source>unparsed entity reference in wrong context</source>
-        <translation>неразобранная ссылка на объект в неверном контексте</translation>
+        <translation>неразобранная ссылка на объект в неправильном контексте</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -8284,11 +9766,21 @@ Please choose a different file name.</source>
         <source>error in the text declaration of an external entity</source>
         <translation>ошибка в объявлении внешнего объекта</translation>
     </message>
+    <message>
+        <location line="-11"/>
+        <source>encoding declaration or standalone declaration expected while reading the XML declaration</source>
+        <translation>в объявлении XML ожидаются параметры encoding или standalone</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>standalone declaration expected while reading the XML declaration</source>
+        <translation>в объявлении XML ожидается параметр standalone</translation>
+    </message>
 </context>
 <context>
     <name>QXmlPatternistCLI</name>
     <message>
-        <location filename="../src/xmlpatterns/api/qcoloringmessagehandler.cpp" line="+87"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/api/qcoloringmessagehandler.cpp" line="+87"/>
         <source>Warning in %1, at line %2, column %3: %4</source>
         <translation>Предупреждение в %1, в строке %2, столбце %3: %4</translation>
     </message>
@@ -8316,8 +9808,8 @@ Please choose a different file name.</source>
 <context>
     <name>QXmlStream</name>
     <message>
-        <location filename="../src/corelib/xml/qxmlstream.cpp" line="+611"/>
-        <location filename="../src/corelib/xml/qxmlstream_p.h" line="+1770"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/xml/qxmlstream.cpp" line="+611"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/xml/qxmlstream_p.h" line="+1770"/>
         <source>Extra content at end of document.</source>
         <translation>Лишние данные в конце документа.</translation>
     </message>
@@ -8334,12 +9826,12 @@ Please choose a different file name.</source>
     <message>
         <location line="+259"/>
         <source>Sequence &apos;]]&gt;&apos; not allowed in content.</source>
-        <translation>Последовательность &apos;]]&gt;&apos; недопустима в содержимом.</translation>
+        <translation>Последовательность &quot;]]&gt;&quot; недопустима в содержимом.</translation>
     </message>
     <message>
         <location line="+309"/>
         <source>Namespace prefix &apos;%1&apos; not declared</source>
-        <translation>Префикс пространства имён &apos;%1&apos; не объявлен</translation>
+        <translation>Префикс пространства имён &quot;%1&quot; не объявлен</translation>
     </message>
     <message>
         <location line="+78"/>
@@ -8349,12 +9841,12 @@ Please choose a different file name.</source>
     <message>
         <location line="+115"/>
         <source>Unexpected character &apos;%1&apos; in public id literal.</source>
-        <translation>Неожиданный символ &apos;%1&apos; в литерале открытого идентификатора.</translation>
+        <translation>Неожиданный символ &quot;%1&quot; в литерале открытого идентификатора.</translation>
     </message>
     <message>
         <location line="+28"/>
         <source>Invalid XML version string.</source>
-        <translation>Неверная строка версии XML.</translation>
+        <translation>Некорректная строка версии XML.</translation>
     </message>
     <message>
         <location line="+2"/>
@@ -8364,7 +9856,7 @@ Please choose a different file name.</source>
     <message>
         <location line="+23"/>
         <source>%1 is an invalid encoding name.</source>
-        <translation>%1 - неверное название кодировки.</translation>
+        <translation>%1 - не является корректным названием кодировки.</translation>
     </message>
     <message>
         <location line="+7"/>
@@ -8374,7 +9866,7 @@ Please choose a different file name.</source>
     <message>
         <location line="+16"/>
         <source>Standalone accepts only yes or no.</source>
-        <translation>Псевдоатрибут &apos;standalone&apos; может принимать только значения &apos;yes&apos; или &apos;no&apos;.</translation>
+        <translation>Псевдоатрибут &quot;standalone&quot; может принимать только значения &quot;yes&quot; или &quot;no&quot;.</translation>
     </message>
     <message>
         <location line="+2"/>
@@ -8412,7 +9904,7 @@ Please choose a different file name.</source>
         <translation>Ожидаются символьные данные.</translation>
     </message>
     <message>
-        <location filename="../src/corelib/xml/qxmlstream_p.h" line="-995"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/xml/qxmlstream_p.h" line="-995"/>
         <source>Recursive entity detected.</source>
         <translation>Обнаружен рекурсивный объект.</translation>
     </message>
@@ -8434,23 +9926,23 @@ Please choose a different file name.</source>
     <message>
         <location line="+34"/>
         <source>%1 is an invalid processing instruction name.</source>
-        <translation>%1 неверное название обрабатываемой инструкции.</translation>
+        <translation>%1 не является корректным названием обрабатываемой инструкции.</translation>
     </message>
     <message>
         <location line="+11"/>
         <source>Invalid processing instruction name.</source>
-        <translation>Неверное название обрабатываемой инструкции.</translation>
+        <translation>Некорректное название обрабатываемой инструкции.</translation>
     </message>
     <message>
-        <location filename="../src/corelib/xml/qxmlstream.cpp" line="-536"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/xml/qxmlstream.cpp" line="-536"/>
         <location line="+12"/>
-        <location filename="../src/corelib/xml/qxmlstream_p.h" line="+164"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/xml/qxmlstream_p.h" line="+164"/>
         <location line="+53"/>
         <source>Illegal namespace declaration.</source>
-        <translation>Неверное объявление пространства имён.</translation>
+        <translation>Некорректное объявление пространства имён.</translation>
     </message>
     <message>
-        <location filename="../src/corelib/xml/qxmlstream_p.h" line="+15"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/xml/qxmlstream_p.h" line="+15"/>
         <source>Invalid XML name.</source>
         <translation>Некорректное имя XML.</translation>
     </message>
@@ -8462,387 +9954,118 @@ Please choose a different file name.</source>
     <message>
         <location line="+18"/>
         <source>Reference to unparsed entity &apos;%1&apos;.</source>
-        <translation>Ссылка на необработанный объект &apos;%1&apos;.</translation>
+        <translation>Ссылка на необработанный объект &quot;%1&quot;.</translation>
     </message>
     <message>
         <location line="-13"/>
         <location line="+61"/>
         <location line="+40"/>
         <source>Entity &apos;%1&apos; not declared.</source>
-        <translation>Объект &apos;%1&apos; не объявлен.</translation>
+        <translation>Объект &quot;%1&quot; не объявлен.</translation>
     </message>
     <message>
         <location line="-26"/>
         <source>Reference to external entity &apos;%1&apos; in attribute value.</source>
-        <translation>Ссылка на внешний объект &apos;%1&apos; в значении атрибута.</translation>
+        <translation>Ссылка на внешний объект &quot;%1&quot; в значении атрибута.</translation>
     </message>
     <message>
         <location line="+40"/>
         <source>Invalid character reference.</source>
-        <translation>Неверная символьная ссылка.</translation>
+        <translation>Некорректная символьная ссылка.</translation>
     </message>
     <message>
-        <location filename="../src/corelib/xml/qxmlstream.cpp" line="-75"/>
-        <location filename="../src/corelib/xml/qxmlstream_p.h" line="-823"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/xml/qxmlstream.cpp" line="-75"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/xml/qxmlstream_p.h" line="-823"/>
         <source>Encountered incorrectly encoded content.</source>
-        <translation>Обнаружено неверно закодированное содержимое.</translation>
+        <translation>Обнаружено некорректно закодированное содержимое.</translation>
     </message>
     <message>
         <location line="+274"/>
         <source>The standalone pseudo attribute must appear after the encoding.</source>
-        <translation>Псевдоатрибут &apos;standalone&apos; должен находиться после указания кодировки.</translation>
+        <translation>Псевдоатрибут &quot;standalone&quot; должен находиться после указания кодировки.</translation>
     </message>
     <message>
-        <location filename="../src/corelib/xml/qxmlstream_p.h" line="+562"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/xml/qxmlstream_p.h" line="+562"/>
         <source>%1 is an invalid PUBLIC identifier.</source>
-        <translation>%1 - неверный идентификатор PUBLIC.</translation>
+        <translation>%1 - некорректный идентификатор PUBLIC.</translation>
     </message>
 </context>
 <context>
     <name>QtXmlPatterns</name>
     <message>
-        <location filename="../src/xmlpatterns/api/qiodevicedelegate.cpp" line="+84"/>
-        <source>Network timeout.</source>
-        <translation>Время ожидания сети истекло.</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/api/qxmlserializer.cpp" line="+320"/>
-        <source>Element %1 can&apos;t be serialized because it appears outside the document element.</source>
-        <translation>Элемент %1 не может быть сериализован, так как присутствует вне документа.</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/data/qabstractdatetime.cpp" line="+80"/>
-        <source>Year %1 is invalid because it begins with %2.</source>
-        <translation>Год %1 неверен, так как начинается с %2.</translation>
-    </message>
-    <message>
-        <location line="+19"/>
-        <source>Day %1 is outside the range %2..%3.</source>
-        <translation>День %1 вне диапазона %2..%3.</translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>Month %1 is outside the range %2..%3.</source>
-        <translation>Месяц %1 вне диапазона %2..%3.</translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>Overflow: Can&apos;t represent date %1.</source>
-        <translation>Переполнение: Не удаётся представить дату %1.</translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <source>Day %1 is invalid for month %2.</source>
-        <translation>День %1 неверен для месяца %2.</translation>
-    </message>
-    <message>
-        <location line="+49"/>
-        <source>Time 24:%1:%2.%3 is invalid. Hour is 24, but minutes, seconds, and milliseconds are not all 0; </source>
-        <translation>Время 24:%1:%2.%3 неверно. 24 часа, но минуты, секунды и/или миллисекунды отличны от 0; </translation>
-    </message>
-    <message>
-        <location line="+13"/>
-        <source>Time %1:%2:%3.%4 is invalid.</source>
-        <translation>Время %1:%2:%3.%4 неверно.</translation>
-    </message>
-    <message>
-        <location line="+115"/>
-        <source>Overflow: Date can&apos;t be represented.</source>
-        <translation>Переполнение: невозможно представить дату.</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/data/qabstractduration.cpp" line="+99"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/data/qabstractduration.cpp" line="+99"/>
         <location line="+15"/>
         <source>At least one component must be present.</source>
         <translation>Должна присутствовать как минимум одна компонента.</translation>
     </message>
     <message>
-        <location line="-7"/>
-        <source>At least one time component must appear after the %1-delimiter.</source>
-        <translation>Как минимум одна компонента времени должна следовать за разделителем &apos;%1&apos;.</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/data/qanyuri_p.h" line="+132"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/data/qanyuri_p.h" line="+132"/>
         <source>%1 is not a valid value of type %2.</source>
         <translation>%1 не является правильным значением типа %2.</translation>
     </message>
     <message>
-        <location filename="../src/xmlpatterns/data/qatomiccasters_p.h" line="+223"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/data/qatomiccasters_p.h" line="+223"/>
         <source>When casting to %1 from %2, the source value cannot be %3.</source>
         <translation>При преобразовании %2 в %1 исходное значение не может быть %3.</translation>
     </message>
     <message>
-        <location filename="../src/xmlpatterns/data/qatomicmathematicians.cpp" line="+65"/>
-        <source>Integer division (%1) by zero (%2) is undefined.</source>
-        <translation>Целочисленное деление (%1) на нуль (%2) не определено.</translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>Division (%1) by zero (%2) is undefined.</source>
-        <translation>Деление (%1) на нуль (%2) не определено.</translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>Modulus division (%1) by zero (%2) is undefined.</source>
-        <translation>Деление по модулю (%1) на нуль (%2) не определено.</translation>
-    </message>
-    <message>
-        <location line="+122"/>
-        <location line="+32"/>
-        <source>Dividing a value of type %1 by %2 (not-a-number) is not allowed.</source>
-        <translation>Деление числа типа %1 на %2 (не числовое выражение) недопустимо.</translation>
-    </message>
-    <message>
-        <location line="-20"/>
-        <source>Dividing a value of type %1 by %2 or %3 (plus or minus zero) is not allowed.</source>
-        <translation>Деление числа типа %1 на %2 или %3 (плюс или минус нуль) недопустимо.</translation>
-    </message>
-    <message>
-        <location line="+32"/>
-        <source>Multiplication of a value of type %1 by %2 or %3 (plus or minus infinity) is not allowed.</source>
-        <translation>Умножение числа типа %1 на %2 или %3 (плюс-минус бесконечность) недопустимо.</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/data/qatomicvalue.cpp" line="+79"/>
-        <source>A value of type %1 cannot have an Effective Boolean Value.</source>
-        <translation>Значение типа %1 не может быть булевым значением.</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/data/qboolean.cpp" line="+78"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/data/qboolean.cpp" line="+78"/>
         <source>Effective Boolean Value cannot be calculated for a sequence containing two or more atomic values.</source>
         <translation>Булево значение не может быть вычислено для последовательностей, которые содержат два и более атомарных значения.</translation>
     </message>
     <message>
-        <location filename="../src/xmlpatterns/data/qderivedinteger_p.h" line="+402"/>
-        <source>Value %1 of type %2 exceeds maximum (%3).</source>
-        <translation>Значение %1 типа %2 больше максимума (%3).</translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <source>Value %1 of type %2 is below minimum (%3).</source>
-        <translation>Значение %1 типа %2 меньше минимума (%3).</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/data/qhexbinary.cpp" line="+91"/>
-        <source>A value of type %1 must contain an even number of digits. The value %2 does not.</source>
-        <translation>Значение типа %1 должно содержать четное количество цифр. Значение %2 этому требованию не удовлетворяет.</translation>
-    </message>
-    <message>
-        <location line="+19"/>
-        <source>%1 is not valid as a value of type %2.</source>
-        <translation>Значение %1 некорректно для типа %2.</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/expr/qarithmeticexpression.cpp" line="+207"/>
-        <source>Operator %1 cannot be used on type %2.</source>
-        <translation>Оператор %1 не может использоваться для типа %2.</translation>
-    </message>
-    <message>
-        <location line="+17"/>
-        <source>Operator %1 cannot be used on atomic values of type %2 and %3.</source>
-        <translation>Оператор %1 не может использоваться для атомарных значений типов %2 и %3.</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/expr/qattributenamevalidator.cpp" line="+66"/>
-        <source>The namespace URI in the name for a computed attribute cannot be %1.</source>
-        <translation>URI пространства имён в названии рассчитываемого атрибута не может быть %1.</translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <source>The name for a computed attribute cannot have the namespace URI %1 with the local name %2.</source>
-        <translation>Название расчитываемого атрибута не может иметь URI пространства имён %1 с локальным именем %2.</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/expr/qcastas.cpp" line="+88"/>
-        <source>Type error in cast, expected %1, received %2.</source>
-        <translation>Ошибка типов в преобразовании, ожидалось %1, получено %2.</translation>
-    </message>
-    <message>
-        <location line="+29"/>
-        <source>When casting to %1 or types derived from it, the source value must be of the same type, or it must be a string literal. Type %2 is not allowed.</source>
-        <translation>При преобразовании в %1 или производные от него типы исходное значение должно быть того же типа или строковым литералом. Тип %2 недопустим.</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/expr/qcommentconstructor.cpp" line="+67"/>
-        <source>A comment cannot contain %1</source>
-        <translation>Комментарий не может содержать %1</translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>A comment cannot end with a %1.</source>
-        <translation>Комментарий не может оканчиваться на %1.</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/expr/qdocumentcontentvalidator.cpp" line="+86"/>
-        <source>An attribute node cannot be a child of a document node. Therefore, the attribute %1 is out of place.</source>
-        <translation>Узел-атрибут не может быть потомком узла-документа. Атрибут %1 неуместен.</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/expr/qexpressionfactory.cpp" line="+162"/>
-        <source>A library module cannot be evaluated directly. It must be imported from a main module.</source>
-        <translation>Модуль библиотеки не может использоваться напрямую. Он должен быть импортирован из основного модуля.</translation>
-    </message>
-    <message>
-        <location line="+40"/>
-        <source>No template by name %1 exists.</source>
-        <translation>Шаблон с именем %1 отсутствует.</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/expr/qgenericpredicate.cpp" line="+106"/>
-        <source>A value of type %1 cannot be a predicate. A predicate must have either a numeric type or an Effective Boolean Value type.</source>
-        <translation>Значение типа %1 не может быть условием. Условием могут являться числовой и булевый типы.</translation>
-    </message>
-    <message>
-        <location line="+32"/>
-        <source>A positional predicate must evaluate to a single numeric value.</source>
-        <translation>Позиционный предикат должен вычисляться как числовое выражение.</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/expr/qncnameconstructor_p.h" line="+113"/>
-        <source>The target name in a processing instruction cannot be %1 in any combination of upper and lower case. Therefore, %2 is invalid.</source>
-        <translation>Целевое имя в обрабатываемой инструкции не может быть %1 в любой комбинации нижнего и верхнего регистров. Имя %2 некорректно.</translation>
-    </message>
-    <message>
-        <location line="+24"/>
-        <source>%1 is not a valid target name in a processing instruction. It must be a %2 value, e.g. %3.</source>
-        <translation>%1 некорректное целевое имя в обрабатываемой инструкции. Имя должно быть значением типа %2, например: %3.</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/expr/qpath.cpp" line="+109"/>
-        <source>The last step in a path must contain either nodes or atomic values. It cannot be a mixture between the two.</source>
-        <translation>Последняя часть пути должна содержать узлы или атомарные значения, но не может содержать и то, и другое одновременно.</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/expr/qprocessinginstructionconstructor.cpp" line="+84"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/expr/qprocessinginstructionconstructor.cpp" line="+84"/>
         <source>The data of a processing instruction cannot contain the string %1</source>
-        <translation>Данные обрабатываемой инструкции не могут содержать строку &apos;%1&apos;</translation>
+        <translation>Данные обрабатываемой инструкции не могут содержать строку &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../src/xmlpatterns/expr/qqnameconstructor.cpp" line="+82"/>
-        <source>No namespace binding exists for the prefix %1</source>
-        <translation>Отсутствует привязка к пространству имён для префикса %1</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/expr/qqnameconstructor_p.h" line="+156"/>
-        <source>No namespace binding exists for the prefix %1 in %2</source>
-        <translation>Отсутствует привязка к пространству имён для префикса %1 в %2</translation>
-    </message>
-    <message>
-        <location line="+12"/>
-        <location filename="../src/xmlpatterns/functions/qqnamefns.cpp" line="+69"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/expr/qqnameconstructor_p.h" line="+168"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/functions/qqnamefns.cpp" line="+69"/>
         <source>%1 is an invalid %2</source>
         <translation>%1 некоррекно для %2</translation>
     </message>
-    <message numerus="yes">
-        <location filename="../src/xmlpatterns/functions/qabstractfunctionfactory.cpp" line="+77"/>
-        <source>%1 takes at most %n argument(s). %2 is therefore invalid.</source>
-        <translation>
-            <numerusform>%1 принимает не более %n аргумента. Следовательно, %2 неверно.</numerusform>
-            <numerusform>%1 принимает не более %n аргументов. Следовательно, %2 неверно.</numerusform>
-            <numerusform>%1 принимает не более %n аргументов. Следовательно, %2 неверно.</numerusform>
-        </translation>
-    </message>
-    <message numerus="yes">
-        <location line="+11"/>
-        <source>%1 requires at least %n argument(s). %2 is therefore invalid.</source>
-        <translation>
-            <numerusform>%1 принимает не менее %n аргумента. Следовательно, %2 неверно.</numerusform>
-            <numerusform>%1 принимает не менее %n аргументов. Следовательно, %2 неверно.</numerusform>
-            <numerusform>%1 принимает не менее %n аргументов. Следовательно, %2 неверно.</numerusform>
-        </translation>
-    </message>
     <message>
-        <location filename="../src/xmlpatterns/functions/qaggregatefns.cpp" line="+120"/>
-        <source>The first argument to %1 cannot be of type %2. It must be a numeric type, xs:yearMonthDuration or xs:dayTimeDuration.</source>
-        <translation>Первый аргумент %1 не может быть типа %2. Он должен быть числового типа, типа xs:yearMonthDuration или типа xs:dayTimeDuration.</translation>
-    </message>
-    <message>
-        <location line="+74"/>
-        <source>The first argument to %1 cannot be of type %2. It must be of type %3, %4, or %5.</source>
-        <translation>Первый аргумент %1 не может быть типа %2. Он должен быть типа %3, %4 или %5.</translation>
-    </message>
-    <message>
-        <location line="+91"/>
-        <source>The second argument to %1 cannot be of type %2. It must be of type %3, %4, or %5.</source>
-        <translation>Второй аргумент %1 не может быть типа %2. Он должен быть типа %3, %4 или %5.</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/functions/qassemblestringfns.cpp" line="+88"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/functions/qassemblestringfns.cpp" line="+88"/>
         <source>%1 is not a valid XML 1.0 character.</source>
         <translation>Символ %1 недопустим для XML 1.0.</translation>
     </message>
     <message>
-        <location filename="../src/xmlpatterns/functions/qdatetimefn.cpp" line="+86"/>
-        <source>If both values have zone offsets, they must have the same zone offset. %1 and %2 are not the same.</source>
-        <translation>Если оба значения имеют региональные смещения, смещения должны быть одинаковы. %1 и %2 не одинаковы.</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/functions/qerrorfn.cpp" line="+61"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/functions/qerrorfn.cpp" line="+61"/>
         <source>%1 was called.</source>
         <translation>%1 было вызвано.</translation>
     </message>
     <message>
-        <location filename="../src/xmlpatterns/functions/qpatternmatchingfns.cpp" line="+94"/>
-        <source>%1 must be followed by %2 or %3, not at the end of the replacement string.</source>
-        <translation>&apos;%1&apos; должно сопровождаться &apos;%2&apos; или &apos;%3&apos;, но не в конце замещаемой строки.</translation>
-    </message>
-    <message>
-        <location line="+39"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/functions/qpatternmatchingfns.cpp" line="+133"/>
         <source>In the replacement string, %1 must be followed by at least one digit when not escaped.</source>
-        <translation>В замещаемой строке &apos;%1&apos; должно сопровождаться как минимум одной цифрой, если неэкранировано.</translation>
+        <translation>В замещаемой строке &quot;%1&quot; должно сопровождаться как минимум одной цифрой, если неэкранировано.</translation>
     </message>
     <message>
         <location line="+26"/>
         <source>In the replacement string, %1 can only be used to escape itself or %2, not %3</source>
-        <translation>В замещаемой строке символ &apos;%1&apos; может использоваться только для экранирования самого себя или &apos;%2&apos;, но не &apos;%3&apos;</translation>
+        <translation>В замещаемой строке символ &quot;%1&quot; может использоваться только для экранирования самого себя или &quot;%2&quot;, но не &quot;%3&quot;</translation>
     </message>
     <message>
-        <location filename="../src/xmlpatterns/functions/qpatternplatform.cpp" line="+92"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/functions/qpatternplatform.cpp" line="+92"/>
         <source>%1 matches newline characters</source>
         <translation>%1 соответствует символам конца строки</translation>
     </message>
     <message>
-        <location line="+4"/>
-        <source>%1 and %2 match the start and end of a line.</source>
-        <translation>%1 и %2 соответствуют началу и концу строки.</translation>
-    </message>
-    <message>
-        <location line="+6"/>
+        <location line="+10"/>
         <source>Matches are case insensitive</source>
         <translation>Соответствия регистронезависимы</translation>
     </message>
     <message>
-        <location line="+4"/>
-        <source>Whitespace characters are removed, except when they appear in character classes</source>
-        <translation type="unfinished">Символы пробелов удалены, за исключением тех, что были в классах символов</translation>
-    </message>
-    <message>
-        <location line="+100"/>
+        <location line="+104"/>
         <source>%1 is an invalid regular expression pattern: %2</source>
-        <translation>%1 - неверный шаблон регулярного выражения: %2</translation>
+        <translation>%1 - некорректный шаблон регулярного выражения: %2</translation>
     </message>
     <message>
-        <location line="+30"/>
-        <source>%1 is an invalid flag for regular expressions. Valid flags are:</source>
-        <translation>%1 - неверный флаг для регулярного выражения. Допустимые флаги:</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/functions/qqnamefns.cpp" line="+17"/>
-        <source>If the first argument is the empty sequence or a zero-length string (no namespace), a prefix cannot be specified. Prefix %1 was specified.</source>
-        <translation>Префикс не должен быть указан, если первый параметр - пустая последовательность или пустая строка (вне пространства имён). Был указан префикс %1.</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/functions/qsequencefns.cpp" line="+346"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/functions/qsequencefns.cpp" line="+346"/>
         <source>It will not be possible to retrieve %1.</source>
         <translation>Будет невозможно восстановить %1.</translation>
     </message>
     <message>
-        <location filename="../src/xmlpatterns/functions/qcontextnodechecker.cpp" line="+54"/>
-        <source>The root node of the second argument to function %1 must be a document node. %2 is not a document node.</source>
-        <translation>Корневой узел второго аргумента функции %1 должен быть документом. %2 не является документом.</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/functions/qsequencegeneratingfns.cpp" line="+266"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/functions/qsequencegeneratingfns.cpp" line="+266"/>
         <source>The default collection is undefined</source>
         <translation>Набор по умолчанию не определён</translation>
     </message>
@@ -8852,32 +10075,12 @@ Please choose a different file name.</source>
         <translation>%1 не может быть восстановлен</translation>
     </message>
     <message>
-        <location filename="../src/xmlpatterns/functions/qstringvaluefns.cpp" line="+252"/>
-        <source>The normalization form %1 is unsupported. The supported forms are %2, %3, %4, and %5, and none, i.e. the empty string (no normalization).</source>
-        <translation>Форма нормализации %1 не поддерживается. Поддерживаются только %2, %3, %4, %5 и пустая, т.е. пустая строка (без нормализации).</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/functions/qtimezonefns.cpp" line="+87"/>
-        <source>A zone offset must be in the range %1..%2 inclusive. %3 is out of range.</source>
-        <translation>Региональное смещение должно быть в переделах от %1 до %2 включительно. %3 выходит за допустимые пределы.</translation>
-    </message>
-    <message>
-        <location line="+12"/>
-        <source>%1 is not a whole number of minutes.</source>
-        <translation>%1 не является полным количеством минут.</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/janitors/qcardinalityverifier.cpp" line="+58"/>
-        <source>Required cardinality is %1; got cardinality %2.</source>
-        <translation>Необходимо %1 элементов, получено %2.</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/janitors/qitemverifier.cpp" line="+67"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/janitors/qitemverifier.cpp" line="+67"/>
         <source>The item %1 did not match the required type %2.</source>
         <translation>Элемент %1 не соответствует необходимому типу %2.</translation>
     </message>
     <message>
-        <location filename="../src/xmlpatterns/parser/qquerytransformparser.cpp" line="+352"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/parser/qquerytransformparser.cpp" line="+352"/>
         <location line="+7323"/>
         <source>%1 is an unknown schema type.</source>
         <translation>%1 является схемой неизвестного типа.</translation>
@@ -8898,43 +10101,22 @@ Please choose a different file name.</source>
         <translation>Инициализация переменной %1 зависит от себя самой</translation>
     </message>
     <message>
-        <location filename="../src/xmlpatterns/parser/qparsercontext.cpp" line="+93"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/parser/qparsercontext.cpp" line="+93"/>
         <source>The variable %1 is unused</source>
         <translation>Переменная %1 не используется</translation>
     </message>
     <message>
-        <location filename="../src/xmlpatterns/parser/qquerytransformparser.cpp" line="+2904"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/parser/qquerytransformparser.cpp" line="+2904"/>
         <source>Version %1 is not supported. The supported XQuery version is 1.0.</source>
         <translation>Версия %1 не поддерживается. Поддерживается XQuery версии 1.0.</translation>
     </message>
     <message>
-        <location line="+16"/>
-        <source>The encoding %1 is invalid. It must contain Latin characters only, must not contain whitespace, and must match the regular expression %2.</source>
-        <translation>Кодировка %1 неверна. Имя кодировки должно содержать только символы латиницы без пробелов и должно удовлетворять регулярному выражению %2.</translation>
-    </message>
-    <message>
-        <location line="+55"/>
+        <location line="+71"/>
         <source>No function with signature %1 is available</source>
         <translation>Функция с сигнатурой %1 отсутствует</translation>
     </message>
     <message>
-        <location line="+72"/>
-        <location line="+10"/>
-        <source>A default namespace declaration must occur before function, variable, and option declarations.</source>
-        <translation>Объявление пространство имён по умолчанию должно быть до объявления функций, переменных и опций.</translation>
-    </message>
-    <message>
-        <location line="+10"/>
-        <source>Namespace declarations must occur before function, variable, and option declarations.</source>
-        <translation>Объявление пространства имён должно быть до объявления функций, переменных и опций.</translation>
-    </message>
-    <message>
-        <location line="+11"/>
-        <source>Module imports must occur before function, variable, and option declarations.</source>
-        <translation>Импортируемые модули должны быть указаны до объявления функций, переменных и опций.</translation>
-    </message>
-    <message>
-        <location line="+200"/>
+        <location line="+303"/>
         <source>It is not possible to redeclare prefix %1.</source>
         <translation>Невозможно переопределить префикс %1.</translation>
     </message>
@@ -8964,27 +10146,7 @@ Please choose a different file name.</source>
         <translation>Возможность импорта модулей не поддерживается</translation>
     </message>
     <message>
-        <location line="-403"/>
-        <source>The keyword %1 cannot occur with any other mode name.</source>
-        <translation>Ключевое слово %1 не может встречаться с любым другим названием режима.</translation>
-    </message>
-    <message>
-        <location line="+551"/>
-        <source>A stylesheet function must have a prefixed name.</source>
-        <translation>Функция стилей должна иметь имя с префиксом.</translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <source>The namespace for a user defined function cannot be empty (try the predefined prefix %1 which exists for cases like this)</source>
-        <translation>Пространство имён для пользовательских функций не может быть пустым (попробуйте предопределённый префикс %1, который существует для подобных ситуаций)</translation>
-    </message>
-    <message>
-        <location line="+9"/>
-        <source>The namespace %1 is reserved; therefore user defined functions may not use it. Try the predefined prefix %2, which exists for these cases.</source>
-        <translation>Пространтсво имён %1 зарезервировано, поэтому пользовательские функции не могут его использовать. Попробуйте предопределённый префикс %2, который существует для подобных ситуаций.</translation>
-    </message>
-    <message>
-        <location line="+12"/>
+        <location line="+178"/>
         <source>The namespace of a user defined function in a library module must be equivalent to the module namespace. In other words, it should be %1 instead of %2</source>
         <translation>Пространство имён пользовательской функции в модуле библиотеки должен соответствовать пространству имён модуля. Другими словами, он должен быть %1 вместо %2</translation>
     </message>
@@ -8999,7 +10161,334 @@ Please choose a different file name.</source>
         <translation>Внешние функции не поддерживаются. Все поддерживаемые функции могут использоваться напрямую без первоначального объявления их в качестве внешних</translation>
     </message>
     <message>
-        <location line="-3755"/>
+        <location line="+1709"/>
+        <source>The %1-axis is unsupported in XQuery</source>
+        <translation>Ось %1 не поддерживается в XQuery</translation>
+    </message>
+    <message>
+        <location line="+435"/>
+        <source>The namespace URI cannot be the empty string when binding to a prefix, %1.</source>
+        <translation>URI пространства имён не может быть пустой строкой при связывании с префиксом %1.</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>%1 is an invalid namespace URI.</source>
+        <translation>%1 - некорректный URI пространства имён.</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>It is not possible to bind to the prefix %1</source>
+        <translation>Невозможно связать с префиксом %1</translation>
+    </message>
+    <message>
+        <location line="+30"/>
+        <source>Two namespace declaration attributes have the same name: %1.</source>
+        <translation>Два атрибута объявления пространств имён имеют одинаковое имя: %1.</translation>
+    </message>
+    <message>
+        <location line="+89"/>
+        <source>The namespace URI must be a constant and cannot use enclosed expressions.</source>
+        <translation>URI пространства имён должен быть константой и не может содержать выражений.</translation>
+    </message>
+    <message>
+        <location line="+699"/>
+        <location line="+71"/>
+        <source>%1 is not in the in-scope attribute declarations. Note that the schema import feature is not supported.</source>
+        <translation>%1 является объявлением атрибута вне области объявлений. Имейте в виду, возможность импорта схем не поддерживается.</translation>
+    </message>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/type/qcardinality.cpp" line="+55"/>
+        <source>empty</source>
+        <translation>пусто</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>zero or one</source>
+        <translation>нуль или один</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>exactly one</source>
+        <translation>ровно один</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>one or more</source>
+        <translation>один или более</translation>
+    </message>
+    <message>
+        <location line="+2"/>
+        <source>zero or more</source>
+        <translation>нуль или более</translation>
+    </message>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/type/qtypechecker.cpp" line="+156"/>
+        <source>The focus is undefined.</source>
+        <translation>Фокус не определён.</translation>
+    </message>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/utils/qoutputvalidator.cpp" line="+93"/>
+        <source>An attribute by name %1 has already been created.</source>
+        <translation>Атрибут с именем %1 уже существует.</translation>
+    </message>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/api/qiodevicedelegate.cpp" line="+84"/>
+        <source>Network timeout.</source>
+        <translation>Время ожидания сети истекло.</translation>
+    </message>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/api/qxmlserializer.cpp" line="+320"/>
+        <source>Element %1 can&apos;t be serialized because it appears outside the document element.</source>
+        <translation>Элемент %1 не может быть сериализован, так как расположен вне документа.</translation>
+    </message>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/data/qabstractdatetime.cpp" line="+80"/>
+        <source>Year %1 is invalid because it begins with %2.</source>
+        <translation>Год %1 неверен, так как начинается с %2.</translation>
+    </message>
+    <message>
+        <location line="+19"/>
+        <source>Day %1 is outside the range %2..%3.</source>
+        <translation>День %1 вне диапазона %2..%3.</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Month %1 is outside the range %2..%3.</source>
+        <translation>Месяц %1 вне диапазона %2..%3.</translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>Overflow: Can&apos;t represent date %1.</source>
+        <translation>Переполнение: Не удаётся представить дату %1.</translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>Day %1 is invalid for month %2.</source>
+        <translation>День %1 неверен для месяца %2.</translation>
+    </message>
+    <message>
+        <location line="+49"/>
+        <source>Time 24:%1:%2.%3 is invalid. Hour is 24, but minutes, seconds, and milliseconds are not all 0; </source>
+        <translation>Время 24:%1:%2.%3 некорректно. 24 часа, но минуты, секунды и/или миллисекунды отличны от 0; </translation>
+    </message>
+    <message>
+        <location line="+13"/>
+        <source>Time %1:%2:%3.%4 is invalid.</source>
+        <translation>Время %1:%2:%3.%4 некорректно.</translation>
+    </message>
+    <message>
+        <location line="+115"/>
+        <source>Overflow: Date can&apos;t be represented.</source>
+        <translation>Переполнение: невозможно представить дату.</translation>
+    </message>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/data/qabstractduration.cpp" line="-7"/>
+        <source>At least one time component must appear after the %1-delimiter.</source>
+        <translation>Как минимум одна компонента времени должна следовать за разделителем &apos;%1&apos;.</translation>
+    </message>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/data/qatomicmathematicians.cpp" line="+201"/>
+        <location line="+32"/>
+        <source>Dividing a value of type %1 by %2 (not-a-number) is not allowed.</source>
+        <translation>Деление числа типа %1 на %2 (не числовое выражение) недопустимо.</translation>
+    </message>
+    <message>
+        <location line="-20"/>
+        <source>Dividing a value of type %1 by %2 or %3 (plus or minus zero) is not allowed.</source>
+        <translation>Деление числа типа %1 на %2 или %3 (плюс или минус нуль) недопустимо.</translation>
+    </message>
+    <message>
+        <location line="+32"/>
+        <source>Multiplication of a value of type %1 by %2 or %3 (plus or minus infinity) is not allowed.</source>
+        <translation>Умножение числа типа %1 на %2 или %3 (плюс-минус бесконечность) недопустимо.</translation>
+    </message>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/data/qatomicvalue.cpp" line="+79"/>
+        <source>A value of type %1 cannot have an Effective Boolean Value.</source>
+        <translation>Значение типа %1 не может быть булевым значением.</translation>
+    </message>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/data/qderivedinteger_p.h" line="+402"/>
+        <source>Value %1 of type %2 exceeds maximum (%3).</source>
+        <translation>Значение %1 типа %2 больше максимума (%3).</translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>Value %1 of type %2 is below minimum (%3).</source>
+        <translation>Значение %1 типа %2 меньше минимума (%3).</translation>
+    </message>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/data/qhexbinary.cpp" line="+91"/>
+        <source>A value of type %1 must contain an even number of digits. The value %2 does not.</source>
+        <translation>Значение типа %1 должно содержать четное количество цифр. Значение %2 этому требованию не удовлетворяет.</translation>
+    </message>
+    <message>
+        <location line="+19"/>
+        <source>%1 is not valid as a value of type %2.</source>
+        <translation>Значение %1 некорректно для типа %2.</translation>
+    </message>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/expr/qarithmeticexpression.cpp" line="+207"/>
+        <source>Operator %1 cannot be used on type %2.</source>
+        <translation>Оператор %1 не может использоваться для типа %2.</translation>
+    </message>
+    <message>
+        <location line="+17"/>
+        <source>Operator %1 cannot be used on atomic values of type %2 and %3.</source>
+        <translation>Оператор %1 не может использоваться для атомарных значений типов %2 и %3.</translation>
+    </message>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/expr/qattributenamevalidator.cpp" line="+66"/>
+        <source>The namespace URI in the name for a computed attribute cannot be %1.</source>
+        <translation>URI пространства имён в названии рассчитываемого атрибута не может быть %1.</translation>
+    </message>
+    <message>
+        <location line="+9"/>
+        <source>The name for a computed attribute cannot have the namespace URI %1 with the local name %2.</source>
+        <translation>Название расчитываемого атрибута не может иметь URI пространства имён %1 с локальным именем %2.</translation>
+    </message>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/expr/qcastas.cpp" line="+88"/>
+        <source>Type error in cast, expected %1, received %2.</source>
+        <translation>Ошибка типов в преобразовании, ожидалось %1, получено %2.</translation>
+    </message>
+    <message>
+        <location line="+29"/>
+        <source>When casting to %1 or types derived from it, the source value must be of the same type, or it must be a string literal. Type %2 is not allowed.</source>
+        <translation>При преобразовании в %1 или производные от него типы исходное значение должно быть того же типа или строковым литералом. Тип %2 недопустим.</translation>
+    </message>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/expr/qcommentconstructor.cpp" line="+67"/>
+        <source>A comment cannot contain %1</source>
+        <translation>Комментарий не может содержать %1</translation>
+    </message>
+    <message>
+        <location line="+6"/>
+        <source>A comment cannot end with a %1.</source>
+        <translation>Комментарий не может оканчиваться на %1.</translation>
+    </message>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/expr/qdocumentcontentvalidator.cpp" line="+86"/>
+        <source>An attribute node cannot be a child of a document node. Therefore, the attribute %1 is out of place.</source>
+        <translation>Узел-атрибут не может быть потомком узла-документа. Атрибут %1 неуместен.</translation>
+    </message>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/expr/qexpressionfactory.cpp" line="+162"/>
+        <source>A library module cannot be evaluated directly. It must be imported from a main module.</source>
+        <translation>Модуль библиотеки не может использоваться напрямую. Он должен быть импортирован из основного модуля.</translation>
+    </message>
+    <message>
+        <location line="+40"/>
+        <source>No template by name %1 exists.</source>
+        <translation>Шаблон с именем %1 отсутствует.</translation>
+    </message>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/expr/qgenericpredicate.cpp" line="+106"/>
+        <source>A value of type %1 cannot be a predicate. A predicate must have either a numeric type or an Effective Boolean Value type.</source>
+        <translation>Значение типа %1 не может быть условием. Условием могут являться числовой и булевый типы.</translation>
+    </message>
+    <message>
+        <location line="+32"/>
+        <source>A positional predicate must evaluate to a single numeric value.</source>
+        <translation>Позиционный предикат должен вычисляться как числовое выражение.</translation>
+    </message>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/expr/qncnameconstructor_p.h" line="+113"/>
+        <source>The target name in a processing instruction cannot be %1 in any combination of upper and lower case. Therefore, %2 is invalid.</source>
+        <translation>Целевое имя в обрабатываемой инструкции не может быть %1 в любой комбинации нижнего и верхнего регистров. Имя %2 некорректно.</translation>
+    </message>
+    <message>
+        <location line="+24"/>
+        <source>%1 is not a valid target name in a processing instruction. It must be a %2 value, e.g. %3.</source>
+        <translation>%1 некорректное целевое имя в обрабатываемой инструкции. Имя должно быть значением типа %2, например: %3.</translation>
+    </message>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/expr/qpath.cpp" line="+109"/>
+        <source>The last step in a path must contain either nodes or atomic values. It cannot be a mixture between the two.</source>
+        <translation>Последняя часть пути должна содержать узлы или атомарные значения, но не может содержать и то, и другое одновременно.</translation>
+    </message>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/expr/qqnameconstructor.cpp" line="+82"/>
+        <source>No namespace binding exists for the prefix %1</source>
+        <translation>Отсутствует привязка к пространству имён для префикса %1</translation>
+    </message>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/expr/qqnameconstructor_p.h" line="-12"/>
+        <source>No namespace binding exists for the prefix %1 in %2</source>
+        <translation>Отсутствует привязка к пространству имён для префикса %1 в %2</translation>
+    </message>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/functions/qaggregatefns.cpp" line="+120"/>
+        <source>The first argument to %1 cannot be of type %2. It must be a numeric type, xs:yearMonthDuration or xs:dayTimeDuration.</source>
+        <translation>Первый аргумент %1 не может быть типа %2. Он должен быть числового типа, типа xs:yearMonthDuration или типа xs:dayTimeDuration.</translation>
+    </message>
+    <message>
+        <location line="+74"/>
+        <source>The first argument to %1 cannot be of type %2. It must be of type %3, %4, or %5.</source>
+        <translation>Первый аргумент %1 не может быть типа %2. Он должен быть типа %3, %4 или %5.</translation>
+    </message>
+    <message>
+        <location line="+91"/>
+        <source>The second argument to %1 cannot be of type %2. It must be of type %3, %4, or %5.</source>
+        <translation>Второй аргумент %1 не может быть типа %2. Он должен быть типа %3, %4 или %5.</translation>
+    </message>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/functions/qdatetimefn.cpp" line="+86"/>
+        <source>If both values have zone offsets, they must have the same zone offset. %1 and %2 are not the same.</source>
+        <translation>Если оба значения имеют региональные смещения, смещения должны быть одинаковы. %1 и %2 не одинаковы.</translation>
+    </message>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/functions/qpatternmatchingfns.cpp" line="-65"/>
+        <source>%1 must be followed by %2 or %3, not at the end of the replacement string.</source>
+        <translation>&quot;%1&quot; должно сопровождаться &quot;%2&quot; или &quot;%3&quot;, но не в конце замещаемой строки.</translation>
+    </message>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/functions/qpatternplatform.cpp" line="-110"/>
+        <source>%1 and %2 match the start and end of a line.</source>
+        <translation>%1 и %2 соответствуют началу и концу строки.</translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>Whitespace characters are removed, except when they appear in character classes</source>
+        <translation>Символы пробелов удалены (за исключением тех, что были в символах классов)</translation>
+    </message>
+    <message>
+        <location line="+130"/>
+        <source>%1 is an invalid flag for regular expressions. Valid flags are:</source>
+        <translation>%1 - некорректный флаг регулярного выражения. Допустимые флаги:</translation>
+    </message>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/functions/qqnamefns.cpp" line="+17"/>
+        <source>If the first argument is the empty sequence or a zero-length string (no namespace), a prefix cannot be specified. Prefix %1 was specified.</source>
+        <translation>Префикс не должен быть указан, если первый параметр - пустая последовательность или пустая строка (вне пространства имён). Был указан префикс %1.</translation>
+    </message>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/functions/qstringvaluefns.cpp" line="+252"/>
+        <source>The normalization form %1 is unsupported. The supported forms are %2, %3, %4, and %5, and none, i.e. the empty string (no normalization).</source>
+        <translation>Форма нормализации %1 не поддерживается. Поддерживаются только %2, %3, %4, %5 и пустая, т.е. пустая строка (без нормализации).</translation>
+    </message>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/functions/qtimezonefns.cpp" line="+87"/>
+        <source>A zone offset must be in the range %1..%2 inclusive. %3 is out of range.</source>
+        <translation>Региональное смещение должно быть в переделах от %1 до %2 включительно. %3 выходит за допустимые пределы.</translation>
+    </message>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/janitors/qcardinalityverifier.cpp" line="+58"/>
+        <source>Required cardinality is %1; got cardinality %2.</source>
+        <translation>Необходимо %1 элементов, получено %2.</translation>
+    </message>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/parser/qquerytransformparser.cpp" line="-3944"/>
+        <source>The encoding %1 is invalid. It must contain Latin characters only, must not contain whitespace, and must match the regular expression %2.</source>
+        <translation>Имя кодировки %1 некорректно. Имя кодировки должно содержать только символы латиницы без пробелов и должно удовлетворять регулярному выражению %2.</translation>
+    </message>
+    <message>
+        <location line="+260"/>
+        <source>The keyword %1 cannot occur with any other mode name.</source>
+        <translation>Ключевое слово %1 не может встречаться с любым другим названием режима.</translation>
+    </message>
+    <message>
+        <location line="-3117"/>
         <source>No variable with name %1 exists</source>
         <translation>Переменная с именем %1 отсутствует</translation>
     </message>
@@ -9024,7 +10513,17 @@ Please choose a different file name.</source>
         <translation>Отсутствует значение для внешней переменной с именем %1.</translation>
     </message>
     <message>
-        <location line="+220"/>
+        <location line="+96"/>
+        <source>A stylesheet function must have a prefixed name.</source>
+        <translation>Функция стилей должна иметь имя с префиксом.</translation>
+    </message>
+    <message>
+        <location line="+18"/>
+        <source>The namespace %1 is reserved; therefore user defined functions may not use it. Try the predefined prefix %2, which exists for these cases.</source>
+        <translation>Пространтсво имён %1 зарезервировано, поэтому пользовательские функции не могут его использовать. Попробуйте предопределённый префикс %2, который существует для подобных ситуаций.</translation>
+    </message>
+    <message>
+        <location line="+106"/>
         <source>An argument with name %1 has already been declared. Every argument name must be unique.</source>
         <translation>Аргумент с именем %1 уже объявлен. Имя каждого аргумента должно быть уникальным.</translation>
     </message>
@@ -9061,12 +10560,12 @@ Please choose a different file name.</source>
     <message>
         <location line="+126"/>
         <source>%1 is an invalid template mode name.</source>
-        <translation>%1 является неверным шаблоном имени режима.</translation>
+        <translation>%1 не является корректным шаблоном имени режима.</translation>
     </message>
     <message>
         <location line="+44"/>
         <source>The name of a variable bound in a for-expression must be different from the positional variable. Hence, the two variables named %1 collide.</source>
-        <translation type="unfinished">Имя переменной, связанной с выражением for, должно отличаться от позиционной переменной. Две переменные с именем %1 конфликтуют.</translation>
+        <translation>Имя переменной, связанной с выражением for, должно отличаться от позиционной переменной. Две переменные с именем %1 конфликтуют.</translation>
     </message>
     <message>
         <location line="+778"/>
@@ -9084,29 +10583,14 @@ Please choose a different file name.</source>
         <translation>Имя каждого параметра шаблона должно быть уникальным, но %1 повторяется.</translation>
     </message>
     <message>
-        <location line="+129"/>
-        <source>The %1-axis is unsupported in XQuery</source>
-        <translation>Ось %1 не поддерживается в XQuery</translation>
-    </message>
-    <message>
-        <location line="+333"/>
+        <location line="+462"/>
         <source>No function with name %1 is available.</source>
         <translation>Функция с именем %1 отсутствует.</translation>
     </message>
     <message>
-        <location line="+250"/>
-        <source>An attribute with name %1 has already appeared on this element.</source>
-        <translation>Атрибут с именем %1 уже существует для данного элемента.</translation>
-    </message>
-    <message>
-        <location line="+614"/>
-        <source>%1 is not a valid name for a processing-instruction.</source>
-        <translation>%1 является неверным названием для инструкции обработки.</translation>
-    </message>
-    <message>
-        <location line="-7099"/>
+        <location line="-6235"/>
         <source>%1 is not a valid numeric literal.</source>
-        <translation>%1 является неверным числовым литералом.</translation>
+        <translation>%1 не является корректным числовым литералом.</translation>
     </message>
     <message>
         <location line="-152"/>
@@ -9124,22 +10608,7 @@ Please choose a different file name.</source>
         <translation>Встречена конструкция, запрещённая для текущего языка (%1).</translation>
     </message>
     <message>
-        <location line="+6482"/>
-        <source>The namespace URI cannot be the empty string when binding to a prefix, %1.</source>
-        <translation>URI пространства имён не может быть пустой строкой при связывании с префиксом %1.</translation>
-    </message>
-    <message>
-        <location line="+7"/>
-        <source>%1 is an invalid namespace URI.</source>
-        <translation>%1 - неверный URI пространства имён.</translation>
-    </message>
-    <message>
-        <location line="+6"/>
-        <source>It is not possible to bind to the prefix %1</source>
-        <translation>Невозможно связать с префиксом %1</translation>
-    </message>
-    <message>
-        <location line="+7"/>
+        <location line="+6502"/>
         <source>Namespace %1 can only be bound to %2 (and it is, in either case, pre-declared).</source>
         <translation>Пространство имён %1 может быть связано только с %2 (в данном случае уже предопределено).</translation>
     </message>
@@ -9149,17 +10618,12 @@ Please choose a different file name.</source>
         <translation>Префикс %1 может быть связан только с %2 (в данном случае уже предопределено).</translation>
     </message>
     <message>
-        <location line="+15"/>
-        <source>Two namespace declaration attributes have the same name: %1.</source>
-        <translation>Два атрибута объявления пространств имён имеют одинаковое имя: %1.</translation>
+        <location line="+120"/>
+        <source>An attribute with name %1 has already appeared on this element.</source>
+        <translation>Атрибут с именем %1 уже существует для данного элемента.</translation>
     </message>
     <message>
-        <location line="+89"/>
-        <source>The namespace URI must be a constant and cannot use enclosed expressions.</source>
-        <translation>URI пространства имён должно быть константой и не может содержать выражений.</translation>
-    </message>
-    <message>
-        <location line="+77"/>
+        <location line="+61"/>
         <source>A direct element constructor is not well-formed. %1 is ended with %2.</source>
         <translation>Прямой конструктор элемента составлен некорректно. %1 заканчивается на %2.</translation>
     </message>
@@ -9179,43 +10643,17 @@ Please choose a different file name.</source>
         <translation>%1 - не атомарный тип. Преобразование возможно только к атомарным типам.</translation>
     </message>
     <message>
-        <location line="+145"/>
-        <location line="+71"/>
-        <source>%1 is not in the in-scope attribute declarations. Note that the schema import feature is not supported.</source>
-        <translation>%1 является объявлением атрибута вне области объявлений. Имейте в виду, возможность импорта схем не поддерживается.</translation>
+        <location line="+76"/>
+        <source>%1 is not a valid name for a processing-instruction.</source>
+        <translation>%1 не является корректным названием инструкции обработки.</translation>
     </message>
     <message>
-        <location line="+48"/>
+        <location line="+188"/>
         <source>The name of an extension expression must be in a namespace.</source>
         <translation>Название выражения расширения должно быть в пространстве имён.</translation>
     </message>
     <message>
-        <location filename="../src/xmlpatterns/type/qcardinality.cpp" line="+55"/>
-        <source>empty</source>
-        <translation>пусто</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>zero or one</source>
-        <translation>нуль или один</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>exactly one</source>
-        <translation>ровно один</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>one or more</source>
-        <translation>один или более</translation>
-    </message>
-    <message>
-        <location line="+2"/>
-        <source>zero or more</source>
-        <translation>нуль или более</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/type/qtypechecker.cpp" line="+63"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/type/qtypechecker.cpp" line="-93"/>
         <source>Required type is %1, but %2 was found.</source>
         <translation>Требуется тип %1, но обнаружен %2.</translation>
     </message>
@@ -9225,32 +10663,86 @@ Please choose a different file name.</source>
         <translation>Преобразование %1 к %2 может снизить точность.</translation>
     </message>
     <message>
-        <location line="+49"/>
-        <source>The focus is undefined.</source>
-        <translation>Фокус не определён.</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/utils/qoutputvalidator.cpp" line="+86"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/utils/qoutputvalidator.cpp" line="-7"/>
         <source>It&apos;s not possible to add attributes after any other kind of node.</source>
         <translation>Невозможно добавлять атрибуты после любого другого вида узла.</translation>
     </message>
     <message>
-        <location line="+7"/>
-        <source>An attribute by name %1 has already been created.</source>
-        <translation>Атрибут с именем %1 уже существует.</translation>
-    </message>
-    <message>
-        <location filename="../src/xmlpatterns/utils/qxpathhelper_p.h" line="+120"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/utils/qxpathhelper_p.h" line="+120"/>
         <source>Only the Unicode Codepoint Collation is supported(%1). %2 is unsupported.</source>
         <translation>Поддерживается только Unicode Codepoint Collation (%1). %2 не поддерживается.</translation>
     </message>
     <message>
-        <location filename="../src/xmlpatterns/api/qxmlserializer.cpp" line="+60"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/data/qatomicmathematicians.cpp" line="-180"/>
+        <source>Integer division (%1) by zero (%2) is undefined.</source>
+        <translation>Целочисленное деление (%1) на нуль (%2) не определено.</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Division (%1) by zero (%2) is undefined.</source>
+        <translation>Деление (%1) на нуль (%2) не определено.</translation>
+    </message>
+    <message>
+        <location line="+7"/>
+        <source>Modulus division (%1) by zero (%2) is undefined.</source>
+        <translation>Деление по модулю (%1) на нуль (%2) не определено.</translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/functions/qabstractfunctionfactory.cpp" line="+77"/>
+        <source>%1 takes at most %n argument(s). %2 is therefore invalid.</source>
+        <translation>
+            <numerusform>%1 принимает не более %n аргумента. Следовательно, %2 некорректно.</numerusform>
+            <numerusform>%1 принимает не более %n аргументов. Следовательно, %2 некорректно.</numerusform>
+            <numerusform>%1 принимает не более %n аргументов. Следовательно, %2 некорректно.</numerusform>
+        </translation>
+    </message>
+    <message numerus="yes">
+        <location line="+11"/>
+        <source>%1 requires at least %n argument(s). %2 is therefore invalid.</source>
+        <translation>
+            <numerusform>%1 принимает не менее %n аргумента. Следовательно, %2 некорректно.</numerusform>
+            <numerusform>%1 принимает не менее %n аргументов. Следовательно, %2 некорректно.</numerusform>
+            <numerusform>%1 принимает не менее %n аргументов. Следовательно, %2 некорректно.</numerusform>
+        </translation>
+    </message>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/functions/qcontextnodechecker.cpp" line="+54"/>
+        <source>The root node of the second argument to function %1 must be a document node. %2 is not a document node.</source>
+        <translation>Корневой узел второго аргумента функции %1 должен быть документом. %2 не является документом.</translation>
+    </message>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/parser/qquerytransformparser.cpp" line="-3172"/>
+        <source>The namespace for a user defined function cannot be empty (try the predefined prefix %1 which exists for cases like this)</source>
+        <translation>Пространство имён для пользовательских функций не может быть пустым (попробуйте предопределённый префикс %1, который существует для подобных ситуаций)</translation>
+    </message>
+    <message>
+        <location line="-693"/>
+        <location line="+10"/>
+        <source>A default namespace declaration must occur before function, variable, and option declarations.</source>
+        <translation>Объявление пространство имён по умолчанию должно быть до объявления функций, переменных и опций.</translation>
+    </message>
+    <message>
+        <location line="+10"/>
+        <source>Namespace declarations must occur before function, variable, and option declarations.</source>
+        <translation>Объявление пространства имён должно быть до объявления функций, переменных и опций.</translation>
+    </message>
+    <message>
+        <location line="+11"/>
+        <source>Module imports must occur before function, variable, and option declarations.</source>
+        <translation>Импортируемые модули должны быть указаны до объявления функций, переменных и опций.</translation>
+    </message>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/functions/qtimezonefns.cpp" line="+12"/>
+        <source>%1 is not a whole number of minutes.</source>
+        <translation>%1 не является полным количеством минут.</translation>
+    </message>
+    <message>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/api/qxmlserializer.cpp" line="+60"/>
         <source>Attribute %1 can&apos;t be serialized because it appears at the top level.</source>
         <translation>Атрибут %1 не может быть сериализован, так как присутствует на верхнем уровне.</translation>
     </message>
     <message>
-        <location filename="../src/xmlpatterns/acceltree/qacceltreeresourceloader.cpp" line="+344"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/acceltree/qacceltreeresourceloader.cpp" line="+344"/>
         <source>%1 is an unsupported encoding.</source>
         <translation>Кодировка %1 не поддерживается.</translation>
     </message>
@@ -9265,12 +10757,12 @@ Please choose a different file name.</source>
         <translation>Символ с кодом %1, присутствующий в %2 при использовании кодировки %3, не является допустимым символом XML.</translation>
     </message>
     <message>
-        <location filename="../src/xmlpatterns/expr/qapplytemplate.cpp" line="+119"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/expr/qapplytemplate.cpp" line="+119"/>
         <source>Ambiguous rule match.</source>
         <translation>Неоднозначное соответствие правилу.</translation>
     </message>
     <message>
-        <location filename="../src/xmlpatterns/expr/qcomputednamespaceconstructor.cpp" line="+69"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/expr/qcomputednamespaceconstructor.cpp" line="+69"/>
         <source>In a namespace constructor, the value for a namespace cannot be an empty string.</source>
         <translation>В конструкторе пространства имён значение пространства имён не может быть пустой строкой.</translation>
     </message>
@@ -9290,7 +10782,7 @@ Please choose a different file name.</source>
         <translation>Только префикс %1 может быть связан с %2 и наоборот.</translation>
     </message>
     <message>
-        <location filename="../src/xmlpatterns/expr/qtemplate.cpp" line="+145"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/expr/qtemplate.cpp" line="+145"/>
         <source>The parameter %1 is required, but no corresponding %2 is supplied.</source>
         <translation>Необходим параметр %1 , но соответствующего %2 не передано.</translation>
     </message>
@@ -9300,12 +10792,12 @@ Please choose a different file name.</source>
         <translation>Передан параметр %1 , но соответствующего %2 не существует.</translation>
     </message>
     <message>
-        <location filename="../src/xmlpatterns/functions/qunparsedtextfn.cpp" line="+65"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/functions/qunparsedtextfn.cpp" line="+65"/>
         <source>The URI cannot have a fragment</source>
         <translation>URI не может содержать фрагмент</translation>
     </message>
     <message>
-        <location filename="../src/xmlpatterns/parser/qxslttokenizer.cpp" line="+519"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/parser/qxslttokenizer.cpp" line="+519"/>
         <source>Element %1 is not allowed at this location.</source>
         <translation>Элемент %1 недопустим в этом месте.</translation>
     </message>
@@ -9397,12 +10889,12 @@ Please choose a different file name.</source>
     <message>
         <location line="+270"/>
         <source>Element %1 cannot have children.</source>
-        <translation>У элемента %1 не может быть потомков.</translation>
+        <translation>Элемент %1 не может иметь потомков.</translation>
     </message>
     <message>
         <location line="+434"/>
         <source>Element %1 cannot have a sequence constructor.</source>
-        <translation>У элемента %1 не может быть конструктора последовательности.</translation>
+        <translation type="unfinished">Элемент %1 не может иметь конструктор последовательности.</translation>
     </message>
     <message>
         <location line="+86"/>
@@ -9413,7 +10905,7 @@ Please choose a different file name.</source>
     <message>
         <location line="+15"/>
         <source>A parameter in a function cannot be declared to be a tunnel.</source>
-        <translation type="unfinished">Параметр в функции не может быть объявлен туннелем.</translation>
+        <translation type="unfinished">Параметр функции не может быть объявлен туннелем.</translation>
     </message>
     <message>
         <location line="+149"/>
@@ -9446,7 +10938,7 @@ Please choose a different file name.</source>
         <translation>Как минимум один элемент %1 должен быть в %2.</translation>
     </message>
     <message>
-        <location filename="../src/xmlpatterns/schema/qxsdschemachecker.cpp" line="+227"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/schema/qxsdschemachecker.cpp" line="+227"/>
         <source>%1 has inheritance loop in its base type %2.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -9849,7 +11341,7 @@ Please choose a different file name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/xmlpatterns/schema/qxsdschemahelper.cpp" line="+691"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/schema/qxsdschemahelper.cpp" line="+691"/>
         <location line="+63"/>
         <source>Base attribute %1 is required but derived attribute is not.</source>
         <translation type="unfinished"></translation>
@@ -9910,7 +11402,7 @@ Please choose a different file name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/xmlpatterns/schema/qxsdschemaresolver.cpp" line="+354"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/schema/qxsdschemaresolver.cpp" line="+354"/>
         <source>%1 references unknown %2 or %3 element %4.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10062,7 +11554,7 @@ Please choose a different file name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/xmlpatterns/schema/qxsdparticlechecker.cpp" line="+165"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/schema/qxsdparticlechecker.cpp" line="+165"/>
         <source>Empty particle cannot be derived from non-empty particle.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10127,12 +11619,12 @@ Please choose a different file name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location line="+240"/>
+        <location line="+270"/>
         <source>Derived particle allows content that is not allowed in the base particle.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/xmlpatterns/schema/qxsdschemaparser.cpp" line="+170"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/schema/qxsdschemaparser.cpp" line="+170"/>
         <source>Can not process unknown element %1, expected elements are: %2.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10287,7 +11779,7 @@ Please choose a different file name.</source>
     <message>
         <location line="+19"/>
         <source>Text or entity references not allowed inside %1 element</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Текст или ссылка на объект недопустимы в качестве содержимого элемента %1</translation>
     </message>
     <message>
         <location line="+41"/>
@@ -10324,17 +11816,17 @@ Please choose a different file name.</source>
     <message>
         <location line="+17"/>
         <source>Element %1 already defined.</source>
-        <translation type="unfinished"></translation>
+        <translation>Элемент %1 уже определён.</translation>
     </message>
     <message>
         <location line="+11"/>
         <source>Attribute %1 already defined.</source>
-        <translation type="unfinished"></translation>
+        <translation>Атрибут %1 уже определён.</translation>
     </message>
     <message>
         <location line="+15"/>
         <source>Type %1 already defined.</source>
-        <translation type="unfinished"></translation>
+        <translation>Тип %1 уже определён.</translation>
     </message>
     <message>
         <location line="+23"/>
@@ -10344,7 +11836,7 @@ Please choose a different file name.</source>
     <message>
         <location line="+11"/>
         <source>Element group %1 already defined.</source>
-        <translation type="unfinished"></translation>
+        <translation>Группа элементов %1 уже определёна.</translation>
     </message>
     <message>
         <location line="+11"/>
@@ -10362,11 +11854,11 @@ Please choose a different file name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/xmlpatterns/schema/qxsdtypechecker.cpp" line="+233"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/schema/qxsdtypechecker.cpp" line="+233"/>
         <location line="+7"/>
         <location line="+21"/>
         <source>%1 is not valid according to %2.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 некорректно в соответствии с %2.</translation>
     </message>
     <message>
         <location line="+167"/>
@@ -10591,7 +12083,7 @@ Please choose a different file name.</source>
     <message>
         <location line="+27"/>
         <source>Invalid QName content: %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Некорректное содержимое QName: %1.</translation>
     </message>
     <message>
         <location line="+17"/>
@@ -10649,7 +12141,7 @@ Please choose a different file name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/xmlpatterns/schema/qxsdvalidatinginstancereader.cpp" line="+160"/>
+        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/schema/qxsdvalidatinginstancereader.cpp" line="+160"/>
         <source>Element %1 is missing child element.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10661,32 +12153,32 @@ Please choose a different file name.</source>
     <message>
         <location line="+27"/>
         <source>Loaded schema file is invalid.</source>
-        <translation type="unfinished"></translation>
+        <translation>Загруженный файл схемы некорректен.</translation>
     </message>
     <message>
         <location line="+16"/>
         <source>%1 contains invalid data.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 содержит некорректные данные.</translation>
     </message>
     <message>
         <location line="+13"/>
         <source>xsi:schemaLocation namespace %1 has already appeared earlier in the instance document.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Пространство имён xsi:schemaLocation %1 уже встречалось ранее в данном документе.</translation>
     </message>
     <message>
         <location line="+22"/>
         <source>xsi:noNamespaceSchemaLocation cannot appear after the first no-namespace element or attribute.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">xsi:noNamespaceSchemaLocation не может встречаться после первого не-`namespace` элемента или атрибута.</translation>
     </message>
     <message>
         <location line="+18"/>
         <source>No schema defined for validation.</source>
-        <translation type="unfinished"></translation>
+        <translation>Схема для проверки не определена.</translation>
     </message>
     <message>
         <location line="+10"/>
         <source>No definition for element %1 available.</source>
-        <translation type="unfinished"></translation>
+        <translation>Отсутствует определение элемента %1.</translation>
     </message>
     <message>
         <location line="+18"/>
@@ -10698,7 +12190,7 @@ Please choose a different file name.</source>
     <message>
         <location line="-176"/>
         <source>Element %1 is not defined in this scope.</source>
-        <translation type="unfinished"></translation>
+        <translation>Элемент %1 не определён в данном контексте.</translation>
     </message>
     <message>
         <location line="+43"/>
@@ -10718,7 +12210,7 @@ Please choose a different file name.</source>
     <message>
         <location line="+7"/>
         <source>Element %1 is not nillable.</source>
-        <translation type="unfinished"></translation>
+        <translation>Элемент %1 необнуляемый.</translation>
     </message>
     <message>
         <location line="+8"/>
@@ -10728,7 +12220,7 @@ Please choose a different file name.</source>
     <message>
         <location line="+8"/>
         <source>Element contains content although it is nillable.</source>
-        <translation type="unfinished"></translation>
+        <translation>Элемент необнуляемый, т.к. имеет содержимое.</translation>
     </message>
     <message>
         <location line="+6"/>
@@ -10738,7 +12230,7 @@ Please choose a different file name.</source>
     <message>
         <location line="+230"/>
         <source>Element %1 cannot contain other elements, as it has a fixed content.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Элемент %1 не может содержать другие элементы, т.к. имеет статическое содержимое.</translation>
     </message>
     <message>
         <location line="-198"/>
@@ -10849,7 +12341,7 @@ Please choose a different file name.</source>
     <message>
         <location line="+64"/>
         <source>More than one value found for field %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Для поля %1 найдено более одного значения.</translation>
     </message>
     <message>
         <location line="+20"/>
@@ -10859,12 +12351,12 @@ Please choose a different file name.</source>
     <message>
         <location line="+73"/>
         <source>ID value &apos;%1&apos; is not unique.</source>
-        <translation type="unfinished"></translation>
+        <translation>Значение ID &quot;%1&quot; неуникально.</translation>
     </message>
     <message>
         <location line="+11"/>
         <source>&apos;%1&apos; attribute contains invalid QName content: %2.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Атрибут `%1` имеет некорректное содержимое QName: %2.</translation>
     </message>
 </context>
 </TS>
