@@ -42,7 +42,7 @@ AboutWidget::AboutWidget(QWidget *parent)
 	p.start( "dpkg-query", QStringList() << "-W" << "-f=${Package} ${Version}" << "estonianidcard" );
 	if( !p.waitForStarted() && p.error() == QProcess::FailedToStart )
 	{
-		p.start( "rpm", QStringList() << "-q" << "--qf" << "'%{VERSION}'" << "estonianidcard" );
+		p.start( "rpm", QStringList() << "-q" << "--qf" << "%{NAME} %{VERSION}" << "estonianidcard" );
 		p.waitForStarted();
 	}
 	p.waitForFinished();
