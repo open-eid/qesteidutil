@@ -221,7 +221,7 @@
     </message>
     <message>
         <source>PIN has been entered incorrectly one time</source>
-        <translation type="unfinished"></translation>
+        <translation>Pin введён неправильно один раз</translation>
     </message>
 </context>
 <context>
