@@ -5,7 +5,7 @@
     <name>AboutWidget</name>
     <message>
         <source>About</source>
-        <translation type="unfinished"></translation>
+        <translation>Информация</translation>
     </message>
 </context>
 <context>
