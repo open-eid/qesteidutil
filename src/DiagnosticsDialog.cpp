@@ -22,10 +22,10 @@
 
 #include "DiagnosticsDialog.h"
 
-#include "smartcardpp/common.h"
-#include "smartcardpp/DynamicLibrary.h"
-#include "smartcardpp/SmartCardManager.h"
-#include "smartcardpp/esteid/EstEidCard.h"
+#include <smartcardpp/common.h>
+#include <smartcardpp/DynamicLibrary.h>
+#include <smartcardpp/PCSCManager.h>
+#include <smartcardpp/esteid/EstEidCard.h>
 
 #include <QDesktopServices>
 #include <QFile>
@@ -290,9 +290,9 @@ QString DiagnosticsDialog::getReaderInfo() const
 
 	QHash<QString,QString> readers;
 	QString reader;
-	SmartCardManager *m = 0;
+	PCSCManager *m = 0;
 	try {
-		m = new SmartCardManager();
+		m = new PCSCManager();
 	} catch( const std::runtime_error & ) {
 		readers[reader] = tr("No readers found");
 	}
@@ -305,9 +305,7 @@ QString DiagnosticsDialog::getReaderInfo() const
 				reader = QString::fromStdString( m->getReaderName( i ) );
 				if ( !QString::fromStdString( m->getReaderState( i ) ).contains( "EMPTY" ) )
 				{
-					ConnectionBase *c = m->connect(i,false);
-					EstEidCard card( *m, c );
-					card.connect( i );
+					EstEidCard card( *m, i );
 					readers[reader] = tr( "ID - %1" ).arg( QString::fromStdString( card.readCardID() ) );
 				} else
 					readers[reader] = "";

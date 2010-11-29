@@ -59,12 +59,11 @@ void JsEsteidCard::resetCard()
 	cardOK = false;
 }
 
-void JsEsteidCard::setCard(SmartCardManager *cardMgr, int reader)
+void JsEsteidCard::setCard(PCSCManager *cardMgr, int reader)
 {
 	cardOK = false;
 	m_reader = reader;
-	ConnectionBase *c = cardMgr->connect( reader, false );
-	m_card = new EstEidCard( *cardMgr, c );
+	m_card = new EstEidCard( *cardMgr, reader );
 	m_authCert->loadCert(m_card, JsCertData::AuthCert);
 	m_signCert->loadCert(m_card, JsCertData::SignCert);
     reloadData();
@@ -512,7 +511,7 @@ void JsEsteidCard::reconnect()
 		return;
 
 	try {
-		m_card->connect( m_reader, true );
+		m_card->connect( m_reader );
 	} catch ( std::runtime_error &e ) {
 		qDebug() << e.what();
 	}

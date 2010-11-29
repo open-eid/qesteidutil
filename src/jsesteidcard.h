@@ -22,13 +22,14 @@
 
 #pragma once
 
+#include "jscertdata.h"
+
 #include <QString>
 #include <QObject>
 
-#include "smartcardpp/common.h"
-#include "smartcardpp/SmartCardManager.h"
-#include "smartcardpp/esteid/EstEidCard.h"
-#include "jscertdata.h"
+#include <smartcardpp/common.h>
+#include <smartcardpp/PCSCManager.h>
+#include <smartcardpp/esteid/EstEidCard.h>
 
 class JsEsteidCard : public QObject
 {
@@ -38,7 +39,7 @@ public:
     JsEsteidCard( QObject *parent );
 
 	void resetCard();
-	void setCard(SmartCardManager *card, int reader = 0);
+	void setCard(PCSCManager *card, int reader = 0);
     void reloadData();
 	void reconnect();
 
@@ -97,7 +98,7 @@ signals:
     void cardError(QString func, QString err);
 
 private:
-	SmartCardManager *m_cardManager;
+	PCSCManager *m_cardManager;
 	void handleError(QString msg);
 	dword authUsageCount;
 	dword signUsageCount;

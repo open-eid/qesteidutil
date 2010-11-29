@@ -15,6 +15,11 @@ find_package(LibDL REQUIRED)
 
 add_definitions(-DPKCS11_MODULE="${PKCS11_MODULE}")
 
+# Hack to get around smartcardpp header inclusion scheme
+if(UNIX)
+    find_package(PCSCLite REQUIRED)
+endif(UNIX)
+
 if(MSVC)
     # Needed for smartcardpp
     add_definitions(-D_SECURE_SCL=0)
@@ -109,6 +114,7 @@ include_directories(
     ${OPENSSL_INCLUDE_DIR}
     ${LIBP11_INCLUDE_DIR}
     ${SMARTCARDPP_INCLUDE_DIR}
+    ${PCSCLITE_INCLUDE_DIR}
     qtsingleapplication/src
 )
 

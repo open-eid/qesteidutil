@@ -22,13 +22,14 @@
 
 #pragma once
 
+#include "jsesteidcard.h"
+
 #include <QObject>
 #include <QHash>
 #include <QTimer>
 
-#include "smartcardpp/common.h"
-#include "smartcardpp/SmartCardManager.h"
-#include "jsesteidcard.h"
+#include <smartcardpp/common.h>
+#include <smartcardpp/PCSCManager.h>
 
 class JsCardManager : public QObject
 {
@@ -46,7 +47,7 @@ public:
     JsCardManager(JsEsteidCard *jsEsteidCard);
 
 private:
-	SmartCardManager *cardMgr;
+	PCSCManager *cardMgr;
 	JsEsteidCard *m_jsEsteidCard;
     QTimer pollTimer;
 

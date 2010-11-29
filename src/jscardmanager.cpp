@@ -38,8 +38,8 @@ JsCardManager::JsCardManager(JsEsteidCard *jsEsteidCard)
 ,   readAllowed( true )
 {
 	try {
-		cardMgr = new SmartCardManager();
-	} catch (std::runtime_error &e) {}
+		cardMgr = new PCSCManager();
+	} catch (std::runtime_error &) {}
 
 	connect(&pollTimer, SIGNAL(timeout()),
             this, SLOT(pollCard()));
@@ -60,7 +60,7 @@ void JsCardManager::pollCard()
 	int numReaders = 0;
     try {
 		if (!cardMgr)
-			cardMgr = new SmartCardManager();
+			cardMgr = new PCSCManager();
 
 		QString insert,remove;
 		bool foundConnected = false;
@@ -84,9 +84,7 @@ void JsCardManager::pollCard()
 					EstEidCard card(*cardMgr);
 					if ( card.isInReader(i) )
 					{
-						ConnectionBase *c = cardMgr->connect(i,false);
-						//card.connect( i );
-						EstEidCard e( *cardMgr, c );
+						EstEidCard e( *cardMgr, i );
 						reader.cardId = QString::fromStdString( e.readDocumentID() );
 						reader.connected = true;
 						foundConnected = true;
