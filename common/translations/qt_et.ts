@@ -4,7 +4,7 @@
 <context>
     <name>CloseButton</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/widgets/qtabbar.cpp" line="+2319"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/widgets/qtabbar.cpp" line="+2319"/>
         <source>Close Tab</source>
         <translation>Sulge kaart</translation>
     </message>
@@ -12,7 +12,7 @@
 <context>
     <name>FakeReply</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/3rdparty/webkit/WebKit/qt/tests/qwebframe/tst_qwebframe.cpp" line="+2279"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/3rdparty/webkit/WebKit/qt/tests/qwebframe/tst_qwebframe.cpp" line="+2279"/>
         <source>Fake error !</source>
         <translation type="unfinished"></translation>
     </message>
@@ -25,7 +25,7 @@
 <context>
     <name>MAC_APPLICATION_MENU</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/kernel/qapplication.cpp" line="+2390"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/kernel/qapplication.cpp" line="+2390"/>
         <source>Services</source>
         <translation>Teenused</translation>
     </message>
@@ -63,7 +63,7 @@
 <context>
     <name>Phonon::</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/3rdparty/phonon/phonon/phononnamespace.cpp" line="+55"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/3rdparty/phonon/phonon/phononnamespace.cpp" line="+55"/>
         <source>Notifications</source>
         <translation>Hoiatused</translation>
     </message>
@@ -96,7 +96,7 @@
 <context>
     <name>Phonon::AudioOutput</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/3rdparty/phonon/phonon/audiooutput.cpp" line="+444"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/3rdparty/phonon/phonon/audiooutput.cpp" line="+444"/>
         <location line="+34"/>
         <source>&lt;html&gt;The audio playback device &lt;b&gt;%1&lt;/b&gt; does not work.&lt;br/&gt;Falling back to &lt;b&gt;%2&lt;/b&gt;.&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
@@ -121,7 +121,7 @@
 <context>
     <name>Phonon::Gstreamer::Backend</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/3rdparty/phonon/gstreamer/backend.cpp" line="+188"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/3rdparty/phonon/gstreamer/backend.cpp" line="+188"/>
         <source>Warning: You do not seem to have the package gstreamer0.10-plugins-good installed.
           Some video features have been disabled.</source>
         <translation type="unfinished"></translation>
@@ -136,7 +136,7 @@
 <context>
     <name>Phonon::Gstreamer::MediaObject</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/3rdparty/phonon/gstreamer/mediaobject.cpp" line="+93"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/3rdparty/phonon/gstreamer/mediaobject.cpp" line="+93"/>
         <source>Cannot start playback. 
 
 Check your GStreamer installation and make sure you 
@@ -194,7 +194,7 @@ have libgstreamer-plugins-base installed.</source>
 <context>
     <name>Phonon::MMF</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/3rdparty/phonon/mmf/audiooutput.cpp" line="+106"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/3rdparty/phonon/mmf/audiooutput.cpp" line="+106"/>
         <source>Audio Output</source>
         <translation type="unfinished"></translation>
     </message>
@@ -204,7 +204,7 @@ have libgstreamer-plugins-base installed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/3rdparty/phonon/mmf/utils.cpp" line="+89"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/3rdparty/phonon/mmf/utils.cpp" line="+89"/>
         <source>No error</source>
         <translation type="unfinished"></translation>
     </message>
@@ -357,7 +357,7 @@ have libgstreamer-plugins-base installed.</source>
 <context>
     <name>Phonon::MMF::AbstractMediaPlayer</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/3rdparty/phonon/mmf/abstractmediaplayer.cpp" line="+74"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/3rdparty/phonon/mmf/abstractmediaplayer.cpp" line="+74"/>
         <source>Not ready to play</source>
         <translation type="unfinished"></translation>
     </message>
@@ -401,7 +401,7 @@ have libgstreamer-plugins-base installed.</source>
 <context>
     <name>Phonon::MMF::AbstractVideoPlayer</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/3rdparty/phonon/mmf/abstractvideoplayer.cpp" line="+110"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/3rdparty/phonon/mmf/abstractvideoplayer.cpp" line="+110"/>
         <source>Pause failed</source>
         <translation type="unfinished"></translation>
     </message>
@@ -424,7 +424,7 @@ have libgstreamer-plugins-base installed.</source>
 <context>
     <name>Phonon::MMF::AudioEqualizer</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/3rdparty/phonon/mmf/audioequalizer.cpp" line="+92"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/3rdparty/phonon/mmf/audioequalizer.cpp" line="+92"/>
         <source>%1 Hz</source>
         <translation type="unfinished"></translation>
     </message>
@@ -432,7 +432,7 @@ have libgstreamer-plugins-base installed.</source>
 <context>
     <name>Phonon::MMF::AudioPlayer</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/3rdparty/phonon/mmf/audioplayer.cpp" line="+179"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/3rdparty/phonon/mmf/audioplayer.cpp" line="+179"/>
         <source>Getting position failed</source>
         <translation type="unfinished"></translation>
     </message>
@@ -440,7 +440,7 @@ have libgstreamer-plugins-base installed.</source>
 <context>
     <name>Phonon::MMF::DsaVideoPlayer</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/3rdparty/phonon/mmf/videoplayer_dsa.cpp" line="+241"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/3rdparty/phonon/mmf/videoplayer_dsa.cpp" line="+241"/>
         <location line="+15"/>
         <location line="+8"/>
         <location line="+22"/>
@@ -452,7 +452,7 @@ have libgstreamer-plugins-base installed.</source>
 <context>
     <name>Phonon::MMF::EffectFactory</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/3rdparty/phonon/mmf/effectfactory.cpp" line="+181"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/3rdparty/phonon/mmf/effectfactory.cpp" line="+181"/>
         <source>Enabled</source>
         <translation type="unfinished"></translation>
     </message>
@@ -460,7 +460,7 @@ have libgstreamer-plugins-base installed.</source>
 <context>
     <name>Phonon::MMF::EnvironmentalReverb</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/3rdparty/phonon/mmf/environmentalreverb.cpp" line="+146"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/3rdparty/phonon/mmf/environmentalreverb.cpp" line="+146"/>
         <source>Decay HF ratio (%)</source>
         <extracomment>DecayHFRatio: Ratio of high-frequency decay time to the value specified by DecayTime.</extracomment>
         <translation type="unfinished"></translation>
@@ -523,7 +523,7 @@ have libgstreamer-plugins-base installed.</source>
 <context>
     <name>Phonon::MMF::MediaObject</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/3rdparty/phonon/mmf/mediaobject.cpp" line="+309"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/3rdparty/phonon/mmf/mediaobject.cpp" line="+309"/>
         <location line="+18"/>
         <source>Error opening source: type not supported</source>
         <translation type="unfinished"></translation>
@@ -547,7 +547,7 @@ have libgstreamer-plugins-base installed.</source>
 <context>
     <name>Phonon::MMF::StereoWidening</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/3rdparty/phonon/mmf/stereowidening.cpp" line="+79"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/3rdparty/phonon/mmf/stereowidening.cpp" line="+79"/>
         <source>Level (%)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -555,7 +555,7 @@ have libgstreamer-plugins-base installed.</source>
 <context>
     <name>Phonon::MMF::SurfaceVideoPlayer</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/3rdparty/phonon/mmf/videoplayer_surface.cpp" line="+139"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/3rdparty/phonon/mmf/videoplayer_surface.cpp" line="+139"/>
         <location line="+26"/>
         <source>Video display error</source>
         <translation type="unfinished"></translation>
@@ -564,7 +564,7 @@ have libgstreamer-plugins-base installed.</source>
 <context>
     <name>Phonon::VolumeSlider</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/3rdparty/phonon/phonon/volumeslider.cpp" line="+42"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/3rdparty/phonon/phonon/volumeslider.cpp" line="+42"/>
         <location line="+18"/>
         <location line="+129"/>
         <location line="+15"/>
@@ -587,7 +587,7 @@ have libgstreamer-plugins-base installed.</source>
 <context>
     <name>Q3Accel</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/other/q3accel.cpp" line="+481"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/qt3support/other/q3accel.cpp" line="+481"/>
         <source>%1, %2 not defined</source>
         <translation type="unfinished"></translation>
     </message>
@@ -600,7 +600,7 @@ have libgstreamer-plugins-base installed.</source>
 <context>
     <name>Q3DataTable</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/sql/q3datatable.cpp" line="+285"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/qt3support/sql/q3datatable.cpp" line="+285"/>
         <source>True</source>
         <translation type="unfinished">Tõene</translation>
     </message>
@@ -628,7 +628,7 @@ have libgstreamer-plugins-base installed.</source>
 <context>
     <name>Q3FileDialog</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/dialogs/q3filedialog.cpp" line="+835"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/qt3support/dialogs/q3filedialog.cpp" line="+835"/>
         <source>Copy or Move a File</source>
         <translation type="unfinished"></translation>
     </message>
@@ -653,7 +653,7 @@ have libgstreamer-plugins-base installed.</source>
         <location line="-157"/>
         <location line="+49"/>
         <location line="+2149"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/dialogs/q3filedialog_mac.cpp" line="+133"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/qt3support/dialogs/q3filedialog_mac.cpp" line="+133"/>
         <source>All Files (*)</source>
         <translation type="unfinished">Kõik failid (*)</translation>
     </message>
@@ -793,13 +793,13 @@ have libgstreamer-plugins-base installed.</source>
     <message>
         <location line="+704"/>
         <location line="+1999"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/dialogs/q3filedialog_win.cpp" line="+209"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/qt3support/dialogs/q3filedialog_win.cpp" line="+209"/>
         <source>Open</source>
         <translation type="unfinished">Ava</translation>
     </message>
     <message>
         <location line="-1889"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/dialogs/q3filedialog_win.cpp" line="+71"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/qt3support/dialogs/q3filedialog_win.cpp" line="+71"/>
         <source>Save As</source>
         <translation type="unfinished"></translation>
     </message>
@@ -941,7 +941,7 @@ Check path and filename.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/dialogs/q3filedialog_win.cpp" line="-191"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/qt3support/dialogs/q3filedialog_win.cpp" line="-191"/>
         <source>All Files (*.*)</source>
         <translation type="unfinished">Kõik failid (*.*)</translation>
     </message>
@@ -959,7 +959,7 @@ Check path and filename.</source>
 <context>
     <name>Q3LocalFs</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/network/q3localfs.cpp" line="+130"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/qt3support/network/q3localfs.cpp" line="+130"/>
         <location line="+10"/>
         <source>Could not read directory
 %1</source>
@@ -1001,7 +1001,7 @@ to
 <context>
     <name>Q3MainWindow</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/widgets/q3mainwindow.cpp" line="+2051"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/qt3support/widgets/q3mainwindow.cpp" line="+2051"/>
         <source>Line up</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1014,7 +1014,7 @@ to
 <context>
     <name>Q3NetworkProtocol</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/network/q3networkprotocol.cpp" line="+854"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/qt3support/network/q3networkprotocol.cpp" line="+854"/>
         <source>Operation stopped by the user</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1022,7 +1022,7 @@ to
 <context>
     <name>Q3ProgressDialog</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/dialogs/q3progressdialog.cpp" line="+224"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/qt3support/dialogs/q3progressdialog.cpp" line="+224"/>
         <location line="+61"/>
         <source>Cancel</source>
         <translation type="unfinished">Loobu</translation>
@@ -1031,7 +1031,7 @@ to
 <context>
     <name>Q3TabDialog</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/dialogs/q3tabdialog.cpp" line="+190"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/qt3support/dialogs/q3tabdialog.cpp" line="+190"/>
         <location line="+824"/>
         <source>OK</source>
         <translation type="unfinished">OK</translation>
@@ -1060,7 +1060,7 @@ to
 <context>
     <name>Q3TextEdit</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/text/q3textedit.cpp" line="+5429"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/qt3support/text/q3textedit.cpp" line="+5429"/>
         <source>&amp;Undo</source>
         <translation type="unfinished">&amp;Võta tagasi</translation>
     </message>
@@ -1099,7 +1099,7 @@ to
 <context>
     <name>Q3TitleBar</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/plugins/accessible/compat/q3complexwidgets.cpp" line="+246"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/plugins/accessible/compat/q3complexwidgets.cpp" line="+246"/>
         <source>System</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1167,7 +1167,7 @@ to
 <context>
     <name>Q3ToolBar</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/widgets/q3toolbar.cpp" line="+692"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/qt3support/widgets/q3toolbar.cpp" line="+692"/>
         <source>More...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1175,7 +1175,7 @@ to
 <context>
     <name>Q3UrlOperator</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/network/q3urloperator.cpp" line="+386"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/qt3support/network/q3urloperator.cpp" line="+386"/>
         <location line="+260"/>
         <location line="+4"/>
         <source>The protocol `%1&apos; is not supported</source>
@@ -1227,7 +1227,7 @@ to
 <context>
     <name>Q3Wizard</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/dialogs/q3wizard.cpp" line="+177"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/qt3support/dialogs/q3wizard.cpp" line="+177"/>
         <source>&amp;Cancel</source>
         <translation type="unfinished">&amp;Loobu</translation>
     </message>
@@ -1255,17 +1255,17 @@ to
 <context>
     <name>QAbstractSocket</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/socket/qabstractsocket.cpp" line="+916"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/socket/qhttpsocketengine.cpp" line="+629"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/socket/qsocks5socketengine.cpp" line="+661"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/network/socket/qabstractsocket.cpp" line="+916"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/network/socket/qhttpsocketengine.cpp" line="+629"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/network/socket/qsocks5socketengine.cpp" line="+661"/>
         <location line="+26"/>
         <source>Host not found</source>
         <translation>Masinat ei leitud</translation>
     </message>
     <message>
         <location line="+50"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/socket/qhttpsocketengine.cpp" line="+3"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/socket/qsocks5socketengine.cpp" line="+4"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/network/socket/qhttpsocketengine.cpp" line="+3"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/network/socket/qsocks5socketengine.cpp" line="+4"/>
         <source>Connection refused</source>
         <translation>Ühendusest keelduti</translation>
     </message>
@@ -1282,18 +1282,18 @@ to
         <translation>Sokli toiming ei ole toetatud</translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/access/qhttpnetworkconnection.cpp" line="+620"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/socket/qabstractsocket.cpp" line="+203"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/network/access/qhttpnetworkconnection.cpp" line="+620"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/network/socket/qabstractsocket.cpp" line="+203"/>
         <source>Socket operation timed out</source>
         <translation>Soklitoiming aegus</translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/socket/qabstractsocket.cpp" line="+380"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/network/socket/qabstractsocket.cpp" line="+380"/>
         <source>Socket is not connected</source>
         <translation>Sokkel pole ühendatud</translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/socket/qsocks5socketengine.cpp" line="-8"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/network/socket/qsocks5socketengine.cpp" line="-8"/>
         <source>Network unreachable</source>
         <translation>Võrk ei ole kättesaadav</translation>
     </message>
@@ -1301,7 +1301,7 @@ to
 <context>
     <name>QAbstractSpinBox</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/widgets/qabstractspinbox.cpp" line="+1263"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/widgets/qabstractspinbox.cpp" line="+1263"/>
         <source>&amp;Step up</source>
         <translation>&amp;Samm üles</translation>
     </message>
@@ -1319,7 +1319,7 @@ to
 <context>
     <name>QAccessibleButton</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/plugins/accessible/widgets/simplewidgets.cpp" line="+250"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/plugins/accessible/widgets/simplewidgets.cpp" line="+250"/>
         <source>Press</source>
         <translation type="unfinished">Vajuta</translation>
     </message>
@@ -1327,12 +1327,12 @@ to
 <context>
     <name>QApplication</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/accessible/qaccessibleobject.cpp" line="+376"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/accessible/qaccessibleobject.cpp" line="+376"/>
         <source>Activate</source>
         <translation>Aktiveeri</translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qmessagebox.h" line="+354"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/dialogs/qmessagebox.h" line="+354"/>
         <source>Executable &apos;%1&apos; requires Qt %2, found Qt %3.</source>
         <translation>Programm &apos;%1&apos; vajab Qt %2 aga leidsin Qt %3</translation>
     </message>
@@ -1342,13 +1342,13 @@ to
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/kernel/qapplication.cpp" line="-13"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/kernel/qapplication.cpp" line="-13"/>
         <source>QT_LAYOUT_DIRECTION</source>
         <comment>Translate this string to the string &apos;LTR&apos; in left-to-right languages or to &apos;RTL&apos; in right-to-left languages (such as Hebrew and Arabic) to get proper widget layout.</comment>
         <translation>LTR</translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/accessible/qaccessibleobject.cpp" line="+2"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/accessible/qaccessibleobject.cpp" line="+2"/>
         <source>Activates the program&apos;s main window</source>
         <translation>Aktiveerib programmi peaakna</translation>
     </message>
@@ -1356,7 +1356,7 @@ to
 <context>
     <name>QAxSelect</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/activeqt/container/qaxselect.ui"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/activeqt/container/qaxselect.ui"/>
         <source>Select ActiveX Control</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1379,7 +1379,7 @@ to
 <context>
     <name>QCheckBox</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/plugins/accessible/widgets/simplewidgets.cpp" line="-136"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/plugins/accessible/widgets/simplewidgets.cpp" line="-136"/>
         <source>Uncheck</source>
         <translation>Eemalda märge</translation>
     </message>
@@ -1397,7 +1397,7 @@ to
 <context>
     <name>QColorDialog</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qcolordialog.cpp" line="+1378"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/dialogs/qcolordialog.cpp" line="+1378"/>
         <source>Hu&amp;e:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1455,13 +1455,13 @@ to
 <context>
     <name>QComboBox</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/plugins/accessible/widgets/complexwidgets.cpp" line="+1776"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/plugins/accessible/widgets/complexwidgets.cpp" line="+1776"/>
         <location line="+65"/>
         <source>Open</source>
         <translation>Ava</translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/itemviews/qitemeditorfactory.cpp" line="+556"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/itemviews/qitemeditorfactory.cpp" line="+556"/>
         <source>False</source>
         <translation>Väär</translation>
     </message>
@@ -1471,7 +1471,7 @@ to
         <translation>Tõene</translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/plugins/accessible/widgets/complexwidgets.cpp" line="+0"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/plugins/accessible/widgets/complexwidgets.cpp" line="+0"/>
         <source>Close</source>
         <translation>Sulge</translation>
     </message>
@@ -1479,7 +1479,7 @@ to
 <context>
     <name>QCoreApplication</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/kernel/qsystemsemaphore_unix.cpp" line="+119"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/corelib/kernel/qsystemsemaphore_unix.cpp" line="+119"/>
         <source>%1: key is empty</source>
         <comment>QSystemSemaphore</comment>
         <translation>%1: võti on tühi</translation>
@@ -1497,7 +1497,7 @@ to
         <translation>%1: ftok nurjus&quot;</translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/kernel/qsystemsemaphore_symbian.cpp" line="+65"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/corelib/kernel/qsystemsemaphore_symbian.cpp" line="+65"/>
         <source>%1: already exists</source>
         <comment>QSystemSemaphore</comment>
         <translation type="unfinished"></translation>
@@ -1524,7 +1524,7 @@ to
 <context>
     <name>QDB2Driver</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/sql/drivers/db2/qsql_db2.cpp" line="+1253"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/sql/drivers/db2/qsql_db2.cpp" line="+1253"/>
         <source>Unable to connect</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1581,7 +1581,7 @@ to
 <context>
     <name>QDateTimeEdit</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/widgets/qdatetimeedit.cpp" line="+2274"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/widgets/qdatetimeedit.cpp" line="+2274"/>
         <source>AM</source>
         <translation>AM</translation>
     </message>
@@ -1604,7 +1604,7 @@ to
 <context>
     <name>QDeclarativeAbstractAnimation</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/declarative/util/qdeclarativeanimation.cpp" line="+172"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/declarative/util/qdeclarativeanimation.cpp" line="+172"/>
         <source>Cannot animate non-existent property &quot;%1&quot;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1614,7 +1614,7 @@ to
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/declarative/util/qdeclarativeutilmodule.cpp" line="+120"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/declarative/util/qdeclarativeutilmodule.cpp" line="+120"/>
         <location line="+45"/>
         <source>Animation is an abstract class</source>
         <translation type="unfinished"></translation>
@@ -1623,7 +1623,7 @@ to
 <context>
     <name>QDeclarativeAnchorAnimation</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/declarative/util/qdeclarativeanimation.cpp" line="+2687"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/declarative/util/qdeclarativeanimation.cpp" line="+2687"/>
         <source>Cannot set a duration of &lt; 0</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1631,7 +1631,7 @@ to
 <context>
     <name>QDeclarativeAnchors</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/declarative/graphicsitems/qdeclarativeanchors.cpp" line="+195"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/declarative/graphicsitems/qdeclarativeanchors.cpp" line="+195"/>
         <source>Possible anchor loop detected on fill.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1699,7 +1699,7 @@ to
 <context>
     <name>QDeclarativeAnimatedImage</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/declarative/graphicsitems/qdeclarativeitemsmodule.cpp" line="+102"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/declarative/graphicsitems/qdeclarativeitemsmodule.cpp" line="+102"/>
         <location line="+78"/>
         <source>Qt was built without support for QMovie</source>
         <translation type="unfinished"></translation>
@@ -1708,7 +1708,7 @@ to
 <context>
     <name>QDeclarativeBehavior</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/declarative/util/qdeclarativebehavior.cpp" line="+126"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/declarative/util/qdeclarativebehavior.cpp" line="+126"/>
         <source>Cannot change the animation assigned to a Behavior.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1716,7 +1716,7 @@ to
 <context>
     <name>QDeclarativeBinding</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/declarative/qml/qdeclarativebinding.cpp" line="+242"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/declarative/qml/qdeclarativebinding.cpp" line="+242"/>
         <source>Binding loop detected for property &quot;%1&quot;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1724,7 +1724,7 @@ to
 <context>
     <name>QDeclarativeCompiledBindings</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/declarative/qml/qdeclarativecompiledbindings.cpp" line="+372"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/declarative/qml/qdeclarativecompiledbindings.cpp" line="+372"/>
         <source>Binding loop detected for property &quot;%1&quot;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1732,7 +1732,7 @@ to
 <context>
     <name>QDeclarativeCompiler</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/declarative/qml/qdeclarativecompiler.cpp" line="+185"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/declarative/qml/qdeclarativecompiler.cpp" line="+185"/>
         <location line="+1593"/>
         <location line="+188"/>
         <location line="+81"/>
@@ -2126,7 +2126,7 @@ to
 <context>
     <name>QDeclarativeComponent</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/declarative/qml/qdeclarativecomponent.cpp" line="+489"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/declarative/qml/qdeclarativecomponent.cpp" line="+489"/>
         <source>Invalid empty URL</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2134,7 +2134,7 @@ to
 <context>
     <name>QDeclarativeConnections</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/declarative/util/qdeclarativeconnections.cpp" line="+204"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/declarative/util/qdeclarativeconnections.cpp" line="+204"/>
         <location line="+60"/>
         <source>Cannot assign to non-existent property &quot;%1&quot;</source>
         <translation type="unfinished"></translation>
@@ -2158,7 +2158,7 @@ to
 <context>
     <name>QDeclarativeEngine</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/declarative/qml/qdeclarativesqldatabase.cpp" line="+204"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/declarative/qml/qdeclarativesqldatabase.cpp" line="+204"/>
         <source>executeSql called outside transaction()</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2192,7 +2192,7 @@ to
 <context>
     <name>QDeclarativeFlipable</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/declarative/graphicsitems/qdeclarativeflipable.cpp" line="+137"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/declarative/graphicsitems/qdeclarativeflipable.cpp" line="+137"/>
         <source>front is a write-once property</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2205,7 +2205,7 @@ to
 <context>
     <name>QDeclarativeImportDatabase</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/declarative/qml/qdeclarativeimport.cpp" line="+361"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/declarative/qml/qdeclarativeimport.cpp" line="+361"/>
         <source>module &quot;%1&quot; definition &quot;%2&quot; not readable</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2281,7 +2281,7 @@ to
 <context>
     <name>QDeclarativeKeyNavigationAttached</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/declarative/graphicsitems/qdeclarativeitemsmodule.cpp" line="-6"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/declarative/graphicsitems/qdeclarativeitemsmodule.cpp" line="-6"/>
         <location line="+58"/>
         <source>KeyNavigation is only available via attached properties</source>
         <translation type="unfinished"></translation>
@@ -2299,7 +2299,7 @@ to
 <context>
     <name>QDeclarativeListModel</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/declarative/util/qdeclarativelistmodel.cpp" line="+400"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/declarative/util/qdeclarativelistmodel.cpp" line="+400"/>
         <source>remove: index %1 out of range</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2359,7 +2359,7 @@ to
 <context>
     <name>QDeclarativeLoader</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/declarative/graphicsitems/qdeclarativeloader.cpp" line="+362"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/declarative/graphicsitems/qdeclarativeloader.cpp" line="+362"/>
         <source>Loader does not support loading non-visual elements.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2367,7 +2367,7 @@ to
 <context>
     <name>QDeclarativeParentAnimation</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/declarative/util/qdeclarativeanimation.cpp" line="-166"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/declarative/util/qdeclarativeanimation.cpp" line="-166"/>
         <source>Unable to preserve appearance under complex transform</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2386,7 +2386,7 @@ to
 <context>
     <name>QDeclarativeParentChange</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/declarative/util/qdeclarativestateoperations.cpp" line="+96"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/declarative/util/qdeclarativestateoperations.cpp" line="+96"/>
         <source>Unable to preserve appearance under complex transform</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2405,7 +2405,7 @@ to
 <context>
     <name>QDeclarativeParser</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/declarative/qml/parser/qdeclarativejslexer.cpp" line="+542"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/declarative/qml/parser/qdeclarativejslexer.cpp" line="+542"/>
         <location line="+123"/>
         <location line="+54"/>
         <source>Illegal unicode escape sequence</source>
@@ -2463,7 +2463,7 @@ to
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/declarative/qml/parser/qdeclarativejsparser.cpp" line="+1828"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/declarative/qml/parser/qdeclarativejsparser.cpp" line="+1828"/>
         <location line="+67"/>
         <source>Syntax error</source>
         <translation type="unfinished"></translation>
@@ -2480,7 +2480,7 @@ to
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/declarative/qml/qdeclarativescriptparser.cpp" line="+260"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/declarative/qml/qdeclarativescriptparser.cpp" line="+260"/>
         <location line="+430"/>
         <location line="+59"/>
         <source>Property value set multiple times</source>
@@ -2550,7 +2550,7 @@ to
 <context>
     <name>QDeclarativePauseAnimation</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/declarative/util/qdeclarativeanimation.cpp" line="-2116"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/declarative/util/qdeclarativeanimation.cpp" line="-2116"/>
         <source>Cannot set a duration of &lt; 0</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2558,7 +2558,7 @@ to
 <context>
     <name>QDeclarativePixmap</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/declarative/util/qdeclarativepixmapcache.cpp" line="+309"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/declarative/util/qdeclarativepixmapcache.cpp" line="+309"/>
         <source>Error decoding: %1: %2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2578,7 +2578,7 @@ to
 <context>
     <name>QDeclarativePropertyAnimation</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/declarative/util/qdeclarativeanimation.cpp" line="+1246"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/declarative/util/qdeclarativeanimation.cpp" line="+1246"/>
         <source>Cannot set a duration of &lt; 0</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2586,7 +2586,7 @@ to
 <context>
     <name>QDeclarativePropertyChanges</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/declarative/util/qdeclarativepropertychanges.cpp" line="+240"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/declarative/util/qdeclarativepropertychanges.cpp" line="+240"/>
         <source>PropertyChanges does not support creating state-specific objects.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2604,7 +2604,7 @@ to
 <context>
     <name>QDeclarativeTextInput</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/declarative/graphicsitems/qdeclarativetextinput.cpp" line="+812"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/declarative/graphicsitems/qdeclarativetextinput.cpp" line="+812"/>
         <location line="+8"/>
         <source>Could not load cursor delegate</source>
         <translation type="unfinished"></translation>
@@ -2618,7 +2618,7 @@ to
 <context>
     <name>QDeclarativeTypeLoader</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/declarative/qml/qdeclarativetypeloader.cpp" line="+807"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/declarative/qml/qdeclarativetypeloader.cpp" line="+807"/>
         <source>Script %1 unavailable</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2641,7 +2641,7 @@ to
 <context>
     <name>QDeclarativeVME</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/declarative/qml/qdeclarativevme.cpp" line="+194"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/declarative/qml/qdeclarativevme.cpp" line="+194"/>
         <source>Unable to create object of type %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2689,7 +2689,7 @@ to
 <context>
     <name>QDeclarativeVisualDataModel</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/declarative/graphicsitems/qdeclarativevisualitemmodel.cpp" line="+1087"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/declarative/graphicsitems/qdeclarativevisualitemmodel.cpp" line="+1087"/>
         <source>Delegate component must be Item type.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2697,7 +2697,7 @@ to
 <context>
     <name>QDeclarativeXmlListModel</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/declarative/util/qdeclarativeutilmodule.cpp" line="-57"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/declarative/util/qdeclarativeutilmodule.cpp" line="-57"/>
         <location line="+2"/>
         <location line="+47"/>
         <location line="+2"/>
@@ -2708,7 +2708,7 @@ to
 <context>
     <name>QDeclarativeXmlListModelRole</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/declarative/util/qdeclarativexmllistmodel_p.h" line="+174"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/declarative/util/qdeclarativexmllistmodel_p.h" line="+174"/>
         <source>An XmlRole query must not start with &apos;/&apos;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2716,7 +2716,7 @@ to
 <context>
     <name>QDeclarativeXmlRoleList</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/declarative/util/qdeclarativexmllistmodel.cpp" line="+732"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/declarative/util/qdeclarativexmllistmodel.cpp" line="+732"/>
         <source>An XmlListModel query must start with &apos;/&apos; or &quot;//&quot;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2724,7 +2724,7 @@ to
 <context>
     <name>QDial</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/plugins/accessible/widgets/rangecontrols.cpp" line="+951"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/plugins/accessible/widgets/rangecontrols.cpp" line="+951"/>
         <source>QDial</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2742,7 +2742,7 @@ to
 <context>
     <name>QDialog</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qdialog.cpp" line="+651"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/dialogs/qdialog.cpp" line="+651"/>
         <source>What&apos;s This?</source>
         <translation>Mis see on?</translation>
     </message>
@@ -2755,14 +2755,14 @@ to
 <context>
     <name>QDialogButtonBox</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qmessagebox.cpp" line="+1920"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/dialogs/qmessagebox.cpp" line="+1920"/>
         <location line="+464"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/widgets/qdialogbuttonbox.cpp" line="+649"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/widgets/qdialogbuttonbox.cpp" line="+649"/>
         <source>OK</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/widgets/qdialogbuttonbox.cpp" line="+0"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/widgets/qdialogbuttonbox.cpp" line="+0"/>
         <source>&amp;OK</source>
         <translation>&amp;OK</translation>
     </message>
@@ -2880,7 +2880,7 @@ to
 <context>
     <name>QDirModel</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/itemviews/qdirmodel.cpp" line="+457"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/itemviews/qdirmodel.cpp" line="+457"/>
         <source>Name</source>
         <translation>Nimi</translation>
     </message>
@@ -2910,7 +2910,7 @@ to
 <context>
     <name>QDockWidget</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/plugins/accessible/widgets/qaccessiblewidgets.cpp" line="+1239"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/plugins/accessible/widgets/qaccessiblewidgets.cpp" line="+1239"/>
         <source>Close</source>
         <translation>Sulge</translation>
     </message>
@@ -2928,7 +2928,7 @@ to
 <context>
     <name>QDoubleSpinBox</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/plugins/accessible/widgets/rangecontrols.cpp" line="-537"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/plugins/accessible/widgets/rangecontrols.cpp" line="-537"/>
         <source>More</source>
         <translation>Rohkem</translation>
     </message>
@@ -2941,7 +2941,7 @@ to
 <context>
     <name>QErrorMessage</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qerrormessage.cpp" line="+208"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/dialogs/qerrormessage.cpp" line="+208"/>
         <source>Debug Message:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2969,7 +2969,7 @@ to
 <context>
     <name>QFile</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/io/qfile.cpp" line="+703"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/corelib/io/qfile.cpp" line="+703"/>
         <location line="+155"/>
         <source>Destination file exists</source>
         <translation>Sihtfail on olemas</translation>
@@ -3008,7 +3008,7 @@ to
 <context>
     <name>QFileDialog</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qfiledialog.cpp" line="+558"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/dialogs/qfiledialog.cpp" line="+558"/>
         <location line="+481"/>
         <source>All Files (*)</source>
         <translation>Kõik failid (*)</translation>
@@ -3053,12 +3053,12 @@ Faili ei leidnud.
 Palun kontrolli failinem õigsust.</translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/itemviews/qdirmodel.cpp" line="+402"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/itemviews/qdirmodel.cpp" line="+402"/>
         <source>My Computer</source>
         <translation>Minu arvuti</translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qfiledialog.cpp" line="-1526"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/dialogs/qfiledialog.cpp" line="-1526"/>
         <source>&amp;Rename</source>
         <translation>&amp;Nimeta ümber</translation>
     </message>
@@ -3073,37 +3073,37 @@ Palun kontrolli failinem õigsust.</translation>
         <translation>Näita &amp;peidetud faile</translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qfiledialog.ui"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qfiledialog_embedded.ui"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/dialogs/qfiledialog.ui"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/dialogs/qfiledialog_embedded.ui"/>
         <source>Back</source>
         <translation>Tagasi</translation>
     </message>
     <message>
         <location/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qfiledialog_embedded.ui"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/dialogs/qfiledialog_embedded.ui"/>
         <source>Parent Directory</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qfiledialog_embedded.ui"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/dialogs/qfiledialog_embedded.ui"/>
         <source>List View</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qfiledialog_embedded.ui"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/dialogs/qfiledialog_embedded.ui"/>
         <source>Detail View</source>
         <translation>Detailne vaade</translation>
     </message>
     <message>
         <location/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qfiledialog_embedded.ui"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/dialogs/qfiledialog_embedded.ui"/>
         <source>Files of type:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qfiledialog.cpp" line="+6"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/dialogs/qfiledialog.cpp" line="+6"/>
         <location line="+679"/>
         <source>Directory:</source>
         <translation>Kataloog:</translation>
@@ -3138,17 +3138,17 @@ Do you want to delete it anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qfiledialog_win.cpp" line="+148"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/dialogs/qfiledialog_win.cpp" line="+148"/>
         <source>All Files (*.*)</source>
         <translation>Kõik failid (*.*)</translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qfiledialog.cpp" line="-2569"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/dialogs/qfiledialog.cpp" line="-2569"/>
         <source>Save As</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/itemviews/qfileiconprovider.cpp" line="+475"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/itemviews/qfileiconprovider.cpp" line="+475"/>
         <source>Drive</source>
         <translation>Ketas</translation>
     </message>
@@ -3188,7 +3188,7 @@ Do you want to delete it anyway?</source>
         <translation>Tundmatu</translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qfiledialog.cpp" line="-4"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/dialogs/qfiledialog.cpp" line="-4"/>
         <source>Find Directory</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3198,13 +3198,13 @@ Do you want to delete it anyway?</source>
         <translation>Näita</translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qfiledialog.ui"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qfiledialog_embedded.ui"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/dialogs/qfiledialog.ui"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/dialogs/qfiledialog_embedded.ui"/>
         <source>Forward</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qfiledialog.cpp" line="+1992"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/dialogs/qfiledialog.cpp" line="+1992"/>
         <source>New Folder</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3220,25 +3220,25 @@ Do you want to delete it anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qsidebar.cpp" line="+442"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/dialogs/qsidebar.cpp" line="+442"/>
         <source>Remove</source>
         <translation>Eemalda</translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qfiledialog.cpp" line="-723"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/dialogs/qfiledialog.cpp" line="-723"/>
         <location line="+683"/>
         <source>File &amp;name:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qfiledialog.ui"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qfiledialog_embedded.ui"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/dialogs/qfiledialog.ui"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/dialogs/qfiledialog_embedded.ui"/>
         <source>Look in:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qfiledialog_embedded.ui"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/dialogs/qfiledialog_embedded.ui"/>
         <source>Create New Folder</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3276,12 +3276,12 @@ Do you want to delete it anyway?</source>
 <context>
     <name>QFileSystemModel</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/itemviews/qdirmodel.cpp" line="+489"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/itemviews/qdirmodel.cpp" line="+489"/>
         <source>%1 byte(s)</source>
         <translation>%1 bait</translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qfilesystemmodel.cpp" line="+836"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/dialogs/qfilesystemmodel.cpp" line="+836"/>
         <source>Invalid filename</source>
         <translation>Vigane failinimi</translation>
     </message>
@@ -3318,7 +3318,7 @@ Do you want to delete it anyway?</source>
         <translation>Muutmise kuupäev</translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qfilesystemmodel_p.h" line="+261"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/dialogs/qfilesystemmodel_p.h" line="+261"/>
         <source>My Computer</source>
         <translation>Minu arvuti</translation>
     </message>
@@ -3328,26 +3328,26 @@ Do you want to delete it anyway?</source>
         <translation>Arvuti</translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qfilesystemmodel.cpp" line="-176"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/itemviews/qdirmodel.cpp" line="-7"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/dialogs/qfilesystemmodel.cpp" line="-176"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/itemviews/qdirmodel.cpp" line="-7"/>
         <source>%1 TB</source>
         <translation>%1 TB</translation>
     </message>
     <message>
         <location line="+2"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/itemviews/qdirmodel.cpp" line="+2"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/itemviews/qdirmodel.cpp" line="+2"/>
         <source>%1 GB</source>
         <translation>%1 GB</translation>
     </message>
     <message>
         <location line="+2"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/itemviews/qdirmodel.cpp" line="+2"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/itemviews/qdirmodel.cpp" line="+2"/>
         <source>%1 MB</source>
         <translation>%1 MB</translation>
     </message>
     <message>
         <location line="+2"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/itemviews/qdirmodel.cpp" line="+2"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/itemviews/qdirmodel.cpp" line="+2"/>
         <source>%1 KB</source>
         <translation>%1 KB</translation>
     </message>
@@ -3360,7 +3360,7 @@ Do you want to delete it anyway?</source>
 <context>
     <name>QFontDatabase</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/text/qfontdatabase.cpp" line="+102"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/text/qfontdatabase.cpp" line="+102"/>
         <location line="+1347"/>
         <source>Normal</source>
         <translation type="unfinished"></translation>
@@ -3582,7 +3582,7 @@ Do you want to delete it anyway?</source>
 <context>
     <name>QFontDialog</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qfontdialog.cpp" line="+768"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/dialogs/qfontdialog.cpp" line="+768"/>
         <source>&amp;Font</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3630,20 +3630,20 @@ Do you want to delete it anyway?</source>
 <context>
     <name>QFtp</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/access/qftp.cpp" line="+828"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/network/q3ftp.cpp" line="+683"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/network/access/qftp.cpp" line="+828"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/qt3support/network/q3ftp.cpp" line="+683"/>
         <source>Not connected</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+68"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/network/q3ftp.cpp" line="+65"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/qt3support/network/q3ftp.cpp" line="+65"/>
         <source>Host %1 not found</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+4"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/network/q3ftp.cpp" line="+4"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/qt3support/network/q3ftp.cpp" line="+4"/>
         <source>Connection refused to host %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3654,97 +3654,97 @@ Do you want to delete it anyway?</source>
     </message>
     <message>
         <location line="+104"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/network/q3ftp.cpp" line="+102"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/qt3support/network/q3ftp.cpp" line="+102"/>
         <location line="+1451"/>
         <source>Connected to host %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+219"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/network/q3ftp.cpp" line="-1290"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/qt3support/network/q3ftp.cpp" line="-1290"/>
         <source>Connection refused for data connection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+178"/>
         <location line="+29"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/network/q3ftp.cpp" line="+195"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/qt3support/network/q3ftp.cpp" line="+195"/>
         <location line="+728"/>
         <source>Unknown error</source>
         <translation>Tundmatu viga</translation>
     </message>
     <message>
         <location line="+897"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/network/q3ftp.cpp" line="+77"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/qt3support/network/q3ftp.cpp" line="+77"/>
         <source>Connecting to host failed:
 %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+4"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/network/q3ftp.cpp" line="+3"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/qt3support/network/q3ftp.cpp" line="+3"/>
         <source>Login failed:
 %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+4"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/network/q3ftp.cpp" line="+3"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/qt3support/network/q3ftp.cpp" line="+3"/>
         <source>Listing directory failed:
 %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+4"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/network/q3ftp.cpp" line="+3"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/qt3support/network/q3ftp.cpp" line="+3"/>
         <source>Changing directory failed:
 %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+4"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/network/q3ftp.cpp" line="+3"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/qt3support/network/q3ftp.cpp" line="+3"/>
         <source>Downloading file failed:
 %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+4"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/network/q3ftp.cpp" line="+3"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/qt3support/network/q3ftp.cpp" line="+3"/>
         <source>Uploading file failed:
 %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+4"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/network/q3ftp.cpp" line="+3"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/qt3support/network/q3ftp.cpp" line="+3"/>
         <source>Removing file failed:
 %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+4"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/network/q3ftp.cpp" line="+3"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/qt3support/network/q3ftp.cpp" line="+3"/>
         <source>Creating directory failed:
 %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+4"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/network/q3ftp.cpp" line="+3"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/qt3support/network/q3ftp.cpp" line="+3"/>
         <source>Removing directory failed:
 %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+28"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/network/q3ftp.cpp" line="+25"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/qt3support/network/q3ftp.cpp" line="+25"/>
         <location line="+250"/>
         <source>Connection closed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/network/q3ftp.cpp" line="-11"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/qt3support/network/q3ftp.cpp" line="-11"/>
         <source>Host %1 found</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3767,12 +3767,12 @@ Do you want to delete it anyway?</source>
 <context>
     <name>QHostInfo</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/kernel/qhostinfo_p.h" line="+103"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/network/kernel/qhostinfo_p.h" line="+103"/>
         <source>Unknown error</source>
         <translation>Tundmatu viga</translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/kernel/qhostinfo.cpp" line="+171"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/network/kernel/qhostinfo.cpp" line="+171"/>
         <source>No host name given</source>
         <translation type="unfinished">Masina nime ei ole antud</translation>
     </message>
@@ -3780,9 +3780,9 @@ Do you want to delete it anyway?</source>
 <context>
     <name>QHostInfoAgent</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/kernel/qhostinfo_unix.cpp" line="+277"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/network/kernel/qhostinfo_unix.cpp" line="+277"/>
         <location line="+32"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/kernel/qhostinfo_win.cpp" line="+215"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/network/kernel/qhostinfo_win.cpp" line="+215"/>
         <location line="+27"/>
         <source>Host not found</source>
         <translation>Masinat ei leitud</translation>
@@ -3790,27 +3790,27 @@ Do you want to delete it anyway?</source>
     <message>
         <location line="-45"/>
         <location line="+39"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/kernel/qhostinfo_win.cpp" line="-34"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/network/kernel/qhostinfo_win.cpp" line="-34"/>
         <location line="+29"/>
         <source>Unknown address type</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+10"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/kernel/qhostinfo_win.cpp" line="-19"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/network/kernel/qhostinfo_win.cpp" line="-19"/>
         <location line="+27"/>
         <source>Unknown error</source>
         <translation>Tundmatu viga</translation>
     </message>
     <message>
         <location line="-115"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/kernel/qhostinfo_win.cpp" line="-67"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/network/kernel/qhostinfo_win.cpp" line="-67"/>
         <source>No host name given</source>
         <translation>Masina nime ei ole antud</translation>
     </message>
     <message>
         <location line="+1"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/kernel/qhostinfo_win.cpp" line="+0"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/network/kernel/qhostinfo_win.cpp" line="+0"/>
         <source>Invalid hostname</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3818,34 +3818,34 @@ Do you want to delete it anyway?</source>
 <context>
     <name>QHttp</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/access/qhttp.cpp" line="+1582"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/network/access/qhttp.cpp" line="+1582"/>
         <location line="+820"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/network/q3http.cpp" line="+1159"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/qt3support/network/q3http.cpp" line="+1159"/>
         <location line="+567"/>
         <source>Unknown error</source>
         <translation>Tundmatu viga</translation>
     </message>
     <message>
         <location line="-568"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/network/q3http.cpp" line="-370"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/qt3support/network/q3http.cpp" line="-370"/>
         <source>Request aborted</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+579"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/network/q3http.cpp" line="+381"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/qt3support/network/q3http.cpp" line="+381"/>
         <source>No server set to connect to</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+164"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/network/q3http.cpp" line="+56"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/qt3support/network/q3http.cpp" line="+56"/>
         <source>Wrong content length</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+4"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/network/q3http.cpp" line="+4"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/qt3support/network/q3http.cpp" line="+4"/>
         <source>Server closed connection unexpectedly</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3860,40 +3860,40 @@ Do you want to delete it anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/access/qhttpnetworkconnection.cpp" line="-6"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/network/q3http.cpp" line="+38"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/network/access/qhttpnetworkconnection.cpp" line="-6"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/qt3support/network/q3http.cpp" line="+38"/>
         <source>Connection refused</source>
         <translation>Ühendusest keelduti</translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/access/qhttp.cpp" line="-325"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/access/qhttpnetworkconnection.cpp" line="-4"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/network/q3http.cpp" line="+3"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/network/access/qhttp.cpp" line="-325"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/network/access/qhttpnetworkconnection.cpp" line="-4"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/qt3support/network/q3http.cpp" line="+3"/>
         <source>Host %1 not found</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+20"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/network/q3http.cpp" line="+3"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/qt3support/network/q3http.cpp" line="+3"/>
         <source>HTTP request failed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+94"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/network/q3http.cpp" line="+69"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/qt3support/network/q3http.cpp" line="+69"/>
         <source>Invalid HTTP response header</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+125"/>
         <location line="+48"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/network/q3http.cpp" line="+40"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/qt3support/network/q3http.cpp" line="+40"/>
         <location line="+47"/>
         <source>Invalid HTTP chunked body</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/network/q3http.cpp" line="+294"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/qt3support/network/q3http.cpp" line="+294"/>
         <source>Host %1 found</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3918,13 +3918,13 @@ Do you want to delete it anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/access/qhttpnetworkconnection.cpp" line="+7"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/network/q3http.cpp" line="+3"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/network/access/qhttpnetworkconnection.cpp" line="+7"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/qt3support/network/q3http.cpp" line="+3"/>
         <source>Connection closed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/access/qhttp.cpp" line="-135"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/network/access/qhttp.cpp" line="-135"/>
         <source>Proxy authentication required</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3939,7 +3939,7 @@ Do you want to delete it anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/access/qhttpnetworkconnection.cpp" line="+6"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/network/access/qhttpnetworkconnection.cpp" line="+6"/>
         <source>Proxy requires authentication</source>
         <translation>Proksi server vajab autentimist</translation>
     </message>
@@ -3964,7 +3964,7 @@ Do you want to delete it anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/access/qhttp.cpp" line="-2266"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/network/access/qhttp.cpp" line="-2266"/>
         <source>HTTPS connection requested but SSL support not compiled in</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3972,7 +3972,7 @@ Do you want to delete it anyway?</source>
 <context>
     <name>QHttpSocketEngine</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/socket/qhttpsocketengine.cpp" line="-89"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/network/socket/qhttpsocketengine.cpp" line="-89"/>
         <source>Did not receive HTTP response from proxy</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4020,7 +4020,7 @@ Do you want to delete it anyway?</source>
 <context>
     <name>QIBaseDriver</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/sql/drivers/ibase/qsql_ibase.cpp" line="+1491"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/sql/drivers/ibase/qsql_ibase.cpp" line="+1491"/>
         <source>Error opening database</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4133,7 +4133,7 @@ Do you want to delete it anyway?</source>
 <context>
     <name>QIODevice</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/global/qglobal.cpp" line="+2131"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/corelib/global/qglobal.cpp" line="+2131"/>
         <source>Permission denied</source>
         <translation>Õigustest ei piisa</translation>
     </message>
@@ -4153,7 +4153,7 @@ Do you want to delete it anyway?</source>
         <translation>Seadmel pole enam vaba ruumi</translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/io/qiodevice.cpp" line="+1618"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/corelib/io/qiodevice.cpp" line="+1618"/>
         <source>Unknown error</source>
         <translation>Tundmatu viga</translation>
     </message>
@@ -4161,7 +4161,7 @@ Do you want to delete it anyway?</source>
 <context>
     <name>QInputContext</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/inputmethod/qinputcontextfactory.cpp" line="+301"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/inputmethod/qinputcontextfactory.cpp" line="+301"/>
         <source>XIM</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4194,7 +4194,7 @@ Do you want to delete it anyway?</source>
 <context>
     <name>QInputDialog</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qinputdialog.cpp" line="+223"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/dialogs/qinputdialog.cpp" line="+223"/>
         <source>Enter a value:</source>
         <translation>Sisesta väärtus:</translation>
     </message>
@@ -4202,7 +4202,7 @@ Do you want to delete it anyway?</source>
 <context>
     <name>QLibrary</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/plugin/qlibrary.cpp" line="+378"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/corelib/plugin/qlibrary.cpp" line="+378"/>
         <source>Plugin verification data mismatch in &apos;%1&apos;</source>
         <translation>Plugin kontrollimisandmed ei klapi asukohas &apos;%1&apos;</translation>
     </message>
@@ -4224,7 +4224,7 @@ Do you want to delete it anyway?</source>
     <message>
         <location line="-543"/>
         <location line="+138"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/plugin/qpluginloader.cpp" line="+343"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/corelib/plugin/qpluginloader.cpp" line="+343"/>
         <source>The shared library was not found.</source>
         <translation>Jagatud teeki ei leitud.</translation>
     </message>
@@ -4239,20 +4239,20 @@ Do you want to delete it anyway?</source>
         <translation>Plugin &apos;%1&apos; kasutab ühildumatut Qt teeki. (Ei tohi segada silumis- ja väljalasteteeke.)</translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/plugin/qlibrary_unix.cpp" line="+236"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/plugin/qlibrary_win.cpp" line="+87"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/corelib/plugin/qlibrary_unix.cpp" line="+236"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/corelib/plugin/qlibrary_win.cpp" line="+87"/>
         <source>Cannot load library %1: %2</source>
         <translation>Teegi %1 laadimine nurjus: %2</translation>
     </message>
     <message>
         <location line="+17"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/plugin/qlibrary_win.cpp" line="+22"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/corelib/plugin/qlibrary_win.cpp" line="+22"/>
         <source>Cannot unload library %1: %2</source>
         <translation>Teegi %1 töö lõpetamine nurjus: %2</translation>
     </message>
     <message>
         <location line="+34"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/plugin/qlibrary_win.cpp" line="+15"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/corelib/plugin/qlibrary_win.cpp" line="+15"/>
         <source>Cannot resolve symbol &quot;%1&quot; in %2: %3</source>
         <translation>Sümboli \&quot;%1\&quot; lahendamine asukohas %2 nurjus: %3</translation>
     </message>
@@ -4260,7 +4260,7 @@ Do you want to delete it anyway?</source>
 <context>
     <name>QLineEdit</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/widgets/qlineedit.cpp" line="+2084"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/widgets/qlineedit.cpp" line="+2084"/>
         <source>&amp;Undo</source>
         <translation>&amp;Võta tagasi</translation>
     </message>
@@ -4298,13 +4298,13 @@ Do you want to delete it anyway?</source>
 <context>
     <name>QLocalServer</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/socket/qlocalserver.cpp" line="+224"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/socket/qlocalserver_unix.cpp" line="+246"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/network/socket/qlocalserver.cpp" line="+224"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/network/socket/qlocalserver_unix.cpp" line="+246"/>
         <source>%1: Name error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/socket/qlocalserver_unix.cpp" line="-8"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/network/socket/qlocalserver_unix.cpp" line="-8"/>
         <source>%1: Permission denied</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4322,59 +4322,59 @@ Do you want to delete it anyway?</source>
 <context>
     <name>QLocalSocket</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/socket/qlocalsocket_tcp.cpp" line="+132"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/socket/qlocalsocket_unix.cpp" line="+139"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/network/socket/qlocalsocket_tcp.cpp" line="+132"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/network/socket/qlocalsocket_unix.cpp" line="+139"/>
         <source>%1: Connection refused</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/socket/qlocalsocket_unix.cpp" line="+3"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/network/socket/qlocalsocket_unix.cpp" line="+3"/>
         <source>%1: Remote closed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/socket/qlocalsocket_unix.cpp" line="+3"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/socket/qlocalsocket_win.cpp" line="+79"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/network/socket/qlocalsocket_unix.cpp" line="+3"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/network/socket/qlocalsocket_win.cpp" line="+79"/>
         <location line="+59"/>
         <source>%1: Invalid name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/socket/qlocalsocket_unix.cpp" line="+3"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/network/socket/qlocalsocket_unix.cpp" line="+3"/>
         <source>%1: Socket access error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/socket/qlocalsocket_unix.cpp" line="+3"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/network/socket/qlocalsocket_unix.cpp" line="+3"/>
         <source>%1: Socket resource error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/socket/qlocalsocket_unix.cpp" line="+3"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/network/socket/qlocalsocket_unix.cpp" line="+3"/>
         <source>%1: Socket operation timed out</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/socket/qlocalsocket_unix.cpp" line="+3"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/network/socket/qlocalsocket_unix.cpp" line="+3"/>
         <source>%1: Datagram too large</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/socket/qlocalsocket_unix.cpp" line="+3"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/socket/qlocalsocket_win.cpp" line="-64"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/network/socket/qlocalsocket_unix.cpp" line="+3"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/network/socket/qlocalsocket_win.cpp" line="-64"/>
         <source>%1: Connection error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+3"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/socket/qlocalsocket_unix.cpp" line="+3"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/network/socket/qlocalsocket_unix.cpp" line="+3"/>
         <source>%1: The socket operation is not supported</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4384,8 +4384,8 @@ Do you want to delete it anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/socket/qlocalsocket_unix.cpp" line="+4"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/socket/qlocalsocket_win.cpp" line="+10"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/network/socket/qlocalsocket_unix.cpp" line="+4"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/network/socket/qlocalsocket_win.cpp" line="+10"/>
         <source>%1: Unknown error %2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4393,7 +4393,7 @@ Do you want to delete it anyway?</source>
 <context>
     <name>QMYSQLDriver</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/sql/drivers/mysql/qsql_mysql.cpp" line="+1287"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/sql/drivers/mysql/qsql_mysql.cpp" line="+1287"/>
         <source>Unable to open database &apos;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4482,7 +4482,7 @@ Do you want to delete it anyway?</source>
 <context>
     <name>QMdiArea</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/widgets/qmdiarea.cpp" line="+290"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/widgets/qmdiarea.cpp" line="+290"/>
         <source>(Untitled)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4490,7 +4490,7 @@ Do you want to delete it anyway?</source>
 <context>
     <name>QMdiSubWindow</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/widgets/qmdisubwindow.cpp" line="+280"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/widgets/qmdisubwindow.cpp" line="+280"/>
         <source>%1 - [%2]</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4583,7 +4583,7 @@ Do you want to delete it anyway?</source>
 <context>
     <name>QMenu</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/plugins/accessible/widgets/qaccessiblemenu.cpp" line="+157"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/plugins/accessible/widgets/qaccessiblemenu.cpp" line="+157"/>
         <location line="+225"/>
         <source>Close</source>
         <translation>Sulge</translation>
@@ -4605,7 +4605,7 @@ Do you want to delete it anyway?</source>
 <context>
     <name>QMenuBar</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/widgets/qmenu_symbian.cpp" line="+456"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/widgets/qmenu_symbian.cpp" line="+456"/>
         <source>Actions</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4613,14 +4613,14 @@ Do you want to delete it anyway?</source>
 <context>
     <name>QMessageBox</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qmessagebox.cpp" line="-1116"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/dialogs/qmessagebox.cpp" line="-1116"/>
         <source>Help</source>
         <translation>Abi</translation>
     </message>
     <message>
         <location line="-848"/>
         <location line="+847"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qmessagebox.h" line="-52"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/dialogs/qmessagebox.h" line="-52"/>
         <location line="+8"/>
         <source>OK</source>
         <translation>OK</translation>
@@ -4654,7 +4654,7 @@ Do you want to delete it anyway?</source>
 <context>
     <name>QMultiInputContext</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/plugins/inputmethods/imsw-multi/qmultiinputcontext.cpp" line="+88"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/plugins/inputmethods/imsw-multi/qmultiinputcontext.cpp" line="+88"/>
         <source>Select IM</source>
         <translation>Sisestusviisi valik</translation>
     </message>
@@ -4662,7 +4662,7 @@ Do you want to delete it anyway?</source>
 <context>
     <name>QMultiInputContextPlugin</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/plugins/inputmethods/imsw-multi/qmultiinputcontextplugin.cpp" line="+95"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/plugins/inputmethods/imsw-multi/qmultiinputcontextplugin.cpp" line="+95"/>
         <source>Multiple input method switcher</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4675,7 +4675,7 @@ Do you want to delete it anyway?</source>
 <context>
     <name>QNativeSocketEngine</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/socket/qnativesocketengine.cpp" line="+209"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/network/socket/qnativesocketengine.cpp" line="+209"/>
         <source>The remote host closed the connection</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4808,7 +4808,7 @@ Do you want to delete it anyway?</source>
 <context>
     <name>QNetworkAccessCacheBackend</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/access/qnetworkaccesscachebackend.cpp" line="+66"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/network/access/qnetworkaccesscachebackend.cpp" line="+66"/>
         <source>Error opening %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4816,7 +4816,7 @@ Do you want to delete it anyway?</source>
 <context>
     <name>QNetworkAccessDataBackend</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/access/qnetworkaccessdatabackend.cpp" line="+76"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/network/access/qnetworkaccessdatabackend.cpp" line="+76"/>
         <source>Operation not supported on %1</source>
         <translation type="unfinished">Operation not supported on %1</translation>
     </message>
@@ -4829,7 +4829,7 @@ Do you want to delete it anyway?</source>
 <context>
     <name>QNetworkAccessDebugPipeBackend</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/access/qnetworkaccessdebugpipebackend.cpp" line="+195"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/network/access/qnetworkaccessdebugpipebackend.cpp" line="+195"/>
         <source>Write error writing to %1: %2</source>
         <translation>Kirjutamisviga %1 kirjutamisel: %2</translation>
     </message>
@@ -4847,30 +4847,30 @@ Do you want to delete it anyway?</source>
 <context>
     <name>QNetworkAccessFileBackend</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/access/qfilenetworkreply.cpp" line="+85"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/access/qnetworkaccessfilebackend.cpp" line="+100"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/network/access/qfilenetworkreply.cpp" line="+85"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/network/access/qnetworkaccessfilebackend.cpp" line="+100"/>
         <source>Request for opening non-local file %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+36"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/access/qnetworkaccessfilebackend.cpp" line="+45"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/network/access/qnetworkaccessfilebackend.cpp" line="+45"/>
         <source>Error opening %1: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/access/qnetworkaccessfilebackend.cpp" line="+38"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/network/access/qnetworkaccessfilebackend.cpp" line="+38"/>
         <source>Write error writing to %1: %2</source>
         <translation>Kirjutamisviga %1 kirjutamisel: %2</translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/access/qfilenetworkreply.cpp" line="-13"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/access/qnetworkaccessfilebackend.cpp" line="+48"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/network/access/qfilenetworkreply.cpp" line="-13"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/network/access/qnetworkaccessfilebackend.cpp" line="+48"/>
         <source>Cannot open %1: Path is a directory</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/access/qnetworkaccessfilebackend.cpp" line="+21"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/network/access/qnetworkaccessfilebackend.cpp" line="+21"/>
         <source>Read error reading from %1: %2</source>
         <translation>Lugemisviga %1 lugemisel: %2</translation>
     </message>
@@ -4878,7 +4878,7 @@ Do you want to delete it anyway?</source>
 <context>
     <name>QNetworkAccessFtpBackend</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/access/qnetworkaccessftpbackend.cpp" line="+131"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/network/access/qnetworkaccessftpbackend.cpp" line="+131"/>
         <source>No suitable proxy found</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4906,7 +4906,7 @@ Do you want to delete it anyway?</source>
 <context>
     <name>QNetworkAccessHttpBackend</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/access/qnetworkaccesshttpbackend.cpp" line="+652"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/network/access/qnetworkaccesshttpbackend.cpp" line="+652"/>
         <source>No suitable proxy found</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4914,7 +4914,7 @@ Do you want to delete it anyway?</source>
 <context>
     <name>QNetworkAccessManager</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/access/qnetworkreplyimpl.cpp" line="+943"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/network/access/qnetworkreplyimpl.cpp" line="+943"/>
         <source>Network access is disabled.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4922,12 +4922,12 @@ Do you want to delete it anyway?</source>
 <context>
     <name>QNetworkReply</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/access/qnetworkaccesshttpbackend.cpp" line="+100"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/network/access/qnetworkaccesshttpbackend.cpp" line="+100"/>
         <source>Error downloading %1 - server replied: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/access/qnetworkreplyimpl.cpp" line="-861"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/network/access/qnetworkreplyimpl.cpp" line="-861"/>
         <source>Protocol &quot;%1&quot; is unknown</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4954,7 +4954,7 @@ Do you want to delete it anyway?</source>
 <context>
     <name>QNetworkSession</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/bearer/qnetworksession.cpp" line="+449"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/network/bearer/qnetworksession.cpp" line="+449"/>
         <source>Invalid configuration.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4962,7 +4962,7 @@ Do you want to delete it anyway?</source>
 <context>
     <name>QNetworkSessionPrivateImpl</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/plugins/bearer/icd/qnetworksession_impl.cpp" line="+1024"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/plugins/bearer/icd/qnetworksession_impl.cpp" line="+1024"/>
         <source>Roaming error</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4977,32 +4977,32 @@ Do you want to delete it anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/plugins/bearer/qnetworksession_impl.cpp" line="+272"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/plugins/bearer/symbian/qnetworksession_impl.cpp" line="+306"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/plugins/bearer/qnetworksession_impl.cpp" line="+272"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/plugins/bearer/symbian/qnetworksession_impl.cpp" line="+306"/>
         <source>Unknown session error.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+2"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/plugins/bearer/symbian/qnetworksession_impl.cpp" line="+2"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/plugins/bearer/symbian/qnetworksession_impl.cpp" line="+2"/>
         <source>The session was aborted by the user or system.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+2"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/plugins/bearer/symbian/qnetworksession_impl.cpp" line="+2"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/plugins/bearer/symbian/qnetworksession_impl.cpp" line="+2"/>
         <source>The requested operation is not supported by the system.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+2"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/plugins/bearer/symbian/qnetworksession_impl.cpp" line="+2"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/plugins/bearer/symbian/qnetworksession_impl.cpp" line="+2"/>
         <source>The specified configuration cannot be used.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+2"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/plugins/bearer/symbian/qnetworksession_impl.cpp" line="+2"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/plugins/bearer/symbian/qnetworksession_impl.cpp" line="+2"/>
         <source>Roaming was aborted or is not possible.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5010,7 +5010,7 @@ Do you want to delete it anyway?</source>
 <context>
     <name>QOCIDriver</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/sql/drivers/oci/qsql_oci.cpp" line="+2120"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/sql/drivers/oci/qsql_oci.cpp" line="+2120"/>
         <source>Unable to logon</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5084,7 +5084,7 @@ Do you want to delete it anyway?</source>
 <context>
     <name>QODBCDriver</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/sql/drivers/odbc/qsql_odbc.cpp" line="+1888"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/sql/drivers/odbc/qsql_odbc.cpp" line="+1888"/>
         <source>Unable to connect</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5144,14 +5144,14 @@ Do you want to delete it anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/sql/drivers/db2/qsql_db2.cpp" line="+189"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/sql/drivers/odbc/qsql_odbc.cpp" line="-466"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/sql/drivers/db2/qsql_db2.cpp" line="+189"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/sql/drivers/odbc/qsql_odbc.cpp" line="-466"/>
         <location line="+578"/>
         <source>Unable to fetch last</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/sql/drivers/odbc/qsql_odbc.cpp" line="-672"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/sql/drivers/odbc/qsql_odbc.cpp" line="-672"/>
         <source>Unable to fetch</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5169,13 +5169,13 @@ Do you want to delete it anyway?</source>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/3rdparty/phonon/phonon/pulsesupport.cpp" line="+162"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/3rdparty/phonon/phonon/pulsesupport.cpp" line="+162"/>
         <location line="+11"/>
         <source>PulseAudio Sound Server</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/declarative/util/qdeclarativexmllistmodel.cpp" line="-249"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/declarative/util/qdeclarativexmllistmodel.cpp" line="-249"/>
         <source>&quot;%1&quot; duplicates a previous role name and will be disabled.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5189,7 +5189,7 @@ Do you want to delete it anyway?</source>
 <context>
     <name>QPPDOptionsModel</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qprintdialog_unix.cpp" line="+1238"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/dialogs/qprintdialog_unix.cpp" line="+1238"/>
         <source>Name</source>
         <translation>Nimi</translation>
     </message>
@@ -5202,7 +5202,7 @@ Do you want to delete it anyway?</source>
 <context>
     <name>QPSQLDriver</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/sql/drivers/psql/qsql_psql.cpp" line="+782"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/sql/drivers/psql/qsql_psql.cpp" line="+782"/>
         <source>Unable to connect</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5248,7 +5248,7 @@ Do you want to delete it anyway?</source>
 <context>
     <name>QPageSetupWidget</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qpagesetupdialog_unix.cpp" line="+304"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/dialogs/qpagesetupdialog_unix.cpp" line="+304"/>
         <source>Centimeters (cm)</source>
         <translation>Sentimeetrid (cm)</translation>
     </message>
@@ -5268,7 +5268,7 @@ Do you want to delete it anyway?</source>
         <translation>Punktid (pt)</translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qpagesetupwidget.ui"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/dialogs/qpagesetupwidget.ui"/>
         <source>Form</source>
         <translation>Vorm</translation>
     </message>
@@ -5351,7 +5351,7 @@ Do you want to delete it anyway?</source>
 <context>
     <name>QPluginLoader</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/plugin/qpluginloader.cpp" line="+24"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/corelib/plugin/qpluginloader.cpp" line="+24"/>
         <source>Unknown error</source>
         <translation>Tundmatu viga</translation>
     </message>
@@ -5364,7 +5364,7 @@ Do you want to delete it anyway?</source>
 <context>
     <name>QPrintDialog</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/painting/qprinterinfo_unix.cpp" line="+110"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/painting/qprinterinfo_unix.cpp" line="+110"/>
         <source>locally connected</source>
         <translation>kohalikult ühendatud</translation>
     </message>
@@ -5381,7 +5381,7 @@ Do you want to delete it anyway?</source>
         <translation>tundmatu</translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qprintdialog_qws.cpp" line="+333"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/dialogs/qprintdialog_qws.cpp" line="+333"/>
         <source>A0 (841 x 1189 mm)</source>
         <translation>A0 (841 x 1189 mm)</translation>
     </message>
@@ -5536,24 +5536,24 @@ Do you want to delete it anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qprintdialog_win.cpp" line="+272"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/dialogs/qprintdialog_win.cpp" line="+272"/>
         <source>OK</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qabstractprintdialog.cpp" line="+113"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/dialogs/qabstractprintdialog.cpp" line="+113"/>
         <location line="+13"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qprintdialog_win.cpp" line="-2"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/dialogs/qprintdialog_win.cpp" line="-2"/>
         <source>Print</source>
         <translation>Trükkimine</translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qprintdialog_unix.cpp" line="-392"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/dialogs/qprintdialog_unix.cpp" line="-392"/>
         <source>Print To File ...</source>
         <translation>Trükkimine faili...</translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qprintdialog_qws.cpp" line="-1"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/dialogs/qprintdialog_qws.cpp" line="-1"/>
         <source>Print range</source>
         <translation>Trükivahemik</translation>
     </message>
@@ -5563,7 +5563,7 @@ Do you want to delete it anyway?</source>
         <translation>Kõige trükkimine</translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qprintdialog_unix.cpp" line="+82"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/dialogs/qprintdialog_unix.cpp" line="+82"/>
         <source>File %1 is not writable.
 Please choose a different file name.</source>
         <translation>Fail %1 ei ole kirjutatav.
@@ -5577,7 +5577,7 @@ Do you want to overwrite it?</source>
 Do you want to overwrite it?</translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qprintdialog_qws.cpp" line="-231"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/dialogs/qprintdialog_qws.cpp" line="-231"/>
         <source>File exists</source>
         <translation>Fail on olemas</translation>
     </message>
@@ -5592,14 +5592,14 @@ Do you want to overwrite it?</translation>
         <translation>Trüki valik</translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qprintdialog_unix.cpp" line="-8"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/dialogs/qprintdialog_unix.cpp" line="-8"/>
         <source>%1 is a directory.
 Please choose a different file name.</source>
         <translation>%1 on kataloog.
 Palun vali mõni muu failinimi.</translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qpagesetupdialog_unix.cpp" line="-232"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/dialogs/qpagesetupdialog_unix.cpp" line="-232"/>
         <source>A0</source>
         <translation>A0</translation>
     </message>
@@ -5754,7 +5754,7 @@ Palun vali mõni muu failinimi.</translation>
         <translation>Kohandatud</translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qprintdialog_unix.cpp" line="-530"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/dialogs/qprintdialog_unix.cpp" line="-530"/>
         <location line="+68"/>
         <source>&amp;Options &gt;&gt;</source>
         <translation>&amp;Valikud &gt;&gt;</translation>
@@ -5790,7 +5790,7 @@ Palun vali mõni muu failinimi.</translation>
         <translation>%1-faili kirjutamine</translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qprintdialog_win.cpp" line="+1"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/dialogs/qprintdialog_win.cpp" line="+1"/>
         <source>The &apos;From&apos; value cannot be greater than the &apos;To&apos; value.</source>
         <translation>Alguse väärtus ei saa olla suurem kui lõpu väärtus.</translation>
     </message>
@@ -5798,13 +5798,13 @@ Palun vali mõni muu failinimi.</translation>
 <context>
     <name>QPrintPreviewDialog</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qabstractpagesetupdialog.cpp" line="+68"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/dialogs/qabstractpagesetupdialog.cpp" line="+68"/>
         <location line="+12"/>
         <source>Page Setup</source>
         <translation>Lehekülje seadistused</translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qprintpreviewdialog.cpp" line="+249"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/dialogs/qprintpreviewdialog.cpp" line="+249"/>
         <source>%1%</source>
         <translation>%1%</translation>
     </message>
@@ -5907,7 +5907,7 @@ Palun vali mõni muu failinimi.</translation>
 <context>
     <name>QPrintPropertiesWidget</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qprintpropertieswidget.ui"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/dialogs/qprintpropertieswidget.ui"/>
         <source>Form</source>
         <translation>Vorm</translation>
     </message>
@@ -5925,7 +5925,7 @@ Palun vali mõni muu failinimi.</translation>
 <context>
     <name>QPrintSettingsOutput</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qprintsettingsoutput.ui"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/dialogs/qprintsettingsoutput.ui"/>
         <source>Form</source>
         <translation>Vorm</translation>
     </message>
@@ -6028,7 +6028,7 @@ Palun vali mõni muu failinimi.</translation>
 <context>
     <name>QPrintWidget</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qprintwidget.ui"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/dialogs/qprintwidget.ui"/>
         <source>Form</source>
         <translation>Vorm</translation>
     </message>
@@ -6076,14 +6076,14 @@ Palun vali mõni muu failinimi.</translation>
 <context>
     <name>QProcess</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/io/qprocess_unix.cpp" line="+406"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/io/qprocess_win.cpp" line="+137"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/corelib/io/qprocess_unix.cpp" line="+406"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/corelib/io/qprocess_win.cpp" line="+137"/>
         <source>Could not open input redirection for reading</source>
         <translation>Sisendi ümbersuunamise avamine lugemiseks nurjus.</translation>
     </message>
     <message>
         <location line="+12"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/io/qprocess_win.cpp" line="+20"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/corelib/io/qprocess_win.cpp" line="+20"/>
         <source>Could not open output redirection for writing</source>
         <translation>Väljundi ümbersuunamise avamine lugemiseks nurjus.</translation>
     </message>
@@ -6097,7 +6097,7 @@ Palun vali mõni muu failinimi.</translation>
         <location line="+52"/>
         <location line="+74"/>
         <location line="+66"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/io/qprocess_win.cpp" line="+411"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/corelib/io/qprocess_win.cpp" line="+411"/>
         <location line="+50"/>
         <location line="+75"/>
         <location line="+42"/>
@@ -6106,9 +6106,9 @@ Palun vali mõni muu failinimi.</translation>
         <translation>Protsessi toiming aegus</translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/io/qprocess.cpp" line="+866"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/corelib/io/qprocess.cpp" line="+866"/>
         <location line="+52"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/io/qprocess_win.cpp" line="-211"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/corelib/io/qprocess_win.cpp" line="-211"/>
         <location line="+50"/>
         <source>Error reading from process</source>
         <translation>Viga protsessist lugemisel</translation>
@@ -6116,7 +6116,7 @@ Palun vali mõni muu failinimi.</translation>
     <message>
         <location line="+47"/>
         <location line="+870"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/io/qprocess_win.cpp" line="+140"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/corelib/io/qprocess_win.cpp" line="+140"/>
         <source>Error writing to process</source>
         <translation>Viga protsessi kirjutamisel</translation>
     </message>
@@ -6131,7 +6131,7 @@ Palun vali mõni muu failinimi.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/io/qprocess_win.cpp" line="-360"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/corelib/io/qprocess_win.cpp" line="-360"/>
         <source>Process failed to start: %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6139,7 +6139,7 @@ Palun vali mõni muu failinimi.</translation>
 <context>
     <name>QProgressDialog</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qprogressdialog.cpp" line="+203"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/dialogs/qprogressdialog.cpp" line="+203"/>
         <source>Cancel</source>
         <translation>Loobu</translation>
     </message>
@@ -6147,7 +6147,7 @@ Palun vali mõni muu failinimi.</translation>
 <context>
     <name>QPushButton</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/plugins/accessible/widgets/simplewidgets.cpp" line="-8"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/plugins/accessible/widgets/simplewidgets.cpp" line="-8"/>
         <source>Open</source>
         <translation>Ava</translation>
     </message>
@@ -6163,7 +6163,7 @@ Palun vali mõni muu failinimi.</translation>
 <context>
     <name>QRegExp</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/tools/qregexp.cpp" line="+65"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/corelib/tools/qregexp.cpp" line="+65"/>
         <source>no error occurred</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6221,7 +6221,7 @@ Palun vali mõni muu failinimi.</translation>
 <context>
     <name>QSQLite2Driver</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/sql/drivers/sqlite2/qsql_sqlite2.cpp" line="+399"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/sql/drivers/sqlite2/qsql_sqlite2.cpp" line="+399"/>
         <source>Error opening database</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6257,7 +6257,7 @@ Palun vali mõni muu failinimi.</translation>
 <context>
     <name>QSQLiteDriver</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/sql/drivers/sqlite/qsql_sqlite.cpp" line="+539"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/sql/drivers/sqlite/qsql_sqlite.cpp" line="+539"/>
         <source>Error opening database</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6320,7 +6320,7 @@ Palun vali mõni muu failinimi.</translation>
 <context>
     <name>QScriptBreakpointsModel</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/scripttools/debugging/qscriptbreakpointsmodel.cpp" line="+455"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/scripttools/debugging/qscriptbreakpointsmodel.cpp" line="+455"/>
         <source>ID</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6353,7 +6353,7 @@ Palun vali mõni muu failinimi.</translation>
 <context>
     <name>QScriptBreakpointsWidget</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/scripttools/debugging/qscriptbreakpointswidget.cpp" line="+298"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/scripttools/debugging/qscriptbreakpointswidget.cpp" line="+298"/>
         <source>New</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6366,7 +6366,7 @@ Palun vali mõni muu failinimi.</translation>
 <context>
     <name>QScriptDebugger</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/scripttools/debugging/qscriptdebugger.cpp" line="+885"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/scripttools/debugging/qscriptdebugger.cpp" line="+885"/>
         <location line="+1013"/>
         <source>Go to Line</source>
         <translation type="unfinished"></translation>
@@ -6510,7 +6510,7 @@ Palun vali mõni muu failinimi.</translation>
 <context>
     <name>QScriptDebuggerCodeFinderWidget</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/scripttools/debugging/qscriptdebuggercodefinderwidget.cpp" line="+141"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/scripttools/debugging/qscriptdebuggercodefinderwidget.cpp" line="+141"/>
         <source>Close</source>
         <translation type="unfinished">Sulge</translation>
     </message>
@@ -6543,7 +6543,7 @@ Palun vali mõni muu failinimi.</translation>
 <context>
     <name>QScriptDebuggerLocalsModel</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/scripttools/debugging/qscriptdebuggerlocalsmodel.cpp" line="+897"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/scripttools/debugging/qscriptdebuggerlocalsmodel.cpp" line="+897"/>
         <source>Name</source>
         <translation type="unfinished">Nimi</translation>
     </message>
@@ -6556,7 +6556,7 @@ Palun vali mõni muu failinimi.</translation>
 <context>
     <name>QScriptDebuggerStackModel</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/scripttools/debugging/qscriptdebuggerstackmodel.cpp" line="+161"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/scripttools/debugging/qscriptdebuggerstackmodel.cpp" line="+161"/>
         <source>Level</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6574,7 +6574,7 @@ Palun vali mõni muu failinimi.</translation>
 <context>
     <name>QScriptEdit</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/scripttools/debugging/qscriptedit.cpp" line="+411"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/scripttools/debugging/qscriptedit.cpp" line="+411"/>
         <source>Toggle Breakpoint</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6597,7 +6597,7 @@ Palun vali mõni muu failinimi.</translation>
 <context>
     <name>QScriptEngineDebugger</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/scripttools/debugging/qscriptenginedebugger.cpp" line="+523"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/scripttools/debugging/qscriptenginedebugger.cpp" line="+523"/>
         <source>Loaded Scripts</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6650,7 +6650,7 @@ Palun vali mõni muu failinimi.</translation>
 <context>
     <name>QScriptNewBreakpointWidget</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/scripttools/debugging/qscriptbreakpointswidget.cpp" line="-223"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/scripttools/debugging/qscriptbreakpointswidget.cpp" line="-223"/>
         <source>Close</source>
         <translation type="unfinished">Sulge</translation>
     </message>
@@ -6658,7 +6658,7 @@ Palun vali mõni muu failinimi.</translation>
 <context>
     <name>QScrollBar</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/widgets/qscrollbar.cpp" line="+454"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/widgets/qscrollbar.cpp" line="+454"/>
         <source>Scroll here</source>
         <translation>Keri siia</translation>
     </message>
@@ -6689,7 +6689,7 @@ Palun vali mõni muu failinimi.</translation>
     </message>
     <message>
         <location line="+0"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/plugins/accessible/widgets/rangecontrols.cpp" line="+143"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/plugins/accessible/widgets/rangecontrols.cpp" line="+143"/>
         <source>Page up</source>
         <translation>Lehekülg üles</translation>
     </message>
@@ -6700,7 +6700,7 @@ Palun vali mõni muu failinimi.</translation>
     </message>
     <message>
         <location line="+0"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/plugins/accessible/widgets/rangecontrols.cpp" line="+4"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/plugins/accessible/widgets/rangecontrols.cpp" line="+4"/>
         <source>Page down</source>
         <translation>Lehekülg alla</translation>
     </message>
@@ -6725,7 +6725,7 @@ Palun vali mõni muu failinimi.</translation>
         <translation>Keri alla</translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/plugins/accessible/widgets/rangecontrols.cpp" line="-6"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/plugins/accessible/widgets/rangecontrols.cpp" line="-6"/>
         <source>Line up</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6743,7 +6743,7 @@ Palun vali mõni muu failinimi.</translation>
 <context>
     <name>QSharedMemory</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/kernel/qsharedmemory.cpp" line="+223"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/corelib/kernel/qsharedmemory.cpp" line="+223"/>
         <source>%1: unable to set key on lock</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6754,7 +6754,7 @@ Palun vali mõni muu failinimi.</translation>
     </message>
     <message>
         <location line="+168"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/kernel/qsharedmemory_p.h" line="+155"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/corelib/kernel/qsharedmemory_p.h" line="+155"/>
         <source>%1: unable to lock</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6764,16 +6764,16 @@ Palun vali mõni muu failinimi.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/kernel/qsharedmemory_symbian.cpp" line="+83"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/kernel/qsharedmemory_unix.cpp" line="+81"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/kernel/qsharedmemory_win.cpp" line="+87"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/corelib/kernel/qsharedmemory_symbian.cpp" line="+83"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/corelib/kernel/qsharedmemory_unix.cpp" line="+81"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/corelib/kernel/qsharedmemory_win.cpp" line="+87"/>
         <source>%1: permission denied</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="-16"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/kernel/qsharedmemory_unix.cpp" line="+4"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/kernel/qsharedmemory_win.cpp" line="-22"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/corelib/kernel/qsharedmemory_unix.cpp" line="+4"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/corelib/kernel/qsharedmemory_win.cpp" line="-22"/>
         <source>%1: already exists</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6784,26 +6784,26 @@ Palun vali mõni muu failinimi.</translation>
     </message>
     <message>
         <location line="+8"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/kernel/qsharedmemory_unix.cpp" line="+10"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/kernel/qsharedmemory_win.cpp" line="+18"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/corelib/kernel/qsharedmemory_unix.cpp" line="+10"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/corelib/kernel/qsharedmemory_win.cpp" line="+18"/>
         <source>%1: out of resources</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+7"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/kernel/qsharedmemory_unix.cpp" line="+4"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/kernel/qsharedmemory_win.cpp" line="+7"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/corelib/kernel/qsharedmemory_unix.cpp" line="+4"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/corelib/kernel/qsharedmemory_win.cpp" line="+7"/>
         <source>%1: unknown error %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/kernel/qsharedmemory_unix.cpp" line="+21"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/corelib/kernel/qsharedmemory_unix.cpp" line="+21"/>
         <source>%1: key is empty</source>
         <translation>%1: võti on tühi</translation>
     </message>
     <message>
         <location line="-31"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/kernel/qsharedmemory_win.cpp" line="-16"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/corelib/kernel/qsharedmemory_win.cpp" line="-16"/>
         <source>%1: doesn&apos;t exist</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6818,14 +6818,14 @@ Palun vali mõni muu failinimi.</translation>
         <translation>%1: ftok nurjus&quot;</translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/kernel/qsharedmemory_symbian.cpp" line="+56"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/kernel/qsharedmemory_unix.cpp" line="+51"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/kernel/qsharedmemory_win.cpp" line="+31"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/corelib/kernel/qsharedmemory_symbian.cpp" line="+56"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/corelib/kernel/qsharedmemory_unix.cpp" line="+51"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/corelib/kernel/qsharedmemory_win.cpp" line="+31"/>
         <source>%1: unable to make key</source>
         <translation>%1: võtme loomine nurjus</translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/kernel/qsharedmemory_unix.cpp" line="+20"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/corelib/kernel/qsharedmemory_unix.cpp" line="+20"/>
         <source>%1: system-imposed size restrictions</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6835,19 +6835,19 @@ Palun vali mõni muu failinimi.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/kernel/qsharedmemory_symbian.cpp" line="-67"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/kernel/qsharedmemory_win.cpp" line="-27"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/corelib/kernel/qsharedmemory_symbian.cpp" line="-67"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/corelib/kernel/qsharedmemory_win.cpp" line="-27"/>
         <source>%1: invalid size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+40"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/kernel/qsharedmemory_win.cpp" line="+63"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/corelib/kernel/qsharedmemory_win.cpp" line="+63"/>
         <source>%1: key error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/kernel/qsharedmemory_win.cpp" line="+32"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/corelib/kernel/qsharedmemory_win.cpp" line="+32"/>
         <source>%1: size query failed</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6855,7 +6855,7 @@ Palun vali mõni muu failinimi.</translation>
 <context>
     <name>QShortcut</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/kernel/qkeysequence.cpp" line="+396"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/kernel/qkeysequence.cpp" line="+396"/>
         <source>Space</source>
         <extracomment>This and all following &quot;incomprehensible&quot; strings in QShortcut context are key names. Please use the localized names appearing on actual keyboards or whatever is commonly used.</extracomment>
         <translation type="unfinished"></translation>
@@ -7963,7 +7963,7 @@ Palun vali mõni muu failinimi.</translation>
 <context>
     <name>QSlider</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/plugins/accessible/widgets/rangecontrols.cpp" line="+151"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/plugins/accessible/widgets/rangecontrols.cpp" line="+151"/>
         <source>Page left</source>
         <translation>Lehekülg vasakule</translation>
     </message>
@@ -7991,7 +7991,7 @@ Palun vali mõni muu failinimi.</translation>
 <context>
     <name>QSocks5SocketEngine</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/socket/qsocks5socketengine.cpp" line="-67"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/network/socket/qsocks5socketengine.cpp" line="-67"/>
         <source>Connection to proxy refused</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8064,7 +8064,7 @@ Palun vali mõni muu failinimi.</translation>
 <context>
     <name>QSoftKeyManager</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/kernel/qsoftkeymanager.cpp" line="+63"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/kernel/qsoftkeymanager.cpp" line="+63"/>
         <source>Ok</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8089,7 +8089,7 @@ Palun vali mõni muu failinimi.</translation>
         <translation type="unfinished">Loobu</translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/kernel/qsoftkeymanager_s60.cpp" line="+321"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/kernel/qsoftkeymanager_s60.cpp" line="+321"/>
         <source>Exit</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8097,7 +8097,7 @@ Palun vali mõni muu failinimi.</translation>
 <context>
     <name>QSpinBox</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/plugins/accessible/widgets/rangecontrols.cpp" line="-574"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/plugins/accessible/widgets/rangecontrols.cpp" line="-574"/>
         <source>More</source>
         <translation>Rohkem</translation>
     </message>
@@ -8110,7 +8110,7 @@ Palun vali mõni muu failinimi.</translation>
 <context>
     <name>QSql</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/qt3support/sql/q3sqlmanager_p.cpp" line="+890"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/qt3support/sql/q3sqlmanager_p.cpp" line="+890"/>
         <source>Delete</source>
         <translation>Kustuta</translation>
     </message>
@@ -8167,7 +8167,7 @@ Palun vali mõni muu failinimi.</translation>
 <context>
     <name>QSslSocket</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/ssl/qsslsocket_openssl.cpp" line="+850"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/network/ssl/qsslsocket_openssl.cpp" line="+850"/>
         <source>Unable to write data: %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8228,7 +8228,7 @@ Palun vali mõni muu failinimi.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/ssl/qsslerror.cpp" line="+213"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/network/ssl/qsslerror.cpp" line="+213"/>
         <source>No error</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8346,7 +8346,7 @@ Palun vali mõni muu failinimi.</translation>
 <context>
     <name>QStateMachine</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/statemachine/qstatemachine.cpp" line="+1028"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/corelib/statemachine/qstatemachine.cpp" line="+1028"/>
         <source>Missing initial state in compound state &apos;%1&apos;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8369,14 +8369,14 @@ Palun vali mõni muu failinimi.</translation>
 <context>
     <name>QSystemSemaphore</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/kernel/qsystemsemaphore_unix.cpp" line="-41"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/kernel/qsystemsemaphore_win.cpp" line="+66"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/corelib/kernel/qsystemsemaphore_unix.cpp" line="-41"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/corelib/kernel/qsystemsemaphore_win.cpp" line="+66"/>
         <source>%1: out of resources</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="-13"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/kernel/qsystemsemaphore_win.cpp" line="+4"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/corelib/kernel/qsystemsemaphore_win.cpp" line="+4"/>
         <source>%1: permission denied</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8392,7 +8392,7 @@ Palun vali mõni muu failinimi.</translation>
     </message>
     <message>
         <location line="+9"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/kernel/qsystemsemaphore_win.cpp" line="+3"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/corelib/kernel/qsystemsemaphore_win.cpp" line="+3"/>
         <source>%1: unknown error %2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8400,7 +8400,7 @@ Palun vali mõni muu failinimi.</translation>
 <context>
     <name>QTDSDriver</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/sql/drivers/tds/qsql_tds.cpp" line="+595"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/sql/drivers/tds/qsql_tds.cpp" line="+595"/>
         <source>Unable to open connection</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8413,7 +8413,7 @@ Palun vali mõni muu failinimi.</translation>
 <context>
     <name>QTabBar</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/plugins/accessible/widgets/complexwidgets.cpp" line="-330"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/plugins/accessible/widgets/complexwidgets.cpp" line="-330"/>
         <source>Scroll Left</source>
         <translation>Keri vasakule</translation>
     </message>
@@ -8426,7 +8426,7 @@ Palun vali mõni muu failinimi.</translation>
 <context>
     <name>QTcpServer</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/socket/qtcpserver.cpp" line="+292"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/network/socket/qtcpserver.cpp" line="+292"/>
         <source>Operation on socket is not supported</source>
         <translation>Sokli toiming ei ole toetatud</translation>
     </message>
@@ -8434,7 +8434,7 @@ Palun vali mõni muu failinimi.</translation>
 <context>
     <name>QTextControl</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/text/qtextcontrol.cpp" line="+2032"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/text/qtextcontrol.cpp" line="+2032"/>
         <source>&amp;Undo</source>
         <translation>&amp;Võta tagasi</translation>
     </message>
@@ -8477,7 +8477,7 @@ Palun vali mõni muu failinimi.</translation>
 <context>
     <name>QToolButton</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/plugins/accessible/widgets/simplewidgets.cpp" line="+310"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/plugins/accessible/widgets/simplewidgets.cpp" line="+310"/>
         <location line="+6"/>
         <source>Press</source>
         <translation>Vajuta</translation>
@@ -8492,7 +8492,7 @@ Palun vali mõni muu failinimi.</translation>
 <context>
     <name>QUdpSocket</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/network/socket/qudpsocket.cpp" line="+189"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/network/socket/qudpsocket.cpp" line="+189"/>
         <source>This platform does not support IPv6</source>
         <translation>See platvorm ei toeta IPv6</translation>
     </message>
@@ -8500,7 +8500,7 @@ Palun vali mõni muu failinimi.</translation>
 <context>
     <name>QUndoGroup</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/util/qundogroup.cpp" line="+385"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/util/qundogroup.cpp" line="+385"/>
         <source>Undo</source>
         <translation>Võta tagasi</translation>
     </message>
@@ -8513,7 +8513,7 @@ Palun vali mõni muu failinimi.</translation>
 <context>
     <name>QUndoModel</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/util/qundoview.cpp" line="+101"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/util/qundoview.cpp" line="+101"/>
         <source>&lt;empty&gt;</source>
         <translation>&lt;tühi&gt;</translation>
     </message>
@@ -8521,7 +8521,7 @@ Palun vali mõni muu failinimi.</translation>
 <context>
     <name>QUndoStack</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/util/qundostack.cpp" line="+832"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/util/qundostack.cpp" line="+832"/>
         <source>Undo</source>
         <translation>Võta tagasi</translation>
     </message>
@@ -8534,7 +8534,7 @@ Palun vali mõni muu failinimi.</translation>
 <context>
     <name>QUnicodeControlCharacterMenu</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/text/qtextcontrol.cpp" line="+899"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/text/qtextcontrol.cpp" line="+899"/>
         <source>LRM Left-to-right mark</source>
         <translation>LRM vasakult paremale märk</translation>
     </message>
@@ -8592,7 +8592,7 @@ Palun vali mõni muu failinimi.</translation>
 <context>
     <name>QWebFrame</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/3rdparty/webkit/WebKit/qt/WebCoreSupport/FrameLoaderClientQt.cpp" line="+756"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/3rdparty/webkit/WebKit/qt/WebCoreSupport/FrameLoaderClientQt.cpp" line="+756"/>
         <source>Request cancelled</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8625,7 +8625,7 @@ Palun vali mõni muu failinimi.</translation>
 <context>
     <name>QWebPage</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/3rdparty/webkit/WebCore/platform/network/qt/QNetworkReplyHandler.cpp" line="+355"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/3rdparty/webkit/WebCore/platform/network/qt/QNetworkReplyHandler.cpp" line="+355"/>
         <source>Redirection limit reached</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8635,7 +8635,7 @@ Palun vali mõni muu failinimi.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/3rdparty/webkit/WebCore/platform/qt/Localizations.cpp" line="+44"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/3rdparty/webkit/WebCore/platform/qt/Localizations.cpp" line="+44"/>
         <source>Submit</source>
         <comment>default label for Submit buttons in forms on web pages</comment>
         <translation type="unfinished"></translation>
@@ -9169,12 +9169,12 @@ Palun vali mõni muu failinimi.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/3rdparty/webkit/WebKit/qt/WebCoreSupport/InspectorClientQt.cpp" line="+256"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/3rdparty/webkit/WebKit/qt/WebCoreSupport/InspectorClientQt.cpp" line="+256"/>
         <source>Web Inspector - %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/3rdparty/webkit/WebCore/platform/qt/ScrollbarQt.cpp" line="+58"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/3rdparty/webkit/WebCore/platform/qt/ScrollbarQt.cpp" line="+58"/>
         <source>Scroll here</source>
         <translation>Keri siia</translation>
     </message>
@@ -9239,7 +9239,7 @@ Palun vali mõni muu failinimi.</translation>
         <translation>Keri alla</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/3rdparty/webkit/WebCore/platform/qt/FileChooserQt.cpp" line="+45"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/3rdparty/webkit/WebCore/platform/qt/FileChooserQt.cpp" line="+45"/>
         <source>%n file(s)</source>
         <comment>number of chosen file</comment>
         <translation type="unfinished">
@@ -9247,7 +9247,7 @@ Palun vali mõni muu failinimi.</translation>
         </translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/3rdparty/webkit/WebKit/qt/Api/qwebpage.cpp" line="+2083"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/3rdparty/webkit/WebKit/qt/Api/qwebpage.cpp" line="+2083"/>
         <source>JavaScript Alert - %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -9485,7 +9485,7 @@ Palun vali mõni muu failinimi.</translation>
 <context>
     <name>QWhatsThisAction</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/kernel/qwhatsthis.cpp" line="+527"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/kernel/qwhatsthis.cpp" line="+527"/>
         <source>What&apos;s This?</source>
         <translation>Mis see on?</translation>
     </message>
@@ -9493,7 +9493,7 @@ Palun vali mõni muu failinimi.</translation>
 <context>
     <name>QWidget</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/kernel/qwidget.cpp" line="+5896"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/kernel/qwidget.cpp" line="+5896"/>
         <source>*</source>
         <translation>*</translation>
     </message>
@@ -9501,7 +9501,7 @@ Palun vali mõni muu failinimi.</translation>
 <context>
     <name>QWizard</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/dialogs/qwizard.cpp" line="+689"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/dialogs/qwizard.cpp" line="+689"/>
         <source>Go Back</source>
         <translation type="unfinished"></translation>
     </message>
@@ -9559,7 +9559,7 @@ Palun vali mõni muu failinimi.</translation>
 <context>
     <name>QWorkspace</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/gui/widgets/qworkspace.cpp" line="+1089"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/gui/widgets/qworkspace.cpp" line="+1089"/>
         <source>&amp;Restore</source>
         <translation type="unfinished"></translation>
     </message>
@@ -9629,7 +9629,7 @@ Palun vali mõni muu failinimi.</translation>
 <context>
     <name>QXml</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xml/sax/qxml.cpp" line="+58"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/xml/sax/qxml.cpp" line="+58"/>
         <source>no error occurred</source>
         <translation type="unfinished"></translation>
     </message>
@@ -9747,7 +9747,7 @@ Palun vali mõni muu failinimi.</translation>
 <context>
     <name>QXmlPatternistCLI</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/api/qcoloringmessagehandler.cpp" line="+87"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/xmlpatterns/api/qcoloringmessagehandler.cpp" line="+87"/>
         <source>Warning in %1, at line %2, column %3: %4</source>
         <translation type="unfinished"></translation>
     </message>
@@ -9775,8 +9775,8 @@ Palun vali mõni muu failinimi.</translation>
 <context>
     <name>QXmlStream</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/xml/qxmlstream.cpp" line="+611"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/xml/qxmlstream_p.h" line="+1770"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/corelib/xml/qxmlstream.cpp" line="+611"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/corelib/xml/qxmlstream_p.h" line="+1770"/>
         <source>Extra content at end of document.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -9871,7 +9871,7 @@ Palun vali mõni muu failinimi.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/xml/qxmlstream_p.h" line="-995"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/corelib/xml/qxmlstream_p.h" line="-995"/>
         <source>Recursive entity detected.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -9901,15 +9901,15 @@ Palun vali mõni muu failinimi.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/xml/qxmlstream.cpp" line="-536"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/corelib/xml/qxmlstream.cpp" line="-536"/>
         <location line="+12"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/xml/qxmlstream_p.h" line="+164"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/corelib/xml/qxmlstream_p.h" line="+164"/>
         <location line="+53"/>
         <source>Illegal namespace declaration.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/xml/qxmlstream_p.h" line="+15"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/corelib/xml/qxmlstream_p.h" line="+15"/>
         <source>Invalid XML name.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -9941,8 +9941,8 @@ Palun vali mõni muu failinimi.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/xml/qxmlstream.cpp" line="-75"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/xml/qxmlstream_p.h" line="-823"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/corelib/xml/qxmlstream.cpp" line="-75"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/corelib/xml/qxmlstream_p.h" line="-823"/>
         <source>Encountered incorrectly encoded content.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -9952,7 +9952,7 @@ Palun vali mõni muu failinimi.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/corelib/xml/qxmlstream_p.h" line="+562"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/corelib/xml/qxmlstream_p.h" line="+562"/>
         <source>%1 is an invalid PUBLIC identifier.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -9960,17 +9960,17 @@ Palun vali mõni muu failinimi.</translation>
 <context>
     <name>QtXmlPatterns</name>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/api/qiodevicedelegate.cpp" line="+84"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/xmlpatterns/api/qiodevicedelegate.cpp" line="+84"/>
         <source>Network timeout.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/api/qxmlserializer.cpp" line="+320"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/xmlpatterns/api/qxmlserializer.cpp" line="+320"/>
         <source>Element %1 can&apos;t be serialized because it appears outside the document element.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/data/qabstractdatetime.cpp" line="+80"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/xmlpatterns/data/qabstractdatetime.cpp" line="+80"/>
         <source>Year %1 is invalid because it begins with %2.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10010,7 +10010,7 @@ Palun vali mõni muu failinimi.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/data/qabstractduration.cpp" line="+99"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/xmlpatterns/data/qabstractduration.cpp" line="+99"/>
         <location line="+15"/>
         <source>At least one component must be present.</source>
         <translation type="unfinished"></translation>
@@ -10021,17 +10021,17 @@ Palun vali mõni muu failinimi.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/data/qanyuri_p.h" line="+132"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/xmlpatterns/data/qanyuri_p.h" line="+132"/>
         <source>%1 is not a valid value of type %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/data/qatomiccasters_p.h" line="+223"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/xmlpatterns/data/qatomiccasters_p.h" line="+223"/>
         <source>When casting to %1 from %2, the source value cannot be %3.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/data/qatomicmathematicians.cpp" line="+65"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/xmlpatterns/data/qatomicmathematicians.cpp" line="+65"/>
         <source>Integer division (%1) by zero (%2) is undefined.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10062,17 +10062,17 @@ Palun vali mõni muu failinimi.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/data/qatomicvalue.cpp" line="+79"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/xmlpatterns/data/qatomicvalue.cpp" line="+79"/>
         <source>A value of type %1 cannot have an Effective Boolean Value.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/data/qboolean.cpp" line="+78"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/xmlpatterns/data/qboolean.cpp" line="+78"/>
         <source>Effective Boolean Value cannot be calculated for a sequence containing two or more atomic values.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/data/qderivedinteger_p.h" line="+402"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/xmlpatterns/data/qderivedinteger_p.h" line="+402"/>
         <source>Value %1 of type %2 exceeds maximum (%3).</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10082,7 +10082,7 @@ Palun vali mõni muu failinimi.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/data/qhexbinary.cpp" line="+91"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/xmlpatterns/data/qhexbinary.cpp" line="+91"/>
         <source>A value of type %1 must contain an even number of digits. The value %2 does not.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10092,7 +10092,7 @@ Palun vali mõni muu failinimi.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/expr/qarithmeticexpression.cpp" line="+207"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/xmlpatterns/expr/qarithmeticexpression.cpp" line="+207"/>
         <source>Operator %1 cannot be used on type %2.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10102,7 +10102,7 @@ Palun vali mõni muu failinimi.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/expr/qattributenamevalidator.cpp" line="+66"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/xmlpatterns/expr/qattributenamevalidator.cpp" line="+66"/>
         <source>The namespace URI in the name for a computed attribute cannot be %1.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10112,7 +10112,7 @@ Palun vali mõni muu failinimi.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/expr/qcastas.cpp" line="+88"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/xmlpatterns/expr/qcastas.cpp" line="+88"/>
         <source>Type error in cast, expected %1, received %2.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10122,7 +10122,7 @@ Palun vali mõni muu failinimi.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/expr/qcommentconstructor.cpp" line="+67"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/xmlpatterns/expr/qcommentconstructor.cpp" line="+67"/>
         <source>A comment cannot contain %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10132,12 +10132,12 @@ Palun vali mõni muu failinimi.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/expr/qdocumentcontentvalidator.cpp" line="+86"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/xmlpatterns/expr/qdocumentcontentvalidator.cpp" line="+86"/>
         <source>An attribute node cannot be a child of a document node. Therefore, the attribute %1 is out of place.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/expr/qexpressionfactory.cpp" line="+162"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/xmlpatterns/expr/qexpressionfactory.cpp" line="+162"/>
         <source>A library module cannot be evaluated directly. It must be imported from a main module.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10147,7 +10147,7 @@ Palun vali mõni muu failinimi.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/expr/qgenericpredicate.cpp" line="+106"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/xmlpatterns/expr/qgenericpredicate.cpp" line="+106"/>
         <source>A value of type %1 cannot be a predicate. A predicate must have either a numeric type or an Effective Boolean Value type.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10157,7 +10157,7 @@ Palun vali mõni muu failinimi.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/expr/qncnameconstructor_p.h" line="+113"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/xmlpatterns/expr/qncnameconstructor_p.h" line="+113"/>
         <source>The target name in a processing instruction cannot be %1 in any combination of upper and lower case. Therefore, %2 is invalid.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10167,33 +10167,33 @@ Palun vali mõni muu failinimi.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/expr/qpath.cpp" line="+109"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/xmlpatterns/expr/qpath.cpp" line="+109"/>
         <source>The last step in a path must contain either nodes or atomic values. It cannot be a mixture between the two.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/expr/qprocessinginstructionconstructor.cpp" line="+84"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/xmlpatterns/expr/qprocessinginstructionconstructor.cpp" line="+84"/>
         <source>The data of a processing instruction cannot contain the string %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/expr/qqnameconstructor.cpp" line="+82"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/xmlpatterns/expr/qqnameconstructor.cpp" line="+82"/>
         <source>No namespace binding exists for the prefix %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/expr/qqnameconstructor_p.h" line="+156"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/xmlpatterns/expr/qqnameconstructor_p.h" line="+156"/>
         <source>No namespace binding exists for the prefix %1 in %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+12"/>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/functions/qqnamefns.cpp" line="+69"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/xmlpatterns/functions/qqnamefns.cpp" line="+69"/>
         <source>%1 is an invalid %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message numerus="yes">
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/functions/qabstractfunctionfactory.cpp" line="+77"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/xmlpatterns/functions/qabstractfunctionfactory.cpp" line="+77"/>
         <source>%1 takes at most %n argument(s). %2 is therefore invalid.</source>
         <translation type="unfinished">
             <numerusform></numerusform>
@@ -10207,7 +10207,7 @@ Palun vali mõni muu failinimi.</translation>
         </translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/functions/qaggregatefns.cpp" line="+120"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/xmlpatterns/functions/qaggregatefns.cpp" line="+120"/>
         <source>The first argument to %1 cannot be of type %2. It must be a numeric type, xs:yearMonthDuration or xs:dayTimeDuration.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10222,22 +10222,22 @@ Palun vali mõni muu failinimi.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/functions/qassemblestringfns.cpp" line="+88"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/xmlpatterns/functions/qassemblestringfns.cpp" line="+88"/>
         <source>%1 is not a valid XML 1.0 character.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/functions/qdatetimefn.cpp" line="+86"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/xmlpatterns/functions/qdatetimefn.cpp" line="+86"/>
         <source>If both values have zone offsets, they must have the same zone offset. %1 and %2 are not the same.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/functions/qerrorfn.cpp" line="+61"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/xmlpatterns/functions/qerrorfn.cpp" line="+61"/>
         <source>%1 was called.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/functions/qpatternmatchingfns.cpp" line="+94"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/xmlpatterns/functions/qpatternmatchingfns.cpp" line="+94"/>
         <source>%1 must be followed by %2 or %3, not at the end of the replacement string.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10252,7 +10252,7 @@ Palun vali mõni muu failinimi.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/functions/qpatternplatform.cpp" line="+92"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/xmlpatterns/functions/qpatternplatform.cpp" line="+92"/>
         <source>%1 matches newline characters</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10282,22 +10282,22 @@ Palun vali mõni muu failinimi.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/functions/qqnamefns.cpp" line="+17"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/xmlpatterns/functions/qqnamefns.cpp" line="+17"/>
         <source>If the first argument is the empty sequence or a zero-length string (no namespace), a prefix cannot be specified. Prefix %1 was specified.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/functions/qsequencefns.cpp" line="+346"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/xmlpatterns/functions/qsequencefns.cpp" line="+346"/>
         <source>It will not be possible to retrieve %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/functions/qcontextnodechecker.cpp" line="+54"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/xmlpatterns/functions/qcontextnodechecker.cpp" line="+54"/>
         <source>The root node of the second argument to function %1 must be a document node. %2 is not a document node.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/functions/qsequencegeneratingfns.cpp" line="+266"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/xmlpatterns/functions/qsequencegeneratingfns.cpp" line="+266"/>
         <source>The default collection is undefined</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10307,12 +10307,12 @@ Palun vali mõni muu failinimi.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/functions/qstringvaluefns.cpp" line="+252"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/xmlpatterns/functions/qstringvaluefns.cpp" line="+252"/>
         <source>The normalization form %1 is unsupported. The supported forms are %2, %3, %4, and %5, and none, i.e. the empty string (no normalization).</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/functions/qtimezonefns.cpp" line="+87"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/xmlpatterns/functions/qtimezonefns.cpp" line="+87"/>
         <source>A zone offset must be in the range %1..%2 inclusive. %3 is out of range.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10322,17 +10322,17 @@ Palun vali mõni muu failinimi.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/janitors/qcardinalityverifier.cpp" line="+58"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/xmlpatterns/janitors/qcardinalityverifier.cpp" line="+58"/>
         <source>Required cardinality is %1; got cardinality %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/janitors/qitemverifier.cpp" line="+67"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/xmlpatterns/janitors/qitemverifier.cpp" line="+67"/>
         <source>The item %1 did not match the required type %2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/parser/qquerytransformparser.cpp" line="+352"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/xmlpatterns/parser/qquerytransformparser.cpp" line="+352"/>
         <location line="+7323"/>
         <source>%1 is an unknown schema type.</source>
         <translation type="unfinished"></translation>
@@ -10353,12 +10353,12 @@ Palun vali mõni muu failinimi.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/parser/qparsercontext.cpp" line="+93"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/xmlpatterns/parser/qparsercontext.cpp" line="+93"/>
         <source>The variable %1 is unused</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/parser/qquerytransformparser.cpp" line="+2904"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/xmlpatterns/parser/qquerytransformparser.cpp" line="+2904"/>
         <source>Version %1 is not supported. The supported XQuery version is 1.0.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10645,7 +10645,7 @@ Palun vali mõni muu failinimi.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/type/qcardinality.cpp" line="+55"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/xmlpatterns/type/qcardinality.cpp" line="+55"/>
         <source>empty</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10670,7 +10670,7 @@ Palun vali mõni muu failinimi.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/type/qtypechecker.cpp" line="+63"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/xmlpatterns/type/qtypechecker.cpp" line="+63"/>
         <source>Required type is %1, but %2 was found.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10685,7 +10685,7 @@ Palun vali mõni muu failinimi.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/utils/qoutputvalidator.cpp" line="+86"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/xmlpatterns/utils/qoutputvalidator.cpp" line="+86"/>
         <source>It&apos;s not possible to add attributes after any other kind of node.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10695,17 +10695,17 @@ Palun vali mõni muu failinimi.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/utils/qxpathhelper_p.h" line="+120"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/xmlpatterns/utils/qxpathhelper_p.h" line="+120"/>
         <source>Only the Unicode Codepoint Collation is supported(%1). %2 is unsupported.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/api/qxmlserializer.cpp" line="+60"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/xmlpatterns/api/qxmlserializer.cpp" line="+60"/>
         <source>Attribute %1 can&apos;t be serialized because it appears at the top level.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/acceltree/qacceltreeresourceloader.cpp" line="+344"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/xmlpatterns/acceltree/qacceltreeresourceloader.cpp" line="+344"/>
         <source>%1 is an unsupported encoding.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10720,12 +10720,12 @@ Palun vali mõni muu failinimi.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/expr/qapplytemplate.cpp" line="+119"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/xmlpatterns/expr/qapplytemplate.cpp" line="+119"/>
         <source>Ambiguous rule match.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/expr/qcomputednamespaceconstructor.cpp" line="+69"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/xmlpatterns/expr/qcomputednamespaceconstructor.cpp" line="+69"/>
         <source>In a namespace constructor, the value for a namespace cannot be an empty string.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10745,7 +10745,7 @@ Palun vali mõni muu failinimi.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/expr/qtemplate.cpp" line="+145"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/xmlpatterns/expr/qtemplate.cpp" line="+145"/>
         <source>The parameter %1 is required, but no corresponding %2 is supplied.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10755,12 +10755,12 @@ Palun vali mõni muu failinimi.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/functions/qunparsedtextfn.cpp" line="+65"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/xmlpatterns/functions/qunparsedtextfn.cpp" line="+65"/>
         <source>The URI cannot have a fragment</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/parser/qxslttokenizer.cpp" line="+519"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/xmlpatterns/parser/qxslttokenizer.cpp" line="+519"/>
         <source>Element %1 is not allowed at this location.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10901,7 +10901,7 @@ Palun vali mõni muu failinimi.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/schema/qxsdschemachecker.cpp" line="+227"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/xmlpatterns/schema/qxsdschemachecker.cpp" line="+227"/>
         <source>%1 has inheritance loop in its base type %2.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -11304,7 +11304,7 @@ Palun vali mõni muu failinimi.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/schema/qxsdschemahelper.cpp" line="+691"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/xmlpatterns/schema/qxsdschemahelper.cpp" line="+691"/>
         <location line="+63"/>
         <source>Base attribute %1 is required but derived attribute is not.</source>
         <translation type="unfinished"></translation>
@@ -11365,7 +11365,7 @@ Palun vali mõni muu failinimi.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/schema/qxsdschemaresolver.cpp" line="+354"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/xmlpatterns/schema/qxsdschemaresolver.cpp" line="+354"/>
         <source>%1 references unknown %2 or %3 element %4.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -11517,7 +11517,7 @@ Palun vali mõni muu failinimi.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/schema/qxsdparticlechecker.cpp" line="+165"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/xmlpatterns/schema/qxsdparticlechecker.cpp" line="+165"/>
         <source>Empty particle cannot be derived from non-empty particle.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -11587,7 +11587,7 @@ Palun vali mõni muu failinimi.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/schema/qxsdschemaparser.cpp" line="+170"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/xmlpatterns/schema/qxsdschemaparser.cpp" line="+170"/>
         <source>Can not process unknown element %1, expected elements are: %2.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -11817,7 +11817,7 @@ Palun vali mõni muu failinimi.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/schema/qxsdtypechecker.cpp" line="+233"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/xmlpatterns/schema/qxsdtypechecker.cpp" line="+233"/>
         <location line="+7"/>
         <location line="+21"/>
         <source>%1 is not valid according to %2.</source>
@@ -12104,7 +12104,7 @@ Palun vali mõni muu failinimi.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../../../../qt/qt-everywhere-commercial-src-4.7.1/src/xmlpatterns/schema/qxsdvalidatinginstancereader.cpp" line="+160"/>
+        <location filename="../../../../../qt/qt-everywhere-opensource-src-4.7.1/src/xmlpatterns/schema/qxsdvalidatinginstancereader.cpp" line="+160"/>
         <source>Element %1 is missing child element.</source>
         <translation type="unfinished"></translation>
     </message>
