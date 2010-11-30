@@ -24,7 +24,9 @@
 
 #include "SslCertificate.h"
 #include "TokenData.h"
+#include "Settings.h"
 
+#include <QApplication>
 #include <QDateTime>
 #include <QDesktopServices>
 #include <QFileInfo>
@@ -284,13 +286,26 @@ QStringList Common::normalized( const QStringList &list )
 #endif
 }
 
-void Common::showHelp( const QString &msg )
+void Common::showHelp( const QString &msg, int code )
 {
-	QUrl u( "http://support.sk.ee/" );
-	u.addQueryItem( "searchquery", msg );
-	u.addQueryItem( "searchtype", "all" );
-	u.addQueryItem( "_m", "core" );
-	u.addQueryItem( "_a", "searchclient" );
+	QUrl u;
+
+	if( code > 0 )
+	{
+		u.setUrl( "http://www.sk.ee/digidoc/support/errorinfo/" );
+		u.addQueryItem( "app", qApp->applicationName() );
+		u.addQueryItem( "appver", qApp->applicationVersion() );
+		u.addQueryItem( "l", Settings().value("Main/Language", "et" ).toString() );
+		u.addQueryItem( "code", QString::number( code ) );
+	}
+	else
+	{
+		u.setUrl( "http://support.sk.ee/" );
+		u.addQueryItem( "searchquery", msg );
+		u.addQueryItem( "searchtype", "all" );
+		u.addQueryItem( "_m", "core" );
+		u.addQueryItem( "_a", "searchclient" );
+	}
 	QDesktopServices::openUrl( u );
 }
 

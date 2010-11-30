@@ -46,7 +46,7 @@ public:
 	static QString fileSize( quint64 bytes );
 	static QString normalized( const QString &str );
 	static QStringList normalized( const QStringList &list );
-	static void showHelp( const QString &msg );
+	static void showHelp( const QString &msg, int code = -1 );
 	static bool startDetached( const QString &program );
 	static bool startDetached( const QString &program, const QStringList &arguments );
 	static QString tokenInfo( CertType type, const TokenData &data );
