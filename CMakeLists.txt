@@ -12,6 +12,7 @@ find_package(PKCS11)
 find_package(LibP11 REQUIRED)
 find_package(SmartCardpp REQUIRED)
 find_package(LibDL REQUIRED)
+find_package(LibLtdl REQUIRED)
 
 add_definitions(-DPKCS11_MODULE="${PKCS11_MODULE}")
 
@@ -177,15 +178,16 @@ if(WIN32)
 endif(WIN32)
 
 target_link_libraries(qesteidutil
-    ${QT_QTMAIN_LIBRARY}
-    ${QT_LIBRARIES}
-    ${OPENSSL_LIBRARIES}
-    ${OPENSSLCRYPTO_LIBRARIES}
-    ${LIBP11_LIBRARIES}
-    ${SMARTCARDPP_LIBRARIES}
+	${QT_QTMAIN_LIBRARY}
+	${QT_LIBRARIES}
+	${OPENSSL_LIBRARIES}
+	${OPENSSLCRYPTO_LIBRARIES}
+	${LIBP11_LIBRARIES}
+	${SMARTCARDPP_LIBRARIES}
 	${ADDITIONAL_LIBRARIES}
-    ${LIBDL_LIBRARIES}
-    qtsingleapplication
+	${LIBDL_LIBRARIES}
+	${LIBLTDL_LIBRARIES}
+	qtsingleapplication
 )
 
 if(UNIX AND NOT APPLE)
