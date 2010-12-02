@@ -25,6 +25,7 @@
 #include "ui_AboutWidget.h"
 
 #include <QApplication>
+#include <QDesktopServices>
 #include <QProcess>
 
 class AboutWidgetPrivate: public Ui::AboutWidget
@@ -51,8 +52,14 @@ AboutWidget::AboutWidget(QWidget *parent)
 		package = QString::fromUtf8( p.readAll() );
 	p.close();
 
-	d->content->setText( QString("<center>%1<br />%2<br />%3</center>")
+	d->content->setText( tr(
+		"<center>%1 version %2, published mm.dd.yyyy<br />%3<br /><br />"
+		"ID-tarkvara tellija Riigi Infosüsteemide Arenduskeskus, arendaja AS Sertifitseerimiskeskus<br /><br />"
+		"Probleemide korral pöörduge emaili teel <a href=\"mailto:abi@id.ee\">abi@id.ee</a> või helistage ID-abiliinile 1777</center>")
 		.arg( qApp->applicationName(), qApp->applicationVersion(), package ) );
 }
 
 AboutWidget::~AboutWidget() { delete d; }
+
+void AboutWidget::on_content_anchorClicked( const QUrl &link )
+{ QDesktopServices::openUrl( link ); }

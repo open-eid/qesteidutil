@@ -24,6 +24,8 @@
 
 #include <QWidget>
 
+class QUrl;
+
 class AboutWidgetPrivate;
 class AboutWidget: public QWidget
 {
@@ -31,6 +33,9 @@ class AboutWidget: public QWidget
 public:
 	explicit AboutWidget( QWidget *parent = 0 );
 	~AboutWidget();
+
+private Q_SLOTS:
+	void on_content_anchorClicked( const QUrl &link );
 
 private:
 	AboutWidgetPrivate *d;
