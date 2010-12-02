@@ -333,7 +333,8 @@ function readCardData( translate )
 
 		//update cert button
 		days = esteidData.authCert.validDays();
-		if ( !esteidData.authCert.isDigiID() && ( days <= 105 || esteidData.signCert.validDays() <= 105 ) && pin1Retry > 0 && esteidIsValid )
+		if ( !esteidData.authCert.isDigiID() && !esteidData.authCert.isTempel() 
+				&& ( days <= 105 || esteidData.signCert.validDays() <= 105 ) && pin1Retry > 0 && esteidIsValid )
 		{
 			document.getElementById('authUpdateDiv').style.display='block';
 			var width = 0;
