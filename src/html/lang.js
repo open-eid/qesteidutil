@@ -96,7 +96,7 @@ var htmlStrings = {
 	"inputChangePIN2": new tr( "Muuda PIN2", "Change PIN2", "Поменять PIN2" ),
 	"inputChangePUK": new tr( "Muuda PUK", "Change PUK", "Поменять PUK" ),
 	"inputCertDetails": new tr( "Vaata üksikasju", "View details", "Просмотреть детали" ),
-	"inputUpdateCert": new tr( "Uuenda sertifikaat", "Update certificate", "Обнови сертификат" ),
+	"inputUpdateCert": new tr( "Uuenda sertifikaate", "Update certificates", "Обнови сертификаты" ),
 	"inputUnblock": new tr ( "Tühista blokeering", "Revoke blocking", "Отменить блокировку" ),
 	
 	"labelCurrentPIN1": new tr( "Kehtiv PIN1 kood", "Current PIN1 code", "Действующий PIN1 код" ),
