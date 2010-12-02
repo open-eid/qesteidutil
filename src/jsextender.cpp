@@ -26,6 +26,7 @@
 #include <QFileDialog>
 #include <QLocale>
 #include <QMessageBox>
+#include <QPixmap>
 #include <QTemporaryFile>
 
 #include "CertUpdate.h"
