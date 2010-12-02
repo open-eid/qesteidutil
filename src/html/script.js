@@ -214,8 +214,13 @@ function readCardData( translate )
 		validSpan = validSpan.replace( /%s/, _( esteidIsValid ? 'labelIsValid' : 'labelIsInValid' ) );
 		document.getElementById('labelThisIs').innerHTML = _( 'labelThisIs' ).replace( /%s/, validSpan );
 		document.getElementById('labelCardValidity').style.color = esteidIsValid ? '#509b00' : '#e80303';
-		document.getElementById('labelCardValidTo').innerHTML = !esteidIsValid ? _('labelCardGetNew') : _('labelCardValidTill') + '<span id="expiry" style="color: #355670;">' + esteidData.getExpiry( language ) + '</span>';
-
+		var getNew = "";
+		if ( esteidIsValid )
+			getNew = _('labelCardValidTill') + '<span id="expiry" style="color: #355670;">' + esteidData.getExpiry( language ) + '</span>';
+		else if ( !esteidData.authCert.isDigiID() )
+			getNew = _('labelCardGetNew');
+		document.getElementById('labelCardValidTo').innerHTML = getNew;
+		
 		if ( esteidData.authCert.isTempel() )
 		{
 			document.getElementById('liPersonBirth').style.display = 'none';
