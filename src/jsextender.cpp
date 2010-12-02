@@ -26,7 +26,6 @@
 #include <QFileDialog>
 #include <QLocale>
 #include <QMessageBox>
-#include <QPixmap>
 #include <QTemporaryFile>
 
 #include "CertUpdate.h"
@@ -261,14 +260,14 @@ void JsExtender::loadPicture()
 	QPixmap pix;
 	if ( pix.loadFromData( buffer ) )
 	{
-		QPixmap small = pix.scaled( 90, 120, Qt::IgnoreAspectRatio, Qt::SmoothTransformation );
+		QPixmap smallPix = pix.scaled( 90, 120, Qt::IgnoreAspectRatio, Qt::SmoothTransformation );
 		QTemporaryFile file( QString( "%1%2XXXXXX" )
 			.arg( QDir::tempPath() ).arg( QDir::separator() ) );
 		file.setAutoRemove( false );
 		if ( file.open() )
 		{
 			m_tempFile = file.fileName();
-			if ( small.save( m_tempFile + "_small.jpg" ) && pix.save( m_tempFile + "_big.jpg" ) )
+			if ( smallPix.save( m_tempFile + "_small.jpg" ) && pix.save( m_tempFile + "_big.jpg" ) )
 			{
 				jsCall( "setPicture", QUrl::fromLocalFile(m_tempFile).toString(), "" );
 				return;
