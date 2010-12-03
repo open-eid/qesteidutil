@@ -43,15 +43,14 @@ MainWindow::MainWindow( QWidget *parent )
 	page()->mainFrame()->setScrollBarPolicy( Qt::Horizontal, Qt::ScrollBarAlwaysOff );
 	page()->mainFrame()->setScrollBarPolicy( Qt::Vertical, Qt::ScrollBarAlwaysOff );
 	setContextMenuPolicy(Qt::PreventContextMenu);
-	setWindowIcon( QIcon( ":/html/images/id_icon_48x48.png" ) );
 	setFixedSize( 585, 535 );
 
 	appTranslator = new QTranslator( this );
 	qtTranslator = new QTranslator( this );
 	commonTranslator = new QTranslator( this );
-	QApplication::instance()->installTranslator( appTranslator );
-	QApplication::instance()->installTranslator( qtTranslator );
-	QApplication::instance()->installTranslator( commonTranslator );
+	qApp->installTranslator( appTranslator );
+	qApp->installTranslator( qtTranslator );
+	qApp->installTranslator( commonTranslator );
 
 	m_jsExtender = new JsExtender( this );
 
@@ -63,7 +62,6 @@ MainWindow::MainWindow( QWidget *parent )
 	pref->setMenuRole( QAction::PreferencesRole );
 	close->setShortcut( Qt::CTRL + Qt::Key_W );
 #endif
-	
 	jsEsteidCard = new JsEsteidCard( this );
 	jsCardManager = new JsCardManager( jsEsteidCard );
 
@@ -92,7 +90,7 @@ void MainWindow::retranslate( const QString &lang )
 	appTranslator->load( ":/translations/" + lang );
 	qtTranslator->load( ":/translations/qt_" + lang );
 	commonTranslator->load( ":/translations/common_" + lang );
-	setWindowTitle(QApplication::translate("MainWindow", "ID-card utility", 0, QApplication::UnicodeUTF8));
+	setWindowTitle( tr("ID-card utility") );
 #ifdef Q_OS_MAC
 	if ( menu )
 	{

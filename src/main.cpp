@@ -33,6 +33,7 @@ int main(int argc, char *argv[])
 	app.setApplicationVersion( VER_STR( FILE_VER_DOT ) );
 	app.setOrganizationDomain( DOMAINURL );
 	app.setOrganizationName( ORG );
+	app.setWindowIcon( QIcon( ":/html/images/id_icon_big.png" ) );
 
 	if( app.isRunning() )
 	{
