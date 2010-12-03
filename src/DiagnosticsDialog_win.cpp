@@ -186,7 +186,7 @@ bool DiagnosticsDialog::isPCSCRunning() const
 	return result;
 }
 
-QString DiagnosticsDialog::checkCert( ByteVec &certBytes, ByteVec &certBytesSign ) const
+QString DiagnosticsDialog::checkCert( ByteVec &certBytes, ByteVec &certBytesSign, const QString &cardId ) const
 {
 	if ( !certBytes.size() )
 		return QString();
@@ -222,12 +222,11 @@ QString DiagnosticsDialog::checkCert( ByteVec &certBytes, ByteVec &certBytesSign
 	if ( QMessageBox::question( 0, tr( "Certificate store" ), tr( "Certificate is not registered in certificate store. Register now?" ), 
 			QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes ) == QMessageBox::Yes )
 	{
-		if ( CertAddEncodedCertificateToStore( store, X509_ASN_ENCODING, &certBytes[0], DWORD( certBytes.size() ), CERT_STORE_ADD_REPLACE_EXISTING, NULL ) )
+		if ( addCert( store, certBytes, QString( "AUT_%1" ).arg( cardId ), AT_KEYEXCHANGE ) )
 			s << tr( "Successfully registered authentication certificate" ) << "<br />";
 		else
 			s << tr( "Authentication certificate registration failed" ) << "<br />";
-
-		if ( CertAddEncodedCertificateToStore( store, X509_ASN_ENCODING, &certBytesSign[0],(DWORD)certBytesSign.size(), CERT_STORE_ADD_REPLACE_EXISTING, NULL ) )
+		if ( addCert( store, certBytesSign, QString( "SIG_%1" ).arg( cardId ), AT_SIGNATURE ) )
 			s << tr( "Successfully registered signature certificate" ) << "<br />";
 		else
 			s << tr( "Signature certificate registration failed" ) << "<br />";
@@ -238,4 +237,28 @@ QString DiagnosticsDialog::checkCert( ByteVec &certBytes, ByteVec &certBytesSign
 	CertCloseStore( store, 0 );
 
 	return d;
+}
+
+bool DiagnosticsDialog::addCert( HCERTSTORE store, ByteVec &cert, const QString &card, DWORD keyCode ) const
+{
+	PCCERT_CONTEXT newContext = NULL;
+	if ( !CertAddEncodedCertificateToStore( store, X509_ASN_ENCODING, &cert[0],(DWORD)cert.size(), CERT_STORE_ADD_REPLACE_EXISTING, &newContext ) )
+		return false;
+
+	CRYPT_KEY_PROV_INFO KeyProvInfo = { (LPWSTR)card.toAscii().data(), L"EstEID Card CSP", PROV_RSA_FULL, 0, 0, NULL, keyCode };
+	CertSetCertificateContextProperty( newContext, CERT_KEY_PROV_INFO_PROP_ID, 0, &KeyProvInfo );
+
+	if ( keyCode == AT_SIGNATURE ) // limit usages
+	{
+		unsigned char asnEncodedUsage[] =  // ask no questions ..
+				"\x30\x38\x06\x0A\x2B\x06\x01\x04\x01\x82\x37\x0A\x05\x01\x06\x0A"
+				"\x2B\x06\x01\x04\x01\x82\x37\x0A\x03\x02\x06\x0A\x2B\x06\x01\x04"
+				"\x01\x82\x37\x0A\x03\x01\x06\x08\x2B\x06\x01\x05\x05\x07\x03\x08"
+				"\x06\x08\x2B\x06\x01\x05\x05\x07\x03\x03";
+		CRYPT_DATA_BLOB asnBlob = { sizeof(asnEncodedUsage)-1,asnEncodedUsage };
+		CertSetCertificateContextProperty( newContext, CERT_ENHKEY_USAGE_PROP_ID, 0, &asnBlob );
+	}
+
+	CertFreeCertificateContext( newContext );
+	return true;
 }
