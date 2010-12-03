@@ -13,6 +13,7 @@ find_package(LibP11 REQUIRED)
 find_package(SmartCardpp REQUIRED)
 find_package(LibDL REQUIRED)
 find_package(LibLtdl REQUIRED)
+find_package(Subversion)
 
 add_definitions(-DPKCS11_MODULE="${PKCS11_MODULE}")
 
@@ -100,14 +101,19 @@ include(${QT_USE_FILE})
 
 add_subdirectory( qtsingleapplication )
 
-find_package(Subversion)
+set( MAJOR_VER 3 )
+set( MINOR_VER 1 )
+set( RELEASE_VER 0 )
+
 if (Subversion_FOUND AND EXISTS ${PROJECT_SOURCE_DIR}/.svn)
-  Subversion_WC_INFO(${PROJECT_SOURCE_DIR} PROJECT)
-  message(STATUS "Current SVN revision is ${PROJECT_WC_REVISION}")
-  add_definitions(-DBUILD_VER=${PROJECT_WC_REVISION})
+	Subversion_WC_INFO(${PROJECT_SOURCE_DIR} PROJECT)
+	message(STATUS "Current SVN revision is ${PROJECT_WC_REVISION}")
+	set( BUILD_VER ${PROJECT_WC_REVISION} )
 else (Subversion_FOUND AND EXISTS ${PROJECT_SOURCE_DIR}/.svn)
-  add_definitions(-DBUILD_VER=0)
+	set( BUILD_VER 0 )
 endif (Subversion_FOUND AND EXISTS ${PROJECT_SOURCE_DIR}/.svn)
+
+add_definitions( -DMAJOR_VER=${MAJOR_VER} -DMINOR_VER=${MINOR_VER} -DRELEASE_VER=${RELEASE_VER} -DBUILD_VER=${BUILD_VER} )
 
 include_directories(
     ${CMAKE_SOURCE_DIR}
