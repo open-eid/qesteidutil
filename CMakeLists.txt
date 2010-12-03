@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 2.8)
 project(qesteidutil)
+set( PROGNAME qesteidutil )
 
 # Custom cmake modules
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/modules")
@@ -118,6 +119,7 @@ else (Subversion_FOUND AND EXISTS ${PROJECT_SOURCE_DIR}/.svn)
 	set( BUILD_VER 0 )
 endif (Subversion_FOUND AND EXISTS ${PROJECT_SOURCE_DIR}/.svn)
 
+set( VERSION ${MAJOR_VER}.${MINOR_VER}.${RELEASE_VER}.${BUILD_VER} )
 add_definitions( -DMAJOR_VER=${MAJOR_VER} -DMINOR_VER=${MINOR_VER} -DRELEASE_VER=${RELEASE_VER} -DBUILD_VER=${BUILD_VER} )
 
 include_directories(
@@ -130,37 +132,42 @@ include_directories(
     qtsingleapplication/src
 )
 
-if(APPLE)
-    set(APP_CONTENTS_DIR "${CMAKE_SOURCE_DIR}/mac")
-    if(NOT DEFINED QT_PLUGINS_DIR)
-	SET(QT_PLUGINS_DIR "/Developer/Applications/Qt/")
-    endif(NOT DEFINED QT_PLUGINS_DIR)
+if( APPLE )
+	find_library( ADDITIONAL_LIBRARIES CoreServices )
 
-    set(LIBQJPEG_FILE "${QT_PLUGINS_DIR}/imageformats/libqjpeg.dylib")
-    
-    # xCode hacks
-    include_directories(/usr/local/include/../include)
-    
-    # Bundle resources
-    file(GLOB_RECURSE RESOURCE_FILES ${APP_CONTENTS_DIR}/Resources/*.icns ${APP_CONTENTS_DIR}/Resources/**/*.strings)
-    
-    foreach(_file ${RESOURCE_FILES})
-        get_filename_component(_file_dir ${_file} PATH)
-        file(RELATIVE_PATH _file_dir ${APP_CONTENTS_DIR}/Resources ${_file_dir})
-        set_source_files_properties(${_file} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources/${_file_dir}" )
-    endforeach(_file)
-    
-    # Qt jpeg plugin
-    set(RESOURCE_FILES ${RESOURCE_FILES} ${LIBQJPEG_FILE})
-    set_source_files_properties(${LIBQJPEG_FILE} PROPERTIES MACOSX_PACKAGE_LOCATION "MacOS/imageformats" )
-endif(APPLE)
+	set( MACOSX_BUNDLE_BUNDLE_NAME ${PROGNAME} )
+	set( MACOSX_BUNDLE_GUI_IDENTIFIER ${PROGNAME} )
+	set( MACOSX_BUNDLE_INFO_STRING "${VERSION}, Copyright 2010 Estonian ID Card" )
+	set( MACOSX_BUNDLE_COPYRIGHT "(C) 2010 Estonian ID Card" )
+	set( MACOSX_BUNDLE_SHORT_VERSION_STRING ${VERSION} )
+	set( MACOSX_BUNDLE_VERSION ${VERSION} )
+	set( MACOSX_BUNDLE_LONG_VERSION_STRING Version ${VERSION} )
+	set( MACOSX_BUNDLE_ICON_FILE Icon.icns )
+
+	# Bundle resources
+	set( APP_CONTENTS_DIR "${CMAKE_SOURCE_DIR}/mac" )
+	file( GLOB_RECURSE RESOURCE_FILES ${APP_CONTENTS_DIR}/Resources/*.icns )
+	foreach( _file ${RESOURCE_FILES} )
+		get_filename_component( _file_dir ${_file} PATH )
+		file( RELATIVE_PATH _file_dir ${APP_CONTENTS_DIR}/Resources ${_file_dir} )
+		set_source_files_properties( ${_file} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources/${_file_dir}" )
+	endforeach( _file )
+
+	# Qt jpeg plugin
+	if( NOT DEFINED QT_PLUGINS_DIR )
+		set( QT_PLUGINS_DIR "/Developer/Applications/Qt/" )
+	endif( NOT DEFINED QT_PLUGINS_DIR )
+	set( LIBQJPEG_FILE "${QT_PLUGINS_DIR}/imageformats/libqjpeg.dylib" )
+	set( RESOURCE_FILES ${RESOURCE_FILES} ${LIBQJPEG_FILE} )
+	set_source_files_properties( ${LIBQJPEG_FILE} PROPERTIES MACOSX_PACKAGE_LOCATION "MacOS/imageformats" )
+endif( APPLE )
 
 IF(WIN32)
     SET(qesteidutil_SRCS ${qesteidutil_SRCS} src/qesteidutil.rc)
 	SET(ADDITIONAL_LIBRARIES ws2_32)
 ENDIF(WIN32)
     
-add_executable(qesteidutil WIN32 MACOSX_BUNDLE
+add_executable( ${PROGNAME} WIN32 MACOSX_BUNDLE
     ${qesteidutil_SRCS}
     ${QM_FILES}
     ${qesteidutil_RCC_SRCS}
@@ -168,27 +175,13 @@ add_executable(qesteidutil WIN32 MACOSX_BUNDLE
     ${RESOURCE_FILES}
 )
 
-if(APPLE)
-	configure_file(
-		${APP_CONTENTS_DIR}/Info.plist.cmake
-		${APP_CONTENTS_DIR}/Info.plist
-		@ONLY
-	)
-
-    set_target_properties(qesteidutil
-		PROPERTIES
-		MACOSX_BUNDLE_INFO_PLIST ${APP_CONTENTS_DIR}/Info.plist
-	)
-	find_library( ADDITIONAL_LIBRARIES CoreServices )
-endif(APPLE)
-
 if(WIN32)
-	SET_TARGET_PROPERTIES(qesteidutil
+	SET_TARGET_PROPERTIES( ${PROGNAME}
 		PROPERTIES
 		LINK_FLAGS "/MANIFESTDEPENDENCY:\"type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'\"")
 endif(WIN32)
 
-target_link_libraries(qesteidutil
+target_link_libraries( ${PROGNAME}
 	${QT_QTMAIN_LIBRARY}
 	${QT_LIBRARIES}
 	${OPENSSL_LIBRARIES}
@@ -214,4 +207,4 @@ if(UNIX AND NOT APPLE)
     endforeach(RES)
 endif(UNIX AND NOT APPLE)
 
-install(TARGETS qesteidutil DESTINATION ${BIN_INSTALL_DIR})
+install(TARGETS ${PROGNAME} DESTINATION ${BIN_INSTALL_DIR})
