@@ -24,6 +24,12 @@
 
 #include "ui_DiagnosticsDialog.h"
 
+#include <smartcardpp/common.h>
+
+#if defined(Q_OS_WIN32)
+#include <Windows.h>
+#endif
+
 class DiagnosticsDialog: public QDialog, private Ui::DiagnosticsDialog
 {
 	Q_OBJECT
@@ -37,10 +43,14 @@ private:
 	bool	isPCSCRunning() const;
 	QString getPackageVersion( const QStringList &list, bool returnPackageName = true ) const;
 	QString getProcessor() const;
-	QString getReaderInfo() const;
+	QString getReaderInfo();
 #if defined(Q_OS_WIN32)
+	bool DiagnosticsDialog::addCert( HCERTSTORE store, ByteVec &cert, DWORD keyCode ) const;
+	QString checkCert( ByteVec &bytes, ByteVec &certBytesSign ) const;
 	QString getBits() const;
 	QString getLibVersion( const QString &lib ) const;
 	QString getOS() const;
+
+	QString certInfo;
 #endif
 };

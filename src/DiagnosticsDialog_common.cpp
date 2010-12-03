@@ -31,7 +31,7 @@
 #include <QMessageBox>
 #include <QTextStream>
 
-QString DiagnosticsDialog::getReaderInfo() const
+QString DiagnosticsDialog::getReaderInfo()
 {
 	QString d;
 	QTextStream s( &d );
@@ -57,6 +57,9 @@ QString DiagnosticsDialog::getReaderInfo() const
 					readers[reader] = tr( "ID - %1<br />ATR - %2" )
 						.arg( QString::fromStdString( card.readCardID() ) )
 						.arg( QString::fromStdString( m->getATRHex( i ) ).toUpper() );
+#if defined(Q_OS_WIN32)
+					certInfo += checkCert( card.getAuthCert(), card.getSignCert() );
+#endif
 				} else
 					readers[reader] = "";
 			}

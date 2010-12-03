@@ -164,7 +164,7 @@ endif( APPLE )
 
 IF(WIN32)
     SET(qesteidutil_SRCS ${qesteidutil_SRCS} src/qesteidutil.rc)
-	SET(ADDITIONAL_LIBRARIES ws2_32)
+	SET(ADDITIONAL_LIBRARIES ws2_32 Crypt32)
 ENDIF(WIN32)
     
 add_executable( ${PROGNAME} WIN32 MACOSX_BUNDLE

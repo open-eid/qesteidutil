@@ -24,8 +24,8 @@
 
 #include <smartcardpp/DynamicLibrary.h>
 
+#include <QMessageBox>
 #include <QTextStream>
-#include <Windows.h>
 
 DiagnosticsDialog::DiagnosticsDialog( QWidget *parent )
 :	QDialog( parent )
@@ -65,6 +65,8 @@ DiagnosticsDialog::DiagnosticsDialog( QWidget *parent )
 	QString browsers;
 	if ( !browsers.isEmpty() )
 		s << "<b>" << tr("Browsers:") << "</b><br />" << browsers << "<br /><br />";
+
+	s << certInfo;
 
 	diagnosticsText->setHtml( info );
 }
@@ -182,4 +184,73 @@ bool DiagnosticsDialog::isPCSCRunning() const
 		CloseServiceHandle( h );
 	}
 	return result;
+}
+
+QString DiagnosticsDialog::checkCert( ByteVec &certBytes, ByteVec &certBytesSign ) const
+{
+	if ( !certBytes.size() )
+		return QString();
+
+	QString d;
+	QTextStream s( &d );
+	s << "<b>" << tr( "Checking certificate store" ) << "</b><br />";
+
+	HCERTSTORE store = NULL;
+	PCCERT_CONTEXT context = NULL;
+
+	if ( !( store = CertOpenStore( CERT_STORE_PROV_SYSTEM, X509_ASN_ENCODING, 0, CERT_SYSTEM_STORE_CURRENT_USER, L"MY" ) ) )
+	{
+		s << tr( "Unable to open cert store" ) << "<br />";
+		return d;
+	}
+
+	if( !( context = CertCreateCertificateContext( PKCS_7_ASN_ENCODING | X509_ASN_ENCODING, &certBytes[0], DWORD( certBytes.size() ) ) ) )
+	{
+		s << tr( "Unable to create certificate context" ) << "<br />";
+		CertCloseStore( store, 0 );
+		return d;
+	}
+
+	if ( CertFindCertificateInStore( store, PKCS_7_ASN_ENCODING | X509_ASN_ENCODING, 0, CERT_FIND_SUBJECT_CERT, context->pCertInfo, NULL ) )
+	{
+		s << tr( "Certificate found in certificate store" ) << "<br />";
+		CertFreeCertificateContext( context );
+		CertCloseStore( store, 0 );
+		return d;
+	}
+
+	if ( QMessageBox::question( 0, tr( "Certificate store" ), tr( "Certificate is not registered in certificate store. Register now?" ), 
+			QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes ) == QMessageBox::Yes )
+	{
+		PCCERT_CONTEXT newContext = NULL;
+		if ( CertAddEncodedCertificateToStore( store, X509_ASN_ENCODING, &certBytes[0], DWORD( certBytes.size() ), CERT_STORE_ADD_REPLACE_EXISTING, &newContext ) )
+		{
+			if ( addCert( store, certBytes, AT_KEYEXCHANGE ) )
+				s << tr( "Successfully registered authentication certificate" ) << "<br />";
+			else
+				s << tr( "Authentication certificate registration failed" ) << "<br />";
+			if ( addCert( store, certBytesSign, AT_SIGNATURE ) )
+				s << tr( "Successfully registered signature certificate" ) << "<br />";
+			else
+				s << tr( "Signature certificate registration failed" ) << "<br />";
+			CertFreeCertificateContext( newContext );
+		} else
+			s << tr( "Failed to register certificate to certificate store" ) << "<br />";
+	} else
+		s << tr( "Certificate not found in certificate store" ) << "<br />";
+
+	CertFreeCertificateContext( context );
+	CertCloseStore( store, 0 );
+
+	return d;
+}
+
+bool DiagnosticsDialog::addCert( HCERTSTORE store, ByteVec &cert, DWORD keyCode ) const
+{
+	PCCERT_CONTEXT newContext = NULL;
+	if ( !CertAddEncodedCertificateToStore( store, X509_ASN_ENCODING, &cert[0],(DWORD)cert.size(), CERT_STORE_ADD_REPLACE_EXISTING, &newContext ) )
+		return false;
+
+	CertFreeCertificateContext( newContext );
+	return true;
 }
