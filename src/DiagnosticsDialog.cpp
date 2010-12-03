@@ -22,6 +22,7 @@
 
 #include "DiagnosticsDialog.h"
 
+#include <QFile>
 #include <QTextStream>
 
 #if defined(Q_OS_LINUX)
