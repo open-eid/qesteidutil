@@ -17,7 +17,7 @@
     </message>
     <message>
         <source>Serveri töös tekkisid vead, samm: %1</source>
-        <translation type="obsolete">Server error, step: %1</translation>
+        <translation type="unfinished">Server error, step: %1</translation>
     </message>
     <message>
         <source>Kaardi vastuse parsimisel tekkis viga, samm: %1</source>
@@ -33,7 +33,7 @@
     </message>
     <message>
         <source>Serveri tÃ¶Ã¶s tekkisid vead, samm: %1</source>
-        <translation>Server error, step: %1</translation>
+        <translation type="obsolete">Server error, step: %1</translation>
     </message>
     <message>
         <source>Server sai vale arvu baite, samm: %1.
@@ -61,7 +61,7 @@ Oodati: %2, saadi: %3</source>
     </message>
     <message>
         <source>ID - %1</source>
-        <translation>ID - %1</translation>
+        <translation type="obsolete">ID - %1</translation>
     </message>
     <message>
         <source>Error reading card data:</source>
@@ -126,6 +126,14 @@ Oodati: %2, saadi: %3</source>
     <message>
         <source>No readers found</source>
         <translation>No readers found</translation>
+    </message>
+    <message>
+        <source>CPU:</source>
+        <translation>CPU:</translation>
+    </message>
+    <message>
+        <source>ID - %1&lt;br /&gt;ATR - %2</source>
+        <translation></translation>
     </message>
 </context>
 <context>

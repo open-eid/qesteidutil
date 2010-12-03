@@ -60,7 +60,7 @@ set(qesteidutil_SRCS
     common/TokenData.cpp
     common/sslConnect.cpp
     src/CertUpdate.cpp
-    src/DiagnosticsDialog.cpp
+	src/DiagnosticsDialog_common.cpp
     src/SettingsDialog.cpp
     src/jscardmanager.cpp
     src/jscertdata.cpp
@@ -69,6 +69,11 @@ set(qesteidutil_SRCS
     src/main.cpp
     src/mainwindow.cpp
 )
+IF(WIN32)
+    set(qesteidutil_SRCS ${qesteidutil_SRCS} src/DiagnosticsDialog_win.cpp)
+ELSE(WIN32)
+    set(qesteidutil_SRCS ${qesteidutil_SRCS} src/DiagnosticsDialog.cpp)
+ENDIF(WIN32)
 
 QT4_WRAP_UI( UI_HEADERS
     common/ui/CertificateWidget.ui
