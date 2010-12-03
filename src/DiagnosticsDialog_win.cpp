@@ -198,7 +198,7 @@ QString DiagnosticsDialog::checkCert( ByteVec &certBytes, ByteVec &certBytesSign
 	HCERTSTORE store = NULL;
 	PCCERT_CONTEXT context = NULL;
 
-	if ( !( store = CertOpenStore( CERT_STORE_PROV_SYSTEM, X509_ASN_ENCODING, 0, CERT_SYSTEM_STORE_CURRENT_USER, L"MY" ) ) )
+	if ( !( store = CertOpenStore( CERT_STORE_PROV_SYSTEM_A, X509_ASN_ENCODING, 0, CERT_SYSTEM_STORE_CURRENT_USER, L"MY" ) ) )
 	{
 		s << tr( "Unable to open cert store" ) << "<br />";
 		return d;
@@ -242,12 +242,14 @@ QString DiagnosticsDialog::checkCert( ByteVec &certBytes, ByteVec &certBytesSign
 bool DiagnosticsDialog::addCert( HCERTSTORE store, ByteVec &cert, const QString &card, DWORD keyCode ) const
 {
 	PCCERT_CONTEXT newContext = NULL;
-	if ( !CertAddEncodedCertificateToStore( store, X509_ASN_ENCODING, &cert[0],(DWORD)cert.size(), CERT_STORE_ADD_REPLACE_EXISTING, &newContext ) )
+	if ( !CertAddEncodedCertificateToStore( store, PKCS_7_ASN_ENCODING | X509_ASN_ENCODING, 
+			&cert[0],(DWORD)cert.size(), CERT_STORE_ADD_REPLACE_EXISTING, &newContext ) )
 		return false;
 
-	CRYPT_KEY_PROV_INFO KeyProvInfo = { (LPWSTR)card.toAscii().data(), L"EstEID Card CSP", PROV_RSA_FULL, 0, 0, NULL, keyCode };
+	CRYPT_KEY_PROV_INFO KeyProvInfo = { (LPWSTR)card.toAscii().data(), L"EstEID NewCard CSP", PROV_RSA_FULL, 0, 0, NULL, keyCode };
 	CertSetCertificateContextProperty( newContext, CERT_KEY_PROV_INFO_PROP_ID, 0, &KeyProvInfo );
 
+	/*
 	if ( keyCode == AT_SIGNATURE ) // limit usages
 	{
 		unsigned char asnEncodedUsage[] =  // ask no questions ..
@@ -258,6 +260,7 @@ bool DiagnosticsDialog::addCert( HCERTSTORE store, ByteVec &cert, const QString 
 		CRYPT_DATA_BLOB asnBlob = { sizeof(asnEncodedUsage)-1,asnEncodedUsage };
 		CertSetCertificateContextProperty( newContext, CERT_ENHKEY_USAGE_PROP_ID, 0, &asnBlob );
 	}
+*/
 
 	CertFreeCertificateContext( newContext );
 	return true;
