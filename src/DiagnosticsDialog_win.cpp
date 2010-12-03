@@ -22,9 +22,12 @@
 
 #include "DiagnosticsDialog.h"
 
+#include <common/SslCertificate.h>
+
 #include <smartcardpp/DynamicLibrary.h>
 
 #include <QMessageBox>
+#include <QSslCertificate>
 #include <QTextStream>
 
 DiagnosticsDialog::DiagnosticsDialog( QWidget *parent )
@@ -198,20 +201,20 @@ QString DiagnosticsDialog::checkCert( ByteVec &certBytes, ByteVec &certBytesSign
 	HCERTSTORE store = NULL;
 	PCCERT_CONTEXT context = NULL;
 
-	if ( !( store = CertOpenStore( CERT_STORE_PROV_SYSTEM_A, X509_ASN_ENCODING, 0, CERT_SYSTEM_STORE_CURRENT_USER, L"MY" ) ) )
+	if ( !( store = CertOpenStore( CERT_STORE_PROV_SYSTEM_A, X509_ASN_ENCODING, 0, CERT_SYSTEM_STORE_CURRENT_USER, "MY" ) ) )
 	{
 		s << tr( "Unable to open cert store" ) << "<br />";
 		return d;
 	}
 
-	if( !( context = CertCreateCertificateContext( PKCS_7_ASN_ENCODING | X509_ASN_ENCODING, &certBytes[0], DWORD( certBytes.size() ) ) ) )
+	if( !( context = CertCreateCertificateContext( X509_ASN_ENCODING | PKCS_7_ASN_ENCODING, &certBytes[0], DWORD( certBytes.size() ) ) ) )
 	{
 		s << tr( "Unable to create certificate context" ) << "<br />";
 		CertCloseStore( store, 0 );
 		return d;
 	}
 
-	if ( CertFindCertificateInStore( store, PKCS_7_ASN_ENCODING | X509_ASN_ENCODING, 0, CERT_FIND_SUBJECT_CERT, context->pCertInfo, NULL ) )
+	if ( CertFindCertificateInStore( store, X509_ASN_ENCODING | PKCS_7_ASN_ENCODING, 0, CERT_FIND_SUBJECT_CERT, context->pCertInfo, NULL ) )
 	{
 		s << tr( "Certificate found in certificate store" ) << "<br />";
 		CertFreeCertificateContext( context );
@@ -242,25 +245,24 @@ QString DiagnosticsDialog::checkCert( ByteVec &certBytes, ByteVec &certBytesSign
 bool DiagnosticsDialog::addCert( HCERTSTORE store, ByteVec &cert, const QString &card, DWORD keyCode ) const
 {
 	PCCERT_CONTEXT newContext = NULL;
-	if ( !CertAddEncodedCertificateToStore( store, PKCS_7_ASN_ENCODING | X509_ASN_ENCODING, 
+	if ( !CertAddEncodedCertificateToStore( store, X509_ASN_ENCODING, 
 			&cert[0],(DWORD)cert.size(), CERT_STORE_ADD_REPLACE_EXISTING, &newContext ) )
 		return false;
 
-	CRYPT_KEY_PROV_INFO KeyProvInfo = { (LPWSTR)card.toAscii().data(), L"EstEID NewCard CSP", PROV_RSA_FULL, 0, 0, NULL, keyCode };
-	CertSetCertificateContextProperty( newContext, CERT_KEY_PROV_INFO_PROP_ID, 0, &KeyProvInfo );
+	SslCertificate c( QSslCertificate( QByteArray( (char *)&cert[0], cert.size() ), QSsl::Der ) );
+	QString str = "Authentication ";
+	if ( keyCode == AT_SIGNATURE )
+		str = "Signature ";
+	str += c.toString( "SN, GN" ).toUpper();
 
-	/*
-	if ( keyCode == AT_SIGNATURE ) // limit usages
-	{
-		unsigned char asnEncodedUsage[] =  // ask no questions ..
-				"\x30\x38\x06\x0A\x2B\x06\x01\x04\x01\x82\x37\x0A\x05\x01\x06\x0A"
-				"\x2B\x06\x01\x04\x01\x82\x37\x0A\x03\x02\x06\x0A\x2B\x06\x01\x04"
-				"\x01\x82\x37\x0A\x03\x01\x06\x08\x2B\x06\x01\x05\x05\x07\x03\x08"
-				"\x06\x08\x2B\x06\x01\x05\x05\x07\x03\x03";
-		CRYPT_DATA_BLOB asnBlob = { sizeof(asnEncodedUsage)-1,asnEncodedUsage };
-		CertSetCertificateContextProperty( newContext, CERT_ENHKEY_USAGE_PROP_ID, 0, &asnBlob );
-	}
-*/
+	int len = ( str.length() + 1 ) * sizeof( QChar );
+	CRYPT_DATA_BLOB DataBlob = { len, new unsigned char[ len ] };
+	memset( DataBlob.pbData, 0, len );
+	memcpy( DataBlob.pbData, str.utf16(), len - sizeof( QChar ) );
+	CertSetCertificateContextProperty( newContext, CERT_FRIENDLY_NAME_PROP_ID, 0, &DataBlob );
+
+	CRYPT_KEY_PROV_INFO KeyProvInfo = { (LPWSTR)card.utf16(), L"EstEID Card CSP", PROV_RSA_FULL, 0, 0, NULL, keyCode };
+	CertSetCertificateContextProperty( newContext, CERT_KEY_PROV_INFO_PROP_ID, 0, &KeyProvInfo );
 
 	CertFreeCertificateContext( newContext );
 	return true;
