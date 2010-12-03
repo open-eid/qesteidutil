@@ -74,7 +74,9 @@ DiagnosticsDialog::DiagnosticsDialog( QWidget *parent )
 #endif
 
 	s << " (" << QSysInfo::WordSize << ")<br />";
+#if defined(Q_OS_LINUX)
 	s << "<b>" << tr("CPU:") << "</b> " << getProcessor() << "<br /><br />";
+#endif
 
 	s << "<b>" << tr("Library paths:") << "</b> " << QCoreApplication::libraryPaths().join( ";" ) << "<br />";
 
