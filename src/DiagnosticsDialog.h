@@ -45,7 +45,6 @@ private:
 	QString getProcessor() const;
 	QString getReaderInfo();
 #if defined(Q_OS_WIN32)
-	bool DiagnosticsDialog::addCert( HCERTSTORE store, ByteVec &cert, DWORD keyCode ) const;
 	QString checkCert( ByteVec &bytes, ByteVec &certBytesSign ) const;
 	QString getBits() const;
 	QString getLibVersion( const QString &lib ) const;

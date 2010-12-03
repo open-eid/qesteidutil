@@ -222,20 +222,15 @@ QString DiagnosticsDialog::checkCert( ByteVec &certBytes, ByteVec &certBytesSign
 	if ( QMessageBox::question( 0, tr( "Certificate store" ), tr( "Certificate is not registered in certificate store. Register now?" ), 
 			QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes ) == QMessageBox::Yes )
 	{
-		PCCERT_CONTEXT newContext = NULL;
-		if ( CertAddEncodedCertificateToStore( store, X509_ASN_ENCODING, &certBytes[0], DWORD( certBytes.size() ), CERT_STORE_ADD_REPLACE_EXISTING, &newContext ) )
-		{
-			if ( addCert( store, certBytes, AT_KEYEXCHANGE ) )
-				s << tr( "Successfully registered authentication certificate" ) << "<br />";
-			else
-				s << tr( "Authentication certificate registration failed" ) << "<br />";
-			if ( addCert( store, certBytesSign, AT_SIGNATURE ) )
-				s << tr( "Successfully registered signature certificate" ) << "<br />";
-			else
-				s << tr( "Signature certificate registration failed" ) << "<br />";
-			CertFreeCertificateContext( newContext );
-		} else
-			s << tr( "Failed to register certificate to certificate store" ) << "<br />";
+		if ( CertAddEncodedCertificateToStore( store, X509_ASN_ENCODING, &certBytes[0], DWORD( certBytes.size() ), CERT_STORE_ADD_REPLACE_EXISTING, NULL ) )
+			s << tr( "Successfully registered authentication certificate" ) << "<br />";
+		else
+			s << tr( "Authentication certificate registration failed" ) << "<br />";
+
+		if ( CertAddEncodedCertificateToStore( store, X509_ASN_ENCODING, &certBytesSign[0],(DWORD)certBytesSign.size(), CERT_STORE_ADD_REPLACE_EXISTING, NULL ) )
+			s << tr( "Successfully registered signature certificate" ) << "<br />";
+		else
+			s << tr( "Signature certificate registration failed" ) << "<br />";
 	} else
 		s << tr( "Certificate not found in certificate store" ) << "<br />";
 
@@ -243,14 +238,4 @@ QString DiagnosticsDialog::checkCert( ByteVec &certBytes, ByteVec &certBytesSign
 	CertCloseStore( store, 0 );
 
 	return d;
-}
-
-bool DiagnosticsDialog::addCert( HCERTSTORE store, ByteVec &cert, DWORD keyCode ) const
-{
-	PCCERT_CONTEXT newContext = NULL;
-	if ( !CertAddEncodedCertificateToStore( store, X509_ASN_ENCODING, &cert[0],(DWORD)cert.size(), CERT_STORE_ADD_REPLACE_EXISTING, &newContext ) )
-		return false;
-
-	CertFreeCertificateContext( newContext );
-	return true;
 }
