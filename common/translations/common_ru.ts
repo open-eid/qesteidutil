@@ -7,6 +7,10 @@
         <source>About</source>
         <translation>Информация</translation>
     </message>
+    <message utf8="true">
+        <source>&lt;center&gt;%1 version %2, released mm.dd.yyyy%3&lt;br /&gt;&lt;br /&gt;Estonian ID-software is released by Riigi Infosüsteemide Arenduskeskus, developed by AS Sertifitseerimiskeskus&lt;br /&gt;&lt;br /&gt;Contact for assistance by email &lt;a href=&quot;mailto:abi@id.ee&quot;&gt;abi@id.ee&lt;/a&gt; or call 1777.&lt;/center&gt;</source>
+        <translation>&lt;center&gt;%1, версия %2, выпуск mm.dd.yyyy%3&lt;br /&gt;&lt;br /&gt;Заказчиком программного обеспечения ID-карты является Центр Развития Государственных Инфосистем, разработчик - AS Sertifitseerimiskeskus.&lt;br /&gt;&lt;br /&gt;В случае проблем обращайтесь по адресу электронной почты &lt;a href=&quot;mailto:abi@id.ee&quot;&gt;abi@id.ee&lt;/a&gt; или звоните на на номер ID-помощи 1777.&lt;/center&gt;</translation>
+    </message>
 </context>
 <context>
     <name>CertificateDialog</name>

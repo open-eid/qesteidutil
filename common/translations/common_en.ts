@@ -7,6 +7,10 @@
         <source>About</source>
         <translation>About</translation>
     </message>
+    <message utf8="true">
+        <source>&lt;center&gt;%1 version %2, released mm.dd.yyyy%3&lt;br /&gt;&lt;br /&gt;Estonian ID-software is released by Riigi Infosüsteemide Arenduskeskus, developed by AS Sertifitseerimiskeskus&lt;br /&gt;&lt;br /&gt;Contact for assistance by email &lt;a href=&quot;mailto:abi@id.ee&quot;&gt;abi@id.ee&lt;/a&gt; or call 1777.&lt;/center&gt;</source>
+        <translation>&lt;center&gt;%1 version %2, released mm.dd.yyyy%3&lt;br /&gt;&lt;br /&gt;Estonian ID-software is released by Riigi Infosüsteemide Arenduskeskus, developed by AS Sertifitseerimiskeskus&lt;br /&gt;&lt;br /&gt;Contact for assistance by email &lt;a href=&quot;mailto:abi@id.ee&quot;&gt;abi@id.ee&lt;/a&gt; or call 1777.&lt;/center&gt;</translation>
+    </message>
 </context>
 <context>
     <name>CertificateDialog</name>
@@ -277,7 +281,7 @@
     </message>
     <message>
         <source>Downloading picture</source>
-        <translation type="unfinished">Downloading picture</translation>
+        <translation>Downloading picture</translation>
     </message>
 </context>
 <context>

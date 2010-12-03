@@ -7,6 +7,10 @@
         <source>About</source>
         <translation>Info</translation>
     </message>
+    <message utf8="true">
+        <source>&lt;center&gt;%1 version %2, released mm.dd.yyyy%3&lt;br /&gt;&lt;br /&gt;Estonian ID-software is released by Riigi Infosüsteemide Arenduskeskus, developed by AS Sertifitseerimiskeskus&lt;br /&gt;&lt;br /&gt;Contact for assistance by email &lt;a href=&quot;mailto:abi@id.ee&quot;&gt;abi@id.ee&lt;/a&gt; or call 1777.&lt;/center&gt;</source>
+        <translation>&lt;center&gt;%1 versioon %2, avaldatud mm.dd.yyyy%3&lt;br /&gt;&lt;br /&gt;ID-tarkvara tellija Riigi Infosüsteemide Arenduskeskus, arendaja AS Sertifitseerimiskeskus&lt;br /&gt;&lt;br /&gt;Probleemide korral pöörduge emaili teel &lt;a href=&quot;mailto:abi@id.ee&quot;&gt;abi@id.ee&lt;/a&gt; või helistage ID-abiliinile 1777&lt;/center&gt;</translation>
+    </message>
 </context>
 <context>
     <name>CertificateDialog</name>

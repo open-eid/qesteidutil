@@ -39,6 +39,8 @@ AboutWidget::AboutWidget(QWidget *parent)
 	setAttribute( Qt::WA_DeleteOnClose, true );
 	setWindowFlags( Qt::Sheet );
 
+	QString package;
+#ifdef Q_OS_LINUX
 	QProcess p;
 	p.start( "dpkg-query", QStringList() << "-W" << "-f=${Package} ${Version}" << "estonianidcard" );
 	if( !p.waitForStarted() && p.error() == QProcess::FailedToStart )
@@ -47,15 +49,15 @@ AboutWidget::AboutWidget(QWidget *parent)
 		p.waitForStarted();
 	}
 	p.waitForFinished();
-	QString package;
 	if( !p.exitCode() )
-		package = QString::fromUtf8( p.readAll() );
+		package = "<br />" + QString::fromUtf8( p.readAll() );
 	p.close();
+#endif
 
-	d->content->setText( tr(
-		"<center>%1 version %2, published mm.dd.yyyy<br />%3<br /><br />"
-		"ID-tarkvara tellija Riigi Infosüsteemide Arenduskeskus, arendaja AS Sertifitseerimiskeskus<br /><br />"
-		"Probleemide korral pöörduge emaili teel <a href=\"mailto:abi@id.ee\">abi@id.ee</a> või helistage ID-abiliinile 1777</center>")
+	d->content->setText( trUtf8(
+		"<center>%1 version %2, released mm.dd.yyyy%3<br /><br />"
+		"Estonian ID-software is released by Riigi Infosüsteemide Arenduskeskus, developed by AS Sertifitseerimiskeskus<br /><br />"
+		"Contact for assistance by email <a href=\"mailto:abi@id.ee\">abi@id.ee</a> or call 1777.</center>")
 		.arg( qApp->applicationName(), qApp->applicationVersion(), package ) );
 }
 
