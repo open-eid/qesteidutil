@@ -82,7 +82,10 @@ DiagnosticsDialog::DiagnosticsDialog( QWidget *parent )
 
 	s << "<b>" << tr("Libraries") << ":</b><br />";
 #if defined(Q_OS_MAC)
-	//s << getLibVersion( "PCSC" ) << "<br />";
+	QProcess p;
+	p.start( "/Library/OpenSC/bin/opensc-tool", QStringList() << "-i" );
+	p.waitForReadyRead();
+	s << p.readAll() << "<br />";
 #elif defined(Q_OS_LINUX)
 	s << getPackageVersion( QStringList() << "openssl" << "libpcsclite1" << "opensc" );
 #endif
