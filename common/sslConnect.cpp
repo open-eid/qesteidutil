@@ -31,6 +31,7 @@
 #include <QApplication>
 #include <QDateTime>
 #include <QLocale>
+#include <QProgressBar>
 #include <QProgressDialog>
 
 class sslError: public std::runtime_error
@@ -355,6 +356,8 @@ QByteArray SSLConnect::getUrl( RequestType type, const QString &value )
 	sslError::check( SSL_write( d->ssl, data.constData(), data.length() ) );
 	QProgressDialog p( label, QString(), 0, 0, qApp->activeWindow() );
 	p.setWindowFlags( (p.windowFlags() | Qt::CustomizeWindowHint) & ~Qt::WindowCloseButtonHint );
+	if( QProgressBar *bar = p.findChild<QProgressBar*>() )
+		bar->setTextVisible( false );
 	p.open();
 	return SSLReadThread( d->ssl ).waitForDone();
 }
