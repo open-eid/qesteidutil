@@ -135,7 +135,7 @@ include_directories(
 if( APPLE )
 	find_library( ADDITIONAL_LIBRARIES CoreServices )
 
-	set( MACOSX_BUNDLE_BUNDLE_NAME ${PROGNAME} )
+	set( MACOSX_BUNDLE_BUNDLE_NAME "ID-card utility" )
 	set( MACOSX_BUNDLE_GUI_IDENTIFIER ${PROGNAME} )
 	set( MACOSX_BUNDLE_INFO_STRING "${VERSION}, Copyright 2010 Estonian ID Card" )
 	set( MACOSX_BUNDLE_COPYRIGHT "(C) 2010 Estonian ID Card" )
