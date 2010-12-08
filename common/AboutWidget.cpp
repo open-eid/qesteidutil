@@ -55,10 +55,10 @@ AboutWidget::AboutWidget(QWidget *parent)
 #endif
 
 	d->content->setText( trUtf8(
-		"<center>%1 version %2, released mm.dd.yyyy%3<br /><br />"
+		"<center>%1 version %2, released %3%4<br /><br />"
 		"Estonian ID-software is released by Riigi Infosüsteemide Arenduskeskus, developed by AS Sertifitseerimiskeskus<br /><br />"
 		"Contact for assistance by email <a href=\"mailto:abi@id.ee\">abi@id.ee</a> or call 1777.</center>")
-		.arg( qApp->applicationName(), qApp->applicationVersion(), package ) );
+		.arg( qApp->applicationName(), qApp->applicationVersion(), BUILD_DATE, package ) );
 }
 
 AboutWidget::~AboutWidget() { delete d; }
