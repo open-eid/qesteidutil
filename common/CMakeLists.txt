@@ -1,3 +1,16 @@
+if( WIN32 )
+	execute_process( COMMAND "date" "/T" OUTPUT_VARIABLE BUILD_DATE )
+	string( REGEX REPLACE "(..)/(..)/(....).*" "\\1.\\2.\\3" BUILD_DATE ${BUILD_DATE} )
+elseif( UNIX )
+	execute_process( COMMAND "date" "+%d/%m/%Y" OUTPUT_VARIABLE BUILD_DATE )
+	string( REGEX REPLACE "(..)/(..)/(....).*" "\\1.\\2.\\3" BUILD_DATE ${BUILD_DATE} )
+else( WIN32 )
+	message( SEND_ERROR "date not implemented")
+	set( BUILD_DATE "00.00.0000" )
+endif( WIN32 )
+
+add_definitions( -DBUILD_DATE=\"${BUILD_DATE}\" )
+
 set( MOC_HEADERS
 	AboutWidget.h
 	CheckConnection.h
