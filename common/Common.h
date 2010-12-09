@@ -44,6 +44,7 @@ public:
 
 	static bool canWrite( const QString &filename );
 	static QString fileSize( quint64 bytes );
+	static QString helpUrl();
 	static QString normalized( const QString &str );
 	static QStringList normalized( const QStringList &list );
 	static void showHelp( const QString &msg, int code = -1 );

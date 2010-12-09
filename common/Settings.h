@@ -24,6 +24,8 @@
 
 #include <QSettings>
 
+#include <QLocale>
+
 class Settings : public QSettings
 {
 	Q_OBJECT
@@ -31,4 +33,17 @@ class Settings : public QSettings
 public:
 	Settings( QObject *parent = 0 )
 	: QSettings( "Estonian ID Card", QString(), parent ) {}
+
+	static QString language()
+	{
+		QString deflang;
+		switch( QLocale().language() )
+		{
+		case QLocale::English: deflang = "en"; break;
+		case QLocale::Russian: deflang = "ru"; break;
+		case QLocale::Estonian:
+		default: deflang = "et"; break;
+		}
+		return Settings().value( "Main/Langauge", deflang ).toString();
+	}
 };

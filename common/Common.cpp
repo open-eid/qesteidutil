@@ -97,6 +97,14 @@ void Common::browse( const QUrl &url )
 	QDesktopServices::openUrl( QUrl::fromLocalFile( QFileInfo( u.toLocalFile() ).absolutePath() ) );
 }
 
+QString Common::helpUrl()
+{
+	QString lang = Settings::language();
+	if( lang == "en" ) return "http://support.sk.ee/eng/";
+	if( lang == "ru" ) return "http://support.sk.ee/ru/";
+	return "http://support.sk.ee";
+}
+
 QString Common::fileSize( quint64 bytes )
 {
 	const quint64 kb = 1024;
@@ -300,7 +308,7 @@ void Common::showHelp( const QString &msg, int code )
 	}
 	else
 	{
-		u.setUrl( "http://support.sk.ee/" );
+		u.setUrl( helpUrl() );
 		u.addQueryItem( "searchquery", msg );
 		u.addQueryItem( "searchtype", "all" );
 		u.addQueryItem( "_m", "core" );
