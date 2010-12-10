@@ -137,7 +137,7 @@ if( APPLE )
 
 	set( APP_CONTENTS_DIR "${CMAKE_CURRENT_SOURCE_DIR}/mac" )
 
-	set( APPLE_GUI_BUNDLE_NAME "ID-card utility" )
+	set( APPLE_GUI_BUNDLE_NAME ${PROGNAME} )
 	set( APPLE_GUI_IDENTIFIER ${PROGNAME} )
 	set( APPLE_GUI_INFO_STRING "${VERSION}, Copyright 2010 Estonian ID Card" )
 	set( APPLE_GUI_COPYRIGHT "(C) 2010 Estonian ID Card" )
