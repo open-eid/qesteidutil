@@ -135,18 +135,22 @@ include_directories(
 if( APPLE )
 	find_library( ADDITIONAL_LIBRARIES CoreServices )
 
-	set( MACOSX_BUNDLE_BUNDLE_NAME "ID-card utility" )
-	set( MACOSX_BUNDLE_GUI_IDENTIFIER ${PROGNAME} )
-	set( MACOSX_BUNDLE_INFO_STRING "${VERSION}, Copyright 2010 Estonian ID Card" )
-	set( MACOSX_BUNDLE_COPYRIGHT "(C) 2010 Estonian ID Card" )
-	set( MACOSX_BUNDLE_SHORT_VERSION_STRING ${VERSION} )
-	set( MACOSX_BUNDLE_VERSION ${VERSION} )
-	set( MACOSX_BUNDLE_LONG_VERSION_STRING Version ${VERSION} )
-	set( MACOSX_BUNDLE_ICON_FILE Icon.icns )
+	set( APP_CONTENTS_DIR "${CMAKE_CURRENT_SOURCE_DIR}/mac" )
 
-	# Bundle resources
-	set( APP_CONTENTS_DIR "${CMAKE_SOURCE_DIR}/mac" )
-	file( GLOB_RECURSE RESOURCE_FILES ${APP_CONTENTS_DIR}/Resources/*.icns )
+	set( APPLE_GUI_BUNDLE_NAME "ID-card utility" )
+	set( APPLE_GUI_IDENTIFIER ${PROGNAME} )
+	set( APPLE_GUI_INFO_STRING "${VERSION}, Copyright 2010 Estonian ID Card" )
+	set( APPLE_GUI_COPYRIGHT "(C) 2010 Estonian ID Card" )
+	set( APPLE_GUI_SHORT_VERSION_STRING ${VERSION} )
+	set( APPLE_GUI_BUNDLE_VERSION ${VERSION} )
+	set( APPLE_GUI_LONG_VERSION_STRING Version ${VERSION} )
+	set( APPLE_GUI_ICON Icon.icns )
+	configure_file( mac/Info.plist.cmake mac/Info.plist )
+
+	file( GLOB_RECURSE RESOURCE_FILES
+		${APP_CONTENTS_DIR}/Resources/*.icns
+		${APP_CONTENTS_DIR}/Resources/**/*.strings )
+
 	foreach( _file ${RESOURCE_FILES} )
 		get_filename_component( _file_dir ${_file} PATH )
 		file( RELATIVE_PATH _file_dir ${APP_CONTENTS_DIR}/Resources ${_file_dir} )
@@ -175,11 +179,16 @@ add_executable( ${PROGNAME} WIN32 MACOSX_BUNDLE
     ${RESOURCE_FILES}
 )
 
-if(WIN32)
-	SET_TARGET_PROPERTIES( ${PROGNAME}
+if( APPLE )
+	set_target_properties( ${PROGNAME}
+		PROPERTIES
+		MACOSX_BUNDLE_INFO_PLIST ${CMAKE_CURRENT_BINARY_DIR}/mac/Info.plist )
+endif( APPLE )
+if( WIN32 )
+	set_target_properties( ${PROGNAME}
 		PROPERTIES
 		LINK_FLAGS "/MANIFESTDEPENDENCY:\"type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'\"")
-endif(WIN32)
+endif( WIN32 )
 
 target_link_libraries( ${PROGNAME}
 	${QT_QTMAIN_LIBRARY}
