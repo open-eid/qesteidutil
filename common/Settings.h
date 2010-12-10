@@ -44,6 +44,6 @@ public:
 		case QLocale::Estonian:
 		default: deflang = "et"; break;
 		}
-		return Settings().value( "Main/Langauge", deflang ).toString();
+		return Settings().value( "Main/Language", deflang ).toString();
 	}
 };
