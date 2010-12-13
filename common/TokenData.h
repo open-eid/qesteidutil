@@ -1,5 +1,5 @@
 /*
- * QDigiDocClient
+ * QDigiDocCommon
  *
  * Copyright (C) 2009,2010 Jargo Kõster <jargo@innovaatik.ee>
  * Copyright (C) 2009,2010 Raul Metsma <raul@innovaatik.ee>
