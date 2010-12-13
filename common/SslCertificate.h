@@ -92,7 +92,6 @@ public:
 private:
 	void*	getExtension( int nid ) const;
 	QByteArray subjectInfoToString( SubjectInfo info ) const;
-	QMap<QString,QString> mapFromOnlineName( const QString &name ) const;
 };
 
 class PKCS12CertificatePrivate;

@@ -36,6 +36,21 @@
 static QByteArray ASN_STRING_to_QByteArray( ASN1_OCTET_STRING *str )
 { return QByteArray( (const char *)ASN1_STRING_data(str), ASN1_STRING_length(str) ); }
 
+static QMap<QByteArray, QString> mapFromX509Name( X509_NAME *name )
+{
+	QMap<QByteArray,QString> info;
+	for( int i = 0; i < X509_NAME_entry_count(name); ++i )
+	{
+		X509_NAME_ENTRY *e = X509_NAME_get_entry( name, i );
+		const char *obj = OBJ_nid2sn( OBJ_obj2nid( X509_NAME_ENTRY_get_object( e ) ) );
+		unsigned char *data = 0;
+		int size = ASN1_STRING_to_UTF8( &data, X509_NAME_ENTRY_get_data( e ) );
+		info[obj] = QString::fromUtf8( (char*)data, size );
+		OPENSSL_free( data );
+	}
+	return info;
+}
+
 
 
 SslCertificate::SslCertificate( const QSslCertificate &cert )
@@ -167,25 +182,7 @@ QString SslCertificate::issuerInfo( SubjectInfo subject ) const
 { return issuerInfo( subjectInfoToString( subject ) ); }
 
 QString SslCertificate::issuerInfo( const QByteArray &tag ) const
-{
-	if( !handle() )
-		return QString();
-
-	BIO *bio = BIO_new( BIO_s_mem() );
-	X509_NAME_print_ex( bio, X509_get_issuer_name((X509*)handle()), 0,
-		ASN1_STRFLGS_UTF8_CONVERT |
-		ASN1_STRFLGS_DUMP_UNKNOWN |
-		ASN1_STRFLGS_DUMP_DER |
-		XN_FLAG_SEP_MULTILINE |
-		XN_FLAG_DUMP_UNKNOWN_FIELDS |
-		XN_FLAG_FN_SN );
-
-	char *data = 0;
-	long len = BIO_get_mem_data( bio, &data );
-	QString string = QString::fromUtf8( data, len );
-	BIO_free( bio );
-	return mapFromOnlineName( string ).value( tag );
-}
+{ return handle() ? mapFromX509Name( X509_get_issuer_name((X509*)handle()) ).value( tag ) : QString(); }
 
 bool SslCertificate::isDigiID() const
 { CertType t = type(); return t == DigiIDType || t==DigiIDTestType; }
@@ -224,17 +221,6 @@ QHash<SslCertificate::KeyUsage,QString> SslCertificate::keyUsage() const
 	}
 	ASN1_BIT_STRING_free( keyusage );
 	return list;
-}
-
-QMap<QString,QString> SslCertificate::mapFromOnlineName( const QString &name ) const
-{
-	QMap<QString,QString> info;
-	Q_FOREACH( const QString item, name.split( "\n" ) )
-	{
-		QStringList split = item.split( "=" );
-		info[split.value(0)] = split.value(1);
-	}
-	return info;
 }
 
 QStringList SslCertificate::policies() const
@@ -287,25 +273,7 @@ QString SslCertificate::subjectInfo( SubjectInfo subject ) const
 { return subjectInfo( subjectInfoToString( subject ) ); }
 
 QString SslCertificate::subjectInfo( const QByteArray &tag ) const
-{
-	if( !handle() )
-		return QString();
-
-	BIO *bio = BIO_new( BIO_s_mem() );
-	X509_NAME_print_ex( bio, X509_get_subject_name((X509*)handle()), 0,
-		ASN1_STRFLGS_UTF8_CONVERT |
-		ASN1_STRFLGS_DUMP_UNKNOWN |
-		ASN1_STRFLGS_DUMP_DER |
-		XN_FLAG_SEP_MULTILINE |
-		XN_FLAG_DUMP_UNKNOWN_FIELDS |
-		XN_FLAG_FN_SN );
-
-	char *data = 0;
-	long len = BIO_get_mem_data( bio, &data );
-	QString string = QString::fromUtf8( data, len );
-	BIO_free( bio );
-	return mapFromOnlineName( string ).value( tag );
-}
+{ return handle() ? mapFromX509Name( X509_get_subject_name((X509*)handle()) ).value( tag ) : QString(); }
 
 QByteArray SslCertificate::subjectInfoToString( SubjectInfo info ) const
 {
