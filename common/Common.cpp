@@ -37,7 +37,6 @@
 #ifdef Q_OS_WIN32
 #include <QDir>
 #include <QLibrary>
-#include <QTemporaryFile>
 
 #include <windows.h>
 #include <mapi.h>
@@ -62,7 +61,10 @@ Common::Common( QObject *parent )
 bool Common::canWrite( const QString &filename )
 {
 #ifdef Q_OS_WIN32
-	return QTemporaryFile( QFileInfo( filename ).absolutePath().append( "/XXXXXX" ) ).open();
+	QFile f( QFileInfo( filename ).absolutePath().append( "/.XXXXXX" ) );
+	bool result = f.open( QFile::WriteOnly );
+	f.remove();
+	return result;
 #else
 	QFileInfo file( filename );
 	return file.isFile() ? file.isWritable() : QFileInfo( file.absolutePath() ).isWritable();
