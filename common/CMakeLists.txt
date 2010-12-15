@@ -8,8 +8,6 @@ else( WIN32 )
 	set( BUILD_DATE "00.00.0000" )
 endif( WIN32 )
 
-add_definitions( -DBUILD_DATE=\"${BUILD_DATE}\" )
-
 set( MOC_HEADERS
 	AboutWidget.h
 	CheckConnection.h
@@ -37,8 +35,6 @@ set( HEADERS
 	)
 
 if( APPLE )
-	# xCode hacks
-	include_directories(/usr/local/include/../include)
 	set( MOC_HEADERS ${MOC_HEADERS} Application_mac.h )
 	set( SOURCES Application_mac.mm )
 endif( APPLE )
@@ -68,9 +64,12 @@ include_directories(
 	${LIBP11_INCLUDE_DIR}
 	)
 
+add_definitions( -DBUILD_DATE=\"${BUILD_DATE}\" )
 if( LIBP11_TOKEN_FLAGS )
 	add_definitions( -DLIBP11_TOKEN_FLAGS )
 endif( LIBP11_TOKEN_FLAGS )
-include_directories( ${LIBP11_INCLUDE_DIR} )
+if( MSVC )
+	add_definitions( -DWIN32_LEAN_AND_MEAN )
+endif( MSVC )
 
 add_library( qdigidoccommon STATIC ${SOURCES} )
