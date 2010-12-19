@@ -24,8 +24,6 @@
 
 #include <QDialog>
 
-#include <QVariant>
-
 class CertificateDialogPrivate;
 class QSslCertificate;
 
@@ -44,8 +42,5 @@ private Q_SLOTS:
 	void save();
 
 private:
-	void addItem( const QString &variable, const QString &value, const QVariant &valueext = QVariant() );
-	QByteArray addHexSeparators( const QByteArray &data ) const;
-
 	CertificateDialogPrivate *d;
 };

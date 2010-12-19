@@ -32,11 +32,37 @@
 #include <QTextStream>
 #include <QSslKey>
 
+#include <openssl/dsa.h>
+#include <openssl/rsa.h>
+
 class CertificateDialogPrivate: public Ui::CertificateDialog
 {
 public:
+	void addItem( const QString &variable, const QString &value, const QVariant &valueext = QVariant() );
+	int keyLenght( const QSslKey &key ) const;
+
 	QSslCertificate cert;
 };
+
+void CertificateDialogPrivate::addItem( const QString &variable, const QString &value, const QVariant &valueext )
+{
+	QTreeWidgetItem *t = new QTreeWidgetItem( parameters );
+	t->setText( 0, variable );
+	t->setText( 1, value );
+	t->setData( 1, Qt::UserRole, valueext );
+	parameters->addTopLevelItem( t );
+}
+
+int CertificateDialogPrivate::keyLenght( const QSslKey &key ) const
+{
+	switch( key.algorithm() )
+	{
+	case QSsl::Dsa: return DSA_size( (DSA*)key.handle() ) * 8;
+	case QSsl::Rsa: return RSA_size( (RSA*)key.handle() ) * 8;
+	}
+}
+
+
 
 CertificateDialog::CertificateDialog( QWidget *parent )
 :	QDialog( parent )
@@ -57,23 +83,12 @@ CertificateDialog::CertificateDialog( const QSslCertificate &cert, QWidget *pare
 
 CertificateDialog::~CertificateDialog() { delete d; }
 
-void CertificateDialog::addItem( const QString &variable, const QString &value, const QVariant &valueext )
-{
-	QTreeWidgetItem *t = new QTreeWidgetItem( d->parameters );
-	t->setText( 0, variable );
-	t->setText( 1, value );
-	t->setData( 1, Qt::UserRole, valueext );
-	d->parameters->addTopLevelItem( t );
-}
-
 void CertificateDialog::on_parameters_itemSelectionChanged()
 {
-	if ( !d->parameters->selectionModel()->hasSelection() || !d->parameters->selectedItems().size() )
-		return;
-	if( !d->parameters->selectedItems().value(0)->data( 1, Qt::UserRole ).toString().isEmpty() )
-		d->parameterContent->setPlainText( d->parameters->selectedItems().value(0)->data( 1, Qt::UserRole ).toString() );
-	else
-		d->parameterContent->setPlainText( d->parameters->selectedItems().value(0)->text( 1 ) );
+	const QList<QTreeWidgetItem*> &list = d->parameters->selectedItems();
+	if( !list.isEmpty() )
+		d->parameterContent->setPlainText( list[0]->data( 1,
+			list[0]->data( 1, Qt::UserRole ).isNull() ? Qt::DisplayRole : Qt::UserRole ).toString() );
 }
 
 void CertificateDialog::save()
@@ -90,10 +105,7 @@ void CertificateDialog::save()
 
 	QFile f( file );
 	if( f.open( QIODevice::WriteOnly ) )
-	{
 		f.write( QFileInfo( file ).suffix().toLower() == "pem" ? d->cert.toPem() : d->cert.toDer() );
-		f.close();
-	}
 	else
 		QMessageBox::warning( this, tr("Save certificate"), tr("Failed to save file") );
 }
@@ -124,16 +136,14 @@ void CertificateDialog::setCertificate( const QSslCertificate &cert )
 	s << "</p>";
 	d->info->setHtml( i );
 
-	addItem( tr("Version"), "V" + c.version() );
-	addItem( tr("Serial number"), QString( "%1 (0x%2)" )
+	d->addItem( tr("Version"), "V" + c.version() );
+	d->addItem( tr("Serial number"), QString( "%1 (0x%2)" )
 		.arg( c.serialNumber().constData() )
 		.arg( QString::number( c.serialNumber().toInt(), 16 ) ) );
-	addItem( tr("Signature algorithm"), c.signatureAlgorithm() );
+	d->addItem( tr("Signature algorithm"), c.signatureAlgorithm() );
 
 	QStringList text, textExt;
-	QList<QByteArray> subjects;
-	subjects << "CN" << "OU" << "O" << "C";
-	Q_FOREACH( const QByteArray &subject, subjects )
+	Q_FOREACH( const QByteArray &subject, QList<QByteArray>() << "CN" << "OU" << "O" << "C" )
 	{
 		const QString &data = c.issuerInfo( subject );
 		if( data.isEmpty() )
@@ -141,15 +151,14 @@ void CertificateDialog::setCertificate( const QSslCertificate &cert )
 		text << data;
 		textExt << QString( "%1 = %2" ).arg( subject.constData() ).arg( data );
 	}
-	addItem( tr("Issuer"), text.join( ", " ), textExt.join( "\n" ) );
-	addItem( tr("Valid from"), c.effectiveDate().toLocalTime().toString( "dd.MM.yyyy hh:mm:ss" ) );
-	addItem( tr("Vaild to"), c.expiryDate().toLocalTime().toString( "dd.MM.yyyy hh:mm:ss" ) );
+	d->addItem( tr("Issuer"), text.join( ", " ), textExt.join( "\n" ) );
+	d->addItem( tr("Valid from"), c.effectiveDate().toLocalTime().toString( "dd.MM.yyyy hh:mm:ss" ) );
+	d->addItem( tr("Vaild to"), c.expiryDate().toLocalTime().toString( "dd.MM.yyyy hh:mm:ss" ) );
 
-	subjects.clear();
 	text.clear();
 	textExt.clear();
-	subjects << "serialNumber" << "GN" << "SN" << "CN" << "OU" << "O" << "C";
-	Q_FOREACH( const QByteArray &subject, subjects )
+	Q_FOREACH( const QByteArray &subject,
+		QList<QByteArray>() << "serialNumber" << "GN" << "SN" << "CN" << "OU" << "O" << "C" )
 	{
 		const QString &data = c.subjectInfo( subject );
 		if( data.isEmpty() )
@@ -157,21 +166,21 @@ void CertificateDialog::setCertificate( const QSslCertificate &cert )
 		text << data;
 		textExt << QString( "%1 = %2" ).arg( subject.constData() ).arg( data );
 	}
-	addItem( tr("Subject"), text.join( ", " ), textExt.join( "\n" ) );
-	addItem( tr("Public key"), QString("%1 (%2)")
+	d->addItem( tr("Subject"), text.join( ", " ), textExt.join( "\n" ) );
+	d->addItem( tr("Public key"), QString("%1 (%2)")
 			.arg( c.publicKey().algorithm() == QSsl::Rsa ? "RSA" : "DSA" )
-			.arg( c.publicKey().length() ),
+			.arg( d->keyLenght( c.publicKey() ) ),
 		c.toHex( c.publicKey().toDer() ) );
 
 	QStringList enhancedKeyUsage = c.enhancedKeyUsage().values();
 	if( !enhancedKeyUsage.isEmpty() )
-		addItem( tr("Enhanched key usage"), enhancedKeyUsage.join( ", " ), enhancedKeyUsage.join( "\n" ) );
+		d->addItem( tr("Enhanched key usage"), enhancedKeyUsage.join( ", " ), enhancedKeyUsage.join( "\n" ) );
 	QStringList policies = c.policies();
 	if( !policies.isEmpty() )
-		addItem( tr("Certificate policies"), policies.join( ", " ) );
-	addItem( tr("Authority key identifier"), c.toHex( c.authorityKeyIdentifier() ) );
-	addItem( tr("Subject key identifier"), c.toHex( c.subjectKeyIdentifier() ) );
+		d->addItem( tr("Certificate policies"), policies.join( ", " ) );
+	d->addItem( tr("Authority key identifier"), c.toHex( c.authorityKeyIdentifier() ) );
+	d->addItem( tr("Subject key identifier"), c.toHex( c.subjectKeyIdentifier() ) );
 	QStringList keyUsage = c.keyUsage().values();
 	if( !keyUsage.isEmpty() )
-		addItem( tr("Key usage"), keyUsage.join( ", " ), keyUsage.join( "\n" ) );
+		d->addItem( tr("Key usage"), keyUsage.join( ", " ), keyUsage.join( "\n" ) );
 }
