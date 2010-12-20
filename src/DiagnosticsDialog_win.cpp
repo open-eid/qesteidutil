@@ -26,6 +26,7 @@
 
 #include <smartcardpp/DynamicLibrary.h>
 
+#include <QLibrary>
 #include <QMessageBox>
 #include <QSslCertificate>
 #include <QTextStream>
@@ -78,16 +79,16 @@ QString DiagnosticsDialog::getBits() const
 {
 	QString bits = "32";
 	typedef BOOL (WINAPI *LPFN_ISWOW64PROCESS) (HANDLE, PBOOL);
-	LPFN_ISWOW64PROCESS fnIsWow64Process;
-	BOOL bIsWow64 = false;
 	//check if kernel32 supports this function
-	fnIsWow64Process = (LPFN_ISWOW64PROCESS) GetProcAddress( GetModuleHandle(TEXT("kernel32")), "IsWow64Process" );
-	if ( fnIsWow64Process != NULL )
+	QLibrary lib( "kernel32" );
+	BOOL bIsWow64 = false;
+	if( LPFN_ISWOW64PROCESS fnIsWow64Process = (LPFN_ISWOW64PROCESS)lib.resolve( "IsWow64Process" ) )
 	{
-		if ( fnIsWow64Process( GetCurrentProcess(), &bIsWow64 ) )
-			if ( bIsWow64 )
-				bits = "64";
-	} else {
+		if( fnIsWow64Process( GetCurrentProcess(), &bIsWow64 ) && bIsWow64 )
+			bits = "64";
+	}
+	else
+	{
 		SYSTEM_INFO sysInfo;
 		GetSystemInfo( &sysInfo );
 		if ( sysInfo.wProcessorArchitecture == PROCESSOR_ARCHITECTURE_AMD64 )
