@@ -60,6 +60,7 @@ int CertificateDialogPrivate::keyLenght( const QSslKey &key ) const
 	case QSsl::Dsa: return DSA_size( (DSA*)key.handle() ) * 8;
 	case QSsl::Rsa: return RSA_size( (RSA*)key.handle() ) * 8;
 	}
+	return key.length();
 }
 
 

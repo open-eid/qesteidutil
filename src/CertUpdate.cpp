@@ -134,7 +134,7 @@ QByteArray CertUpdate::runStep( int s, QByteArray result )
 					QApplication::processEvents();
 				}
 				card->enterPin( EstEidCard::PIN_AUTH, PinString( m_pin.toLatin1() ) );
-			} catch( const AuthError &e ) {
+			} catch( const AuthError & ) {
 				delete p;
 				throwError( tr("Wrong PIN1 code.").toUtf8() );;
 			}
