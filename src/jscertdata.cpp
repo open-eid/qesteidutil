@@ -28,67 +28,34 @@
 #include "jscertdata.h"
 #include "common/SslCertificate.h"
 
-JsCertData::JsCertData( QObject *parent )
-:	QObject( parent )
-{
-	m_qcert = NULL;
-}
+JsCertData::JsCertData( QObject *parent ): QObject( parent ) {}
 
-JsCertData::~JsCertData()
-{
-	if( m_qcert )
-		delete m_qcert;
-}
-
-QSslCertificate JsCertData::cert() const { return *m_qcert; }
+QSslCertificate JsCertData::cert() const { return m_qcert; }
 
 void JsCertData::loadCert(EstEidCard *card, CertType ct)
 {
 	if ( !card )
 		return;
 
-	if( m_qcert )
-	{
-		delete m_qcert;
-		m_qcert = 0;
-	}
-
-    std::vector<std::string> tmp;
-    ByteVec certBytes;
     try {
         // Read certificate
-        if (ct == AuthCert)
-			certBytes = card->getAuthCert();
-        else
-			certBytes = card->getSignCert();
-
+		ByteVec certBytes = ct == AuthCert ? card->getAuthCert() : card->getSignCert();
 		if( certBytes.size() )
-			m_qcert = new QSslCertificate(QByteArray((char *)&certBytes[0], certBytes.size()), QSsl::Der);
+			m_qcert = QSslCertificate(QByteArray((char *)&certBytes[0], certBytes.size()), QSsl::Der);
 		else
-			m_qcert = new QSslCertificate();
+			m_qcert = QSslCertificate();
 	} catch ( std::runtime_error &err ) {
 //        doShowError(err);
 		qDebug() << "Error on loadCert: " << err.what();
     }
 }
 
-QString JsCertData::toPem()
-{
-    if (!m_qcert)
-        return "";
-
-    return QString(m_qcert->toPem());
-}
-
 QString JsCertData::getEmail()
 {
-    if (!m_qcert)
-        return "";
-
 	if ( isTempel() )
-		return m_qcert->subjectInfo( "emailAddress" );
+		return m_qcert.subjectInfo( "emailAddress" );
 
-    QStringList mailaddresses = m_qcert->alternateSubjectNames().values(QSsl::EmailEntry);
+	QStringList mailaddresses = m_qcert.alternateSubjectNames().values(QSsl::EmailEntry);
 
     // return first email address
     if (!mailaddresses.isEmpty())
@@ -98,129 +65,49 @@ QString JsCertData::getEmail()
 }
 
 QString JsCertData::getSerialNum()
-{
-    if (!m_qcert)
-        return "";
-
-    return m_qcert->subjectInfo("serialNumber");
-}
+{ return m_qcert.subjectInfo("serialNumber"); }
 
 QString JsCertData::getString( const QString &str )
-{
-    if (!m_qcert)
-        return "";
-
-	return SslCertificate( *m_qcert ).toString( str );
-}
+{ return SslCertificate( m_qcert ).toString( str ); }
 
 QString JsCertData::getSubjCN()
-{
-    if (!m_qcert)
-        return "";
-
-	return SslCertificate( *m_qcert ).subjectInfo(QSslCertificate::CommonName);
-}
+{ return SslCertificate( m_qcert ).subjectInfo(QSslCertificate::CommonName); }
 
 QString JsCertData::getSubjSN()
-{
-    if (!m_qcert)
-        return "";
-
-    return m_qcert->subjectInfo("SN");
-}
+{ return m_qcert.subjectInfo("SN"); }
 
 QString JsCertData::getSubjO()
-{
-    if (!m_qcert)
-        return "";
-
-    return m_qcert->subjectInfo(QSslCertificate::Organization);
-}
+{ return m_qcert.subjectInfo(QSslCertificate::Organization); }
 
 QString JsCertData::getSubjOU()
-{
-    if (!m_qcert)
-        return "";
-
-    return m_qcert->subjectInfo(QSslCertificate::OrganizationalUnitName);
-}
+{ return m_qcert.subjectInfo(QSslCertificate::OrganizationalUnitName); }
 
 QString JsCertData::getValidFrom( const QString &locale )
-{
-    if (!m_qcert)
-        return "";
-
-	return QLocale( locale ).toString( m_qcert->effectiveDate().toLocalTime(), "dd. MMMM yyyy" );
-}
+{ return QLocale( locale ).toString( m_qcert.effectiveDate().toLocalTime(), "dd. MMMM yyyy" ); }
 
 QString JsCertData::getValidTo( const QString &locale )
-{
-    if (!m_qcert)
-        return "";
-
-	return QLocale( locale ).toString( m_qcert->expiryDate().toLocalTime(), "dd. MMMM yyyy" );
-}
+{ return QLocale( locale ).toString( m_qcert.expiryDate().toLocalTime(), "dd. MMMM yyyy" ); }
 
 QString JsCertData::getIssuerCN()
-{
-    if (!m_qcert)
-        return "";
-
-    return m_qcert->issuerInfo(QSslCertificate::CommonName);
-}
+{ return m_qcert.issuerInfo(QSslCertificate::CommonName); }
 
 QString JsCertData::getIssuerO()
-{
-    if (!m_qcert)
-        return "";
-
-    return m_qcert->issuerInfo(QSslCertificate::Organization);
-}
+{ return m_qcert.issuerInfo(QSslCertificate::Organization); }
 
 QString JsCertData::getIssuerOU()
-{
-    if (!m_qcert)
-        return "";
-
-    return m_qcert->issuerInfo(QSslCertificate::OrganizationalUnitName);
-}
+{ return m_qcert.issuerInfo(QSslCertificate::OrganizationalUnitName); }
 
 bool JsCertData::isDigiID()
-{
-	if (!m_qcert)
-		return false;
-
-	return SslCertificate( *m_qcert ).isDigiID();
-}
+{ return SslCertificate( m_qcert ).isDigiID(); }
 
 bool JsCertData::isTempel()
-{
-	if (!m_qcert)
-		return false;
-
-	return SslCertificate( *m_qcert ).isTempel();
-}
+{ return SslCertificate( m_qcert ).isTempel(); }
 
 bool JsCertData::isTest()
-{
-	if (!m_qcert)
-		return false;
-
-	return SslCertificate( *m_qcert ).isTest();
-}
+{ return SslCertificate( m_qcert ).isTest(); }
 
 bool JsCertData::isValid()
-{
-    if (!m_qcert)
-        return false;
-
-	return m_qcert->expiryDate().toLocalTime() >= QDateTime::currentDateTime();
-}
+{ return m_qcert.expiryDate().toLocalTime() >= QDateTime::currentDateTime(); }
 
 int JsCertData::validDays()
-{
-	if ( !m_qcert || !isValid() )
-		return 0;
-	
-	return QDateTime::currentDateTime().daysTo( m_qcert->expiryDate().toLocalTime() );
-}
+{ return qMax( 0, QDateTime::currentDateTime().daysTo( m_qcert.expiryDate().toLocalTime() ) ); }

@@ -114,7 +114,7 @@ void JsEsteidCard::reloadData() {
 
 bool JsEsteidCard::canReadCard()
 {
-	return m_card && m_authCert && m_signCert && m_authCert->m_qcert && m_signCert->m_qcert && cardOK;
+	return m_card && m_authCert && m_signCert && !m_authCert->cert().isNull() && !m_signCert->cert().isNull() && cardOK;
 }
 
 bool JsEsteidCard::validatePin1(QString oldVal)

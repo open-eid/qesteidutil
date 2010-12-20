@@ -35,7 +35,6 @@ class JsCertData : public QObject
 
 public:
     JsCertData( QObject *parent );
-	~JsCertData();
 
     enum CertType {
         AuthCert,
@@ -44,10 +43,7 @@ public:
 
 	QSslCertificate cert() const;
 	void loadCert(EstEidCard *card, CertType ct);
-	QSslCertificate *m_qcert;
-
 public slots:
-    QString toPem();
     QString getEmail();
     QString getSubjCN();
     QString getSubjSN();
@@ -66,4 +62,7 @@ public slots:
 	bool	isTest();
 	bool	isValid();
 	int		validDays();
+
+private:
+	QSslCertificate m_qcert;
 };
