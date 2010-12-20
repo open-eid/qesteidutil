@@ -267,7 +267,7 @@ function readCardData( translate )
 		if ( days >= 0 && days <= 105 && pin1Retry != 0 )
 		{
 			document.getElementById('authCertWillExpire').style.display = 'block';
-			if ( days == 0 )
+			if ( !esteidData.authCert.isValid() )
 			    document.getElementById('authCertWillExpire').innerHTML = _( 'labelCertIsExpired' );
 			else
 			    document.getElementById('authCertWillExpire').innerHTML = _( 'labelCertWillExpire' ).replace( /%d/, days );
@@ -281,7 +281,7 @@ function readCardData( translate )
 		if ( days >= 0 && days <= 105 && pin2Retry != 0 )
 		{
 			document.getElementById('signCertWillExpire').style.display = 'block';
-			if ( days == 0 )
+			if ( !esteidData.signCert.isValid() )
 			    document.getElementById('signCertWillExpire').innerHTML = _( 'labelCertIsExpired' );
 			else
 			    document.getElementById('signCertWillExpire').innerHTML = _( 'labelCertWillExpire' ).replace( /%d/, days );
