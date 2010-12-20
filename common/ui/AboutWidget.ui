@@ -16,9 +16,6 @@
   <property name="windowTitle">
    <string>About</string>
   </property>
-  <property name="styleSheet">
-   <string notr="true">#content { background-color: transparent; }</string>
-  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="QLabel" name="elLogo">
@@ -31,12 +28,18 @@
     </widget>
    </item>
    <item>
-    <widget class="QTextBrowser" name="content">
-     <property name="frameShape">
-      <enum>QFrame::NoFrame</enum>
+    <widget class="QLabel" name="content">
+     <property name="textFormat">
+      <enum>Qt::RichText</enum>
      </property>
-     <property name="openLinks">
-      <bool>false</bool>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+     <property name="openExternalLinks">
+      <bool>true</bool>
+     </property>
+     <property name="textInteractionFlags">
+      <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
      </property>
     </widget>
    </item>
