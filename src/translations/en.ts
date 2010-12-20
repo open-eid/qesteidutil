@@ -17,7 +17,7 @@
     </message>
     <message>
         <source>Serveri töös tekkisid vead, samm: %1</source>
-        <translation type="unfinished">Server error, step: %1</translation>
+        <translation>Server error, step: %1</translation>
     </message>
     <message>
         <source>Kaardi vastuse parsimisel tekkis viga, samm: %1</source>
@@ -30,15 +30,6 @@
     <message>
         <source>Wrong PIN1 code.</source>
         <translation>Wrong PIN1 code.</translation>
-    </message>
-    <message>
-        <source>Serveri tÃ¶Ã¶s tekkisid vead, samm: %1</source>
-        <translation type="obsolete">Server error, step: %1</translation>
-    </message>
-    <message>
-        <source>Server sai vale arvu baite, samm: %1.
-Oodati: %2, saadi: %3</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -58,10 +49,6 @@ Oodati: %2, saadi: %3</source>
     <message>
         <source>Card readers</source>
         <translation>Card readers</translation>
-    </message>
-    <message>
-        <source>ID - %1</source>
-        <translation type="obsolete">ID - %1</translation>
     </message>
     <message>
         <source>Error reading card data:</source>
@@ -134,6 +121,50 @@ Oodati: %2, saadi: %3</source>
     <message>
         <source>ID - %1&lt;br /&gt;ATR - %2</source>
         <translation></translation>
+    </message>
+    <message>
+        <source>Checking certificate store</source>
+        <translation>Checking certificate store</translation>
+    </message>
+    <message>
+        <source>Unable to open cert store</source>
+        <translation>Unable to open cert store</translation>
+    </message>
+    <message>
+        <source>Unable to create certificate context</source>
+        <translation>Unable to create certificate context</translation>
+    </message>
+    <message>
+        <source>Certificate found in certificate store</source>
+        <translation>Certificate found in certificate store</translation>
+    </message>
+    <message>
+        <source>Certificate store</source>
+        <translation>Certificate store</translation>
+    </message>
+    <message>
+        <source>Certificate is not registered in certificate store. Register now?</source>
+        <translation>Certificate is not registered in certificate store. Register now?</translation>
+    </message>
+    <message>
+        <source>Successfully registered authentication certificate</source>
+        <translation>Successfully registered authentication certificate</translation>
+    </message>
+    <message>
+        <source>Authentication certificate registration failed</source>
+        <translation>Authentication certificate registration failed</translation>
+    </message>
+    <message>
+        <source>Successfully registered signature certificate</source>
+        <translation>Successfully registered signature certificate</translation>
+    </message>
+    <message>
+        <source>Signature certificate registration failed</source>
+        <translation>Signature certificate registration failed</translation>
+    </message>
+    <message>
+        <source>Certificate not found in certificate store</source>
+        <translation>Certificate not found in certificate store</translation>
     </message>
 </context>
 <context>
@@ -219,12 +250,6 @@ Oodati: %2, saadi: %3</source>
     <message>
         <source>Never</source>
         <translation>Never</translation>
-    </message>
-    <message>
-        <source>Save PIN1 for specified period in minutes
-0 - always ask</source>
-        <translation type="obsolete">Save PIN1 for specified period in minutes
-0 - always ask</translation>
     </message>
     <message>
         <source>Check for updates</source>

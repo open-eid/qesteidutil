@@ -31,15 +31,6 @@
         <source>Wrong PIN1 code.</source>
         <translation>Неверный PIN1 код.</translation>
     </message>
-    <message>
-        <source>Serveri tÃ¶Ã¶s tekkisid vead, samm: %1</source>
-        <translation type="obsolete">В работе сервера произошла ошибка, шаг: %1</translation>
-    </message>
-    <message>
-        <source>Server sai vale arvu baite, samm: %1.
-Oodati: %2, saadi: %3</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>DiagnosticsDialog</name>
@@ -82,10 +73,6 @@ Oodati: %2, saadi: %3</source>
     <message>
         <source>%1 - failed to get version info</source>
         <translation>%1 - ошибка при чтении версии</translation>
-    </message>
-    <message>
-        <source>ID - %1</source>
-        <translation type="obsolete">ID - %1</translation>
     </message>
     <message>
         <source>Error reading card data:</source>
@@ -134,6 +121,50 @@ Oodati: %2, saadi: %3</source>
     <message>
         <source>ID - %1&lt;br /&gt;ATR - %2</source>
         <translation></translation>
+    </message>
+    <message>
+        <source>Checking certificate store</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unable to open cert store</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unable to create certificate context</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Certificate found in certificate store</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Certificate store</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Certificate is not registered in certificate store. Register now?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Successfully registered authentication certificate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Authentication certificate registration failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Successfully registered signature certificate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Signature certificate registration failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Certificate not found in certificate store</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -195,12 +226,6 @@ Oodati: %2, saadi: %3</source>
     <message>
         <source>Settings</source>
         <translation>Настройки</translation>
-    </message>
-    <message>
-        <source>Save PIN1 for specified period in minutes
-0 - always ask</source>
-        <translation type="obsolete">Сохранять PIN1 на обозначенный период в минутах
-0 - всегда спрашивать</translation>
     </message>
     <message>
         <source>Check updates</source>

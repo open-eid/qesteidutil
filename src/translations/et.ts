@@ -17,7 +17,7 @@
     </message>
     <message>
         <source>Serveri töös tekkisid vead, samm: %1</source>
-        <translation type="unfinished">Serveri töös tekkisid vead, samm: %1</translation>
+        <translation>Serveri töös tekkisid vead, samm: %1</translation>
     </message>
     <message>
         <source>Kaardi vastuse parsimisel tekkis viga, samm: %1</source>
@@ -30,15 +30,6 @@
     <message>
         <source>Wrong PIN1 code.</source>
         <translation>Vale PIN1 kood.</translation>
-    </message>
-    <message>
-        <source>Serveri tÃ¶Ã¶s tekkisid vead, samm: %1</source>
-        <translation type="obsolete">Serveri töös tekkisid vead, samm: %1</translation>
-    </message>
-    <message>
-        <source>Server sai vale arvu baite, samm: %1.
-Oodati: %2, saadi: %3</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -58,10 +49,6 @@ Oodati: %2, saadi: %3</source>
     <message>
         <source>Card readers</source>
         <translation>Kaardilugejad</translation>
-    </message>
-    <message>
-        <source>ID - %1</source>
-        <translation type="obsolete">ID - %1</translation>
     </message>
     <message>
         <source>Error reading card data:</source>
@@ -134,6 +121,50 @@ Oodati: %2, saadi: %3</source>
     <message>
         <source>ID - %1&lt;br /&gt;ATR - %2</source>
         <translation></translation>
+    </message>
+    <message>
+        <source>Checking certificate store</source>
+        <translation>Kontrollin sertifikaadi hoidlat</translation>
+    </message>
+    <message>
+        <source>Unable to open cert store</source>
+        <translation>Sertifikaadi hoidla avamine ebaõnnestus</translation>
+    </message>
+    <message>
+        <source>Unable to create certificate context</source>
+        <translation>Sertifikaadi konteksti loomine ebaõnnestus</translation>
+    </message>
+    <message>
+        <source>Certificate found in certificate store</source>
+        <translation>Sertifikaat leiti sertifikaadi hoidlast</translation>
+    </message>
+    <message>
+        <source>Certificate store</source>
+        <translation>Sertifikaadi hoidla</translation>
+    </message>
+    <message>
+        <source>Certificate is not registered in certificate store. Register now?</source>
+        <translation>Sertifikaat ei ole registreeritud sertifikaadi hoidlas. Registreerin kohe?</translation>
+    </message>
+    <message>
+        <source>Successfully registered authentication certificate</source>
+        <translation>Isikutuvastuse sertifikaadi registreerimine õnnestus</translation>
+    </message>
+    <message>
+        <source>Authentication certificate registration failed</source>
+        <translation>Isikutuvastuse sertifikaadi registreerimine ebaõnnestus</translation>
+    </message>
+    <message>
+        <source>Successfully registered signature certificate</source>
+        <translation>Allkirjastamise sertifikaadi registreerimine õnnestus</translation>
+    </message>
+    <message>
+        <source>Signature certificate registration failed</source>
+        <translation>Allkirjastamise sertifikaadi registreerimine ebaõnnestus</translation>
+    </message>
+    <message>
+        <source>Certificate not found in certificate store</source>
+        <translation>Sertifikaati ei leitud sertifikaadi hoidklast</translation>
     </message>
 </context>
 <context>
@@ -219,12 +250,6 @@ Oodati: %2, saadi: %3</source>
     <message>
         <source>Never</source>
         <translation>Mitte kunagi</translation>
-    </message>
-    <message>
-        <source>Save PIN1 for specified period in minutes
-0 - always ask</source>
-        <translation type="obsolete">Salvesta PIN1 määratud minutiteks
-0 - küsi iga kord</translation>
     </message>
     <message>
         <source>Check for updates</source>
