@@ -48,6 +48,7 @@ private:
 	bool DiagnosticsDialog::addCert( HCERTSTORE store, ByteVec &cert, const QString &card, DWORD keyCode ) const;
 	QString checkCert( ByteVec &bytes, ByteVec &certBytesSign, const QString &cardId ) const;
 	QString getBits() const;
+	QString getBrowsers() const;
 	QString getLibVersion( const QString &lib ) const;
 	QString getOS() const;
 

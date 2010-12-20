@@ -28,6 +28,7 @@
 
 #include <QLibrary>
 #include <QMessageBox>
+#include <QSettings>
 #include <QSslCertificate>
 #include <QTextStream>
 
@@ -66,13 +67,32 @@ DiagnosticsDialog::DiagnosticsDialog( QWidget *parent )
 
 	s << "<b>" << tr("Card readers") << ":</b><br />" << getReaderInfo() << "<br />";
 
-	QString browsers;
+	QString browsers = getBrowsers();
 	if ( !browsers.isEmpty() )
 		s << "<b>" << tr("Browsers:") << "</b><br />" << browsers << "<br /><br />";
 
 	s << certInfo;
 
 	diagnosticsText->setHtml( info );
+}
+
+QString DiagnosticsDialog::getBrowsers() const
+{
+	QStringList browsers;
+	Q_FOREACH( const QString &group, QStringList() << "HKEY_LOCAL_MACHINE" << "HKEY_CURRENT_USER" )
+	{
+		QSettings s( group + "\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall", QSettings::NativeFormat );
+		Q_FOREACH( const QString &key, s.childGroups() )
+		{
+			QString name = s.value( key + "/DisplayName" ).toString();
+			QString version = s.value( key + "/DisplayVersion" ).toString();
+			QString type = s.value( key + "/ReleaseType" ).toString();
+			if( !type.contains( "Update", Qt::CaseInsensitive ) &&
+				name.contains( QRegExp( "Firefox|Internet Explorer|Google Chrome|Thunderbird", Qt::CaseInsensitive ) ) )
+				browsers << QString( "%1 (%2)" ).arg( name, version );
+		}
+	}
+	return browsers.join( "<br />" );
 }
 
 QString DiagnosticsDialog::getBits() const
@@ -171,20 +191,19 @@ QString DiagnosticsDialog::getProcessor() const
 
 bool DiagnosticsDialog::isPCSCRunning() const
 {
-	bool result = false;
 	SC_HANDLE h = OpenSCManager( NULL, NULL, SC_MANAGER_CONNECT );
-	if( h )
+	if( !h )
+		return false;
+
+	bool result = false;
+	if( SC_HANDLE s = OpenService( h, "SCardSvr", SERVICE_QUERY_STATUS ) )
 	{
-		SC_HANDLE s = OpenService( h, "SCardSvr", SERVICE_QUERY_STATUS );
-		if( s )
-		{
-			SERVICE_STATUS status;
-			QueryServiceStatus( s, &status );
-			result = (status.dwCurrentState == SERVICE_RUNNING);
-			CloseServiceHandle( s );
-		}
-		CloseServiceHandle( h );
+		SERVICE_STATUS status;
+		QueryServiceStatus( s, &status );
+		result = (status.dwCurrentState == SERVICE_RUNNING);
+		CloseServiceHandle( s );
 	}
+	CloseServiceHandle( h );
 	return result;
 }
 
