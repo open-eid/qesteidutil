@@ -37,9 +37,11 @@ void JsCertData::loadCert(EstEidCard *card, CertType ct)
 	if ( !card )
 		return;
 
+	certBytes.clear();
+
     try {
         // Read certificate
-		ByteVec certBytes = ct == AuthCert ? card->getAuthCert() : card->getSignCert();
+		certBytes = ct == AuthCert ? card->getAuthCert() : card->getSignCert();
 		if( certBytes.size() )
 			m_qcert = QSslCertificate(QByteArray((char *)&certBytes[0], certBytes.size()), QSsl::Der);
 		else

@@ -36,6 +36,9 @@ class DiagnosticsDialog: public QDialog, private Ui::DiagnosticsDialog
 public:
 	DiagnosticsDialog( QWidget *parent = 0 );
 
+	static bool addCert( HCERTSTORE store, ByteVec &cert, const QString &card, DWORD keyCode );
+	static QString checkCert( ByteVec &bytes, ByteVec &certBytesSign, const QString &cardId );
+
 private slots:
 	void save();
 
@@ -46,8 +49,6 @@ private:
 	QString getProcessor() const;
 	QString getReaderInfo();
 #if defined(Q_OS_WIN32)
-	bool DiagnosticsDialog::addCert( HCERTSTORE store, ByteVec &cert, const QString &card, DWORD keyCode ) const;
-	QString checkCert( ByteVec &bytes, ByteVec &certBytesSign, const QString &cardId ) const;
 	QString getBits() const;
 	QString getLibVersion( const QString &lib ) const;
 	QString getOS() const;

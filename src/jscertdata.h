@@ -43,6 +43,8 @@ public:
 
 	QSslCertificate cert() const;
 	void loadCert(EstEidCard *card, CertType ct);
+	ByteVec certBytes;
+
 public slots:
     QString getEmail();
     QString getSubjCN();

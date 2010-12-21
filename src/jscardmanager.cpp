@@ -290,3 +290,18 @@ void JsCardManager::newManager()
 {
 	m_jsEsteidCard->resetCard();
 }
+
+bool JsCardManager::checkCerts()
+{
+#if defined(Q_OS_WIN32)
+	if ( !isInReader( activeReaderNum() ) )
+		return false;
+
+	DiagnosticsDialog::checkCert(
+						m_jsEsteidCard->m_authCert->certBytes,
+						m_jsEsteidCard->m_signCert->certBytes,
+						m_jsEsteidCard->getId() );
+#endif
+
+	return true;
+}

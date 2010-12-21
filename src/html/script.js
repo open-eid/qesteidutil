@@ -349,6 +349,8 @@ function readCardData( translate )
 
 		if(pukRetry == 0)
 			setActive('puk',document.getElementById('buttonPUK'));
+			
+		var check = cardManager.checkCerts();
 	} catch ( err ) { }
 }
 

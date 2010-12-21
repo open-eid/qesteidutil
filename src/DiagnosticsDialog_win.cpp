@@ -207,7 +207,7 @@ bool DiagnosticsDialog::isPCSCRunning() const
 	return result;
 }
 
-QString DiagnosticsDialog::checkCert( ByteVec &certBytes, ByteVec &certBytesSign, const QString &cardId ) const
+QString DiagnosticsDialog::checkCert( ByteVec &certBytes, ByteVec &certBytesSign, const QString &cardId )
 {
 	if ( !certBytes.size() )
 		return QString();
@@ -260,7 +260,7 @@ QString DiagnosticsDialog::checkCert( ByteVec &certBytes, ByteVec &certBytesSign
 	return d;
 }
 
-bool DiagnosticsDialog::addCert( HCERTSTORE store, ByteVec &cert, const QString &card, DWORD keyCode ) const
+bool DiagnosticsDialog::addCert( HCERTSTORE store, ByteVec &cert, const QString &card, DWORD keyCode )
 {
 	PCCERT_CONTEXT newContext = NULL;
 	if ( !CertAddEncodedCertificateToStore( store, X509_ASN_ENCODING, 

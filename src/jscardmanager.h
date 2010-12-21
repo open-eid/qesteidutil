@@ -72,6 +72,8 @@ public slots:
 	void disableRead();
 	void newManager();
 
+	bool checkCerts();
+
 private slots:
     void pollCard();
 
