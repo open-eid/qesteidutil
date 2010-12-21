@@ -55,7 +55,7 @@ QString DiagnosticsDialog::getReaderInfo()
 				{
 					EstEidCard card( *m, i );
 					QString cardId = QString::fromStdString( card.readCardID() ); 
-					readers[reader] = tr( "ID - %1<br />ATR - %2" )
+					readers[reader] = QString( "ID - %1<br />ATR - %2" )
 						.arg( cardId )
 						.arg( QString::fromStdString( m->getATRHex( i ) ).toUpper() );
 #if defined(Q_OS_WIN32)

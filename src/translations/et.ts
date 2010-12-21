@@ -119,10 +119,6 @@
         <translation>Protsessor:</translation>
     </message>
     <message>
-        <source>ID - %1&lt;br /&gt;ATR - %2</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>Checking certificate store</source>
         <translation>Kontrollin sertifikaadi hoidlat</translation>
     </message>
@@ -165,6 +161,10 @@
     <message>
         <source>Certificate not found in certificate store</source>
         <translation>Sertifikaati ei leitud sertifikaadi hoidklast</translation>
+    </message>
+    <message>
+        <source>Unknown version</source>
+        <translation>Teadmata versioon</translation>
     </message>
 </context>
 <context>

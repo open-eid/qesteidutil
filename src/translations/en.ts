@@ -119,10 +119,6 @@
         <translation>CPU:</translation>
     </message>
     <message>
-        <source>ID - %1&lt;br /&gt;ATR - %2</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>Checking certificate store</source>
         <translation>Checking certificate store</translation>
     </message>
@@ -165,6 +161,10 @@
     <message>
         <source>Certificate not found in certificate store</source>
         <translation>Certificate not found in certificate store</translation>
+    </message>
+    <message>
+        <source>Unknown version</source>
+        <translation>Unknown version</translation>
     </message>
 </context>
 <context>
