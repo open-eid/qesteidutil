@@ -26,6 +26,7 @@ var htmlStrings = {
 	"linkDiagnostics": new tr( "Diagnostika", "Diagnostics", "Диагностика" ),
 	"linkSettings": new tr( "Seaded", "Settings", "Настройки" ),
 	"linkHelp": new tr( "Abi", "Help", "Помощь" ),
+	"linkAbout": new tr( "Info", "About", "Информация" ),
 
 	"personName": new tr( "Nimi", "Name", "Имя" ),
 	"personCode": new tr( "Isikukood", "Personal Code", "Личный номер" ),

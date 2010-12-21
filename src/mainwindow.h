@@ -48,5 +48,5 @@ private:
 	QTranslator *appTranslator, *qtTranslator, *commonTranslator;
 	QMenuBar *bar;
 	QMenu *menu;
-	QAction *pref, *close;
+	QAction *about, *pref, *close;
 };

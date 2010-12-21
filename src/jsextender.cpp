@@ -31,8 +31,10 @@
 #include "CertUpdate.h"
 #include "mainwindow.h"
 #include "jsextender.h"
-#include "common/Settings.h"
 #include "SettingsDialog.h"
+
+#include <common/AboutWidget.h>
+#include <common/Settings.h>
 
 JsExtender::JsExtender( MainWindow *main )
 :	QObject( main )
@@ -398,6 +400,9 @@ void JsExtender::httpRequestFinished( int, bool error )
 
 	QByteArray result = m_http.readAll();
 }
+
+void JsExtender::showAbout()
+{ (new AboutWidget( m_mainWindow ))->show(); }
 
 void JsExtender::showSettings()
 { (new SettingsDialog( m_mainWindow ) )->show(); }

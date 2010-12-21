@@ -16,5 +16,6 @@
     <file>html/images/flag_english.png</file>
     <file>html/images/flag_russian.png</file>
     <file alias="stamp">../common/images/ico_stamp_blue_75.png</file>
+    <file alias="images/EL_Regionaalareng_horisontaal.png">../common/images/EL_Regionaalareng_horisontaal.png</file>
   </qresource>
 </RCC>

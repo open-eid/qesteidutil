@@ -220,6 +220,10 @@
         <source>Close</source>
         <translation>Close</translation>
     </message>
+    <message>
+        <source>Info</source>
+        <translation>About</translation>
+    </message>
 </context>
 <context>
     <name>SettingsDialog</name>

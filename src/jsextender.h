@@ -78,6 +78,7 @@ public slots:
 	void savePicture();
 
 	QString locale() { return m_locale; }
+	void showAbout();
 	void showSettings();
 
 	void showLoading( const QString & );

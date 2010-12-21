@@ -34,12 +34,7 @@ MainWindow::MainWindow( QWidget *parent )
 :	QWebView( parent )
 ,	menu( 0 )
 {
-	setWindowFlags( Qt::Window | Qt::CustomizeWindowHint | Qt::WindowMinimizeButtonHint );
-#if QT_VERSION >= 0x040500
-	setWindowFlags( windowFlags() | Qt::WindowCloseButtonHint );
-#else
-	setWindowFlags( windowFlags() | Qt::WindowSystemMenuHint );
-#endif
+	setWindowFlags( Qt::Window|Qt::CustomizeWindowHint|Qt::WindowMinimizeButtonHint|Qt::WindowCloseButtonHint );
 	page()->mainFrame()->setScrollBarPolicy( Qt::Horizontal, Qt::ScrollBarAlwaysOff );
 	page()->mainFrame()->setScrollBarPolicy( Qt::Vertical, Qt::ScrollBarAlwaysOff );
 	setContextMenuPolicy(Qt::PreventContextMenu);
@@ -58,8 +53,10 @@ MainWindow::MainWindow( QWidget *parent )
 	bar = new QMenuBar;
 	menu = bar->addMenu( tr("&File") );
 	pref = menu->addAction( tr("Settings"), m_jsExtender, SLOT(showSettings()) );
+	about = menu->addAction( tr("Info"), m_jsExtender, SLOT(showAbout()) );
 	close = menu->addAction( tr("Close"), qApp, SLOT(quit()) );
 	pref->setMenuRole( QAction::PreferencesRole );
+	about->setMenuRole( QAction::AboutRole );
 	close->setShortcut( Qt::CTRL + Qt::Key_W );
 #endif
 	jsEsteidCard = new JsEsteidCard( this );
@@ -96,6 +93,7 @@ void MainWindow::retranslate( const QString &lang )
 	{
 		menu->setTitle( tr("&File") );
 		pref->setText( tr("Settings") );
+		about->setText( tr("Info") );
 		close->setText( tr("Close") );
 	}
 #endif
