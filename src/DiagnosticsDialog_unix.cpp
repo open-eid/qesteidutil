@@ -95,16 +95,20 @@ DiagnosticsDialog::DiagnosticsDialog( QWidget *parent )
 
 	s << "<b>" << tr("Card readers") << ":</b><br />" << getReaderInfo() << "<br />";
 
-	QString browsers;
-#if defined(Q_OS_LINUX)
-	browsers = getPackageVersion( QStringList() << "chromium-browser" << "firefox" << "MozillaFirefox");
-#elif defined(Q_OS_MAC)
-	browsers = getPackageVersion( QStringList() << "Google Chrome" << "Firefox" << "Safari" );
-#endif
+	QString browsers = getBrowsers();
 	if ( !browsers.isEmpty() )
 		s << "<b>" << tr("Browsers:") << "</b><br />" << browsers << "<br /><br />";
 
 	diagnosticsText->setHtml( info );
+}
+
+QString DiagnosticsDialog::getBrowsers() const
+{
+#if defined(Q_OS_LINUX)
+	return getPackageVersion( QStringList() << "chromium-browser" << "firefox" << "MozillaFirefox");
+#elif defined(Q_OS_MAC)
+	return getPackageVersion( QStringList() << "Google Chrome" << "Firefox" << "Safari" );
+#endif
 }
 
 QString DiagnosticsDialog::getPackageVersion( const QStringList &list, bool returnPackageName ) const

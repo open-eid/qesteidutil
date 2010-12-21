@@ -41,6 +41,7 @@ private slots:
 
 private:
 	bool	isPCSCRunning() const;
+	QString getBrowsers() const;
 	QString getPackageVersion( const QStringList &list, bool returnPackageName = true ) const;
 	QString getProcessor() const;
 	QString getReaderInfo();
@@ -48,7 +49,6 @@ private:
 	bool DiagnosticsDialog::addCert( HCERTSTORE store, ByteVec &cert, const QString &card, DWORD keyCode ) const;
 	QString checkCert( ByteVec &bytes, ByteVec &certBytesSign, const QString &cardId ) const;
 	QString getBits() const;
-	QString getBrowsers() const;
 	QString getLibVersion( const QString &lib ) const;
 	QString getOS() const;
 
