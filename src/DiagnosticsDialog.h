@@ -36,8 +36,10 @@ class DiagnosticsDialog: public QDialog, private Ui::DiagnosticsDialog
 public:
 	DiagnosticsDialog( QWidget *parent = 0 );
 
+#if defined(Q_OS_WIN32)
 	static bool addCert( HCERTSTORE store, ByteVec &cert, const QString &card, DWORD keyCode );
 	static QString checkCert( ByteVec &bytes, ByteVec &certBytesSign, const QString &cardId );
+#endif
 
 private slots:
 	void save();
