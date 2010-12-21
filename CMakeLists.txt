@@ -28,7 +28,19 @@ if(MSVC)
     add_definitions(-D_SECURE_SCL=0)
 endif(MSVC)
 
+if( WIN32 )
+	execute_process( COMMAND "cmd.exe" "/C date /T" OUTPUT_VARIABLE BUILD_DATE )
+	string( REGEX REPLACE ".*([0-3][0-9]).([0-1][0-9]).([0-9][0-9][0-9][0-9]).*" "\\1.\\2.\\3" BUILD_DATE ${BUILD_DATE} )
+elseif( UNIX )
+	execute_process( COMMAND "date" "+%d.%m.%Y" OUTPUT_VARIABLE BUILD_DATE OUTPUT_STRIP_TRAILING_WHITESPACE )
+else( WIN32 )
+	message( SEND_ERROR "date not implemented")
+	set( BUILD_DATE "00.00.0000" )
+endif( WIN32 )
+add_definitions( -DBUILD_DATE=\"${BUILD_DATE}\" )
+
 set(qesteidutil_MOC_HDRS
+	common/AboutWidget.h
     common/CertificateWidget.h
     common/PinDialog.h
     common/Settings.h
@@ -55,6 +67,7 @@ QT4_WRAP_CPP(qesteidutil_MOC_SRCS ${qesteidutil_MOC_HDRS})
 set(qesteidutil_SRCS
     ${qesteidutil_HDRS}
     ${qesteidutil_MOC_SRCS}
+	common/AboutWidget.cpp
     common/CertificateWidget.cpp
     common/PinDialog.cpp
     common/SslCertificate.cpp
@@ -77,6 +90,7 @@ ELSE(WIN32)
 ENDIF(WIN32)
 
 QT4_WRAP_UI( UI_HEADERS
+	common/ui/AboutWidget.ui
     common/ui/CertificateWidget.ui
     src/ui/DiagnosticsDialog.ui
     src/ui/SettingsDialog.ui
