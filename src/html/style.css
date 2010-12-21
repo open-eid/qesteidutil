@@ -48,7 +48,8 @@ a:hover, a:focus {color: #509b00; text-decoration: underline;}
 
 .cardInfo { position: absolute; top:226px; left:180px; width:385; height:72px;
 			background-color: rgba(255,255,255,0.7); border: 1px solid #cddbeb; z-index: 1;-webkit-border-radius: 5px;
-			color: #54859b; font-weight: bold; font-family: "Arial, Liberation Sans"; font-size: 16px;}
+			color: #54859b; font-weight: bold; font-family: "Arial, Liberation Sans"; font-size: 16px;
+			display: none; }
 .cardInfo ul {list-style: none; text-indent:-1.7em; margin-top: 7px;}
 .noCard { padding-top:5px; font-size:18px; font-weight: bold; color:#ec2b2b; }
 .pukBlocked { padding-top:5px; font-size:16px; font-weight: bold; color:#ec2b2b; }

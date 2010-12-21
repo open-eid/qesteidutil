@@ -451,7 +451,9 @@ $('headerSelect').value = language;
 
 translateHTML();
 
-disableFields();
+extender.showLoading( _('loadCardData') );
+
+disableFields( true );
 
 if ( navigator.platform.indexOf("Linux") != -1 )
     $('showSettingsLink').hide();

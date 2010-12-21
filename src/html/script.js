@@ -579,7 +579,7 @@ function handleNotice(msg)
 	_alert( 'notice', _( msg ) )
 }
 
-function disableFields()
+function disableFields(firstRun)
 {
 	var divs = document.getElementsByTagName('div');
 	for( i=0;i<divs.length;i++ )
@@ -614,8 +614,12 @@ function disableFields()
 		{
 			cardManager.disableRead();
 			activeCardId = "";
-			document.getElementById('cardInfoNoCard').style.display='block';
-			document.getElementById('cardInfoNoCardText').innerHTML='<trtag trcode="' + ( cardManager.getReaderCount() == 0 ? 'noReaders' : 'noCard' ) + '">' + _( cardManager.getReaderCount() == 0 ? 'noReaders' : 'noCard' ) + '</trtag>';
+			if ( typeof(firstRun) == 'undefined' )
+			{
+			    document.getElementById('cardInfoNoCard').style.display='block';
+			    document.getElementById('cardInfoNoCardText').innerHTML='<trtag trcode="' + ( cardManager.getReaderCount() == 0 ? 'noReaders' : 'noCard' ) + '">' + _( cardManager.getReaderCount() == 0 ? 'noReaders' : 'noCard' ) + '</trtag>';
+			    extender.closeLoading();
+            }
 			if ( cardManager.getReaderCount() == 0 )
 				cardManager.newManager();
 			cardManager.allowRead();
