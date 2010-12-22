@@ -145,6 +145,8 @@ void JsCardManager::pollCard()
         // For now ignore any errors that might have happened during polling.
         // We don't want to spam users too often.
     }
+	if ( numReaders == 0 )
+		emit cardEvent( "cardRemoved", -1 );
 }
 
 bool JsCardManager::isInReader( const QString &cardId )
