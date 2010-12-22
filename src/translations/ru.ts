@@ -120,51 +120,51 @@
     </message>
     <message>
         <source>Checking certificate store</source>
-        <translation type="unfinished"></translation>
+        <translation>Идет проверка хранилища сертификатов</translation>
     </message>
     <message>
         <source>Unable to open cert store</source>
-        <translation type="unfinished"></translation>
+        <translation>Невозможно открыть хранилище сертификатов</translation>
     </message>
     <message>
         <source>Unable to create certificate context</source>
-        <translation type="unfinished"></translation>
+        <translation>Невозможно создать контекст сертификата</translation>
     </message>
     <message>
         <source>Certificate found in certificate store</source>
-        <translation type="unfinished"></translation>
+        <translation>Сертификат обнаружен в хранилище сертификатов</translation>
     </message>
     <message>
         <source>Certificate store</source>
-        <translation type="unfinished"></translation>
+        <translation>Хранилище сертификатов</translation>
     </message>
     <message>
         <source>Certificate is not registered in certificate store. Register now?</source>
-        <translation type="unfinished"></translation>
+        <translation>Сертификат не зарегистрирован в хранилище сертификатов. Зарегистрировать сертификат?</translation>
     </message>
     <message>
         <source>Successfully registered authentication certificate</source>
-        <translation type="unfinished"></translation>
+        <translation>Регистрация сертификата идентификации личности прошла успешно</translation>
     </message>
     <message>
         <source>Authentication certificate registration failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Регистрация сертификата идентификации личности не прошла</translation>
     </message>
     <message>
         <source>Successfully registered signature certificate</source>
-        <translation type="unfinished"></translation>
+        <translation>Регистрация сертификата цифрового подписывания прошла успешно</translation>
     </message>
     <message>
         <source>Signature certificate registration failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Регистрация сертификата цифрового подписывания не прошла </translation>
     </message>
     <message>
         <source>Certificate not found in certificate store</source>
-        <translation type="unfinished"></translation>
+        <translation>Сертификат не обнаружен в хранилище сертификатов </translation>
     </message>
     <message>
         <source>Unknown version</source>
-        <translation type="unfinished"></translation>
+        <translation>Неизвестная версий</translation>
     </message>
 </context>
 <context>
