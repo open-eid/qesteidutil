@@ -5,6 +5,7 @@ set( PROGNAME qesteidutil )
 # Custom cmake modules
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/modules")
 
+include(CMakeFindFrameworks)
 include(InstallSettings)
 
 find_package(Qt4 4.6.0 COMPONENTS QtCore QtGui QtNetwork QtWebkit QtXml REQUIRED)
@@ -147,7 +148,16 @@ include_directories(
 )
 
 if( APPLE )
-	find_library( ADDITIONAL_LIBRARIES CoreServices )
+	find_library( CORESERVICES_LIB CoreServices )
+	find_library( SECURITY_LIB Security )
+	set( ADDITIONAL_LIBRARIES ${CORESERVICES_LIB} ${SECURITY_LIB} )
+
+	CMAKE_FIND_FRAMEWORKS( Security )
+	if( Security_FRAMEWORKS )
+		foreach( dir ${Security_FRAMEWORKS} )
+			include_directories( ${dir}/Headers )
+		endforeach( dir )
+	endif( Security_FRAMEWORKS )
 
 	set( APP_CONTENTS_DIR "${CMAKE_CURRENT_SOURCE_DIR}/mac" )
 

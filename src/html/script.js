@@ -700,7 +700,14 @@ function updateCert()
 	if ( ok )
 	{
 		extender.closeLoading();
-		_alert( 'info', _( 'updateCertOk' ) );
+		if( navigator.platform.indexOf("Mac") != -1 )
+		{
+			_alert( 'info', _('updateCertOk') + '<br /><br />' + _('cleanTokenCacheInfo') );
+			var status = extender.cleanTokenCache();
+			_alert( 'info', status ? _('cleanTokenCacheOk') : _('cleanTokenCacheFail') );
+		}
+		else
+			_alert( 'info', _( 'updateCertOk' ) );
 		activeCardId = "";
 		var activeNum = cardManager.activeReaderNum();
 		cardManager.newManager();

@@ -89,6 +89,7 @@ public slots:
 
 	void showMessage( const QString &type, const QString &message, const QString &title = "" );
 
+	bool cleanTokenCache() const;
 	bool updateCertAllowed();
 	bool updateCert();
 };

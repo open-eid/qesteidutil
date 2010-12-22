@@ -137,7 +137,10 @@ var htmlStrings = {
 	"loadPicFailed3": new tr( "Pildi laadimine ebaõnnestus - viga salvestamisel!", "Loading picture failed - error saving file!", "Загрузка картинки неуспешна- ошибка при сохранении!" ),
 	"loadCardData": new tr( "Loen andmeid", "Reading data", "Данные считываются" ),
 	"updateCert": new tr( "Sertifikaatide uuendamine...", "Updating certificates", "Обновление сертификатов" ),
-	"updateCertOk": new tr( "Sertifikaatide uuendamine õnnestus", "Updating certificates successful", "Успешное обновление сертификатов" )
+	"updateCertOk": new tr( "Sertifikaatide uuendamine õnnestus", "Updating certificates successful", "Успешное обновление сертификатов" ),
+	"cleanTokenCacheInfo": new tr( "Eemalda kaart lugejast, et puhastada TokenCache. See tegevus nõuab kasutaja parooli.", "Remove card from reader to clean TokenCache. It requires user password", " Remove card from reader to clean TokenCache. It requires user password" ),
+	"cleanTokenCacheOk": new tr( "TokenCache puhastamine õnnestus", "TokenCache succesfully cleaned", "TokenCache successfully cleaned" ),
+	"cleanTokenCacheFail": new tr( "TokenCache puhastamine ebaõnnestus", "TokenCache cleanup failed", "TokenCache cleanup failed" )
 };
 
 //codes from eesti.ee

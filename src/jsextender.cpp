@@ -36,6 +36,10 @@
 #include <common/AboutWidget.h>
 #include <common/Settings.h>
 
+#ifdef Q_OS_MAC
+#include <Authorization.h>
+#endif
+
 JsExtender::JsExtender( MainWindow *main )
 :	QObject( main )
 ,	m_mainWindow( main )
@@ -66,6 +70,24 @@ JsExtender::~JsExtender()
 		QFile::remove( m_tempFile + "_small.jpg" );
 	if ( QFile::exists( m_tempFile + "_big.jpg" ) )
 		QFile::remove( m_tempFile + "_big.jpg" );
+}
+
+bool JsExtender::cleanTokenCache() const
+{
+#ifdef Q_OS_MAC
+	AuthorizationRef ref;
+	AuthorizationCreate( 0, kAuthorizationEmptyEnvironment, kAuthorizationFlagDefaults, &ref );
+	char *args[] = { (char*)"-c", (char*)"/bin/rm -rf /var/db/TokenCache/tokens/com.apple.tokend.opensc*", 0 };
+	FILE *pipe = 0;
+	OSStatus status = AuthorizationExecuteWithPrivileges( ref, "/bin/sh",
+		kAuthorizationFlagDefaults, args, &pipe );
+
+	if( pipe )
+		fclose( pipe );
+
+	AuthorizationFree( ref, kAuthorizationFlagDestroyRights );
+	return status == errAuthorizationSuccess;
+#endif
 }
 
 void JsExtender::setLanguage( const QString &lang )
