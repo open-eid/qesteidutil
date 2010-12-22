@@ -88,7 +88,7 @@ QString DiagnosticsDialog::getBrowsers() const
 			QString version = s.value( key + "/DisplayVersion" ).toString();
 			QString type = s.value( key + "/ReleaseType" ).toString();
 			if( !type.contains( "Update", Qt::CaseInsensitive ) &&
-				name.contains( QRegExp( "Firefox|Internet Explorer|Google Chrome|Thunderbird", Qt::CaseInsensitive ) ) )
+				name.contains( QRegExp( "Mozilla|Internet Explorer|Google Chrome", Qt::CaseInsensitive ) ) )
 				browsers << QString( "%1 (%2)" ).arg( name, version );
 		}
 	}
