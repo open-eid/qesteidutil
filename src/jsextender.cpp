@@ -87,6 +87,8 @@ bool JsExtender::cleanTokenCache() const
 
 	AuthorizationFree( ref, kAuthorizationFlagDestroyRights );
 	return status == errAuthorizationSuccess;
+#else
+	return true;
 #endif
 }
 
