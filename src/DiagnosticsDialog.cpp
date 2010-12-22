@@ -54,13 +54,9 @@ QString DiagnosticsDialog::getReaderInfo()
 				if ( !QString::fromStdString( m->getReaderState( i ) ).contains( "EMPTY" ) )
 				{
 					EstEidCard card( *m, i );
-					QString cardId = QString::fromStdString( card.readCardID() ); 
 					readers[reader] = QString( "ID - %1<br />ATR - %2" )
-						.arg( cardId )
+						.arg( QString::fromStdString( card.readCardID() ) )
 						.arg( QString::fromStdString( m->getATRHex( i ) ).toUpper() );
-#if defined(Q_OS_WIN32)
-					certInfo += checkCert( card.getAuthCert(), card.getSignCert(), cardId );
-#endif
 				} else
 					readers[reader] = "";
 			}
