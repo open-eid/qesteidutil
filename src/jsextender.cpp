@@ -29,8 +29,8 @@
 #include <QTemporaryFile>
 
 #include "CertUpdate.h"
-#include "mainwindow.h"
 #include "jsextender.h"
+#include "mainwindow.h"
 #include "SettingsDialog.h"
 
 #include <common/AboutWidget.h>
@@ -450,28 +450,26 @@ bool JsExtender::updateCertAllowed()
 		QMessageBox::Yes|QMessageBox::No, QMessageBox::No );
 	if( b == QMessageBox::No )
 		return false;
-	bool result = false;
 	try {
-		CertUpdate *c = new CertUpdate( m_mainWindow->cardManager()->activeReaderNum(), this );
-		result = c->checkUpdateAllowed();
+		CertUpdate c( m_mainWindow->cardManager()->activeReaderNum(), this );
+		return c.checkUpdateAllowed();
 	} catch ( std::runtime_error &e ) {
 		QMessageBox::warning( m_mainWindow, tr( "Certificate update" ), tr("Certificate update failed:<br />%1").arg( QString::fromUtf8( e.what() ) ), QMessageBox::Ok );
 	}
-	return result;
+	return false;
 }
 
 bool JsExtender::updateCert()
 {
-	bool result = false;
 	try {
-		CertUpdate *c = new CertUpdate( m_mainWindow->cardManager()->activeReaderNum(), this );
-		if ( c->checkUpdateAllowed() && m_mainWindow->eidCard()->m_authCert )
+		CertUpdate c( m_mainWindow->cardManager()->activeReaderNum(), this );
+		if ( c.checkUpdateAllowed() && m_mainWindow->eidCard()->m_authCert )
 		{
-			c->startUpdate();
-			result = true;
+			c.startUpdate();
+			return true;
 		}
 	} catch ( std::runtime_error &e ) {
 		QMessageBox::warning( m_mainWindow, tr( "Certificate update" ), tr("Certificate update failed: %1").arg( QString::fromUtf8( e.what() ) ), QMessageBox::Ok );
 	}
-	return result;
+	return false;
 }
