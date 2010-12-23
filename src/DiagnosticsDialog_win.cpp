@@ -56,7 +56,7 @@ DiagnosticsDialog::DiagnosticsDialog( QWidget *parent )
 	s << getLibVersion( "advapi32") << "<br />";
 	s << getLibVersion( "crypt32") << "<br />";
 	s << getLibVersion( "winscard") << "<br />";
-	s << getLibVersion( "esteid") << "<br />";
+	s << getLibVersion( "esteidcsp") << "<br />";
 	s << getLibVersion( "esteidcm") << "<br />";
 	s << getLibVersion( "libeay32" ) << "<br />";
 	s << getLibVersion( "ssleay32" ) << "<br />";
