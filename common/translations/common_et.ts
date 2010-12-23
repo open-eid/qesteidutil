@@ -194,6 +194,17 @@
     </message>
 </context>
 <context>
+    <name>DMessageBox</name>
+    <message>
+        <source>Hide Details...</source>
+        <translation>Peida üksikasjad...</translation>
+    </message>
+    <message>
+        <source>Show Details...</source>
+        <translation>Näita üksikasju...</translation>
+    </message>
+</context>
+<context>
     <name>PinDialog</name>
     <message>
         <source>Selected action requires auth certificate.</source>

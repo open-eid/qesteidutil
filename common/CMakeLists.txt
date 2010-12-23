@@ -15,6 +15,7 @@ set( MOC_HEADERS
 	ComboBox.h
 	Common.h
 	IKValidator.h
+	MessageBox.h
 	PinDialog.h
 	QPKCS11.h
 	QPKCS11_p.h
@@ -50,6 +51,7 @@ set( SOURCES
 	ComboBox.cpp
 	Common.cpp
 	IKValidator.cpp
+	MessageBox.cpp
 	PinDialog.cpp
 	QPKCS11.cpp
 	SslCertificate.cpp
