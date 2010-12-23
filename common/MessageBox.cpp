@@ -1,7 +1,7 @@
 /*
  * QEstEidCommon
  *
- * Copyright (C) 2010 Jargo Kõster <jargo@innovaatik.ee>
+ * Copyright (C) 2010 Jargo KÃµster <jargo@innovaatik.ee>
  * Copyright (C) 2010 Raul Metsma <raul@innovaatik.ee>
  *
  * This library is free software; you can redistribute it and/or
@@ -31,7 +31,7 @@
 DMessageBox::DMessageBox( QWidget *parent )
 : QMessageBox( parent )
 {
-	if( b = findChild<QDialogButtonBox*>() )
+	if( (b = findChild<QDialogButtonBox*>()) )
 		connect( b, SIGNAL(clicked(QAbstractButton*)), SLOT(fixDetailsLabel()) );
 }
 
@@ -39,7 +39,7 @@ DMessageBox::DMessageBox( Icon icon, const QString &title, const QString &text,
 	StandardButtons buttons, QWidget *parent, Qt::WindowFlags flags )
 : QMessageBox( icon, title, text, buttons, parent, flags )
 {
-	if( b = findChild<QDialogButtonBox*>() )
+	if( (b = findChild<QDialogButtonBox*>()) )
 		connect( b, SIGNAL(clicked(QAbstractButton*)), SLOT(fixDetailsLabel()) );
 }
 

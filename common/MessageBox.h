@@ -1,7 +1,7 @@
 /*
  * QEstEidCommon
  *
- * Copyright (C) 2010 Jargo Kõster <jargo@innovaatik.ee>
+ * Copyright (C) 2010 Jargo KÃµster <jargo@innovaatik.ee>
  * Copyright (C) 2010 Raul Metsma <raul@innovaatik.ee>
  *
  * This library is free software; you can redistribute it and/or
