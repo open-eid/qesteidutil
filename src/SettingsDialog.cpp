@@ -21,7 +21,6 @@
  */
 
 #include "SettingsDialog.h"
-#include "common/Settings.h"
 
 #include <QDesktopServices>
 #include <QProcess>
@@ -33,19 +32,12 @@ SettingsDialog::SettingsDialog( QWidget *parent )
 	setupUi( this );
 	setAttribute( Qt::WA_DeleteOnClose, true );
 
-	Settings s;
-	s.beginGroup( "Util" );
-
 #ifdef Q_OS_WIN32
 	updateInterval->addItem( tr("Once a day"), "-daily" );
 	updateInterval->addItem( tr("Once a week"), "-weekly" );
 	updateInterval->addItem( tr("Once a month"), "-monthly" );
-	updateInterval->addItem( tr("Never"), "-remove" );
-	int interval = updateInterval->findText( s.value( "updateInterval" ).toString() );
-	if ( interval == -1 )
-		interval = 0;
-	updateInterval->setCurrentIndex( interval );
-	autoUpdate->setChecked( s.value( "autoUpdate", true ).toBool() );
+	updateInterval->addItem( tr("Disabled"), "-never" );
+	updateInterval->addItem( tr("Remove"), "-remove" );
 #else
 	updateInterval->hide();
 	updateIntervalLabel->hide();
@@ -53,37 +45,28 @@ SettingsDialog::SettingsDialog( QWidget *parent )
 	autoUpdateLabel->hide();
 #endif
 
-#ifndef Q_OS_MAC
-	checkUpdates->hide();
-#else
+#ifdef Q_OS_MAC
 	buttonBox->setStandardButtons( QDialogButtonBox::Close );
 #endif
 }
 
 void SettingsDialog::accept()
 {
-	Settings s;
-	s.beginGroup( "Util" );
-	
-	s.setValue( "updateInterval", updateInterval->currentText() );
-	s.setValue( "autoUpdate", autoUpdate->isChecked() );
-
 #ifndef Q_OS_LINUX
-	QStringList list;
-	if ( !autoUpdate->isChecked() )
-		list << "-remove";
-	else
-		list << updateInterval->itemData( updateInterval->currentIndex() ).toString();
-	QProcess::startDetached( "id-updater.exe", list );
+	QProcess::startDetached( "id-updater.exe", QStringList() <<
+		updateInterval->itemData( updateInterval->currentIndex() ).toString() );
 #endif
-
 	done( 1 );
 }
 
 void SettingsDialog::on_checkUpdates_clicked()
 {
+#ifdef Q_OS_WIN32
+	QProcess::startDetached( "id-updater.exe" );
+#else
 	QDesktopServices::openUrl( QUrl(
-			QString("https://installer.id.ee/update/mac/?ver=%1")
-				  .arg( QCoreApplication::applicationVersion() ) ) );
+		QString("https://installer.id.ee/update/mac/?ver=%1")
+			  .arg( QCoreApplication::applicationVersion() ) ) );
+#endif
 	done( 1 );
 }
