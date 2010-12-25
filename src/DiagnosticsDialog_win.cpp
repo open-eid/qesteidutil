@@ -92,6 +92,11 @@ QString DiagnosticsDialog::getBrowsers() const
 				browsers << QString( "%1 (%2)" ).arg( name, version );
 		}
 	}
+	if ( !browsers.join(",").contains( QRegExp( "Internet Explorer", Qt::CaseInsensitive ) ) )
+	{
+		QSettings s( "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Internet Explorer", QSettings::NativeFormat );
+		browsers << QString( "Internet Explorer (%2)" ).arg( s.value( "Version" ).toString() );
+	}
 	return browsers.join( "<br />" );
 }
 
