@@ -49,13 +49,15 @@ set(qesteidutil_MOC_HDRS
     common/sslConnect_p.h
     src/CertUpdate.h
     src/DiagnosticsDialog.h
-    src/SettingsDialog.h
     src/jscardmanager.h
     src/jscertdata.h
     src/jsesteidcard.h
     src/jsextender.h
     src/mainwindow.h
 )
+if( APPLE OR WIN32 )
+	set( qesteidutil_MOC_HDRS ${qesteidutil_MOC_HDRS} src/SettingsDialog.h )
+endif( APPLE OR WIN32 )
 
 set(qesteidutil_HDRS
     ${qesteidutil_MOC_HDRS}
@@ -76,19 +78,21 @@ set(qesteidutil_SRCS
     common/sslConnect.cpp
     src/CertUpdate.cpp
 	src/DiagnosticsDialog.cpp
-    src/SettingsDialog.cpp
-    src/jscardmanager.cpp
+	src/jscardmanager.cpp
     src/jscertdata.cpp
     src/jsesteidcard.cpp
     src/jsextender.cpp
     src/main.cpp
     src/mainwindow.cpp
 )
-IF(WIN32)
-    set(qesteidutil_SRCS ${qesteidutil_SRCS} src/DiagnosticsDialog_win.cpp)
-ELSE(WIN32)
-    set(qesteidutil_SRCS ${qesteidutil_SRCS} src/DiagnosticsDialog_unix.cpp)
-ENDIF(WIN32)
+if( APPLE OR WIN32 )
+	set( qesteidutil_SRCS ${qesteidutil_SRCS} src/SettingsDialog.cpp )
+endif( APPLE OR WIN32 )
+if( WIN32 )
+	set( qesteidutil_SRCS ${qesteidutil_SRCS} src/DiagnosticsDialog_win.cpp )
+else( WIN32 )
+	set( qesteidutil_SRCS ${qesteidutil_SRCS} src/DiagnosticsDialog_unix.cpp )
+endif( WIN32 )
 
 QT4_WRAP_UI( UI_HEADERS
 	common/ui/AboutWidget.ui

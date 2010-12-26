@@ -31,7 +31,9 @@
 #include "CertUpdate.h"
 #include "jsextender.h"
 #include "mainwindow.h"
+#if defined(Q_OS_WIN32) || defined(Q_OS_MACX)
 #include "SettingsDialog.h"
+#endif
 
 #include <common/AboutWidget.h>
 #include <common/Settings.h>
@@ -429,7 +431,11 @@ void JsExtender::showAbout()
 { (new AboutWidget( m_mainWindow ))->show(); }
 
 void JsExtender::showSettings()
-{ (new SettingsDialog( m_mainWindow ) )->show(); }
+{
+#if defined(Q_OS_WIN32) || defined(Q_OS_MACX)
+	(new SettingsDialog( m_mainWindow ) )->show();
+#endif
+}
 
 void JsExtender::showLoading( const QString &str )
 {

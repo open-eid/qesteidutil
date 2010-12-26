@@ -32,30 +32,25 @@ SettingsDialog::SettingsDialog( QWidget *parent )
 	setupUi( this );
 	setAttribute( Qt::WA_DeleteOnClose, true );
 
-#ifdef Q_OS_WIN32
 	updateInterval->addItem( tr("Once a day"), "-daily" );
 	updateInterval->addItem( tr("Once a week"), "-weekly" );
 	updateInterval->addItem( tr("Once a month"), "-monthly" );
 	updateInterval->addItem( tr("Disabled"), "-never" );
 	updateInterval->addItem( tr("Remove"), "-remove" );
-#else
+
+#ifdef Q_OS_MAC
 	updateInterval->hide();
 	updateIntervalLabel->hide();
 	autoUpdate->hide();
 	autoUpdateLabel->hide();
-#endif
-
-#ifdef Q_OS_MAC
 	buttonBox->setStandardButtons( QDialogButtonBox::Close );
 #endif
 }
 
 void SettingsDialog::accept()
 {
-#ifndef Q_OS_LINUX
 	QProcess::startDetached( "id-updater.exe", QStringList() <<
 		updateInterval->itemData( updateInterval->currentIndex() ).toString() );
-#endif
 	done( 1 );
 }
 
