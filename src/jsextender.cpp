@@ -143,14 +143,17 @@ QByteArray JsExtender::getUrl( SSLConnect::RequestType type, const QString &def 
 {
 	QByteArray buffer;
 
+	m_mainWindow->cardManager()->disableRead();
 	try {
 		SSLConnect sslConnect;
 		sslConnect.setCard( m_mainWindow->cardManager()->cardId(
 			m_mainWindow->cardManager()->activeReaderNum() ) );
 		buffer = sslConnect.getUrl( type, def );
 	} catch( const std::runtime_error &e ) {
+		m_mainWindow->cardManager()->allowRead();
 		throw std::runtime_error( e );
 	}
+	m_mainWindow->cardManager()->allowRead();
 	m_mainWindow->eidCard()->reconnect();
 	return buffer;
 }
