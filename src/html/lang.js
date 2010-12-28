@@ -138,9 +138,12 @@ var htmlStrings = {
 	"loadCardData": new tr( "Loen andmeid", "Reading data", "Данные считываются" ),
 	"updateCert": new tr( "Sertifikaatide uuendamine...", "Updating certificates", "Обновление сертификатов" ),
 	"updateCertOk": new tr( "Sertifikaatide uuendamine õnnestus", "Updating certificates successful", "Успешное обновление сертификатов" ),
-	"cleanTokenCacheInfo": new tr( "Eemalda kaart lugejast, et puhastada TokenCache. See tegevus nõuab kasutaja parooli.", "Remove card from reader to clean TokenCache. It requires user password", " Remove card from reader to clean TokenCache. It requires user password" ),
-	"cleanTokenCacheOk": new tr( "TokenCache puhastamine õnnestus", "TokenCache succesfully cleaned", "TokenCache successfully cleaned" ),
-	"cleanTokenCacheFail": new tr( "TokenCache puhastamine ebaõnnestus", "TokenCache cleanup failed", "TokenCache cleanup failed" )
+	"cleanTokenCacheInfo": new tr(
+		"Eemalda kaart lugejast, et puhastada TokenCache. See tegevus nõuab kasutaja parooli.",
+		"Remove card from reader to clean TokenCache. It requires user password",
+		"Извлеките карту из считывателя, чтобы удалить из программного обеспечения ID-карты старые сертификаты. Это действие требует введения пароля пользователяю." ),
+	"cleanTokenCacheOk": new tr( "TokenCache puhastamine õnnestus", "TokenCache succesfully cleaned", "Удаление старых сертификатов прошло успешно." ),
+	"cleanTokenCacheFail": new tr( "TokenCache puhastamine ebaõnnestus", "TokenCache cleanup failed", "Не удается удалить старые сертификаты." )
 };
 
 //codes from eesti.ee
