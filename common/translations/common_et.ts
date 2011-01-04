@@ -279,7 +279,7 @@
     </message>
     <message>
         <source>Loading server access certificate. Please wait.</source>
-        <translation>Laen juurdepääsutõendit… palume kannatust.</translation>
+        <translation>Laadin juurdepääsutõendit… palume kannatust.</translation>
     </message>
     <message>
         <source>Loading Email info</source>
