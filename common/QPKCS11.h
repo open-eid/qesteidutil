@@ -25,8 +25,8 @@
 #include <QObject>
 
 #include "SslCertificate.h"
-#include "TokenData.h"
 
+class TokenData;
 class QPKCS11Private;
 
 class QPKCS11: public QObject

@@ -25,7 +25,6 @@
 #include "PinDialog.h"
 
 #include <QApplication>
-#include <QScopedArrayPointer>
 #include <QStringList>
 
 bool QPKCS11Private::attribute( CK_OBJECT_HANDLE obj, CK_ATTRIBUTE_TYPE type, void *value, unsigned long &size )
@@ -184,7 +183,7 @@ QPKCS11::PinStatus QPKCS11::login( const TokenData &_t )
 		t.setFlag( TokenData::PinCountLow );
 	if( token.flags & CKF_SO_PIN_FINAL_TRY || token.flags & CKF_USER_PIN_FINAL_TRY )
 		t.setFlag( TokenData::PinFinalTry );
-	if( token.flags & CKF_SO_PIN_LOCKED || token.flags & CKF_USER_PIN_FINAL_TRY )
+	if( token.flags & CKF_SO_PIN_LOCKED || token.flags & CKF_USER_PIN_LOCKED )
 		t.setFlag( TokenData::PinLocked );
 
 	if( d->session >= 0 )
@@ -243,7 +242,7 @@ TokenData QPKCS11::selectSlot( const QString &card, SslCertificate::KeyUsage usa
 			t.setFlag( TokenData::PinCountLow );
 		if( token.flags & CKF_SO_PIN_FINAL_TRY || token.flags & CKF_USER_PIN_FINAL_TRY )
 			t.setFlag( TokenData::PinFinalTry );
-		if( token.flags & CKF_SO_PIN_LOCKED || token.flags & CKF_USER_PIN_FINAL_TRY )
+		if( token.flags & CKF_SO_PIN_LOCKED || token.flags & CKF_USER_PIN_LOCKED )
 			t.setFlag( TokenData::PinLocked );
 		break;
 	}
