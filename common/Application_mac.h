@@ -22,7 +22,7 @@
 
 #pragma once
 
-#include <QtGlobal>
+#include <QObject>
 
 #ifdef QT_MAC_USE_COCOA
 #include <QObject>
