@@ -126,11 +126,8 @@ SSLConnectPrivate::SSLConnectPrivate()
 SSLConnectPrivate::~SSLConnectPrivate()
 {
 	if( ssl )
-	{
 		SSL_shutdown( ssl );
-		SSL_free( ssl );
-		SSL_CTX_free( sctx );
-	}
+	SSL_free( ssl );
 	if( nslots )
 		PKCS11_release_all_slots( p11, pslots, nslots );
 	if( p11loaded && unload )
@@ -195,8 +192,7 @@ bool SSLConnectPrivate::connectToHost( SSLConnect::RequestType type )
 		sslError::error( SSLConnect::tr("no key matching certificate available").toUtf8() );
 	EVP_PKEY *pkey = PKCS11_get_private_key( authkey );
 
-	sctx = SSL_CTX_new( SSLv23_client_method() );
-	ssl = SSL_new( sctx );
+	ssl = SSL_new( SSL_CTX_new( SSLv23_client_method() ) );
 	sslError::check( SSL_use_certificate( ssl, (&certs[0])->x509 ) );
 	sslError::check( SSL_use_PrivateKey( ssl, pkey ) );
 	sslError::check( SSL_check_private_key( ssl ) );

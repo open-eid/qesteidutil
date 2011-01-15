@@ -57,7 +57,6 @@ public:
 	bool	unload;
 	PKCS11_CTX *p11;
 	bool	p11loaded;
-	SSL_CTX *sctx;
 	SSL		*ssl;
 
 	QString card;
