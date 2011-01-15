@@ -29,8 +29,6 @@
 #include <stdexcept>
 #include <sstream>
 #include <QApplication>
-#include <QDateTime>
-#include <QLocale>
 #include <QProgressBar>
 #include <QProgressDialog>
 
@@ -139,8 +137,6 @@ SSLConnectPrivate::~SSLConnectPrivate()
 	if( p11loaded && unload )
 		PKCS11_CTX_unload( p11 );
 	PKCS11_CTX_free( p11 );
-
-	ERR_remove_state(0);
 }
 
 bool SSLConnectPrivate::connectToHost( SSLConnect::RequestType type )
@@ -295,15 +291,6 @@ QByteArray SSLConnect::getUrl( RequestType type, const QString &value )
 	case AccessCert:
 	{
 		label = tr("Loading server access certificate. Please wait.");
-		QString lang;
-		switch( QLocale().language() )
-		{
-		case QLocale::English: lang = "en"; break;
-		case QLocale::Russian: lang = "ru"; break;
-		case QLocale::Estonian:
-		default: lang = "et"; break;
-		}
-
 		QString request = QString(
 			"<SOAP-ENV:Envelope"
 			"	xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\""
@@ -321,7 +308,7 @@ QByteArray SSLConnect::getUrl( RequestType type, const QString &value )
 			"</m:GetAccessToken>"
 			"</SOAP-ENV:Body>"
 			"</SOAP-ENV:Envelope>" )
-			.arg( lang.toUpper() );
+			.arg( Settings::language().toUpper() );
 		header = QString(
 			"POST /GetAccessTokenWS/ HTTP/1.1\r\n"
 			"Host: %1\r\n"
