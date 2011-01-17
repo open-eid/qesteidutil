@@ -25,10 +25,13 @@
 #include <smartcardpp/PCSCManager.h>
 #include <smartcardpp/esteid/EstEidCard.h>
 
+#include <common/SslCertificate.h>
+
 #include <QDesktopServices>
 #include <QFile>
 #include <QFileDialog>
 #include <QMessageBox>
+#include <QSslCertificate>
 #include <QTextStream>
 
 QString DiagnosticsDialog::getReaderInfo()
@@ -54,8 +57,16 @@ QString DiagnosticsDialog::getReaderInfo()
 				if ( !QString::fromStdString( m->getReaderState( i ) ).contains( "EMPTY" ) )
 				{
 					EstEidCard card( *m, i );
+					QString id = QString::fromStdString( card.readCardID() );
+					ByteVec certBytes = card.getAuthCert();
+					if( certBytes.size() )
+					{
+						QSslCertificate cert = QSslCertificate( QByteArray((char *)&certBytes[0], certBytes.size()), QSsl::Der );
+						if ( cert.isValid() && SslCertificate( cert ).isDigiID() )
+							id = cert.subjectInfo( "serialNumber" );
+					}
 					readers[reader] = QString( "ID - %1<br />ATR - %2" )
-						.arg( QString::fromStdString( card.readCardID() ) )
+						.arg( id )
 						.arg( QString::fromStdString( m->getATRHex( i ) ).toUpper() );
 				} else
 					readers[reader] = "";
