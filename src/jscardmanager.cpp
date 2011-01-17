@@ -52,7 +52,7 @@ void JsCardManager::pollCard()
 {
 
 	if ( !pollTimer.isActive() )
-		pollTimer.start( 500 );
+		pollTimer.start( 1000 );
 
 	if ( !readAllowed )
         return;
@@ -68,6 +68,7 @@ void JsCardManager::pollCard()
 		// Build current device list with statuses
         QHash<QString,ReaderState> tmp;
 		numReaders = getReaderCount();
+
         for (int i = 0; i < numReaders; i++) {
             ReaderState reader;
 			reader.id = i;
@@ -99,6 +100,11 @@ void JsCardManager::pollCard()
 			}
 			tmp[reader.name] = reader;
         }
+		if ( foundConnected && pollTimer.interval() == 1000 )
+			pollTimer.setInterval( 5000 );
+		else if ( !foundConnected && pollTimer.interval() == 5000 )
+			pollTimer.setInterval( 1000 );
+		qDebug() << pollTimer.interval();
 		// check if connected card or reader has removed
 		if ( cardReaders.size() > tmp.size() )
 		{
