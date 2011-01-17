@@ -104,7 +104,6 @@ void JsCardManager::pollCard()
 			pollTimer.setInterval( 5000 );
 		else if ( !foundConnected && pollTimer.interval() == 5000 )
 			pollTimer.setInterval( 1000 );
-		qDebug() << pollTimer.interval();
 		// check if connected card or reader has removed
 		if ( cardReaders.size() > tmp.size() )
 		{
