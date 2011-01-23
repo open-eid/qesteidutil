@@ -34,9 +34,6 @@ public:
 	explicit AboutWidget( QWidget *parent = 0 );
 	~AboutWidget();
 
-private Q_SLOTS:
-	void on_content_anchorClicked( const QUrl &link );
-
 private:
 	AboutWidgetPrivate *d;
 };

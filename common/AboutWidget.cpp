@@ -62,6 +62,3 @@ AboutWidget::AboutWidget(QWidget *parent)
 }
 
 AboutWidget::~AboutWidget() { delete d; }
-
-void AboutWidget::on_content_anchorClicked( const QUrl &link )
-{ QDesktopServices::openUrl( link ); }
