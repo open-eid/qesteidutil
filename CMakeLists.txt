@@ -127,7 +127,7 @@ include(${QT_USE_FILE})
 add_subdirectory( qtsingleapplication )
 
 set( MAJOR_VER 3 )
-set( MINOR_VER 1 )
+set( MINOR_VER 3 )
 set( RELEASE_VER 0 )
 
 if (Subversion_FOUND AND EXISTS ${PROJECT_SOURCE_DIR}/.svn)
