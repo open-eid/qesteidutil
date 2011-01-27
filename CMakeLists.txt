@@ -13,16 +13,15 @@ find_package(OpenSSL REQUIRED)
 find_package(PKCS11)
 find_package(LibP11 REQUIRED)
 find_package(SmartCardpp REQUIRED)
-find_package(LibDL REQUIRED)
 find_package(LibLtdl REQUIRED)
 find_package(Subversion)
-
-add_definitions(-DPKCS11_MODULE="${PKCS11_MODULE}")
-
-# Hack to get around smartcardpp header inclusion scheme
 if(UNIX)
+	find_package(LibDL REQUIRED)
+	# Hack to get around smartcardpp header inclusion scheme
     find_package(PCSCLite REQUIRED)
 endif(UNIX)
+
+add_definitions(-DPKCS11_MODULE="${PKCS11_MODULE}")
 
 if(MSVC)
     # Needed for smartcardpp
