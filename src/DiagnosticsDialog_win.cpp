@@ -88,11 +88,11 @@ QString DiagnosticsDialog::getBrowsers() const
 			QString version = s.value( key + "/DisplayVersion" ).toString();
 			QString type = s.value( key + "/ReleaseType" ).toString();
 			if( !type.contains( "Update", Qt::CaseInsensitive ) &&
-				name.contains( QRegExp( "Mozilla|Internet Explorer|Google Chrome", Qt::CaseInsensitive ) ) )
+				name.contains( QRegExp( "Mozilla|Windows Internet Explorer|Google Chrome", Qt::CaseInsensitive ) ) )
 				browsers << QString( "%1 (%2)" ).arg( name, version );
 		}
 	}
-	if ( !browsers.join(",").contains( QRegExp( "Internet Explorer", Qt::CaseInsensitive ) ) )
+	if ( !browsers.join(",").contains( QRegExp( "Windows Internet Explorer", Qt::CaseInsensitive ) ) )
 	{
 		QSettings s( "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Internet Explorer", QSettings::NativeFormat );
 		browsers << QString( "Internet Explorer (%2)" ).arg( s.value( "Version" ).toString() );
