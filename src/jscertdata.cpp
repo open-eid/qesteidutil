@@ -48,6 +48,7 @@ void JsCertData::loadCert(EstEidCard *card, CertType ct)
 			m_qcert = QSslCertificate();
 	} catch ( std::runtime_error &err ) {
 //        doShowError(err);
+		m_qcert = QSslCertificate();
 		qDebug() << "Error on loadCert: " << err.what();
     }
 }
