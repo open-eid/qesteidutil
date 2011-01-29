@@ -198,15 +198,6 @@ bool SSLConnectPrivate::connectToHost( SSLConnect::RequestType type )
 	sslError::check( SSL_check_private_key( ssl ) );
 	sslError::check( SSL_set_mode( ssl, SSL_MODE_AUTO_RETRY ) );
 
-#ifdef Q_OS_MAC
-#ifdef SSL_OP_ALLOW_UNSAFE_LEGACY_RENEGOTIATION
-	SSL_set_options( ssl, SSL_OP_ALLOW_UNSAFE_LEGACY_RENEGOTIATION );
-#else
-#define SSL3_FLAGS_ALLOW_UNSAFE_LEGACY_RENEGOTIATION	0x0010
-	ssl->s3->flags |= SSL3_FLAGS_ALLOW_UNSAFE_LEGACY_RENEGOTIATION;
-#endif
-#endif
-
 	const char *url = 0;
 	switch( type )
 	{
