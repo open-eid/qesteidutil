@@ -42,7 +42,7 @@
     <message>
         <location line="+1"/>
         <source>Show All</source>
-        <translation>Näita kõik</translation>
+        <translation>Kuva kõik</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -52,12 +52,12 @@
     <message>
         <location line="+1"/>
         <source>Quit %1</source>
-        <translation>Sulge %1</translation>
+        <translation>Välju rakendusest %1</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>About %1</source>
-        <translation>Info %1</translation>
+        <translation>Teave %1 kohta</translation>
     </message>
 </context>
 <context>
