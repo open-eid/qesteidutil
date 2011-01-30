@@ -39,7 +39,7 @@ var htmlStrings = {
 	"labelThisIs": new tr( "See on %s dokument", "This is %s document", "Этот документ %s" ),
 	"labelIsValid": new tr( "kehtiv", "valid", "действующий" ),
 	"labelIsInValid": new tr( "kehtetu", "expired", "недействителен" ),
-	"labelThisIsDigiID": new tr( "See on digitaalne isikutunnitus", "You’re using Digital identity card", "В считывающем устройстве дигитальное удостоверение личности" ),
+	"labelThisIsDigiID": new tr( "See on digitaalne isikutunnistus", "You’re using Digital identity card", "В считывающем устройстве дигитальное удостоверение личности" ),
 	"labelCardValidTill": new tr( "Kaart on kehtiv kuni ", "Card is valid till ", "Карта действительна до " ),
 	"labelCardGetNew": new tr( "Juhised uue dokumendi taotlemiseks leiad <a href='#' onClick='extender.openUrl(\"http://www.politsei.ee/et/teenused/isikut-toendavad-dokumendid/id-kaart/taiskasvanule/\");'>siit</a>", "Instructions how to get a new document you can find <a href='#' onClick='extender.openUrl(\"http://www.politsei.ee/en/teenused/isikut-toendavad-dokumendid/id-kaart-kodanikule/taiskasvanule/\");'>here</a>", "Инструкции по ходатайству новом документе находятся <a href='#' onClick='extender.openUrl(\"http://www.politsei.ee/ru/teenused/isikut-toendavad-dokumendid/id-kaart/taiskasvanule/\");'>здесь</a>" ),
 	
