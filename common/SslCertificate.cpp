@@ -392,6 +392,8 @@ void PKCS12CertificatePrivate::init( const QByteArray &data, const QByteArray &p
 	PKCS12_free( p12 );
 	if( !ret )
 		return setLastError();
+	// Hack: clear PKCS12_parse error ERROR: 185073780 - error:0B080074:x509 certificate routines:X509_check_private_key:key values mismatch
+	ERR_get_error();
 
 	cert = SslCertificate::fromX509( Qt::HANDLE(c) );
 	key = SslCertificate::keyFromEVP( Qt::HANDLE(k) );
