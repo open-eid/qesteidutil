@@ -341,24 +341,6 @@ SslCertificate::CertType SslCertificate::type() const
 	return UnknownType;
 }
 
-#if QT_VERSION < 0x040600
-// Workaround qt bugs < 4.6
-QByteArray SslCertificate::serialNumber() const
-{
-	if( !handle() )
-		return QByteArray();
-	return QByteArray::number( qlonglong(ASN1_INTEGER_get( ((X509*)handle())->cert_info->serialNumber )) );
-}
-
-QByteArray SslCertificate::version() const
-{
-	if( !handle() )
-		return QByteArray();
-	return QByteArray::number( qlonglong(ASN1_INTEGER_get( ((X509*)handle())->cert_info->version )) + 1 );
-}
-
-#endif
-
 
 
 class PKCS12CertificatePrivate

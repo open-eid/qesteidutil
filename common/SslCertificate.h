@@ -87,11 +87,6 @@ public:
 	QString		toString( const QString &format ) const;
 	CertType	type() const;
 
-#if QT_VERSION < 0x040600
-	QByteArray	serialNumber() const;
-	QByteArray	version() const;
-#endif
-
 private:
 	void*	getExtension( int nid ) const;
 	QByteArray subjectInfoToString( SubjectInfo info ) const;
