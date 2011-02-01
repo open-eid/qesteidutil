@@ -22,7 +22,6 @@
 
 #include "SslCertificate.h"
 
-#include <QCoreApplication>
 #include <QDateTime>
 #include <QLocale>
 #include <QMap>
@@ -72,7 +71,7 @@ QHash<SslCertificate::EnhancedKeyUsage,QString> SslCertificate::enhancedKeyUsage
 	EXTENDED_KEY_USAGE *usage = (EXTENDED_KEY_USAGE*)getExtension( NID_ext_key_usage );
 	if( !usage )
 	{
-		list[All] = QCoreApplication::translate("SslCertificate", "All application policies");
+		list[All] = tr("All application policies");
 		return list;
 	}
 
@@ -82,11 +81,11 @@ QHash<SslCertificate::EnhancedKeyUsage,QString> SslCertificate::enhancedKeyUsage
 		switch( OBJ_obj2nid( obj ) )
 		{
 		case NID_client_auth:
-			list[ClientAuth] = QCoreApplication::translate("SslCertificate", "Proves your identity to a remote computer"); break;
+			list[ClientAuth] = tr("Proves your identity to a remote computer"); break;
 		case NID_email_protect:
-			list[EmailProtect] = QCoreApplication::translate("SslCertificate", "Protects e-mail messages"); break;
+			list[EmailProtect] = tr("Protects e-mail messages"); break;
 		case NID_OCSP_sign:
-			list[OCSPSign] = QCoreApplication::translate("SslCertificate", "OCSP signing"); break;
+			list[OCSPSign] = tr("OCSP signing"); break;
 		default: break;
 		}
 	}
@@ -204,15 +203,15 @@ QHash<SslCertificate::KeyUsage,QString> SslCertificate::keyUsage() const
 			QString usage;
 			switch( n )
 			{
-			case DigitalSignature: usage = QCoreApplication::translate("SslCertificate", "Digital signature"); break;
-			case NonRepudiation: usage = QCoreApplication::translate("SslCertificate", "Non repudiation"); break;
-			case KeyEncipherment: usage = QCoreApplication::translate("SslCertificate", "Key encipherment"); break;
-			case DataEncipherment: usage = QCoreApplication::translate("SslCertificate", "Data encipherment"); break;
-			case KeyAgreement: usage = QCoreApplication::translate("SslCertificate", "Key agreement"); break;
-			case KeyCertificateSign: usage = QCoreApplication::translate("SslCertificate", "Key certificate sign"); break;
-			case CRLSign: usage = QCoreApplication::translate("SslCertificate", "CRL sign"); break;
-			case EncipherOnly: usage = QCoreApplication::translate("SslCertificate", "Encipher only"); break;
-			case DecipherOnly: usage = QCoreApplication::translate("SslCertificate", "Decipher only"); break;
+			case DigitalSignature: usage = tr("Digital signature"); break;
+			case NonRepudiation: usage = tr("Non repudiation"); break;
+			case KeyEncipherment: usage = tr("Key encipherment"); break;
+			case DataEncipherment: usage = tr("Data encipherment"); break;
+			case KeyAgreement: usage = tr("Key agreement"); break;
+			case KeyCertificateSign: usage = tr("Key certificate sign"); break;
+			case CRLSign: usage = tr("CRL sign"); break;
+			case EncipherOnly: usage = tr("Encipher only"); break;
+			case DecipherOnly: usage = tr("Decipher only"); break;
 			default: break;
 			}
 			if( !usage.isEmpty() )

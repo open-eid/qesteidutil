@@ -24,10 +24,13 @@
 
 #include <QSslCertificate>
 
+#include <QCoreApplication>
 #include <QHash>
 
 class SslCertificate: public QSslCertificate
 {
+	Q_DECLARE_TR_FUNCTIONS( SslCertificate )
+
 public:
 	enum EnhancedKeyUsage
 	{
