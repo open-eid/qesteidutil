@@ -24,6 +24,7 @@
 
 #include "PinDialog.h"
 #include "Settings.h"
+#include "SOAPDocument.h"
 #include "SslCertificate.h"
 
 #include <stdexcept>
@@ -278,24 +279,12 @@ QByteArray SSLConnect::getUrl( RequestType type, const QString &value )
 	case AccessCert:
 	{
 		label = tr("Loading server access certificate. Please wait.");
-		QString request = QString(
-			"<SOAP-ENV:Envelope"
-			"	xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\""
-			"	xmlns:SOAP-ENC=\"http://schemas.xmlsoap.org/soap/encoding/\""
-			"	xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\""
-			"	xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">"
-			"<SOAP-ENV:Body>"
-			"<m:GetAccessToken"
-			"	xmlns:m=\"urn:GetAccessToken\""
-			"	SOAP-ENV:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\">"
-			"<Language xsi:type=\"xsd:string\">%1</Language>"
-			"<RequestTime xsi:type=\"xsd:string\" />"
-			"<SoftwareName xsi:type=\"xsd:string\">DigiDoc3</SoftwareName>"
-			"<SoftwareVersion xsi:type=\"xsd:string\" />"
-			"</m:GetAccessToken>"
-			"</SOAP-ENV:Body>"
-			"</SOAP-ENV:Envelope>" )
-			.arg( Settings::language().toUpper() );
+		SOAPDocument s( "GetAccessToken", "urn:GetAccessToken" );
+		s.writeParameter( "Language", Settings::language().toUpper() );
+		s.writeParameter( "RequestTime", "" );
+		s.writeParameter( "SoftwareName", "DigiDoc3" );
+		s.writeParameter( "SoftwareVersion", qApp->applicationVersion() );
+		s.finalize();
 		header = QString(
 			"POST /GetAccessTokenWS/ HTTP/1.1\r\n"
 			"Host: %1\r\n"
@@ -304,7 +293,7 @@ QByteArray SSLConnect::getUrl( RequestType type, const QString &value )
 			"SOAPAction: \"\"\r\n"
 			"Connection: close\r\n\r\n"
 			"%3" )
-			.arg( SK ).arg( request.size() ).arg( request );
+			.arg( SK ).arg( s.document().size() ).arg( QString::fromUtf8( s.document() ) );
 		break;
 	}
 	case EmailInfo:

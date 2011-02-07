@@ -25,7 +25,7 @@
 #include <QBuffer>
 #include <QVariant>
 
-SOAPDocument::SOAPDocument( const QString &action )
+SOAPDocument::SOAPDocument( const QString &action, const QString &namespaceUri )
 :	QXmlStreamWriter()
 ,	data( new QBuffer() )
 {
@@ -42,8 +42,8 @@ SOAPDocument::SOAPDocument( const QString &action )
 
 	writeStartElement( SOAP_ENV, "Body" );
 
-	writeNamespace( DIGIDOCSERVICE, "m" );
-	writeStartElement( DIGIDOCSERVICE, action );
+	writeNamespace( namespaceUri, "m" );
+	writeStartElement( namespaceUri, action );
 	writeAttribute( SOAP_ENV, "encodingStyle", SOAP_ENC );
 }
 
@@ -70,7 +70,7 @@ void SOAPDocument::writeParameter( const QString &name, const QVariant &value )
 	case QMetaType::Int: type = "int"; break;
 	case QMetaType::QByteArray:
 	case QMetaType::QString:
-	default: type = "String"; break;
+	default: type = "string"; break;
 	}
 
 	writeStartElement( name );

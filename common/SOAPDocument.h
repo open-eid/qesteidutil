@@ -35,7 +35,7 @@ class QBuffer;
 class SOAPDocument: public QXmlStreamWriter
 {
 public:
-	SOAPDocument( const QString &action );
+	SOAPDocument( const QString &action, const QString &namespaceUri );
 	~SOAPDocument();
 
 	QByteArray document() const;
