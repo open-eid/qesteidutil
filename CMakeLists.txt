@@ -41,48 +41,50 @@ add_definitions( -DBUILD_DATE=\"${BUILD_DATE}\" )
 
 set(qesteidutil_MOC_HDRS
 	common/AboutWidget.h
-    common/CertificateWidget.h
-    common/PinDialog.h
-    common/Settings.h
-    common/sslConnect.h
-    common/sslConnect_p.h
-    src/CertUpdate.h
-    src/DiagnosticsDialog.h
-    src/jscardmanager.h
-    src/jscertdata.h
-    src/jsesteidcard.h
-    src/jsextender.h
-    src/mainwindow.h
+	common/CertificateWidget.h
+	common/PinDialog.h
+	common/Settings.h
+	common/sslConnect.h
+	common/sslConnect_p.h
+	src/CertUpdate.h
+	src/DiagnosticsDialog.h
+	src/jscardmanager.h
+	src/jscertdata.h
+	src/jsesteidcard.h
+	src/jsextender.h
+	src/mainwindow.h
 )
 if( APPLE OR WIN32 )
 	set( qesteidutil_MOC_HDRS ${qesteidutil_MOC_HDRS} src/SettingsDialog.h )
 endif( APPLE OR WIN32 )
 
 set(qesteidutil_HDRS
-    ${qesteidutil_MOC_HDRS}
-    common/SslCertificate.h
-    common/TokenData.h
-    src/version.h
+	${qesteidutil_MOC_HDRS}
+	common/SOAPDocument.h
+	common/SslCertificate.h
+	common/TokenData.h
+	src/version.h
 )
 
 QT4_WRAP_CPP(qesteidutil_MOC_SRCS ${qesteidutil_MOC_HDRS})
 set(qesteidutil_SRCS
-    ${qesteidutil_HDRS}
-    ${qesteidutil_MOC_SRCS}
+	${qesteidutil_HDRS}
+	${qesteidutil_MOC_SRCS}
 	common/AboutWidget.cpp
-    common/CertificateWidget.cpp
-    common/PinDialog.cpp
-    common/SslCertificate.cpp
-    common/TokenData.cpp
-    common/sslConnect.cpp
-    src/CertUpdate.cpp
+	common/CertificateWidget.cpp
+	common/PinDialog.cpp
+	common/SOAPDocument.cpp
+	common/SslCertificate.cpp
+	common/TokenData.cpp
+	common/sslConnect.cpp
+	src/CertUpdate.cpp
 	src/DiagnosticsDialog.cpp
 	src/jscardmanager.cpp
-    src/jscertdata.cpp
-    src/jsesteidcard.cpp
-    src/jsextender.cpp
-    src/main.cpp
-    src/mainwindow.cpp
+	src/jscertdata.cpp
+	src/jsesteidcard.cpp
+	src/jsextender.cpp
+	src/main.cpp
+	src/mainwindow.cpp
 )
 if( APPLE OR WIN32 )
 	set( qesteidutil_SRCS ${qesteidutil_SRCS} src/SettingsDialog.cpp )
