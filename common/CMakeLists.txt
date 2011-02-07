@@ -31,6 +31,7 @@ set( HEADERS
 	${MOC_HEADERS}
 	${UI_HEADERS}
 	pkcs11.h
+	SOAPDocument.h
 	SslCertificate.h
 	TokenData.h
 	)
@@ -54,6 +55,7 @@ set( SOURCES
 	MessageBox.cpp
 	PinDialog.cpp
 	QPKCS11.cpp
+	SOAPDocument.cpp
 	SslCertificate.cpp
 	sslConnect.cpp
 	TokenData.cpp
