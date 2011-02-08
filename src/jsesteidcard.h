@@ -72,6 +72,8 @@ public slots:
     QString getComment3();
     QString getComment4();
 
+	int cardVersion();
+
 	bool canReadCard();
 	bool isValid();
 

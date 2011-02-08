@@ -64,6 +64,7 @@ void JsEsteidCard::setCard(PCSCManager *cardMgr, int reader)
 	cardOK = false;
 	m_reader = reader;
 	m_card = new EstEidCard( *cardMgr, reader );
+	m_card->isInReader( reader );
 	m_authCert->loadCert(m_card, JsCertData::AuthCert);
 	m_signCert->loadCert(m_card, JsCertData::SignCert);
     reloadData();
@@ -115,6 +116,14 @@ void JsEsteidCard::reloadData() {
 bool JsEsteidCard::canReadCard()
 {
 	return m_card && m_authCert && m_signCert && !m_authCert->cert().isNull() && !m_signCert->cert().isNull() && cardOK;
+}
+
+int JsEsteidCard::cardVersion()
+{
+	if ( !m_card )
+		return -1;
+
+	return (int)m_card->getCardVersion();
 }
 
 bool JsEsteidCard::validatePin1(QString oldVal)

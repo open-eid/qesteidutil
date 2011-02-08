@@ -331,9 +331,9 @@ function readCardData( translate )
 		}
 		document.getElementById('signCertValidTo').className=(esteidData.signCert.isValid() ? 'certValid' : 'certBlocked');
 
-		//update cert button
+		//update cert button, 2011 kaardil ka ei n2idata
 		days = esteidData.authCert.validDays();
-		if ( !esteidData.authCert.isDigiID() && !esteidData.authCert.isTempel() 
+		if ( !esteidData.authCert.isDigiID() && !esteidData.authCert.isTempel() && esteidData.cardVersion() != 3
 				&& ( days <= 105 || esteidData.signCert.validDays() <= 105 ) && pin1Retry > 0 && esteidIsValid )
 		{
 			document.getElementById('authUpdateDiv').style.display='block';
