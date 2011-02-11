@@ -700,7 +700,8 @@ function updateCert()
 	if ( ok )
 	{
 		extender.closeLoading();
-		if( navigator.platform.indexOf('Mac') != -1 )
+		if( navigator.platform.indexOf('Mac') != -1 ||
+			navigator.platform.indexOf('Win') != -1 )
 		{
 			_alert( 'info', _('updateCertOk') + '<br /><br />' + _('cleanTokenCacheInfo') );
 			var status = extender.cleanTokenCache();

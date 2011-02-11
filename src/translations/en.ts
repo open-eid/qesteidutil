@@ -119,21 +119,12 @@
         <translation>CPU:</translation>
     </message>
     <message>
-        <source>Checking certificate store</source>
-        <translation>Checking certificate store</translation>
+        <source>Unknown version</source>
+        <translation>Unknown version</translation>
     </message>
-    <message>
-        <source>Unable to open cert store</source>
-        <translation>Unable to open cert store</translation>
-    </message>
-    <message>
-        <source>Unable to create certificate context</source>
-        <translation>Unable to create certificate context</translation>
-    </message>
-    <message>
-        <source>Certificate found in certificate store</source>
-        <translation>Certificate found in certificate store</translation>
-    </message>
+</context>
+<context>
+    <name>JsCardManager</name>
     <message>
         <source>Certificate store</source>
         <translation>Certificate store</translation>
@@ -141,30 +132,6 @@
     <message>
         <source>Certificate is not registered in certificate store. Register now?</source>
         <translation>Certificate is not registered in certificate store. Register now?</translation>
-    </message>
-    <message>
-        <source>Successfully registered authentication certificate</source>
-        <translation>Successfully registered authentication certificate</translation>
-    </message>
-    <message>
-        <source>Authentication certificate registration failed</source>
-        <translation>Authentication certificate registration failed</translation>
-    </message>
-    <message>
-        <source>Successfully registered signature certificate</source>
-        <translation>Successfully registered signature certificate</translation>
-    </message>
-    <message>
-        <source>Signature certificate registration failed</source>
-        <translation>Signature certificate registration failed</translation>
-    </message>
-    <message>
-        <source>Certificate not found in certificate store</source>
-        <translation>Certificate not found in certificate store</translation>
-    </message>
-    <message>
-        <source>Unknown version</source>
-        <translation>Unknown version</translation>
     </message>
 </context>
 <context>
@@ -258,6 +225,10 @@
     <message>
         <source>Check for updates</source>
         <translation>Check for updates</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation>Remove</translation>
     </message>
 </context>
 </TS>

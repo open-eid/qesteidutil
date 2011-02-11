@@ -20,14 +20,20 @@
  *
  */
 
+#include "jscardmanager.h"
+
+#include "DiagnosticsDialog.h"
+#include "smartcardpp/esteid/EstEidCard.h"
+
+#ifdef Q_OS_WIN
+#include "CertStore.h"
+#endif
+
 #include <iostream>
 #include <QApplication>
 #include <QDebug>
+#include <QMessageBox>
 #include <QTextEdit>
-
-#include "jscardmanager.h"
-#include "DiagnosticsDialog.h"
-#include "smartcardpp/esteid/EstEidCard.h"
 
 using namespace std;
 
@@ -301,13 +307,17 @@ void JsCardManager::newManager()
 bool JsCardManager::checkCerts()
 {
 #if defined(Q_OS_WIN32)
-	if ( !isInReader( activeReaderNum() ) )
+	if( !isInReader( activeReaderNum() ) )
 		return false;
-
-	DiagnosticsDialog::checkCert(
-						m_jsEsteidCard->m_authCert->certBytes,
-						m_jsEsteidCard->m_signCert->certBytes,
-						m_jsEsteidCard->getId() );
+	CertStore store;
+	if( store.find( m_jsEsteidCard->m_authCert->cert() ) )
+		return true;
+	if( QMessageBox::question( 0, tr( "Certificate store" ),
+			tr( "Certificate is not registered in certificate store. Register now?" ),
+			QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes ) == QMessageBox::No )
+		return false;
+	store.add( m_jsEsteidCard->m_authCert->cert(), m_jsEsteidCard->getId() );
+	store.add( m_jsEsteidCard->m_signCert->cert(), m_jsEsteidCard->getId() );
 #endif
 
 	return true;

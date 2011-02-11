@@ -35,7 +35,7 @@ SettingsDialog::SettingsDialog( QWidget *parent )
 	updateInterval->addItem( tr("Once a day"), "-daily" );
 	updateInterval->addItem( tr("Once a week"), "-weekly" );
 	updateInterval->addItem( tr("Once a month"), "-monthly" );
-	updateInterval->addItem( tr("Disabled"), "-never" );
+	updateInterval->addItem( tr("Never"), "-never" );
 	updateInterval->addItem( tr("Remove"), "-remove" );
 
 #ifdef Q_OS_MAC

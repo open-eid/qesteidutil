@@ -119,21 +119,12 @@
         <translation>Protsessor:</translation>
     </message>
     <message>
-        <source>Checking certificate store</source>
-        <translation>Kontrollin sertifikaadi hoidlat</translation>
+        <source>Unknown version</source>
+        <translation>Teadmata versioon</translation>
     </message>
-    <message>
-        <source>Unable to open cert store</source>
-        <translation>Sertifikaadi hoidla avamine ebaõnnestus</translation>
-    </message>
-    <message>
-        <source>Unable to create certificate context</source>
-        <translation>Sertifikaadi konteksti loomine ebaõnnestus</translation>
-    </message>
-    <message>
-        <source>Certificate found in certificate store</source>
-        <translation>Sertifikaat leiti sertifikaadi hoidlast</translation>
-    </message>
+</context>
+<context>
+    <name>JsCardManager</name>
     <message>
         <source>Certificate store</source>
         <translation>Sertifikaadi hoidla</translation>
@@ -141,30 +132,6 @@
     <message>
         <source>Certificate is not registered in certificate store. Register now?</source>
         <translation>Sertifikaat ei ole registreeritud sertifikaadi hoidlas. Registreerin kohe?</translation>
-    </message>
-    <message>
-        <source>Successfully registered authentication certificate</source>
-        <translation>Isikutuvastuse sertifikaadi registreerimine õnnestus</translation>
-    </message>
-    <message>
-        <source>Authentication certificate registration failed</source>
-        <translation>Isikutuvastuse sertifikaadi registreerimine ebaõnnestus</translation>
-    </message>
-    <message>
-        <source>Successfully registered signature certificate</source>
-        <translation>Allkirjastamise sertifikaadi registreerimine õnnestus</translation>
-    </message>
-    <message>
-        <source>Signature certificate registration failed</source>
-        <translation>Allkirjastamise sertifikaadi registreerimine ebaõnnestus</translation>
-    </message>
-    <message>
-        <source>Certificate not found in certificate store</source>
-        <translation>Sertifikaati ei leitud sertifikaadi hoidklast</translation>
-    </message>
-    <message>
-        <source>Unknown version</source>
-        <translation>Teadmata versioon</translation>
     </message>
 </context>
 <context>
@@ -258,6 +225,10 @@
     <message>
         <source>Check for updates</source>
         <translation>Kontrolli uuendusi</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation>Eemalda</translation>
     </message>
 </context>
 </TS>

@@ -1,4 +1,4 @@
-﻿/*
+/*
  * QEstEidUtil
  *
  * Copyright (C) 2009,2010 Jargo Kõster <jargo@innovaatik.ee>
@@ -22,15 +22,13 @@
 
 #include "DiagnosticsDialog.h"
 
-#include <common/SslCertificate.h>
-
 #include <smartcardpp/DynamicLibrary.h>
 
 #include <QLibrary>
-#include <QMessageBox>
 #include <QSettings>
-#include <QSslCertificate>
 #include <QTextStream>
+
+#include <Windows.h>
 
 DiagnosticsDialog::DiagnosticsDialog( QWidget *parent )
 :	QDialog( parent )
@@ -70,8 +68,6 @@ DiagnosticsDialog::DiagnosticsDialog( QWidget *parent )
 	QString browsers = getBrowsers();
 	if ( !browsers.isEmpty() )
 		s << "<b>" << tr("Browsers:") << "</b><br />" << browsers << "<br /><br />";
-
-	s << certInfo;
 
 	diagnosticsText->setHtml( info );
 }
@@ -210,83 +206,4 @@ bool DiagnosticsDialog::isPCSCRunning() const
 	}
 	CloseServiceHandle( h );
 	return result;
-}
-
-QString DiagnosticsDialog::checkCert( ByteVec &certBytes, ByteVec &certBytesSign, const QString &cardId )
-{
-	if ( !certBytes.size() )
-		return QString();
-
-	QString d;
-	QTextStream s( &d );
-	s << "<b>" << tr( "Checking certificate store" ) << "</b><br />";
-
-	HCERTSTORE store = NULL;
-	PCCERT_CONTEXT context = NULL;
-
-	if ( !( store = CertOpenStore( CERT_STORE_PROV_SYSTEM_A, X509_ASN_ENCODING, 0, CERT_SYSTEM_STORE_CURRENT_USER, "MY" ) ) )
-	{
-		s << tr( "Unable to open cert store" ) << "<br />";
-		return d;
-	}
-
-	if( !( context = CertCreateCertificateContext( X509_ASN_ENCODING | PKCS_7_ASN_ENCODING, &certBytes[0], DWORD( certBytes.size() ) ) ) )
-	{
-		s << tr( "Unable to create certificate context" ) << "<br />";
-		CertCloseStore( store, 0 );
-		return d;
-	}
-
-	if ( CertFindCertificateInStore( store, X509_ASN_ENCODING | PKCS_7_ASN_ENCODING, 0, CERT_FIND_SUBJECT_CERT, context->pCertInfo, NULL ) )
-	{
-		s << tr( "Certificate found in certificate store" ) << "<br />";
-		CertFreeCertificateContext( context );
-		CertCloseStore( store, 0 );
-		return d;
-	}
-
-	if ( QMessageBox::question( 0, tr( "Certificate store" ), tr( "Certificate is not registered in certificate store. Register now?" ), 
-			QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes ) == QMessageBox::Yes )
-	{
-		if ( addCert( store, certBytes, QString( "AUT_%1" ).arg( cardId ), AT_KEYEXCHANGE ) )
-			s << tr( "Successfully registered authentication certificate" ) << "<br />";
-		else
-			s << tr( "Authentication certificate registration failed" ) << "<br />";
-		if ( addCert( store, certBytesSign, QString( "SIG_%1" ).arg( cardId ), AT_SIGNATURE ) )
-			s << tr( "Successfully registered signature certificate" ) << "<br />";
-		else
-			s << tr( "Signature certificate registration failed" ) << "<br />";
-	} else
-		s << tr( "Certificate not found in certificate store" ) << "<br />";
-
-	CertFreeCertificateContext( context );
-	CertCloseStore( store, 0 );
-
-	return d;
-}
-
-bool DiagnosticsDialog::addCert( HCERTSTORE store, ByteVec &cert, const QString &card, DWORD keyCode )
-{
-	PCCERT_CONTEXT newContext = NULL;
-	if ( !CertAddEncodedCertificateToStore( store, X509_ASN_ENCODING, 
-			&cert[0],(DWORD)cert.size(), CERT_STORE_ADD_REPLACE_EXISTING, &newContext ) )
-		return false;
-
-	SslCertificate c( QSslCertificate( QByteArray( (char *)&cert[0], cert.size() ), QSsl::Der ) );
-	QString str = "Authentication ";
-	if ( keyCode == AT_SIGNATURE )
-		str = "Signature ";
-	str += c.toString( "SN, GN" ).toUpper();
-
-	int len = ( str.length() + 1 ) * sizeof( QChar );
-	CRYPT_DATA_BLOB DataBlob = { len, new unsigned char[ len ] };
-	memset( DataBlob.pbData, 0, len );
-	memcpy( DataBlob.pbData, str.utf16(), len - sizeof( QChar ) );
-	CertSetCertificateContextProperty( newContext, CERT_FRIENDLY_NAME_PROP_ID, 0, &DataBlob );
-
-	CRYPT_KEY_PROV_INFO KeyProvInfo = { (LPWSTR)card.utf16(), L"EstEID Card CSP", PROV_RSA_FULL, 0, 0, NULL, keyCode };
-	CertSetCertificateContextProperty( newContext, CERT_KEY_PROV_INFO_PROP_ID, 0, &KeyProvInfo );
-
-	CertFreeCertificateContext( newContext );
-	return true;
 }

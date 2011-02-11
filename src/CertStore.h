@@ -1,8 +1,8 @@
 /*
  * QEstEidUtil
  *
- * Copyright (C) 2009,2010 Jargo Kõster <jargo@innovaatik.ee>
- * Copyright (C) 2009,2010 Raul Metsma <raul@innovaatik.ee>
+ * Copyright (C) 2011 Jargo Kõster <jargo@innovaatik.ee>
+ * Copyright (C) 2011 Raul Metsma <raul@innovaatik.ee>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -22,26 +22,20 @@
 
 #pragma once
 
-#include "ui_DiagnosticsDialog.h"
+class CertStorePrivate;
+class QSslCertificate;
+class QString;
 
-class DiagnosticsDialog: public QDialog, private Ui::DiagnosticsDialog
+class CertStore
 {
-	Q_OBJECT
 public:
-	DiagnosticsDialog( QWidget *parent = 0 );
+	CertStore();
+	~CertStore();
 
-private slots:
-	void save();
+	bool add( const QSslCertificate &cert, const QString &card );
+	bool find( const QSslCertificate &cert );
+	bool remove( const QSslCertificate &cert );
 
 private:
-	bool	isPCSCRunning() const;
-	QString getBrowsers() const;
-	QString getPackageVersion( const QStringList &list, bool returnPackageName = true ) const;
-	QString getProcessor() const;
-	QString getReaderInfo();
-#if defined(Q_OS_WIN32)
-	QString getBits() const;
-	QString getLibVersion( const QString &lib ) const;
-	QString getOS() const;
-#endif
+	CertStorePrivate *d;
 };

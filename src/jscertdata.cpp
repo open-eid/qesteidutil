@@ -35,13 +35,12 @@ QSslCertificate JsCertData::cert() const { return m_qcert; }
 void JsCertData::loadCert(EstEidCard *card, CertType ct)
 {
 	m_qcert = QSslCertificate();
-	certBytes.clear();
 	if ( !card )
 		return;
 
 	try {
         // Read certificate
-		certBytes = ct == AuthCert ? card->getAuthCert() : card->getSignCert();
+		ByteVec certBytes = ct == AuthCert ? card->getAuthCert() : card->getSignCert();
 		if( certBytes.size() )
 			m_qcert = QSslCertificate(QByteArray((char *)&certBytes[0], certBytes.size()), QSsl::Der);
 	} catch ( std::runtime_error &err ) {

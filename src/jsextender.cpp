@@ -31,8 +31,11 @@
 #include "CertUpdate.h"
 #include "jsextender.h"
 #include "mainwindow.h"
-#if defined(Q_OS_WIN32) || defined(Q_OS_MACX)
+#if defined(Q_OS_WIN) || defined(Q_OS_MAC)
 #include "SettingsDialog.h"
+#endif
+#ifdef Q_OS_WIN
+#include "CertStore.h"
 #endif
 
 #include <common/AboutWidget.h>
@@ -76,7 +79,7 @@ JsExtender::~JsExtender()
 
 bool JsExtender::cleanTokenCache() const
 {
-#ifdef Q_OS_MAC
+#if defined(Q_OS_MAC)
 	AuthorizationRef ref;
 	AuthorizationCreate( 0, kAuthorizationEmptyEnvironment, kAuthorizationFlagDefaults, &ref );
 	char *args[] = { (char*)"-c", (char*)"/bin/rm -rf /var/db/TokenCache/tokens/com.apple.tokend.opensc*", 0 };
@@ -89,6 +92,12 @@ bool JsExtender::cleanTokenCache() const
 
 	AuthorizationFree( ref, kAuthorizationFlagDestroyRights );
 	return status == errAuthorizationSuccess;
+#elif defined(Q_OS_WIN)
+	CertStore s;
+	s.remove( m_mainWindow->eidCard()->m_authCert->cert() );
+	s.remove( m_mainWindow->eidCard()->m_signCert->cert() );
+	return s.add( m_mainWindow->eidCard()->m_authCert->cert(), m_mainWindow->eidCard()->getId() ) ||
+		s.add( m_mainWindow->eidCard()->m_signCert->cert(), m_mainWindow->eidCard()->getId() );
 #else
 	return true;
 #endif
