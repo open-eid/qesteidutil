@@ -1,8 +1,8 @@
 /*
  * QEstEidCommon
  *
- * Copyright (C) 2009,2010 Jargo Kõster <jargo@innovaatik.ee>
- * Copyright (C) 2009,2010 Raul Metsma <raul@innovaatik.ee>
+ * Copyright (C) 2009-2011 Jargo Kõster <jargo@innovaatik.ee>
+ * Copyright (C) 2009-2011 Raul Metsma <raul@innovaatik.ee>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -34,7 +34,7 @@
 #include <QTextStream>
 #include <QUrl>
 
-#ifdef Q_OS_WIN32
+#ifdef Q_OS_WIN
 #include <QDir>
 #include <QLibrary>
 
@@ -60,8 +60,11 @@ Common::Common( QObject *parent )
 
 bool Common::canWrite( const QString &filename )
 {
-#ifdef Q_OS_WIN32
-	QFile f( QFileInfo( filename ).absolutePath().append( "/.XXXXXX" ) );
+#ifdef Q_OS_WIN
+	QFileInfo i( filename );
+	if( i.isFile() )
+		return QFile( filename ).open( QFile::WriteOnly );
+	QFile f( i.absolutePath().append( "/.XXXXXX" ) );
 	bool result = f.open( QFile::WriteOnly );
 	f.remove();
 	return result;
@@ -75,7 +78,7 @@ void Common::browse( const QUrl &url )
 {
 	QUrl u = url;
 	u.setScheme( "file" );
-#if defined(Q_OS_WIN32)
+#if defined(Q_OS_WIN)
 	if( QProcess::startDetached( "explorer", QStringList() << "/select," <<
 		QDir::toNativeSeparators( u.toLocalFile() ) ) )
 		return;
@@ -126,7 +129,7 @@ QString Common::fileSize( quint64 bytes )
 
 void Common::mailTo( const QUrl &url )
 {
-#if defined(Q_OS_WIN32)
+#if defined(Q_OS_WIN)
 	QString file = url.queryItemValue( "attachment" );
 	QByteArray filePath = QDir::toNativeSeparators( file ).toLatin1();
 	QByteArray fileName = QFileInfo( file ).fileName().toLatin1();
