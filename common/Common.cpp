@@ -340,8 +340,8 @@ QString Common::tempFilename()
 	QString path = QDir::tempPath();
 	QString prefix = QFileInfo( qApp->applicationFilePath() ).baseName();
 #ifdef Q_OS_WIN
-	wchar_t *name = _wtempnam( QDir::toNativeSeparators( path ).utf16(), prefix.utf16() );
-	QString result = QString::fromUtf16( name );
+	wchar_t *name = _wtempnam( (wchar_t*)QDir::toNativeSeparators( path ).utf16(), (wchar_t*)prefix.utf16() );
+	QString result = QString::fromUtf16( (ushort*)name );
 #else
 	char *name = tempnam( path.toLocal8Bit(), prefix.toLocal8Bit() );
 	QString result = QString::fromLocal8Bit( name );
