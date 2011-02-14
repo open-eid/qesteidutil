@@ -35,6 +35,8 @@
 #include <QTextStream>
 #include <QUrl>
 
+#include <stdlib.h>
+
 #ifdef Q_OS_WIN
 #include <QLibrary>
 
