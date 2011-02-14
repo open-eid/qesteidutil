@@ -29,13 +29,13 @@
 #include <QApplication>
 #include <QDateTime>
 #include <QDesktopServices>
+#include <QDir>
 #include <QFileInfo>
 #include <QProcess>
 #include <QTextStream>
 #include <QUrl>
 
 #ifdef Q_OS_WIN
-#include <QDir>
 #include <QLibrary>
 
 #include <windows.h>
@@ -160,8 +160,7 @@ void Common::mailTo( const QUrl &url )
 
 	QLibrary lib("mapi32");
 	typedef ULONG (PASCAL *SendMail)(ULONG,ULONG,MapiMessage*,FLAGS,ULONG);
-	SendMail mapi = (SendMail)lib.resolve("MAPISendMail");
-	if( mapi )
+	if( SendMail mapi = (SendMail)lib.resolve("MAPISendMail") )
 	{
 		mapi( NULL, 0, &message, MAPI_LOGON_UI|MAPI_DIALOG, 0 );
 		return;
@@ -332,6 +331,21 @@ bool Common::startDetached( const QString &program, const QStringList &arguments
 #else
 	return QProcess::startDetached( program, arguments );
 #endif
+}
+
+QString Common::tempFilename()
+{
+	QString path = QDir::tempPath();
+	QString prefix = QFileInfo( qApp->applicationFilePath() ).baseName();
+#ifdef Q_OS_WIN
+	wchar_t *name = _wtempnam( QDir::toNativeSeparators( path ).utf16(), prefix.utf16() );
+	QString result = QString::fromUtf16( name );
+#else
+	char *name = tempnam( path.toLocal8Bit(), prefix.toLocal8Bit() );
+	QString result = QString::fromLocal8Bit( name );
+#endif
+	free( name );
+	return result;
 }
 
 QString Common::tokenInfo( CertType type, const TokenData &data )

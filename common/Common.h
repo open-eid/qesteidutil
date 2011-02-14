@@ -24,8 +24,6 @@
 
 #include <QObject>
 
-#include <QFileDialog>
-
 class QSslCertificate;
 class QStringList;
 class QUrl;
@@ -50,6 +48,7 @@ public:
 	static void showHelp( const QString &msg, int code = -1 );
 	static bool startDetached( const QString &program );
 	static bool startDetached( const QString &program, const QStringList &arguments );
+	static QString tempFilename();
 	static QString tokenInfo( CertType type, const TokenData &data );
 
 public Q_SLOTS:
