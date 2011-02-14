@@ -1,8 +1,8 @@
 /*
  * QEstEidUtil
  *
- * Copyright (C) 2009,2010 Jargo Kõster <jargo@innovaatik.ee>
- * Copyright (C) 2009,2010 Raul Metsma <raul@innovaatik.ee>
+ * Copyright (C) 2009-2011 Jargo Kõster <jargo@innovaatik.ee>
+ * Copyright (C) 2009-2011 Raul Metsma <raul@innovaatik.ee>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -31,6 +31,8 @@
 #include <smartcardpp/common.h>
 #include <smartcardpp/PCSCManager.h>
 
+#include <fstream>
+
 class JsCardManager : public QObject
 {
     Q_OBJECT
@@ -45,16 +47,6 @@ class JsCardManager : public QObject
 
 public:
     JsCardManager(JsEsteidCard *jsEsteidCard);
-
-private:
-	PCSCManager *cardMgr;
-	JsEsteidCard *m_jsEsteidCard;
-    QTimer pollTimer;
-
-    QHash<QString,ReaderState> cardReaders;
-
-    void handleError(QString msg);
-    bool readAllowed;
 
 public slots:
     int getReaderCount();
@@ -80,4 +72,15 @@ private slots:
 signals:
     void cardEvent(QString func, int i);
     void cardError(QString func, QString err);
+
+private:
+	PCSCManager *cardMgr;
+	JsEsteidCard *m_jsEsteidCard;
+	QTimer pollTimer;
+	std::ofstream log;
+
+	QHash<QString,ReaderState> cardReaders;
+
+	void handleError(QString msg);
+	bool readAllowed;
 };

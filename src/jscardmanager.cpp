@@ -1,8 +1,8 @@
 /*
  * QEstEidUtil
  *
- * Copyright (C) 2009,2010 Jargo Kõster <jargo@innovaatik.ee>
- * Copyright (C) 2009,2010 Raul Metsma <raul@innovaatik.ee>
+ * Copyright (C) 2009-2011 Jargo Kõster <jargo@innovaatik.ee>
+ * Copyright (C) 2009-2011 Raul Metsma <raul@innovaatik.ee>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -23,17 +23,19 @@
 #include "jscardmanager.h"
 
 #include "DiagnosticsDialog.h"
-#include "smartcardpp/esteid/EstEidCard.h"
 
 #ifdef Q_OS_WIN
 #include "CertStore.h"
 #endif
 
-#include <iostream>
+#include <smartcardpp/esteid/EstEidCard.h>
+
 #include <QApplication>
 #include <QDebug>
+#include <QDir>
 #include <QMessageBox>
 #include <QTextEdit>
+#include <QProcess>
 
 using namespace std;
 
@@ -47,8 +49,21 @@ JsCardManager::JsCardManager(JsEsteidCard *jsEsteidCard)
 		cardMgr = new PCSCManager();
 	} catch (std::runtime_error &) {}
 
-	connect(&pollTimer, SIGNAL(timeout()),
-            this, SLOT(pollCard()));
+	connect(&pollTimer, SIGNAL(timeout()), SLOT(pollCard()));
+
+	QStringList env = QProcess::systemEnvironment();
+	int pos = -1;
+	if( (pos = env.indexOf( QRegExp( "QESTEIDUTIL_DEBUG.*" ) )) != -1 )
+	{
+		QString path = QString( "%1/qesteidutil.log" ).arg( QDir::tempPath() );
+#ifdef Q_OS_WIN
+		log.open( (wchar_t*)path.utf16() );
+#else
+		log.open( path.toLocal8Bit() );
+#endif
+	}
+	if( log.is_open() )
+		cardMgr->setLogging( &log );
 
 	//wait javascript/html to initialize
 	QTimer::singleShot( 2000, this, SLOT(pollCard()) );
@@ -67,6 +82,9 @@ void JsCardManager::pollCard()
     try {
 		if (!cardMgr)
 			cardMgr = new PCSCManager();
+
+		if( log.is_open() )
+			cardMgr->setLogging( &log );
 
 		QString insert,remove;
 		bool foundConnected = false;
