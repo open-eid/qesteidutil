@@ -196,6 +196,14 @@ bool JsCardManager::isInReader( int readerNum )
 	return false;
 }
 
+QString JsCardManager::activeCardId()
+{
+	int readerNum = activeReaderNum();
+	foreach( const ReaderState &r, cardReaders )
+		if ( r.id == readerNum && !r.state.contains( "EMPTY") )
+			return r.cardId;
+	return "";
+}
 QString JsCardManager::cardId( int readerNum )
 {
 	foreach( const ReaderState &r, cardReaders )

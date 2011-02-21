@@ -60,6 +60,8 @@ private:
 	QLabel *m_loading;
 	QByteArray getUrl( SSLConnect::RequestType, const QString &def );
 	QHttp m_http;
+	SSLConnect::ErrorType sslError;
+	QString sslErrorString;
 
 public slots:
 	void setLanguage( const QString &lang );

@@ -46,8 +46,10 @@ public:
 	enum ErrorType {
 		PinCanceledError = 1,
 		PinInvalidError = 2,
-		PinLocked = 3,
-		UnknownError = -1,
+		PinLockedError = 3,
+		NoError = -1,
+		PKCS11Error = 4,
+		SSLError = 5,
 	};
 
 	SSLConnect( QObject *parent = 0 );
@@ -59,7 +61,8 @@ public:
 	QByteArray getUrl( RequestType type, const QString &value = "" );
 	QString pin() const;
 	QByteArray result() const;
-	void setCard( const QString &card );
+	static QString getError();
+	bool setCard( const QString &card );
 	void setPin( const QString &pin );
 	void setPKCS11( const QString &pkcs11, bool unload = true );
 	void waitForFinished( RequestType type, const QString &value = "" );

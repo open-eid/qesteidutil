@@ -27,32 +27,9 @@
 #include "SOAPDocument.h"
 #include "SslCertificate.h"
 
-#include <stdexcept>
-#include <sstream>
 #include <QApplication>
 #include <QProgressBar>
 #include <QProgressDialog>
-
-class sslError: public std::runtime_error
-{
-public:
-	sslError() : std::runtime_error("openssl error")
-	{
-		unsigned long err = ERR_get_error();
-		std::ostringstream buf;
-		buf << ERR_func_error_string( err ) << " (" << ERR_reason_error_string( err ) << ")";
-		desc = buf.str();
-	}
-    ~sslError() throw () {}
-
-	virtual const char *what() const throw() { return desc.c_str(); }
-	void static check( bool result ) { if( !result ) throw sslError(); }
-	void static error( const QString &msg ) { throw std::runtime_error( msg.toStdString() ); }
-
-	std::string desc;
-};
-
-
 
 void PINPADThread::run()
 {
@@ -90,8 +67,7 @@ void SSLReadThread::run()
 			case SSL_ERROR_ZERO_RETURN: // Disconnect
 				break;
 			default:
-				sslError::check( true );
-				break;
+				return;
 			}
 		}
 
@@ -121,7 +97,7 @@ SSLConnectPrivate::SSLConnectPrivate()
 ,	ssl( 0 )
 ,	flags( 0 )
 ,	nslots( 0 )
-,	error( SSLConnect::UnknownError )
+,	error( SSLConnect::NoError )
 {}
 
 SSLConnectPrivate::~SSLConnectPrivate()
@@ -139,19 +115,34 @@ SSLConnectPrivate::~SSLConnectPrivate()
 bool SSLConnectPrivate::connectToHost( SSLConnect::RequestType type )
 {
 	if( !p11loaded )
-		sslError::error( errorString.toUtf8() );
+	{
+		error = SSLConnect::PKCS11Error;
+		return false;
+	}
 
 	if( !selectSlot() )
-		sslError::error( SSLConnect::tr("no token available").toUtf8() );
+	{
+		error = SSLConnect::PKCS11Error;
+		errorString = SSLConnect::tr("no token available");
+		return false;
+	}
 
 	// Find token cert
 	PKCS11_CERT *certs;
 	unsigned int ncerts;
 	if( PKCS11_enumerate_certs( pslot->token, &certs, &ncerts ) || !ncerts )
-		sslError::error( SSLConnect::tr("no certificate available").toUtf8() );
+	{
+		error = SSLConnect::PKCS11Error;
+		errorString = SSLConnect::tr("no certificate available");
+		return false;
+	}
 	QSslCertificate cert = SslCertificate::fromX509( Qt::HANDLE((&certs[0])->x509) );
 	if( !cert.isValid() )
-		sslError::error( SSLConnect::tr("Certificate is not valid").toUtf8() );
+	{
+		error = SSLConnect::PKCS11Error;
+		errorString = SSLConnect::tr("Certificate is not valid");
+		return false;
+	}
 
 	// Login token
 	if( pslot->token->loginRequired )
@@ -161,7 +152,11 @@ bool SSLConnectPrivate::connectToHost( SSLConnect::RequestType type )
 		{
 			PinDialog p( PinDialog::Pin1Type, cert, flags, qApp->activeWindow() );
 			if( !p.exec() )
-				throw std::runtime_error( "" );
+			{
+				error = SSLConnect::PinCanceledError;
+				errorString = SSLConnect::tr("PIN canceled");
+				return false;
+			}
 			if( PKCS11_login( pslot, 0, p.text().toUtf8() ) < 0 )
 				err = ERR_get_error();
 		}
@@ -176,28 +171,60 @@ bool SSLConnectPrivate::connectToHost( SSLConnect::RequestType type )
 		case CKR_OK: break;
 		case CKR_CANCEL:
 		case CKR_FUNCTION_CANCELED:
-			throw std::runtime_error( "" ); break;
+			error = SSLConnect::PinCanceledError;
+			errorString = SSLConnect::tr("PIN canceled");
+			return false;
 		case CKR_PIN_INCORRECT:
 			selectSlot();
-			throw std::runtime_error( "PIN1Invalid" ); break;
+			error = SSLConnect::PinInvalidError;
+			errorString = SSLConnect::tr("Invalid PIN");
+			return false;
 		case CKR_PIN_LOCKED:
-			throw std::runtime_error( "PINLocked" ); break;
+			error = SSLConnect::PinLockedError;
+			errorString = SSLConnect::tr("Pin locked");
+			return false;
 		default:
-			throw std::runtime_error( "PIN1Invalid" ); break;
+			error = SSLConnect::PinInvalidError;
+			errorString = SSLConnect::tr("Invalid PIN");
+			return false;
 		}
 	}
 
 	// Find token key
 	PKCS11_KEY *authkey = PKCS11_find_key( &certs[0] );
 	if ( !authkey )
-		sslError::error( SSLConnect::tr("no key matching certificate available").toUtf8() );
+	{
+		error = SSLConnect::PKCS11Error;
+		errorString = SSLConnect::tr("no key matching certificate available");
+		return false;
+	}
 	EVP_PKEY *pkey = PKCS11_get_private_key( authkey );
 
 	ssl = SSL_new( SSL_CTX_new( SSLv23_client_method() ) );
-	sslError::check( SSL_use_certificate( ssl, (&certs[0])->x509 ) );
-	sslError::check( SSL_use_PrivateKey( ssl, pkey ) );
-	sslError::check( SSL_check_private_key( ssl ) );
-	sslError::check( SSL_set_mode( ssl, SSL_MODE_AUTO_RETRY ) );
+	if( !SSL_use_certificate( ssl, (&certs[0])->x509 ) )
+	{
+		error = SSLConnect::SSLError;
+		errorString = SSLConnect::getError();
+		return false;
+	}
+	if( !SSL_use_PrivateKey( ssl, pkey ) )
+	{
+		error = SSLConnect::SSLError;
+		errorString = SSLConnect::getError();
+		return false;
+	}
+	if( !SSL_check_private_key( ssl ) )
+	{
+		error = SSLConnect::SSLError;
+		errorString = SSLConnect::getError();
+		return false;
+	}
+	if( !SSL_set_mode( ssl, SSL_MODE_AUTO_RETRY ) )
+	{
+		error = SSLConnect::SSLError;
+		errorString = SSLConnect::getError();
+		return false;
+	}
 
 	const char *url = 0;
 	switch( type )
@@ -210,10 +237,20 @@ bool SSLConnectPrivate::connectToHost( SSLConnect::RequestType type )
 
 	BIO_set_conn_port( sock, "https" );
 	if( BIO_do_connect( sock ) <= 0 )
-		sslError::error( SSLConnect::tr( "Failed to connect to host. Are you connected to the internet?" ).toUtf8() );
+	{
+		error = SSLConnect::SSLError;
+		errorString = SSLConnect::tr( "Failed to connect to host. Are you connected to the internet?" );
+		return false;
+	}
 
 	SSL_set_bio( ssl, sock, sock );
-	sslError::check( SSL_connect( ssl ) );
+	
+	if ( !SSL_connect( ssl ) )
+	{
+		error = SSLConnect::SSLError;
+		errorString = SSLConnect::getError();
+		return false;
+	}
 
 	return true;
 }
@@ -316,7 +353,12 @@ QByteArray SSLConnect::getUrl( RequestType type, const QString &value )
 	}
 
 	QByteArray data = header.toUtf8();
-	sslError::check( SSL_write( d->ssl, data.constData(), data.length() ) );
+	if( !SSL_write( d->ssl, data.constData(), data.length() ) )
+	{
+		d->error = SSLConnect::SSLError;
+		d->errorString = SSLConnect::getError();
+		return false;
+	}
 	QProgressDialog p( label, QString(), 0, 0, qApp->activeWindow() );
 	p.setWindowFlags( (p.windowFlags() | Qt::CustomizeWindowHint) & ~Qt::WindowCloseButtonHint );
 	if( QProgressBar *bar = p.findChild<QProgressBar*>() )
@@ -329,7 +371,8 @@ SSLConnect::ErrorType SSLConnect::error() const { return d->error; }
 QString SSLConnect::errorString() const { return d->errorString; }
 TokenData::TokenFlags SSLConnect::flags() const { return d->flags; }
 QByteArray SSLConnect::result() const { return d->result; }
-void SSLConnect::setCard( const QString &card ) { d->card = card; d->selectSlot(); }
+QString SSLConnect::getError() { return ERR_reason_error_string( ERR_get_error() ); }
+bool SSLConnect::setCard( const QString &card ) { d->card = card; return d->selectSlot(); }
 void SSLConnect::setPKCS11( const QString &pkcs11, bool unload )
 {
 	if( d->p11loaded && d->unload )
@@ -338,13 +381,16 @@ void SSLConnect::setPKCS11( const QString &pkcs11, bool unload )
 	d->p11loaded = PKCS11_CTX_load( d->p11, pkcs11.toUtf8() ) == 0;
 	if( !d->p11loaded )
 	{
-		d->error = UnknownError;
+		d->error = PKCS11Error;
 		d->errorString = tr("failed to load pkcs11 module '%1'").arg( pkcs11 );
 	}
 }
 
 void SSLConnect::waitForFinished( RequestType type, const QString &value )
 {
+	d->error = SSLConnect::NoError;
+	d->errorString.clear();
+
 	try { d->result = getUrl( type, value ); }
 	catch( const std::runtime_error &e )
 	{
@@ -360,16 +406,10 @@ void SSLConnect::waitForFinished( RequestType type, const QString &value )
 		}
 		else if( qstrcmp( e.what(), "PINLocked" ) == 0 )
 		{
-			d->error = SSLConnect::PinLocked;
+			d->error = SSLConnect::PinLockedError;
 			d->errorString = tr("Pin locked");
 		}
 		else
-		{
-			d->error = SSLConnect::UnknownError;
 			d->errorString = QString::fromUtf8( e.what() );
-		}
-		return;
 	}
-	d->error = SSLConnect::UnknownError;
-	d->errorString.clear();
 }

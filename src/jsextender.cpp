@@ -49,6 +49,7 @@ JsExtender::JsExtender( MainWindow *main )
 :	QObject( main )
 ,	m_mainWindow( main )
 ,	m_loading( 0 )
+,	sslError( SSLConnect::NoError )
 {
 	QString deflang;
 	switch( QLocale().language() )
@@ -152,31 +153,35 @@ QByteArray JsExtender::getUrl( SSLConnect::RequestType type, const QString &def 
 {
 	QByteArray buffer;
 
-	try {
-		SSLConnect sslConnect;
-		sslConnect.setCard( m_mainWindow->cardManager()->cardId(
-			m_mainWindow->cardManager()->activeReaderNum() ) );
-		buffer = sslConnect.getUrl( type, def );
-	} catch( const std::runtime_error &e ) {
-		throw std::runtime_error( e );
+	sslError = SSLConnect::NoError;
+	sslErrorString.clear();
+
+	SSLConnect sslConnect;
+	if ( !sslConnect.setCard( m_mainWindow->cardManager()->activeCardId() ) )
+	{
+		sslError = sslConnect.error();
+		sslErrorString = sslConnect.errorString();
+		return buffer;
 	}
+
+	buffer = sslConnect.getUrl( type, def );
+
+	sslError = sslConnect.error();
+	sslErrorString = sslConnect.errorString();
+
 	m_mainWindow->eidCard()->reconnect();
 	return buffer;
 }
 
 void JsExtender::activateEmail( const QString &email )
 {
-	QByteArray buffer;
-	try {
-		buffer = getUrl( SSLConnect::ActivateEmails, email );
-	} catch( std::runtime_error &e ) {
-		jsCall( "handleError", QString::fromUtf8( e.what() ) );
-		jsCall( "setEmails", "forwardFailed", "" );
-		return;
-	}
-	if ( !buffer.size() )
+	QByteArray buffer = getUrl( SSLConnect::ActivateEmails, email );
+	if ( !buffer.size() || sslError != SSLConnect::NoError )
 	{
-		jsCall( "setEmails", "forwardFailed", "" );
+		if ( sslError != SSLConnect::NoError )
+			jsCall( "handleError", sslErrorString );
+		else
+			jsCall( "setEmails", "forwardFailed", "" );
 		return;
 	}
 	xml.clear();
@@ -196,18 +201,15 @@ void JsExtender::activateEmail( const QString &email )
 
 void JsExtender::loadEmails()
 {
-	QByteArray buffer;
-	try {
-		buffer = getUrl( SSLConnect::EmailInfo, "" );
-	} catch( std::runtime_error &e ) {
-		jsCall( "handleError", QString::fromUtf8( e.what() ) );
-		jsCall( "setEmails", "loadFailed", "" );
-		return;
-	}
-
-	if ( !buffer.size() )
+	QByteArray buffer = getUrl( SSLConnect::EmailInfo, "" );
+	if ( !buffer.size() || sslError != SSLConnect::NoError )
 	{
-		jsCall( "setEmails", "loadFailed", "" );
+		if ( sslError != SSLConnect::NoError )
+		{
+			jsCall( "handleError", sslErrorString );
+			jsCall( "setEmails", "", "" );
+		} else
+			jsCall( "setEmails", "loadFailed", "" );
 		return;
 	}
 	xml.clear();
@@ -279,18 +281,15 @@ QString JsExtender::readForwards()
 
 void JsExtender::loadPicture()
 {
-	QString result = "loadPicFailed";
-	QByteArray buffer;
-	try {
-		buffer = getUrl( SSLConnect::PictureInfo, "" );
-	} catch( std::runtime_error &e ) {
-		jsCall( "handleError", QString::fromUtf8( e.what() ) );
-		jsCall( "setPicture", "", result );
-		return;
-	}
-	if ( !buffer.size() )
+	QByteArray buffer = getUrl( SSLConnect::PictureInfo, "" );
+	if ( !buffer.size() || sslError != SSLConnect::NoError )
 	{
-		jsCall( "setPicture", "", result );
+		if ( sslError != SSLConnect::NoError )
+		{
+			jsCall( "handleError", sslErrorString );
+			jsCall( "setPicture", "", "" );
+		} else
+			jsCall( "setPicture", "", "loadPicFailed" );
 		return;
 	}
 
@@ -312,7 +311,7 @@ void JsExtender::loadPicture()
 		}
 		jsCall( "setPicture", "", QString( "loadPicFailed3|%1" ).arg( file.errorString() ) );
 	} else { //probably got xml error string
-		QString result2 = "loadPicFailed2";
+		QString result = "loadPicFailed2";
 		xml.clear();
 		xml.addData( buffer );		
 		while ( !xml.atEnd() )
@@ -320,11 +319,11 @@ void JsExtender::loadPicture()
 			xml.readNext();
 			if ( xml.isStartElement() && xml.name() == "fault_code" )
 			{
-				result2 = xml.readElementText();
+				result = xml.readElementText();
 				break;
 			}
 		}
-		jsCall( "setPicture", "", result2 );
+		jsCall( "setPicture", "", result );
 	}
 }
 
@@ -356,7 +355,6 @@ void JsExtender::savePicture()
 void JsExtender::getMidStatus()
 {
 	QString result = "mobileFailed";
-	QByteArray buffer;
 
 	QString data = "<SOAP-ENV:Envelope xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:SOAP-ENC=\"http://schemas.xmlsoap.org/soap/encoding/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">"
 						"<SOAP-ENV:Body>"
@@ -369,63 +367,57 @@ void JsExtender::getMidStatus()
 					 "Content-Length: " + QString::number( data.size() ) + "\r\n"
 					 "SOAPAction: \"\"\r\n"
 					 "Connection: close\r\n\r\n";
-	try {
-		buffer = getUrl( SSLConnect::MobileInfo, header + data );
-	} catch( std::runtime_error &e ) {
-		jsCall( "handleError", QString::fromUtf8( e.what() ) );
-		jsCall( "setMobile", "", result );
+	QByteArray buffer = getUrl( SSLConnect::MobileInfo, header + data );
+	if ( !buffer.size() || sslError != SSLConnect::NoError )
+	{
+		if ( sslError != SSLConnect::NoError )
+			jsCall( "handleError", sslErrorString );
+		else
+			jsCall( "setMobile", "", result );
 		return;
 	}
-	if ( !buffer.size() )
+
+	QDomDocument doc;
+	if ( !doc.setContent( buffer ) )
 	{
-		jsCall( "setMobile", "", result );
+		jsCall( "handleError", result );
 		return;
 	}
-	//qDebug() << buffer;
-	if ( !buffer.isEmpty() )
+	QDomElement e = doc.documentElement();
+	if ( !e.elementsByTagName( "ResponseStatus" ).size() )
 	{
-		QDomDocument doc;
-		if ( !doc.setContent( buffer ) )
-		{
-			jsCall( "handleError", result );
-			return;
-		}
-		QDomElement e = doc.documentElement();
-		if ( !e.elementsByTagName( "ResponseStatus" ).size() )
-		{
-			jsCall( "handleError", result );
-			return;
-		}
-		MobileResult mRes = (MobileResult)e.elementsByTagName( "ResponseStatus" ).item(0).toElement().text().toInt();
-		QString mResString, mNotice;
-		switch( mRes )
-		{
-			case NoCert: mNotice = "mobileNoCert"; break;
-			case NotActive: mNotice = "mobileNotActive"; break;
-			case NoIDCert: mResString = "noIDCert"; break;
-			case InternalError: mResString = "mobileInternalError"; break;
-			case InterfaceNotReady: mResString = "mobileInterfaceNotReady"; break;
-			case OK:
-			default: break;
-		}
-		if ( !mResString.isEmpty() )
-		{
-			jsCall( "handleError", mResString );
-			return;
-		}
-		if ( !mNotice.isEmpty() )
-		{
-			jsCall( "handleNotice", mNotice );
-			return;
-		}
-		mResString = QString( "%1;%2;%3;%4;%5" )
-						.arg( e.elementsByTagName( "MSISDN" ).item(0).toElement().text() )
-						.arg( e.elementsByTagName( "Operator" ).item(0).toElement().text() )
-						.arg( e.elementsByTagName( "Status" ).item(0).toElement().text() )
-						.arg( e.elementsByTagName( "URL" ).item(0).toElement().text() )
-						.arg( e.elementsByTagName( "MIDCertsValidTo" ).item(0).toElement().text() );
-		jsCall( "setMobile", mResString );
+		jsCall( "handleError", result );
+		return;
 	}
+	MobileResult mRes = (MobileResult)e.elementsByTagName( "ResponseStatus" ).item(0).toElement().text().toInt();
+	QString mResString, mNotice;
+	switch( mRes )
+	{
+		case NoCert: mNotice = "mobileNoCert"; break;
+		case NotActive: mNotice = "mobileNotActive"; break;
+		case NoIDCert: mResString = "noIDCert"; break;
+		case InternalError: mResString = "mobileInternalError"; break;
+		case InterfaceNotReady: mResString = "mobileInterfaceNotReady"; break;
+		case OK:
+		default: break;
+	}
+	if ( !mResString.isEmpty() )
+	{
+		jsCall( "handleError", mResString );
+		return;
+	}
+	if ( !mNotice.isEmpty() )
+	{
+		jsCall( "handleNotice", mNotice );
+		return;
+	}
+	mResString = QString( "%1;%2;%3;%4;%5" )
+					.arg( e.elementsByTagName( "MSISDN" ).item(0).toElement().text() )
+					.arg( e.elementsByTagName( "Operator" ).item(0).toElement().text() )
+					.arg( e.elementsByTagName( "Status" ).item(0).toElement().text() )
+					.arg( e.elementsByTagName( "URL" ).item(0).toElement().text() )
+					.arg( e.elementsByTagName( "MIDCertsValidTo" ).item(0).toElement().text() );
+	jsCall( "setMobile", mResString );
 }
 
 void JsExtender::httpRequestFinished( int, bool error )

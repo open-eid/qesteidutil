@@ -55,6 +55,7 @@ public slots:
 	bool selectReader( const ReaderState &reader );
 	bool isInReader( const QString &cardId );
 	bool isInReader( int readerNum );
+	QString activeCardId();
 	QString cardId( int readerNum );
 	void showDiagnostics();
 	void findCard();
