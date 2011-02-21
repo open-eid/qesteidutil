@@ -61,16 +61,16 @@ bool CertStore::add( const QSslCertificate &cert, const QString &card )
 
 	SslCertificate c( cert );
 	DWORD keyCode = c.keyUsage().contains( SslCertificate::NonRepudiation ) ? AT_SIGNATURE : AT_KEYEXCHANGE;
-	QString str = QString( "%1 %2" )
-		.arg( keyCode == AT_SIGNATURE ? "Signature" : "Authentication" )
-		.arg( c.toString( "SN, GN" ).toUpper() );
-	QString cardStr = QString( keyCode == AT_SIGNATURE ? "SIG_" : "AUT_" ).append( card );
 
 	PCCERT_CONTEXT context = d->certContext( cert );
 
+	QString str = QString( "%1 %2" )
+		.arg( keyCode == AT_SIGNATURE ? "Signature" : "Authentication" )
+		.arg( c.toString( "SN, GN" ).toUpper() );
 	CRYPT_DATA_BLOB DataBlob = { str.length() * sizeof( QChar ), (BYTE*)str.utf16() };
 	CertSetCertificateContextProperty( context, CERT_FRIENDLY_NAME_PROP_ID, 0, &DataBlob );
 
+	QString cardStr = QString( keyCode == AT_SIGNATURE ? "SIG_" : "AUT_" ).append( card );
 	CRYPT_KEY_PROV_INFO KeyProvInfo =
 	{ (LPWSTR)cardStr.utf16(), L"EstEID Card CSP", PROV_RSA_FULL, 0, 0, NULL, keyCode };
 	CertSetCertificateContextProperty( context, CERT_KEY_PROV_INFO_PROP_ID, 0, &KeyProvInfo );
@@ -92,21 +92,18 @@ bool CertStore::find( const QSslCertificate &cert )
 	return result;
 }
 
-bool CertStore::remove( const QSslCertificate &cert )
+void CertStore::remove( const QSslCertificate &cert )
 {
 	if( !d->s )
-		return false;
+		return;
 
 	PCCERT_CONTEXT context = d->certContext( cert );
-	bool result = false;
 	PCCERT_CONTEXT scontext = 0;
 	while( (scontext = CertEnumCertificatesInStore( d->s, scontext )) )
 	{
-		if( !CertCompareCertificate( X509_ASN_ENCODING, context->pCertInfo, scontext->pCertInfo ) )
-			continue;
-		result = CertDeleteCertificateFromStore( scontext );
-		break;
+		if( CertCompareCertificateName( X509_ASN_ENCODING,
+				&context->pCertInfo->Subject, &scontext->pCertInfo->Subject ) )
+			CertDeleteCertificateFromStore( scontext );
 	}
 	CertFreeCertificateContext( context );
-	return result;
 }

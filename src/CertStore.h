@@ -34,7 +34,7 @@ public:
 
 	bool add( const QSslCertificate &cert, const QString &card );
 	bool find( const QSslCertificate &cert );
-	bool remove( const QSslCertificate &cert );
+	void remove( const QSslCertificate &cert );
 
 private:
 	CertStorePrivate *d;
