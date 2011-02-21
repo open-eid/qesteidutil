@@ -103,7 +103,10 @@ void CertStore::remove( const QSslCertificate &cert )
 	{
 		if( CertCompareCertificateName( X509_ASN_ENCODING,
 				&context->pCertInfo->Subject, &scontext->pCertInfo->Subject ) )
+		{
 			CertDeleteCertificateFromStore( scontext );
+			scontext = 0;
+		}
 	}
 	CertFreeCertificateContext( context );
 }
