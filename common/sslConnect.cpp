@@ -391,25 +391,5 @@ void SSLConnect::waitForFinished( RequestType type, const QString &value )
 	d->error = SSLConnect::NoError;
 	d->errorString.clear();
 
-	try { d->result = getUrl( type, value ); }
-	catch( const std::runtime_error &e )
-	{
-		if( qstrcmp( e.what(), "" ) == 0 )
-		{
-			d->error = SSLConnect::PinCanceledError;
-			d->errorString = tr("PIN canceled");
-		}
-		else if( qstrcmp( e.what(), "PIN1Invalid" ) == 0 )
-		{
-			d->error = SSLConnect::PinInvalidError;
-			d->errorString = tr("Invalid PIN");
-		}
-		else if( qstrcmp( e.what(), "PINLocked" ) == 0 )
-		{
-			d->error = SSLConnect::PinLockedError;
-			d->errorString = tr("Pin locked");
-		}
-		else
-			d->errorString = QString::fromUtf8( e.what() );
-	}
+	d->result = getUrl( type, value ); }
 }
