@@ -1,8 +1,8 @@
 /*
  * QDigiDocCommon
  *
- * Copyright (C) 2010 Jargo Kõster <jargo@innovaatik.ee>
- * Copyright (C) 2010 Raul Metsma <raul@innovaatik.ee>
+ * Copyright (C) 2010-2011 Jargo Kõster <jargo@innovaatik.ee>
+ * Copyright (C) 2010-2011 Raul Metsma <raul@innovaatik.ee>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -195,8 +195,10 @@ QPKCS11::PinStatus QPKCS11::login( const TokenData &_t )
 	if( token.flags & CKF_PROTECTED_AUTHENTICATION_PATH )
 	{
 		PinDialog p( pin2 ? PinDialog::Pin2PinpadType : PinDialog::Pin1PinpadType, t, qApp->activeWindow() );
+		QPKCS11Thread t( d );
+		connect( &t, SIGNAL(started()), &p, SIGNAL(startTimer()) );
 		p.open();
-		d->err = QPKCS11Thread( d ).waitForDone();
+		d->err = t.waitForDone();
 	}
 	else
 	{

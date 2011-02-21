@@ -1,8 +1,8 @@
 /*
  * QEstEidCommon
  *
- * Copyright (C) 2009,2010 Jargo Kõster <jargo@innovaatik.ee>
- * Copyright (C) 2009,2010 Raul Metsma <raul@innovaatik.ee>
+ * Copyright (C) 2009-2011 Jargo Kõster <jargo@innovaatik.ee>
+ * Copyright (C) 2009-2011 Raul Metsma <raul@innovaatik.ee>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -163,8 +163,10 @@ bool SSLConnectPrivate::connectToHost( SSLConnect::RequestType type )
 		else
 		{
 			PinDialog p( PinDialog::Pin1PinpadType, cert, flags, qApp->activeWindow() );
+			PINPADThread t( pslot );
+			QObject::connect( &t, SIGNAL(started()), &p, SLOT(startTimer()) );
 			p.open();
-			err = PINPADThread( pslot ).waitForDone();
+			err = t.waitForDone();
 		}
 		switch( ERR_GET_REASON(err) )
 		{

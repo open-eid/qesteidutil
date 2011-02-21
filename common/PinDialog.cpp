@@ -1,8 +1,8 @@
 /*
  * QEstEidCommon
  *
- * Copyright (C) 2009,2010 Jargo Kõster <jargo@innovaatik.ee>
- * Copyright (C) 2009,2010 Raul Metsma <raul@innovaatik.ee>
+ * Copyright (C) 2009-2011 Jargo Kõster <jargo@innovaatik.ee>
+ * Copyright (C) 2009-2011 Raul Metsma <raul@innovaatik.ee>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -27,8 +27,10 @@
 #include <QDialogButtonBox>
 #include <QLabel>
 #include <QLineEdit>
+#include <QProgressBar>
 #include <QPushButton>
 #include <QRegExpValidator>
+#include <QTimeLine>
 #include <QVBoxLayout>
 
 PinDialog::PinDialog( QWidget *parent )
@@ -95,28 +97,37 @@ void PinDialog::init( PinType type, const QString &title, TokenData::TokenFlags 
 
 	if( type == Pin1PinpadType || type == Pin2PinpadType )
 	{
-#if QT_VERSION >= 0x040500
 		setWindowFlags( (windowFlags() | Qt::CustomizeWindowHint) & ~Qt::WindowCloseButtonHint );
-#endif
-		return;
+		QProgressBar *progress = new QProgressBar( this );
+		progress->setRange( 0, 30 );
+		progress->setValue( progress->maximum() );
+		progress->setTextVisible( false );
+		l->addWidget( progress );
+		QTimeLine *statusTimer = new QTimeLine( progress->maximum() * 1000, this );
+		statusTimer->setCurveShape( QTimeLine::LinearCurve );
+		statusTimer->setFrameRange( progress->maximum(), progress->minimum() );
+		connect( statusTimer, SIGNAL(frameChanged(int)), progress, SLOT(setValue(int)) );
+		connect( this, SIGNAL(startTimer()), statusTimer, SLOT(start()) );
 	}
+	else
+	{
+		m_text = new QLineEdit( this );
+		m_text->setEchoMode( QLineEdit::Password );
+		m_text->setFocus();
+		m_text->setValidator( new QRegExpValidator( regexp, m_text ) );
+		connect( m_text, SIGNAL(textEdited(QString)), SLOT(textEdited(QString)) );
+		l->addWidget( m_text );
 
-	m_text = new QLineEdit( this );
-	m_text->setEchoMode( QLineEdit::Password );
-	m_text->setFocus();
-	m_text->setValidator( new QRegExpValidator( regexp, m_text ) );
-	connect( m_text, SIGNAL(textEdited(QString)), SLOT(textEdited(QString)) );
-	l->addWidget( m_text );
+		QDialogButtonBox *buttons = new QDialogButtonBox(
+			QDialogButtonBox::Ok|QDialogButtonBox::Cancel, Qt::Horizontal, this );
+		ok = buttons->button( QDialogButtonBox::Ok );
+		ok->setAutoDefault( true );
+		connect( buttons, SIGNAL(accepted()), SLOT(accept()) );
+		connect( buttons, SIGNAL(rejected()), SLOT(reject()) );
+		l->addWidget( buttons );
 
-	QDialogButtonBox *buttons = new QDialogButtonBox(
-		QDialogButtonBox::Ok|QDialogButtonBox::Cancel, Qt::Horizontal, this );
-	ok = buttons->button( QDialogButtonBox::Ok );
-	ok->setAutoDefault( true );
-	connect( buttons, SIGNAL(accepted()), SLOT(accept()) );
-	connect( buttons, SIGNAL(rejected()), SLOT(reject()) );
-	l->addWidget( buttons );
-
-	textEdited( QString() );
+		textEdited( QString() );
+	}
 }
 
 QString PinDialog::text() const { return m_text->text(); }
