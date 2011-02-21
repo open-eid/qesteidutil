@@ -35,9 +35,9 @@ class QPKCS11Private
 public:
 	QPKCS11Private()
 	: f(0)
-	, slot(-1)
+	, pslot(0)
 	, pslots(0)
-	, session(-1)
+	, session(0)
 	, nslots(0)
 	, err(CKR_OK)
 	{}
@@ -50,7 +50,7 @@ public:
 
 	QLibrary		lib;
 	CK_FUNCTION_LIST *f;
-	CK_SLOT_ID		slot, *pslots;
+	CK_SLOT_ID		*pslot, *pslots;
 	CK_SESSION_HANDLE session;
 	unsigned long	nslots, err;
 };
@@ -72,7 +72,7 @@ public:
 	}
 
 private:
-	void run() { result = d->f->C_Login( d->session, d->slot, 0, 0 ); }
+	void run() { result = d->f->C_Login( d->session, *(d->pslot), 0, 0 ); }
 
 	QPKCS11Private *d;
 	unsigned long result;

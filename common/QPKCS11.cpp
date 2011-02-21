@@ -37,7 +37,7 @@ bool QPKCS11Private::attribute( CK_OBJECT_HANDLE obj, CK_ATTRIBUTE_TYPE type, vo
 
 QSslCertificate QPKCS11Private::readCert( CK_SLOT_ID slot )
 {
-	if( session >= 0 )
+	if( session > 0 )
 		f->C_CloseSession( session );
 	err = f->C_OpenSession( slot, CKF_SERIAL_SESSION, 0, 0, &session );
 	if( err != CKR_OK )
@@ -172,7 +172,7 @@ bool QPKCS11::loadDriver( const QString &driver )
 QPKCS11::PinStatus QPKCS11::login( const TokenData &_t )
 {
 	CK_TOKEN_INFO token;
-	if( d->slot < 0 || (d->err = d->f->C_GetTokenInfo( d->slot, &token )) != CKR_OK )
+	if( !d->pslot || (d->err = d->f->C_GetTokenInfo( *(d->pslot), &token )) != CKR_OK )
 		return PinUnknown;
 
 	if( !(token.flags & CKF_LOGIN_REQUIRED) )
@@ -186,9 +186,9 @@ QPKCS11::PinStatus QPKCS11::login( const TokenData &_t )
 	if( token.flags & CKF_SO_PIN_LOCKED || token.flags & CKF_USER_PIN_LOCKED )
 		t.setFlag( TokenData::PinLocked );
 
-	if( d->session >= 0 )
+	if( d->session )
 		d->err = d->f->C_CloseSession( d->session );
-	if( (d->err = d->f->C_OpenSession( d->slot, CKF_SERIAL_SESSION, 0, 0, &d->session )) != CKR_OK )
+	if( (d->err = d->f->C_OpenSession( *(d->pslot), CKF_SERIAL_SESSION, 0, 0, &d->session )) != CKR_OK )
 		return PinUnknown;
 
 	bool pin2 = SslCertificate( t.cert() ).keyUsage().keys().contains( SslCertificate::NonRepudiation );
@@ -222,7 +222,8 @@ bool QPKCS11::logout() { return (d->err = d->f->C_Logout( d->session )) == CKR_O
 
 TokenData QPKCS11::selectSlot( const QString &card, SslCertificate::KeyUsage usage )
 {
-	d->slot = -1;
+	delete d->pslot;
+	d->pslot = 0;
 	TokenData t;
 	t.setCard( card );
 	for( unsigned int i = 0; i < d->nslots; ++i )
@@ -236,7 +237,7 @@ TokenData QPKCS11::selectSlot( const QString &card, SslCertificate::KeyUsage usa
 		if( !cert.keyUsage().keys().contains( usage ) )
 			continue;
 
-		d->slot = d->pslots[i];
+		d->pslot = new CK_SLOT_ID( d->pslots[i] );
 		t.setCert( cert );
 		if( token.flags & CKF_SO_PIN_COUNT_LOW || token.flags & CKF_USER_PIN_COUNT_LOW )
 			t.setFlag( TokenData::PinCountLow );
@@ -268,6 +269,8 @@ bool QPKCS11::sign( const QByteArray &data, unsigned char *signature, unsigned l
 void QPKCS11::unloadDriver()
 {
 	d->freeSlotIds();
+	delete d->pslot;
+	d->pslot = 0;
 	if( d->f )
 		d->f->C_Finalize( 0 );
 	d->f = 0;
