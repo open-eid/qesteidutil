@@ -370,7 +370,6 @@ QByteArray SSLConnect::getUrl( RequestType type, const QString &value )
 SSLConnect::ErrorType SSLConnect::error() const { return d->error; }
 QString SSLConnect::errorString() const { return d->errorString; }
 TokenData::TokenFlags SSLConnect::flags() const { return d->flags; }
-QByteArray SSLConnect::result() const { return d->result; }
 QString SSLConnect::getError() { return ERR_reason_error_string( ERR_get_error() ); }
 bool SSLConnect::setCard( const QString &card ) { d->card = card; return d->selectSlot(); }
 void SSLConnect::setPKCS11( const QString &pkcs11, bool unload )
@@ -384,12 +383,4 @@ void SSLConnect::setPKCS11( const QString &pkcs11, bool unload )
 		d->error = PKCS11Error;
 		d->errorString = tr("failed to load pkcs11 module '%1'").arg( pkcs11 );
 	}
-}
-
-void SSLConnect::waitForFinished( RequestType type, const QString &value )
-{
-	d->error = SSLConnect::NoError;
-	d->errorString.clear();
-
-	d->result = getUrl( type, value );
 }

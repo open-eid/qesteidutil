@@ -68,7 +68,6 @@ public:
 
 	SSLConnect::ErrorType error;
 	QString errorString;
-	QByteArray result;
 };
 
 class PINPADThread: public QThread
