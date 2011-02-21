@@ -391,5 +391,5 @@ void SSLConnect::waitForFinished( RequestType type, const QString &value )
 	d->error = SSLConnect::NoError;
 	d->errorString.clear();
 
-	d->result = getUrl( type, value ); }
+	d->result = getUrl( type, value );
 }
