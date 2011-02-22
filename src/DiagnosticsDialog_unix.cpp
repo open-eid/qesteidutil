@@ -87,7 +87,7 @@ DiagnosticsDialog::DiagnosticsDialog( QWidget *parent )
 	p.waitForReadyRead();
 	s << p.readAll() << "<br />";
 #elif defined(Q_OS_LINUX)
-	s << getPackageVersion( QStringList() << "openssl" << "libpcsclite1" << "opensc" );
+	s << getPackageVersion( QStringList() << "openssl" << "libpcsclite1" << "pcsc-lite" << "opensc" );
 #endif
 	s << "QT (" << qVersion() << ")<br />" << "<br />";
 
