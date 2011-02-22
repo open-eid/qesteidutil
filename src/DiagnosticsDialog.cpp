@@ -54,6 +54,8 @@ QString DiagnosticsDialog::getReaderInfo()
 			for( int i = 0; i < readersCount; i++ )
 			{
 				reader = QString::fromStdString( m->getReaderName( i ) );
+				if ( m->isPinPad( i ) )
+					reader.append( " - PinPad" );
 				if ( !QString::fromStdString( m->getReaderState( i ) ).contains( "EMPTY" ) )
 				{
 					EstEidCard card( *m, i );
