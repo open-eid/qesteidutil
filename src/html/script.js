@@ -95,7 +95,12 @@ function cardInserted(i)
 		
 	document.getElementById( 'forUpdate' ).innerHTML += ".";
 	if ( !inReader && activeCardId != '' )
+    {
 		readCardData();
+        try {
+            cardManager.checkCerts();
+        } catch ( err ) {}
+    }
     cardManager.allowRead();
 }
 
@@ -351,8 +356,6 @@ function readCardData( translate )
 
 		if(pukRetry == 0)
 			setActive('puk',document.getElementById('buttonPUK'));
-			
-		var check = cardManager.checkCerts();
 	} catch ( err ) { }
 }
 
