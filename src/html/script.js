@@ -306,7 +306,8 @@ function readCardData( translate )
 			if ( language != "ru" )
 				document.getElementById('spanAuthKeyBlocked').innerHTML+="<br />"+_("labelCertBlocked");
 			document.getElementById('authValidButtons').style.display='none';
-			document.getElementById('authBlockedButtons').style.display=(pukRetry == 0 ? 'none' : 'block');
+			document.getElementById('authBlockedButtons').style.display='block';
+            document.getElementById('authBlockedButtons1').style.visibility=(pukRetry == 0 ? 'hidden' : 'visible');
 		}
 		document.getElementById('authCertValidTo').className=(esteidData.authCert.isValid() ? 'certValid' : 'certBlocked');
 		
@@ -326,8 +327,9 @@ function readCardData( translate )
 			document.getElementById('spanSignKeyBlocked').innerHTML=_("labelSignKeyBlocked");
 			if ( language != "ru" )
 				document.getElementById('spanSignKeyBlocked').innerHTML+="<br />"+_("labelCertBlocked");
-			document.getElementById('signValidButtons').style.display='none';
-			document.getElementById('signBlockedButtons').style.display=(pukRetry == 0 ? 'none' : 'block');;
+            document.getElementById('signValidButtons').style.display='none';
+			document.getElementById('signBlockedButtons').style.display='block';
+            document.getElementById('signBlockedButtons1').style.visibility=(pukRetry == 0 ? 'hidden' : 'visible');
 		}
 		document.getElementById('signCertValidTo').className=(esteidData.signCert.isValid() ? 'certValid' : 'certBlocked');
 
