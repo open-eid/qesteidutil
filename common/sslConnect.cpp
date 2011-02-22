@@ -359,7 +359,7 @@ QByteArray SSLConnect::getUrl( RequestType type, const QString &value )
 	{
 		d->error = SSLConnect::SSLError;
 		d->errorString = SSLConnect::getError();
-		return false;
+		return QByteArray();
 	}
 	QProgressDialog p( label, QString(), 0, 0, qApp->activeWindow() );
 	p.setWindowFlags( (p.windowFlags() | Qt::CustomizeWindowHint) & ~Qt::WindowCloseButtonHint );
