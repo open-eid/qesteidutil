@@ -42,8 +42,8 @@ DiagnosticsDialog::DiagnosticsDialog( QWidget *parent )
 	QTextStream s( &info );
 
 	s << "<b>" << tr("Locale:") << "</b> ";
-	QString locale = QLocale::c().name();
-	s << (locale == "C" ? "en_us" : locale) << "<br /><br />";
+	QLocale::Language language = QLocale::system().language();
+	s << (language == QLocale::C ? "English/United States" : QLocale::languageToString( language ) ) << "<br /><br />";
 
 #if defined(Q_OS_LINUX)
 	QString package = getPackageVersion( QStringList() << "estonianidcard", false );
