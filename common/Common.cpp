@@ -65,7 +65,7 @@ bool Common::canWrite( const QString &filename )
 #ifdef Q_OS_WIN
 	QFileInfo i( filename );
 	if( i.isFile() )
-		return QFile( filename ).open( QFile::WriteOnly );
+		return QFile( filename ).open( QFile::WriteOnly|QFile::Append );
 	QFile f( i.absolutePath().append( "/.XXXXXX" ) );
 	bool result = f.open( QFile::WriteOnly );
 	f.remove();
