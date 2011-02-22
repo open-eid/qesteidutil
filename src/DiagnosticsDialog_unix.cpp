@@ -138,7 +138,9 @@ QString DiagnosticsDialog::getPackageVersion( const QStringList &list, bool retu
 	Q_FOREACH( QString package, list )
 	{
 		p.start( cmd, QStringList() << params << package );
-		p.waitForReadyRead();
+		p.waitForFinished();
+		if ( p.exitCode() )
+			continue;
 		QByteArray result = p.readAll();
 		if ( !result.isEmpty() )
 		{
@@ -156,7 +158,9 @@ QString DiagnosticsDialog::getPackageVersion( const QStringList &list, bool retu
 		if ( !QFile::exists( app + ".plist") )
 			continue;
 		p.start( "defaults", QStringList() << "read" << app << "CFBundleShortVersionString" );
-		p.waitForReadyRead();
+		p.waitForFinished();
+		if ( p.exitCode() )
+			continue;
 		QByteArray result = p.readAll();
 		if ( !result.isEmpty() )
 		{
