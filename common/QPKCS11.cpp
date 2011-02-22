@@ -37,8 +37,9 @@ bool QPKCS11Private::attribute( CK_OBJECT_HANDLE obj, CK_ATTRIBUTE_TYPE type, vo
 
 QSslCertificate QPKCS11Private::readCert( CK_SLOT_ID slot )
 {
-	if( session > 0 )
+	if( session )
 		f->C_CloseSession( session );
+	session = 0;
 	err = f->C_OpenSession( slot, CKF_SERIAL_SESSION, 0, 0, &session );
 	if( err != CKR_OK )
 		return QSslCertificate();
@@ -188,6 +189,7 @@ QPKCS11::PinStatus QPKCS11::login( const TokenData &_t )
 
 	if( d->session )
 		d->err = d->f->C_CloseSession( d->session );
+	d->session = 0;
 	if( (d->err = d->f->C_OpenSession( *(d->pslot), CKF_SERIAL_SESSION, 0, 0, &d->session )) != CKR_OK )
 		return PinUnknown;
 
