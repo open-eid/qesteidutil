@@ -11,14 +11,14 @@ include(InstallSettings)
 find_package(Qt4 4.6.0 COMPONENTS QtCore QtGui QtNetwork QtWebkit QtXml REQUIRED)
 find_package(OpenSSL REQUIRED)
 find_package(PKCS11)
+set(CMAKE_REQUIRED_INCLUDES ${OPENSSL_INCLUDE_PATH} ${CMAKE_REQUIRED_INCLUDES})
 find_package(LibP11 REQUIRED)
 find_package(SmartCardpp REQUIRED)
 find_package(LibLtdl REQUIRED)
 find_package(Subversion)
 if(UNIX)
-	find_package(LibDL REQUIRED)
 	# Hack to get around smartcardpp header inclusion scheme
-    find_package(PCSCLite REQUIRED)
+	find_package(PCSCLite REQUIRED)
 endif(UNIX)
 
 add_definitions(-DPKCS11_MODULE="${PKCS11_MODULE}")
@@ -97,9 +97,9 @@ endif( WIN32 )
 
 QT4_WRAP_UI( UI_HEADERS
 	common/ui/AboutWidget.ui
-    common/ui/CertificateWidget.ui
-    src/ui/DiagnosticsDialog.ui
-    src/ui/SettingsDialog.ui
+	common/ui/CertificateWidget.ui
+	src/ui/DiagnosticsDialog.ui
+	src/ui/SettingsDialog.ui
 )
 
 set(QM_DIR ${CMAKE_BINARY_DIR})
@@ -196,7 +196,7 @@ if( APPLE )
 endif( APPLE )
 
 IF(WIN32)
-    SET(qesteidutil_SRCS ${qesteidutil_SRCS} src/qesteidutil.rc)
+	SET(qesteidutil_SRCS ${qesteidutil_SRCS} src/qesteidutil.rc)
 	SET(ADDITIONAL_LIBRARIES ws2_32 Crypt32)
 ENDIF(WIN32)
     
@@ -227,7 +227,7 @@ target_link_libraries( ${PROGNAME}
 	${LIBP11_LIBRARIES}
 	${SMARTCARDPP_LIBRARIES}
 	${ADDITIONAL_LIBRARIES}
-	${LIBDL_LIBRARIES}
+	${CMAKE_DL_LIBS}
 	${LIBLTDL_LIBRARIES}
 	qtsingleapplication
 )
