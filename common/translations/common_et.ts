@@ -283,15 +283,15 @@
     </message>
     <message>
         <source>Loading Email info</source>
-        <translation type="unfinished"></translation>
+        <translation>Laadin e-posti seadeid</translation>
     </message>
     <message>
         <source>Loading Mobile info</source>
-        <translation type="unfinished"></translation>
+        <translation>Laadin Molbiil-ID seadeid</translation>
     </message>
     <message>
         <source>Downloading picture</source>
-        <translation>Laen pilti</translation>
+        <translation>Laadin pilti</translation>
     </message>
 </context>
 <context>
