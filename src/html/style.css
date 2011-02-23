@@ -54,23 +54,23 @@ a:hover, a:focus {color: #509b00; text-decoration: underline;}
 .noCard { padding-top:5px; font-size:18px; font-weight: bold; color:#ec2b2b; }
 .pukBlocked { padding-top:5px; font-size:16px; font-weight: bold; color:#ec2b2b; }
 
-.content {position: relative; top: 70px; padding-left: 35px; padding-right: 35px;}
+.content {position: relative; top: 70px; padding-left: 20px; padding-right: 20px;}
 .contentHeader {color: #54859b; font-family: "Arial, Liberation Sans"; font-weight: bold; font-size: 16px; }
 .content p {color: #355670; font-family: "Arial, Liberation Sans"; font-size: 12px;}
 .statusValid {color: #509b00; font-weight: bold;}
 .statusBlocked, .certBlocked {color: #e80303; font-weight: bold; }
 .certValid {font-weight: bold;}
 
-.leftContent {position: absolute; left: 40px; width: 240px; height: 180px; border-right: 1px solid #dfdfdf; margin-top: 10px; padding-right: 10px; }
+.leftContent {position: absolute; left: 20px; width: 265px; height: 180px; border-right: 1px solid #dfdfdf; margin-top: 10px; padding-right: 5px; }
 .buttonSelectedBottom, .buttonBottom { height: 23px; -webkit-border-radius: 3px; font-family: "Arial, Liberation Sans"; font-size: 12px; margin-left: 0px;}
 .buttonSelectedBottom { background-image: url('qrc:/html/images/buttonSelected.png'); border: 1px solid #ce911b; color: #00355f;}
 .buttonBottom { background-image: url('qrc:/html/images/button.png'); border: 1px solid #1a4b79; color: #ffffff;}
 
-.rightContent {position: absolute; left: 290px; width: 245px; margin-top: 10px; height: 180px; padding-left: 30px;}
-#signBottomButtons, #authBottomButtons { position: absolute; bottom:0px; left: 0px; height: 30px; width:250; z-index: 1; }
-#signUpdateDiv, #authUpdateDiv { position: absolute; bottom:30px; left: 0px; height: 25px; width:250; z-index: 1; }
+.rightContent {position: absolute; left: 280px; width: 265px; margin-top: 10px; height: 180px; padding-left: 25px;}
+#signBottomButtons, #authBottomButtons { position: absolute; bottom:0px; left: 0px; height: 30px; width:270; z-index: 1; }
+#signUpdateDiv, #authUpdateDiv { position: absolute; bottom:30px; left: 0px; height: 25px; width:265; z-index: 1; }
 
-.keyBlocked { position: absolute; bottom: 35px; width: 220px; padding: 5px;
+.keyBlocked { position: absolute; bottom: 35px; width: 245px; padding: 5px;
 	font-family: "Arial, Liberation Sans"; font-size: 12px; font-weight: bold; color: #e80303; border: 1px solid #e80303; -webkit-border-radius: 5px; }
 				
 label	 {color: #355670; font-weight: bold;}
