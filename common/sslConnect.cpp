@@ -164,7 +164,7 @@ bool SSLConnectPrivate::connectToHost( SSLConnect::RequestType type )
 		{
 			PinDialog p( PinDialog::Pin1PinpadType, cert, flags, qApp->activeWindow() );
 			PINPADThread t( pslot );
-			QObject::connect( &t, SIGNAL(started()), &p, SLOT(startTimer()) );
+			QObject::connect( &t, SIGNAL(started()), &p, SIGNAL(startTimer()) );
 			p.open();
 			err = t.waitForDone();
 		}
