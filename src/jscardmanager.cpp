@@ -168,14 +168,20 @@ void JsCardManager::pollCard()
 		qDebug() << e.what();
 		if ( cardReaders.size() > 0 && numReaders == 0 )
 		{
-			cardReaders = QHash<QString,ReaderState>();
+			cardReaders.clear();
 			emit cardEvent( "cardRemoved", cardReaders.value(0).id );
 		}
         // For now ignore any errors that might have happened during polling.
         // We don't want to spam users too often.
     }
 	if ( numReaders == 0 )
+	{
+		if ( pollTimer.isActive() )
+			pollTimer.start( 5000 );
+		delete cardMgr;
+		cardMgr = 0;
 		emit cardEvent( "cardRemoved", -1 );
+	}
 }
 
 bool JsCardManager::isInReader( const QString &cardId )
