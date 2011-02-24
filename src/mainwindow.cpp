@@ -82,6 +82,13 @@ MainWindow::~MainWindow()
 #endif
 }
 
+void MainWindow::raiseAndRead()
+{
+	raise();
+	activateWindow();
+	page()->mainFrame()->evaluateJavaScript( "selectReader()" );
+}
+
 void MainWindow::retranslate( const QString &lang )
 {
 	appTranslator->load( ":/translations/" + lang );

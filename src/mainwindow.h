@@ -41,6 +41,9 @@ public:
 	JsCardManager* cardManager() { return jsCardManager; }
 	void retranslate( const QString &lang );
 
+public slots:
+	void raiseAndRead();
+
 private:
 	JsExtender *m_jsExtender;
 	JsCardManager *jsCardManager;

@@ -37,7 +37,7 @@ int main(int argc, char *argv[])
 
 	if( app.isRunning() )
 	{
-		app.activateWindow();
+		app.sendMessage( "" );
 		return 0;
 	}
 
@@ -45,7 +45,7 @@ int main(int argc, char *argv[])
 	SSL_library_init();
 
 	MainWindow w;
-	app.setActivationWindow( &w );
+	QObject::connect( &app, SIGNAL(messageReceived(QString)), &w, SLOT(raiseAndRead()) );
     w.show();
     return app.exec();
 }
