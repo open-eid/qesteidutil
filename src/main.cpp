@@ -1,8 +1,8 @@
 /*
  * QEstEidUtil
  *
- * Copyright (C) 2009,2010 Jargo Kõster <jargo@innovaatik.ee>
- * Copyright (C) 2009,2010 Raul Metsma <raul@innovaatik.ee>
+ * Copyright (C) 2009-2011 Jargo Kõster <jargo@innovaatik.ee>
+ * Copyright (C) 2009-2011 Raul Metsma <raul@innovaatik.ee>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -21,13 +21,19 @@
  */
 
 #include <qtsingleapplication.h>
-#include <openssl/ssl.h>
 
 #include "mainwindow.h"
 #include "version.h"
 
+#if defined(Q_OS_WIN)
+#include <Windows.h>
+#endif
+
 int main(int argc, char *argv[])
 {
+#if defined(Q_OS_WIN)
+	AllowSetForegroundWindow( ASFW_ANY );
+#endif
 	QtSingleApplication app(argc, argv);
 	app.setApplicationName( APP );
 	app.setApplicationVersion( VER_STR( FILE_VER_DOT ) );
@@ -40,9 +46,6 @@ int main(int argc, char *argv[])
 		app.sendMessage( "" );
 		return 0;
 	}
-
-	SSL_load_error_strings();
-	SSL_library_init();
 
 	MainWindow w;
 	QObject::connect( &app, SIGNAL(messageReceived(QString)), &w, SLOT(raiseAndRead()) );
