@@ -85,6 +85,7 @@ MainWindow::~MainWindow()
 void MainWindow::raiseAndRead()
 {
 	raise();
+	showNormal();
 	activateWindow();
 	page()->mainFrame()->evaluateJavaScript( "selectReader()" );
 }
