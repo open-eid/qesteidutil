@@ -116,7 +116,7 @@ var htmlStrings = {
 	
 	"labelMobile": new tr( "Mobiil-ID on võimalus kasutada isikutuvastamiseks ja digitaalallkirja andmiseks ID-kaardi asemel mobiiltelefoni.", "Mobiil-ID is possibility to use mobile phone instead of ID-card for identification and digital signing.", "Mobiil-ID - это возможность идентифицировать личность и ставить цифровую подпись при помощи мобильного телефона, наравне с ID-картой." ),
 	"labelMobile2": new tr( "Mobiil-ID kasutamiseks on vajalik uus SIM-kaart, mille sa saad endale mobiilsideoperaatori käest. Kui selline kaart on sul juba olemas, tuleb teenus aktiveerida.", "To use Mobiil-ID it is needed to use a SIM card that supports this feature. If such a SIM card is already purchased, then it has to be activated.", "Для пользования Mobiil-ID вам понадобится SIM-карта с поддержкой этой технологии. Новую карту можно получить у вашего мобильного оператора. Если такая карта уже установлена, следует активировать услугу." ),
-	"labelMobileReadMore": new tr( "Loe täpsemalt id.ee kodulehelt", "More info from id.ee", "Подробности - на портале id.ee" ),
+	"labelMobileReadMore": new tr( "Loe täpsemalt mobiil.id.ee kodulehelt", "More info from mobiil.id.ee", "Подробности - на портале mobiil.id.ee" ),
 	"mobileNumber": new tr( "Mobiili number", "Mobile number", "Номер моб. телефона" ),
 	"mobileOperator": new tr( "Mobiili operaator", "Mobile operator", "Оператор моб. телефона" ),
 	"mobileStatus": new tr( "Staatus", "Mobile status", "Статус" ),
