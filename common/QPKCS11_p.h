@@ -72,7 +72,7 @@ public:
 	}
 
 private:
-	void run() { result = d->f->C_Login( d->session, *(d->pslot), 0, 0 ); }
+	void run() { result = d->f->C_Login( d->session, CKU_USER, 0, 0 ); }
 
 	QPKCS11Private *d;
 	unsigned long result;
