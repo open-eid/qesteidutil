@@ -257,6 +257,9 @@ QString SslCertificate::policyInfo( const QString &index ) const
 	return QString();
 }
 
+bool SslCertificate::showCN() const
+{ return subjectInfo( "GN" ).isEmpty() && subjectInfo( "SN" ).isEmpty(); }
+
 QString SslCertificate::signatureAlgorithm() const
 {
 	if( !handle() )

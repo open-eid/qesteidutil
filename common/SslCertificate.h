@@ -80,6 +80,7 @@ public:
 	QHash<KeyUsage,QString> keyUsage() const;
 	QStringList policies() const;
 	QString		policyInfo( const QString &oid ) const;
+	bool		showCN() const;
 	QString		signatureAlgorithm() const;
 	QString		subjectInfo( SubjectInfo subject ) const;
 	QString		subjectInfo( const QByteArray &tag ) const;
