@@ -244,7 +244,7 @@
     </message>
     <message>
         <source>Authendicating</source>
-        <translation type="unfinished"></translation>
+        <translation>Isikutuvastus</translation>
     </message>
 </context>
 <context>
