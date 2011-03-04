@@ -238,6 +238,14 @@
         <source>PIN has been entered incorrectly one time</source>
         <translation>Pin введён неправильно один раз</translation>
     </message>
+    <message>
+        <source>Signing</source>
+        <translation>Подписывание</translation>
+    </message>
+    <message>
+        <source>Authendicating</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SSLConnect</name>

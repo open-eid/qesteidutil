@@ -37,65 +37,62 @@ PinDialog::PinDialog( QWidget *parent )
 :	QDialog( parent )
 {}
 
-PinDialog::PinDialog( PinType type, const TokenData &t, QWidget *parent )
+PinDialog::PinDialog( PinFlags flags, const TokenData &t, QWidget *parent )
 {
 	SslCertificate c = t.cert();
-	init( type, c.toString( c.showCN() ? "CN serialNumber" : "GN SN serialNumber" ), t.flags() );
+	init( flags, c.toString( c.showCN() ? "CN serialNumber" : "GN SN serialNumber" ), t.flags() );
 }
 
-PinDialog::PinDialog( PinType type, const QSslCertificate &cert, TokenData::TokenFlags flags, QWidget *parent )
+PinDialog::PinDialog( PinFlags flags, const QSslCertificate &cert, TokenData::TokenFlags token, QWidget *parent )
 :	QDialog( parent )
 {
 	SslCertificate c = cert;
-	init( type, c.toString( c.isTempel() ? "CN serialNumber" : "GN SN serialNumber" ), flags );
+	init( flags, c.toString( c.isTempel() ? "CN serialNumber" : "GN SN serialNumber" ), token );
 }
 
-PinDialog::PinDialog( PinType type, const QString &title, TokenData::TokenFlags flags, QWidget *parent )
+PinDialog::PinDialog( PinFlags flags, const QString &title, TokenData::TokenFlags token, QWidget *parent )
 :	QDialog( parent )
-{ init( type, title, flags ); }
+{ init( flags, title, token ); }
 
-void PinDialog::init( PinType type, const QString &title, TokenData::TokenFlags flags )
+void PinDialog::init( PinFlags flags, const QString &title, TokenData::TokenFlags token )
 {
 	setWindowModality( Qt::ApplicationModal );
-	setWindowTitle( title );
 
 	QLabel *label = new QLabel( this );
 	QVBoxLayout *l = new QVBoxLayout( this );
 	l->addWidget( label );
 
-	QString text = QString( "<b>%1</b><br />" ).arg( title );
-	switch( type )
+	QString _title = title;
+	QString text;
+
+	if( token & TokenData::PinFinalTry )
+		text += "<font color='red'><b>" + tr("PIN will be locked next failed attempt") + "</b></font><br />";
+	else if( token & TokenData::PinCountLow )
+		text += "<font color='red'><b>" + tr("PIN has been entered incorrectly one time") + "</b></font><br />";
+
+	text += QString( "<b>%1</b><br />" ).arg( title );
+	if( flags & Pin2Type )
 	{
-	case Pin1Type:
-		text.append( QString( "%2<br />%3" )
-			.arg( tr("Selected action requires auth certificate.") )
-			.arg( tr("For using auth certificate enter PIN1") ) );
-		regexp.setPattern( "\\d{4,12}" );
-		break;
-	case Pin2Type:
-		text.append( QString( "%2<br />%3" )
-			.arg( tr("Selected action requires sign certificate.") )
-			.arg( tr("For using sign certificate enter PIN2") ) );
+		_title = tr("Signing") + " - " + title;
+		text += tr("Selected action requires sign certificate.") + "<br />" +
+			(flags & PinpadFlag ?
+				tr("For using sign certificate enter PIN2 with pinpad") :
+				tr("For using sign certificate enter PIN2") );
 		regexp.setPattern( "\\d{5,12}" );
-		break;
-	case Pin1PinpadType:
-		text.append( QString( "%2<br />%3" )
-			.arg( tr("Selected action requires auth certificate.") )
-			.arg( tr("For using auth certificate enter PIN1 with pinpad") ) );
-		break;
-	case Pin2PinpadType:
-		text.append( QString( "%2<br />%3" )
-			.arg( tr("Selected action requires sign certificate.") )
-			.arg( tr("For using sign certificate enter PIN2 with pinpad") ) );
-		break;
 	}
-	if( flags & TokenData::PinFinalTry )
-		text.append( QString( "<br />").append( tr("PIN will be locked next failed attempt") ) );
-	else if( flags & TokenData::PinCountLow )
-		text.append( QString( "<br />").append( tr("PIN has been entered incorrectly one time") ) );
+	else
+	{
+		_title = tr("Authendicating") + " - " + title;
+		text += tr("Selected action requires auth certificate.") + "<br />" +
+			(flags & PinpadFlag ?
+				tr("For using auth certificate enter PIN1 with pinpad") :
+				tr("For using auth certificate enter PIN1") );
+		regexp.setPattern( "\\d{4,12}" );
+	}
+	setWindowTitle( _title );
 	label->setText( text );
 
-	if( type == Pin1PinpadType || type == Pin2PinpadType )
+	if( flags & PinpadFlag )
 	{
 		setWindowFlags( (windowFlags() | Qt::CustomizeWindowHint) & ~Qt::WindowCloseButtonHint );
 		QProgressBar *progress = new QProgressBar( this );

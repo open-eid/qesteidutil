@@ -238,6 +238,14 @@
         <source>PIN has been entered incorrectly one time</source>
         <translation>PIN-i on sisestatud vigaselt üks kord</translation>
     </message>
+    <message>
+        <source>Signing</source>
+        <translation>Allkirjastamine</translation>
+    </message>
+    <message>
+        <source>Authendicating</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SSLConnect</name>

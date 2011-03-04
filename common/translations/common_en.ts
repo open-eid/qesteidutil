@@ -238,6 +238,14 @@
         <source>PIN has been entered incorrectly one time</source>
         <translation>PIN has been entered incorrectly one time</translation>
     </message>
+    <message>
+        <source>Signing</source>
+        <translation>Signing</translation>
+    </message>
+    <message>
+        <source>Authendicating</source>
+        <translation>Authendicating</translation>
+    </message>
 </context>
 <context>
     <name>SSLConnect</name>

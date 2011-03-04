@@ -35,18 +35,19 @@ class PinDialog: public QDialog
 {
 	Q_OBJECT
 public:
-	enum PinType
+	enum PinFlags
 	{
-		Pin1Type,
-		Pin2Type,
-		Pin1PinpadType,
-		Pin2PinpadType,
+		Pin1Type = 0,
+		Pin2Type = 1,
+		PinpadFlag = 2,
+		Pin1PinpadType = Pin1Type|PinpadFlag,
+		Pin2PinpadType = Pin2Type|PinpadFlag,
 	};
 	PinDialog( QWidget *parent = 0 );
-	PinDialog( PinType type, const TokenData &t, QWidget *parent = 0 );
-	PinDialog( PinType type, const QSslCertificate &cert, TokenData::TokenFlags flags, QWidget *parent = 0 );
-	PinDialog( PinType type, const QString &title, TokenData::TokenFlags flags, QWidget *parent = 0 );
-	void init( PinType type, const QString &title, TokenData::TokenFlags flags );
+	PinDialog( PinFlags flags, const TokenData &t, QWidget *parent = 0 );
+	PinDialog( PinFlags flags, const QSslCertificate &cert, TokenData::TokenFlags token, QWidget *parent = 0 );
+	PinDialog( PinFlags flags, const QString &title, TokenData::TokenFlags token, QWidget *parent = 0 );
+	void init( PinFlags flags, const QString &title, TokenData::TokenFlags token );
 
 	QString text() const;
 
