@@ -36,11 +36,6 @@ set( HEADERS
 	TokenData.h
 	)
 
-if( APPLE )
-	set( MOC_HEADERS ${MOC_HEADERS} Application_mac.h )
-	set( SOURCES Application_mac.mm )
-endif( APPLE )
-
 QT4_WRAP_CPP( MOC_SOURCES ${MOC_HEADERS} )
 set( SOURCES
 	${SOURCES}
@@ -60,8 +55,12 @@ set( SOURCES
 	sslConnect.cpp
 	TokenData.cpp
 	)
+if( APPLE )
+	set( SOURCES ${SOURCES} Application_mac.mm )
+endif( APPLE )
 
 include_directories(
+	${CMAKE_SOURCE_DIR}
 	${CMAKE_CURRENT_SOURCE_DIR}
 	${CMAKE_CURRENT_BINARY_DIR}
 	${OPENSSL_INCLUDE_DIR}

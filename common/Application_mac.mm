@@ -1,8 +1,8 @@
 /*
  * QEstEidCommon
  *
- * Copyright (C) 2010 Jargo Kõster <jargo@innovaatik.ee>
- * Copyright (C) 2010 Raul Metsma <raul@innovaatik.ee>
+ * Copyright (C) 2010-2011 Jargo Kõster <jargo@innovaatik.ee>
+ * Copyright (C) 2010-2011 Raul Metsma <raul@innovaatik.ee>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,10 +20,7 @@
  *
  */
 
-#include "Application_mac.h"
 #include "Common.h"
-
-#include <QApplication>
 
 #ifdef QT_MAC_USE_COCOA
 #include <Cocoa/Cocoa.h>
@@ -65,48 +62,30 @@
 
 struct ApplicationStruct { ApplicationObjC *applicationObjC; };
 
-ApplicationObj::ApplicationObj( QObject *parent )
-: QObject( parent )
-, eventsLoaded( false )
-, d( new ApplicationStruct )
-{
-	d->applicationObjC = [[ApplicationObjC alloc] init];
-	qApp->installEventFilter( this );
-}
-
-ApplicationObj::~ApplicationObj()
-{
-	[d->applicationObjC release];
-	delete d;
-}
-
-bool ApplicationObj::eventFilter( QObject *o, QEvent *e )
-{
-	// Load here because cocoa NSApplication overides events
-	if( o == qApp && e->type() == QEvent::ApplicationActivate && !eventsLoaded )
-	{
-		mac_install_event_handler( this );
-		eventsLoaded = true;
-	}
-	return QObject::eventFilter( o, e );
-}
-
 #else
 #include <Carbon/Carbon.h>
-static OSStatus appleEventHandler( const AppleEvent *event, AppleEvent *, long )
+static OSStatus appleEventHandler( const AppleEvent *, AppleEvent *, long )
 {
 	QApplication::postEvent( qApp, new REOpenEvent );
 	return 0;
 }
 #endif
 
-void mac_install_event_handler( QObject *app )
+void Common::initMacEvents()
 {
 #ifdef QT_MAC_USE_COCOA
-	new ApplicationObj( app );
+	macEvents = new ApplicationStruct;
+	macEvents->applicationObjC = [[ApplicationObjC alloc] init];
 #else
-	Q_UNUSED( app )
 	AEEventHandlerUPP appleEventHandlerPP = AEEventHandlerUPP(appleEventHandler);
 	AEInstallEventHandler( kCoreEventClass, kAEReopenApplication, appleEventHandlerPP, 0, false );
+#endif
+}
+
+void Common::deinitMacEvents()
+{
+#ifdef QT_MAC_USE_COCOA
+	[macEvents->applicationObjC release];
+	delete macEvents;
 #endif
 }

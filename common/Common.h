@@ -22,14 +22,17 @@
 
 #pragma once
 
-#include <QObject>
+#include "qtsingleapplication/src/QtSingleApplication"
 
+#include <QEvent>
+
+struct ApplicationStruct;
 class QSslCertificate;
 class QStringList;
 class QUrl;
 class TokenData;
 
-class Common: public QObject
+class Common: public QtSingleApplication
 {
 	Q_OBJECT
 public:
@@ -38,7 +41,10 @@ public:
 		AuthCert,
 		SignCert,
 	};
-	Common( QObject *parent = 0 );
+	Common( int &argc, char **argv );
+	virtual ~Common();
+
+	virtual bool event( QEvent *e );
 
 	static bool canWrite( const QString &filename );
 	static QString fileSize( quint64 bytes );
@@ -54,10 +60,20 @@ public:
 public Q_SLOTS:
 	void browse( const QUrl &url );
 	void mailTo( const QUrl &url );
-};
 
-#ifdef Q_OS_MAC
-#include <QEvent>
+protected:
+	void initDigiDoc();
+
+private:
+#if defined(Q_OS_LINUX)
+	static QByteArray fileEncoder( const QString &filename ) { return filename.toUtf8(); }
+	static QString fileDecoder( const QByteArray &filename ) { return QString::fromUtf8( filename ); }
+#elif defined(Q_OS_MAC)
+	void initMacEvents();
+	void deinitMacEvents();
+	ApplicationStruct *macEvents;
+#endif
+};
 
 class REOpenEvent: public QEvent
 {
@@ -65,4 +81,3 @@ public:
 	enum { Type = QEvent::User + 1 };
 	REOpenEvent(): QEvent( QEvent::Type(Type) ) {}
 };
-#endif

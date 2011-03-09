@@ -31,32 +31,39 @@
 #include <QDesktopServices>
 #include <QDir>
 #include <QFileInfo>
+#include <QPalette>
 #include <QProcess>
 #include <QTextStream>
 #include <QUrl>
 
 #include <stdlib.h>
 
-#ifdef Q_OS_WIN
+#if defined(Q_OS_WIN)
 #include <QLibrary>
 
 #include <windows.h>
 #include <mapi.h>
-#endif
-
-#ifdef Q_OS_MAC
-#include "Application_mac.h"
-
+#elif defined(Q_OS_MAC)
 #include <Carbon/Carbon.h>
 #endif
 
-Common::Common( QObject *parent )
-:	QObject( parent )
+Common::Common( int &argc, char **argv )
+:	QtSingleApplication( argc, argv )
 {
-	QDesktopServices::setUrlHandler( "browse", this, "browse" );
-	QDesktopServices::setUrlHandler( "mailto", this, "mailTo" );
-#ifdef Q_OS_MAC
-	mac_install_event_handler( parent );
+#if defined(Q_OS_WIN)
+	AllowSetForegroundWindow( ASFW_ANY );
+#elif defined(Q_OS_MAC)
+	macEvents = 0;
+#ifndef QT_MAC_USE_COCOA
+	initMacEvents();
+#endif
+#endif
+}
+
+Common::~Common()
+{
+#if defined(Q_OS_MAC)
+	deinitMacEvents();
 #endif
 }
 
@@ -110,6 +117,39 @@ QString Common::helpUrl()
 	if( lang == "en" ) return "http://support.sk.ee/eng/";
 	if( lang == "ru" ) return "http://support.sk.ee/ru/";
 	return "http://support.sk.ee";
+}
+
+void Common::initDigiDoc()
+{
+	setStyleSheet(
+		"QDialogButtonBox { dialogbuttonbox-buttons-have-icons: 0; }\n"
+		"* { font: 12px \"Arial, Liberation Sans\"; }"
+	);
+	QPalette p = palette();
+	p.setBrush( QPalette::Link, QBrush( "#509B00" ) );
+	p.setBrush( QPalette::LinkVisited, QBrush( "#509B00" ) );
+	setPalette( p );
+
+	qRegisterMetaType<QSslCertificate>("QSslCertificate");
+	qRegisterMetaType<TokenData>("TokenData");
+
+	QDesktopServices::setUrlHandler( "browse", this, "browse" );
+	QDesktopServices::setUrlHandler( "mailto", this, "mailTo" );
+
+#if defined(Q_OS_LINUX)
+	QFile::setEncodingFunction( fileEncoder );
+	QFile::setDecodingFunction( fileDecoder );
+#endif
+}
+
+bool Common::event( QEvent *e )
+{
+#ifdef QT_MAC_USE_COCOA
+	// Load here because cocoa NSApplication overides events
+	if( e->type() == QEvent::ApplicationActivate && !macEvents )
+		initMacEvents();
+#endif
+	return QtSingleApplication::event( e );
 }
 
 QString Common::fileSize( quint64 bytes )
