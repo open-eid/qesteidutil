@@ -74,6 +74,8 @@ static OSStatus appleEventHandler( const AppleEvent *, AppleEvent *, long )
 void Common::initMacEvents()
 {
 #ifdef QT_MAC_USE_COCOA
+	if( macEvents )
+		return;
 	macEvents = new ApplicationStruct;
 	macEvents->applicationObjC = [[ApplicationObjC alloc] init];
 #else
@@ -85,6 +87,8 @@ void Common::initMacEvents()
 void Common::deinitMacEvents()
 {
 #ifdef QT_MAC_USE_COCOA
+	if( !macEvents )
+		return;
 	[macEvents->applicationObjC release];
 	delete macEvents;
 #endif
