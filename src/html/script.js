@@ -240,7 +240,7 @@ function readCardData( translate )
 		} else if ( esteidData.authCert.isDigiID() ) {
 			document.getElementById('liPersonBirth').style.display = 'none';
 			document.getElementById('liPersonCitizen').style.display = 'none';		    
-			document.getElementById('liEmail').style.display = 'none';
+			document.getElementById('liEmail').style.display = 'block';
 			document.getElementById('liCardValidTo').style.display = 'none';
 			document.getElementById('liCardThisIs').style.display = 'none';
 			document.getElementById('liCardThisIsDigiID').style.display = 'block';
