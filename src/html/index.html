@@ -137,7 +137,7 @@
 			<trtag trcode="labelCertUnblock2"></trtag>
 		</p>
 	</div>
-	<div class="rightContent">
+	<div class="rightContent" id="bpin1ContentRight">
 		<label>
 			<trtag trcode="labelPUK"></trtag><br />
 			<input type="password" name="bpin1OldPin" id="bpin1OldPin" maxlength="12" onKeyPress="handlekey('bpin1NewPin'); return checkNumeric(event);">
@@ -156,6 +156,12 @@
         <input type="button" trcode="inputChange" onClick="unblockPin1();" onKeyPress="checkEnter( event, this );" class="buttonBottom" id="inputUnblockPin1" />
         <input type="button" trcode="inputCancel" onClick="setActive('cert','');" onKeyPress="checkEnter( event, this );" class="buttonBottom" />		
 	</div>
+	<div class="rightContent" id="bpin1ContentRight2">
+		<trtag trcode="PinPadbpin1"></trtag>
+		<br /><br />
+        <input type="button" trcode="inputChange" onClick="unblockPin1();" onKeyPress="checkEnter( event, this );" class="buttonBottom" id="inputUnblockPin1" />
+        <input type="button" trcode="inputCancel" onClick="setActive('cert','');" onKeyPress="checkEnter( event, this );" class="buttonBottom" />		
+	</div>
   </div>
   <!-- PIN1 blokeeringu l6pp -->
   
@@ -171,7 +177,7 @@
 		</p>
 		<a href="#" style="font-size:12px;" onClick="setActive('ppin1','');"><trtag trcode="linkPIN1withPUK"></trtag></a>
 	</div>
-	<div class="rightContent">
+	<div class="rightContent" id="pin1ContentRight">
 		<label>
 			<trtag trcode="labelCurrentPIN1"></trtag>
 			<input type="password" name="pin1OldPin" id="pin1OldPin" maxlength="12" onKeyPress="handlekey('pin1NewPin'); return checkNumeric(event);">
@@ -190,6 +196,12 @@
         <input type="button" trcode="inputChange" onClick="changePin1();" onKeyPress="checkEnter( event, this );" class="buttonBottom" id="inputChangePin1" />
         <input type="button" trcode="inputCancel" onClick="setActive('cert','');" onKeyPress="checkEnter( event, this );" class="buttonBottom" />		
 	</div>
+	<div class="rightContent" id="pin1ContentRight2">
+		<trtag trcode="PinPadpin1"></trtag>
+		<br /><br />
+        <input type="button" trcode="inputChange" onClick="changePin1();" onKeyPress="checkEnter( event, this );" class="buttonBottom" id="inputChangePin1" />
+        <input type="button" trcode="inputCancel" onClick="setActive('cert','');" onKeyPress="checkEnter( event, this );" class="buttonBottom" />		
+	</div>
   </div>
   <!-- PIN1 muutmine l6pp -->
   
@@ -204,7 +216,7 @@
 			<trtag trcode="labelChangingPIN13"></trtag>
 		</p>
 	</div>
-	<div class="rightContent">
+	<div class="rightContent" id="ppin1ContentRight">
 		<label>
 			<trtag trcode="labelPUK"></trtag>
 			 <br />
@@ -224,7 +236,13 @@
 		<input type="button" trcode="inputChange" onClick="changePin1PUK();" onKeyPress="checkEnter( event, this );" class="buttonBottom" id="inputChangePin1p" />
 		<input type="button" trcode="inputCancel" onClick="setActive('cert','');" onKeyPress="checkEnter( event, this );" class="buttonBottom" />
 	</div>
-  </div>
+	<div class="rightContent" id="ppin1ContentRight2">
+		<trtag trcode="PinPadppin1"></trtag>
+		<br /><br />
+		<input type="button" trcode="inputChange" onClick="changePin1PUK();" onKeyPress="checkEnter( event, this );" class="buttonBottom" id="inputChangePin1p" />
+		<input type="button" trcode="inputCancel" onClick="setActive('cert','');" onKeyPress="checkEnter( event, this );" class="buttonBottom" />
+	</div>
+</div>
   <!-- PIN1 muutmine PUKiga l6pp -->
 
   <!-- PIN2 blokeeringu algus -->
@@ -241,7 +259,7 @@
 			<trtag trcode="labelCertUnblock2"></trtag>
 		</p>
 	</div>
-	<div class="rightContent">
+	<div class="rightContent" id="bpin2ContentRight">
 		<label>
 			<trtag trcode="labelPUK"></trtag><br />
 			<input type="password" name="bpin2OldPin" id="bpin2OldPin" maxlength="12" onKeyPress="handlekey('bpin2NewPin'); return checkNumeric(event);">
@@ -260,6 +278,12 @@
         <input type="button" trcode="inputChange" onClick="unblockPin2();" onKeyPress="checkEnter( event, this );" class="buttonBottom" id="inputUnblockPin2" />
         <input type="button" trcode="inputCancel" onClick="setActive('cert','');" onKeyPress="checkEnter( event, this );" class="buttonBottom" />		
 	</div>
+	<div class="rightContent" id="bpin2ContentRight2">
+		<trtag trcode="PinPadbpin2"></trtag>
+		<br /><br />
+        <input type="button" trcode="inputChange" onClick="unblockPin2();" onKeyPress="checkEnter( event, this );" class="buttonBottom" id="inputUnblockPin2" />
+        <input type="button" trcode="inputCancel" onClick="setActive('cert','');" onKeyPress="checkEnter( event, this );" class="buttonBottom" />		
+	</div>
   </div>
   <!-- PIN2 blokeeringu l6pp -->
   
@@ -275,7 +299,7 @@
 		</p>
 		<a href="#" style="font-size:12px;" onClick="setActive('ppin2','');"><trtag trcode="linkPIN2withPUK"></trtag></a>
 	</div>
-	<div class="rightContent">
+	<div class="rightContent" id="pin2ContentRight">
 		<label>
 			<trtag trcode="labelCurrentPIN2"></trtag>
 			 <br />
@@ -295,7 +319,13 @@
         <input type="button" trcode="inputChange" onClick="changePin2();" onKeyPress="checkEnter( event, this );" class="buttonBottom" id="inputChangePin2" />
         <input type="button" trcode="inputCancel" onClick="setActive('cert','');" onKeyPress="checkEnter( event, this );" class="buttonBottom" />		
 	</div>
-  </div>
+	<div class="rightContent" id="pin2ContentRight2">
+		<trtag trcode="PinPadpin2"></trtag>
+		<br /><br />
+        <input type="button" trcode="inputChange" onClick="changePin2();" onKeyPress="checkEnter( event, this );" class="buttonBottom" id="inputChangePin2" />
+        <input type="button" trcode="inputCancel" onClick="setActive('cert','');" onKeyPress="checkEnter( event, this );" class="buttonBottom" />		
+	</div>
+</div>
   <!-- PIN2 muutmine l6pp -->
   
   <!-- PIN2 muutmine PUKiga algus -->
@@ -309,7 +339,7 @@
 			<trtag trcode="labelChangingPIN23"></trtag>
 		</p>
 	</div>
-	<div class="rightContent">
+	<div class="rightContent" id="ppin2ContentRight">
 		<label>
 			<trtag trcode="labelPUK"></trtag>
 			 <br />
@@ -329,6 +359,12 @@
 		<input type="button" trcode="inputChange" onClick="changePin2PUK();" onKeyPress="checkEnter( event, this );" class="buttonBottom" id="inputChangePin2p" />
 		<input type="button" trcode="inputCancel" onClick="setActive('cert','');" onKeyPress="checkEnter( event, this );" class="buttonBottom" />
 	</div>
+	<div class="rightContent" id="ppin2ContentRight2">
+		<trtag trcode="PinPadppin2"></trtag>
+		<br /><br />
+		<input type="button" trcode="inputChange" onClick="changePin2PUK();" onKeyPress="checkEnter( event, this );" class="buttonBottom" id="inputChangePin2p" />
+		<input type="button" trcode="inputCancel" onClick="setActive('cert','');" onKeyPress="checkEnter( event, this );" class="buttonBottom" />
+	</div>	
   </div>
   <!-- PIN2 muutmine PUKiga l6pp -->
 
@@ -424,7 +460,7 @@
 			<trtag trcode="labelChangingPUK2"></trtag>
 		</p>
 	</div>
-	<div class="rightContent">
+	<div class="rightContent" id="cpukContentRight">
 		<label>
 			<trtag trcode="labelCurrentPUK"></trtag>
 			<input type="password" name="pukOldPin" id="pukOldPin" maxlength="12" onKeyPress="handlekey('pukNewPin'); return checkNumeric(event);">
@@ -440,6 +476,12 @@
 			<input type="password" name="pukNewPin2" id="pukNewPin2" maxlength="12" onKeyPress="handlekey('buttonChangePuk'); return checkNumeric(event);">
 		</label>
 		<br />
+        <input type="button" trcode="inputChange" onClick="changePuk();" onKeyPress="checkEnter( event, this );" class="buttonBottom" id="buttonChangePuk" />
+        <input type="button" trcode="inputCancel" onClick="setActive('puk','');" onKeyPress="checkEnter( event, this );" class="buttonBottom" />		
+	</div>
+	<div class="rightContent" id="cpukContentRight2">
+		<trtag trcode="PinPadcpuk"></trtag>
+		<br /><br />
         <input type="button" trcode="inputChange" onClick="changePuk();" onKeyPress="checkEnter( event, this );" class="buttonBottom" id="buttonChangePuk" />
         <input type="button" trcode="inputCancel" onClick="setActive('puk','');" onKeyPress="checkEnter( event, this );" class="buttonBottom" />		
 	</div>

@@ -392,42 +392,98 @@ function setActive( content, el )
 			document.getElementById('pukNewPin').value = "";
 			document.getElementById('pukNewPin2').value = "";
 			document.getElementById('pukOldPin').focus();
+            if( esteidData.isSecureConnection() )
+            {  
+                document.getElementById('cpukContentRight2').style.display = 'block';
+                document.getElementById('cpukContentRight').style.display = 'none';
+            } else {
+                document.getElementById('cpukContentRight2').style.display = 'none';
+                document.getElementById('cpukContentRight').style.display = 'block';
+            }
 			break;
 		case "pin1":
 			document.getElementById('pin1OldPin').value = "";
 			document.getElementById('pin1NewPin').value = "";
 			document.getElementById('pin1NewPin2').value = "";
 			document.getElementById('pin1OldPin').focus();
+            if( esteidData.isSecureConnection() )
+            {  
+                document.getElementById('pin1ContentRight2').style.display = 'block';
+                document.getElementById('pin1ContentRight').style.display = 'none';
+            } else {
+                document.getElementById('pin1ContentRight2').style.display = 'none';
+                document.getElementById('pin1ContentRight').style.display = 'block';
+            }
 			break;
 		case "ppin1":
 			document.getElementById('ppin1OldPin').value = "";
 			document.getElementById('ppin1NewPin').value = "";
 			document.getElementById('ppin1NewPin2').value = "";
 			document.getElementById('ppin1OldPin').focus();
-			break;
+            if( esteidData.isSecureConnection() )
+            {  
+                document.getElementById('ppin1ContentRight2').style.display = 'block';
+                document.getElementById('ppin1ContentRight').style.display = 'none';
+            } else {
+                document.getElementById('ppin1ContentRight2').style.display = 'none';
+                document.getElementById('ppin1ContentRight').style.display = 'block';
+            }
+           break;
 		case "pin2":
 			document.getElementById('pin2OldPin').value = "";
 			document.getElementById('pin2NewPin').value = "";
 			document.getElementById('pin2NewPin2').value = "";
 			document.getElementById('pin2OldPin').focus();
+            if( esteidData.isSecureConnection() )
+            {  
+                document.getElementById('pin2ContentRight2').style.display = 'block';
+                document.getElementById('pin2ContentRight').style.display = 'none';
+            } else {
+                document.getElementById('pin2ContentRight2').style.display = 'none';
+                document.getElementById('pin2ContentRight').style.display = 'block';
+            }
 			break;
 		case "ppin2":
 			document.getElementById('ppin2OldPin').value = "";
 			document.getElementById('ppin2NewPin').value = "";
 			document.getElementById('ppin2NewPin2').value = "";
 			document.getElementById('ppin2OldPin').focus();
+            if( esteidData.isSecureConnection() )
+            {  
+                document.getElementById('ppin2ContentRight2').style.display = 'block';
+                document.getElementById('ppin2ContentRight').style.display = 'none';
+            } else {
+                document.getElementById('ppin2ContentRight2').style.display = 'none';
+                document.getElementById('ppin2ContentRight').style.display = 'block';
+            }
 			break;
 		case "bpin1":
 			document.getElementById('bpin1OldPin').value = "";
 			document.getElementById('bpin1NewPin').value = "";
 			document.getElementById('bpin1NewPin2').value = "";
 			document.getElementById('bpin1OldPin').focus();
+            if( esteidData.isSecureConnection() )
+            {  
+                document.getElementById('bpin1ContentRight2').style.display = 'block';
+                document.getElementById('bpin1ContentRight').style.display = 'none';
+            } else {
+                document.getElementById('bpin1ContentRight2').style.display = 'none';
+                document.getElementById('bpin1ContentRight').style.display = 'block';
+            }
 			break;
 		case "bpin2":
 			document.getElementById('bpin2OldPin').value = "";
 			document.getElementById('bpin2NewPin').value = "";
 			document.getElementById('bpin2NewPin2').value = "";
 			document.getElementById('bpin2OldPin').focus();
+            if( esteidData.isSecureConnection() )
+            {  
+                document.getElementById('bpin2ContentRight2').style.display = 'block';
+                document.getElementById('bpin2ContentRight').style.display = 'none';
+            } else {
+                document.getElementById('bpin2ContentRight2').style.display = 'none';
+                document.getElementById('bpin2ContentRight').style.display = 'block';
+            }
 			break;
 		case "email":
 			try {
@@ -730,6 +786,23 @@ function changePin2()
 
 function changePin( type )
 {
+    if( esteidData.isSecureConnection() )
+    {
+        eval("var chgResult = esteidData.changePin" + type + "('', '')");
+        if ( chgResult == "1" )
+        {
+		    _alert( 'notice', _( 'PIN' + type + 'Changed' ) );
+		    setActive('cert','');
+	    } else {
+		    _alert( 'error', _( chgResult ) );
+            if ( chgResult == 'PIN' + type + 'Blocked' )
+            {
+                readCardData();
+				setActive('cert','');
+            }
+        }
+        return;
+    }
 	var oldVal=document.getElementById('pin' + type + 'OldPin').value;
 	if (oldVal==null || oldVal.length < 4)
 	{
@@ -800,7 +873,8 @@ function changePin( type )
 		document.getElementById('pin' + type + 'NewPin2').focus();
 		return;		
 	}
-	if (eval("esteidData.changePin" + type + "(newVal, oldVal)"))
+    eval("var chgResult = esteidData.changePin" + type + "(newVal, oldVal)");
+	if (chgResult == "1")
 	{
 		document.getElementById('pin' + type + 'OldPin').value = "";
 		document.getElementById('pin' + type + 'NewPin').value = "";
@@ -819,6 +893,23 @@ function changePin2PUK()
 
 function changePinPUK( type )
 {
+    if( esteidData.isSecureConnection() )
+    {
+        eval("var chgResult = esteidData.unblockPin" + type + "('', '')");
+        if ( chgResult == "1" )
+        {
+		    _alert( 'notice', _( 'PIN' + type + 'Changed' ) );
+		    setActive('puk','');
+	    } else {
+		    _alert( 'error', _( chgResult ) );
+            if ( chgResult == 'PUKBlocked' )
+            {
+                readCardData();
+				setActive('cert','');
+            }
+        }
+        return;
+    }
 	var oldVal=document.getElementById('ppin' + type + 'OldPin').value;
 	if (oldVal==null || oldVal.length < 4)
 	{
@@ -895,7 +986,8 @@ function changePinPUK( type )
 		document.getElementById('ppin' + type + 'NewPin').focus();
 		return;
 	}
-	if ( eval('esteidData.unblockPin' + type + '(newVal, oldVal)') )
+    eval('var chgResult = esteidData.unblockPin' + type + '(newVal, oldVal)');
+	if ( chgResult == '1' )
 	{
 		document.getElementById('ppin' + type + 'OldPin').value = "";
 		document.getElementById('ppin' + type + 'NewPin').value = "";
@@ -908,6 +1000,23 @@ function changePinPUK( type )
 
 function changePuk()
 {
+    if( esteidData.isSecureConnection() )
+    {
+        eval("var chgResult = esteidData.changePuk('', '')");
+        if ( chgResult == "1" )
+        {
+		    _alert( 'notice', _( 'PUKChanged' ) );
+		    setActive('puk','');
+	    } else {
+		    _alert( 'error', _( chgResult ) );
+            if ( chgResult == 'PUKBlocked' )
+            {
+                readCardData();
+				setActive('cert','');
+            }
+        }
+        return;
+    }
 	var oldVal=document.getElementById('pukOldPin').value;
 	if (oldVal==null || oldVal == "")
 	{
@@ -971,7 +1080,8 @@ function changePuk()
 		document.getElementById('pukNewPin2').focus();
 		return;		
 	}
-	if (esteidData.changePuk(newVal, oldVal))
+    eval("var chgResult=esteidData.changePuk(newVal, oldVal)");
+	if (chgResult == "1")
 	{
 		document.getElementById('pukOldPin').value = "";
 		document.getElementById('pukNewPin').value = "";

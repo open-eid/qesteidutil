@@ -75,6 +75,7 @@ public slots:
 	int cardVersion();
 
 	bool canReadCard();
+	bool isSecureConnection();
 	bool isValid();
 
     int getPin1RetryCount( bool connect = false );
@@ -84,11 +85,11 @@ public slots:
 	int getAuthUsageCount();
 	int getSignUsageCount();
 
-    bool changePin1(QString newVal, QString oldVal);
-    bool changePin2(QString newVal, QString oldVal);
-    bool changePuk(QString newVal, QString oldVal);
-    bool unblockPin1(QString newVal, QString puk);
-    bool unblockPin2(QString newVal, QString puk);
+    QString changePin1(QString newVal, QString oldVal);
+    QString changePin2(QString newVal, QString oldVal);
+    QString changePuk(QString newVal, QString oldVal);
+    QString unblockPin1(QString newVal, QString puk);
+    QString unblockPin2(QString newVal, QString puk);
 	bool validatePin1(QString oldVal);
 	bool validatePin2(QString oldVal);
 	bool validatePuk(QString oldVal);
