@@ -376,6 +376,8 @@ QString SSLConnect::getError() { return ERR_reason_error_string( ERR_get_error()
 bool SSLConnect::setCard( const QString &card ) { d->card = card; return d->selectSlot(); }
 void SSLConnect::setPKCS11( const QString &pkcs11, bool unload )
 {
+	d->error = NoError;
+	d->errorString.clear();
 	if( d->p11loaded && d->unload )
 		PKCS11_CTX_unload( d->p11 );
 	d->unload = unload;
