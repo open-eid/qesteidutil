@@ -49,19 +49,19 @@ SettingsDialog::SettingsDialog( QWidget *parent )
 
 void SettingsDialog::accept()
 {
-	QProcess::startDetached( "id-updater.exe", QStringList() <<
-		updateInterval->itemData( updateInterval->currentIndex() ).toString() );
+	QProcess::startDetached( "id-updater", QStringList()
+		<< updateInterval->itemData( updateInterval->currentIndex() ).toString()
+		<< (autoUpdate->isChecked() ? "-autoupdate" : "") );
 	done( 1 );
 }
 
 void SettingsDialog::on_checkUpdates_clicked()
 {
 #ifdef Q_OS_WIN32
-	QProcess::startDetached( "id-updater.exe" );
+	QProcess::startDetached( "id-updater" );
 #else
 	QDesktopServices::openUrl( QUrl(
-		QString("https://installer.id.ee/update/mac/?ver=%1")
-			  .arg( QCoreApplication::applicationVersion() ) ) );
+		QString("https://installer.id.ee/update/mac/?ver=%1").arg( qApp->applicationVersion() ) ) );
 #endif
 	done( 1 );
 }
