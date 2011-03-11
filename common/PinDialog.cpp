@@ -56,6 +56,7 @@ PinDialog::PinDialog( PinFlags flags, const QString &title, TokenData::TokenFlag
 
 void PinDialog::init( PinFlags flags, const QString &title, TokenData::TokenFlags token )
 {
+	setMinimumWidth( 350 );
 	setWindowModality( Qt::ApplicationModal );
 
 	QLabel *label = new QLabel( this );
