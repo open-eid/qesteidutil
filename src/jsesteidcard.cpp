@@ -372,9 +372,10 @@ QString JsEsteidCard::unblockPin2(QString newVal, QString puk)
 	while( retry > 0 )
 	{
 		try {
-			return m_card->unblockSignPin( PinString( newVal.toLatin1() ),
+			bool result = m_card->unblockSignPin( PinString( newVal.toLatin1() ),
                                       PinString( puk.toLatin1() ),
                                       retriesLeft);
+			return result ? "1" : "0";
 		} catch(AuthError &err) {
 			if ( err.m_aborted )
 				return "PUKValidateFailed";
