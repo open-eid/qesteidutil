@@ -32,15 +32,10 @@
 
 using namespace std;
 
-static QString getName( const std::string &data )
-{
-	QTextCodec *c = QTextCodec::codecForName("Windows-1252");
-	return SslCertificate::formatName( c->toUnicode( data.c_str() ) );
-}
-
 JsEsteidCard::JsEsteidCard( QObject *parent )
 :	QObject( parent )
 ,	m_card( 0 )
+,	codec( QTextCodec::codecForName("Windows-1252") )
 {
     m_authCert = new JsCertData( this );
     m_signCert = new JsCertData( this );
@@ -412,6 +407,9 @@ QString JsEsteidCard::getMiddleName()
 {
     return middleName;
 }
+
+QString JsEsteidCard::getName( const std::string &data ) const
+{ return SslCertificate::formatName( codec->toUnicode( data.c_str() ) ); }
 
 QString JsEsteidCard::getSex()
 {

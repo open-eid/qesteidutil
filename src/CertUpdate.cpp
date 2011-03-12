@@ -121,15 +121,14 @@ QByteArray CertUpdate::runStep( int s, QByteArray result )
 		{
 			PinDialog *p = 0;
 			try {
-				SslCertificate c = m_authCert->cert();
 				if ( !card->isSecureConnection() && m_pin.isEmpty() )
 				{
-					p = new PinDialog( PinDialog::Pin1Type, c, 0, qApp->activeWindow() );
+					p = new PinDialog( PinDialog::Pin1Type, m_authCert->cert(), 0, qApp->activeWindow() );
 					if( !p->exec() )
 						throw std::runtime_error( "" );
 					m_pin = p->text();
 				} else if ( card->isSecureConnection() ) {
-					p = new PinDialog( PinDialog::Pin1PinpadType, c, 0, qApp->activeWindow() );
+					p = new PinDialog( PinDialog::Pin1PinpadType, m_authCert->cert(), 0, qApp->activeWindow() );
 					p->show();
 					QApplication::processEvents();
 				}

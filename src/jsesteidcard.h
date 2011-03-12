@@ -101,8 +101,11 @@ signals:
     void cardError(QString func, QString err);
 
 private:
-	PCSCManager *m_cardManager;
 	void handleError(QString msg);
+	QString getName( const std::string &data ) const;
+
+	QTextCodec *codec;
+	PCSCManager *m_cardManager;
 	dword authUsageCount;
 	dword signUsageCount;
 
