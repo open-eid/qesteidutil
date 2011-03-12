@@ -33,11 +33,8 @@
 #include <QTimeLine>
 #include <QVBoxLayout>
 
-PinDialog::PinDialog( QWidget *parent )
-:	QDialog( parent )
-{}
-
 PinDialog::PinDialog( PinFlags flags, const TokenData &t, QWidget *parent )
+:	QDialog( parent )
 {
 	SslCertificate c = t.cert();
 	init( flags, c.toString( c.showCN() ? "CN serialNumber" : "GN SN serialNumber" ), t.flags() );
@@ -47,12 +44,8 @@ PinDialog::PinDialog( PinFlags flags, const QSslCertificate &cert, TokenData::To
 :	QDialog( parent )
 {
 	SslCertificate c = cert;
-	init( flags, c.toString( c.isTempel() ? "CN serialNumber" : "GN SN serialNumber" ), token );
+	init( flags, c.toString( c.showCN() ? "CN serialNumber" : "GN SN serialNumber" ), token );
 }
-
-PinDialog::PinDialog( PinFlags flags, const QString &title, TokenData::TokenFlags token, QWidget *parent )
-:	QDialog( parent )
-{ init( flags, title, token ); }
 
 void PinDialog::init( PinFlags flags, const QString &title, TokenData::TokenFlags token )
 {

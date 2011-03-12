@@ -43,11 +43,8 @@ public:
 		Pin1PinpadType = Pin1Type|PinpadFlag,
 		Pin2PinpadType = Pin2Type|PinpadFlag,
 	};
-	PinDialog( QWidget *parent = 0 );
 	PinDialog( PinFlags flags, const TokenData &t, QWidget *parent = 0 );
 	PinDialog( PinFlags flags, const QSslCertificate &cert, TokenData::TokenFlags token, QWidget *parent = 0 );
-	PinDialog( PinFlags flags, const QString &title, TokenData::TokenFlags token, QWidget *parent = 0 );
-	void init( PinFlags flags, const QString &title, TokenData::TokenFlags token );
 
 	QString text() const;
 
@@ -58,6 +55,8 @@ private Q_SLOTS:
 	void textEdited( const QString &text );
 
 private:
+	void init( PinFlags flags, const QString &title, TokenData::TokenFlags token );
+
 	QLineEdit	*m_text;
 	QPushButton	*ok;
 	QRegExp		regexp;
