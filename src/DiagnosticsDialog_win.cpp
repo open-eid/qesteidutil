@@ -122,10 +122,15 @@ QString DiagnosticsDialog::getLibVersion( const QString &lib ) const
 {
 	try
 	{
-		return QString( "%1 (%2)" ).arg( lib )
-			.arg( QString::fromStdString( DynamicLibrary( lib.toLatin1() ).getVersionStr() ) );
-	} catch( const std::runtime_error & )
-	{ return tr("%1 - failed to get version info").arg( lib ); }
+		return QString( "%1 (%2)" )
+					.arg( lib )
+					.arg( QString::fromStdString( DynamicLibrary( lib.toLatin1() ).getVersionStr() ) );
+	} catch( const std::runtime_error &e )
+	{
+		return QString("%1 - %2")
+				.arg( lib )
+				.arg( QString( e.what() ).contains( "missing" ) ?  tr( "failed to get version info" ) : tr( "library not found" ) );
+	}
 }
 
 QString DiagnosticsDialog::getOS() const

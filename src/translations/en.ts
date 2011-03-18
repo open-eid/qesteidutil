@@ -31,6 +31,11 @@
         <source>Wrong PIN1 code.</source>
         <translation>Wrong PIN1 code.</translation>
     </message>
+    <message>
+        <source>Server sai vale arvu baite, samm: %1.
+Oodati: %2, saadi: %3</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DiagnosticsDialog</name>
@@ -95,10 +100,6 @@
         <translation>Not running</translation>
     </message>
     <message>
-        <source>%1 - failed to get version info</source>
-        <translation>%1 - failed to get version info</translation>
-    </message>
-    <message>
         <source>ID-card package version:</source>
         <translation>ID-card package version:</translation>
     </message>
@@ -121,6 +122,14 @@
     <message>
         <source>Unknown version</source>
         <translation>Unknown version</translation>
+    </message>
+    <message>
+        <source>failed to get version info</source>
+        <translation>failed to get version info</translation>
+    </message>
+    <message>
+        <source>library not found</source>
+        <translation>library not found</translation>
     </message>
 </context>
 <context>

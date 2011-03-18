@@ -31,6 +31,11 @@
         <source>Wrong PIN1 code.</source>
         <translation>Неверный PIN1 код.</translation>
     </message>
+    <message>
+        <source>Server sai vale arvu baite, samm: %1.
+Oodati: %2, saadi: %3</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DiagnosticsDialog</name>
@@ -69,10 +74,6 @@
     <message>
         <source>Card readers</source>
         <translation>Считыватели карт</translation>
-    </message>
-    <message>
-        <source>%1 - failed to get version info</source>
-        <translation>%1 - ошибка при чтении версии</translation>
     </message>
     <message>
         <source>Error reading card data:</source>
@@ -121,6 +122,14 @@
     <message>
         <source>Unknown version</source>
         <translation>Неизвестная версий</translation>
+    </message>
+    <message>
+        <source>failed to get version info</source>
+        <translation>ошибка при чтении версии</translation>
+    </message>
+    <message>
+        <source>library not found</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

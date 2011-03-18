@@ -31,6 +31,11 @@
         <source>Wrong PIN1 code.</source>
         <translation>Vale PIN1 kood.</translation>
     </message>
+    <message>
+        <source>Server sai vale arvu baite, samm: %1.
+Oodati: %2, saadi: %3</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DiagnosticsDialog</name>
@@ -95,10 +100,6 @@
         <translation>Ei tööta</translation>
     </message>
     <message>
-        <source>%1 - failed to get version info</source>
-        <translation>%1 - viga versiooniinfo lugemisel</translation>
-    </message>
-    <message>
         <source>ID-card package version:</source>
         <translation>ID-kaardi paki versioon: </translation>
     </message>
@@ -121,6 +122,14 @@
     <message>
         <source>Unknown version</source>
         <translation>Teadmata versioon</translation>
+    </message>
+    <message>
+        <source>failed to get version info</source>
+        <translation>viga versiooniinfo lugemisel</translation>
+    </message>
+    <message>
+        <source>library not found</source>
+        <translation>moodulit ei leitud</translation>
     </message>
 </context>
 <context>
