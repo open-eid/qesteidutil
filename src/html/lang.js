@@ -92,6 +92,7 @@ var htmlStrings = {
 	"inputPUK": new tr( "PUK kood", "PUK code", "PUK код" ),
 	
 	"inputChange": new tr( "Muuda", "Change", "Измени" ),
+	"inputChangePinPad": new tr( "Muuda PinPad'iga", "Change with PinPad", "Измени PinPad" ),
 	"inputCancel": new tr( "Tühista", "Cancel", "Отменить" ),
 	"inputChangePIN1": new tr( "Muuda PIN1", "Change PIN1", "Поменять PIN1" ),
 	"inputChangePIN2": new tr( "Muuda PIN2", "Change PIN2", "Поменять PIN2" ),
@@ -212,7 +213,15 @@ var eidStrings = {
 	"PUKInvalidRetry": new tr( "Vale PUK kood. Saad veel proovida %d korda.", "Wrong PUK code. You can try %d more times.", "Неверный PUK код. Попыток ещё: %d" ),
 	"PUKBlocked": new tr( "PUK kood blokeeritud.", "PUK blocked", "PUK заблокирован." ),
 	"PUKNewOldSame": new tr( "Kehtiv ja uus PUK peavad olema erinevad!", "Old and new PUK has to be different!", "Старый и новый PUK должны отличаться!" ),
-	"PUKValidateFailed": new tr( "PUK koodi valideerimine ebaõnnestus", "PUK validation failed", "Не удалось распознать PUK" )
+	"PUKValidateFailed": new tr( "PUK koodi valideerimine ebaõnnestus", "PUK validation failed", "Не удалось распознать PUK" ),
+	
+	"PinPadbpin1": new tr( "blocked pin1", "", "" ),
+	"PinPadbpin2": new tr( "blocked pin2", "", "" ),
+	"PinPadpin1": new tr( "change pin1", "", "" ),
+	"PinPadpin2": new tr( "change pin2", "", "" ),
+	"PinPadppin1": new tr( "puk pin1", "", "" ),
+	"PinPadppin2": new tr( "puk pin2", "", "" ),
+	"PinPadcpuk": new tr( "change puk", "", "" )
 };
 
 function selectLanguage()
