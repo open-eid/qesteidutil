@@ -223,18 +223,16 @@ bool DiagnosticsDialog::isPCSCRunning() const
 void DiagnosticsDialog::showDetails()
 {
 	QString ret;
-	QByteArray cmd;
 	QProcess p;
 	p.start( "opensc-tool", QStringList() << "-la" );
-	while( p.waitForReadyRead() )
-		cmd += p.readAll();
+	p.waitForFinished();
+	QByteArray cmd = p.readAll();
 	if ( !cmd.isEmpty() )
 		ret += "<b>" + tr("OpenSC tool:") + "</b><br/> " + cmd.replace( "\n", "<br />" ) + "<br />";
 
-	cmd.clear();
 	p.start( "pkcs11-tool", QStringList() << "-T" );
-	while( p.waitForReadyRead() )
-		cmd += p.readAll();
+	p.waitForFinished();
+	cmd = p.readAll();
 	if ( !cmd.isEmpty() )
 		ret += "<b>" + tr("PKCS11 tool:") + "</b><br/> " + cmd.replace( "\n", "<br />" ) + "<br />";
 

@@ -1,4 +1,4 @@
-/*
+﻿/*
  * QEstEidUtil
  *
  * Copyright (C) 2009,2010 Jargo Kõster <jargo@innovaatik.ee>
@@ -203,29 +203,26 @@ bool DiagnosticsDialog::isPCSCRunning() const
 void DiagnosticsDialog::showDetails()
 {
 	QString ret;
-	QByteArray cmd;
 	QProcess p;
 	p.start( "opensc-tool", QStringList() << "-la" );
-	while( p.waitForReadyRead() )
-		cmd += p.readAll();
+	p.waitForFinished();
+	QByteArray cmd = p.readAll();
 	if ( !cmd.isEmpty() )
 		ret += "<b>" + tr("OpenSC tool:") + "</b><br/> " + cmd.replace( "\n", "<br />" ) + "<br />";
 
-	cmd.clear();
 	p.start( "pkcs11-tool", QStringList() << "-T" );
-	while( p.waitForReadyRead() )
-		cmd += p.readAll();
+	p.waitForFinished();
+	cmd = p.readAll();
 	if ( !cmd.isEmpty() )
 		ret += "<b>" + tr("PKCS11 tool:") + "</b><br/> " + cmd.replace( "\n", "<br />" ) + "<br />";
 
-	cmd.clear();
 #if defined(Q_OS_LINUX)
 	p.start( "lsusb" );
 #else
 	p.start( "system_profiler", QStringList() << "SPUSBDataType" );
 #endif
-	while( p.waitForReadyRead() )
-		cmd += p.readAll();
+	p.waitForFinished();
+	cmd = p.readAll();
 	if ( !cmd.isEmpty() )
 		ret += "<b>" + tr("USB info:") + "</b><br/> " + cmd.replace( "\n", "<br />" ) + "<br />";
 
