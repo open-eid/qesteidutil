@@ -51,6 +51,8 @@ DiagnosticsDialog::DiagnosticsDialog( QWidget *parent )
 	s << "<b>" << tr("Library paths:") << "</b> " << QCoreApplication::libraryPaths().join( ";" ) << "<br />";
 
 	s << "<b>" << tr("Libraries") << ":</b><br />";
+	s << getLibVersion( "digidoc") << "<br />";
+	s << getLibVersion( "digidocpp") << "<br />";
 	s << getLibVersion( "advapi32") << "<br />";
 	s << getLibVersion( "crypt32") << "<br />";
 	s << getLibVersion( "winscard") << "<br />";
@@ -122,9 +124,10 @@ QString DiagnosticsDialog::getLibVersion( const QString &lib ) const
 {
 	try
 	{
+		QString ver = QString::fromStdString( DynamicLibrary( lib.toLatin1() ).getVersionStr() );
 		return QString( "%1 (%2)" )
 					.arg( lib )
-					.arg( QString::fromStdString( DynamicLibrary( lib.toLatin1() ).getVersionStr() ) );
+					.arg( ver == "missing" ? tr( "failed to get version info" ) : ver );
 	} catch( const std::runtime_error &e )
 	{
 		return QString("%1 - %2")
