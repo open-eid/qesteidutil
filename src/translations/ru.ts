@@ -131,6 +131,22 @@ Oodati: %2, saadi: %3</source>
         <source>library not found</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>OpenSC tool:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>PKCS11 tool:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>USB info:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>More info</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>JsCardManager</name>

@@ -80,8 +80,25 @@ QPushButton::hover, QPushButton::focus { background-image: url(:/html/images/but
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>helpRequested()</signal>
+   <receiver>DiagnosticsDialog</receiver>
+   <slot>showDetails()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>299</x>
+     <y>577</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>299</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>save()</slot>
+  <slot>showDetails()</slot>
  </slots>
 </ui>

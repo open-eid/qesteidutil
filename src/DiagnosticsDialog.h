@@ -32,6 +32,7 @@ public:
 
 private slots:
 	void save();
+	void showDetails();
 
 private:
 	bool	isPCSCRunning() const;
