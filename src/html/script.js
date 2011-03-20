@@ -1028,7 +1028,7 @@ function changePuk()
         return;
     }
 	var oldVal=document.getElementById('pukOldPin').value;
-	if (oldVal==null || oldVal == "")
+	if (oldVal==null || oldVal.length < 4 )
 	{
 		_alert( 'warning', _('PUKEnterOld') );
 		document.getElementById('pukOldPin').focus();
