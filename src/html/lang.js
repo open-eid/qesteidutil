@@ -215,6 +215,7 @@ var eidStrings = {
 	"PUKNewOldSame": new tr( "Kehtiv ja uus PUK peavad olema erinevad!", "Old and new PUK has to be different!", "Старый и новый PUK должны отличаться!" ),
 	"PUKValidateFailed": new tr( "PUK koodi valideerimine ebaõnnestus", "PUK validation failed", "Не удалось распознать PUK" ),
 	
+    "EnterPinPadCodes": new tr( "Sisesta PIN/PUK koodid PinPad'ilt", "Enter PIN/PUK codes on PinPad", "" ),
 	"PinPadbpin1": new tr( "blocked pin1", "", "" ),
 	"PinPadbpin2": new tr( "blocked pin2", "", "" ),
 	"PinPadpin1": new tr( "change pin1", "", "" ),

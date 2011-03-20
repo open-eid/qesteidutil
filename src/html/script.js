@@ -788,6 +788,7 @@ function changePin( type )
 {
     if( esteidData.isSecureConnection() )
     {
+        extender.showLoading( _("EnterPinPadCodes") );
         eval("var chgResult = esteidData.changePin" + type + "('', '')");
         if ( chgResult == "1" )
         {
@@ -797,10 +798,12 @@ function changePin( type )
 		    _alert( 'error', _( chgResult ) );
             if ( chgResult == 'PIN' + type + 'Blocked' )
             {
+                extender.closeLoading();
                 readCardData();
 				setActive('cert','');
             }
         }
+        extender.closeLoading();
         return;
     }
 	var oldVal=document.getElementById('pin' + type + 'OldPin').value;
@@ -895,19 +898,23 @@ function changePinPUK( type )
 {
     if( esteidData.isSecureConnection() )
     {
+        extender.showLoading( _("EnterPinPadCodes") );
         eval("var chgResult = esteidData.unblockPin" + type + "('', '')");
         if ( chgResult == "1" )
         {
 		    _alert( 'notice', _( 'PIN' + type + 'Changed' ) );
-		    setActive('puk','');
+            readCardData();
+		    setActive('cert','');
 	    } else {
 		    _alert( 'error', _( chgResult ) );
             if ( chgResult == 'PUKBlocked' )
             {
+                extender.closeLoading();
                 readCardData();
 				setActive('cert','');
             }
         }
+        extender.closeLoading();
         return;
     }
 	var oldVal=document.getElementById('ppin' + type + 'OldPin').value;
@@ -1002,6 +1009,7 @@ function changePuk()
 {
     if( esteidData.isSecureConnection() )
     {
+        extender.showLoading( _("EnterPinPadCodes") );
         eval("var chgResult = esteidData.changePuk('', '')");
         if ( chgResult == "1" )
         {
@@ -1011,10 +1019,12 @@ function changePuk()
 		    _alert( 'error', _( chgResult ) );
             if ( chgResult == 'PUKBlocked' )
             {
+                extender.closeLoading();
                 readCardData();
 				setActive('cert','');
             }
         }
+        extender.closeLoading();
         return;
     }
 	var oldVal=document.getElementById('pukOldPin').value;
@@ -1100,6 +1110,27 @@ function unblockPin2()
 
 function unblockPin( type )
 {
+    if( esteidData.isSecureConnection() )
+    {
+        extender.showLoading( _("EnterPinPadCodes") );
+        eval("var chgResult = esteidData.unblockPin" + type + "('', '')");
+        if ( chgResult == "1" )
+        {
+		    _alert( 'notice', _( 'PIN' + type + 'UnblockSuccess' ) );
+            readCardData();
+		    setActive('cert','');
+	    } else {
+		    _alert( 'error', _( chgResult ) );
+            if ( chgResult == 'PUKBlocked' )
+            {
+                extender.closeLoading();
+                readCardData();
+				setActive('cert','');
+            }
+        }
+        extender.closeLoading();
+        return;
+    }
 	var oldVal=document.getElementById('bpin' + type + 'OldPin').value;
 	if (oldVal==null || oldVal.length < 4)
 	{
@@ -1164,7 +1195,8 @@ function unblockPin( type )
 		document.getElementById('bpin' + type + 'NewPin2').focus();
 		return;		
 	}
-	if (eval('esteidData.unblockPin' + type + '(newVal, oldVal)'))
+    eval('var chgResult = esteidData.unblockPin' + type + '(newVal, oldVal)');
+	if ( chgResult == '1' )
 	{
 		document.getElementById('bpin' + type + 'OldPin').value = "";
 		document.getElementById('bpin' + type + 'NewPin').value = "";

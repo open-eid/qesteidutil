@@ -164,8 +164,8 @@ QString JsEsteidCard::changePin1(QString newVal, QString oldVal)
                                      retriesLeft);
 			return result ? "1" : "0";
 		} catch(AuthError &err) {
-			if ( err.m_aborted )
-				return "PIN1ValidateFailed";
+			if ( err.m_aborted ) return "PIN1ValidateFailed";
+			if ( err.m_blocked ) return "PIN1Blocked";
 			switch( err.SW1 )
 			{
 			case 0x63: return "PIN1Invalid";
@@ -229,8 +229,8 @@ QString JsEsteidCard::changePin2(QString newVal, QString oldVal)
                                      retriesLeft);
 			return result ? "1" : "0";
 		} catch(AuthError &err) {
-			if ( err.m_aborted )
-				return "PIN2ValidateFailed";
+			if ( err.m_aborted ) return "PIN2ValidateFailed";
+			if ( err.m_blocked ) return "PIN2Blocked";
 			switch( err.SW1 )
 			{
 			case 0x63: return "PIN2Invalid";
@@ -294,8 +294,8 @@ QString JsEsteidCard::changePuk(QString newVal, QString oldVal)
                                  retriesLeft);
 			return result ? "1" : "0";
 	    } catch(AuthError &err) {
-			if ( err.m_aborted )
-				return "PUKValidateFailed";
+			if ( err.m_aborted ) return "PUKValidateFailed";
+			if ( err.m_blocked ) return "PUKBlocked";
 			switch( err.SW1 )
 			{
 			case 0x63: return "PUKInvalid";
@@ -333,8 +333,8 @@ QString JsEsteidCard::unblockPin1(QString newVal, QString puk)
                                       retriesLeft);
 			return result ? "1" : "0";
 	    } catch(AuthError &err) {
-			if ( err.m_aborted )
-				return "PUKValidateFailed";
+			if ( err.m_aborted ) return "PUKValidateFailed";
+			if ( err.m_blocked ) return "PUKBlocked";
 			switch( err.SW1 )
 			{
 			case 0x63: return "PUKInvalid";
@@ -372,8 +372,8 @@ QString JsEsteidCard::unblockPin2(QString newVal, QString puk)
                                       retriesLeft);
 			return result ? "1" : "0";
 		} catch(AuthError &err) {
-			if ( err.m_aborted )
-				return "PUKValidateFailed";
+			if ( err.m_aborted ) return "PUKValidateFailed";
+			if ( err.m_blocked ) return "PUKBlocked";
 			switch( err.SW1 )
 			{
 			case 0x63: return "PUKInvalid";
