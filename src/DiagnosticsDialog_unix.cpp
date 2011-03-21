@@ -150,7 +150,6 @@ QString DiagnosticsDialog::getPackageVersion( const QStringList &list, bool retu
 		p.close();
 	}
 #else
-	QProcess p;
 	Q_FOREACH( const QString &package, list )
 	{
 		QStringList params = QStringList() << "read";
@@ -163,18 +162,13 @@ QString DiagnosticsDialog::getPackageVersion( const QStringList &list, bool retu
 		else
 			continue;
 
-		p.start( "defaults", params );
-		p.waitForFinished();
-		if ( p.exitCode() )
-			continue;
-		QByteArray result = p.readAll();
+		QByteArray result = runProcess( "defaults", params );
 		if ( !result.isEmpty() )
 		{
 			if ( returnPackageName )
 				ret += package + " ";
 			ret += result + "<BR />";
 		}
-		p.close();
 	}
 #endif
 
