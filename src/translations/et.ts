@@ -147,6 +147,10 @@ Oodati: %2, saadi: %3</source>
         <source>More info</source>
         <translation>Detailsem</translation>
     </message>
+    <message>
+        <source>Base version:</source>
+        <translation>Baastarkvara:</translation>
+    </message>
 </context>
 <context>
     <name>JsCardManager</name>

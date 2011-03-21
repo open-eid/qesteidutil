@@ -1,8 +1,8 @@
 /*
  * QEstEidUtil
  *
- * Copyright (C) 2009,2010 Jargo Kõster <jargo@innovaatik.ee>
- * Copyright (C) 2009,2010 Raul Metsma <raul@innovaatik.ee>
+ * Copyright (C) 2009-2011 Jargo Kõster <jargo@innovaatik.ee>
+ * Copyright (C) 2009-2011 Raul Metsma <raul@innovaatik.ee>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -36,7 +36,7 @@ private slots:
 
 private:
 	bool	isPCSCRunning() const;
-	QString getBrowsers() const;
+	QString getRegistry( const QString &search = "" ) const;
 	QString getPackageVersion( const QStringList &list, bool returnPackageName = true ) const;
 	QString getProcessor() const;
 	QString getReaderInfo();

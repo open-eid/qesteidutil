@@ -1,8 +1,8 @@
 /*
  * QEstEidUtil
  *
- * Copyright (C) 2009,2010 Jargo Kõster <jargo@innovaatik.ee>
- * Copyright (C) 2009,2010 Raul Metsma <raul@innovaatik.ee>
+ * Copyright (C) 2009-2011 Jargo Kõster <jargo@innovaatik.ee>
+ * Copyright (C) 2009-2011 Raul Metsma <raul@innovaatik.ee>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -96,7 +96,7 @@ DiagnosticsDialog::DiagnosticsDialog( QWidget *parent )
 
 	s << "<b>" << tr("Card readers") << ":</b><br />" << getReaderInfo() << "<br />";
 
-	QString browsers = getBrowsers();
+	QString browsers = getRegistry();
 	if ( !browsers.isEmpty() )
 		s << "<b>" << tr("Browsers:") << "</b><br />" << browsers << "<br /><br />";
 
@@ -105,7 +105,7 @@ DiagnosticsDialog::DiagnosticsDialog( QWidget *parent )
 	buttonBox->addButton( tr( "More info" ), QDialogButtonBox::HelpRole );
 }
 
-QString DiagnosticsDialog::getBrowsers() const
+QString DiagnosticsDialog::getRegistry( const QString & ) const
 {
 #if defined(Q_OS_LINUX)
 	return getPackageVersion( QStringList() << "chromium-browser" << "firefox" << "MozillaFirefox");

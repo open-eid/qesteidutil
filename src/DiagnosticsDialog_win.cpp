@@ -1,8 +1,8 @@
 ﻿/*
  * QEstEidUtil
  *
- * Copyright (C) 2009,2010 Jargo Kõster <jargo@innovaatik.ee>
- * Copyright (C) 2009,2010 Raul Metsma <raul@innovaatik.ee>
+ * Copyright (C) 2009-2011 Jargo Kõster <jargo@innovaatik.ee>
+ * Copyright (C) 2009-2011 Raul Metsma <raul@innovaatik.ee>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -45,6 +45,9 @@ DiagnosticsDialog::DiagnosticsDialog( QWidget *parent )
 	QLocale::Language language = QLocale::system().language();
 	s << (language == QLocale::C ? "English/United States" : QLocale::languageToString( language ) ) << "<br /><br />";
 
+	QString base = getRegistry( "Eesti ID kaardi tarkvara" );
+	if ( !base.isEmpty() )
+		s << "<b>" << tr("Base version:") << "</b> " << base << "<br />";
 	s << "<b>" << tr("ID-card utility version:") << "</b> "<< QCoreApplication::applicationVersion() << "<br />";
 
 	s << "<b>" << tr("OS:") << "</b> " << getOS() << " (" << getBits() << ")<br />";
@@ -69,7 +72,7 @@ DiagnosticsDialog::DiagnosticsDialog( QWidget *parent )
 
 	s << "<b>" << tr("Card readers") << ":</b><br />" << getReaderInfo() << "<br />";
 
-	QString browsers = getBrowsers();
+	QString browsers = getRegistry( "Mozilla|Windows Internet Explorer|Google Chrome" );
 	if ( !browsers.isEmpty() )
 		s << "<b>" << tr("Browsers:") << "</b><br />" << browsers << "<br /><br />";
 
@@ -78,7 +81,7 @@ DiagnosticsDialog::DiagnosticsDialog( QWidget *parent )
 	buttonBox->addButton( tr( "More info" ), QDialogButtonBox::HelpRole );
 }
 
-QString DiagnosticsDialog::getBrowsers() const
+QString DiagnosticsDialog::getRegistry( const QString &search ) const
 {
 	QStringList browsers;
 	Q_FOREACH( const QString &group, QStringList() << "HKEY_LOCAL_MACHINE" << "HKEY_CURRENT_USER" )
@@ -90,11 +93,11 @@ QString DiagnosticsDialog::getBrowsers() const
 			QString version = s.value( key + "/DisplayVersion" ).toString();
 			QString type = s.value( key + "/ReleaseType" ).toString();
 			if( !type.contains( "Update", Qt::CaseInsensitive ) &&
-				name.contains( QRegExp( "Mozilla|Windows Internet Explorer|Google Chrome", Qt::CaseInsensitive ) ) )
+				name.contains( QRegExp( search, Qt::CaseInsensitive ) ) )
 				browsers << QString( "%1 (%2)" ).arg( name, version );
 		}
 	}
-	if ( !browsers.join(",").contains( QRegExp( "Windows Internet Explorer", Qt::CaseInsensitive ) ) )
+	if ( search.contains( "Internet Explorer" ) && !browsers.join(",").contains( QRegExp( "Windows Internet Explorer", Qt::CaseInsensitive ) ) )
 	{
 		QSettings s( "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Internet Explorer", QSettings::NativeFormat );
 		browsers << QString( "Internet Explorer (%2)" ).arg( s.value( "Version" ).toString() );
