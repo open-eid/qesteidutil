@@ -69,8 +69,8 @@ Common::~Common()
 
 bool Common::canWrite( const QString &filename )
 {
-#ifdef Q_OS_WIN
 	QFileInfo i( filename );
+#ifdef Q_OS_WIN
 	if( i.isFile() )
 		return QFile( filename ).open( QFile::WriteOnly|QFile::Append );
 	QFile f( i.absolutePath().append( "/.XXXXXX" ) );
@@ -78,8 +78,7 @@ bool Common::canWrite( const QString &filename )
 	f.remove();
 	return result;
 #else
-	QFileInfo file( filename );
-	return file.isFile() ? file.isWritable() : QFileInfo( file.absolutePath() ).isWritable();
+	return i.isFile() ? i.isWritable() : QFileInfo( i.absolutePath() ).isWritable();
 #endif
 }
 
@@ -122,9 +121,7 @@ QString Common::helpUrl()
 void Common::initDigiDoc()
 {
 	setStyleSheet(
-		"QDialogButtonBox { dialogbuttonbox-buttons-have-icons: 0; }\n"
-		"* { font: 12px \"Arial, Liberation Sans\"; }"
-	);
+		"QDialogButtonBox { dialogbuttonbox-buttons-have-icons: 0; }\n" );
 	QPalette p = palette();
 	p.setBrush( QPalette::Link, QBrush( "#509B00" ) );
 	p.setBrush( QPalette::LinkVisited, QBrush( "#509B00" ) );
