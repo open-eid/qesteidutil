@@ -46,16 +46,12 @@ DiagnosticsDialog::DiagnosticsDialog( QWidget *parent )
 	QLocale::Language language = QLocale::system().language();
 	s << (language == QLocale::C ? "English/United States" : QLocale::languageToString( language ) ) << "<br /><br />";
 
-#if defined(Q_OS_LINUX)
 	QString package = getPackageVersion( QStringList() << "estonianidcard", false );
 	QString utility = getPackageVersion( QStringList() << "qesteidutil", false );
 	if ( !package.isEmpty() )
 		s << "<b>" << tr("ID-card package version:") << "</b> " << package << "<br />";
 	if ( !utility.isEmpty() )
 		s << "<b>" << tr("ID-card utility version:") << "</b> " << utility << "<br />";
-#else
-	s << "<b>" << tr("ID-card utility version:") << "</b> " << QCoreApplication::applicationVersion() << "<br />";
-#endif
 
 	s << "<b>" << tr("OS:") << "</b> ";
 #if defined(Q_OS_LINUX)
@@ -82,13 +78,14 @@ DiagnosticsDialog::DiagnosticsDialog( QWidget *parent )
 	s << "<b>" << tr("Library paths:") << "</b> " << QCoreApplication::libraryPaths().join( ";" ) << "<br />";
 
 	s << "<b>" << tr("Libraries") << ":</b><br />";
+	s << getPackageVersion( QStringList() << "libdigidoc" << "libdigidocpp" );
 #if defined(Q_OS_MAC)
 	QProcess p;
 	p.start( "/Library/OpenSC/bin/opensc-tool", QStringList() << "-i" );
 	p.waitForReadyRead();
 	s << p.readAll() << "<br />";
 #elif defined(Q_OS_LINUX)
-	s << getPackageVersion( QStringList() << "libdigidoc" << "libdigidocpp" << "openssl" << "libpcsclite1" << "pcsc-lite" << "opensc" );
+	s << getPackageVersion( QStringList() << "openssl" << "libpcsclite1" << "pcsc-lite" << "opensc" );
 #endif
 	s << "QT (" << qVersion() << ")<br />" << "<br />";
 
@@ -157,10 +154,15 @@ QString DiagnosticsDialog::getPackageVersion( const QStringList &list, bool retu
 	QProcess p;
 	Q_FOREACH( QString package, list )
 	{
-		QString app = "/Applications/" + package + ".app/Contents/Info";
-		if ( !QFile::exists( app + ".plist") )
+		QStringList params = QStringList() << "read";
+		if ( QFile::exists( "/var/db/receipts/ee.sk.idcard." + package + ".plist") )
+			params << "/var/db/receipts/ee.sk.idcard." + package << "PackageVersion";
+		else if( QFile::exists( "/Library/Receipts/" + package + ".pkg/Contents/Info.plist") )
+			params << "/Library/Receipts/" + package + ".pkg/Contents/Info" << "CFBundleShortVersionString";
+		else
 			continue;
-		p.start( "defaults", QStringList() << "read" << app << "CFBundleShortVersionString" );
+
+		p.start( "defaults", params );
 		p.waitForFinished();
 		if ( p.exitCode() )
 			continue;
