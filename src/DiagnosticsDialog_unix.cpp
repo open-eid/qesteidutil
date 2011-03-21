@@ -24,6 +24,8 @@
 
 #include <QDialogButtonBox>
 #include <QFile>
+#include <QProgressBar>
+#include <QProgressDialog>
 #include <QTextStream>
 #include <QProcess>
 
@@ -199,10 +201,21 @@ bool DiagnosticsDialog::isPCSCRunning() const
 
 void DiagnosticsDialog::showDetails()
 {
+	QProgressDialog box( tr( "Generating diagnostics\n\nPlease wait..." ), QString(), 0, 0, qApp->activeWindow() );
+	box.setWindowTitle( windowTitle() );
+	box.setWindowFlags( (box.windowFlags() | Qt::CustomizeWindowHint) & ~Qt::WindowCloseButtonHint );
+	if( QProgressBar *bar = box.findChild<QProgressBar*>() )
+		bar->setVisible( false );
+	box.open();
+	
+	QApplication::processEvents();
+
 	QString ret;
 	QByteArray cmd = runProcess( "opensc-tool", QStringList() << "-la" );
 	if ( !cmd.isEmpty() )
 		ret += "<b>" + tr("OpenSC tool:") + "</b><br/> " + cmd.replace( "\n", "<br />" ) + "<br />";
+
+	QApplication::processEvents();
 
 	cmd = runProcess( "pkcs11-tool", QStringList() << "-T" );
 	if ( !cmd.isEmpty() )

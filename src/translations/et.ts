@@ -151,6 +151,14 @@ Oodati: %2, saadi: %3</source>
         <source>Base version:</source>
         <translation>Baastarkvara:</translation>
     </message>
+    <message>
+        <source>Generating diagnostics
+
+Please wait...</source>
+        <translation>Koostan diagnostikat
+
+Palun oodake...</translation>
+    </message>
 </context>
 <context>
     <name>JsCardManager</name>
