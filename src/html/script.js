@@ -918,7 +918,7 @@ function changePinPUK( type )
         return;
     }
 	var oldVal=document.getElementById('ppin' + type + 'OldPin').value;
-	if (oldVal==null || oldVal.length < 4)
+	if (oldVal==null || oldVal.length < 8)
 	{
 		_alert( 'warning', _( 'PUKEnterOld' ) );
 		document.getElementById('ppin' + type + 'OldPin').focus();
@@ -1028,7 +1028,7 @@ function changePuk()
         return;
     }
 	var oldVal=document.getElementById('pukOldPin').value;
-	if (oldVal==null || oldVal.length < 4 )
+	if (oldVal==null || oldVal.length < 8 )
 	{
 		_alert( 'warning', _('PUKEnterOld') );
 		document.getElementById('pukOldPin').focus();
@@ -1132,7 +1132,7 @@ function unblockPin( type )
         return;
     }
 	var oldVal=document.getElementById('bpin' + type + 'OldPin').value;
-	if (oldVal==null || oldVal.length < 4)
+	if (oldVal==null || oldVal.length < 8)
 	{
 		_alert( 'warning', _('PUKEnter') );
 		document.getElementById('bpin' + type + 'OldPin').focus();
