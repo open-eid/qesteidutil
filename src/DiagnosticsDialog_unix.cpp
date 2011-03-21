@@ -25,13 +25,22 @@
 #include <QDialogButtonBox>
 #include <QFile>
 #include <QTextStream>
+#include <QProcess>
 
-#if defined(Q_OS_LINUX)
-#include <QProcess>
-#elif defined(Q_OS_MAC)
+#ifdef Q_OS_MAC
 #include <Carbon/Carbon.h>
-#include <QProcess>
 #endif
+
+static QByteArray runProcess( const QString &program, const QStringList &arguments = QStringList() )
+{
+	QProcess p;
+	if( arguments.isEmpty() )
+		p.start( program );
+	else
+		p.start( program, arguments );
+	p.waitForFinished();
+	return p.readAll();
+}
 
 DiagnosticsDialog::DiagnosticsDialog( QWidget *parent )
 :	QDialog( parent )
@@ -54,12 +63,9 @@ DiagnosticsDialog::DiagnosticsDialog( QWidget *parent )
 		s << "<b>" << tr("ID-card utility version:") << "</b> " << utility << "<br />";
 
 	s << "<b>" << tr("OS:") << "</b> ";
-#if defined(Q_OS_LINUX)
-	QProcess p;
-	p.start( "lsb_release", QStringList() << "-s" << "-d" );
-	p.waitForReadyRead();
-	s << p.readAll();
-#elif defined(Q_OS_MAC)
+#ifdef Q_OS_LINUX
+	s << runProcess( "lsb_release", QStringList() << "-s" << "-d" );
+#else
 	SInt32 major, minor, bugfix;
 	
 	if( Gestalt(gestaltSystemVersionMajor, &major) == noErr &&
@@ -71,7 +77,7 @@ DiagnosticsDialog::DiagnosticsDialog( QWidget *parent )
 #endif
 
 	s << " (" << QSysInfo::WordSize << ")<br />";
-#if defined(Q_OS_LINUX)
+#ifdef Q_OS_LINUX
 	s << "<b>" << tr("CPU:") << "</b> " << getProcessor() << "<br /><br />";
 #endif
 
@@ -79,12 +85,9 @@ DiagnosticsDialog::DiagnosticsDialog( QWidget *parent )
 
 	s << "<b>" << tr("Libraries") << ":</b><br />";
 	s << getPackageVersion( QStringList() << "libdigidoc" << "libdigidocpp" );
-#if defined(Q_OS_MAC)
-	QProcess p;
-	p.start( "/Library/OpenSC/bin/opensc-tool", QStringList() << "-i" );
-	p.waitForReadyRead();
-	s << p.readAll() << "<br />";
-#elif defined(Q_OS_LINUX)
+#ifdef Q_OS_MAC
+	s << runProcess(  "/Library/OpenSC/bin/opensc-tool", QStringList() << "-i" ) << "<br />";
+#else
 	s << getPackageVersion( QStringList() << "openssl" << "libpcsclite1" << "pcsc-lite" << "opensc" );
 #endif
 	s << "QT (" << qVersion() << ")<br />" << "<br />";
@@ -104,9 +107,9 @@ DiagnosticsDialog::DiagnosticsDialog( QWidget *parent )
 
 QString DiagnosticsDialog::getRegistry( const QString & ) const
 {
-#if defined(Q_OS_LINUX)
-	return getPackageVersion( QStringList() << "chromium-browser" << "firefox" << "MozillaFirefox");
-#elif defined(Q_OS_MAC)
+#ifdef Q_OS_LINUX
+	return getPackageVersion( QStringList() << "chromium-browser" << "firefox" << "MozillaFirefox" );
+#else
 	return getPackageVersion( QStringList() << "Google Chrome" << "Firefox" << "Safari" );
 #endif
 }
@@ -114,7 +117,7 @@ QString DiagnosticsDialog::getRegistry( const QString & ) const
 QString DiagnosticsDialog::getPackageVersion( const QStringList &list, bool returnPackageName ) const
 {
 	QString ret;
-#if defined(Q_OS_LINUX)
+#ifdef Q_OS_LINUX
 	QStringList params;
 	QProcess p;
 	p.start( "which", QStringList() << "dpkg-query" );
@@ -135,7 +138,7 @@ QString DiagnosticsDialog::getPackageVersion( const QStringList &list, bool retu
 	}
 	p.close();
 
-	Q_FOREACH( QString package, list )
+	Q_FOREACH( const QString &package, list )
 	{
 		p.start( cmd, QStringList() << params << package );
 		p.waitForFinished();
@@ -150,14 +153,16 @@ QString DiagnosticsDialog::getPackageVersion( const QStringList &list, bool retu
 		}
 		p.close();
 	}
-#elif defined(Q_OS_MAC)
+#else
 	QProcess p;
-	Q_FOREACH( QString package, list )
+	Q_FOREACH( const QString &package, list )
 	{
 		QStringList params = QStringList() << "read";
-		if ( QFile::exists( "/var/db/receipts/ee.sk.idcard." + package + ".plist") )
+		if( QFile::exists( "/Applications/" + package + ".app/Contents/Info.plist" ) )
+			params << "/Applications/" + package + ".app/Contents/Info" << "CFBundleShortVersionString";
+		else if( QFile::exists( "/var/db/receipts/ee.sk.idcard." + package + ".plist" ) )
 			params << "/var/db/receipts/ee.sk.idcard." + package << "PackageVersion";
-		else if( QFile::exists( "/Library/Receipts/" + package + ".pkg/Contents/Info.plist") )
+		else if( QFile::exists( "/Library/Receipts/" + package + ".pkg/Contents/Info.plist" ) )
 			params << "/Library/Receipts/" + package + ".pkg/Contents/Info" << "CFBundleShortVersionString";
 		else
 			continue;
@@ -182,49 +187,35 @@ QString DiagnosticsDialog::getPackageVersion( const QStringList &list, bool retu
 
 QString DiagnosticsDialog::getProcessor() const
 {
-	QProcess p;
-	p.start( "sh -c \"cat /proc/cpuinfo | grep -m 1 model\\ name\"" );
-	p.waitForReadyRead();
-	return p.readAll();
+	return runProcess( "sh -c \"cat /proc/cpuinfo | grep -m 1 model\\ name\"" );
 }
 
 bool DiagnosticsDialog::isPCSCRunning() const
 {
-	QProcess p;
-#if defined(Q_OS_LINUX)
-	p.start( "pidof", QStringList() << "pcscd" );
-#elif defined(Q_OS_MAC)
-	p.start( "sh -c \"ps ax | grep -v grep | grep pcscd\"" );
+#ifdef Q_OS_LINUX
+	QByteArray result = runProcess( "pidof", QStringList() << "pcscd" );
 #else
-	return true;
+	QByteArray result = runProcess( "sh -c \"ps ax | grep -v grep | grep pcscd\"" );
 #endif
-	p.waitForFinished();
-	return !p.readAll().trimmed().isEmpty();
+	return !result.trimmed().isEmpty();
 }
 
 void DiagnosticsDialog::showDetails()
 {
 	QString ret;
-	QProcess p;
-	p.start( "opensc-tool", QStringList() << "-la" );
-	p.waitForFinished();
-	QByteArray cmd = p.readAll();
+	QByteArray cmd = runProcess( "opensc-tool", QStringList() << "-la" );
 	if ( !cmd.isEmpty() )
 		ret += "<b>" + tr("OpenSC tool:") + "</b><br/> " + cmd.replace( "\n", "<br />" ) + "<br />";
 
-	p.start( "pkcs11-tool", QStringList() << "-T" );
-	p.waitForFinished();
-	cmd = p.readAll();
+	cmd = runProcess( "pkcs11-tool", QStringList() << "-T" );
 	if ( !cmd.isEmpty() )
 		ret += "<b>" + tr("PKCS11 tool:") + "</b><br/> " + cmd.replace( "\n", "<br />" ) + "<br />";
 
-#if defined(Q_OS_LINUX)
-	p.start( "lsusb" );
+#ifdef Q_OS_LINUX
+	cmd = runProcess( "lsusb" );
 #else
-	p.start( "system_profiler", QStringList() << "SPUSBDataType" );
+	cmd = runProcess( "system_profiler", QStringList() << "SPUSBDataType" );
 #endif
-	p.waitForFinished();
-	cmd = p.readAll();
 	if ( !cmd.isEmpty() )
 		ret += "<b>" + tr("USB info:") + "</b><br/> " + cmd.replace( "\n", "<br />" ) + "<br />";
 
