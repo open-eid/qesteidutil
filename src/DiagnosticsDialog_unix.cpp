@@ -77,12 +77,8 @@ DiagnosticsDialog::DiagnosticsDialog( QWidget *parent )
 #endif
 
 	s << " (" << QSysInfo::WordSize << ")<br />";
-#ifdef Q_OS_LINUX
 	s << "<b>" << tr("CPU:") << "</b> " << getProcessor() << "<br /><br />";
-#endif
-
 	s << "<b>" << tr("Library paths:") << "</b> " << QCoreApplication::libraryPaths().join( ";" ) << "<br />";
-
 	s << "<b>" << tr("Libraries") << ":</b><br />";
 	s << getPackageVersion( QStringList() << "libdigidoc" << "libdigidocpp" );
 #ifdef Q_OS_MAC
@@ -187,7 +183,14 @@ QString DiagnosticsDialog::getPackageVersion( const QStringList &list, bool retu
 
 QString DiagnosticsDialog::getProcessor() const
 {
+#ifdef Q_OS_LINUX
 	return runProcess( "sh -c \"cat /proc/cpuinfo | grep -m 1 model\\ name\"" );
+#else
+	QString result = runProcess( "system_profiler", QStringList() << "SPHardwareDataType" );
+	QRegExp reg( "Processor Name:(\\s*)(.*)\n.*Processor Speed:(\\s*)(.*)\n" );
+	reg.setMinimal( true );
+	return reg.indexIn( result ) != -1 ? reg.cap( 2 ) + " (" + reg.cap( 4 ) + ")" : "";
+#endif
 }
 
 bool DiagnosticsDialog::isPCSCRunning() const
