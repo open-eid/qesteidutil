@@ -92,7 +92,7 @@ var htmlStrings = {
 	"inputPUK": new tr( "PUK kood", "PUK code", "PUK код" ),
 	
 	"inputChange": new tr( "Muuda", "Change", "Измени" ),
-	"inputChangePinPad": new tr( "Muuda PinPad'iga", "Change with PinPad", "Измени PinPad" ),
+	"inputChangePinPad": new tr( "Muuda PinPad'iga", "Change with PinPad", "Измени с помощью PinPad" ),
 	"inputCancel": new tr( "Tühista", "Cancel", "Отменить" ),
 	"inputChangePIN1": new tr( "Muuda PIN1", "Change PIN1", "Поменять PIN1" ),
 	"inputChangePIN2": new tr( "Muuda PIN2", "Change PIN2", "Поменять PIN2" ),
@@ -215,14 +215,14 @@ var eidStrings = {
 	"PUKNewOldSame": new tr( "Kehtiv ja uus PUK peavad olema erinevad!", "Old and new PUK has to be different!", "Старый и новый PUK должны отличаться!" ),
 	"PUKValidateFailed": new tr( "PUK koodi valideerimine ebaõnnestus", "PUK validation failed", "Не удалось распознать PUK" ),
 	
-    "EnterPinPadCodes": new tr( "Sisesta PIN/PUK koodid PinPad'ilt", "Enter PIN/PUK codes on PinPad", "" ),
-	"PinPadbpin1": new tr( "blocked pin1", "", "" ),
-	"PinPadbpin2": new tr( "blocked pin2", "", "" ),
-	"PinPadpin1": new tr( "change pin1", "", "" ),
-	"PinPadpin2": new tr( "change pin2", "", "" ),
-	"PinPadppin1": new tr( "puk pin1", "", "" ),
-	"PinPadppin2": new tr( "puk pin2", "", "" ),
-	"PinPadcpuk": new tr( "change puk", "", "" )
+    "EnterPinPadCodes": new tr( "Sisesta PIN/PUK koodid PinPad'ilt", "Enter PIN/PUK codes on PinPad", "Введите PIN/PUK коды с помощью PinPad" ),
+	"PinPadbpin1": new tr( "PinPad lugejaga PIN blokeeringu tühistamiseks tuleb kõigepealt sisestada PUK ning siis kaks korda PIN.", "To unblock PIN code on PinPad reader the PUK code have to be entered first and then PIN code twice.", "Для разблокировки PIN кода Вам необходимо ввести один раз PUK код и два раза новый PIN код с помощью PinPad." ),
+	"PinPadbpin2": new tr( "PinPad lugejaga PIN blokeeringu tühistamiseks tuleb kõigepealt sisestada PUK ning siis kaks korda PIN.", "To unblock PIN code on PinPad reader the PUK code have to be entered first and then PIN code twice.", "Для разблокировки PIN кода Вам необходимо ввести один раз PUK код и два раза новый PIN код с помощью PinPad." ),
+	"PinPadpin1": new tr( "PinPad lugejaga PIN muutmiseks tuleb kõigepealt sisestada vana PIN ning siis kaks korda uus PIN.", "To change PIN code on PinPad reader old PIN code have to be entered first and then new PIN code twice.", "Для замены PIN кода Вам необходимо ввести один раз действующий PIN код и два раза новый PIN код с помощью PinPad." ),
+	"PinPadpin2": new tr( "PinPad lugejaga PIN muutmiseks tuleb kõigepealt sisestada vana PIN ning siis kaks korda uus PIN.", "To change PIN code on Pinpad reader old PIN code have to be entered first and then new PIN code twice.", "Для замены PIN кода Вам необходимо ввести один раз действующий PIN код и два раза новый PIN код с помощью PinPad." ),
+	"PinPadppin1": new tr( "PinPad lugejaga PUK abil PIN muutmiseks tuleb kõigepealt sisestada PUK ning siis kaks korda uus PIN.", "To change PIN code with PUK on PinPad reader the PUK code have to be entered first and then PIN code twice.", "Для изменения PIN кода с помощью PUK кода Вам необходимо ввести один раз PUK код и два раза новый PIN код с помощью PinPad." ),
+	"PinPadppin2": new tr( "PinPad lugejaga PUK abil PIN muutmiseks tuleb kõigepealt sisestada PUK ning siis kaks korda uus PIN.", "To change PIN code with PUK on PinPad reader the PUK code have to be entered first and then PIN code twice.", "Для изменения PIN кода с помощью PUK кода Вам необходимо ввести один раз PUK код и два раза новый PIN код с помощью PinPad." ),
+	"PinPadcpuk": new tr( "PinPad lugejaga PUK muutmiseks tuleb kõigepealt sisestada vana PUK ning siis kaks korda uus PUK.", "To change PUK code on PinPad reader old PUK code have to be entered first and then new PUK code twice.", "Для замены PUK кода с помощью PinPad Вам необходимо ввести один раз старый PUK код и два раза новый." )
 };
 
 function selectLanguage()
