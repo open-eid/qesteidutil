@@ -155,7 +155,9 @@ Oodati: %2, saadi: %3</source>
         <source>Generating diagnostics
 
 Please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation>Составляется диагностический отчёт
+
+Пожалуйста, подождите...</translation>
     </message>
 </context>
 <context>
