@@ -51,7 +51,7 @@ public:
 	SSLConnectPrivate();
 	~SSLConnectPrivate();
 
-	bool connectToHost( SSLConnect::RequestType type );
+	bool connectToHost( const QByteArray &url );
 	bool selectSlot();
 	void setError( SSLConnect::ErrorType type, const QString &msg = QString() );
 

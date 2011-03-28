@@ -112,7 +112,7 @@ SSLConnectPrivate::~SSLConnectPrivate()
 	PKCS11_CTX_free( p11 );
 }
 
-bool SSLConnectPrivate::connectToHost( SSLConnect::RequestType type )
+bool SSLConnectPrivate::connectToHost( const QByteArray &url )
 {
 	if( !p11loaded )
 	{
@@ -228,15 +228,7 @@ bool SSLConnectPrivate::connectToHost( SSLConnect::RequestType type )
 		return false;
 	}
 
-	const char *url = 0;
-	switch( type )
-	{
-	case SSLConnect::AccessCert:
-	case SSLConnect::MobileInfo: url = SK; break;
-	default: url = EESTI; break;
-	}
-	BIO *sock = BIO_new_connect( const_cast<char*>(url) );
-
+	BIO *sock = BIO_new_connect( (char*)url.constData() );
 	BIO_set_conn_port( sock, "https" );
 	if( BIO_do_connect( sock ) <= 0 )
 	{
@@ -311,11 +303,9 @@ SSLConnect::~SSLConnect() { delete d; }
 
 QByteArray SSLConnect::getUrl( RequestType type, const QString &value )
 {
-	if( !d->connectToHost( type ) )
-		return QByteArray();
-
 	QString header;
 	QString label;
+	QByteArray url;
 	switch( type )
 	{
 	case AccessCert:
@@ -336,26 +326,34 @@ QByteArray SSLConnect::getUrl( RequestType type, const QString &value )
 			"Connection: close\r\n\r\n"
 			"%3" )
 			.arg( SK ).arg( s.document().size() ).arg( QString::fromUtf8( s.document() ) );
+		url = SK;
 		break;
 	}
 	case EmailInfo:
 		label = tr("Loading Email info");
 		header = "GET /idportaal/postisysteem.naita_suunamised HTTP/1.0\r\n\r\n";
+		url = EESTI;
 		break;
 	case ActivateEmails:
 		label = tr("Loading Email info");
 		header = QString( "GET /idportaal/postisysteem.lisa_suunamine?%1 HTTP/1.0\r\n\r\n" ).arg( value );
+		url = EESTI;
 		break;
 	case MobileInfo:
 		label = tr("Loading Mobile info");
 		header = value;
+		url = SK;
 		break;
 	case PictureInfo:
 		label = tr("Downloading picture");
 		header = "GET /idportaal/portaal.idpilt HTTP/1.0\r\n\r\n";
+		url = EESTI;
 		break;
 	default: return QByteArray();
 	}
+
+	if( !d->connectToHost( url ) )
+		return QByteArray();
 
 	QByteArray data = header.toUtf8();
 	if( !SSL_write( d->ssl, data.constData(), data.length() ) )
