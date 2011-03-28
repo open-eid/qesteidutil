@@ -134,7 +134,7 @@ bool SSLConnectPrivate::connectToHost( SSLConnect::RequestType type )
 		setError( SSLConnect::PKCS11Error, SSLConnect::tr("no certificate available") );
 		return false;
 	}
-	QSslCertificate cert = SslCertificate::fromX509( Qt::HANDLE((&certs[0])->x509) );
+	QSslCertificate cert = SslCertificate::fromX509( Qt::HANDLE(certs[0].x509) );
 	if( !cert.isValid() )
 	{
 		setError( SSLConnect::PKCS11Error, SSLConnect::tr("Certificate is not valid") );
@@ -188,7 +188,7 @@ bool SSLConnectPrivate::connectToHost( SSLConnect::RequestType type )
 	PKCS11_KEY *authkey = PKCS11_find_key( &certs[0] );
 	if ( !authkey )
 	{
-		setError( SSLConnect::PKCS11Errori, SSLConnect::tr("no key matching certificate available") );
+		setError( SSLConnect::PKCS11Error, SSLConnect::tr("no key matching certificate available") );
 		return false;
 	}
 	EVP_PKEY *pkey = PKCS11_get_private_key( authkey );
@@ -213,7 +213,7 @@ bool SSLConnectPrivate::connectToHost( SSLConnect::RequestType type )
 		return false;
 	}
 
-	if( !SSL_use_certificate( ssl, cert1.x509 ) )
+	if( !SSL_use_certificate( ssl, certs[0].x509 ) )
 	{
 		setError( SSLConnect::SSLError );
 		return false;
