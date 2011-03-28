@@ -29,6 +29,8 @@
 #include <Windows.h>
 #endif
 
+#include <openssl/ssl.h>
+
 int main(int argc, char *argv[])
 {
 #if defined(Q_OS_WIN)
@@ -46,6 +48,8 @@ int main(int argc, char *argv[])
 		app.sendMessage( "" );
 		return 0;
 	}
+
+	SSL_library_init();
 
 	MainWindow w;
 	QObject::connect( &app, SIGNAL(messageReceived(QString)), &w, SLOT(raiseAndRead()) );
