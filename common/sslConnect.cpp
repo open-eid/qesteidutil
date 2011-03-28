@@ -193,14 +193,7 @@ bool SSLConnectPrivate::connectToHost( SSLConnect::RequestType type )
 	}
 	EVP_PKEY *pkey = PKCS11_get_private_key( authkey );
 
-	const SSL_METHOD *method = SSLv23_client_method();
-	if( !method )
-	{
-		setError( SSLConnect::SSLError );
-		return false;
-	}
-
-	SSL_CTX *ctx = SSL_CTX_new( method );
+	SSL_CTX *ctx = SSL_CTX_new( TLSv1_client_method() );
 	if( !ctx )
 	{
 		setError( SSLConnect::SSLError );
@@ -303,7 +296,7 @@ bool SSLConnectPrivate::selectSlot()
 void SSLConnectPrivate::setError( SSLConnect::ErrorType type, const QString &msg )
 {
 	error = type;
-	errorString = msg.isEmpty() ? SSLConnect::getError() : msg;
+	errorString = msg.isEmpty() ? ERR_reason_error_string( ERR_get_error() ) : msg;
 }
 
 
@@ -384,7 +377,6 @@ QByteArray SSLConnect::getUrl( RequestType type, const QString &value )
 SSLConnect::ErrorType SSLConnect::error() const { return d->error; }
 QString SSLConnect::errorString() const { return d->errorString; }
 TokenData::TokenFlags SSLConnect::flags() const { return d->flags; }
-QString SSLConnect::getError() { return ERR_reason_error_string( ERR_get_error() ); }
 bool SSLConnect::setCard( const QString &card ) { d->card = card; return d->selectSlot(); }
 void SSLConnect::setPKCS11( const QString &pkcs11, bool unload )
 {

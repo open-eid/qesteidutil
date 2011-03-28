@@ -60,7 +60,6 @@ public:
 	TokenData::TokenFlags flags() const;
 	QByteArray getUrl( RequestType type, const QString &value = "" );
 	QString pin() const;
-	static QString getError();
 	bool setCard( const QString &card );
 	void setPin( const QString &pin );
 	void setPKCS11( const QString &pkcs11, bool unload = true );
