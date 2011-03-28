@@ -30,14 +30,6 @@
 
 #include <openssl/ssl.h>
 
-#ifndef PKCS11_MODULE
-#  if defined(Q_OS_WIN32)
-#    define PKCS11_MODULE "opensc-pkcs11.dll"
-#  else
-#    define PKCS11_MODULE "opensc-pkcs11.so"
-#  endif
-#endif
-
 // PKCS#11
 #define CKR_OK					(0)
 #define CKR_CANCEL				(1)

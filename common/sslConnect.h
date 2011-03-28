@@ -52,7 +52,7 @@ public:
 		SSLError = 5,
 	};
 
-	SSLConnect( QObject *parent = 0 );
+	SSLConnect( const QString &pkcs11, QObject *parent = 0 );
 	~SSLConnect();
 
 	ErrorType error() const;

@@ -194,35 +194,12 @@ bool SSLConnectPrivate::connectToHost( const QByteArray &url )
 	EVP_PKEY *pkey = PKCS11_get_private_key( authkey );
 
 	SSL_CTX *ctx = SSL_CTX_new( TLSv1_client_method() );
-	if( !ctx )
-	{
-		setError( SSLConnect::SSLError );
-		return false;
-	}
-
-	if( !(ssl = SSL_new( ctx )) )
-	{
-		setError( SSLConnect::SSLError );
-		return false;
-	}
-
-	if( !SSL_use_certificate( ssl, certs[0].x509 ) )
-	{
-		setError( SSLConnect::SSLError );
-		return false;
-	}
-
-	if( !SSL_use_PrivateKey( ssl, pkey ) )
-	{
-		setError( SSLConnect::SSLError );
-		return false;
-	}
-	if( !SSL_check_private_key( ssl ) )
-	{
-		setError( SSLConnect::SSLError );
-		return false;
-	}
-	if( !SSL_set_mode( ssl, SSL_MODE_AUTO_RETRY ) )
+	if( !ctx ||
+		!(ssl = SSL_new( ctx )) ||
+		!SSL_use_certificate( ssl, certs[0].x509 ) ||
+		!SSL_use_PrivateKey( ssl, pkey ) ||
+		!SSL_check_private_key( ssl ) ||
+		!SSL_set_mode( ssl, SSL_MODE_AUTO_RETRY ) )
 	{
 		setError( SSLConnect::SSLError );
 		return false;
@@ -292,11 +269,13 @@ void SSLConnectPrivate::setError( SSLConnect::ErrorType type, const QString &msg
 }
 
 
-SSLConnect::SSLConnect( QObject *parent )
+
+SSLConnect::SSLConnect( const QString &pkcs11, QObject *parent )
 :	QObject( parent )
 ,	d( new SSLConnectPrivate() )
 {
-	setPKCS11( PKCS11_MODULE );
+	if( !pkcs11.isEmpty() )
+		setPKCS11( pkcs11 );
 }
 
 SSLConnect::~SSLConnect() { delete d; }

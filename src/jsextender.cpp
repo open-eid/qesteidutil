@@ -45,6 +45,14 @@
 #include <Authorization.h>
 #endif
 
+#ifndef PKCS11_MODULE
+#  if defined(Q_OS_WIN32)
+#    define PKCS11_MODULE "opensc-pkcs11.dll"
+#  else
+#    define PKCS11_MODULE "opensc-pkcs11.so"
+#  endif
+#endif
+
 JsExtender::JsExtender( MainWindow *main )
 :	QObject( main )
 ,	m_mainWindow( main )
@@ -156,7 +164,7 @@ QByteArray JsExtender::getUrl( SSLConnect::RequestType type, const QString &def 
 	sslError = SSLConnect::NoError;
 	sslErrorString.clear();
 
-	SSLConnect sslConnect;
+	SSLConnect sslConnect( PKCS11_MODULE );
 	if ( !sslConnect.setCard( m_mainWindow->cardManager()->activeCardId() ) )
 	{
 		sslError = sslConnect.error();
