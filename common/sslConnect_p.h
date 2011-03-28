@@ -53,6 +53,7 @@ public:
 
 	bool connectToHost( SSLConnect::RequestType type );
 	bool selectSlot();
+	void setError( SSLConnect::ErrorType type, const QString &msg = QString() );
 
 	bool	unload;
 	PKCS11_CTX *p11;

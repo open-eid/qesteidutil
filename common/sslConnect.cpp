@@ -122,8 +122,7 @@ bool SSLConnectPrivate::connectToHost( SSLConnect::RequestType type )
 
 	if( !selectSlot() )
 	{
-		error = SSLConnect::PKCS11Error;
-		errorString = SSLConnect::tr("no token available");
+		setError( SSLConnect::PKCS11Error, SSLConnect::tr("no token available") );
 		return false;
 	}
 
@@ -132,15 +131,13 @@ bool SSLConnectPrivate::connectToHost( SSLConnect::RequestType type )
 	unsigned int ncerts;
 	if( PKCS11_enumerate_certs( pslot->token, &certs, &ncerts ) || !ncerts )
 	{
-		error = SSLConnect::PKCS11Error;
-		errorString = SSLConnect::tr("no certificate available");
+		setError( SSLConnect::PKCS11Error, SSLConnect::tr("no certificate available") );
 		return false;
 	}
 	QSslCertificate cert = SslCertificate::fromX509( Qt::HANDLE((&certs[0])->x509) );
 	if( !cert.isValid() )
 	{
-		error = SSLConnect::PKCS11Error;
-		errorString = SSLConnect::tr("Certificate is not valid");
+		setError( SSLConnect::PKCS11Error, SSLConnect::tr("Certificate is not valid") );
 		return false;
 	}
 
@@ -153,8 +150,7 @@ bool SSLConnectPrivate::connectToHost( SSLConnect::RequestType type )
 			PinDialog p( PinDialog::Pin1Type, cert, flags, qApp->activeWindow() );
 			if( !p.exec() )
 			{
-				error = SSLConnect::PinCanceledError;
-				errorString = SSLConnect::tr("PIN canceled");
+				setError( SSLConnect::PinCanceledError, SSLConnect::tr("PIN canceled") );
 				return false;
 			}
 			if( PKCS11_login( pslot, 0, p.text().toUtf8() ) < 0 )
@@ -173,21 +169,17 @@ bool SSLConnectPrivate::connectToHost( SSLConnect::RequestType type )
 		case CKR_OK: break;
 		case CKR_CANCEL:
 		case CKR_FUNCTION_CANCELED:
-			error = SSLConnect::PinCanceledError;
-			errorString = SSLConnect::tr("PIN canceled");
+			setError( SSLConnect::PinCanceledError, SSLConnect::tr("PIN canceled") );
 			return false;
 		case CKR_PIN_INCORRECT:
 			selectSlot();
-			error = SSLConnect::PinInvalidError;
-			errorString = SSLConnect::tr("Invalid PIN");
+			setError( SSLConnect::PinInvalidError, SSLConnect::tr("Invalid PIN") );
 			return false;
 		case CKR_PIN_LOCKED:
-			error = SSLConnect::PinLockedError;
-			errorString = SSLConnect::tr("Pin locked");
+			setError( SSLConnect::PinLockedError, SSLConnect::tr("Pin locked") );
 			return false;
 		default:
-			error = SSLConnect::PinInvalidError;
-			errorString = SSLConnect::tr("Invalid PIN");
+			setError( SSLConnect::PinInvalidError, SSLConnect::tr("Invalid PIN") );
 			return false;
 		}
 	}
@@ -196,35 +188,50 @@ bool SSLConnectPrivate::connectToHost( SSLConnect::RequestType type )
 	PKCS11_KEY *authkey = PKCS11_find_key( &certs[0] );
 	if ( !authkey )
 	{
-		error = SSLConnect::PKCS11Error;
-		errorString = SSLConnect::tr("no key matching certificate available");
+		setError( SSLConnect::PKCS11Errori, SSLConnect::tr("no key matching certificate available") );
 		return false;
 	}
 	EVP_PKEY *pkey = PKCS11_get_private_key( authkey );
 
-	ssl = SSL_new( SSL_CTX_new( SSLv23_client_method() ) );
-	if( !SSL_use_certificate( ssl, (&certs[0])->x509 ) )
+	const SSL_METHOD *method = SSLv23_client_method();
+	if( !method )
 	{
-		error = SSLConnect::SSLError;
-		errorString = SSLConnect::getError();
+		setError( SSLConnect::SSLError );
 		return false;
 	}
+
+	SSL_CTX *ctx = SSL_CTX_new( method );
+	if( !ctx )
+	{
+		setError( SSLConnect::SSLError );
+		return false;
+	}
+
+	if( !(ssl = SSL_new( ctx )) )
+	{
+		setError( SSLConnect::SSLError );
+		return false;
+	}
+
+	if( !SSL_use_certificate( ssl, cert1.x509 ) )
+	{
+		setError( SSLConnect::SSLError );
+		return false;
+	}
+
 	if( !SSL_use_PrivateKey( ssl, pkey ) )
 	{
-		error = SSLConnect::SSLError;
-		errorString = SSLConnect::getError();
+		setError( SSLConnect::SSLError );
 		return false;
 	}
 	if( !SSL_check_private_key( ssl ) )
 	{
-		error = SSLConnect::SSLError;
-		errorString = SSLConnect::getError();
+		setError( SSLConnect::SSLError );
 		return false;
 	}
 	if( !SSL_set_mode( ssl, SSL_MODE_AUTO_RETRY ) )
 	{
-		error = SSLConnect::SSLError;
-		errorString = SSLConnect::getError();
+		setError( SSLConnect::SSLError );
 		return false;
 	}
 
@@ -240,8 +247,7 @@ bool SSLConnectPrivate::connectToHost( SSLConnect::RequestType type )
 	BIO_set_conn_port( sock, "https" );
 	if( BIO_do_connect( sock ) <= 0 )
 	{
-		error = SSLConnect::SSLError;
-		errorString = SSLConnect::tr( "Failed to connect to host. Are you connected to the internet?" );
+		setError( SSLConnect::SSLError, SSLConnect::tr( "Failed to connect to host. Are you connected to the internet?" ) );
 		return false;
 	}
 
@@ -249,8 +255,7 @@ bool SSLConnectPrivate::connectToHost( SSLConnect::RequestType type )
 	
 	if ( !SSL_connect( ssl ) )
 	{
-		error = SSLConnect::SSLError;
-		errorString = SSLConnect::getError();
+		setError( SSLConnect::SSLError );
 		return false;
 	}
 
@@ -295,6 +300,11 @@ bool SSLConnectPrivate::selectSlot()
 	return true;
 }
 
+void SSLConnectPrivate::setError( SSLConnect::ErrorType type, const QString &msg )
+{
+	error = type;
+	errorString = msg.isEmpty() ? SSLConnect::getError() : msg;
+}
 
 
 SSLConnect::SSLConnect( QObject *parent )
@@ -357,8 +367,7 @@ QByteArray SSLConnect::getUrl( RequestType type, const QString &value )
 	QByteArray data = header.toUtf8();
 	if( !SSL_write( d->ssl, data.constData(), data.length() ) )
 	{
-		d->error = SSLConnect::SSLError;
-		d->errorString = SSLConnect::getError();
+		d->setError( SSLConnect::SSLError );
 		return QByteArray();
 	}
 	QProgressDialog p( label, QString(), 0, 0, qApp->activeWindow() );
@@ -366,7 +375,10 @@ QByteArray SSLConnect::getUrl( RequestType type, const QString &value )
 	if( QProgressBar *bar = p.findChild<QProgressBar*>() )
 		bar->setTextVisible( false );
 	p.open();
-	return SSLReadThread( d->ssl ).waitForDone();
+	QByteArray result = SSLReadThread( d->ssl ).waitForDone();
+	if( result.isEmpty() )
+		d->setError( SSLConnect::SSLError );
+	return result;
 }
 
 SSLConnect::ErrorType SSLConnect::error() const { return d->error; }
@@ -384,7 +396,6 @@ void SSLConnect::setPKCS11( const QString &pkcs11, bool unload )
 	d->p11loaded = PKCS11_CTX_load( d->p11, pkcs11.toUtf8() ) == 0;
 	if( !d->p11loaded )
 	{
-		d->error = PKCS11Error;
-		d->errorString = tr("failed to load pkcs11 module '%1'").arg( pkcs11 );
+		d->setError( PKCS11Error, tr("failed to load pkcs11 module '%1'").arg( pkcs11 ) );
 	}
 }
