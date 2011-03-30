@@ -23,6 +23,7 @@
 #include "DiagnosticsDialog.h"
 
 #include <QDialogButtonBox>
+#include <QDir>
 #include <QFile>
 #include <QProgressBar>
 #include <QProgressDialog>
@@ -57,12 +58,12 @@ DiagnosticsDialog::DiagnosticsDialog( QWidget *parent )
 	QLocale::Language language = QLocale::system().language();
 	s << (language == QLocale::C ? "English/United States" : QLocale::languageToString( language ) ) << "<br /><br />";
 
-	QString package = getPackageVersion( QStringList() << "estonianidcard", false );
-	QString utility = getPackageVersion( QStringList() << "qesteidutil", false );
+	QStringList package = getPackageVersion( QStringList() << "estonianidcard", false );
+	QStringList utility = getPackageVersion( QStringList() << "qesteidutil", false );
 	if ( !package.isEmpty() )
-		s << "<b>" << tr("ID-card package version:") << "</b> " << package << "<br />";
+		s << "<b>" << tr("ID-card package version:") << "</b> " << package.first() << "<br />";
 	if ( !utility.isEmpty() )
-		s << "<b>" << tr("ID-card utility version:") << "</b> " << utility << "<br />";
+		s << "<b>" << tr("ID-card utility version:") << "</b> " << utility.first() << "<br />";
 
 	s << "<b>" << tr("OS:") << "</b> ";
 #ifdef Q_OS_LINUX
@@ -82,11 +83,11 @@ DiagnosticsDialog::DiagnosticsDialog( QWidget *parent )
 	s << "<b>" << tr("CPU:") << "</b> " << getProcessor() << "<br /><br />";
 	s << "<b>" << tr("Library paths:") << "</b> " << QCoreApplication::libraryPaths().join( ";" ) << "<br />";
 	s << "<b>" << tr("Libraries") << ":</b><br />";
-	s << getPackageVersion( QStringList() << "libdigidoc" << "libdigidocpp" );
+	s << getPackageVersion( QStringList() << "libdigidoc" << "libdigidocpp" ).join( "<br />" ) << "<br />";
 #ifdef Q_OS_MAC
 	s << runProcess(  "/Library/OpenSC/bin/opensc-tool", QStringList() << "-i" ) << "<br />";
 #else
-	s << getPackageVersion( QStringList() << "openssl" << "libpcsclite1" << "pcsc-lite" << "opensc" );
+	s << getPackageVersion( QStringList() << "openssl" << "libpcsclite1" << "pcsc-lite" << "opensc" ).join( "<br />" ) << "<br />";
 #endif
 	s << "QT (" << qVersion() << ")<br />" << "<br />";
 
@@ -94,9 +95,13 @@ DiagnosticsDialog::DiagnosticsDialog( QWidget *parent )
 
 	s << "<b>" << tr("Card readers") << ":</b><br />" << getReaderInfo() << "<br />";
 
-	QString browsers = getRegistry();
+#ifdef Q_OS_LINUX
+	QStringList browsers = getPackageVersion( QStringList() << "chromium-browser" << "firefox" << "MozillaFirefox" );
+#else
+	QStringList browsers = getPackageVersion( QStringList() << "Google Chrome" << "Firefox" << "Safari" );
+#endif
 	if ( !browsers.isEmpty() )
-		s << "<b>" << tr("Browsers:") << "</b><br />" << browsers << "<br /><br />";
+		s << "<b>" << tr("Browsers:") << "</b><br />" << browsers.join( "<br />" ) << "<br /><br />";
 
 	diagnosticsText->setHtml( info );
 
@@ -104,17 +109,11 @@ DiagnosticsDialog::DiagnosticsDialog( QWidget *parent )
 }
 
 QString DiagnosticsDialog::getRegistry( const QString & ) const
-{
-#ifdef Q_OS_LINUX
-	return getPackageVersion( QStringList() << "chromium-browser" << "firefox" << "MozillaFirefox" );
-#else
-	return getPackageVersion( QStringList() << "Google Chrome" << "Firefox" << "Safari" );
-#endif
-}
+{ return QString(); }
 
-QString DiagnosticsDialog::getPackageVersion( const QStringList &list, bool returnPackageName ) const
+QStringList DiagnosticsDialog::getPackageVersion( const QStringList &list, bool returnPackageName ) const
 {
-	QString ret;
+	QStringList ret;
 #ifdef Q_OS_LINUX
 	QStringList params;
 	QProcess p;
@@ -144,11 +143,7 @@ QString DiagnosticsDialog::getPackageVersion( const QStringList &list, bool retu
 			continue;
 		QByteArray result = p.readAll();
 		if ( !result.isEmpty() )
-		{
-			if ( returnPackageName )
-				ret += package + " ";
-			ret += result + "<BR />";
-		}
+			ret << (returnPackageName ? package + " " + result : result);
 		p.close();
 	}
 #else
@@ -161,16 +156,22 @@ QString DiagnosticsDialog::getPackageVersion( const QStringList &list, bool retu
 			params << "/var/db/receipts/ee.sk.idcard." + package << "PackageVersion";
 		else if( QFile::exists( "/Library/Receipts/" + package + ".pkg/Contents/Info.plist" ) )
 			params << "/Library/Receipts/" + package + ".pkg/Contents/Info" << "CFBundleShortVersionString";
+		else if( package == "estonianidcard" )
+		{
+			QStringList ver = QDir( "/Library/EstonianIDCard" ).entryList( QStringList() << "version-*" );
+			if( !ver.isEmpty() )
+			{
+				QString result = ver.first().mid( 8 );
+				ret << (returnPackageName ? package + " " + result : result);
+			}
+			continue;
+		}
 		else
 			continue;
 
 		QByteArray result = runProcess( "defaults", params );
 		if ( !result.isEmpty() )
-		{
-			if ( returnPackageName )
-				ret += package + " ";
-			ret += result + "<BR />";
-		}
+			ret << (returnPackageName ? package + " "  + result : result);
 	}
 #endif
 
@@ -207,7 +208,7 @@ void DiagnosticsDialog::showDetails()
 	if( QProgressBar *bar = box.findChild<QProgressBar*>() )
 		bar->setVisible( false );
 	box.open();
-	
+
 	QApplication::processEvents();
 
 	QString ret;

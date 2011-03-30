@@ -1,4 +1,4 @@
-﻿/*
+/*
  * QEstEidUtil
  *
  * Copyright (C) 2009-2011 Jargo Kõster <jargo@innovaatik.ee>
@@ -193,12 +193,8 @@ QString DiagnosticsDialog::getOS() const
 	return tr("Unknown version");
 }
 
-QString DiagnosticsDialog::getPackageVersion( const QStringList &list, bool returnPackageName ) const
-{
-	QString ret;
-
-	return ret;
-}
+QStringList DiagnosticsDialog::getPackageVersion( const QStringList &list, bool returnPackageName ) const
+{ return QStringList(); }
 
 QString DiagnosticsDialog::getProcessor() const
 {

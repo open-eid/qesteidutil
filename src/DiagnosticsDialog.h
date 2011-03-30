@@ -37,7 +37,7 @@ private slots:
 private:
 	bool	isPCSCRunning() const;
 	QString getRegistry( const QString &search = "" ) const;
-	QString getPackageVersion( const QStringList &list, bool returnPackageName = true ) const;
+	QStringList getPackageVersion( const QStringList &list, bool returnPackageName = true ) const;
 	QString getProcessor() const;
 	QString getReaderInfo();
 #if defined(Q_OS_WIN32)
