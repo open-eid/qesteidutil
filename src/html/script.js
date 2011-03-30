@@ -158,6 +158,9 @@ function selectReader()
 	extender.closeLoading();
 	document.getElementById( 'forUpdate' ).innerHTML += ".";
 	readCardData();
+    try {
+        cardManager.checkCerts();
+    } catch ( err ) {}
 }
 
 function checkReaderCount()
