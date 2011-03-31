@@ -189,10 +189,13 @@ function checkReaderCount()
 	if ( cards < 2 )
 	{
 		document.getElementById( 'headerMenus' ).style.right = '100px';
-                document.getElementById( 'readerSelectDiv' ).style.display = 'none';
+        document.getElementById( 'readerSelectDiv' ).style.display = 'none';
+        $('headerMenus').setStyle( { fontSize: '12px' } );
 	} else {
-                document.getElementById( 'headerMenus' ).style.right = '200px';
-                document.getElementById( 'readerSelectDiv' ).style.display = 'block';
+        document.getElementById( 'headerMenus' ).style.right = '200px';
+        document.getElementById( 'readerSelectDiv' ).style.display = 'block';
+        if ( language == 'ru' )
+            $('headerMenus').setStyle( { fontSize: '10px' } );
 	}
 }
 

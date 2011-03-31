@@ -13,7 +13,7 @@ a:hover, a:focus {color: #509b00; text-decoration: underline;}
 
 #headerMenus { position: absolute; right: 100px; top: 14px; color: #afc6d1; font-family: "Arial, Liberation Sans"; font-size: 12px; }
 #headerMenus ul { display: inline; }
-#headerMenus ul li { list-style: none; padding: 0px 5px 0px 10px; margin: 0px; display: inline; border-left: 1px solid #325e80; font-weight: bold; }
+#headerMenus ul li { list-style: none; padding: 0px 5px 0px 7px; margin: 0px; display: inline; border-left: 1px solid #325e80; font-weight: bold; }
 #headerMenus ul li:first-child { border-left: none; padding-left: 0px;}
 #headerMenus a:link, #headerMenus a:visited {color: #afc6d1;text-decoration: none;}
 #headerMenus a:hover, #headerMenus a:focus {color: #afc6d1; text-decoration: underline;}

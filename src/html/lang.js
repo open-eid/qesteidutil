@@ -228,6 +228,10 @@ var eidStrings = {
 function selectLanguage()
 {
 	language = $('headerSelect').getValue();
+    if ( language == 'ru' && $('readerSelect').options.length > 1 )
+        $('headerMenus').setStyle( { fontSize: '10px' } );
+    else
+        $('headerMenus').setStyle( { fontSize: '12px' } );
 	translateHTML();
 	readCardData( true );
 	extender.setLanguage( language );
