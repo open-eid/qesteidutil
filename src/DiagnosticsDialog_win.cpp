@@ -1,4 +1,4 @@
-/*
+﻿/*
  * QEstEidUtil
  *
  * Copyright (C) 2009-2011 Jargo Kõster <jargo@innovaatik.ee>
@@ -236,7 +236,7 @@ void DiagnosticsDialog::showDetails()
 	QProcess p;
 	p.start( "opensc-tool", QStringList() << "-la" );
 	p.waitForFinished();
-	QByteArray cmd = p.readAll();
+	QString cmd = QString::fromUtf8( p.readAll() );
 	if ( !cmd.isEmpty() )
 		ret += "<b>" + tr("OpenSC tool:") + "</b><br/> " + cmd.replace( "\n", "<br />" ) + "<br />";
 	
@@ -244,7 +244,7 @@ void DiagnosticsDialog::showDetails()
 
 	p.start( "pkcs11-tool", QStringList() << "-T" );
 	p.waitForFinished();
-	cmd = p.readAll();
+	cmd = QString::fromUtf8( p.readAll() );
 	if ( !cmd.isEmpty() )
 		ret += "<b>" + tr("PKCS11 tool:") + "</b><br/> " + cmd.replace( "\n", "<br />" ) + "<br />";
 

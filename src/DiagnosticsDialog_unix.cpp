@@ -212,13 +212,13 @@ void DiagnosticsDialog::showDetails()
 	QApplication::processEvents();
 
 	QString ret;
-	QByteArray cmd = runProcess( "opensc-tool", QStringList() << "-la" );
+	QString cmd = QString::fromUtf8( runProcess( "opensc-tool", QStringList() << "-la" ) );
 	if ( !cmd.isEmpty() )
 		ret += "<b>" + tr("OpenSC tool:") + "</b><br/> " + cmd.replace( "\n", "<br />" ) + "<br />";
 
 	QApplication::processEvents();
 
-	cmd = runProcess( "pkcs11-tool", QStringList() << "-T" );
+	cmd = QString::fromUtf8( runProcess( "pkcs11-tool", QStringList() << "-T" ) );
 	if ( !cmd.isEmpty() )
 		ret += "<b>" + tr("PKCS11 tool:") + "</b><br/> " + cmd.replace( "\n", "<br />" ) + "<br />";
 
