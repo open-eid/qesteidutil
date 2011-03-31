@@ -1,4 +1,4 @@
-﻿/*
+/*
  * QEstEidUtil
  *
  * Copyright (C) 2009-2011 Jargo Kõster <jargo@innovaatik.ee>
