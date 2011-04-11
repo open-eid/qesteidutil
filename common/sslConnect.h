@@ -47,6 +47,7 @@ public:
 		PinCanceledError = 1,
 		PinInvalidError = 2,
 		PinLockedError = 3,
+		PinUnknownError = 6,
 		NoError = -1,
 		PKCS11Error = 4,
 		SSLError = 5,

@@ -274,10 +274,6 @@
         <translation>Отсутствует подключение к интернету!</translation>
     </message>
     <message>
-        <source>Pin locked</source>
-        <translation>PIN заблокирован</translation>
-    </message>
-    <message>
         <source>failed to load pkcs11 module &apos;%1&apos;</source>
         <translation>ошибка при загрузке модуля pkcs11 &apos;%1&apos;</translation>
     </message>
@@ -291,15 +287,23 @@
     </message>
     <message>
         <source>Loading Email info</source>
-        <translation type="unfinished"></translation>
+        <translation>Загрузка электронной почты информации</translation>
     </message>
     <message>
         <source>Loading Mobile info</source>
-        <translation type="unfinished"></translation>
+        <translation>Загрузка Мобильная справка</translation>
     </message>
     <message>
         <source>Downloading picture</source>
-        <translation type="unfinished"></translation>
+        <translation>Загрузку картинок</translation>
+    </message>
+    <message>
+        <source>PIN locked</source>
+        <translation>PIN заблокирован</translation>
+    </message>
+    <message>
+        <source>Failed to validate PIN</source>
+        <translation>Ошибка проверки PIN-кода</translation>
     </message>
 </context>
 <context>

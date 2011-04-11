@@ -97,6 +97,7 @@ SSLConnectPrivate::SSLConnectPrivate()
 ,	ssl( 0 )
 ,	flags( 0 )
 ,	nslots( 0 )
+,	pslots( 0 )
 ,	error( SSLConnect::NoError )
 {}
 
@@ -127,8 +128,8 @@ bool SSLConnectPrivate::connectToHost( const QByteArray &url )
 	}
 
 	// Find token cert
-	PKCS11_CERT *certs;
-	unsigned int ncerts;
+	PKCS11_CERT *certs = 0;
+	unsigned int ncerts = 0;
 	if( PKCS11_enumerate_certs( pslot->token, &certs, &ncerts ) || !ncerts )
 	{
 		setError( SSLConnect::PKCS11Error, SSLConnect::tr("no certificate available") );
@@ -176,10 +177,10 @@ bool SSLConnectPrivate::connectToHost( const QByteArray &url )
 			setError( SSLConnect::PinInvalidError, SSLConnect::tr("Invalid PIN") );
 			return false;
 		case CKR_PIN_LOCKED:
-			setError( SSLConnect::PinLockedError, SSLConnect::tr("Pin locked") );
+			setError( SSLConnect::PinLockedError, SSLConnect::tr("PIN locked") );
 			return false;
 		default:
-			setError( SSLConnect::PinInvalidError, SSLConnect::tr("Invalid PIN") );
+			setError( SSLConnect::PinUnknownError, SSLConnect::tr("Failed to validate PIN") );
 			return false;
 		}
 	}
@@ -240,8 +241,8 @@ bool SSLConnectPrivate::selectSlot()
 	pslot = 0;
 	for( unsigned int i = 0; i < nslots; ++i )
 	{
-		if( (&pslots[i])->token &&
-			card.contains( (&pslots[i])->token->serialnr ) )
+		if( pslots[i].token &&
+			card.contains( pslots[i].token->serialnr ) )
 		{
 			pslot = &pslots[i];
 			break;

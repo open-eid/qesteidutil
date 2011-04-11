@@ -274,10 +274,6 @@
         <translation>Puudub internetiühendus!</translation>
     </message>
     <message>
-        <source>Pin locked</source>
-        <translation>PIN on lukus</translation>
-    </message>
-    <message>
         <source>failed to load pkcs11 module &apos;%1&apos;</source>
         <translation>viga pkcs11 mooduli laadimisel &apos;%1&apos;</translation>
     </message>
@@ -300,6 +296,14 @@
     <message>
         <source>Downloading picture</source>
         <translation>Laadin pilti</translation>
+    </message>
+    <message>
+        <source>PIN locked</source>
+        <translation>PIN on lukus</translation>
+    </message>
+    <message>
+        <source>Failed to validate PIN</source>
+        <translation>PIN-koodi valideerimine ebaõnnestus</translation>
     </message>
 </context>
 <context>

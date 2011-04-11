@@ -274,10 +274,6 @@
         <translation>Failed to connect to host. Are you connected to the internet?</translation>
     </message>
     <message>
-        <source>Pin locked</source>
-        <translation>Pin locked</translation>
-    </message>
-    <message>
         <source>failed to load pkcs11 module &apos;%1&apos;</source>
         <translation>failed to load pkcs11 module &apos;%1&apos;</translation>
     </message>
@@ -301,6 +297,14 @@
     <message>
         <source>Downloading picture</source>
         <translation>Downloading picture</translation>
+    </message>
+    <message>
+        <source>PIN locked</source>
+        <translation>PIN locked</translation>
+    </message>
+    <message>
+        <source>Failed to validate PIN</source>
+        <translation>Failed to validate PIN</translation>
     </message>
 </context>
 <context>
