@@ -156,16 +156,6 @@ QStringList DiagnosticsDialog::getPackageVersion( const QStringList &list, bool 
 			params << "/var/db/receipts/ee.sk.idcard." + package << "PackageVersion";
 		else if( QFile::exists( "/Library/Receipts/" + package + ".pkg/Contents/Info.plist" ) )
 			params << "/Library/Receipts/" + package + ".pkg/Contents/Info" << "CFBundleShortVersionString";
-		else if( package == "estonianidcard" )
-		{
-			QStringList ver = QDir( "/Library/EstonianIDCard" ).entryList( QStringList() << "version-*" );
-			if( !ver.isEmpty() )
-			{
-				QString result = ver.first().mid( 8 );
-				ret << (returnPackageName ? package + " " + result : result);
-			}
-			continue;
-		}
 		else
 			continue;
 
