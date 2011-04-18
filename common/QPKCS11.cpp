@@ -35,6 +35,29 @@ bool QPKCS11Private::attribute( CK_OBJECT_HANDLE obj, CK_ATTRIBUTE_TYPE type, vo
 	return err == CKR_OK;
 }
 
+bool QPKCS11Private::attribute_char( CK_OBJECT_HANDLE obj, CK_ATTRIBUTE_TYPE type, unsigned char **value, unsigned long &size )
+{
+	if( !attribute( obj, CKA_VALUE, 0, size ) )
+		return false;
+	unsigned char *data = new unsigned char[size];
+	if( !attribute( obj, CKA_VALUE, data, size ) )
+	{
+		delete [] data;
+		return false;
+	}
+	*value = data;
+	return true;
+}
+
+bool QPKCS11Private::attribute_bn( CK_OBJECT_HANDLE obj, CK_ATTRIBUTE_TYPE type, BIGNUM **bn )
+{
+	CK_BYTE binary[4196 / 8];
+	unsigned long size = sizeof(binary);
+	if( !attribute( obj, type, binary, size ) && size < 0 )
+		return false;
+	return (*bn = BN_bin2bn( binary, size, 0 ));
+}
+
 QSslCertificate QPKCS11Private::readCert( CK_SLOT_ID slot )
 {
 	if( session )
@@ -48,18 +71,12 @@ QSslCertificate QPKCS11Private::readCert( CK_SLOT_ID slot )
 	if( !findObject( CKO_CERTIFICATE, &obj ) || obj == CK_INVALID_HANDLE )
 		return QSslCertificate();
 
+	unsigned char *cert_data = 0;
 	unsigned long size = 0;
-	if( !attribute( obj, CKA_VALUE, 0, size ) )
+	if( !attribute_char( obj, CKA_VALUE, &cert_data, size ) )
 		return QSslCertificate();
 
-	char *cert_data = new char[size];
-	if( !attribute( obj, CKA_VALUE, (unsigned char*)cert_data, size ) )
-	{
-		delete [] cert_data;
-		return QSslCertificate();
-	}
-
-	QSslCertificate cert = QSslCertificate( QByteArray( cert_data, size ), QSsl::Der );
+	QSslCertificate cert = QSslCertificate( QByteArray( (char*)cert_data, size ), QSsl::Der );
 	delete [] cert_data;
 	return cert;
 }
