@@ -66,11 +66,15 @@ bool QPKCS11Private::attribute_char( CK_OBJECT_HANDLE obj, CK_ATTRIBUTE_TYPE typ
 
 bool QPKCS11Private::attribute_bn( CK_OBJECT_HANDLE obj, CK_ATTRIBUTE_TYPE type, BIGNUM **bn )
 {
-	CK_BYTE binary[4196 / 8];
-	unsigned long size = sizeof(binary);
+	unsigned long size = 0;
+	if( !attribute( obj, type, 0, size ) )
+		return false;
+	CK_BYTE *binary = new CK_BYTE[size];
 	if( !attribute( obj, type, binary, size ) && size < 0 )
 		return false;
-	return (*bn = BN_bin2bn( binary, size, 0 ));
+	*bn = BN_bin2bn( binary, size, 0 );
+	delete [] binary;
+	return *bn;
 }
 
 QSslCertificate QPKCS11Private::readCert( CK_SLOT_ID slot )
