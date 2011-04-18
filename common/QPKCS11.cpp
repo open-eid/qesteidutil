@@ -225,7 +225,7 @@ Qt::HANDLE QPKCS11::key()
 	RSA_set_app_data( rsa, d );
 	EVP_PKEY *key = EVP_PKEY_new();
 	EVP_PKEY_set1_RSA( key, rsa );
-	return key;
+	return Qt::HANDLE(key);
 }
 
 bool QPKCS11::loadDriver( const QString &driver )
