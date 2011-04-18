@@ -1,12 +1,15 @@
 cmake_minimum_required(VERSION 2.8)
 project(qesteidutil)
 set( PROGNAME qesteidutil )
+set( MAJOR_VER 3 )
+set( MINOR_VER 5 )
+set( RELEASE_VER 0 )
 
 # Custom cmake modules
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/modules")
 
-include(CMakeFindFrameworks)
-include(InstallSettings)
+include( InstallSettings )
+include( VersionInfo )
 
 find_package(Qt4 4.6.0 COMPONENTS QtCore QtGui QtNetwork QtWebkit QtXml REQUIRED)
 find_package(OpenSSL REQUIRED)
@@ -14,7 +17,6 @@ find_package(PKCS11)
 find_package(LibP11 REQUIRED)
 find_package(SmartCardpp REQUIRED)
 find_package(LibLtdl REQUIRED)
-find_package(Subversion)
 if(UNIX)
 	# Hack to get around smartcardpp header inclusion scheme
 	find_package(PCSCLite REQUIRED)
@@ -26,17 +28,6 @@ if(MSVC)
     # Needed for smartcardpp
     add_definitions(-D_SECURE_SCL=0)
 endif(MSVC)
-
-if( WIN32 )
-	execute_process( COMMAND "cmd.exe" "/C date /T" OUTPUT_VARIABLE BUILD_DATE )
-	string( REGEX REPLACE ".*([0-3][0-9]).([0-1][0-9]).([0-9][0-9][0-9][0-9]).*" "\\1.\\2.\\3" BUILD_DATE ${BUILD_DATE} )
-elseif( UNIX )
-	execute_process( COMMAND "date" "+%d.%m.%Y" OUTPUT_VARIABLE BUILD_DATE OUTPUT_STRIP_TRAILING_WHITESPACE )
-else( WIN32 )
-	message( SEND_ERROR "date not implemented")
-	set( BUILD_DATE "00.00.0000" )
-endif( WIN32 )
-add_definitions( -DBUILD_DATE=\"${BUILD_DATE}\" )
 
 set(qesteidutil_MOC_HDRS
 	common/AboutWidget.h
@@ -126,21 +117,6 @@ include(${QT_USE_FILE})
 
 add_subdirectory( qtsingleapplication )
 
-set( MAJOR_VER 3 )
-set( MINOR_VER 4 )
-set( RELEASE_VER 0 )
-
-if (Subversion_FOUND AND EXISTS ${PROJECT_SOURCE_DIR}/.svn)
-	Subversion_WC_INFO(${PROJECT_SOURCE_DIR} PROJECT)
-	message(STATUS "Current SVN revision is ${PROJECT_WC_REVISION}")
-	set( BUILD_VER ${PROJECT_WC_REVISION} )
-else (Subversion_FOUND AND EXISTS ${PROJECT_SOURCE_DIR}/.svn)
-	set( BUILD_VER 0 )
-endif (Subversion_FOUND AND EXISTS ${PROJECT_SOURCE_DIR}/.svn)
-
-set( VERSION ${MAJOR_VER}.${MINOR_VER}.${RELEASE_VER}.${BUILD_VER} )
-add_definitions( -DMAJOR_VER=${MAJOR_VER} -DMINOR_VER=${MINOR_VER} -DRELEASE_VER=${RELEASE_VER} -DBUILD_VER=${BUILD_VER} )
-
 include_directories(
     ${CMAKE_SOURCE_DIR}
     ${CMAKE_BINARY_DIR}
@@ -152,6 +128,7 @@ include_directories(
 )
 
 if( APPLE )
+	include( CMakeFindFrameworks )
 	find_library( CORESERVICES_LIB CoreServices )
 	find_library( SECURITY_LIB Security )
 	set( ADDITIONAL_LIBRARIES ${CORESERVICES_LIB} ${SECURITY_LIB} )
