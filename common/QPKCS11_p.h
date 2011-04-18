@@ -30,17 +30,12 @@
 #include <QLibrary>
 #include <QThread>
 
+#include <openssl/rsa.h>
+
 class QPKCS11Private
 {
 public:
-	QPKCS11Private()
-	: f(0)
-	, pslot(0)
-	, pslots(0)
-	, session(0)
-	, nslots(0)
-	, err(CKR_OK)
-	{}
+	QPKCS11Private();
 
 	bool attribute( CK_OBJECT_HANDLE obj, CK_ATTRIBUTE_TYPE type, void *value, unsigned long &size );
 	bool attribute_char( CK_OBJECT_HANDLE obj, CK_ATTRIBUTE_TYPE type, unsigned char **value, unsigned long &size );
@@ -50,11 +45,16 @@ public:
 	void freeSlotIds();
 	bool getSlotsIds();
 
+	static int rsa_sign( int type, const unsigned char *m, unsigned int m_len,
+		unsigned char *sigret, unsigned int *siglen, const RSA *rsa );
+
 	QLibrary		lib;
 	CK_FUNCTION_LIST *f;
 	CK_SLOT_ID		*pslot, *pslots;
 	CK_SESSION_HANDLE session;
 	unsigned long	nslots, err;
+
+	RSA_METHOD method;
 };
 
 class QPKCS11Thread: public QThread

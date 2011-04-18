@@ -27,6 +27,21 @@
 #include <QApplication>
 #include <QStringList>
 
+#include <openssl/evp.h>
+
+QPKCS11Private::QPKCS11Private()
+: f(0)
+, pslot(0)
+, pslots(0)
+, session(0)
+, nslots(0)
+, err(CKR_OK)
+{
+	memcpy( &method, RSA_get_default_method(), sizeof(method) );
+	method.name = "QPKCS11";
+	method.rsa_sign = rsa_sign;
+}
+
 bool QPKCS11Private::attribute( CK_OBJECT_HANDLE obj, CK_ATTRIBUTE_TYPE type, void *value, unsigned long &size )
 {
 	CK_ATTRIBUTE attr = { type, value, size };
@@ -114,6 +129,27 @@ bool QPKCS11Private::getSlotsIds()
 	return false;
 }
 
+int QPKCS11Private::rsa_sign( int type, const unsigned char *m, unsigned int m_len,
+	unsigned char *sigret, unsigned int *siglen, const RSA *rsa )
+{
+	if( type != NID_md5_sha1 && m_len != 36 ) //ssl
+		return 0;
+	QPKCS11Private *d = (QPKCS11Private*)RSA_get_app_data( rsa );
+
+	CK_OBJECT_HANDLE key = CK_INVALID_HANDLE;
+	if( !d->findObject( CKO_PRIVATE_KEY, &key ) || key == CK_INVALID_HANDLE )
+		return 0;
+
+	CK_MECHANISM mech = { CKM_RSA_PKCS, 0, 0 };
+	if( (d->err = d->f->C_SignInit( d->session, &mech, key )) != CKR_OK )
+		return 0;
+
+	if( (d->err = d->f->C_Sign( d->session, (unsigned char*)m, m_len, 0, (unsigned long*)siglen )) != CKR_OK )
+		return 0;
+
+	return (d->err = d->f->C_Sign( d->session, (unsigned char*)m, m_len, sigret, (unsigned long*)siglen )) == CKR_OK;
+}
+
 
 
 QPKCS11::QPKCS11( QObject *parent )
@@ -171,6 +207,25 @@ bool QPKCS11::decrypt( const QByteArray &data, unsigned char *decrypted, unsigne
 		return false;
 
 	return (d->err = d->f->C_Decrypt( d->session, (unsigned char*)data.constData(), data.size(), decrypted, len )) == CKR_OK;
+}
+
+Qt::HANDLE QPKCS11::key()
+{
+	CK_OBJECT_HANDLE obj = CK_INVALID_HANDLE;
+	if( !d->findObject( CKO_PRIVATE_KEY, &obj ) || obj == CK_INVALID_HANDLE )
+		return false;
+
+	RSA *rsa = RSA_new();
+	if( !d->attribute_bn( obj, CKA_MODULUS, &rsa->n ) ||
+		!d->attribute_bn( obj, CKA_PUBLIC_EXPONENT, &rsa->e ) )
+		return 0;
+
+	RSA_set_method( rsa, &(d->method) );
+	rsa->flags |= RSA_FLAG_SIGN_VER;
+	RSA_set_app_data( rsa, d );
+	EVP_PKEY *key = EVP_PKEY_new();
+	EVP_PKEY_set1_RSA( key, rsa );
+	return key;
 }
 
 bool QPKCS11::loadDriver( const QString &driver )

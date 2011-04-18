@@ -48,6 +48,7 @@ public:
 	QStringList cards();
 	bool encrypt( const QByteArray &data, unsigned char *encrypted, unsigned long *len );
 	bool decrypt( const QByteArray &data, unsigned char *decrypted, unsigned long *len );
+	Qt::HANDLE key();
 	bool loadDriver( const QString &driver );
 	PinStatus login( const TokenData &t );
 	bool logout();
