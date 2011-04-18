@@ -1,13 +1,3 @@
-if( WIN32 )
-	execute_process( COMMAND "cmd.exe" "/C date /T" OUTPUT_VARIABLE BUILD_DATE )
-	string( REGEX REPLACE ".*([0-3][0-9]).([0-1][0-9]).([0-9][0-9][0-9][0-9]).*" "\\1.\\2.\\3" BUILD_DATE ${BUILD_DATE} )
-elseif( UNIX )
-	execute_process( COMMAND "date" "+%d.%m.%Y" OUTPUT_VARIABLE BUILD_DATE OUTPUT_STRIP_TRAILING_WHITESPACE )
-else( WIN32 )
-	message( SEND_ERROR "date not implemented")
-	set( BUILD_DATE "00.00.0000" )
-endif( WIN32 )
-
 set( MOC_HEADERS
 	AboutWidget.h
 	CheckConnection.h
@@ -67,7 +57,6 @@ include_directories(
 	${LIBP11_INCLUDE_DIR}
 	)
 
-add_definitions( -DBUILD_DATE=\"${BUILD_DATE}\" )
 if( LIBP11_TOKEN_FLAGS )
 	add_definitions( -DLIBP11_TOKEN_FLAGS )
 endif( LIBP11_TOKEN_FLAGS )
