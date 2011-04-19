@@ -50,31 +50,22 @@ bool QPKCS11Private::attribute( CK_OBJECT_HANDLE obj, CK_ATTRIBUTE_TYPE type, vo
 	return err == CKR_OK;
 }
 
-bool QPKCS11Private::attribute_char( CK_OBJECT_HANDLE obj, CK_ATTRIBUTE_TYPE type, unsigned char **value, unsigned long &size )
+QByteArray QPKCS11Private::attribute( CK_OBJECT_HANDLE obj, CK_ATTRIBUTE_TYPE type )
 {
-	if( !attribute( obj, CKA_VALUE, 0, size ) )
-		return false;
-	unsigned char *data = new unsigned char[size];
-	if( !attribute( obj, CKA_VALUE, data, size ) )
-	{
-		delete [] data;
-		return false;
-	}
-	*value = data;
-	return true;
-}
-
-bool QPKCS11Private::attribute_bn( CK_OBJECT_HANDLE obj, CK_ATTRIBUTE_TYPE type, BIGNUM **bn )
-{
+	QByteArray data;
 	unsigned long size = 0;
 	if( !attribute( obj, type, 0, size ) )
-		return false;
-	CK_BYTE *binary = new CK_BYTE[size];
-	if( !attribute( obj, type, binary, size ) && size < 0 )
-		return false;
-	*bn = BN_bin2bn( binary, size, 0 );
-	delete [] binary;
-	return *bn;
+		return data;
+	data.resize( size );
+	if( !attribute( obj, type, data.data(), size ) )
+		data.resize( 0 );
+	return data;
+}
+
+BIGNUM* QPKCS11Private::attribute_bn( CK_OBJECT_HANDLE obj, CK_ATTRIBUTE_TYPE type )
+{
+	QByteArray data = attribute( obj, type );
+	return BN_bin2bn( (const unsigned char*)data.constData(), data.size(), 0 );
 }
 
 QSslCertificate QPKCS11Private::readCert( CK_SLOT_ID slot )
@@ -90,14 +81,7 @@ QSslCertificate QPKCS11Private::readCert( CK_SLOT_ID slot )
 	if( !findObject( CKO_CERTIFICATE, &obj ) || obj == CK_INVALID_HANDLE )
 		return QSslCertificate();
 
-	unsigned char *cert_data = 0;
-	unsigned long size = 0;
-	if( !attribute_char( obj, CKA_VALUE, &cert_data, size ) )
-		return QSslCertificate();
-
-	QSslCertificate cert = QSslCertificate( QByteArray( (char*)cert_data, size ), QSsl::Der );
-	delete [] cert_data;
-	return cert;
+	return QSslCertificate( attribute( obj, CKA_VALUE ), QSsl::Der );
 }
 
 bool QPKCS11Private::findObject( CK_OBJECT_CLASS cls, CK_OBJECT_HANDLE *ret )
@@ -220,8 +204,8 @@ Qt::HANDLE QPKCS11::key()
 		return false;
 
 	RSA *rsa = RSA_new();
-	if( !d->attribute_bn( obj, CKA_MODULUS, &rsa->n ) ||
-		!d->attribute_bn( obj, CKA_PUBLIC_EXPONENT, &rsa->e ) )
+	if( !(rsa->n = d->attribute_bn( obj, CKA_MODULUS )) ||
+		!(rsa->e = d->attribute_bn( obj, CKA_PUBLIC_EXPONENT )) )
 		return 0;
 
 	RSA_set_method( rsa, &(d->method) );

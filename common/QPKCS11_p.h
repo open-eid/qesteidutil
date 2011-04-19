@@ -38,8 +38,8 @@ public:
 	QPKCS11Private();
 
 	bool attribute( CK_OBJECT_HANDLE obj, CK_ATTRIBUTE_TYPE type, void *value, unsigned long &size );
-	bool attribute_char( CK_OBJECT_HANDLE obj, CK_ATTRIBUTE_TYPE type, unsigned char **value, unsigned long &size );
-	bool attribute_bn( CK_OBJECT_HANDLE obj, CK_ATTRIBUTE_TYPE type, BIGNUM **bn );
+	QByteArray attribute( CK_OBJECT_HANDLE obj, CK_ATTRIBUTE_TYPE type );
+	BIGNUM* attribute_bn( CK_OBJECT_HANDLE obj, CK_ATTRIBUTE_TYPE type );
 	QSslCertificate readCert( CK_SLOT_ID slot );
 	bool findObject( CK_OBJECT_CLASS cls, CK_OBJECT_HANDLE *ret );
 	void freeSlotIds();
