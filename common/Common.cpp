@@ -67,6 +67,102 @@ Common::~Common()
 #endif
 }
 
+QString Common::applicationOs()
+{
+#if defined(Q_OS_LINUX)
+	QProcess p;
+	p.start( "lsb_release", QStringList() << "-s" << "-d" );
+	p.waitForFinished();
+	return QString::fromLocal8Bit( p.readAll() );
+#elif defined(Q_OS_MAC)
+	SInt32 major, minor, bugfix;
+	if( Gestalt(gestaltSystemVersionMajor, &major) == noErr &&
+			Gestalt(gestaltSystemVersionMinor, &minor) == noErr &&
+			Gestalt(gestaltSystemVersionBugFix, &bugfix) == noErr )
+		return QString( "Mac OS %1.%2.%3 (%4)" ).arg( major ).arg( minor ).arg( bugfix ).arg( QSysInfo::WordSize );
+	else
+		return QString( "Mac OS 10.3 (%1)" ).arg( QSysInfo::WordSize );
+#elif defined(Q_OS_WIN)
+	QString os;
+	OSVERSIONINFOEX osvi;
+	ZeroMemory( &osvi, sizeof( OSVERSIONINFOEX ) );
+	osvi.dwOSVersionInfoSize = sizeof( OSVERSIONINFOEX );
+	if( !GetVersionEx( (OSVERSIONINFO *)&osvi ) )
+	{
+		switch( osvi.dwMajorVersion )
+		{
+		case 5:
+			switch( osvi.dwMinorVersion )
+			{
+			case 0:
+				os = QString( "Windows 2000 %1" ).arg( osvi.wProductType == VER_NT_WORKSTATION ? "Professional" : "Server" );
+				break;
+			case 1:
+				os = QString( "Windows XP %1" ).arg( osvi.wSuiteMask & VER_SUITE_PERSONAL ? "Home" : "Professional" );
+				break;
+			case 2:
+				if( GetSystemMetrics( SM_SERVERR2 ) )
+					os = "Windows Server 2003 R2";
+				else if( osvi.wProductType == VER_NT_WORKSTATION )
+					os = "Windows XP Professional";
+				else
+					os = "Windows Server 2003";
+				break;
+			default: break;
+			}
+			break;
+		case 6:
+			switch( osvi.dwMinorVersion )
+			{
+			case 0:
+				os = osvi.wProductType == VER_NT_WORKSTATION ? "Windows Vista" : "Windows Server 2008";
+				break;
+			case 1:
+				os = osvi.wProductType == VER_NT_WORKSTATION ? "Windows 7" : "Windows Server 2008 R2";
+				break;
+			}
+			break;
+		default: break;
+		}
+	}
+	else
+	{
+		switch( QSysInfo::WindowsVersion )
+		{
+		case QSysInfo::WV_2000: os = "Windows 2000"; break;
+		case QSysInfo::WV_XP: return "Windows XP"; break;
+		case QSysInfo::WV_2003: return "Windows 2003"; break;
+		case QSysInfo::WV_VISTA: return "Windows Vista"; break;
+		case QSysInfo::WV_WINDOWS7: return "Windows 7"; break;
+		default: break;
+		}
+	}
+
+	if( !os.isEmpty() )
+	{
+		QString bits = " (32)";
+		typedef BOOL (WINAPI *LPFN_ISWOW64PROCESS) (HANDLE, PBOOL);
+		QLibrary lib( "kernel32" );
+		BOOL bIsWow64 = false;
+		if( LPFN_ISWOW64PROCESS fnIsWow64Process = LPFN_ISWOW64PROCESS(lib.resolve( "IsWow64Process" )) )
+		{
+			if( fnIsWow64Process( GetCurrentProcess(), &bIsWow64 ) && bIsWow64 )
+				bits = " (64)";
+		}
+		else
+		{
+			SYSTEM_INFO sysInfo;
+			GetSystemInfo( &sysInfo );
+			if ( sysInfo.wProcessorArchitecture == PROCESSOR_ARCHITECTURE_AMD64 )
+				bits = " (64)";
+		}
+		return os + bits;
+	}
+#endif
+
+	return tr("Unknown OS");
+}
+
 bool Common::canWrite( const QString &filename )
 {
 	QFileInfo i( filename );

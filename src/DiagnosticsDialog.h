@@ -41,8 +41,6 @@ private:
 	QString getProcessor() const;
 	QString getReaderInfo();
 #if defined(Q_OS_WIN32)
-	QString getBits() const;
 	QString getLibVersion( const QString &lib ) const;
-	QString getOS() const;
 #endif
 };

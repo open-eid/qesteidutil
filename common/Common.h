@@ -46,6 +46,7 @@ public:
 
 	virtual bool event( QEvent *e );
 
+	static QString applicationOs();
 	static bool canWrite( const QString &filename );
 	static QString fileSize( quint64 bytes );
 	static QString helpUrl();

@@ -22,6 +22,8 @@
 
 #include "DiagnosticsDialog.h"
 
+#include <common/Common.h>
+
 #include <QDialogButtonBox>
 #include <QDir>
 #include <QFile>
@@ -65,21 +67,7 @@ DiagnosticsDialog::DiagnosticsDialog( QWidget *parent )
 	if ( !utility.isEmpty() )
 		s << "<b>" << tr("ID-card utility version:") << "</b> " << utility.first() << "<br />";
 
-	s << "<b>" << tr("OS:") << "</b> ";
-#ifdef Q_OS_LINUX
-	s << runProcess( "lsb_release", QStringList() << "-s" << "-d" );
-#else
-	SInt32 major, minor, bugfix;
-	
-	if( Gestalt(gestaltSystemVersionMajor, &major) == noErr &&
-			Gestalt(gestaltSystemVersionMinor, &minor) == noErr &&
-			Gestalt(gestaltSystemVersionBugFix, &bugfix) == noErr )
-		s << "Mac OS " << major << "." << minor << "." << bugfix;
-	else
-		s << "Mac OS 10.3";
-#endif
-
-	s << " (" << QSysInfo::WordSize << ")<br />";
+	s << "<b>" << tr("OS:") << "</b> " << Common::applicationOs() << "<br />";
 	s << "<b>" << tr("CPU:") << "</b> " << getProcessor() << "<br /><br />";
 	s << "<b>" << tr("Library paths:") << "</b> " << QCoreApplication::libraryPaths().join( ";" ) << "<br />";
 	s << "<b>" << tr("Libraries") << ":</b><br />";

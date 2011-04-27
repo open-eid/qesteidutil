@@ -29,13 +29,11 @@ if(MSVC)
     add_definitions(-D_SECURE_SCL=0)
 endif(MSVC)
 
+include(${QT_USE_FILE})
+add_subdirectory( qtsingleapplication )
+add_subdirectory( common )
+
 set(qesteidutil_MOC_HDRS
-	common/AboutWidget.h
-	common/CertificateWidget.h
-	common/PinDialog.h
-	common/Settings.h
-	common/sslConnect.h
-	common/sslConnect_p.h
 	src/CertUpdate.h
 	src/DiagnosticsDialog.h
 	src/jscardmanager.h
@@ -50,9 +48,6 @@ endif( APPLE OR WIN32 )
 
 set(qesteidutil_HDRS
 	${qesteidutil_MOC_HDRS}
-	common/SOAPDocument.h
-	common/SslCertificate.h
-	common/TokenData.h
 	src/version.h
 )
 
@@ -60,13 +55,6 @@ QT4_WRAP_CPP(qesteidutil_MOC_SRCS ${qesteidutil_MOC_HDRS})
 set(qesteidutil_SRCS
 	${qesteidutil_HDRS}
 	${qesteidutil_MOC_SRCS}
-	common/AboutWidget.cpp
-	common/CertificateWidget.cpp
-	common/PinDialog.cpp
-	common/SOAPDocument.cpp
-	common/SslCertificate.cpp
-	common/TokenData.cpp
-	common/sslConnect.cpp
 	src/CertUpdate.cpp
 	src/DiagnosticsDialog.cpp
 	src/jscardmanager.cpp
@@ -86,8 +74,6 @@ else( WIN32 )
 endif( WIN32 )
 
 QT4_WRAP_UI( UI_HEADERS
-	common/ui/AboutWidget.ui
-	common/ui/CertificateWidget.ui
 	src/ui/DiagnosticsDialog.ui
 	src/ui/SettingsDialog.ui
 )
@@ -97,25 +83,18 @@ configure_file(common/translations/common_tr.qrc.cmake ${QM_DIR}/common_tr.qrc)
 configure_file(src/translations/tr.qrc.cmake ${QM_DIR}/tr.qrc)
 
 QT4_ADD_RESOURCES( qesteidutil_RCC_SRCS
-    ${QM_DIR}/common_tr.qrc
-    ${QM_DIR}/tr.qrc
-    src/qesteidutil.qrc
+	${COMMON_RCS}
+	${QM_DIR}/tr.qrc
+	${QM_DIR}/common_tr.qrc
+	src/qesteidutil.qrc
 )
 
 QT4_ADD_TRANSLATION( QM_FILES
-    common/translations/common_en.ts
-    common/translations/common_et.ts
-    common/translations/common_ru.ts
-    common/translations/qt_et.ts
-    common/translations/qt_ru.ts
-    src/translations/en.ts
-    src/translations/et.ts
-    src/translations/ru.ts
+	${COMMON_TS}
+	src/translations/en.ts
+	src/translations/et.ts
+	src/translations/ru.ts
 )
-
-include(${QT_USE_FILE})
-
-add_subdirectory( qtsingleapplication )
 
 include_directories(
     ${CMAKE_SOURCE_DIR}
@@ -131,7 +110,8 @@ if( APPLE )
 	include( CMakeFindFrameworks )
 	find_library( CORESERVICES_LIB CoreServices )
 	find_library( SECURITY_LIB Security )
-	set( ADDITIONAL_LIBRARIES ${CORESERVICES_LIB} ${SECURITY_LIB} )
+	find_library( COCOA_LIBRARY Cocoa )
+	set( ADDITIONAL_LIBRARIES ${CORESERVICES_LIB} ${SECURITY_LIB} ${COCOA_LIBRARY} )
 
 	CMAKE_FIND_FRAMEWORKS( Security )
 	if( Security_FRAMEWORKS )
@@ -204,6 +184,7 @@ target_link_libraries( ${PROGNAME}
 	${ADDITIONAL_LIBRARIES}
 	${CMAKE_DL_LIBS}
 	${LIBLTDL_LIBRARIES}
+	qdigidoccommon
 	qtsingleapplication
 )
 

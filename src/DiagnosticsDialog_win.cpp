@@ -107,28 +107,6 @@ QString DiagnosticsDialog::getRegistry( const QString &search ) const
 	return browsers.join( "<br />" );
 }
 
-QString DiagnosticsDialog::getBits() const
-{
-	QString bits = "32";
-	typedef BOOL (WINAPI *LPFN_ISWOW64PROCESS) (HANDLE, PBOOL);
-	//check if kernel32 supports this function
-	QLibrary lib( "kernel32" );
-	BOOL bIsWow64 = false;
-	if( LPFN_ISWOW64PROCESS fnIsWow64Process = (LPFN_ISWOW64PROCESS)lib.resolve( "IsWow64Process" ) )
-	{
-		if( fnIsWow64Process( GetCurrentProcess(), &bIsWow64 ) && bIsWow64 )
-			bits = "64";
-	}
-	else
-	{
-		SYSTEM_INFO sysInfo;
-		GetSystemInfo( &sysInfo );
-		if ( sysInfo.wProcessorArchitecture == PROCESSOR_ARCHITECTURE_AMD64 )
-			bits = "64";
-	}
-	return bits;
-}
-
 QString DiagnosticsDialog::getLibVersion( const QString &lib ) const
 {
 	try
@@ -143,54 +121,6 @@ QString DiagnosticsDialog::getLibVersion( const QString &lib ) const
 				.arg( lib )
 				.arg( QString( e.what() ).contains( "missing" ) ?  tr( "failed to get version info" ) : tr( "library not found" ) );
 	}
-}
-
-QString DiagnosticsDialog::getOS() const
-{
-	OSVERSIONINFOEX osvi;
-	ZeroMemory( &osvi, sizeof( OSVERSIONINFOEX ) );
-	osvi.dwOSVersionInfoSize = sizeof( OSVERSIONINFOEX );
-	if( !GetVersionEx( (OSVERSIONINFO *)&osvi ) )
-	{
-		switch( QSysInfo::WindowsVersion )
-		{
-		case QSysInfo::WV_2000: return "Windows 2000";
-		case QSysInfo::WV_XP: return "Windows XP";
-		case QSysInfo::WV_2003: return "Windows 2003";
-		case QSysInfo::WV_VISTA: return "Windows Vista";
-		case QSysInfo::WV_WINDOWS7: return "Windows 7";
-		default: return QString( "%1 (%2)" ).arg( tr("Unknown version"), QSysInfo::WindowsVersion );
-		}
-	}
-	else
-	{
-		switch( osvi.dwMajorVersion )
-		{
-		case 5:
-			switch( osvi.dwMinorVersion )
-			{
-			case 0: return QString( "Windows 2000 %1" ).arg( osvi.wProductType == VER_NT_WORKSTATION ? "Professional" : "Server" );
-			case 1: return QString( "Windows XP %1" ).arg( osvi.wSuiteMask & VER_SUITE_PERSONAL ? "Home" : "Professional" );
-			case 2:
-				if ( GetSystemMetrics( SM_SERVERR2 ) )
-					return "Windows Server 2003 R2";
-				else if ( osvi.wProductType == VER_NT_WORKSTATION )
-					return "Windows XP Professional";
-				else
-					return "Windows Server 2003";
-			}
-			break;
-		case 6:
-			switch( osvi.dwMinorVersion )
-			{
-			case 0: return osvi.wProductType == VER_NT_WORKSTATION ? "Windows Vista" : "Windows Server 2008";
-			case 1: return osvi.wProductType == VER_NT_WORKSTATION ? "Windows 7" : "Windows Server 2008 R2";
-			}
-			break;
-		default: return QString( "%1 (%2)" ).arg( tr("Unknown version"), QSysInfo::WindowsVersion );
-		}
-	}
-	return tr("Unknown version");
 }
 
 QStringList DiagnosticsDialog::getPackageVersion( const QStringList &list, bool returnPackageName ) const

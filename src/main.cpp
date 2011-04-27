@@ -20,23 +20,16 @@
  *
  */
 
-#include <qtsingleapplication.h>
+#include <common/Common.h>
 
 #include "mainwindow.h"
 #include "version.h"
-
-#if defined(Q_OS_WIN)
-#include <Windows.h>
-#endif
 
 #include <openssl/ssl.h>
 
 int main(int argc, char *argv[])
 {
-#if defined(Q_OS_WIN)
-	AllowSetForegroundWindow( ASFW_ANY );
-#endif
-	QtSingleApplication app(argc, argv);
+	Common app(argc, argv);
 	app.setApplicationName( APP );
 	app.setApplicationVersion( VER_STR( FILE_VER_DOT ) );
 	app.setOrganizationDomain( DOMAINURL );
