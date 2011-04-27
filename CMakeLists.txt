@@ -32,6 +32,7 @@ endif(MSVC)
 include(${QT_USE_FILE})
 add_subdirectory( qtsingleapplication )
 add_subdirectory( common )
+include( common/resources.cmake )
 
 set(qesteidutil_MOC_HDRS
 	src/CertUpdate.h
@@ -79,7 +80,7 @@ QT4_WRAP_UI( UI_HEADERS
 )
 
 set(QM_DIR ${CMAKE_BINARY_DIR})
-configure_file(common/translations/common_tr.qrc.cmake ${QM_DIR}/common_tr.qrc)
+configure_file(${COMMON}/translations/common_tr.qrc.cmake ${QM_DIR}/common_tr.qrc)
 configure_file(src/translations/tr.qrc.cmake ${QM_DIR}/tr.qrc)
 
 QT4_ADD_RESOURCES( qesteidutil_RCC_SRCS
