@@ -26,10 +26,6 @@
 
 #include "TokenData.h"
 
-#define EESTI "sisene.www.eesti.ee"
-#define OPENXADES "www.openxades.org"
-#define SK "id.sk.ee"
-
 class SSLConnectPrivate;
 class SSLConnect: public QObject
 {
@@ -59,7 +55,7 @@ public:
 	ErrorType error() const;
 	QString errorString() const;
 	TokenData::TokenFlags flags() const;
-	QByteArray getUrl( RequestType type, const QString &value = "" );
+	QByteArray getUrl( RequestType type, const QString &value = QString() );
 	bool setCard( const QString &card );
 	void setPKCS11( const QString &pkcs11, bool unload = true );
 

@@ -24,11 +24,16 @@
 
 #include "sslConnect.h"
 
+#include <QNetworkRequest>
 #include <QThread>
 
 #include <libp11.h>
 
 #include <openssl/ssl.h>
+
+#define EESTI "sisene.www.eesti.ee"
+#define OPENXADES "www.openxades.org"
+#define SK "id.sk.ee"
 
 // PKCS#11
 #define CKR_OK					(0)
@@ -36,6 +41,20 @@
 #define CKR_FUNCTION_CANCELED	(0x50)
 #define CKR_PIN_INCORRECT		(0xa0)
 #define CKR_PIN_LOCKED			(0xa4)
+
+class HTTPRequest: public QNetworkRequest
+{
+public:
+	HTTPRequest(): QNetworkRequest() {}
+	HTTPRequest( const QByteArray &method, const QByteArray &ver, const QUrl &url )
+	: QNetworkRequest( url ), m_method( method ), m_ver( ver ) {}
+
+	void setContent( const QByteArray &data ) { m_data = data; }
+	QByteArray request() const;
+
+private:
+	QByteArray m_data, m_method, m_ver;
+};
 
 class SSLConnectPrivate
 {

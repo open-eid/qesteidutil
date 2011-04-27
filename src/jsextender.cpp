@@ -209,7 +209,7 @@ void JsExtender::activateEmail( const QString &email )
 
 void JsExtender::loadEmails()
 {
-	QByteArray buffer = getUrl( SSLConnect::EmailInfo, "" );
+	QByteArray buffer = getUrl( SSLConnect::EmailInfo );
 	if ( !buffer.size() || sslError != SSLConnect::NoError )
 	{
 		if ( sslError != SSLConnect::NoError )
@@ -289,7 +289,7 @@ QString JsExtender::readForwards()
 
 void JsExtender::loadPicture()
 {
-	QByteArray buffer = getUrl( SSLConnect::PictureInfo, "" );
+	QByteArray buffer = getUrl( SSLConnect::PictureInfo );
 	if ( !buffer.size() || sslError != SSLConnect::NoError )
 	{
 		if ( sslError != SSLConnect::NoError )
@@ -363,19 +363,7 @@ void JsExtender::savePicture()
 void JsExtender::getMidStatus()
 {
 	QString result = "mobileFailed";
-
-	QString data = "<SOAP-ENV:Envelope xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:SOAP-ENC=\"http://schemas.xmlsoap.org/soap/encoding/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">"
-						"<SOAP-ENV:Body>"
-						"<m:GetMIDTokens xmlns:m=\"urn:GetMIDTokens\" SOAP-ENV:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\"/>"
-						"</SOAP-ENV:Body>"
-						"</SOAP-ENV:Envelope>";
-	QString header = "POST /MIDInfoWS/ HTTP/1.1\r\n"
-					 "Host: " + QString(SK) + "\r\n"
-					 "Content-Type: text/xml\r\n"
-					 "Content-Length: " + QString::number( data.size() ) + "\r\n"
-					 "SOAPAction: \"\"\r\n"
-					 "Connection: close\r\n\r\n";
-	QByteArray buffer = getUrl( SSLConnect::MobileInfo, header + data );
+	QByteArray buffer = getUrl( SSLConnect::MobileInfo );
 	if ( !buffer.size() || sslError != SSLConnect::NoError )
 	{
 		if ( sslError != SSLConnect::NoError )

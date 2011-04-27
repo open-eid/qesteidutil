@@ -58,7 +58,7 @@ private:
 	QXmlStreamReader xml;
 	QString m_locale;
 	QLabel *m_loading;
-	QByteArray getUrl( SSLConnect::RequestType, const QString &def );
+	QByteArray getUrl( SSLConnect::RequestType, const QString &def = QString() );
 	QHttp m_http;
 	SSLConnect::ErrorType sslError;
 	QString sslErrorString;

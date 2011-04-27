@@ -31,6 +31,27 @@
 #include <QProgressBar>
 #include <QProgressDialog>
 
+QByteArray HTTPRequest::request() const
+{
+	QByteArray r;
+	r += m_method + " " + url().toEncoded( QUrl::RemoveScheme|QUrl::RemoveAuthority ) + " HTTP/" + m_ver + "\r\n";
+	r += "Host: " + url().host() + "\r\n";
+	r += "User-Agent: " + qApp->applicationName() + "/" + qApp->applicationVersion() + "\r\n";
+	foreach( const QByteArray &header, rawHeaderList() )
+		r += header + ": " + rawHeader( header ) + "\r\n";
+
+	if( !m_data.isEmpty() )
+	{
+		r += "Content-Length: " + QByteArray::number( m_data.size() ) + "\r\n\r\n";
+		r += m_data;
+	}
+	else
+		r += "\r\n";
+
+	return r;
+}
+
+
 void PINPADThread::run()
 {
 	if( PKCS11_login( m_slot, 0, 0 ) < 0 )
@@ -283,9 +304,8 @@ SSLConnect::~SSLConnect() { delete d; }
 
 QByteArray SSLConnect::getUrl( RequestType type, const QString &value )
 {
-	QString header;
 	QString label;
-	QByteArray url;
+	HTTPRequest req;
 	switch( type )
 	{
 	case AccessCert:
@@ -297,45 +317,46 @@ QByteArray SSLConnect::getUrl( RequestType type, const QString &value )
 		s.writeParameter( "SoftwareName", "DigiDoc3" );
 		s.writeParameter( "SoftwareVersion", qApp->applicationVersion() );
 		s.finalize();
-		header = QString(
-			"POST /GetAccessTokenWS/ HTTP/1.1\r\n"
-			"Host: %1\r\n"
-			"Content-Type: text/xml\r\n"
-			"Content-Length: %2\r\n"
-			"SOAPAction: \"\"\r\n"
-			"Connection: close\r\n\r\n"
-			"%3" )
-			.arg( SK ).arg( s.document().size() ).arg( QString::fromUtf8( s.document() ) );
-		url = SK;
+		req = HTTPRequest( "POST", "1.1", QString("https://%1/GetAccessTokenWS/").arg( SK ) );
+		req.setRawHeader( "Content-Type", "text/xml" );
+		req.setRawHeader( "SOAPAction", QByteArray() );
+		req.setRawHeader( "Connection", "close" );
+		req.setContent( s.document() );
 		break;
 	}
 	case EmailInfo:
 		label = tr("Loading Email info");
-		header = "GET /idportaal/postisysteem.naita_suunamised HTTP/1.0\r\n\r\n";
-		url = EESTI;
+		req = HTTPRequest( "GET", "1.0",
+			QString("https://%1/idportaal/postisysteem.naita_suunamised").arg( EESTI ) );
 		break;
 	case ActivateEmails:
 		label = tr("Loading Email info");
-		header = QString( "GET /idportaal/postisysteem.lisa_suunamine?%1 HTTP/1.0\r\n\r\n" ).arg( value );
-		url = EESTI;
+		req = HTTPRequest( "GET", "1.0",
+			QString("https://%1/idportaal/postisysteem.lisa_suunamine?%2").arg( EESTI ).arg( value ) );
 		break;
 	case MobileInfo:
+	{
 		label = tr("Loading Mobile info");
-		header = value;
-		url = SK;
+		SOAPDocument s( "GetMIDTokens", "urn:GetMIDTokens" );
+		s.finalize();
+		req = HTTPRequest( "POST", "1.1", QString("https://%1/MIDInfoWS/").arg( SK ) );
+		req.setRawHeader( "Content-Type", "text/xml" );
+		req.setRawHeader( "SOAPAction", QByteArray() );
+		req.setRawHeader( "Connection", "close" );
+		req.setContent( s.document() );
 		break;
+	}
 	case PictureInfo:
 		label = tr("Downloading picture");
-		header = "GET /idportaal/portaal.idpilt HTTP/1.0\r\n\r\n";
-		url = EESTI;
+		req = HTTPRequest( "GET", "1.0", QString("https://%1/idportaal/portaal.idpilt").arg( EESTI ) );
 		break;
 	default: return QByteArray();
 	}
 
-	if( !d->connectToHost( url ) )
+	if( !d->connectToHost( req.url().host().toUtf8() ) )
 		return QByteArray();
 
-	QByteArray data = header.toUtf8();
+	QByteArray data = req.request();
 	if( !SSL_write( d->ssl, data.constData(), data.length() ) )
 	{
 		d->setError( SSLConnect::SSLError );
