@@ -22,6 +22,7 @@
 
 #include "DiagnosticsDialog.h"
 
+#include <common/Common.h>
 #include <smartcardpp/DynamicLibrary.h>
 
 #include <QDialogButtonBox>
@@ -33,6 +34,24 @@
 #include <QTextStream>
 
 #include <Windows.h>
+
+static QString getLibVersion( const QString &lib )
+{
+	try
+	{
+		QString ver = QString::fromStdString( DynamicLibrary( lib.toLatin1() ).getVersionStr() );
+		return QString( "%1 (%2)" )
+			.arg( lib )
+			.arg( ver == "missing" ? DiagnosticsDialog::tr("failed to get version info") : ver );
+	}
+	catch( const std::runtime_error &e )
+	{
+		return QString("%1 - %2")
+			.arg( lib )
+			.arg( QString( e.what() ).contains( "missing" ) ?
+				DiagnosticsDialog::tr("failed to get version info") : DiagnosticsDialog::tr("library not found") );
+	}
+}
 
 DiagnosticsDialog::DiagnosticsDialog( QWidget *parent )
 :	QDialog( parent )
@@ -52,7 +71,7 @@ DiagnosticsDialog::DiagnosticsDialog( QWidget *parent )
 		s << "<b>" << tr("Base version:") << "</b> " << base << "<br />";
 	s << "<b>" << tr("ID-card utility version:") << "</b> "<< QCoreApplication::applicationVersion() << "<br />";
 
-	s << "<b>" << tr("OS:") << "</b> " << getOS() << " (" << getBits() << ")<br />";
+	s << "<b>" << tr("OS:") << "</b> " << Common::applicationOs() << "<br />";
 	s << "<b>" << tr("CPU:") << "</b> " << getProcessor() << "<br /><br />";
 
 	s << "<b>" << tr("Library paths:") << "</b> " << QCoreApplication::libraryPaths().join( ";" ) << "<br />";
@@ -105,22 +124,6 @@ QString DiagnosticsDialog::getRegistry( const QString &search ) const
 		browsers << QString( "Internet Explorer (%2)" ).arg( s.value( "Version" ).toString() );
 	}
 	return browsers.join( "<br />" );
-}
-
-QString DiagnosticsDialog::getLibVersion( const QString &lib ) const
-{
-	try
-	{
-		QString ver = QString::fromStdString( DynamicLibrary( lib.toLatin1() ).getVersionStr() );
-		return QString( "%1 (%2)" )
-					.arg( lib )
-					.arg( ver == "missing" ? tr( "failed to get version info" ) : ver );
-	} catch( const std::runtime_error &e )
-	{
-		return QString("%1 - %2")
-				.arg( lib )
-				.arg( QString( e.what() ).contains( "missing" ) ?  tr( "failed to get version info" ) : tr( "library not found" ) );
-	}
 }
 
 QStringList DiagnosticsDialog::getPackageVersion( const QStringList &list, bool returnPackageName ) const

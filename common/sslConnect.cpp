@@ -37,7 +37,7 @@ QByteArray HTTPRequest::request() const
 	QByteArray r;
 	r += m_method + " " + url().toEncoded( QUrl::RemoveScheme|QUrl::RemoveAuthority ) + " HTTP/" + m_ver + "\r\n";
 	r += "Host: " + url().host() + "\r\n";
-	r += "User-Agent: " + qApp->applicationName() + "/" + qApp->applicationVersion() + "(" + Common::applicationOs() + ")\r\n";
+	r += "User-Agent: " + qApp->applicationName() + "/" + qApp->applicationVersion() + " (" + Common::applicationOs() + ")\r\n";
 	foreach( const QByteArray &header, rawHeaderList() )
 		r += header + ": " + rawHeader( header ) + "\r\n";
 

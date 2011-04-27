@@ -40,7 +40,4 @@ private:
 	QStringList getPackageVersion( const QStringList &list, bool returnPackageName = true ) const;
 	QString getProcessor() const;
 	QString getReaderInfo();
-#if defined(Q_OS_WIN32)
-	QString getLibVersion( const QString &lib ) const;
-#endif
 };
