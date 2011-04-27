@@ -1,8 +1,8 @@
 /*
  * QEstEidCommon
  *
- * Copyright (C) 2009,2010 Jargo Kõter <jargo@innovaatik.ee>
- * Copyright (C) 2009,2010 Raul Metsma <raul@innovaatik.ee>
+ * Copyright (C) 2009-2011 Jargo Kõter <jargo@innovaatik.ee>
+ * Copyright (C) 2009-2011 Raul Metsma <raul@innovaatik.ee>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -22,6 +22,8 @@
 
 #include "CheckConnection.h"
 
+#include "Common.h"
+
 #include <QEventLoop>
 #include <QNetworkRequest>
 
@@ -34,28 +36,30 @@ bool CheckConnection::check( const QString &url )
 {
 	QEventLoop e;
 	connect( this, SIGNAL(finished(QNetworkReply*)), &e, SLOT(quit()) );
-	QNetworkReply *reply = get( QNetworkRequest( QUrl( url ) ) );
+	QNetworkRequest req( url );
+	req.setRawHeader( "User-Agent", QString( "%1/%2 (%3)")
+		.arg( qApp->applicationName() ).arg( qApp->applicationVersion() ).arg( Common::applicationOs() ).toUtf8() );
+	QNetworkReply *reply = get( req );
 	e.exec();
-
 	m_error = reply->error();
-	switch( reply->error() )
+	reply->deleteLater();
+	return m_error == QNetworkReply::NoError;
+}
+
+QNetworkReply::NetworkError CheckConnection::error() const { return m_error; }
+QString CheckConnection::errorString() const
+{
+	switch( m_error )
 	{
-	case QNetworkReply::NoError:
-		return true;
+	case QNetworkReply::NoError: return QString();
 	case QNetworkReply::ProxyConnectionRefusedError:
 	case QNetworkReply::ProxyConnectionClosedError:
 	case QNetworkReply::ProxyNotFoundError:
 	case QNetworkReply::ProxyTimeoutError:
-		m_errorString = tr("Check proxy settings");
-		return false;
+		return tr("Check proxy settings");
 	case QNetworkReply::ProxyAuthenticationRequiredError:
-		m_errorString = tr("Check proxy username and password");
-		return false;
+		return tr("Check proxy username and password");
 	default:
-		m_errorString = tr("Check internet connection");
-		return false;
+		return tr("Check internet connection");
 	}
 }
-
-QNetworkReply::NetworkError CheckConnection::error() const { return m_error; }
-QString CheckConnection::errorString() const { return m_errorString; }

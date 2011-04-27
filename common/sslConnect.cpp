@@ -37,7 +37,8 @@ QByteArray HTTPRequest::request() const
 	QByteArray r;
 	r += m_method + " " + url().toEncoded( QUrl::RemoveScheme|QUrl::RemoveAuthority ) + " HTTP/" + m_ver + "\r\n";
 	r += "Host: " + url().host() + "\r\n";
-	r += "User-Agent: " + qApp->applicationName() + "/" + qApp->applicationVersion() + " (" + Common::applicationOs() + ")\r\n";
+	r += "User-Agent: " + QString( "%1/%2 (%3)\r\n" )
+		.arg( qApp->applicationName() ).arg( qApp->applicationVersion() ).arg( Common::applicationOs() ).toUtf8();
 	foreach( const QByteArray &header, rawHeaderList() )
 		r += header + ": " + rawHeader( header ) + "\r\n";
 
@@ -237,7 +238,7 @@ bool SSLConnectPrivate::connectToHost( const QByteArray &url )
 	}
 
 	SSL_set_bio( ssl, sock, sock );
-	
+
 	if ( !SSL_connect( ssl ) )
 	{
 		setError( SSLConnect::SSLError );
