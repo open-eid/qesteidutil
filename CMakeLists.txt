@@ -183,9 +183,9 @@ target_link_libraries( ${PROGNAME}
 	${ADDITIONAL_LIBRARIES}
 	${CMAKE_DL_LIBS}
 	${LIBLTDL_LIBRARIES}
-	${LIBP11_LIBRARIES}
 	qdigidoccommon
 	qtsingleapplication
+	${LIBP11_LIBRARIES}
 )
 
 if(UNIX AND NOT APPLE)
