@@ -1,8 +1,8 @@
 /*
  * QEstEidUtil
  *
- * Copyright (C) 2009,2010 Jargo Kõster <jargo@innovaatik.ee>
- * Copyright (C) 2009,2010 Raul Metsma <raul@innovaatik.ee>
+ * Copyright (C) 2009-2011 Jargo Kõster <jargo@innovaatik.ee>
+ * Copyright (C) 2009-2011 Raul Metsma <raul@innovaatik.ee>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -414,14 +414,6 @@ void JsExtender::getMidStatus()
 					.arg( e.elementsByTagName( "URL" ).item(0).toElement().text() )
 					.arg( e.elementsByTagName( "MIDCertsValidTo" ).item(0).toElement().text() );
 	jsCall( "setMobile", mResString );
-}
-
-void JsExtender::httpRequestFinished( int, bool error )
-{
-	if ( error)
-		qDebug() << "Download failed: " << m_http.errorString();
-
-	QByteArray result = m_http.readAll();
 }
 
 void JsExtender::showAbout()

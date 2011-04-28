@@ -1,8 +1,8 @@
 /*
  * QEstEidUtil
  *
- * Copyright (C) 2009,2010 Jargo Kõster <jargo@innovaatik.ee>
- * Copyright (C) 2009,2010 Raul Metsma <raul@innovaatik.ee>
+ * Copyright (C) 2009-2011 Jargo Kõster <jargo@innovaatik.ee>
+ * Copyright (C) 2009-2011 Raul Metsma <raul@innovaatik.ee>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -25,10 +25,8 @@
 #include "../common/sslConnect.h"
 
 #include <QLabel>
-#include <QObject>
 #include <QWebFrame>
 #include <QDateTime>
-#include <QHttp>
 #include <QXmlStreamReader>
 
 class MainWindow;
@@ -59,7 +57,6 @@ private:
 	QString m_locale;
 	QLabel *m_loading;
 	QByteArray getUrl( SSLConnect::RequestType, const QString &def = QString() );
-	QHttp m_http;
 	SSLConnect::ErrorType sslError;
 	QString sslErrorString;
 
@@ -87,7 +84,6 @@ public slots:
 	void closeLoading();
 
 	void getMidStatus();
-	void httpRequestFinished( int, bool error );
 
 	void showMessage( const QString &type, const QString &message, const QString &title = "" );
 
