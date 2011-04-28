@@ -696,6 +696,7 @@ QByteArray CertUpdate::queryServer( int s, QByteArray result )
 	if ( reply->error() != QNetworkReply::NoError )
 	{
 		qDebug() << reply->errorString();
+		reply->deleteLater();
 		throwError( tr("Check internet connection").toUtf8() );
 		return result;
 	}
