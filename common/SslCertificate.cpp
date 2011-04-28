@@ -324,13 +324,16 @@ QString SslCertificate::toString( const QString &format ) const
 
 SslCertificate::CertType SslCertificate::type() const
 {
+	QStringList p = policies();
+
 	if( enhancedKeyUsage().keys().contains( OCSPSign ) )
 	{
-		return subjectInfo( QSslCertificate::CommonName ).indexOf( QRegExp( "TEST\\-SK.*OCSP.*") ) != -1 ?
+		return
+			p.indexOf( QRegExp( "^1\\.3\\.6\\.1\\.4\\.1\\.10015\\.3.*" ) ) != -1 ||
+			subjectInfo( QSslCertificate::CommonName ).indexOf( "TEST" ) != -1 ?
 			OCSPTestType : OCSPType;
 	}
 
-	QStringList p = policies();
 	if( p.indexOf( QRegExp( "^1\\.3\\.6\\.1\\.4\\.1\\.10015\\.1\\.1.*" ) ) != -1 )
 		return EstEidType;
 	if( p.indexOf( QRegExp( "^1\\.3\\.6\\.1\\.4\\.1\\.10015\\.1\\.2.*" ) ) != -1 )
