@@ -1,8 +1,8 @@
 /*
  * QEstEidUtil
  *
- * Copyright (C) 2009,2010 Jargo Kõster <jargo@innovaatik.ee>
- * Copyright (C) 2009,2010 Raul Metsma <raul@innovaatik.ee>
+ * Copyright (C) 2009-2011 Jargo Kõster <jargo@innovaatik.ee>
+ * Copyright (C) 2009-2011 Raul Metsma <raul@innovaatik.ee>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -22,19 +22,25 @@
 
 #include "CertUpdate.h"
 
-#include "common/PinDialog.h"
-#include "common/SslCertificate.h"
+#include <common/Common.h>
+#include <common/PinDialog.h>
+#include <common/SslCertificate.h>
+
 #include <smartcardpp/helperMacro.h>
 
-#include <QApplication>
 #include <QDateTime>
+#include <QDebug>
+#include <QNetworkAccessManager>
+#include <QNetworkRequest>
+#include <QNetworkReply>
+#include <QVariant>
 
 #define HEADER 28
 
 CertUpdate::CertUpdate( int reader, QObject *parent )
 :	QObject( parent )
 ,	card( 0 )
-,	sock( 0 )
+,	manager( new QNetworkAccessManager( this ) )
 ,	step( 0 )
 ,	serverStep( 0 )
 ,	generateKeys( false )
@@ -49,29 +55,14 @@ CertUpdate::CertUpdate( int reader, QObject *parent )
 	updateUrl = QUrl( ( !m_authCert || m_authCert->isTest() ) ? "http://demo.digidoc.ee:80/iduuendusproxy/" : "http://www.sk.ee:80/id-kontroll2/usk/" );
 	QByteArray c( QByteArray::number( QDateTime::currentDateTime().toTime_t() ) );
 	memcpy( (void*)challenge, c, 8 );
-
-	sock = new QTcpSocket( this );
 }
 
 CertUpdate::~CertUpdate()
 {
-	if ( sock && sock->state() == QTcpSocket::ConnectedState )
-		sock->disconnectFromHost();
 	if ( m_authCert )
 		delete m_authCert;
 	if ( card )
 		delete card;
-}
-
-bool CertUpdate::checkConnection() const
-{
-	if ( sock && sock->state() != QTcpSocket::ConnectedState )
-	{
-		sock->connectToHost( updateUrl.host(), updateUrl.port() );
-		if ( !sock->waitForConnected( 5000 ) )
-			return false;
-	}
-	return true;
 }
 
 bool CertUpdate::checkUpdateAllowed()
@@ -545,9 +536,6 @@ QByteArray CertUpdate::runStep( int s, QByteArray result )
 
 QByteArray CertUpdate::queryServer( int s, QByteArray result )
 {
-	if ( !checkConnection() )
-		throwError( tr("Check internet connection").toUtf8() );
-
 	const char serviceCode[] = { 0x31, 0x00 };
 	QByteArray packet;
 
@@ -691,22 +679,30 @@ QByteArray CertUpdate::queryServer( int s, QByteArray result )
 		return QByteArray();
 	}
 	qDebug() << "step " << s << " serverStep: " << serverStep << " send: " << packet.toUpper();
-	QByteArray data = "POST ";
-	data += updateUrl.path();
-	data += " HTTP/1.1\r\nHost: ";
-	data += updateUrl.host();
-	data += "\r\nContent-Type: text/plain\r\nContent-Length: " + QByteArray::number(packet.size()) + "\r\nConnection: close\r\n\r\n" + packet.toUpper() + "\r\n";
-	sock->write( data );
-	if ( !sock->waitForReadyRead( 60000 ) )
+
+	QNetworkRequest req( updateUrl );
+	req.setHeader( QNetworkRequest::ContentTypeHeader, "text/plain" );
+	req.setHeader( QNetworkRequest::ContentLengthHeader, packet.size() );
+	req.setRawHeader( "User-Agent",
+		QString( "%1/%2 (%3)").arg( qApp->applicationName(), qApp->applicationVersion(), Common::applicationOs() ).toUtf8() );
+	req.setRawHeader( "Connection", "close" );
+
+	QEventLoop e;
+	QNetworkReply *reply = manager->post( req, packet.toUpper() );
+	connect( reply, SIGNAL(finished()), &e, SLOT(quit()) );
+	connect( reply, SIGNAL(error(QNetworkReply::NetworkError)), &e, SLOT(quit()) );
+	e.exec();
+
+	if ( reply->error() != QNetworkReply::NoError )
 	{
-		qDebug() << sock->errorString();
+		qDebug() << reply->errorString();
+		throwError( tr("Check internet connection").toUtf8() );
 		return result;
 	}
-	result = sock->readAll();
-	if ( result.contains( "\r\n\r\n" ) )
-		result = result.remove( 0, result.indexOf( "\r\n\r\n" ) + 4 );
+
+	result = reply->readAll();
+	reply->deleteLater();
 	qDebug() << "step " << s << " serverStep: " << serverStep << " receive: " << result;
-	sock->disconnectFromHost();
 
 	//veakoodide kontroll
 	QByteArray hex = QByteArray::fromHex( result );

@@ -1,8 +1,8 @@
 /*
  * QEstEidUtil
  *
- * Copyright (C) 2009,2010 Jargo Kõster <jargo@innovaatik.ee>
- * Copyright (C) 2009,2010 Raul Metsma <raul@innovaatik.ee>
+ * Copyright (C) 2009-2011 Jargo Kõster <jargo@innovaatik.ee>
+ * Copyright (C) 2009-2011 Raul Metsma <raul@innovaatik.ee>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -23,11 +23,12 @@
 #pragma once
 
 #include <QObject>
-#include <QTcpSocket>
 #include <QUrl>
 
 #include "jscardmanager.h"
 #include "smartcardpp/esteid/EstEidCard.h"
+
+class QNetworkAccessManager;
 
 class CertUpdate: public QObject
 {
@@ -47,14 +48,13 @@ private:
 	QString m_pin;
 	EstEidCard *card;
 	PCSCManager cardMgr;
-	QTcpSocket *sock;
+	QNetworkAccessManager *manager;
 	char challenge[8];
 	char personCode[11], documentNumber[8], tmpResult[36], certInfo[33][114];
 	int step, serverStep, authKey, signKey;
 	bool generateKeys;
 	QByteArray step10;
 	
-	bool checkConnection() const;
 	QByteArray runStep( int step, QByteArray result = "" );
 	QByteArray queryServer( int step, QByteArray result );
 	JsCertData *m_authCert;
