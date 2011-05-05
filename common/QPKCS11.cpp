@@ -314,8 +314,20 @@ TokenData QPKCS11::selectSlot( const QString &card, SslCertificate::KeyUsage usa
 	return t;
 }
 
-QByteArray QPKCS11::sign( const QByteArray &data )
+QByteArray QPKCS11::sign( int type, const QByteArray &digest )
 {
+	QByteArray data;
+	switch( type )
+	{
+	case NID_sha1: data += QByteArray::fromHex("3021300906052b0e03021a05000414"); break;
+	case NID_sha224: data += QByteArray::fromHex("302d300d06096086480165030402040500041c"); break;
+	case NID_sha256: data += QByteArray::fromHex("3031300d060960864801650304020105000420"); break;
+	case NID_sha384: data += QByteArray::fromHex("3041300d060960864801650304020205000430"); break;
+	case NID_sha512: data += QByteArray::fromHex("3051300d060960864801650304020305000440"); break;
+	default: break;
+	}
+	data.append( digest );
+
 	CK_OBJECT_HANDLE key = CK_INVALID_HANDLE;
 	if( !d->findObject( CKO_PRIVATE_KEY, &key ) || key == CK_INVALID_HANDLE )
 		return QByteArray();
