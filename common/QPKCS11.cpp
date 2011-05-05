@@ -58,7 +58,7 @@ QByteArray QPKCS11Private::attribute( CK_OBJECT_HANDLE obj, CK_ATTRIBUTE_TYPE ty
 	QByteArray data;
 	data.resize( size );
 	if( !attribute( obj, type, data.data(), size ) )
-		QByteArray();
+		return QByteArray();
 	return data;
 }
 
@@ -122,20 +122,14 @@ int QPKCS11Private::rsa_sign( int type, const unsigned char *m, unsigned int m_l
 {
 	if( type != NID_md5_sha1 && m_len != 36 ) //ssl
 		return 0;
-	QPKCS11Private *d = (QPKCS11Private*)RSA_get_app_data( rsa );
-
-	CK_OBJECT_HANDLE key = CK_INVALID_HANDLE;
-	if( !d->findObject( CKO_PRIVATE_KEY, &key ) || key == CK_INVALID_HANDLE )
+	QPKCS11 *d = (QPKCS11*)RSA_get_app_data( rsa );
+	QByteArray sig = d->sign( type, QByteArray( (char*)m, m_len ) );
+	if( sig.isEmpty() )
 		return 0;
-
-	CK_MECHANISM mech = { CKM_RSA_PKCS, 0, 0 };
-	if( (d->err = d->f->C_SignInit( d->session, &mech, key )) != CKR_OK )
-		return 0;
-
-	if( (d->err = d->f->C_Sign( d->session, (unsigned char*)m, m_len, 0, (unsigned long*)siglen )) != CKR_OK )
-		return 0;
-
-	return (d->err = d->f->C_Sign( d->session, (unsigned char*)m, m_len, sigret, (unsigned long*)siglen )) == CKR_OK;
+	*siglen = sig.size();
+	sigret = (unsigned char*)qMalloc(sig.size());
+	qMemCopy( sigret, sig.constData(), sig.size() );
+	return 1;
 }
 
 
@@ -210,7 +204,7 @@ Qt::HANDLE QPKCS11::key()
 
 	RSA_set_method( rsa, &(d->method) );
 	rsa->flags |= RSA_FLAG_SIGN_VER;
-	RSA_set_app_data( rsa, d );
+	RSA_set_app_data( rsa, this );
 	EVP_PKEY *key = EVP_PKEY_new();
 	EVP_PKEY_set1_RSA( key, rsa );
 	return Qt::HANDLE(key);
