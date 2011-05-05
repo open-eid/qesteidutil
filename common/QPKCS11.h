@@ -53,7 +53,7 @@ public:
 	PinStatus login( const TokenData &t );
 	bool logout();
 	TokenData selectSlot( const QString &card, SslCertificate::KeyUsage usage );
-	bool sign( const QByteArray &data, unsigned char *signature, unsigned long *len );
+	QByteArray sign( const QByteArray &data );
 	void unloadDriver();
 	bool verify( const QByteArray &data, unsigned char *signature, unsigned long len );
 

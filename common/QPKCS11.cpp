@@ -52,13 +52,13 @@ bool QPKCS11Private::attribute( CK_OBJECT_HANDLE obj, CK_ATTRIBUTE_TYPE type, vo
 
 QByteArray QPKCS11Private::attribute( CK_OBJECT_HANDLE obj, CK_ATTRIBUTE_TYPE type )
 {
-	QByteArray data;
 	unsigned long size = 0;
 	if( !attribute( obj, type, 0, size ) )
-		return data;
+		return QByteArray();
+	QByteArray data;
 	data.resize( size );
 	if( !attribute( obj, type, data.data(), size ) )
-		data.resize( 0 );
+		QByteArray();
 	return data;
 }
 
@@ -314,20 +314,27 @@ TokenData QPKCS11::selectSlot( const QString &card, SslCertificate::KeyUsage usa
 	return t;
 }
 
-bool QPKCS11::sign( const QByteArray &data, unsigned char *signature, unsigned long *len )
+QByteArray QPKCS11::sign( const QByteArray &data )
 {
 	CK_OBJECT_HANDLE key = CK_INVALID_HANDLE;
 	if( !d->findObject( CKO_PRIVATE_KEY, &key ) || key == CK_INVALID_HANDLE )
-		return false;
+		return QByteArray();
 
 	CK_MECHANISM mech = { CKM_RSA_PKCS, 0, 0 };
 	if( (d->err = d->f->C_SignInit( d->session, &mech, key )) != CKR_OK )
-		return false;
+		return QByteArray();
 
-	if( (d->err = d->f->C_Sign( d->session, (unsigned char*)data.constData(), data.size(), 0, len )) != CKR_OK )
-		return false;
+	unsigned long size = 0;
+	if( (d->err = d->f->C_Sign( d->session, (unsigned char*)data.constData(),
+			data.size(), 0, &size )) != CKR_OK )
+		return QByteArray();
 
-	return (d->err = d->f->C_Sign( d->session, (unsigned char*)data.constData(), data.size(), signature, len )) == CKR_OK;
+	QByteArray sig;
+	sig.resize( size );
+	if( (d->err = d->f->C_Sign( d->session, (unsigned char*)data.constData(),
+			data.size(), (unsigned char*)sig.data(), &size )) != CKR_OK )
+		return QByteArray();
+	return sig;
 }
 
 void QPKCS11::unloadDriver()
