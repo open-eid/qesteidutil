@@ -35,11 +35,13 @@ CheckConnection::CheckConnection( QObject *parent )
 bool CheckConnection::check( const QString &url )
 {
 	QEventLoop e;
-	connect( this, SIGNAL(finished(QNetworkReply*)), &e, SLOT(quit()) );
 	QNetworkRequest req( url );
+#if 0
 	req.setRawHeader( "User-Agent", QString( "%1/%2 (%3)")
 		.arg( qApp->applicationName() ).arg( qApp->applicationVersion() ).arg( Common::applicationOs() ).toUtf8() );
+#endif
 	QNetworkReply *reply = get( req );
+	connect( reply, SIGNAL(finished()), &e, SLOT(quit()) );
 	e.exec();
 	m_error = reply->error();
 	reply->deleteLater();
