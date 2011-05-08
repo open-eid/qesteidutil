@@ -64,7 +64,8 @@ DiagnosticsDialog::DiagnosticsDialog( QWidget *parent )
 
 	s << "<b>" << tr("Locale:") << "</b> ";
 	QLocale::Language language = QLocale::system().language();
-	s << (language == QLocale::C ? "English/United States" : QLocale::languageToString( language ) ) << "<br /><br />";
+	s << (language == QLocale::C ? "English/United States" : QLocale::languageToString( language ) ) << "<br />";
+	s << "<b>" << tr("User rights: ") << "</b>" << getUserRights() << "<br />";
 
 	QString base = getRegistry( "Eesti ID kaardi tarkvara" );
 	if ( !base.isEmpty() )
@@ -134,6 +135,57 @@ QString DiagnosticsDialog::getProcessor() const
 	SYSTEM_INFO sysinfo;
 	GetSystemInfo( &sysinfo );
 	return QString::number( sysinfo.dwProcessorType );
+}
+
+QString DiagnosticsDialog::getUserRights() const
+{
+	SID_IDENTIFIER_AUTHORITY NtAuthority = SECURITY_NT_AUTHORITY;
+	PSID AdministratorsGroup = NULL;
+	HANDLE hToken = NULL;
+	DWORD dwIndex, dwLength = 0;
+	PTOKEN_GROUPS pGroup = NULL;
+	QString rights = tr( "User" );
+
+	if ( !OpenThreadToken( GetCurrentThread(), TOKEN_QUERY, TRUE, &hToken ) )
+	{
+		if ( GetLastError() != ERROR_NO_TOKEN )
+			return tr( "Unknown - error %1" ).arg( GetLastError() );
+		if ( !OpenProcessToken( GetCurrentProcess(), TOKEN_QUERY, &hToken ) )
+			return tr( "Unknown - error %1" ).arg( GetLastError() );
+	}
+	if ( !GetTokenInformation( hToken, TokenGroups, NULL, dwLength, &dwLength ) )
+	{
+		if( GetLastError() != ERROR_INSUFFICIENT_BUFFER )
+			return tr( "Unknown - error %1" ).arg( GetLastError() );
+	}
+	pGroup = (PTOKEN_GROUPS)GlobalAlloc( GPTR, dwLength );
+
+	if ( !GetTokenInformation( hToken, TokenGroups, pGroup, dwLength, &dwLength ) )
+	{
+		if ( pGroup )
+			GlobalFree( pGroup );
+		return tr( "Unknown - error %1" ).arg( GetLastError() );;
+	}
+
+	if( AllocateAndInitializeSid( &NtAuthority, 2, SECURITY_BUILTIN_DOMAIN_RID, DOMAIN_ALIAS_RID_ADMINS,
+									0, 0, 0, 0, 0, 0, &AdministratorsGroup ) )
+	{
+		for ( dwIndex = 0; dwIndex < pGroup->GroupCount; dwIndex++ )
+		{
+			if ( EqualSid( AdministratorsGroup, pGroup->Groups[dwIndex].Sid ) )
+			{
+				rights = tr( "Administrator" );
+				break;
+			}
+		}
+	}
+
+	if ( AdministratorsGroup )
+		FreeSid( AdministratorsGroup );
+	if ( pGroup )
+		GlobalFree( pGroup );
+	
+	return rights;
 }
 
 bool DiagnosticsDialog::isPCSCRunning() const

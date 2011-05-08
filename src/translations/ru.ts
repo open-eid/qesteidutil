@@ -120,10 +120,6 @@ Oodati: %2, saadi: %3</source>
         <translation>CPU:</translation>
     </message>
     <message>
-        <source>Unknown version</source>
-        <translation>Неизвестная версий</translation>
-    </message>
-    <message>
         <source>failed to get version info</source>
         <translation>ошибка при чтении версии</translation>
     </message>
@@ -158,6 +154,22 @@ Please wait...</source>
         <translation>Составляется диагностический отчёт
 
 Пожалуйста, подождите...</translation>
+    </message>
+    <message>
+        <source>User rights: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>User</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown - error %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Administrator</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

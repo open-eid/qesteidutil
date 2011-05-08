@@ -34,7 +34,7 @@
     <message>
         <source>Server sai vale arvu baite, samm: %1.
 Oodati: %2, saadi: %3</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -120,10 +120,6 @@ Oodati: %2, saadi: %3</source>
         <translation>Protsessor:</translation>
     </message>
     <message>
-        <source>Unknown version</source>
-        <translation>Teadmata versioon</translation>
-    </message>
-    <message>
         <source>failed to get version info</source>
         <translation>viga versiooniinfo lugemisel</translation>
     </message>
@@ -133,15 +129,15 @@ Oodati: %2, saadi: %3</source>
     </message>
     <message>
         <source>OpenSC tool:</source>
-        <translation type="unfinished"></translation>
+        <translation>OpenSC programm: </translation>
     </message>
     <message>
         <source>PKCS11 tool:</source>
-        <translation type="unfinished"></translation>
+        <translation>PKCS11 programm:</translation>
     </message>
     <message>
         <source>USB info:</source>
-        <translation type="unfinished"></translation>
+        <translation>USB info:</translation>
     </message>
     <message>
         <source>More info</source>
@@ -158,6 +154,22 @@ Please wait...</source>
         <translation>Koostan diagnostikat
 
 Palun oodake...</translation>
+    </message>
+    <message>
+        <source>User rights: </source>
+        <translation>Kasutajaõigused: </translation>
+    </message>
+    <message>
+        <source>User</source>
+        <translation>Kasutaja</translation>
+    </message>
+    <message>
+        <source>Unknown - error %1</source>
+        <translation>Teadmata - viga %1</translation>
+    </message>
+    <message>
+        <source>Administrator</source>
+        <translation>Administraator</translation>
     </message>
 </context>
 <context>

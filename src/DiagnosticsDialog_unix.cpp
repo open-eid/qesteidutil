@@ -168,6 +168,9 @@ QString DiagnosticsDialog::getProcessor() const
 #endif
 }
 
+QString DiagnosticsDialog::getUserRights() const
+{ return QString(); }
+
 bool DiagnosticsDialog::isPCSCRunning() const
 {
 #ifdef Q_OS_LINUX

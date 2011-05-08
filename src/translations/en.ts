@@ -34,7 +34,8 @@
     <message>
         <source>Server sai vale arvu baite, samm: %1.
 Oodati: %2, saadi: %3</source>
-        <translation type="unfinished"></translation>
+        <translation>Server got wrong byte size, step: %1.
+Expected: %2, got: %3</translation>
     </message>
 </context>
 <context>
@@ -120,10 +121,6 @@ Oodati: %2, saadi: %3</source>
         <translation>CPU:</translation>
     </message>
     <message>
-        <source>Unknown version</source>
-        <translation>Unknown version</translation>
-    </message>
-    <message>
         <source>failed to get version info</source>
         <translation>failed to get version info</translation>
     </message>
@@ -133,15 +130,15 @@ Oodati: %2, saadi: %3</source>
     </message>
     <message>
         <source>OpenSC tool:</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>PKCS11 tool:</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>USB info:</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>More info</source>
@@ -155,6 +152,22 @@ Oodati: %2, saadi: %3</source>
         <source>Generating diagnostics
 
 Please wait...</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>User rights: </source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>User</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Unknown - error %1</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Administrator</source>
         <translation></translation>
     </message>
 </context>

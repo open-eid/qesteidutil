@@ -40,4 +40,5 @@ private:
 	QStringList getPackageVersion( const QStringList &list, bool returnPackageName = true ) const;
 	QString getProcessor() const;
 	QString getReaderInfo();
+	QString getUserRights() const;
 };
