@@ -769,9 +769,10 @@ function updateCert()
 		if( navigator.platform.indexOf('Mac') != -1 ||
 			navigator.platform.indexOf('Win') != -1 )
 		{
-			_alert( 'info', _('updateCertOk') + '<br /><br />' + _('cleanTokenCacheInfo') );
+            var win = navigator.platform.indexOf('Mac') != -1;
+			_alert( 'info', _('updateCertOk') + '<br /><br />' + ( win ? '' : _('cleanTokenCacheInfo') ) );
 			var status = extender.cleanTokenCache();
-			_alert( 'info', status ? _('cleanTokenCacheOk') : _('cleanTokenCacheFail') );
+			_alert( 'info', status ? _( win ? 'cleanTokenCacheOkWin' : 'cleanTokenCacheOk' ) : _( win ? 'cleanTokenCacheFailWin' : 'cleanTokenCacheFail' ) );
 		}
 		else
 			_alert( 'info', _( 'updateCertOk' ) );
