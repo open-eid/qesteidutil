@@ -227,7 +227,12 @@ void DiagnosticsDialog::showDetails()
 	
 	QApplication::processEvents();
 
-	p.start( "pkcs11-tool", QStringList() << "-T" );
+	QStringList list;
+#if defined(PKCS11_MODULE)
+	list << QString("--module=%1").arg( PKCS11_MODULE );
+#endif
+	list << "-T";
+	p.start( "pkcs11-tool", list );
 	p.waitForFinished();
 	cmd = QString::fromUtf8( p.readAll() );
 	if ( !cmd.isEmpty() )

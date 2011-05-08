@@ -199,7 +199,13 @@ void DiagnosticsDialog::showDetails()
 
 	QApplication::processEvents();
 
-	cmd = QString::fromUtf8( runProcess( "pkcs11-tool", QStringList() << "-T" ) );
+	QStringList list;
+#if defined(PKCS11_MODULE)
+	list << QString("--module=%1").arg( PKCS11_MODULE );
+#endif
+	list << "-T";
+
+	cmd = QString::fromUtf8( runProcess( "pkcs11-tool", list ) );
 	if ( !cmd.isEmpty() )
 		ret += "<b>" + tr("PKCS11 tool:") + "</b><br/> " + cmd.replace( "\n", "<br />" ) + "<br />";
 
