@@ -348,6 +348,19 @@ void Common::mailTo( const QUrl &url )
 				<< "end tell" << endl
 				<< "end run" << endl;
 		}
+		else if( CFStringFind( appPath, CFSTR("Outlook"), 0 ).location != kCFNotFound )
+		{
+			s << "on run argv" << endl
+				<< "set vattachment to (item 1 of argv)" << endl
+				<< "set vsubject to (item 2 of argv)" << endl
+				<< "tell application \"Microsoft Outlook\"" << endl
+				<< "activate" << endl
+				<< "set vmessage to make new outgoing message with properties {subject:vsubject}" << endl
+				<< "make new attachment at vmessage with properties {file: vattachment}" << endl
+				<< "open vmessage" << endl
+				<< "end tell" << endl
+				<< "end run" << endl;
+		}
 #if 0
 		else if(CFStringCompare(appPath, CFSTR("/Applications/Thunderbird.app"), 0) == kCFCompareEqualTo)
 		{
