@@ -58,7 +58,13 @@ DiagnosticsDialog::DiagnosticsDialog( QWidget *parent )
 
 	s << "<b>" << tr("Locale:") << "</b> ";
 	QLocale::Language language = QLocale::system().language();
-	s << (language == QLocale::C ? "English/United States" : QLocale::languageToString( language ) ) << "<br /><br />";
+	QString locale = QString( "%1 - ").arg( language == QLocale::C ? "English/United States" : QLocale::languageToString( language ) );
+#ifdef Q_OS_MAC
+	locale.append( runProcess( "sh -c \"echo $LC_CTYPE\"" ) );
+#else
+	locale.append( runProcess( "sh -c \"echo $LANG\"" ) );
+#endif
+	s << locale << "<br /><br />";
 
 	QStringList package = getPackageVersion( QStringList() << "estonianidcard", false );
 	QStringList utility = getPackageVersion( QStringList() << "qesteidutil", false );
