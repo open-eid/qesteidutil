@@ -35,22 +35,31 @@
 
 #include <Windows.h>
 
-static QString getLibVersion( const QString &lib )
+static QString getLibVersion( const QString &libraries )
 {
-	try
+	QStringList libs = libraries.split( "|" );
+	QString resultFound, resultNotFound;
+	Q_FOREACH( const QString &lib, libs )
 	{
-		QString ver = QString::fromStdString( DynamicLibrary( lib.toLatin1() ).getVersionStr() );
-		return QString( "%1 (%2)" )
-			.arg( lib )
-			.arg( ver == "missing" ? DiagnosticsDialog::tr("failed to get version info") : ver );
+		try
+		{
+			QString ver = QString::fromStdString( DynamicLibrary( lib.toLatin1() ).getVersionStr() );
+			resultFound += QString( "%1 (%2)" )
+				.arg( lib )
+				.arg( ver == "missing" ? DiagnosticsDialog::tr("failed to get version info") : ver );
+		}
+		catch( const std::runtime_error &e )
+		{
+			QString tmp = QString("%1 - %2")
+				.arg( lib )
+				.arg( QString( e.what() ).contains( "missing" ) ?
+					DiagnosticsDialog::tr("failed to get version info") : DiagnosticsDialog::tr("library not found") );
+			if ( !resultNotFound.isEmpty() )
+				resultNotFound += "<br />";
+			resultNotFound += tmp;
+		}
 	}
-	catch( const std::runtime_error &e )
-	{
-		return QString("%1 - %2")
-			.arg( lib )
-			.arg( QString( e.what() ).contains( "missing" ) ?
-				DiagnosticsDialog::tr("failed to get version info") : DiagnosticsDialog::tr("library not found") );
-	}
+	return !resultFound.isEmpty() ? resultFound : resultNotFound;
 }
 
 DiagnosticsDialog::DiagnosticsDialog( QWidget *parent )
@@ -83,8 +92,7 @@ DiagnosticsDialog::DiagnosticsDialog( QWidget *parent )
 	s << getLibVersion( "advapi32") << "<br />";
 	s << getLibVersion( "crypt32") << "<br />";
 	s << getLibVersion( "winscard") << "<br />";
-	s << getLibVersion( "esteidcsp") << "<br />";
-	s << getLibVersion( "esteidcm") << "<br />";
+	s << getLibVersion( "esteidcsp|esteidcm") << "<br />";
 	s << getLibVersion( "libeay32" ) << "<br />";
 	s << getLibVersion( "ssleay32" ) << "<br />";
 	s << getLibVersion( "opensc-pkcs11" ) << "<br />";
