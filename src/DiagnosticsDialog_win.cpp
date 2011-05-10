@@ -73,7 +73,11 @@ DiagnosticsDialog::DiagnosticsDialog( QWidget *parent )
 
 	s << "<b>" << tr("Locale:") << "</b> ";
 	QLocale::Language language = QLocale::system().language();
-	s << (language == QLocale::C ? "English/United States" : QLocale::languageToString( language ) ) << "<br />";
+	QString locale = (language == QLocale::C ? "English/United States" : QLocale::languageToString( language ) );
+	CPINFOEX CPInfoEx;
+	if ( GetCPInfoEx( GetConsoleCP(), 0, &CPInfoEx ) != 0 )
+		locale.append( " - " ).append( CPInfoEx.CodePageName );
+	s << locale << "<br />";
 	s << "<b>" << tr("User rights: ") << "</b>" << getUserRights() << "<br />";
 
 	QString base = getRegistry( "Eesti ID kaardi tarkvara" );
