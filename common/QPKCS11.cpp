@@ -127,7 +127,6 @@ int QPKCS11Private::rsa_sign( int type, const unsigned char *m, unsigned int m_l
 	if( sig.isEmpty() )
 		return 0;
 	*siglen = sig.size();
-	sigret = (unsigned char*)qMalloc(sig.size());
 	qMemCopy( sigret, sig.constData(), sig.size() );
 	return 1;
 }
@@ -268,7 +267,9 @@ QPKCS11::PinStatus QPKCS11::login( const TokenData &_t )
 
 	switch( d->err )
 	{
-	case CKR_OK: return PinOK;
+	case CKR_OK:
+	case CKR_USER_ALREADY_LOGGED_IN:
+		return PinOK;
 	case CKR_CANCEL:
 	case CKR_FUNCTION_CANCELED: return PinCanceled;
 	case CKR_PIN_INCORRECT: return PinIncorrect;
