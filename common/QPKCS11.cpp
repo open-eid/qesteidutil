@@ -155,6 +155,7 @@ QStringList QPKCS11::cards()
 		cards << QByteArray( (const char*)token.serialNumber, 16 ).trimmed();
 	}
 	cards.removeDuplicates();
+	qSort( cards.begin(), cards.end(), qGreater<QString>() );
 	return cards;
 }
 
