@@ -223,7 +223,7 @@ QByteArray JsExtender::getUrl( SSLConnect::RequestType type, const QString &def 
 
 	sslErrorString.clear();
 	SSLConnect sslConnect;
-	sslConnect.setToken( m_mainWindow->eidCard()->m_authCert->cert(), key );
+	sslConnect.setToken( m_mainWindow->eidCard()->m_authCert->cert(), Qt::HANDLE( key ) );
 
 	QByteArray buffer = sslConnect.getUrl( type, def );
 	sslErrorString = sslConnect.errorString();
