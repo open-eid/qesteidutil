@@ -192,6 +192,10 @@
         <source>PIN is locked</source>
         <translation>PIN заблокирован</translation>
     </message>
+    <message>
+        <source>Unknown OS</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DMessageBox</name>
@@ -250,36 +254,8 @@
 <context>
     <name>SSLConnect</name>
     <message>
-        <source>PIN canceled</source>
-        <translation>Введение PIN отменено</translation>
-    </message>
-    <message>
-        <source>Invalid PIN</source>
-        <translation>Неверный PIN</translation>
-    </message>
-    <message>
-        <source>no token available</source>
-        <translation>не найдено ни одного &quot;token&quot;-а</translation>
-    </message>
-    <message>
-        <source>no certificate available</source>
-        <translation>Нет доступного сертификата</translation>
-    </message>
-    <message>
-        <source>no key matching certificate available</source>
-        <translation>не найдено подходящего сертификата</translation>
-    </message>
-    <message>
         <source>Failed to connect to host. Are you connected to the internet?</source>
         <translation>Отсутствует подключение к интернету!</translation>
-    </message>
-    <message>
-        <source>failed to load pkcs11 module &apos;%1&apos;</source>
-        <translation>ошибка при загрузке модуля pkcs11 &apos;%1&apos;</translation>
-    </message>
-    <message>
-        <source>Certificate is not valid</source>
-        <translation>Сертификат не действителен</translation>
     </message>
     <message>
         <source>Loading server access certificate. Please wait.</source>
@@ -296,14 +272,6 @@
     <message>
         <source>Downloading picture</source>
         <translation>Загрузку картинок</translation>
-    </message>
-    <message>
-        <source>PIN locked</source>
-        <translation>PIN заблокирован</translation>
-    </message>
-    <message>
-        <source>Failed to validate PIN</source>
-        <translation>Ошибка проверки PIN-кода</translation>
     </message>
 </context>
 <context>

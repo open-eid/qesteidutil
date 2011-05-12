@@ -192,6 +192,10 @@
         <source>PIN is locked</source>
         <translation>PIN is locked</translation>
     </message>
+    <message>
+        <source>Unknown OS</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DMessageBox</name>
@@ -250,36 +254,8 @@
 <context>
     <name>SSLConnect</name>
     <message>
-        <source>PIN canceled</source>
-        <translation>PIN canceled</translation>
-    </message>
-    <message>
-        <source>Invalid PIN</source>
-        <translation>Invalid PIN</translation>
-    </message>
-    <message>
-        <source>no token available</source>
-        <translation>no token available</translation>
-    </message>
-    <message>
-        <source>no certificate available</source>
-        <translation>no certificate available</translation>
-    </message>
-    <message>
-        <source>no key matching certificate available</source>
-        <translation>no key matching certificate available</translation>
-    </message>
-    <message>
         <source>Failed to connect to host. Are you connected to the internet?</source>
         <translation>Failed to connect to host. Are you connected to the internet?</translation>
-    </message>
-    <message>
-        <source>failed to load pkcs11 module &apos;%1&apos;</source>
-        <translation>failed to load pkcs11 module &apos;%1&apos;</translation>
-    </message>
-    <message>
-        <source>Certificate is not valid</source>
-        <translation>Certificate is not valid</translation>
     </message>
     <message>
         <source>Loading server access certificate. Please wait.</source>
@@ -297,14 +273,6 @@
     <message>
         <source>Downloading picture</source>
         <translation>Downloading picture</translation>
-    </message>
-    <message>
-        <source>PIN locked</source>
-        <translation>PIN locked</translation>
-    </message>
-    <message>
-        <source>Failed to validate PIN</source>
-        <translation>Failed to validate PIN</translation>
     </message>
 </context>
 <context>

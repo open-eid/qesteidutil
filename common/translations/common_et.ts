@@ -192,6 +192,10 @@
         <source>PIN is locked</source>
         <translation>PIN on lukus</translation>
     </message>
+    <message>
+        <source>Unknown OS</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DMessageBox</name>
@@ -250,36 +254,8 @@
 <context>
     <name>SSLConnect</name>
     <message>
-        <source>PIN canceled</source>
-        <translation>PIN sisestamine katkestati</translation>
-    </message>
-    <message>
-        <source>Invalid PIN</source>
-        <translation>Vale PIN</translation>
-    </message>
-    <message>
-        <source>no token available</source>
-        <translation>ei leitud ühtegi &quot;tokenit&quot;</translation>
-    </message>
-    <message>
-        <source>no certificate available</source>
-        <translation>Ei ole kättesaadavaid sertifikaate</translation>
-    </message>
-    <message>
-        <source>no key matching certificate available</source>
-        <translation>ei leitud ühtegi sobivat sertifikaati</translation>
-    </message>
-    <message>
         <source>Failed to connect to host. Are you connected to the internet?</source>
         <translation>Puudub internetiühendus!</translation>
-    </message>
-    <message>
-        <source>failed to load pkcs11 module &apos;%1&apos;</source>
-        <translation>viga pkcs11 mooduli laadimisel &apos;%1&apos;</translation>
-    </message>
-    <message>
-        <source>Certificate is not valid</source>
-        <translation>Sertifikaat ei ole kehtiv</translation>
     </message>
     <message>
         <source>Loading server access certificate. Please wait.</source>
@@ -296,14 +272,6 @@
     <message>
         <source>Downloading picture</source>
         <translation>Laadin pilti</translation>
-    </message>
-    <message>
-        <source>PIN locked</source>
-        <translation>PIN on lukus</translation>
-    </message>
-    <message>
-        <source>Failed to validate PIN</source>
-        <translation>PIN-koodi valideerimine ebaõnnestus</translation>
     </message>
 </context>
 <context>

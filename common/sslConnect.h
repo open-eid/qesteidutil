@@ -24,7 +24,7 @@
 
 #include <QObject>
 
-#include "TokenData.h"
+class QSslCertificate;
 
 class SSLConnectPrivate;
 class SSLConnect: public QObject
@@ -39,25 +39,13 @@ public:
 		PictureInfo,
 		AccessCert
 	};
-	enum ErrorType {
-		PinCanceledError = 1,
-		PinInvalidError = 2,
-		PinLockedError = 3,
-		PinUnknownError = 6,
-		NoError = -1,
-		PKCS11Error = 4,
-		SSLError = 5,
-	};
 
-	SSLConnect( const QString &pkcs11, QObject *parent = 0 );
+	explicit SSLConnect( QObject *parent = 0 );
 	~SSLConnect();
 
-	ErrorType error() const;
 	QString errorString() const;
-	TokenData::TokenFlags flags() const;
 	QByteArray getUrl( RequestType type, const QString &value = QString() );
-	bool setCard( const QString &card );
-	void setPKCS11( const QString &pkcs11, bool unload = true );
+	void setToken( const QSslCertificate &cert, Qt::HANDLE key );
 
 private:
 	SSLConnectPrivate	*d;

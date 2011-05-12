@@ -19,18 +19,18 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  */
-
+ 
 #include "sslConnect_p.h"
 
-#include "PinDialog.h"
 #include "Settings.h"
 #include "SOAPDocument.h"
-#include "SslCertificate.h"
 
 #include <common/Common.h>
 
+#include <QDebug>
 #include <QProgressBar>
 #include <QProgressDialog>
+#include <QSslCertificate>
 
 QByteArray HTTPRequest::request() const
 {
@@ -54,22 +54,6 @@ QByteArray HTTPRequest::request() const
 }
 
 
-void PINPADThread::run()
-{
-	if( PKCS11_login( m_slot, 0, 0 ) < 0 )
-		result = ERR_get_error();
-}
-
-unsigned long PINPADThread::waitForDone()
-{
-	QEventLoop e;
-	connect( this, SIGNAL(finished()), &e, SLOT(quit()) );
-	start();
-	e.exec();
-	return result;
-}
-
-
 
 void SSLReadThread::run()
 {
@@ -78,11 +62,11 @@ void SSLReadThread::run()
 	QByteArray buffer;
 	do
 	{
-		bytesRead = SSL_read( m_ssl, &readBuffer, 4096 );
+		bytesRead = SSL_read( d->ssl, &readBuffer, 4096 );
 
 		if( bytesRead <= 0 )
 		{
-			switch( SSL_get_error( m_ssl, bytesRead ) )
+			switch( SSL_get_error( d->ssl, bytesRead ) )
 			{
 			case SSL_ERROR_NONE:
 			case SSL_ERROR_WANT_READ:
@@ -90,6 +74,7 @@ void SSLReadThread::run()
 			case SSL_ERROR_ZERO_RETURN: // Disconnect
 				break;
 			default:
+				d->setError();
 				return;
 			}
 		}
@@ -113,199 +98,38 @@ QByteArray SSLReadThread::waitForDone()
 
 
 
-SSLConnectPrivate::SSLConnectPrivate()
-:	unload( true )
-,	p11( PKCS11_CTX_new() )
-,	p11loaded( false )
-,	ssl( 0 )
-,	flags( 0 )
-,	nslots( 0 )
-,	pslots( 0 )
-,	error( SSLConnect::NoError )
-{}
-
-SSLConnectPrivate::~SSLConnectPrivate()
-{
-	if( ssl )
-		SSL_shutdown( ssl );
-	SSL_free( ssl );
-	if( nslots )
-		PKCS11_release_all_slots( p11, pslots, nslots );
-	if( p11loaded && unload )
-		PKCS11_CTX_unload( p11 );
-	PKCS11_CTX_free( p11 );
-}
-
-bool SSLConnectPrivate::connectToHost( const QByteArray &url )
-{
-	if( !p11loaded )
-	{
-		error = SSLConnect::PKCS11Error;
-		return false;
-	}
-
-	if( !selectSlot() )
-	{
-		setError( SSLConnect::PKCS11Error, SSLConnect::tr("no token available") );
-		return false;
-	}
-
-	// Find token cert
-	PKCS11_CERT *certs = 0;
-	unsigned int ncerts = 0;
-	if( PKCS11_enumerate_certs( pslot->token, &certs, &ncerts ) || !ncerts )
-	{
-		setError( SSLConnect::PKCS11Error, SSLConnect::tr("no certificate available") );
-		return false;
-	}
-	QSslCertificate cert = SslCertificate::fromX509( Qt::HANDLE(certs[0].x509) );
-	if( !cert.isValid() )
-	{
-		setError( SSLConnect::PKCS11Error, SSLConnect::tr("Certificate is not valid") );
-		return false;
-	}
-
-	// Login token
-	if( pslot->token->loginRequired )
-	{
-		unsigned long err = CKR_OK;
-		if( !pslot->token->secureLogin )
-		{
-			PinDialog p( PinDialog::Pin1Type, cert, flags, qApp->activeWindow() );
-			if( !p.exec() )
-			{
-				setError( SSLConnect::PinCanceledError, SSLConnect::tr("PIN canceled") );
-				return false;
-			}
-			if( PKCS11_login( pslot, 0, p.text().toUtf8() ) < 0 )
-				err = ERR_get_error();
-		}
-		else
-		{
-			PinDialog p( PinDialog::Pin1PinpadType, cert, flags, qApp->activeWindow() );
-			PINPADThread t( pslot );
-			QObject::connect( &t, SIGNAL(started()), &p, SIGNAL(startTimer()) );
-			p.open();
-			err = t.waitForDone();
-		}
-		switch( ERR_GET_REASON(err) )
-		{
-		case CKR_OK: break;
-		case CKR_CANCEL:
-		case CKR_FUNCTION_CANCELED:
-			setError( SSLConnect::PinCanceledError, SSLConnect::tr("PIN canceled") );
-			return false;
-		case CKR_PIN_INCORRECT:
-			selectSlot();
-			setError( SSLConnect::PinInvalidError, SSLConnect::tr("Invalid PIN") );
-			return false;
-		case CKR_PIN_LOCKED:
-			setError( SSLConnect::PinLockedError, SSLConnect::tr("PIN locked") );
-			return false;
-		default:
-			setError( SSLConnect::PinUnknownError, SSLConnect::tr("Failed to validate PIN") );
-			return false;
-		}
-	}
-
-	// Find token key
-	PKCS11_KEY *authkey = PKCS11_find_key( &certs[0] );
-	if ( !authkey )
-	{
-		setError( SSLConnect::PKCS11Error, SSLConnect::tr("no key matching certificate available") );
-		return false;
-	}
-	EVP_PKEY *pkey = PKCS11_get_private_key( authkey );
-
-	SSL_CTX *ctx = SSL_CTX_new( TLSv1_client_method() );
-	if( !ctx ||
-		!(ssl = SSL_new( ctx )) ||
-		!SSL_use_certificate( ssl, certs[0].x509 ) ||
-		!SSL_use_PrivateKey( ssl, pkey ) ||
-		!SSL_check_private_key( ssl ) ||
-		!SSL_set_mode( ssl, SSL_MODE_AUTO_RETRY ) )
-	{
-		setError( SSLConnect::SSLError );
-		return false;
-	}
-
-	BIO *sock = BIO_new_connect( (char*)url.constData() );
-	BIO_set_conn_port( sock, "https" );
-	if( BIO_do_connect( sock ) <= 0 )
-	{
-		setError( SSLConnect::SSLError, SSLConnect::tr( "Failed to connect to host. Are you connected to the internet?" ) );
-		return false;
-	}
-
-	SSL_set_bio( ssl, sock, sock );
-
-	if ( !SSL_connect( ssl ) )
-	{
-		setError( SSLConnect::SSLError );
-		return false;
-	}
-
-	return true;
-}
-
-bool SSLConnectPrivate::selectSlot()
-{
-	if( !p11loaded )
-		return false;
-
-	if( nslots )
-	{
-		PKCS11_release_all_slots( p11, pslots, nslots );
-		nslots = 0;
-	}
-	if( PKCS11_enumerate_slots( p11, &pslots, &nslots ) || !nslots )
-		return false;
-
-	pslot = 0;
-	for( unsigned int i = 0; i < nslots; ++i )
-	{
-		if( pslots[i].token &&
-			card.contains( pslots[i].token->serialnr ) )
-		{
-			pslot = &pslots[i];
-			break;
-		}
-	}
-
-	if( !pslot || !pslot->token )
-		return false;
-
-#ifdef LIBP11_TOKEN_FLAGS
-	if( pslot->token->soPinCountLow || pslot->token->userPinCountLow )
-		flags |= TokenData::PinCountLow;
-	if( pslot->token->soPinFinalTry || pslot->token->userPinFinalTry )
-		flags |= TokenData::PinFinalTry;
-	if( pslot->token->soPinLocked || pslot->token->userPinLocked )
-		flags |= TokenData::PinLocked;
-#endif
-	return true;
-}
-
-void SSLConnectPrivate::setError( SSLConnect::ErrorType type, const QString &msg )
-{
-	error = type;
-	errorString = msg.isEmpty() ? ERR_reason_error_string( ERR_get_error() ) : msg;
-}
-
-
-
-SSLConnect::SSLConnect( const QString &pkcs11, QObject *parent )
+SSLConnect::SSLConnect( QObject *parent )
 :	QObject( parent )
 ,	d( new SSLConnectPrivate() )
 {
-	if( !pkcs11.isEmpty() )
-		setPKCS11( pkcs11 );
+	d->ctx = SSL_CTX_new( TLSv1_client_method() );
+	if( d->ctx )
+		d->ssl = SSL_new( d->ctx );
+	if( d->ssl )
+		SSL_set_mode( d->ssl, SSL_MODE_AUTO_RETRY );
+	else
+		d->setError();
 }
 
-SSLConnect::~SSLConnect() { delete d; }
+SSLConnect::~SSLConnect()
+{
+	if( d->ssl )
+		SSL_shutdown( d->ssl );
+	SSL_free( d->ssl );
+	delete d;
+}
 
 QByteArray SSLConnect::getUrl( RequestType type, const QString &value )
 {
+	if( !d->ssl )
+		return QByteArray();
+
+	if( !SSL_check_private_key( d->ssl ) )
+	{
+		d->setError();
+		return false;
+	}
+
 	QString label;
 	HTTPRequest req;
 	switch( type )
@@ -355,40 +179,45 @@ QByteArray SSLConnect::getUrl( RequestType type, const QString &value )
 	default: return QByteArray();
 	}
 
-	if( !d->connectToHost( req.url().host().toUtf8() ) )
-		return QByteArray();
-
-	QByteArray data = req.request();
-	if( !SSL_write( d->ssl, data.constData(), data.length() ) )
+	QByteArray url = req.url().host().toUtf8();
+	BIO *sock = BIO_new_connect( (char*)url.constData() );
+	BIO_set_conn_port( sock, "https" );
+	if( BIO_do_connect( sock ) <= 0 )
 	{
-		d->setError( SSLConnect::SSLError );
+		d->setError( tr( "Failed to connect to host. Are you connected to the internet?" ) );
 		return QByteArray();
 	}
+
+	SSL_set_bio( d->ssl, sock, sock );
+	if( !SSL_connect( d->ssl ) )
+	{
+		d->setError();
+		return QByteArray();
+	}
+
+	QByteArray header = req.request();
+	if( !SSL_write( d->ssl, header.constData(), header.size() ) )
+	{
+		d->setError();
+		return QByteArray();
+	}
+
 	QProgressDialog p( label, QString(), 0, 0, qApp->activeWindow() );
 	p.setWindowFlags( (p.windowFlags() | Qt::CustomizeWindowHint) & ~Qt::WindowCloseButtonHint );
 	if( QProgressBar *bar = p.findChild<QProgressBar*>() )
 		bar->setTextVisible( false );
 	p.open();
-	QByteArray result = SSLReadThread( d->ssl ).waitForDone();
-	if( result.isEmpty() )
-		d->setError( SSLConnect::SSLError );
-	return result;
+
+	return SSLReadThread( d ).waitForDone();
 }
 
-SSLConnect::ErrorType SSLConnect::error() const { return d->error; }
 QString SSLConnect::errorString() const { return d->errorString; }
-TokenData::TokenFlags SSLConnect::flags() const { return d->flags; }
-bool SSLConnect::setCard( const QString &card ) { d->card = card; return d->selectSlot(); }
-void SSLConnect::setPKCS11( const QString &pkcs11, bool unload )
+
+void SSLConnect::setToken( const QSslCertificate &cert, Qt::HANDLE key )
 {
-	d->error = NoError;
-	d->errorString.clear();
-	if( d->p11loaded && d->unload )
-		PKCS11_CTX_unload( d->p11 );
-	d->unload = unload;
-	d->p11loaded = PKCS11_CTX_load( d->p11, pkcs11.toUtf8() ) == 0;
-	if( !d->p11loaded )
-	{
-		d->setError( PKCS11Error, tr("failed to load pkcs11 module '%1'").arg( pkcs11 ) );
-	}
+	if( !d->ssl )
+		return;
+	if( !SSL_use_certificate( d->ssl, X509_dup( (X509*)cert.handle() ) ) ||
+		!SSL_use_PrivateKey( d->ssl, (EVP_PKEY*)key ) )
+		d->setError();
 }

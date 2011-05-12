@@ -27,20 +27,12 @@
 #include <QNetworkRequest>
 #include <QThread>
 
-#include <libp11.h>
-
+#include <openssl/err.h>
 #include <openssl/ssl.h>
 
 #define EESTI "sisene.www.eesti.ee"
 #define OPENXADES "www.openxades.org"
 #define SK "id.sk.ee"
-
-// PKCS#11
-#define CKR_OK					(0)
-#define CKR_CANCEL				(1)
-#define CKR_FUNCTION_CANCELED	(0x50)
-#define CKR_PIN_INCORRECT		(0xa0)
-#define CKR_PIN_LOCKED			(0xa4)
 
 class HTTPRequest: public QNetworkRequest
 {
@@ -59,50 +51,21 @@ private:
 class SSLConnectPrivate
 {
 public:
-	SSLConnectPrivate();
-	~SSLConnectPrivate();
+	SSLConnectPrivate(): ctx(0), ssl(0) {}
 
-	bool connectToHost( const QByteArray &url );
-	bool selectSlot();
-	void setError( SSLConnect::ErrorType type, const QString &msg = QString() );
+	void setError( const QString &msg = QString() )
+	{ errorString = msg.isEmpty() ? ERR_reason_error_string( ERR_get_error() ) : msg; }
 
-	bool	unload;
-	PKCS11_CTX *p11;
-	bool	p11loaded;
+	SSL_CTX *ctx;
 	SSL		*ssl;
-
-	QString card;
-	TokenData::TokenFlags flags;
-	PKCS11_SLOT *pslot;
-
-	unsigned int nslots;
-	PKCS11_SLOT *pslots;
-
-	SSLConnect::ErrorType error;
 	QString errorString;
-};
-
-class PINPADThread: public QThread
-{
-	Q_OBJECT
-public:
-	explicit PINPADThread( PKCS11_SLOT *slot, QObject *parent = 0 )
-	: QThread(parent), result(CKR_OK), m_slot(slot) {}
-
-	unsigned long waitForDone();
-
-private:
-	void run();
-
-	unsigned long result;
-	PKCS11_SLOT *m_slot;
 };
 
 class SSLReadThread: public QThread
 {
 	Q_OBJECT
 public:
-	explicit SSLReadThread( SSL *ssl, QObject *parent = 0 ): QThread( parent ), m_ssl(ssl) {}
+	explicit SSLReadThread( SSLConnectPrivate *ssl, QObject *parent = 0 ): QThread( parent ), d(ssl) {}
 
 	QByteArray waitForDone();
 
@@ -110,5 +73,5 @@ private:
 	void run();
 
 	QByteArray result;
-	SSL *m_ssl;
+	SSLConnectPrivate *d;
 };
