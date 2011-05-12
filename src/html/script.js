@@ -819,8 +819,9 @@ function changePin( type )
 		_alert( 'warning', _( 'PIN' + type + 'Enter' ) );
 		document.getElementById('pin' + type + 'OldPin').focus();
 		return;
-	}		
-	if ( !eval("esteidData.validatePin" + type + "(oldVal)") )
+	}
+    eval("var chgResult = esteidData.validatePin" + type + "(oldVal)");
+	if ( chgResult != "1" )
 	{
 		ret = eval("esteidData.getPin" + type + "RetryCount() ");
 		if ( ret == 0 || ret > 3 )
@@ -994,7 +995,8 @@ function changePinPUK( type )
 		document.getElementById('ppin' + type + 'NewPin2').focus();
 		return;
 	}
-	if ( eval("esteidData.validatePin" + type + "(newVal)") )
+    eval("var chgResult = esteidData.validatePin" + type + "(newVal)");
+	if ( chgResult == "1" )
 	{
 		_alert( 'warning', _( 'PIN' + type + 'NewOldSame' ) );
 		document.getElementById('ppin' + type + 'NewPin').focus();

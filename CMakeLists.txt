@@ -14,9 +14,7 @@ include( VersionInfo )
 find_package(Qt4 4.6.0 COMPONENTS QtCore QtGui QtNetwork QtWebkit QtXml REQUIRED)
 find_package(OpenSSL REQUIRED)
 find_package(PKCS11)
-find_package(LibP11 REQUIRED)
 find_package(SmartCardpp REQUIRED)
-find_package(LibLtdl REQUIRED)
 if(UNIX)
 	# Hack to get around smartcardpp header inclusion scheme
 	find_package(PCSCLite REQUIRED)
@@ -182,10 +180,8 @@ target_link_libraries( ${PROGNAME}
 	${SMARTCARDPP_LIBRARIES}
 	${ADDITIONAL_LIBRARIES}
 	${CMAKE_DL_LIBS}
-	${LIBLTDL_LIBRARIES}
 	qdigidoccommon
 	qtsingleapplication
-	${LIBP11_LIBRARIES}
 )
 
 if(UNIX AND NOT APPLE)

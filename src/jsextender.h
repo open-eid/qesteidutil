@@ -29,6 +29,8 @@
 #include <QDateTime>
 #include <QXmlStreamReader>
 
+#include <openssl/rsa.h>
+
 class MainWindow;
 class SettingsDialog;
 
@@ -49,6 +51,9 @@ public:
 	~JsExtender();
     void registerObject( const QString &name, QObject *object );
 
+	static int rsa_sign( int type, const unsigned char *m, unsigned int m_len,
+		unsigned char *sigret, unsigned int *siglen, const RSA *rsa );
+
 private:
 	MainWindow *m_mainWindow;
     QMap<QString, QObject *> m_registeredObjects;
@@ -57,7 +62,6 @@ private:
 	QString m_locale;
 	QLabel *m_loading;
 	QByteArray getUrl( SSLConnect::RequestType, const QString &def = QString() );
-	SSLConnect::ErrorType sslError;
 	QString sslErrorString;
 
 public slots:

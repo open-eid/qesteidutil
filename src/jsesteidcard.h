@@ -73,7 +73,7 @@ public slots:
     QString getComment4();
 
 	int cardVersion();
-
+	ByteVec calcSSL( const ByteVec &vec );
 	bool canReadCard();
 	bool isSecureConnection();
 	bool isValid();
@@ -90,8 +90,8 @@ public slots:
     QString changePuk(QString newVal, QString oldVal);
     QString unblockPin1(QString newVal, QString puk);
     QString unblockPin2(QString newVal, QString puk);
-	bool validatePin1(QString oldVal);
-	bool validatePin2(QString oldVal);
+	QString validatePin1(QString oldVal);
+	QString validatePin2(QString oldVal);
 	bool validatePuk(QString oldVal);
 	bool checkPin( const QString &pin );
 

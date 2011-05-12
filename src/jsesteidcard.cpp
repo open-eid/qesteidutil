@@ -121,11 +121,11 @@ int JsEsteidCard::cardVersion()
 	return (int)m_card->getCardVersion();
 }
 
-bool JsEsteidCard::validatePin1(QString oldVal)
+QString JsEsteidCard::validatePin1(QString oldVal)
 {
 	if (!m_card) {
         qDebug("No card");
-        return false;
+        return "0";
     }
 
     byte retriesLeft = 0;
@@ -134,16 +134,25 @@ bool JsEsteidCard::validatePin1(QString oldVal)
 	while( retry > 0 )
 	{
 		try {
-			return m_card->validateAuthPin( PinString( oldVal.toLatin1() ), retriesLeft);
-		} catch(AuthError &) {
-		    return false;
+			bool result = m_card->validateAuthPin( PinString( oldVal.toLatin1() ), retriesLeft);
+			return result ? "1" : "0";
+		} catch(AuthError &err) {
+			if ( err.m_aborted ) return "PIN1ValidateFailed";
+			if ( err.m_blocked ) return "PIN1Blocked";
+			switch( err.SW1 )
+			{
+			case 0x63: return "PIN1Invalid";
+			case 0x69:
+				if ( err.SW2 == 0x83 ) return "PIN1Blocked";
+			}
+		    return "PIN1Unsuccess";
 		} catch (std::runtime_error &err) {
 		    handleError(err.what());
 			m_card->reconnectWithT0();
 		}
 		retry--;
 	}
-	return false;
+	return "0";
 }
 
 QString JsEsteidCard::changePin1(QString newVal, QString oldVal)
@@ -185,11 +194,11 @@ QString JsEsteidCard::changePin1(QString newVal, QString oldVal)
 	return "0";
 }
 
-bool JsEsteidCard::validatePin2(QString oldVal)
+QString JsEsteidCard::validatePin2(QString oldVal)
 {
 	if (!m_card) {
         qDebug("No card");
-        return false;
+        return "0";
     }
 
     byte retriesLeft = 0;
@@ -198,17 +207,26 @@ bool JsEsteidCard::validatePin2(QString oldVal)
 	while( retry > 0 )
 	{
 	    try {
-			return m_card->validateSignPin( PinString( oldVal.toLatin1() ),
+			bool result = m_card->validateSignPin( PinString( oldVal.toLatin1() ),
 										retriesLeft);
-	    } catch(AuthError &) {
-	        return false;
+			return result ? "1" : "0";
+		} catch(AuthError &err) {
+			if ( err.m_aborted ) return "PIN2ValidateFailed";
+			if ( err.m_blocked ) return "PIN2Blocked";
+			switch( err.SW1 )
+			{
+			case 0x63: return "PIN2Invalid";
+			case 0x69:
+				if ( err.SW2 == 0x83 ) return "PIN2Blocked";
+			}
+		    return "PIN2Unsuccess";
 	    } catch (std::runtime_error &err) {
 	        handleError(err.what());
 			m_card->reconnectWithT0();
 	    }
 		retry--;
 	}
-	return false;
+	return "0";
 }
 
 QString JsEsteidCard::changePin2(QString newVal, QString oldVal)
@@ -595,4 +613,17 @@ void JsEsteidCard::reconnect()
 	} catch ( std::runtime_error &e ) {
 		qDebug() << e.what();
 	}
+}
+
+ByteVec JsEsteidCard::calcSSL( const ByteVec &vec )
+{
+	ByteVec ret;
+	if (!m_card)
+		return ret;
+
+	try {
+		return m_card->calcSSL( vec );
+	} catch ( std::runtime_error & ) {}
+
+	return ret;
 }

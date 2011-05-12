@@ -27,10 +27,12 @@
 #include <QLocale>
 #include <QMessageBox>
 #include <QTemporaryFile>
+#include <QSslKey>
 
 #include "CertUpdate.h"
 #include "jsextender.h"
 #include "mainwindow.h"
+#include "common/PinDialog.h"
 #if defined(Q_OS_WIN) || defined(Q_OS_MAC)
 #include "SettingsDialog.h"
 #endif
@@ -41,23 +43,17 @@
 #include <common/AboutWidget.h>
 #include <common/Settings.h>
 
+#include <smartcardpp/helperMacro.h>
+#include <openssl/evp.h>
+
 #ifdef Q_OS_MAC
 #include <Authorization.h>
-#endif
-
-#ifndef PKCS11_MODULE
-#  if defined(Q_OS_WIN32)
-#    define PKCS11_MODULE "opensc-pkcs11.dll"
-#  else
-#    define PKCS11_MODULE "opensc-pkcs11.so"
-#  endif
 #endif
 
 JsExtender::JsExtender( MainWindow *main )
 :	QObject( main )
 ,	m_mainWindow( main )
 ,	m_loading( 0 )
-,	sslError( SSLConnect::NoError )
 {
 	QString deflang;
 	switch( QLocale().language() )
@@ -157,24 +153,79 @@ QVariant JsExtender::jsCall( const QString &function, const QString &argument, c
 void JsExtender::openUrl( const QString &url )
 { QDesktopServices::openUrl( QUrl( url ) ); }
 
+int JsExtender::rsa_sign( int type, const unsigned char *m, unsigned int m_len,
+		unsigned char *sigret, unsigned int *siglen, const RSA *rsa )
+{
+	JsEsteidCard *e = (JsEsteidCard*)RSA_get_app_data( rsa );
+	if ( !e )
+		return 0;
+
+	ByteVec vec = e->calcSSL( ByteVec( m, m + m_len ) );
+	if ( vec.size() == 0 )
+		return 0;
+
+	*siglen = (unsigned int)vec.size();
+	qMemCopy( sigret, &vec[0], vec.size() );
+	return 1;
+}
+
 QByteArray JsExtender::getUrl( SSLConnect::RequestType type, const QString &def )
 {
-	QByteArray buffer;
-
-	sslError = SSLConnect::NoError;
-	sslErrorString.clear();
-
-	SSLConnect sslConnect( PKCS11_MODULE );
-	if ( !sslConnect.setCard( m_mainWindow->cardManager()->activeCardId() ) )
+	RSA *rsa = RSAPublicKey_dup( (RSA*)m_mainWindow->eidCard()->m_authCert->cert().publicKey().handle() );
+	if ( !rsa )
 	{
-		sslError = sslConnect.error();
-		sslErrorString = sslConnect.errorString();
-		return buffer;
+		sslErrorString = tr( "RSA pubkey error" );
+		return QByteArray();
 	}
 
-	buffer = sslConnect.getUrl( type, def );
+	PinDialog *p = 0;
+	try {
+		QString pin;
+		if ( !m_mainWindow->eidCard()->isSecureConnection() )
+		{
+			p = new PinDialog( PinDialog::Pin1Type, m_mainWindow->eidCard()->m_authCert->cert(), 0, qApp->activeWindow() );
+			if( !p->exec() )
+			{
+				sslErrorString = "PIN1ValidateFailed";
+				delete p;
+				return QByteArray();
+			}
+			pin = p->text();
+		} else {
+			p = new PinDialog( PinDialog::Pin1PinpadType, m_mainWindow->eidCard()->m_authCert->cert(), 0, qApp->activeWindow() );
+			p->open();
+			QApplication::processEvents();
+		}
+		QString result = m_mainWindow->eidCard()->validatePin1( pin );
+		if ( result != "1" )
+		{
+			sslErrorString = result;
+			delete p;
+			return QByteArray();
+		}
+	} catch( const AuthError & ) {
+		sslErrorString = "PIN1ValidateFailed";
+		delete p;
+		return QByteArray();
+	}
+	delete p;
 
-	sslError = sslConnect.error();
+	RSA_METHOD method;
+	memcpy( &method, RSA_get_default_method(), sizeof(method) );
+	method.name = "smartcard";
+	method.rsa_sign = rsa_sign;
+
+	RSA_set_method( rsa, &method );
+	rsa->flags |= RSA_FLAG_SIGN_VER;
+	RSA_set_app_data( rsa, m_mainWindow->eidCard() );
+	EVP_PKEY *key = EVP_PKEY_new();
+	EVP_PKEY_set1_RSA( key, rsa );
+
+	sslErrorString.clear();
+	SSLConnect sslConnect;
+	sslConnect.setToken( m_mainWindow->eidCard()->m_authCert->cert(), key );
+
+	QByteArray buffer = sslConnect.getUrl( type, def );
 	sslErrorString = sslConnect.errorString();
 
 	m_mainWindow->eidCard()->reconnect();
@@ -184,9 +235,9 @@ QByteArray JsExtender::getUrl( SSLConnect::RequestType type, const QString &def 
 void JsExtender::activateEmail( const QString &email )
 {
 	QByteArray buffer = getUrl( SSLConnect::ActivateEmails, email );
-	if ( !buffer.size() || sslError != SSLConnect::NoError )
+	if ( !buffer.size() || !sslErrorString.isEmpty() )
 	{
-		if ( sslError != SSLConnect::NoError )
+		if ( !sslErrorString.isEmpty() )
 			jsCall( "handleError", sslErrorString );
 		else
 			jsCall( "setEmails", "forwardFailed", "" );
@@ -210,9 +261,9 @@ void JsExtender::activateEmail( const QString &email )
 void JsExtender::loadEmails()
 {
 	QByteArray buffer = getUrl( SSLConnect::EmailInfo );
-	if ( !buffer.size() || sslError != SSLConnect::NoError )
+	if ( !buffer.size() || !sslErrorString.isEmpty() )
 	{
-		if ( sslError != SSLConnect::NoError )
+		if ( !sslErrorString.isEmpty() )
 		{
 			jsCall( "handleError", sslErrorString );
 			jsCall( "setEmails", "", "" );
@@ -290,9 +341,9 @@ QString JsExtender::readForwards()
 void JsExtender::loadPicture()
 {
 	QByteArray buffer = getUrl( SSLConnect::PictureInfo );
-	if ( !buffer.size() || sslError != SSLConnect::NoError )
+	if ( !buffer.size() || !sslErrorString.isEmpty() )
 	{
-		if ( sslError != SSLConnect::NoError )
+		if ( !sslErrorString.isEmpty() )
 		{
 			jsCall( "handleError", sslErrorString );
 			jsCall( "setPicture", "", "" );
@@ -364,9 +415,9 @@ void JsExtender::getMidStatus()
 {
 	QString result = "mobileFailed";
 	QByteArray buffer = getUrl( SSLConnect::MobileInfo );
-	if ( !buffer.size() || sslError != SSLConnect::NoError )
+	if ( !buffer.size() || !sslErrorString.isEmpty() )
 	{
-		if ( sslError != SSLConnect::NoError )
+		if ( !sslErrorString.isEmpty() )
 			jsCall( "handleError", sslErrorString );
 		else
 			jsCall( "setMobile", "", result );
