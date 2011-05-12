@@ -63,7 +63,7 @@ QString DiagnosticsDialog::getReaderInfo()
 					ByteVec certBytes = card.getAuthCert();
 					if( certBytes.size() )
 					{
-						QSslCertificate cert = QSslCertificate( QByteArray((char *)&certBytes[0], certBytes.size()), QSsl::Der );
+						QSslCertificate cert = QSslCertificate( QByteArray((char *)&certBytes[0], (int)certBytes.size()), QSsl::Der );
 						if ( cert.isValid() && SslCertificate( cert ).isDigiID() )
 							id = cert.subjectInfo( "serialNumber" );
 					}

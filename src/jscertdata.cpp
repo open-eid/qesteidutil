@@ -42,7 +42,7 @@ void JsCertData::loadCert(EstEidCard *card, CertType ct)
         // Read certificate
 		ByteVec certBytes = ct == AuthCert ? card->getAuthCert() : card->getSignCert();
 		if( certBytes.size() )
-			m_qcert = QSslCertificate(QByteArray((char *)&certBytes[0], certBytes.size()), QSsl::Der);
+			m_qcert = QSslCertificate(QByteArray((char *)&certBytes[0], (int)certBytes.size()), QSsl::Der);
 	} catch ( std::runtime_error &err ) {
 //        doShowError(err);
 		qDebug() << "Error on loadCert: " << err.what();
