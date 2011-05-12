@@ -73,7 +73,7 @@ QString Common::applicationOs()
 	QProcess p;
 	p.start( "lsb_release", QStringList() << "-s" << "-d" );
 	p.waitForFinished();
-	return QString::fromLocal8Bit( p.readAll() );
+	return QString::fromLocal8Bit( p.readAll().trimmed() );
 #elif defined(Q_OS_MAC)
 	SInt32 major, minor, bugfix;
 	if( Gestalt(gestaltSystemVersionMajor, &major) == noErr &&
