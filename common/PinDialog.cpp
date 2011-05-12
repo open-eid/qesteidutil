@@ -100,7 +100,7 @@ void PinDialog::init( PinFlags flags, const QString &title, TokenData::TokenFlag
 		connect( statusTimer, SIGNAL(frameChanged(int)), progress, SLOT(setValue(int)) );
 		connect( this, SIGNAL(startTimer()), statusTimer, SLOT(start()) );
 	}
-	else
+	else if( !(flags & PinpadNoProgressFlag) )
 	{
 		m_text = new QLineEdit( this );
 		m_text->setEchoMode( QLineEdit::Password );

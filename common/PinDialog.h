@@ -40,6 +40,7 @@ public:
 		Pin1Type = 0,
 		Pin2Type = 1,
 		PinpadFlag = 2,
+		PinpadNoProgressFlag = 4,
 		Pin1PinpadType = Pin1Type|PinpadFlag,
 		Pin2PinpadType = Pin2Type|PinpadFlag,
 	};

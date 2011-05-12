@@ -192,7 +192,7 @@ QByteArray JsExtender::getUrl( SSLConnect::RequestType type, const QString &def 
 			}
 			pin = p->text();
 		} else {
-			p = new PinDialog( PinDialog::Pin1PinpadType, m_mainWindow->eidCard()->m_authCert->cert(), 0, qApp->activeWindow() );
+			p = new PinDialog( PinDialog::PinFlags(PinDialog::Pin1Type|PinDialog::PinpadNoProgressFlag), m_mainWindow->eidCard()->m_authCert->cert(), 0, qApp->activeWindow() );
 			p->open();
 			QApplication::processEvents();
 		}
