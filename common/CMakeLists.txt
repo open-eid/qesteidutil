@@ -56,9 +56,6 @@ include_directories(
 	${OPENSSL_INCLUDE_DIR}
 	)
 
-if( LIBP11_TOKEN_FLAGS )
-	add_definitions( -DLIBP11_TOKEN_FLAGS )
-endif( LIBP11_TOKEN_FLAGS )
 if( MSVC )
 	add_definitions( -DWIN32_LEAN_AND_MEAN )
 endif( MSVC )
