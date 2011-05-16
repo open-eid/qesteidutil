@@ -265,40 +265,55 @@ QString Common::fileSize( quint64 bytes )
 void Common::mailTo( const QUrl &url )
 {
 #if defined(Q_OS_WIN)
+	QString mail = QSettings( "HKEY_CURRENT_USER\\Software\\Clients\\Mail",
+		QSettings::NativeFormat ).value( "." ).toString();
+	bool utf8 = QSettings( "HKEY_LOCAL_MACHINE\\Software\\Clients\\Mail\\" + mail,
+		QSettings::NativeFormat ).value( "SupportUTF8", false ).toBool();
+
 	QString file = url.queryItemValue( "attachment" );
-	QByteArray filePath = QDir::toNativeSeparators( file ).toLatin1();
-	QByteArray fileName = QFileInfo( file ).fileName().toLatin1();
-	QByteArray subject = url.queryItemValue( "subject" ).toLatin1();
+	QString filePath = QDir::toNativeSeparators( file );
+	QString fileName = QFileInfo( file ).fileName();
+	QByteArray subject = toLocal8Bit( url.queryItemValue( "subject" ), utf8 );
 
 	MapiFileDesc doc[1];
-	doc[0].ulReserved = 0;
+	doc[0].ulReserved = 0; //utf8 ? CP_UTF8 : 0;
 	doc[0].flFlags = 0;
 	doc[0].nPosition = -1;
-	doc[0].lpszPathName = const_cast<char*>(filePath.constData());
-	doc[0].lpszFileName = const_cast<char*>(fileName.constData());
-	doc[0].lpFileType = NULL;
+	doc[0].lpszPathName = (char*)filePath.utf16();
+	doc[0].lpszFileName = (char*)fileName.utf16();
+	doc[0].lpFileType = 0;
 
 	// Create message
 	MapiMessage message;
-	message.ulReserved = 0;
+	message.ulReserved = utf8 ? CP_UTF8 : 0;
 	message.lpszSubject = const_cast<char*>(subject.constData());
 	message.lpszNoteText = "";
-	message.lpszMessageType = NULL;
-	message.lpszDateReceived = NULL;
-	message.lpszConversationID = NULL;
+	message.lpszMessageType = 0;
+	message.lpszDateReceived = 0;
+	message.lpszConversationID = 0;
 	message.flFlags = 0;
-	message.lpOriginator = NULL;
+	message.lpOriginator = 0;
 	message.nRecipCount = 0;
-	message.lpRecips = NULL;
+	message.lpRecips = 0;
+#if 0
 	message.nFileCount = 1;
-	message.lpFiles = (lpMapiFileDesc)&doc;
+	message.lpFiles = lpMapiFileDesc(&doc);
+#else
+	message.nFileCount = 0;
+	message.lpFiles = 0;
+#endif
 
 	QLibrary lib("mapi32");
-	typedef ULONG (PASCAL *SendMail)(ULONG,ULONG,MapiMessage*,FLAGS,ULONG);
-	if( SendMail mapi = (SendMail)lib.resolve("MAPISendMail") )
+	if( LPMAPISENDMAIL mapi = LPMAPISENDMAIL(lib.resolve("MAPISendMail")) )
 	{
-		mapi( NULL, 0, &message, MAPI_LOGON_UI|MAPI_DIALOG, 0 );
-		return;
+		switch( mapi( NULL, 0, &message, MAPI_LOGON_UI|MAPI_DIALOG, 0 ) )
+		{
+		case SUCCESS_SUCCESS:
+		case MAPI_E_USER_ABORT:
+		case MAPI_E_LOGIN_FAILURE:
+			return;
+		default: break;
+		}
 	}
 #elif defined(Q_OS_MAC)
 	CFURLRef emailUrl = CFURLCreateWithString( kCFAllocatorDefault, CFSTR("mailto:"), 0 );
@@ -495,6 +510,11 @@ QString Common::tempFilename()
 	free( name );
 	return result;
 }
+
+#ifdef Q_OS_WIN
+QByteArray Common::toLocal8Bit( const QString &str, bool utf8 )
+{ return utf8 ? str.toUtf8() : str.toLocal8Bit(); }
+#endif
 
 QString Common::tokenInfo( CertType type, const TokenData &data )
 {

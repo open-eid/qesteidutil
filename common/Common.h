@@ -73,6 +73,8 @@ private:
 	void initMacEvents();
 	void deinitMacEvents();
 	ApplicationStruct *macEvents;
+#elif defined(Q_OS_WIN)
+	QByteArray toLocal8Bit( const QString &str, bool utf8 );
 #endif
 };
 
