@@ -37,11 +37,11 @@ class QPKCS11Private
 public:
 	QPKCS11Private();
 
-	bool attribute( CK_OBJECT_HANDLE obj, CK_ATTRIBUTE_TYPE type, void *value, unsigned long &size );
-	QByteArray attribute( CK_OBJECT_HANDLE obj, CK_ATTRIBUTE_TYPE type );
-	BIGNUM* attribute_bn( CK_OBJECT_HANDLE obj, CK_ATTRIBUTE_TYPE type );
+	bool attribute( CK_OBJECT_HANDLE obj, CK_ATTRIBUTE_TYPE type, void *value, unsigned long &size ) const;
+	QByteArray attribute( CK_OBJECT_HANDLE obj, CK_ATTRIBUTE_TYPE type ) const;
+	BIGNUM* attribute_bn( CK_OBJECT_HANDLE obj, CK_ATTRIBUTE_TYPE type ) const;
 	QSslCertificate readCert( CK_SLOT_ID slot );
-	bool findObject( CK_OBJECT_CLASS cls, CK_OBJECT_HANDLE *ret );
+	bool findObject( CK_OBJECT_CLASS cls, CK_OBJECT_HANDLE *ret ) const;
 	void freeSlotIds();
 	bool getSlotsIds();
 
@@ -52,7 +52,7 @@ public:
 	CK_FUNCTION_LIST *f;
 	CK_SLOT_ID		*pslot, *pslots;
 	CK_SESSION_HANDLE session;
-	unsigned long	nslots, err;
+	unsigned long	nslots;
 
 	RSA_METHOD method;
 };
@@ -77,5 +77,5 @@ private:
 	void run() { result = d->f->C_Login( d->session, CKU_USER, 0, 0 ); }
 
 	QPKCS11Private *d;
-	unsigned long result;
+	CK_RV result;
 };

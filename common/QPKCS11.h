@@ -46,16 +46,16 @@ public:
 	~QPKCS11();
 
 	QStringList cards();
-	bool encrypt( const QByteArray &data, unsigned char *encrypted, unsigned long *len );
-	bool decrypt( const QByteArray &data, unsigned char *decrypted, unsigned long *len );
+	QByteArray encrypt( const QByteArray &data ) const;
+	QByteArray decrypt( const QByteArray &data ) const;
 	Qt::HANDLE key();
 	bool loadDriver( const QString &driver );
 	PinStatus login( const TokenData &t );
-	bool logout();
+	bool logout() const;
 	TokenData selectSlot( const QString &card, SslCertificate::KeyUsage usage );
-	QByteArray sign( int type, const QByteArray &digest );
+	QByteArray sign( int type, const QByteArray &digest ) const;
 	void unloadDriver();
-	bool verify( const QByteArray &data, unsigned char *signature, unsigned long len );
+	bool verify( const QByteArray &data, const QByteArray &signature ) const;
 
 private:
 	QPKCS11Private *d;

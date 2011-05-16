@@ -35,22 +35,21 @@ QPKCS11Private::QPKCS11Private()
 , pslots(0)
 , session(0)
 , nslots(0)
-, err(CKR_OK)
 {
 	memcpy( &method, RSA_get_default_method(), sizeof(method) );
 	method.name = "QPKCS11";
 	method.rsa_sign = rsa_sign;
 }
 
-bool QPKCS11Private::attribute( CK_OBJECT_HANDLE obj, CK_ATTRIBUTE_TYPE type, void *value, unsigned long &size )
+bool QPKCS11Private::attribute( CK_OBJECT_HANDLE obj, CK_ATTRIBUTE_TYPE type, void *value, unsigned long &size ) const
 {
 	CK_ATTRIBUTE attr = { type, value, size };
-	err = f->C_GetAttributeValue( session, obj, &attr, 1 );
+	CK_RV err = f->C_GetAttributeValue( session, obj, &attr, 1 );
 	size = attr.ulValueLen;
 	return err == CKR_OK;
 }
 
-QByteArray QPKCS11Private::attribute( CK_OBJECT_HANDLE obj, CK_ATTRIBUTE_TYPE type )
+QByteArray QPKCS11Private::attribute( CK_OBJECT_HANDLE obj, CK_ATTRIBUTE_TYPE type ) const
 {
 	unsigned long size = 0;
 	if( !attribute( obj, type, 0, size ) )
@@ -62,7 +61,7 @@ QByteArray QPKCS11Private::attribute( CK_OBJECT_HANDLE obj, CK_ATTRIBUTE_TYPE ty
 	return data;
 }
 
-BIGNUM* QPKCS11Private::attribute_bn( CK_OBJECT_HANDLE obj, CK_ATTRIBUTE_TYPE type )
+BIGNUM* QPKCS11Private::attribute_bn( CK_OBJECT_HANDLE obj, CK_ATTRIBUTE_TYPE type ) const
 {
 	QByteArray data = attribute( obj, type );
 	return BN_bin2bn( (const unsigned char*)data.constData(), data.size(), 0 );
@@ -73,8 +72,7 @@ QSslCertificate QPKCS11Private::readCert( CK_SLOT_ID slot )
 	if( session )
 		f->C_CloseSession( session );
 	session = 0;
-	err = f->C_OpenSession( slot, CKF_SERIAL_SESSION, 0, 0, &session );
-	if( err != CKR_OK )
+	if( f->C_OpenSession( slot, CKF_SERIAL_SESSION, 0, 0, &session ) != CKR_OK )
 		return QSslCertificate();
 
 	CK_OBJECT_HANDLE obj = CK_INVALID_HANDLE;
@@ -84,16 +82,16 @@ QSslCertificate QPKCS11Private::readCert( CK_SLOT_ID slot )
 	return QSslCertificate( attribute( obj, CKA_VALUE ), QSsl::Der );
 }
 
-bool QPKCS11Private::findObject( CK_OBJECT_CLASS cls, CK_OBJECT_HANDLE *ret )
+bool QPKCS11Private::findObject( CK_OBJECT_CLASS cls, CK_OBJECT_HANDLE *ret ) const
 {
 	*ret = CK_INVALID_HANDLE;
 
 	CK_ATTRIBUTE attr = { CKA_CLASS, &cls, sizeof(cls) };
-	if( (err = f->C_FindObjectsInit( session, &attr, 1 )) != CKR_OK )
+	if( f->C_FindObjectsInit( session, &attr, 1 ) != CKR_OK )
 		return false;
 
 	CK_ULONG count = 0;
-	err = f->C_FindObjects( session, ret, 1, &count );
+	CK_RV err = f->C_FindObjects( session, ret, 1, &count );
 	f->C_FindObjectsFinal( session );
 	return err == CKR_OK;
 }
@@ -108,10 +106,10 @@ void QPKCS11Private::freeSlotIds()
 bool QPKCS11Private::getSlotsIds()
 {
 	freeSlotIds();
-	if( (err = f->C_GetSlotList( true, 0, &nslots )) != CKR_OK )
+	if( f->C_GetSlotList( true, 0, &nslots ) != CKR_OK )
 		return false;
 	pslots = new CK_SLOT_ID[nslots];
-	if( (err = f->C_GetSlotList( true, pslots, &nslots )) == CKR_OK )
+	if( f->C_GetSlotList( true, pslots, &nslots ) == CKR_OK )
 		return true;
 	freeSlotIds();
 	return false;
@@ -147,10 +145,10 @@ QStringList QPKCS11::cards()
 		return QStringList();
 
 	QStringList cards;
-	for( unsigned int i = 0; i < d->nslots; ++i )
+	for( unsigned long i = 0; i < d->nslots; ++i )
 	{
 		CK_TOKEN_INFO token;
-		d->err = d->f->C_GetTokenInfo( d->pslots[i], &token );
+		d->f->C_GetTokenInfo( d->pslots[i], &token );
 		cards << QByteArray( (const char*)token.serialNumber, 16 ).trimmed();
 	}
 	cards.removeDuplicates();
@@ -158,37 +156,46 @@ QStringList QPKCS11::cards()
 	return cards;
 }
 
-bool QPKCS11::encrypt( const QByteArray &data, unsigned char *encrypted, unsigned long *len )
+QByteArray QPKCS11::encrypt( const QByteArray &data ) const
 {
 	CK_OBJECT_HANDLE key = CK_INVALID_HANDLE;
 	if( !d->findObject( CKO_PRIVATE_KEY, &key ) || key == CK_INVALID_HANDLE )
-		return false;
+		return QByteArray();
 
 	CK_MECHANISM mech = { CKM_RSA_PKCS, 0, 0 };
-	if( (d->err = d->f->C_EncryptInit( d->session, &mech, key )) != CKR_OK )
-		return false;
+	if( d->f->C_EncryptInit( d->session, &mech, key ) != CKR_OK )
+		return QByteArray();
 
-	if( (d->err = d->f->C_Encrypt( d->session, (unsigned char*)data.constData(), data.size(), 0, len )) != CKR_OK )
-		return false;
+	unsigned long size = 0;
+	if( d->f->C_Encrypt( d->session, (unsigned char*)data.constData(), data.size(), 0, &size ) != CKR_OK )
+		return QByteArray();
 
-	d->err = d->f->C_Encrypt( d->session, (unsigned char*)data.constData(), data.size(), encrypted, len );
-	return d->err == CKR_OK;
+	QByteArray result;
+	result.resize( size );
+	if( d->f->C_Encrypt( d->session, (unsigned char*)data.constData(), data.size(), (unsigned char*)result.data(), &size ) != CKR_OK )
+		return QByteArray();
+	return result;
 }
 
-bool QPKCS11::decrypt( const QByteArray &data, unsigned char *decrypted, unsigned long *len )
+QByteArray QPKCS11::decrypt( const QByteArray &data ) const
 {
 	CK_OBJECT_HANDLE key = CK_INVALID_HANDLE;
 	if( !d->findObject( CKO_PRIVATE_KEY, &key ) || key == CK_INVALID_HANDLE )
-		return false;
+		return QByteArray();
 
 	CK_MECHANISM mech = { CKM_RSA_PKCS, 0, 0 };
-	if( (d->err = d->f->C_DecryptInit( d->session, &mech, key )) != CKR_OK )
-		return false;
+	if( d->f->C_DecryptInit( d->session, &mech, key ) != CKR_OK )
+		return QByteArray();
 
-	if( (d->err = d->f->C_Decrypt( d->session, (unsigned char*)data.constData(), data.size(), 0, len )) != CKR_OK )
-		return false;
+	unsigned long size = 0;
+	if( d->f->C_Decrypt( d->session, (unsigned char*)data.constData(), data.size(), 0, &size ) != CKR_OK )
+		return QByteArray();
 
-	return (d->err = d->f->C_Decrypt( d->session, (unsigned char*)data.constData(), data.size(), decrypted, len )) == CKR_OK;
+	QByteArray result;
+	result.resize( size );
+	if( d->f->C_Decrypt( d->session, (unsigned char*)data.constData(), data.size(), (unsigned char*)result.data(), &size ) != CKR_OK )
+		return QByteArray();
+	return result;
 }
 
 Qt::HANDLE QPKCS11::key()
@@ -217,17 +224,16 @@ bool QPKCS11::loadDriver( const QString &driver )
 	if( !l )
 		return false;
 
-	d->err = l( &d->f );
-	if( d->err != CKR_OK )
+	if( l( &d->f ) != CKR_OK )
 		return false;
 
-	return (d->err = d->f->C_Initialize( 0 )) == CKR_OK;
+	return d->f->C_Initialize( 0 ) == CKR_OK;
 }
 
 QPKCS11::PinStatus QPKCS11::login( const TokenData &_t )
 {
 	CK_TOKEN_INFO token;
-	if( !d->pslot || (d->err = d->f->C_GetTokenInfo( *(d->pslot), &token )) != CKR_OK )
+	if( !d->pslot || d->f->C_GetTokenInfo( *(d->pslot), &token ) != CKR_OK )
 		return PinUnknown;
 
 	if( !(token.flags & CKF_LOGIN_REQUIRED) )
@@ -242,11 +248,12 @@ QPKCS11::PinStatus QPKCS11::login( const TokenData &_t )
 		t.setFlag( TokenData::PinLocked );
 
 	if( d->session )
-		d->err = d->f->C_CloseSession( d->session );
+		d->f->C_CloseSession( d->session );
 	d->session = 0;
-	if( (d->err = d->f->C_OpenSession( *(d->pslot), CKF_SERIAL_SESSION, 0, 0, &d->session )) != CKR_OK )
+	if( d->f->C_OpenSession( *(d->pslot), CKF_SERIAL_SESSION, 0, 0, &d->session ) != CKR_OK )
 		return PinUnknown;
 
+	CK_RV err = CKR_OK;
 	bool pin2 = SslCertificate( t.cert() ).keyUsage().keys().contains( SslCertificate::NonRepudiation );
 	if( token.flags & CKF_PROTECTED_AUTHENTICATION_PATH )
 	{
@@ -254,7 +261,7 @@ QPKCS11::PinStatus QPKCS11::login( const TokenData &_t )
 		QPKCS11Thread t( d );
 		connect( &t, SIGNAL(started()), &p, SIGNAL(startTimer()) );
 		p.open();
-		d->err = t.waitForDone();
+		err = t.waitForDone();
 	}
 	else
 	{
@@ -262,10 +269,10 @@ QPKCS11::PinStatus QPKCS11::login( const TokenData &_t )
 		if( !p.exec() )
 			return PinCanceled;
 		QByteArray pin = p.text().toUtf8();
-		d->err = d->f->C_Login( d->session, CKU_USER, (unsigned char*)pin.constData(), pin.size() );
+		err = d->f->C_Login( d->session, CKU_USER, (unsigned char*)pin.constData(), pin.size() );
 	}
 
-	switch( d->err )
+	switch( err )
 	{
 	case CKR_OK:
 	case CKR_USER_ALREADY_LOGGED_IN:
@@ -278,7 +285,7 @@ QPKCS11::PinStatus QPKCS11::login( const TokenData &_t )
 	}
 }
 
-bool QPKCS11::logout() { return (d->err = d->f->C_Logout( d->session )) == CKR_OK; }
+bool QPKCS11::logout() const { return d->f->C_Logout( d->session ) == CKR_OK; }
 
 TokenData QPKCS11::selectSlot( const QString &card, SslCertificate::KeyUsage usage )
 {
@@ -289,7 +296,7 @@ TokenData QPKCS11::selectSlot( const QString &card, SslCertificate::KeyUsage usa
 	for( unsigned int i = 0; i < d->nslots; ++i )
 	{
 		CK_TOKEN_INFO token;
-		if( (d->err = d->f->C_GetTokenInfo( d->pslots[i], &token )) != CKR_OK ||
+		if( d->f->C_GetTokenInfo( d->pslots[i], &token ) != CKR_OK ||
 			card != QByteArray( (const char*)token.serialNumber, 16 ).trimmed() )
 			continue;
 
@@ -310,7 +317,7 @@ TokenData QPKCS11::selectSlot( const QString &card, SslCertificate::KeyUsage usa
 	return t;
 }
 
-QByteArray QPKCS11::sign( int type, const QByteArray &digest )
+QByteArray QPKCS11::sign( int type, const QByteArray &digest ) const
 {
 	QByteArray data;
 	switch( type )
@@ -329,18 +336,18 @@ QByteArray QPKCS11::sign( int type, const QByteArray &digest )
 		return QByteArray();
 
 	CK_MECHANISM mech = { CKM_RSA_PKCS, 0, 0 };
-	if( (d->err = d->f->C_SignInit( d->session, &mech, key )) != CKR_OK )
+	if( d->f->C_SignInit( d->session, &mech, key ) != CKR_OK )
 		return QByteArray();
 
 	unsigned long size = 0;
-	if( (d->err = d->f->C_Sign( d->session, (unsigned char*)data.constData(),
-			data.size(), 0, &size )) != CKR_OK )
+	if( d->f->C_Sign( d->session, (unsigned char*)data.constData(),
+			data.size(), 0, &size ) != CKR_OK )
 		return QByteArray();
 
 	QByteArray sig;
 	sig.resize( size );
-	if( (d->err = d->f->C_Sign( d->session, (unsigned char*)data.constData(),
-			data.size(), (unsigned char*)sig.data(), &size )) != CKR_OK )
+	if( d->f->C_Sign( d->session, (unsigned char*)data.constData(),
+			data.size(), (unsigned char*)sig.data(), &size ) != CKR_OK )
 		return QByteArray();
 	return sig;
 }
@@ -356,18 +363,15 @@ void QPKCS11::unloadDriver()
 	d->lib.unload();
 }
 
-bool QPKCS11::verify( const QByteArray &data, unsigned char *signature, unsigned long len )
+bool QPKCS11::verify( const QByteArray &data, const QByteArray &signature ) const
 {
 	CK_OBJECT_HANDLE key = CK_INVALID_HANDLE;
 	if( !d->findObject( CKO_PRIVATE_KEY, &key ) || key == CK_INVALID_HANDLE )
 		return false;
 
 	CK_MECHANISM mech = { CKM_RSA_PKCS, 0, 0 };
-	if( (d->err = d->f->C_VerifyInit( d->session, &mech, key )) != CKR_OK )
+	if( d->f->C_VerifyInit( d->session, &mech, key ) != CKR_OK )
 		return false;
 
-	if( (d->err = d->f->C_Verify( d->session, (unsigned char*)data.constData(), data.size(), 0, len )) != CKR_OK )
-		return false;
-
-	return (d->err = d->f->C_Verify( d->session, (unsigned char*)data.constData(), data.size(), signature, len )) == CKR_OK;
+	return d->f->C_Verify( d->session, (unsigned char*)data.constData(), data.size(), (unsigned char*)signature.data(), signature.size() ) == CKR_OK;
 }
