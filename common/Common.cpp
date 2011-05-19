@@ -470,7 +470,7 @@ void Common::showHelp( const QString &msg, int code )
 		u.setUrl( "http://www.sk.ee/digidoc/support/errorinfo/" );
 		u.addQueryItem( "app", qApp->applicationName() );
 		u.addQueryItem( "appver", qApp->applicationVersion() );
-		u.addQueryItem( "l", Settings().value("Main/Language", "et" ).toString() );
+		u.addQueryItem( "l", Settings::language() );
 		u.addQueryItem( "code", QString::number( code ) );
 	}
 	else
