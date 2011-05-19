@@ -90,7 +90,7 @@ public:
 	CertType	type() const;
 
 private:
-	void*	getExtension( int nid ) const;
+	Qt::HANDLE extension( int nid ) const;
 	QByteArray subjectInfoToString( SubjectInfo info ) const;
 };
 

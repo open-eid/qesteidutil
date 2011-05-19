@@ -57,7 +57,7 @@ SslCertificate::SslCertificate( const QSslCertificate &cert )
 
 QByteArray SslCertificate::authorityKeyIdentifier() const
 {
-	AUTHORITY_KEYID *id = (AUTHORITY_KEYID *)getExtension( NID_authority_key_identifier );
+	AUTHORITY_KEYID *id = (AUTHORITY_KEYID *)extension( NID_authority_key_identifier );
 	QByteArray out;
 	if( id && id->keyid )
 		out = ASN_STRING_to_QByteArray( id->keyid );
@@ -68,7 +68,7 @@ QByteArray SslCertificate::authorityKeyIdentifier() const
 QHash<SslCertificate::EnhancedKeyUsage,QString> SslCertificate::enhancedKeyUsage() const
 {
 	QHash<EnhancedKeyUsage,QString> list;
-	EXTENDED_KEY_USAGE *usage = (EXTENDED_KEY_USAGE*)getExtension( NID_ext_key_usage );
+	EXTENDED_KEY_USAGE *usage = (EXTENDED_KEY_USAGE*)extension( NID_ext_key_usage );
 	if( !usage )
 	{
 		list[All] = tr("All application policies");
@@ -170,12 +170,8 @@ QSslKey SslCertificate::keyFromEVP( Qt::HANDLE evp )
 	return k;
 }
 
-void* SslCertificate::getExtension( int nid ) const
-{
-	if( !handle() )
-		return 0;
-	return X509_get_ext_d2i( (X509*)handle(), nid, 0, 0 );
-}
+Qt::HANDLE SslCertificate::extension( int nid ) const
+{ return handle() ? X509_get_ext_d2i( (X509*)handle(), nid, 0, 0 ) : 0; }
 
 QString SslCertificate::issuerInfo( SubjectInfo subject ) const
 { return issuerInfo( subjectInfoToString( subject ) ); }
@@ -191,31 +187,27 @@ bool SslCertificate::isTest() const
 
 QHash<SslCertificate::KeyUsage,QString> SslCertificate::keyUsage() const
 {
-	ASN1_BIT_STRING *keyusage = (ASN1_BIT_STRING*)getExtension( NID_key_usage );
+	ASN1_BIT_STRING *keyusage = (ASN1_BIT_STRING*)extension( NID_key_usage );
 	if( !keyusage )
 		return QHash<KeyUsage,QString>();
 
 	QHash<KeyUsage,QString> list;
 	for( int n = 0; n < 9; ++n )
 	{
-		if( ASN1_BIT_STRING_get_bit( keyusage, n ) )
+		if( !ASN1_BIT_STRING_get_bit( keyusage, n ) )
+			continue;
+		switch( n )
 		{
-			QString usage;
-			switch( n )
-			{
-			case DigitalSignature: usage = tr("Digital signature"); break;
-			case NonRepudiation: usage = tr("Non repudiation"); break;
-			case KeyEncipherment: usage = tr("Key encipherment"); break;
-			case DataEncipherment: usage = tr("Data encipherment"); break;
-			case KeyAgreement: usage = tr("Key agreement"); break;
-			case KeyCertificateSign: usage = tr("Key certificate sign"); break;
-			case CRLSign: usage = tr("CRL sign"); break;
-			case EncipherOnly: usage = tr("Encipher only"); break;
-			case DecipherOnly: usage = tr("Decipher only"); break;
-			default: break;
-			}
-			if( !usage.isEmpty() )
-				list[KeyUsage(n)] = usage;
+		case DigitalSignature: list[KeyUsage(n)] = tr("Digital signature"); break;
+		case NonRepudiation: list[KeyUsage(n)] = tr("Non repudiation"); break;
+		case KeyEncipherment: list[KeyUsage(n)] = tr("Key encipherment"); break;
+		case DataEncipherment: list[KeyUsage(n)] = tr("Data encipherment"); break;
+		case KeyAgreement: list[KeyUsage(n)] = tr("Key agreement"); break;
+		case KeyCertificateSign: list[KeyUsage(n)] = tr("Key certificate sign"); break;
+		case CRLSign: list[KeyUsage(n)] = tr("CRL sign"); break;
+		case EncipherOnly: list[KeyUsage(n)] = tr("Encipher only"); break;
+		case DecipherOnly: list[KeyUsage(n)] = tr("Decipher only"); break;
+		default: break;
 		}
 	}
 	ASN1_BIT_STRING_free( keyusage );
@@ -224,7 +216,7 @@ QHash<SslCertificate::KeyUsage,QString> SslCertificate::keyUsage() const
 
 QStringList SslCertificate::policies() const
 {
-	CERTIFICATEPOLICIES *cp = (CERTIFICATEPOLICIES*)getExtension( NID_certificate_policies );
+	CERTIFICATEPOLICIES *cp = (CERTIFICATEPOLICIES*)extension( NID_certificate_policies );
 	if( !cp )
 		return QStringList();
 
@@ -293,7 +285,7 @@ QByteArray SslCertificate::subjectInfoToString( SubjectInfo info ) const
 
 QByteArray SslCertificate::subjectKeyIdentifier() const
 {
-	ASN1_OCTET_STRING *id = (ASN1_OCTET_STRING *)getExtension( NID_subject_key_identifier );
+	ASN1_OCTET_STRING *id = (ASN1_OCTET_STRING*)extension( NID_subject_key_identifier );
 	if( !id )
 		return QByteArray();
 	QByteArray out = ASN_STRING_to_QByteArray( id );
@@ -398,19 +390,14 @@ void PKCS12CertificatePrivate::setLastError()
 	while( ERR_peek_error() > ERR_LIB_NONE)
 	{
 		unsigned long err = ERR_get_error();
-		if( ERR_GET_LIB(err) == ERR_LIB_PKCS12 )
+		if( ERR_GET_LIB(err) == ERR_LIB_PKCS12 &&
+			ERR_GET_REASON(err) == PKCS12_R_MAC_VERIFY_FAILURE )
 		{
-			switch( ERR_GET_REASON(err) )
-			{
-			case PKCS12_R_MAC_VERIFY_FAILURE: error = PKCS12Certificate::InvalidPasswordError; break;
-			default: error = PKCS12Certificate::UnknownError; break;
-			}
+			error = PKCS12Certificate::InvalidPasswordError;
+			return;
 		}
-		else
-		{
-			error = PKCS12Certificate::UnknownError;
-			errorString += ERR_error_string( err, 0 );
-		}
+		error = PKCS12Certificate::UnknownError;
+		errorString += ERR_error_string( err, 0 );
 	}
 }
 
