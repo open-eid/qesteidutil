@@ -171,7 +171,7 @@ QSslKey SslCertificate::keyFromEVP( Qt::HANDLE evp )
 }
 
 Qt::HANDLE SslCertificate::extension( int nid ) const
-{ return handle() ? X509_get_ext_d2i( (X509*)handle(), nid, 0, 0 ) : 0; }
+{ return handle() ? Qt::HANDLE(X509_get_ext_d2i( (X509*)handle(), nid, 0, 0 )) : 0; }
 
 QString SslCertificate::issuerInfo( SubjectInfo subject ) const
 { return issuerInfo( subjectInfoToString( subject ) ); }
