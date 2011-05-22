@@ -105,7 +105,9 @@ include_directories(
 )
 
 if( APPLE )
+	include( VersionInfoMac )
 	include( CMakeFindFrameworks )
+
 	find_library( CORESERVICES_LIB CoreServices )
 	find_library( SECURITY_LIB Security )
 	find_library( COCOA_LIBRARY Cocoa )
@@ -117,28 +119,6 @@ if( APPLE )
 			include_directories( ${dir}/Headers )
 		endforeach( dir )
 	endif( Security_FRAMEWORKS )
-
-	set( APP_CONTENTS_DIR "${CMAKE_CURRENT_SOURCE_DIR}/mac" )
-
-	set( APPLE_GUI_BUNDLE_NAME ${PROGNAME} )
-	set( APPLE_GUI_IDENTIFIER ${PROGNAME} )
-	set( APPLE_GUI_INFO_STRING "${VERSION}, Copyright 2010-2011 Estonian ID Card" )
-	set( APPLE_GUI_COPYRIGHT "(C) 2010-2011 Estonian ID Card" )
-	set( APPLE_GUI_SHORT_VERSION_STRING ${VERSION} )
-	set( APPLE_GUI_BUNDLE_VERSION ${VERSION} )
-	set( APPLE_GUI_LONG_VERSION_STRING Version ${VERSION} )
-	set( APPLE_GUI_ICON Icon.icns )
-	configure_file( mac/Info.plist.cmake mac/Info.plist )
-
-	file( GLOB_RECURSE RESOURCE_FILES
-		${APP_CONTENTS_DIR}/Resources/*.icns
-		${APP_CONTENTS_DIR}/Resources/**/*.strings )
-
-	foreach( _file ${RESOURCE_FILES} )
-		get_filename_component( _file_dir ${_file} PATH )
-		file( RELATIVE_PATH _file_dir ${APP_CONTENTS_DIR}/Resources ${_file_dir} )
-		set_source_files_properties( ${_file} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources/${_file_dir}" )
-	endforeach( _file )
 
 	# Qt jpeg plugin
 	if( NOT DEFINED QT_PLUGINS_DIR )
