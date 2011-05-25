@@ -41,7 +41,7 @@ Oodati: %2, saadi: %3</source>
     <name>DiagnosticsDialog</name>
     <message>
         <source>ID-card utility version:</source>
-        <translation>Версия:</translation>
+        <translation>Версия программы управления ID-картой:</translation>
     </message>
     <message>
         <source>OS:</source>
@@ -49,11 +49,11 @@ Oodati: %2, saadi: %3</source>
     </message>
     <message>
         <source>Library paths:</source>
-        <translation>Поиск по тэгам:</translation>
+        <translation>Поиск библиотеки:</translation>
     </message>
     <message>
         <source>Libraries</source>
-        <translation>Тэги</translation>
+        <translation>Библиотеки</translation>
     </message>
     <message>
         <source>Smart Card service status: </source>
@@ -145,7 +145,7 @@ Oodati: %2, saadi: %3</source>
     </message>
     <message>
         <source>Base version:</source>
-        <translation type="unfinished"></translation>
+        <translation>Базовая версия:</translation>
     </message>
     <message>
         <source>Generating diagnostics
