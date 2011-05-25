@@ -85,10 +85,19 @@ QString Common::applicationOs()
 #elif defined(Q_OS_WIN)
 	QString os;
 	OSVERSIONINFOEX osvi;
+	SYSTEM_INFO si;
 	ZeroMemory( &osvi, sizeof( OSVERSIONINFOEX ) );
+	ZeroMemory( &si, sizeof(SYSTEM_INFO) );
+
+	bool is64bit = false;
 	osvi.dwOSVersionInfoSize = sizeof( OSVERSIONINFOEX );
-	if( !GetVersionEx( (OSVERSIONINFO *)&osvi ) )
+	if( GetVersionEx( (OSVERSIONINFO *)&osvi ) )
 	{
+		typedef void (WINAPI *PGNSI)(LPSYSTEM_INFO);
+		if( PGNSI pGNSI = PGNSI( QLibrary( "kernel32" ).resolve( "GetNativeSystemInfo" ) ) )
+			pGNSI( &si );
+		else
+			GetSystemInfo( &si );
 		switch( osvi.dwMajorVersion )
 		{
 		case 5:
@@ -103,10 +112,19 @@ QString Common::applicationOs()
 			case 2:
 				if( GetSystemMetrics( SM_SERVERR2 ) )
 					os = "Windows Server 2003 R2";
-				else if( osvi.wProductType == VER_NT_WORKSTATION )
+				else if ( osvi.wSuiteMask & VER_SUITE_STORAGE_SERVER )
+					os = "Windows Storage Server 2003";
+				else if ( osvi.wSuiteMask & VER_SUITE_WH_SERVER )
+					os = "Windows Home Server";
+				else if( osvi.wProductType == VER_NT_WORKSTATION && si.wProcessorArchitecture == PROCESSOR_ARCHITECTURE_AMD64 )
+				{
+					is64bit = true;
 					os = "Windows XP Professional";
-				else
+				} else {
 					os = "Windows Server 2003";
+					if ( osvi.wProductType != VER_NT_WORKSTATION && si.wProcessorArchitecture == PROCESSOR_ARCHITECTURE_AMD64 )
+						is64bit = true;
+				}
 				break;
 			default: break;
 			}
@@ -121,6 +139,8 @@ QString Common::applicationOs()
 				os = osvi.wProductType == VER_NT_WORKSTATION ? "Windows 7" : "Windows Server 2008 R2";
 				break;
 			}
+			if ( si.wProcessorArchitecture == PROCESSOR_ARCHITECTURE_AMD64 )
+				is64bit = true;
 			break;
 		default: break;
 		}
@@ -143,23 +163,7 @@ QString Common::applicationOs()
 		if ( osvi.szCSDVersion > 0 )
 			os.append( " " ).append( osvi.szCSDVersion );
 
-		QString bits = " (32)";
-		typedef BOOL (WINAPI *LPFN_ISWOW64PROCESS) (HANDLE, PBOOL);
-		QLibrary lib( "kernel32" );
-		BOOL bIsWow64 = false;
-		if( LPFN_ISWOW64PROCESS fnIsWow64Process = LPFN_ISWOW64PROCESS(lib.resolve( "IsWow64Process" )) )
-		{
-			if( fnIsWow64Process( GetCurrentProcess(), &bIsWow64 ) && bIsWow64 )
-				bits = " (64)";
-		}
-		else
-		{
-			SYSTEM_INFO sysInfo;
-			GetSystemInfo( &sysInfo );
-			if ( sysInfo.wProcessorArchitecture == PROCESSOR_ARCHITECTURE_AMD64 )
-				bits = " (64)";
-		}
-		return os + bits;
+		return QString( "%1 (%2 bit)" ).arg( os ).arg( is64bit ? "64" : "32" );
 	}
 #endif
 
