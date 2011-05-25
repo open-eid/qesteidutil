@@ -130,16 +130,19 @@ QString Common::applicationOs()
 		switch( QSysInfo::WindowsVersion )
 		{
 		case QSysInfo::WV_2000: os = "Windows 2000"; break;
-		case QSysInfo::WV_XP: return "Windows XP"; break;
-		case QSysInfo::WV_2003: return "Windows 2003"; break;
-		case QSysInfo::WV_VISTA: return "Windows Vista"; break;
-		case QSysInfo::WV_WINDOWS7: return "Windows 7"; break;
+		case QSysInfo::WV_XP: os = "Windows XP"; break;
+		case QSysInfo::WV_2003: os = "Windows 2003"; break;
+		case QSysInfo::WV_VISTA: os = "Windows Vista"; break;
+		case QSysInfo::WV_WINDOWS7: os = "Windows 7"; break;
 		default: break;
 		}
 	}
 
 	if( !os.isEmpty() )
 	{
+		if ( osvi.szCSDVersion > 0 )
+			os.append( " " ).append( osvi.szCSDVersion );
+
 		QString bits = " (32)";
 		typedef BOOL (WINAPI *LPFN_ISWOW64PROCESS) (HANDLE, PBOOL);
 		QLibrary lib( "kernel32" );
