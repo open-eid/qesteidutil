@@ -112,10 +112,6 @@ QString Common::applicationOs()
 			case 2:
 				if( GetSystemMetrics( SM_SERVERR2 ) )
 					os = "Windows Server 2003 R2";
-				else if ( osvi.wSuiteMask & VER_SUITE_STORAGE_SERVER )
-					os = "Windows Storage Server 2003";
-				else if ( osvi.wSuiteMask & VER_SUITE_WH_SERVER )
-					os = "Windows Home Server";
 				else if( osvi.wProductType == VER_NT_WORKSTATION && si.wProcessorArchitecture == PROCESSOR_ARCHITECTURE_AMD64 )
 				{
 					is64bit = true;
