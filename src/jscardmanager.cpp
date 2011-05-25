@@ -354,3 +354,8 @@ bool JsCardManager::checkCerts()
 
 	return true;
 }
+
+bool JsCardManager::isPCSCRunning()
+{
+	return DiagnosticsDialog::isPCSCRunning();
+}

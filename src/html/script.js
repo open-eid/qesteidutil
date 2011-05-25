@@ -684,7 +684,10 @@ function disableFields(firstRun)
 			if ( typeof(firstRun) == 'undefined' )
 			{
 			    document.getElementById('cardInfoNoCard').style.display='block';
-			    document.getElementById('cardInfoNoCardText').innerHTML='<trtag trcode="' + ( cardManager.getReaderCount() == 0 ? 'noReaders' : 'noCard' ) + '">' + _( cardManager.getReaderCount() == 0 ? 'noReaders' : 'noCard' ) + '</trtag>';
+                var strType = cardManager.getReaderCount() == 0 ? 'noReaders' : 'noCard';
+                if ( strType == 'noReaders' && !cardManager.isPCSCRunning() )
+                    strType = 'noPCSCRunning';
+			    document.getElementById('cardInfoNoCardText').innerHTML='<trtag trcode="' + strType + '">' + _( strType ) + '</trtag>';
 			    extender.closeLoading();
             }
 			if ( cardManager.getReaderCount() == 0 )

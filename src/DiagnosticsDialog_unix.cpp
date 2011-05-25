@@ -177,7 +177,7 @@ QString DiagnosticsDialog::getProcessor() const
 QString DiagnosticsDialog::getUserRights() const
 { return QString(); }
 
-bool DiagnosticsDialog::isPCSCRunning() const
+bool DiagnosticsDialog::isPCSCRunning()
 {
 #ifdef Q_OS_LINUX
 	QByteArray result = runProcess( "pidof", QStringList() << "pcscd" );

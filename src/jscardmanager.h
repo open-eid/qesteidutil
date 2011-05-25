@@ -49,23 +49,23 @@ public:
     JsCardManager(JsEsteidCard *jsEsteidCard);
 
 public slots:
-    int getReaderCount();
-    QString getReaderName( int i );
-    bool selectReader( int i );
-	bool selectReader( const ReaderState &reader );
-	bool isInReader( const QString &cardId );
-	bool isInReader( int readerNum );
 	QString activeCardId();
-	QString cardId( int readerNum );
-	void showDiagnostics();
-	void findCard();
-	bool anyCardsInReader();
 	int activeReaderNum();
     void allowRead();
-	void disableRead();
-	void newManager();
-
+	bool anyCardsInReader();
+	QString cardId( int readerNum );
 	bool checkCerts();
+	void disableRead();
+	void findCard();
+    int getReaderCount();
+    QString getReaderName( int i );
+	bool isInReader( const QString &cardId );
+	bool isInReader( int readerNum );
+	bool isPCSCRunning();
+	void newManager();
+    bool selectReader( int i );
+	bool selectReader( const ReaderState &reader );
+	void showDiagnostics();
 
 private slots:
     void pollCard();

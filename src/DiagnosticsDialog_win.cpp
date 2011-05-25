@@ -200,7 +200,7 @@ QString DiagnosticsDialog::getUserRights() const
 	return rights;
 }
 
-bool DiagnosticsDialog::isPCSCRunning() const
+bool DiagnosticsDialog::isPCSCRunning()
 {
 	SC_HANDLE h = OpenSCManager( NULL, NULL, SC_MANAGER_CONNECT );
 	if( !h )

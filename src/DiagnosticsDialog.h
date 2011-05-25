@@ -29,13 +29,13 @@ class DiagnosticsDialog: public QDialog, private Ui::DiagnosticsDialog
 	Q_OBJECT
 public:
 	DiagnosticsDialog( QWidget *parent = 0 );
+	static bool isPCSCRunning();
 
 private slots:
 	void save();
 	void showDetails();
 
 private:
-	bool	isPCSCRunning() const;
 	QString getRegistry( const QString &search = "" ) const;
 	QStringList getPackageVersion( const QStringList &list, bool returnPackageName = true ) const;
 	QString getProcessor() const;
