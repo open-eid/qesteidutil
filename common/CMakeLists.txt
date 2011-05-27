@@ -13,6 +13,11 @@ set( MOC_HEADERS
 	sslConnect.h
 	sslConnect_p.h
 	)
+
+if( WIN32 )
+	set( MOC_HEADERS ${MOC_HEADERS} QCSP.h )
+endif( WIN32 )
+
 QT4_WRAP_UI( UI_HEADERS
 	ui/AboutWidget.ui
 	ui/CertificateWidget.ui
@@ -48,6 +53,9 @@ set( SOURCES
 if( APPLE )
 	set( SOURCES ${SOURCES} Application_mac.mm )
 endif( APPLE )
+if( WIN32 )
+	set( SOURCES ${SOURCES} QCSP.cpp )
+endif( WIN32 )
 
 include_directories(
 	${CMAKE_SOURCE_DIR}
