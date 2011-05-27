@@ -125,15 +125,15 @@ Oodati: %2, saadi: %3</source>
     </message>
     <message>
         <source>library not found</source>
-        <translation type="unfinished"></translation>
+        <translation>модуль не обнаружен</translation>
     </message>
     <message>
         <source>OpenSC tool:</source>
-        <translation type="unfinished"></translation>
+        <translation>Модуль OpenSC:</translation>
     </message>
     <message>
         <source>PKCS11 tool:</source>
-        <translation type="unfinished"></translation>
+        <translation>Модуль PKCS11:</translation>
     </message>
     <message>
         <source>USB info:</source>
@@ -157,19 +157,19 @@ Please wait...</source>
     </message>
     <message>
         <source>User rights: </source>
-        <translation type="unfinished"></translation>
+        <translation>Права пользователя: </translation>
     </message>
     <message>
         <source>User</source>
-        <translation type="unfinished"></translation>
+        <translation>Пользователь</translation>
     </message>
     <message>
         <source>Unknown - error %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Неизвестная - ошибка %1</translation>
     </message>
     <message>
         <source>Administrator</source>
-        <translation type="unfinished"></translation>
+        <translation>Администратор</translation>
     </message>
 </context>
 <context>
@@ -277,7 +277,7 @@ Please wait...</source>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить</translation>
     </message>
 </context>
 </TS>

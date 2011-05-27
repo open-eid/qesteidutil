@@ -129,11 +129,11 @@ Oodati: %2, saadi: %3</source>
     </message>
     <message>
         <source>OpenSC tool:</source>
-        <translation>OpenSC programm: </translation>
+        <translation>OpenSC moodul: </translation>
     </message>
     <message>
         <source>PKCS11 tool:</source>
-        <translation>PKCS11 programm:</translation>
+        <translation>PKCS11 moodul:</translation>
     </message>
     <message>
         <source>USB info:</source>
