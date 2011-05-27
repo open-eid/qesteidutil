@@ -772,7 +772,7 @@ function updateCert()
 		if( navigator.platform.indexOf('Mac') != -1 ||
 			navigator.platform.indexOf('Win') != -1 )
 		{
-            var win = navigator.platform.indexOf('Mac') != -1;
+            var win = (navigator.platform.indexOf('Win') != -1);
 			_alert( 'info', _('updateCertOk') + '<br /><br />' + ( win ? '' : _('cleanTokenCacheInfo') ) );
 			var status = extender.cleanTokenCache();
 			_alert( 'info', status ? _( win ? 'cleanTokenCacheOkWin' : 'cleanTokenCacheOk' ) : _( win ? 'cleanTokenCacheFailWin' : 'cleanTokenCacheFail' ) );
