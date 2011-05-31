@@ -328,5 +328,13 @@
         <source>Decipher only</source>
         <translation>Только разшифровка</translation>
     </message>
+    <message>
+        <source>ID-CARD</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>DIGI-ID</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

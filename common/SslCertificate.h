@@ -26,6 +26,9 @@
 
 #include <QCoreApplication>
 #include <QHash>
+#include <QMetaType>
+
+Q_DECLARE_METATYPE( QSslCertificate )
 
 class SslCertificate: public QSslCertificate
 {
@@ -68,6 +71,7 @@ public:
 
 	QByteArray	authorityKeyIdentifier() const;
 	QHash<EnhancedKeyUsage,QString> enhancedKeyUsage() const;
+	QString		friendlyName() const;
 	static QString formatDate( const QDateTime &date, const QString &format );
 	static QString formatName( const QString &name );
 	static QSslCertificate fromX509( Qt::HANDLE x509 );

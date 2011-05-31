@@ -329,5 +329,13 @@
         <source>Decipher only</source>
         <translation>Decipher only</translation>
     </message>
+    <message>
+        <source>ID-CARD</source>
+        <translation>ID-CARD</translation>
+    </message>
+    <message>
+        <source>DIGI-ID</source>
+        <translation>DIGI-ID</translation>
+    </message>
 </context>
 </TS>

@@ -73,6 +73,14 @@ QHash<SslCertificate::EnhancedKeyUsage,QString> SslCertificate::enhancedKeyUsage
 	return list;
 }
 
+QString SslCertificate::friendlyName() const
+{
+	QString o = subjectInfo( QSslCertificate::Organization );
+	if( o == "ESTEID" ) o = tr("ID-CARD");
+	else if( o == "ESTEID (DIGI-ID)" ) o = tr("DIGI-ID");
+	return QString( "%1,%2" ).arg( subjectInfo( QSslCertificate::CommonName ), o );
+}
+
 QString SslCertificate::formatDate( const QDateTime &date, const QString &format )
 {
 	int pos = format.indexOf( "MMMM" );

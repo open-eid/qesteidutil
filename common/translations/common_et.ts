@@ -328,5 +328,13 @@
         <source>Decipher only</source>
         <translation>Ainult dekrüptimine</translation>
     </message>
+    <message>
+        <source>ID-CARD</source>
+        <translation>ID-KAART</translation>
+    </message>
+    <message>
+        <source>DIGI-ID</source>
+        <translation>DIGI-ID</translation>
+    </message>
 </context>
 </TS>
