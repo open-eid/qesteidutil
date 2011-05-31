@@ -32,35 +32,15 @@
 #include <openssl/x509v3.h>
 #include <openssl/pkcs12.h>
 
-static QByteArray ASN_STRING_to_QByteArray( ASN1_OCTET_STRING *str )
-{ return QByteArray( (const char *)ASN1_STRING_data(str), ASN1_STRING_length(str) ); }
-
-static QMap<QByteArray, QString> mapFromX509Name( X509_NAME *name )
-{
-	QMap<QByteArray,QString> info;
-	for( int i = 0; i < X509_NAME_entry_count(name); ++i )
-	{
-		X509_NAME_ENTRY *e = X509_NAME_get_entry( name, i );
-		const char *obj = OBJ_nid2sn( OBJ_obj2nid( X509_NAME_ENTRY_get_object( e ) ) );
-		unsigned char *data = 0;
-		int size = ASN1_STRING_to_UTF8( &data, X509_NAME_ENTRY_get_data( e ) );
-		info[obj] = QString::fromUtf8( (char*)data, size );
-		OPENSSL_free( data );
-	}
-	return info;
-}
-
-
-
 SslCertificate::SslCertificate( const QSslCertificate &cert )
 : QSslCertificate( cert ) {}
 
 QByteArray SslCertificate::authorityKeyIdentifier() const
 {
-	AUTHORITY_KEYID *id = (AUTHORITY_KEYID *)extension( NID_authority_key_identifier );
+	AUTHORITY_KEYID *id = (AUTHORITY_KEYID*)extension( NID_authority_key_identifier );
 	QByteArray out;
 	if( id && id->keyid )
-		out = ASN_STRING_to_QByteArray( id->keyid );
+		out = QByteArray( (const char*)id->keyid->data, id->keyid->length );
 	AUTHORITY_KEYID_free( id );
 	return out;
 }
@@ -173,12 +153,6 @@ QSslKey SslCertificate::keyFromEVP( Qt::HANDLE evp )
 Qt::HANDLE SslCertificate::extension( int nid ) const
 { return handle() ? Qt::HANDLE(X509_get_ext_d2i( (X509*)handle(), nid, 0, 0 )) : 0; }
 
-QString SslCertificate::issuerInfo( SubjectInfo subject ) const
-{ return issuerInfo( subjectInfoToString( subject ) ); }
-
-QString SslCertificate::issuerInfo( const QByteArray &tag ) const
-{ return handle() ? mapFromX509Name( X509_get_issuer_name((X509*)handle()) ).value( tag ) : QString(); }
-
 bool SslCertificate::isDigiID() const
 { CertType t = type(); return t == DigiIDType || t==DigiIDTestType; }
 bool SslCertificate::isTempel() const { return type() == TempelType; }
@@ -263,32 +237,12 @@ QString SslCertificate::signatureAlgorithm() const
 	return buf;
 }
 
-QString SslCertificate::subjectInfo( SubjectInfo subject ) const
-{ return subjectInfo( subjectInfoToString( subject ) ); }
-
-QString SslCertificate::subjectInfo( const QByteArray &tag ) const
-{ return handle() ? mapFromX509Name( X509_get_subject_name((X509*)handle()) ).value( tag ) : QString(); }
-
-QByteArray SslCertificate::subjectInfoToString( SubjectInfo info ) const
-{
-	switch( info )
-	{
-	case QSslCertificate::Organization: return "O";
-	case QSslCertificate::CommonName: return "CN";
-	case QSslCertificate::LocalityName: return "L";
-	case QSslCertificate::OrganizationalUnitName: return "OU";
-	case QSslCertificate::CountryName: return "C";
-	case QSslCertificate::StateOrProvinceName: return "ST";
-	default: return "";
-	}
-}
-
 QByteArray SslCertificate::subjectKeyIdentifier() const
 {
 	ASN1_OCTET_STRING *id = (ASN1_OCTET_STRING*)extension( NID_subject_key_identifier );
 	if( !id )
 		return QByteArray();
-	QByteArray out = ASN_STRING_to_QByteArray( id );
+	QByteArray out = QByteArray( (const char*)id->data, id->length );
 	ASN1_OCTET_STRING_free( id );
 	return out;
 }
@@ -340,6 +294,49 @@ SslCertificate::CertType SslCertificate::type() const
 		return TempelType;
 	return UnknownType;
 }
+
+#if QT_VERSION < 0x040800
+static QMap<QByteArray, QString> mapFromX509Name( X509_NAME *name )
+{
+	QMap<QByteArray,QString> info;
+	for( int i = 0; i < X509_NAME_entry_count(name); ++i )
+	{
+		X509_NAME_ENTRY *e = X509_NAME_get_entry( name, i );
+		const char *obj = OBJ_nid2sn( OBJ_obj2nid( X509_NAME_ENTRY_get_object( e ) ) );
+		unsigned char *data = 0;
+		int size = ASN1_STRING_to_UTF8( &data, X509_NAME_ENTRY_get_data( e ) );
+		info[obj] = QString::fromUtf8( (char*)data, size );
+		OPENSSL_free( data );
+	}
+	return info;
+}
+
+static QByteArray subjectInfoToString( QSslCertificate::SubjectInfo info )
+{
+	switch( info )
+	{
+	case QSslCertificate::Organization: return "O";
+	case QSslCertificate::CommonName: return "CN";
+	case QSslCertificate::LocalityName: return "L";
+	case QSslCertificate::OrganizationalUnitName: return "OU";
+	case QSslCertificate::CountryName: return "C";
+	case QSslCertificate::StateOrProvinceName: return "ST";
+	default: return "";
+	}
+}
+
+QString SslCertificate::issuerInfo( SubjectInfo subject ) const
+{ return issuerInfo( subjectInfoToString( subject ) ); }
+
+QString SslCertificate::issuerInfo( const QByteArray &tag ) const
+{ return handle() ? mapFromX509Name( X509_get_issuer_name((X509*)handle()) ).value( tag ) : QString(); }
+
+QString SslCertificate::subjectInfo( SubjectInfo subject ) const
+{ return subjectInfo( subjectInfoToString( subject ) ); }
+
+QString SslCertificate::subjectInfo( const QByteArray &tag ) const
+{ return handle() ? mapFromX509Name( X509_get_subject_name((X509*)handle()) ).value( tag ) : QString(); }
+#endif
 
 
 

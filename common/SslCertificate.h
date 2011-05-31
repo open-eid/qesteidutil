@@ -72,8 +72,6 @@ public:
 	static QString formatName( const QString &name );
 	static QSslCertificate fromX509( Qt::HANDLE x509 );
 	static QSslKey keyFromEVP( Qt::HANDLE evp );
-	QString		issuerInfo( SubjectInfo info ) const;
-	QString		issuerInfo( const QByteArray &tag ) const;
 	bool		isDigiID() const;
 	bool		isTempel() const;
 	bool		isTest() const;
@@ -82,16 +80,19 @@ public:
 	QString		policyInfo( const QString &oid ) const;
 	bool		showCN() const;
 	QString		signatureAlgorithm() const;
-	QString		subjectInfo( SubjectInfo subject ) const;
-	QString		subjectInfo( const QByteArray &tag ) const;
 	QByteArray	subjectKeyIdentifier() const;
 	static QByteArray	toHex( const QByteArray &in, QChar separator = ' ' );
 	QString		toString( const QString &format ) const;
 	CertType	type() const;
+#if QT_VERSION < 0x040800
+	QString		issuerInfo( SubjectInfo info ) const;
+	QString		issuerInfo( const QByteArray &tag ) const;
+	QString		subjectInfo( SubjectInfo subject ) const;
+	QString		subjectInfo( const QByteArray &tag ) const;
+#endif
 
 private:
 	Qt::HANDLE extension( int nid ) const;
-	QByteArray subjectInfoToString( SubjectInfo info ) const;
 };
 
 class PKCS12CertificatePrivate;

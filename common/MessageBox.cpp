@@ -55,16 +55,20 @@ void DMessageBox::fixDetailsLabel()
 {
 	if( !b )
 		return;
+#if QT_VERSION < 0x040800
 	QWidget *details = 0;
 	if( QTextEdit *w = findChild<QTextEdit*>() )
 		details = w->parentWidget();
 	if( !details )
 		return;
+#endif
 	Q_FOREACH( QAbstractButton *button, b->buttons() )
 	{
 		if( b->buttonRole( button ) == QDialogButtonBox::ActionRole )
 		{
+#if QT_VERSION < 0x040800
 			button->setText( details->isVisible() ? tr("Hide Details...") : tr("Show Details...") );
+#endif
 			button->setMinimumSize( button->sizeHint() + QSize( 20, 0 ) );
 		}
 	}
