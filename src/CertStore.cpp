@@ -25,6 +25,7 @@
 #include <common/SslCertificate.h>
 
 #include <Windows.h>
+#include <WinCrypt.h>
 
 class CertStorePrivate
 {
@@ -34,8 +35,8 @@ public:
 	PCCERT_CONTEXT certContext( const QSslCertificate &cert ) const
 	{
 		QByteArray data = cert.toDer();
-		return CertCreateCertificateContext( X509_ASN_ENCODING | PKCS_7_ASN_ENCODING,
-			(const BYTE*)data.constData(), DWORD(data.size()) );
+		return CertCreateCertificateContext( X509_ASN_ENCODING,
+			(const BYTE*)data.constData(), data.size() );
 	}
 
 	HCERTSTORE s;
@@ -44,8 +45,8 @@ public:
 CertStore::CertStore()
 : d( new CertStorePrivate )
 {
-	d->s = CertOpenStore( CERT_STORE_PROV_SYSTEM_A,
-		X509_ASN_ENCODING, 0, CERT_SYSTEM_STORE_CURRENT_USER, "MY" );
+	d->s = CertOpenStore( CERT_STORE_PROV_SYSTEM_W,
+		X509_ASN_ENCODING, 0, CERT_SYSTEM_STORE_CURRENT_USER, L"MY" );
 }
 
 CertStore::~CertStore()
@@ -72,7 +73,7 @@ bool CertStore::add( const QSslCertificate &cert, const QString &card )
 
 	QString cardStr = QString( keyCode == AT_SIGNATURE ? "SIG_" : "AUT_" ).append( card );
 	CRYPT_KEY_PROV_INFO KeyProvInfo =
-	{ (LPWSTR)cardStr.utf16(), L"EstEID Card CSP", PROV_RSA_FULL, 0, 0, NULL, keyCode };
+	{ (LPWSTR)cardStr.utf16(), L"EstEID Card CSP", PROV_RSA_FULL, 0, 0, 0, keyCode };
 	CertSetCertificateContextProperty( context, CERT_KEY_PROV_INFO_PROP_ID, 0, &KeyProvInfo );
 
 	bool result = CertAddCertificateContextToStore( d->s, context, CERT_STORE_ADD_REPLACE_EXISTING, 0 );
@@ -86,7 +87,7 @@ bool CertStore::find( const QSslCertificate &cert )
 		return false;
 
 	PCCERT_CONTEXT context = d->certContext( cert );
-	bool result = CertFindCertificateInStore( d->s, X509_ASN_ENCODING | PKCS_7_ASN_ENCODING,
+	bool result = CertFindCertificateInStore( d->s, X509_ASN_ENCODING,
 		0, CERT_FIND_SUBJECT_CERT, context->pCertInfo, 0 );
 	CertFreeCertificateContext( context );
 	return result;
@@ -103,10 +104,7 @@ void CertStore::remove( const QSslCertificate &cert )
 	{
 		if( CertCompareCertificateName( X509_ASN_ENCODING,
 				&context->pCertInfo->Subject, &scontext->pCertInfo->Subject ) )
-		{
-			CertDeleteCertificateFromStore( scontext );
-			scontext = 0;
-		}
+			CertDeleteCertificateFromStore( CertDuplicateCertificateContext( scontext ) );
 	}
 	CertFreeCertificateContext( context );
 }

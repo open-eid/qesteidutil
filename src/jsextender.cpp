@@ -101,11 +101,8 @@ bool JsExtender::cleanTokenCache() const
 	CertStore s;
 	s.remove( m_mainWindow->eidCard()->m_authCert->cert() );
 	s.remove( m_mainWindow->eidCard()->m_signCert->cert() );
-	return s.add( m_mainWindow->eidCard()->m_authCert->cert(), m_mainWindow->eidCard()->getId() ) ||
-		s.add( m_mainWindow->eidCard()->m_signCert->cert(), m_mainWindow->eidCard()->getId() );
-#else
-	return true;
 #endif
+	return true;
 }
 
 void JsExtender::setLanguage( const QString &lang )
