@@ -22,34 +22,26 @@
 
 #include "SettingsDialog.h"
 
-#include <QDesktopServices>
-#include <QProcess>
-#include <QUrl>
+#include <common/Common.h>
 
 SettingsDialog::SettingsDialog( QWidget *parent )
 :	QDialog( parent )
 {
 	setupUi( this );
 	setAttribute( Qt::WA_DeleteOnClose, true );
-
 	updateInterval->addItem( tr("Once a day"), "-daily" );
 	updateInterval->addItem( tr("Once a week"), "-weekly" );
 	updateInterval->addItem( tr("Once a month"), "-monthly" );
 	updateInterval->addItem( tr("Never"), "-never" );
 	updateInterval->addItem( tr("Remove"), "-remove" );
-
-#ifdef Q_OS_MAC
-	updateInterval->hide();
-	updateIntervalLabel->hide();
-	autoUpdate->hide();
-	autoUpdateLabel->hide();
-	buttonBox->setStandardButtons( QDialogButtonBox::Close );
-#endif
 }
 
 void SettingsDialog::accept()
 {
-	QProcess::startDetached( "id-updater", QStringList()
+	Common::startDetached( "id-updater", QStringList()
+#ifdef Q_OS_MAC
+		<< "--args"
+#endif
 		<< updateInterval->itemData( updateInterval->currentIndex() ).toString()
 		<< (autoUpdate->isChecked() ? "-autoupdate" : "") );
 	done( 1 );
@@ -57,11 +49,6 @@ void SettingsDialog::accept()
 
 void SettingsDialog::on_checkUpdates_clicked()
 {
-#ifdef Q_OS_WIN32
-	QProcess::startDetached( "id-updater" );
-#else
-	QDesktopServices::openUrl( QUrl(
-		QString("https://installer.id.ee/update/mac/?ver=%1").arg( qApp->applicationVersion() ) ) );
-#endif
+	Common::startDetached( "id-updater" );
 	done( 1 );
 }
