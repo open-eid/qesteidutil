@@ -25,6 +25,7 @@
 #include "PinDialog.h"
 
 #include <QApplication.h>
+#include <QDebug>
 
 #include <Windows.h>
 #include <WinCrypt.h>
@@ -40,6 +41,7 @@ public:
 	static QByteArray keyParam( HCRYPTKEY key, DWORD param, DWORD flags = 0 );
 
 	HCRYPTPROV h;
+	QHash<QString,QPair<QString,QString> > certs;
 };
 
 
@@ -94,9 +96,10 @@ QCSP::PinStatus QCSP::login( const TokenData &t )
 	return CryptSetProvParam( d->h, PP_SIGNATURE_PIN, (BYTE*)dialog.text().utf16(), 0 ) ? PinOK : PinUnknown;
 }
 
-QStringList QCSP::providers()
+QStringList QCSP::containers()
 {
-	QStringList result;
+	qWarning() << "Start enumerationg providers";
+	QHash<QString,QPair<QString,QString> > certs;
 	HCRYPTPROV h = 0;
 	DWORD index = 0, type = 0, size = 0;
 	while( CryptEnumProvidersW( index, 0, 0, &type, 0, &size ) )
@@ -107,44 +110,76 @@ QStringList QCSP::providers()
 			continue;
 
 		QString prov = QString::fromUtf16( (const ushort*)provider.data() );
+		qWarning() << "Found provider" << prov;
 		// its broken and does not play well with pkcs11
 		if( prov.toLower().contains( "esteid" ) )
 			continue;
 
+		qWarning() << "Acquiring provider" << prov << "context";
 		if( h )
 			CryptReleaseContext( h, 0 );
 		h = 0;
 		if( !CryptAcquireContextW( &h, 0, provider.data(), type, CRYPT_SILENT ) )
 			continue;
 
+		qWarning() << "Checking if provider" << prov << "is HW";
 		QByteArray imptype = QCSPPrivate::provParam( h, PP_IMPTYPE );
 		if( imptype.isEmpty() || !(imptype[0] & CRYPT_IMPL_HARDWARE) )
 			continue;
 
-		HCRYPTKEY key = 0;
-		if( !CryptGetUserKey( h, AT_SIGNATURE, &key ) )
-			continue;
+		qWarning() << "Enumerating provider " << prov << "containers";
+		QStringList containers;
+		QByteArray container = QCSPPrivate::provParam( h, PP_ENUMCONTAINERS, CRYPT_FIRST );
+		while( !container.isEmpty() )
+		{
+			containers << container;
+			container = QCSPPrivate::provParam( h, PP_ENUMCONTAINERS, CRYPT_NEXT );
+		}
+		qWarning() << "Provider" << prov << "containers" << containers;
 
-		QSslCertificate cert( QCSPPrivate::keyParam( key, KP_CERTIFICATE, 0 ), QSsl::Der );
-		CryptDestroyKey( key );
+		Q_FOREACH( const QString &container, containers )
+		{
+			if( h )
+				CryptReleaseContext( h, 0 );
+			h = 0;
+			qWarning() << "Acquiring provider" << prov << "container" << container << "context";
+			if( !CryptAcquireContextW( &h, (wchar_t*)container.utf16(), provider.data(), type, CRYPT_SILENT ) )
+				continue;
 
-		if( !cert.isNull() )
-			result << prov;
+			qWarning() << "Geting provider" << prov << "container" << container << "key";
+			HCRYPTKEY key = 0;
+			if( !CryptGetUserKey( h, AT_SIGNATURE, &key ) )
+				continue;
+
+			qWarning() << "Reading provider" << prov << "container" << container << "cert";
+			SslCertificate cert( QSslCertificate( QCSPPrivate::keyParam( key, KP_CERTIFICATE, 0 ), QSsl::Der ) );
+			CryptDestroyKey( key );
+
+			if( !cert.isNull() )
+			{
+				qWarning() << "Adding provider" << prov << "container" << container << "list";
+				certs.insert( cert.subjectInfo( QSslCertificate::CommonName ), QPair<QString,QString>( prov, container ) );
+			}
+		}
 	}
 	if( h )
 		CryptReleaseContext( h, 0 );
+	qWarning() << "End enumerationg providers";
 
-	return result;
+	d->certs = certs;
+	return d->certs.keys();
 }
 
-TokenData QCSP::selectProvider( const QString &provider, SslCertificate::KeyUsage usage )
+TokenData QCSP::selectCert( const QString &cn, SslCertificate::KeyUsage usage )
 {
 	TokenData t;
-	t.setCard( provider );
+	t.setCard( cn );
 
 	if( d->h )
 		CryptReleaseContext( d->h, 0 );
-	if( !CryptAcquireContextW( &d->h, 0, (WCHAR*)provider.utf16(), PROV_RSA_FULL, 0 ) )
+
+	QPair<QString,QString> c = d->certs.value( cn );
+	if( !CryptAcquireContextW( &d->h, (WCHAR*)c.second.utf16(), (WCHAR*)c.first.utf16(), PROV_RSA_FULL, 0 ) )
 		return t;
 
 	HCRYPTKEY key = 0;

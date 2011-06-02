@@ -43,11 +43,10 @@ public:
 	explicit QCSP( QObject *parent = 0 );
 	~QCSP();
 
+	QStringList containers();
 	PinStatus login( const TokenData &t );
-	TokenData selectProvider( const QString &provider, SslCertificate::KeyUsage usage );
+	TokenData selectCert( const QString &cert, SslCertificate::KeyUsage usage );
 	QByteArray sign( int method, const QByteArray &digest );
-
-	static QStringList providers();
 
 private:
 	QCSPPrivate *d;
