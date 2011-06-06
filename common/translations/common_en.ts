@@ -252,6 +252,33 @@
     </message>
 </context>
 <context>
+    <name>QPKCS11</name>
+    <message>
+        <source>PIN Canceled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>PIN locked</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>PIN Incorrect</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>PKCS11 general error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>PKCS11 device error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>PKCS11 unknown error</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>SSLConnect</name>
     <message>
         <source>Failed to connect to host. Are you connected to the internet?</source>

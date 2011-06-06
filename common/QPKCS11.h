@@ -59,6 +59,7 @@ public:
 	void unloadDriver();
 	bool verify( const QByteArray &data, const QByteArray &signature ) const;
 
+	static QString errorString( PinStatus error );
 private:
 	QPKCS11Private *d;
 };

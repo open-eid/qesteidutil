@@ -177,6 +177,20 @@ QByteArray QPKCS11::encrypt( const QByteArray &data ) const
 	return result;
 }
 
+QString QPKCS11::errorString( PinStatus error )
+{
+	switch( error )
+	{
+	case QPKCS11::PinOK: return QString();
+	case QPKCS11::PinCanceled: return tr("PIN Canceled");
+	case QPKCS11::PinLocked: return tr("PIN locked");
+	case QPKCS11::PinIncorrect: return tr("PIN Incorrect");
+	case QPKCS11::GeneralError: return tr("PKCS11 general error");
+	case QPKCS11::DeviceError: return tr("PKCS11 device error");
+	default: return tr("PKCS11 unknown error");
+	}
+}
+
 QByteArray QPKCS11::decrypt( const QByteArray &data ) const
 {
 	CK_OBJECT_HANDLE key = CK_INVALID_HANDLE;
