@@ -464,7 +464,7 @@ QStringList Common::normalized( const QStringList &list )
 	return list;
 #endif
 }
-#include <QDebug>
+
 bool Common::runPrivileged( const QString &program, const QStringList &arguments )
 {
 #if defined(Q_OS_MAC)
