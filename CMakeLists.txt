@@ -106,19 +106,11 @@ include_directories(
 
 if( APPLE )
 	include( VersionInfoMac )
-	include( CMakeFindFrameworks )
 
 	find_library( CORESERVICES_LIB CoreServices )
 	find_library( SECURITY_LIB Security )
 	find_library( COCOA_LIBRARY Cocoa )
 	set( ADDITIONAL_LIBRARIES ${CORESERVICES_LIB} ${SECURITY_LIB} ${COCOA_LIBRARY} )
-
-	CMAKE_FIND_FRAMEWORKS( Security )
-	if( Security_FRAMEWORKS )
-		foreach( dir ${Security_FRAMEWORKS} )
-			include_directories( ${dir}/Headers )
-		endforeach( dir )
-	endif( Security_FRAMEWORKS )
 
 	# Qt jpeg plugin
 	if( NOT DEFINED QT_PLUGINS_DIR )

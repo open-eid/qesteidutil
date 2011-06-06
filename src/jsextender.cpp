@@ -41,14 +41,11 @@
 #endif
 
 #include <common/AboutWidget.h>
+#include <common/Common.h>
 #include <common/Settings.h>
 
 #include <smartcardpp/helperMacro.h>
 #include <openssl/evp.h>
-
-#ifdef Q_OS_MAC
-#include <Authorization.h>
-#endif
 
 JsExtender::JsExtender( MainWindow *main )
 :	QObject( main )
@@ -85,18 +82,7 @@ JsExtender::~JsExtender()
 bool JsExtender::cleanTokenCache() const
 {
 #if defined(Q_OS_MAC)
-	AuthorizationRef ref;
-	AuthorizationCreate( 0, kAuthorizationEmptyEnvironment, kAuthorizationFlagDefaults, &ref );
-	char *args[] = { (char*)"-c", (char*)"/bin/rm -rf /var/db/TokenCache/tokens/com.apple.tokend.opensc*", 0 };
-	FILE *pipe = 0;
-	OSStatus status = AuthorizationExecuteWithPrivileges( ref, "/bin/sh",
-		kAuthorizationFlagDefaults, args, &pipe );
-
-	if( pipe )
-		fclose( pipe );
-
-	AuthorizationFree( ref, kAuthorizationFlagDestroyRights );
-	return status == errAuthorizationSuccess;
+	return Common::runPrivileged( "/bin/sh", QStringList() << "-c" << "/bin/rm -rf /var/db/TokenCache/tokens/com.apple.tokend.opensc*" );
 #elif defined(Q_OS_WIN)
 	CertStore s;
 	s.remove( m_mainWindow->eidCard()->m_authCert->cert() );

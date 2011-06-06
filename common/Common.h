@@ -52,6 +52,7 @@ public:
 	static QString helpUrl();
 	static QString normalized( const QString &str );
 	static QStringList normalized( const QStringList &list );
+	static bool runPrivileged( const QString &program, const QStringList &arguments );
 	static void showHelp( const QString &msg, int code = -1 );
 	static bool startDetached( const QString &program );
 	static bool startDetached( const QString &program, const QStringList &arguments );

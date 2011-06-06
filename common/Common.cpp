@@ -44,6 +44,7 @@
 #include <windows.h>
 #include <mapi.h>
 #elif defined(Q_OS_MAC)
+#include <Authorization.h>
 #include <Carbon/Carbon.h>
 #endif
 
@@ -462,6 +463,33 @@ QStringList Common::normalized( const QStringList &list )
 #else
 	return list;
 #endif
+}
+#include <QDebug>
+bool Common::runPrivileged( const QString &program, const QStringList &arguments )
+{
+#if defined(Q_OS_MAC)
+	QList<QByteArray> u8args;
+	Q_FOREACH( const QString arg, arguments )
+		u8args << arg.toUtf8();
+
+	char *args[u8args.size() + 1];
+	for( int i = 0; i < u8args.size(); ++i )
+		args[i] = (char*)u8args[i].constData();
+	args[u8args.size()] = 0;
+	FILE *pipe = 0;
+
+	AuthorizationRef ref;
+	AuthorizationCreate( 0, kAuthorizationEmptyEnvironment, kAuthorizationFlagDefaults, &ref );
+	OSStatus status = AuthorizationExecuteWithPrivileges( ref, program.toUtf8().constData(),
+		kAuthorizationFlagDefaults, args, &pipe );
+
+	if( pipe )
+		fclose( pipe );
+
+	AuthorizationFree( ref, kAuthorizationFlagDestroyRights );
+	return status == errAuthorizationSuccess;
+#endif
+	return false;
 }
 
 void Common::showHelp( const QString &msg, int code )

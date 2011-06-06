@@ -38,9 +38,10 @@ SettingsDialog::SettingsDialog( QWidget *parent )
 
 void SettingsDialog::accept()
 {
-	Common::startDetached( "id-updater", QStringList()
 #ifdef Q_OS_MAC
-		<< "--args"
+	Common::runPrivileged( "/usr/bin/open", QStringList() << "-a" << "id-updater" << "--args"
+#else
+	Common::startDetached( "id-updater", QStringList()
 #endif
 		<< updateInterval->itemData( updateInterval->currentIndex() ).toString()
 		<< (autoUpdate->isChecked() ? "-autoupdate" : "") );
