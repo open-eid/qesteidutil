@@ -44,7 +44,9 @@
 #include <windows.h>
 #include <mapi.h>
 #elif defined(Q_OS_MAC)
+#ifdef USE_SECURITY
 #include <Authorization.h>
+#endif
 #include <Carbon/Carbon.h>
 #endif
 
@@ -467,7 +469,7 @@ QStringList Common::normalized( const QStringList &list )
 
 bool Common::runPrivileged( const QString &program, const QStringList &arguments )
 {
-#if defined(Q_OS_MAC)
+#ifdef USE_SECURITY
 	QList<QByteArray> u8args;
 	Q_FOREACH( const QString arg, arguments )
 		u8args << arg.toUtf8();
