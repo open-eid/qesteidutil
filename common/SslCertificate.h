@@ -83,6 +83,7 @@ public:
 	QStringList policies() const;
 	QString		policyInfo( const QString &oid ) const;
 	bool		showCN() const;
+	QByteArray	serialNumber( bool hex = false ) const;
 	QString		signatureAlgorithm() const;
 	QByteArray	subjectKeyIdentifier() const;
 	static QByteArray	toHex( const QByteArray &in, QChar separator = ' ' );

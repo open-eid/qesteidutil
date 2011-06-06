@@ -231,6 +231,22 @@ QString SslCertificate::policyInfo( const QString &index ) const
 	return QString();
 }
 
+QByteArray SslCertificate::serialNumber( bool hex ) const
+{
+	QByteArray serial;
+	if( BIGNUM *bn = ASN1_INTEGER_to_BN( X509_get_serialNumber( (X509*)handle() ), 0 ) )
+	{
+		char *str = hex ? BN_bn2hex( bn ) : BN_bn2dec( bn );
+		if( str )
+		{
+			serial = str;
+			OPENSSL_free( str );
+		}
+		BN_free( bn );
+	}
+	return serial;
+}
+
 bool SslCertificate::showCN() const
 { return subjectInfo( "GN" ).isEmpty() && subjectInfo( "SN" ).isEmpty(); }
 

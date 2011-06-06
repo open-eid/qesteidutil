@@ -140,7 +140,7 @@ void CertificateDialog::setCertificate( const QSslCertificate &cert )
 	d->addItem( tr("Version"), "V" + c.version() );
 	d->addItem( tr("Serial number"), QString( "%1 (0x%2)" )
 		.arg( c.serialNumber().constData() )
-		.arg( QString::number( c.serialNumber().toInt(), 16 ) ) );
+		.arg( c.serialNumber( true ).constData() ) );
 	d->addItem( tr("Signature algorithm"), c.signatureAlgorithm() );
 
 	QStringList text, textExt;
