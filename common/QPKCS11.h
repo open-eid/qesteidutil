@@ -39,7 +39,9 @@ public:
 		PinCanceled,
 		PinIncorrect,
 		PinLocked,
-		PinUnknown,
+		DeviceError,
+		GeneralError,
+		UnknownError,
 	};
 
 	explicit QPKCS11( QObject *parent = 0 );

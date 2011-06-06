@@ -234,7 +234,7 @@ QPKCS11::PinStatus QPKCS11::login( const TokenData &_t )
 {
 	CK_TOKEN_INFO token;
 	if( !d->pslot || d->f->C_GetTokenInfo( *(d->pslot), &token ) != CKR_OK )
-		return PinUnknown;
+		return UnknownError;
 
 	if( !(token.flags & CKF_LOGIN_REQUIRED) )
 		return PinOK;
@@ -251,7 +251,7 @@ QPKCS11::PinStatus QPKCS11::login( const TokenData &_t )
 		d->f->C_CloseSession( d->session );
 	d->session = 0;
 	if( d->f->C_OpenSession( *(d->pslot), CKF_SERIAL_SESSION, 0, 0, &d->session ) != CKR_OK )
-		return PinUnknown;
+		return UnknownError;
 
 	CK_RV err = CKR_OK;
 	bool pin2 = SslCertificate( t.cert() ).keyUsage().keys().contains( SslCertificate::NonRepudiation );
@@ -281,7 +281,9 @@ QPKCS11::PinStatus QPKCS11::login( const TokenData &_t )
 	case CKR_FUNCTION_CANCELED: return PinCanceled;
 	case CKR_PIN_INCORRECT: return PinIncorrect;
 	case CKR_PIN_LOCKED: return PinLocked;
-	default: return PinUnknown;
+	case CKR_DEVICE_ERROR: return DeviceError;
+	case CKR_GENERAL_ERROR: return GeneralError;
+	default: return UnknownError;
 	}
 }
 
