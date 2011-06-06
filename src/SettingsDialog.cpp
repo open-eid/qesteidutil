@@ -39,12 +39,13 @@ SettingsDialog::SettingsDialog( QWidget *parent )
 void SettingsDialog::accept()
 {
 #ifdef Q_OS_MAC
-	Common::runPrivileged( "/usr/bin/open", QStringList() << "-a" << "id-updater" << "--args"
+	Common::runPrivileged( "/Library/EstonianIDCard/bin/id-updater.app/Contents/MacOS/id-updater",
 #else
-	Common::startDetached( "id-updater", QStringList()
+	Common::startDetached( "id-updater",
 #endif
-		<< updateInterval->itemData( updateInterval->currentIndex() ).toString()
-		<< (autoUpdate->isChecked() ? "-autoupdate" : "") );
+		QStringList()
+			<< updateInterval->itemData( updateInterval->currentIndex() ).toString()
+			<< (autoUpdate->isChecked() ? "-autoupdate" : "") );
 	done( 1 );
 }
 
