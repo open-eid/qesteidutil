@@ -216,7 +216,7 @@ QStringList SslCertificate::policies() const
 	return list;
 }
 
-QString SslCertificate::policyInfo( const QString &index ) const
+QString SslCertificate::policyInfo( const QString & ) const
 {
 #if 0
 	for( int j = 0; j < sk_POLICYQUALINFO_num( pi->qualifiers ); ++j )

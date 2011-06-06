@@ -490,6 +490,9 @@ bool Common::runPrivileged( const QString &program, const QStringList &arguments
 
 	AuthorizationFree( ref, kAuthorizationFlagDestroyRights );
 	return status == errAuthorizationSuccess;
+#else
+	Q_UNUSED( program )
+	Q_UNUSED( arguments )
 #endif
 	return false;
 }

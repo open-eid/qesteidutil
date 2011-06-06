@@ -56,6 +56,8 @@
 
 - (void) appReopen:(NSAppleEventDescriptor *)event withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 {
+	Q_UNUSED(event)
+	Q_UNUSED(replyEvent)
 	QApplication::postEvent( qApp, new REOpenEvent );
 }
 @end

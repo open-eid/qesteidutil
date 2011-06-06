@@ -1,8 +1,8 @@
 /*
  * QEstEidCommon
  *
- * Copyright (C) 2009,2010 Jargo Kõster <jargo@innovaatik.ee>
- * Copyright (C) 2009,2010 Raul Metsma <raul@innovaatik.ee>
+ * Copyright (C) 2009-2011 Jargo Kõster <jargo@innovaatik.ee>
+ * Copyright (C) 2009-2011 Raul Metsma <raul@innovaatik.ee>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -79,7 +79,7 @@ bool IKValidator::isValid( const QString &ik )
 	return ik.right( 1 ).toInt() == result;
 }
 
-QValidator::State IKValidator::validate( QString &input, int &pos ) const
+QValidator::State IKValidator::validate( QString &input, int & ) const
 {
 	input = input.trimmed();
 	if( input.size() > 11 || !QRegExp( "\\d{0,11}" ).exactMatch( input ) )
