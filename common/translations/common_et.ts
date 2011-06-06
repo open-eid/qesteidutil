@@ -194,7 +194,7 @@
     </message>
     <message>
         <source>Unknown OS</source>
-        <translation type="unfinished"></translation>
+        <translation>Tundmatu operatsioonisüsteem</translation>
     </message>
 </context>
 <context>
@@ -259,11 +259,11 @@
     </message>
     <message>
         <source>PIN locked</source>
-        <translation type="unfinished"></translation>
+        <translation>Vale PIN</translation>
     </message>
     <message>
         <source>PIN Incorrect</source>
-        <translation type="unfinished"></translation>
+        <translation>PIN on lukus</translation>
     </message>
     <message>
         <source>PKCS11 general error</source>

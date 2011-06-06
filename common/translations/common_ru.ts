@@ -259,11 +259,11 @@
     </message>
     <message>
         <source>PIN locked</source>
-        <translation type="unfinished"></translation>
+        <translation>PIN заблокирован</translation>
     </message>
     <message>
         <source>PIN Incorrect</source>
-        <translation type="unfinished"></translation>
+        <translation>Неверный PIN</translation>
     </message>
     <message>
         <source>PKCS11 general error</source>

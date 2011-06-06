@@ -194,7 +194,7 @@
     </message>
     <message>
         <source>Unknown OS</source>
-        <translation type="unfinished"></translation>
+        <translation>Unknown OS</translation>
     </message>
 </context>
 <context>
@@ -255,27 +255,27 @@
     <name>QPKCS11</name>
     <message>
         <source>PIN Canceled</source>
-        <translation type="unfinished"></translation>
+        <translation>PIN Canceled</translation>
     </message>
     <message>
         <source>PIN locked</source>
-        <translation type="unfinished"></translation>
+        <translation>PIN locked</translation>
     </message>
     <message>
         <source>PIN Incorrect</source>
-        <translation type="unfinished"></translation>
+        <translation>PIN Incorrect</translation>
     </message>
     <message>
         <source>PKCS11 general error</source>
-        <translation type="unfinished"></translation>
+        <translation>PKCS11 general error</translation>
     </message>
     <message>
         <source>PKCS11 device error</source>
-        <translation type="unfinished"></translation>
+        <translation>PKCS11 device error</translation>
     </message>
     <message>
         <source>PKCS11 unknown error</source>
-        <translation type="unfinished"></translation>
+        <translation>PKCS11 unknown error</translation>
     </message>
 </context>
 <context>
