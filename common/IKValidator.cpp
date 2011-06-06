@@ -81,6 +81,7 @@ bool IKValidator::isValid( const QString &ik )
 
 QValidator::State IKValidator::validate( QString &input, int &pos ) const
 {
+	input = input.trimmed();
 	if( input.size() > 11 || !QRegExp( "\\d{0,11}" ).exactMatch( input ) )
 		return Invalid;
 	else if( input.size() == 11 )
