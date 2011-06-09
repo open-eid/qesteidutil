@@ -23,7 +23,6 @@
 #include "MessageBox.h"
 
 #include <QAbstractButton>
-#include <QDebug>
 #include <QDialogButtonBox>
 #include <QEvent>
 #include <QTextEdit>

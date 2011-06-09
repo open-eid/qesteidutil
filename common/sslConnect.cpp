@@ -27,7 +27,6 @@
 
 #include <common/Common.h>
 
-#include <QDebug>
 #include <QProgressBar>
 #include <QProgressDialog>
 #include <QSslCertificate>
