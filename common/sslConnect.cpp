@@ -127,7 +127,7 @@ QByteArray SSLConnect::getUrl( RequestType type, const QString &value )
 	if( !SSL_check_private_key( d->ssl ) )
 	{
 		d->setError();
-		return false;
+		return QByteArray();
 	}
 
 	QString label;
