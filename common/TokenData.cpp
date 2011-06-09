@@ -22,8 +22,11 @@
 
 #include "TokenData.h"
 
-#include <QSslCertificate>
+#include "SslCertificate.h"
+
+#include <QDateTime>
 #include <QStringList>
+#include <QTextStream>
 
 class TokenDataPrivate: public QSharedData
 {
@@ -60,6 +63,57 @@ void TokenData::setFlag( TokenFlags flag, bool enabled )
 	else d->flags &= ~flag;
 }
 void TokenData::setFlags( TokenFlags flags ) { d->flags = flags; }
+
+QString TokenData::toHtml() const
+{
+	QString content;
+	QTextStream s( &content );
+	SslCertificate c( d->cert );
+
+	s << "<table width=\"100%\"><tr><td>";
+	if( c.isTempel() )
+	{
+		s << tr("Company") << ": <font color=\"black\">"
+			<< c.toString( "CN" ) << "</font><br />";
+		s << tr("Register code") << ": <font color=\"black\">"
+			<< c.subjectInfo( "serialNumber" ) << "</font><br />";
+	}
+	else
+	{
+		s << tr("Name") << ": <font color=\"black\">"
+			<< c.toString( "GN SN" ) << "</font><br />";
+		s << tr("Personal code") << ": <font color=\"black\">"
+			<< c.subjectInfo( "serialNumber" ) << "</font><br />";
+	}
+	s << tr("Card in reader") << ": <font color=\"black\">" << d->card << "</font><br />";
+
+	bool willExpire = c.expiryDate().toLocalTime() <= QDateTime::currentDateTime().addDays( 105 );
+	s << (c.keyUsage().keys().contains( SslCertificate::NonRepudiation ) ? tr("Sign certificate is") : tr("Auth certificate is")  ) << " ";
+	if( c.isValid() )
+	{
+		s << "<font color=\"green\">" << tr("valid") << "</font>";
+		if( willExpire )
+			s << "<br /><font color=\"red\">" << tr("Your certificates will expire soon") << "</font>";
+	}
+	else
+		s << "<font color=\"red\">" << tr("expired") << "</font>";
+	if( d->flags & TokenData::PinLocked )
+		s << "<br /><font color=\"red\">" << tr("PIN is locked") << "</font>";
+
+	s << "</td><td align=\"center\" width=\"75\">";
+	if( !c.isValid() || willExpire || d->flags & TokenData::PinLocked )
+	{
+		s << "<a href=\"openUtility\"><img src=\":/images/warning.png\"><br />"
+			"<font color=\"red\">" << tr("Open utility") << "</font></a>";
+	}
+	else if( c.isTempel() )
+		s << "<img src=\":/images/ico_stamp_blue_75.png\">";
+	else
+		s << "<img src=\":/images/ico_person_blue_75.png\">";
+	s << "</td></tr></table>";
+
+	return content;
+}
 
 TokenData TokenData::operator =( const TokenData &other ) { d = other.d; return *this; }
 

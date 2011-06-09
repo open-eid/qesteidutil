@@ -145,54 +145,6 @@
 <context>
     <name>Common</name>
     <message>
-        <source>Company</source>
-        <translation>Company</translation>
-    </message>
-    <message>
-        <source>Register code</source>
-        <translation>Register code</translation>
-    </message>
-    <message>
-        <source>Name</source>
-        <translation>Name</translation>
-    </message>
-    <message>
-        <source>Personal code</source>
-        <translation>Personal code</translation>
-    </message>
-    <message>
-        <source>Card in reader</source>
-        <translation>Card number</translation>
-    </message>
-    <message>
-        <source>Auth certificate is</source>
-        <translation>Auth certificate is</translation>
-    </message>
-    <message>
-        <source>Sign certificate is</source>
-        <translation>Sign certificate is</translation>
-    </message>
-    <message>
-        <source>valid</source>
-        <translation>valid</translation>
-    </message>
-    <message>
-        <source>expired</source>
-        <translation>expired</translation>
-    </message>
-    <message>
-        <source>Open utility</source>
-        <translation>Open utility</translation>
-    </message>
-    <message>
-        <source>Your certificates will expire soon</source>
-        <translation>Your certificates will expire soon</translation>
-    </message>
-    <message>
-        <source>PIN is locked</source>
-        <translation>PIN is locked</translation>
-    </message>
-    <message>
         <source>Unknown OS</source>
         <translation>Unknown OS</translation>
     </message>
@@ -363,6 +315,57 @@
     <message>
         <source>DIGI-ID</source>
         <translation>DIGI-ID</translation>
+    </message>
+</context>
+<context>
+    <name>TokenData</name>
+    <message>
+        <source>Company</source>
+        <translation>Company</translation>
+    </message>
+    <message>
+        <source>Register code</source>
+        <translation>Register code</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation>Name</translation>
+    </message>
+    <message>
+        <source>Personal code</source>
+        <translation>Personal code</translation>
+    </message>
+    <message>
+        <source>Card in reader</source>
+        <translation>Card number</translation>
+    </message>
+    <message>
+        <source>Sign certificate is</source>
+        <translation>Sign certificate is</translation>
+    </message>
+    <message>
+        <source>Auth certificate is</source>
+        <translation>Auth certificate is</translation>
+    </message>
+    <message>
+        <source>valid</source>
+        <translation>valid</translation>
+    </message>
+    <message>
+        <source>Your certificates will expire soon</source>
+        <translation>Your certificates will expire soon</translation>
+    </message>
+    <message>
+        <source>expired</source>
+        <translation>expired</translation>
+    </message>
+    <message>
+        <source>PIN is locked</source>
+        <translation>PIN is locked</translation>
+    </message>
+    <message>
+        <source>Open utility</source>
+        <translation>Open utility</translation>
     </message>
 </context>
 </TS>

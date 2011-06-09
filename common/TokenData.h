@@ -22,6 +22,7 @@
 
 #pragma once
 
+#include <QCoreApplication>
 #include <QMetaType>
 #include <QSharedDataPointer>
 
@@ -29,6 +30,7 @@ class QSslCertificate;
 class TokenDataPrivate;
 class TokenData
 {
+	Q_DECLARE_TR_FUNCTIONS( TokenData )
 public:
 	enum TokenFlag
 	{
@@ -56,6 +58,8 @@ public:
 	TokenFlags flags() const;
 	void setFlag( TokenFlags flag, bool enabled = true );
 	void setFlags( TokenFlags flags );
+
+	QString toHtml() const;
 
 	TokenData operator =( const TokenData &other );
 	bool operator !=( const TokenData &other ) const;

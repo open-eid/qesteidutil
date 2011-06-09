@@ -145,54 +145,6 @@
 <context>
     <name>Common</name>
     <message>
-        <source>Company</source>
-        <translation>Asutus</translation>
-    </message>
-    <message>
-        <source>Register code</source>
-        <translation>Registrikood</translation>
-    </message>
-    <message>
-        <source>Name</source>
-        <translation>Nimi</translation>
-    </message>
-    <message>
-        <source>Personal code</source>
-        <translation>Isikukood</translation>
-    </message>
-    <message>
-        <source>Card in reader</source>
-        <translation>Lugejas on kaart</translation>
-    </message>
-    <message>
-        <source>Auth certificate is</source>
-        <translation>Isikutuvastuse sertifikaat on</translation>
-    </message>
-    <message>
-        <source>Sign certificate is</source>
-        <translation>Allkirjastamise sertifikaat on</translation>
-    </message>
-    <message>
-        <source>valid</source>
-        <translation>kehtiv</translation>
-    </message>
-    <message>
-        <source>expired</source>
-        <translation>aegunud</translation>
-    </message>
-    <message>
-        <source>Open utility</source>
-        <translation>Ava haldusvahend</translation>
-    </message>
-    <message>
-        <source>Your certificates will expire soon</source>
-        <translation>Sertifikaadid hakkavad aeguma</translation>
-    </message>
-    <message>
-        <source>PIN is locked</source>
-        <translation>PIN on lukus</translation>
-    </message>
-    <message>
         <source>Unknown OS</source>
         <translation>Tundmatu operatsioonisüsteem</translation>
     </message>
@@ -362,6 +314,57 @@
     <message>
         <source>DIGI-ID</source>
         <translation>DIGI-ID</translation>
+    </message>
+</context>
+<context>
+    <name>TokenData</name>
+    <message>
+        <source>Company</source>
+        <translation>Asutus</translation>
+    </message>
+    <message>
+        <source>Register code</source>
+        <translation>Registrikood</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation>Nimi</translation>
+    </message>
+    <message>
+        <source>Personal code</source>
+        <translation>Isikukood</translation>
+    </message>
+    <message>
+        <source>Card in reader</source>
+        <translation>Lugejas on kaart</translation>
+    </message>
+    <message>
+        <source>Sign certificate is</source>
+        <translation>Allkirjastamise sertifikaat on</translation>
+    </message>
+    <message>
+        <source>Auth certificate is</source>
+        <translation>Isikutuvastuse sertifikaat on</translation>
+    </message>
+    <message>
+        <source>valid</source>
+        <translation>kehtiv</translation>
+    </message>
+    <message>
+        <source>Your certificates will expire soon</source>
+        <translation>Sertifikaadid hakkavad aeguma</translation>
+    </message>
+    <message>
+        <source>expired</source>
+        <translation>aegunud</translation>
+    </message>
+    <message>
+        <source>PIN is locked</source>
+        <translation>PIN on lukus</translation>
+    </message>
+    <message>
+        <source>Open utility</source>
+        <translation>Ava haldusvahend</translation>
     </message>
 </context>
 </TS>

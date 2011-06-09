@@ -30,17 +30,11 @@ struct ApplicationStruct;
 class QSslCertificate;
 class QStringList;
 class QUrl;
-class TokenData;
 
 class Common: public QtSingleApplication
 {
 	Q_OBJECT
 public:
-	enum CertType
-	{
-		AuthCert,
-		SignCert,
-	};
 	Common( int &argc, char **argv );
 	virtual ~Common();
 
@@ -57,7 +51,6 @@ public:
 	static bool startDetached( const QString &program );
 	static bool startDetached( const QString &program, const QStringList &arguments );
 	static QString tempFilename();
-	static QString tokenInfo( CertType type, const TokenData &data );
 
 public Q_SLOTS:
 	void browse( const QUrl &url );

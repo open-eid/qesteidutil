@@ -145,54 +145,6 @@
 <context>
     <name>Common</name>
     <message>
-        <source>Company</source>
-        <translation>Учереждение</translation>
-    </message>
-    <message>
-        <source>Register code</source>
-        <translation>Код регистра</translation>
-    </message>
-    <message>
-        <source>Name</source>
-        <translation>Имя</translation>
-    </message>
-    <message>
-        <source>Personal code</source>
-        <translation>Личный код</translation>
-    </message>
-    <message>
-        <source>Card in reader</source>
-        <translation>Карта в считывателе</translation>
-    </message>
-    <message>
-        <source>Auth certificate is</source>
-        <translation>Сертификаты подписи</translation>
-    </message>
-    <message>
-        <source>Sign certificate is</source>
-        <translation>Сертификаты подписи</translation>
-    </message>
-    <message>
-        <source>valid</source>
-        <translation>действительны</translation>
-    </message>
-    <message>
-        <source>expired</source>
-        <translation>устарели</translation>
-    </message>
-    <message>
-        <source>Open utility</source>
-        <translation>Открыть средство управления</translation>
-    </message>
-    <message>
-        <source>Your certificates will expire soon</source>
-        <translation>Сертификаты скоро будут недействительны</translation>
-    </message>
-    <message>
-        <source>PIN is locked</source>
-        <translation>PIN заблокирован</translation>
-    </message>
-    <message>
         <source>Unknown OS</source>
         <translation type="unfinished"></translation>
     </message>
@@ -362,6 +314,57 @@
     <message>
         <source>DIGI-ID</source>
         <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TokenData</name>
+    <message>
+        <source>Company</source>
+        <translation>Учереждение</translation>
+    </message>
+    <message>
+        <source>Register code</source>
+        <translation>Код регистра</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation>Имя</translation>
+    </message>
+    <message>
+        <source>Personal code</source>
+        <translation>Личный код</translation>
+    </message>
+    <message>
+        <source>Card in reader</source>
+        <translation>Карта в считывателе</translation>
+    </message>
+    <message>
+        <source>Sign certificate is</source>
+        <translation>Сертификаты подписи</translation>
+    </message>
+    <message>
+        <source>Auth certificate is</source>
+        <translation>Сертификаты подписи</translation>
+    </message>
+    <message>
+        <source>valid</source>
+        <translation>действительны</translation>
+    </message>
+    <message>
+        <source>Your certificates will expire soon</source>
+        <translation>Сертификаты скоро будут недействительны</translation>
+    </message>
+    <message>
+        <source>expired</source>
+        <translation>устарели</translation>
+    </message>
+    <message>
+        <source>PIN is locked</source>
+        <translation>PIN заблокирован</translation>
+    </message>
+    <message>
+        <source>Open utility</source>
+        <translation>Открыть средство управления</translation>
     </message>
 </context>
 </TS>
