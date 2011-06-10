@@ -20,7 +20,7 @@
     </message>
     <message>
         <source>Certificates (*.cer *.crt *.pem)</source>
-        <translation>Сертификаты (*.pem *.crt *.cer)</translation>
+        <translation>Сертификаты (*.cer *.crt *.pem)</translation>
     </message>
     <message>
         <source>Failed to save file</source>
