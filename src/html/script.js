@@ -622,7 +622,7 @@ function handleError(msg)
 		extender.closeLoading();
 		return;
 	}
-	if ( msg == "PIN1InvalidRetry" || msg == "PIN1Invalid" )
+	if ( msg == "PIN1InvalidRetry" || msg == "PIN1Invalid" || msg == "PIN1ValidateFailed" )
 	{
 		msg = "PIN1InvalidRetry";
 		var ret = esteidData.getPin1RetryCount( true );
