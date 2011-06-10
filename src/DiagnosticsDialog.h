@@ -24,6 +24,8 @@
 
 #include "ui_DiagnosticsDialog.h"
 
+#include <QPushButton>
+
 class DiagnosticsDialog: public QDialog, private Ui::DiagnosticsDialog
 {
 	Q_OBJECT
@@ -41,4 +43,5 @@ private:
 	QString getProcessor() const;
 	QString getReaderInfo();
 	QString getUserRights() const;
+	QPushButton *details;
 };

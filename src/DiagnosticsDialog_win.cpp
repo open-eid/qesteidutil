@@ -112,7 +112,7 @@ DiagnosticsDialog::DiagnosticsDialog( QWidget *parent )
 
 	diagnosticsText->setHtml( info );
 
-	buttonBox->addButton( tr( "More info" ), QDialogButtonBox::HelpRole );
+	details = buttonBox->addButton( tr( "More info" ), QDialogButtonBox::HelpRole );
 }
 
 QString DiagnosticsDialog::getRegistry( const QString &search ) const
@@ -252,4 +252,6 @@ void DiagnosticsDialog::showDetails()
 
 	if ( !ret.isEmpty() )
 		diagnosticsText->append( ret );
+
+	details->setDisabled( true );
 }

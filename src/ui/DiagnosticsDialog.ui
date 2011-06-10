@@ -24,7 +24,8 @@
 
 QPushButton { height: 25px; border-radius: 3px; font-family: Arial; font-size: 12px; width: 80px; border: 1px solid #1a4b79; color: #ffffff; background-image: url(:/html/images/button.png); }
 QPushButton::hover, QPushButton::focus { background-image: url(:/html/images/buttonSelected.png); border: 1px solid #ce911b; color: #00355f }
-</string>
+QPushButton:disabled
+{color: gray; }</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0">
