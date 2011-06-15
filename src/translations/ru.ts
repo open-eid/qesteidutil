@@ -31,11 +31,6 @@
         <source>Wrong PIN1 code.</source>
         <translation>Неверный PIN1 код.</translation>
     </message>
-    <message>
-        <source>Server sai vale arvu baite, samm: %1.
-Oodati: %2, saadi: %3</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>DiagnosticsDialog</name>
@@ -88,7 +83,7 @@ Oodati: %2, saadi: %3</source>
         <translation>Текстовые файлы (*.txt)</translation>
     </message>
     <message>
-        <source>Error occured</source>
+        <source>Error occurred</source>
         <translation>Возникла ошибка</translation>
     </message>
     <message>
@@ -216,6 +211,10 @@ Please wait...</source>
     <message>
         <source>For updating certificates please close all programs which are interacting with smartcard (qdigidocclient, qdigidoccrypto, Firefox, Safari, Internet Explorer...)&lt;br /&gt;After updating certificates it will no longer be possible to decrypt documents that were encrypted with the old certificate.&lt;br /&gt;Do you want to continue?</source>
         <translation>Для обновления сертификатов, пожалуйста, закройте все приложения, которые используют ID-карту (Клиент, Crypto, Firefox, Safari, Internet Explorer...)&lt;br /&gt;После обновления сертификатов расшифровка документов, зашифрованных с использованием старого сертификата, будет невозможна!&lt;br /&gt;Хотите продолжить?</translation>
+    </message>
+    <message>
+        <source>RSA pubkey error</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

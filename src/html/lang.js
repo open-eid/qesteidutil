@@ -123,7 +123,7 @@ var htmlStrings = {
 	"mobileStatus": new tr( "Staatus", "Mobile status", "Статус" ),
 	"mobileCertValid": new tr( "Sertifikaadid kehtivad kuni", "Certificates are valid till", "Сертификаты действителен до" ),
 	
-	"errorFound": new tr( "Tekkis viga: ", "Error occured: ", "Возникла ошибка:" ),
+	"errorFound": new tr( "Tekkis viga: ", "Error occurred: ", "Возникла ошибка:" ),
 	"loadEmail": new tr( "Laadin e-posti seadeid", "Loading e-mail settings", "Загружаю настройки эл. почты" ),
 	"activatingEmail": new tr( "Aktiveerin e-posti seadeid", "Activating e-mail settings", "настройки эл. почты" ),
 	"forwardFailed": new tr( "E-posti suunamise aktiveerimine ebaõnnestus.", "Failed activating e-mail forwards.", "Активация перенаправления с эл. почты провалилась." ),

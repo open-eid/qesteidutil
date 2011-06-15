@@ -31,11 +31,6 @@
         <source>Wrong PIN1 code.</source>
         <translation>Vale PIN1 kood.</translation>
     </message>
-    <message>
-        <source>Server sai vale arvu baite, samm: %1.
-Oodati: %2, saadi: %3</source>
-        <translation></translation>
-    </message>
 </context>
 <context>
     <name>DiagnosticsDialog</name>
@@ -68,7 +63,7 @@ Oodati: %2, saadi: %3</source>
         <translation>Teksti failid (*.txt)</translation>
     </message>
     <message>
-        <source>Error occured</source>
+        <source>Error occurred</source>
         <translation>Tekkis viga</translation>
     </message>
     <message>
@@ -216,6 +211,10 @@ Palun oodake...</translation>
     <message>
         <source>For updating certificates please close all programs which are interacting with smartcard (qdigidocclient, qdigidoccrypto, Firefox, Safari, Internet Explorer...)&lt;br /&gt;After updating certificates it will no longer be possible to decrypt documents that were encrypted with the old certificate.&lt;br /&gt;Do you want to continue?</source>
         <translation>Sertifikaatite uuendamiseks palun sulgege kõik rakendused, mis kasutavad ID-kaarti (Klient, Krüpto, Firefox, Safari, Internet Explorer...)&lt;br /&gt;Pärast sertifikaatide uuendamist ei ole võimalik enam dekrüpteerida vana sertifikaadiga krüpteeritud dokumente!&lt; br /&gt;Kas soovite jätkata sertifikaatide uuendamisega?</translation>
+    </message>
+    <message>
+        <source>RSA pubkey error</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

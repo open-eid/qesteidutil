@@ -105,5 +105,5 @@ void DiagnosticsDialog::save()
 	if( f.open( QIODevice::WriteOnly ) )
 		f.write( diagnosticsText->toPlainText().toUtf8() );
 	else
-		QMessageBox::warning( this, tr("Error occured"), tr("Failed write to file!") );
+		QMessageBox::warning( this, tr("Error occurred"), tr("Failed write to file!") );
 }

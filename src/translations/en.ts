@@ -31,12 +31,6 @@
         <source>Wrong PIN1 code.</source>
         <translation>Wrong PIN1 code.</translation>
     </message>
-    <message>
-        <source>Server sai vale arvu baite, samm: %1.
-Oodati: %2, saadi: %3</source>
-        <translation>Server got wrong byte size, step: %1.
-Expected: %2, got: %3</translation>
-    </message>
 </context>
 <context>
     <name>DiagnosticsDialog</name>
@@ -69,8 +63,8 @@ Expected: %2, got: %3</translation>
         <translation>Text files (*.txt)</translation>
     </message>
     <message>
-        <source>Error occured</source>
-        <translation>Error occured</translation>
+        <source>Error occurred</source>
+        <translation>Error occurred</translation>
     </message>
     <message>
         <source>Failed write to file!</source>
@@ -215,6 +209,10 @@ Please wait...</source>
     <message>
         <source>For updating certificates please close all programs which are interacting with smartcard (qdigidocclient, qdigidoccrypto, Firefox, Safari, Internet Explorer...)&lt;br /&gt;After updating certificates it will no longer be possible to decrypt documents that were encrypted with the old certificate.&lt;br /&gt;Do you want to continue?</source>
         <translation>For updating certificates please close all programs which are interacting with smartcard (Client, Crypto, Firefox, Safari, Internet Explorer...)&lt;br /&gt;After updating certificates it will no longer be possible to decrypt documents that were encrypted with the old certificate.&lt;br /&gt;Do you want to continue?</translation>
+    </message>
+    <message>
+        <source>RSA pubkey error</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
