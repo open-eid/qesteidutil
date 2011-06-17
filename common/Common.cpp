@@ -427,21 +427,22 @@ void Common::mailTo( const QUrl &url )
 		{}
 	}*/
 
+	bool status = false;
 	if( !thunderbird.isEmpty() )
 	{
-		if( p.startDetached( thunderbird, QStringList() << "-compose"
+		status = p.startDetached( thunderbird, QStringList() << "-compose"
 			<< QString( "subject='%1',attachment='%2'" )
 				.arg( url.queryItemValue( "subject" ) )
-				.arg( QUrl::fromLocalFile( url.queryItemValue( "attachment" ) ).toString() ) ) );
-			return;
+				.arg( QUrl::fromLocalFile( url.queryItemValue( "attachment" ) ).toString() ) );
 	}
 	else
 	{
-		if( p.startDetached( "xdg-email", QStringList()
-				<< "--subject" << url.queryItemValue( "subject" )
-				<< "--attach" << url.queryItemValue( "attachment" ) ) )
-			return;
+		status = p.startDetached( "xdg-email", QStringList()
+			<< "--subject" << url.queryItemValue( "subject" )
+			<< "--attach" << url.queryItemValue( "attachment" ) );
 	}
+	if( status )
+		return;
 #endif
 	QDesktopServices::openUrl( url );
 }
