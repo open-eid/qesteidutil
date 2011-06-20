@@ -43,7 +43,8 @@ public:
 	explicit QCSP( QObject *parent = 0 );
 	~QCSP();
 
-	QStringList containers();
+	QStringList containers( SslCertificate::KeyUsage usage );
+	QByteArray decrypt( const QByteArray &data );
 	PinStatus login( const TokenData &t );
 	TokenData selectCert( const QString &cert, SslCertificate::KeyUsage usage );
 	QByteArray sign( int method, const QByteArray &digest );

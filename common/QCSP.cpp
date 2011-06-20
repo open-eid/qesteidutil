@@ -85,6 +85,25 @@ QCSP::~QCSP()
 	delete d;
 }
 
+QByteArray QCSP::decrypt( const QByteArray &data )
+{
+	HCRYPTKEY key = 0;
+	if( !CryptGetUserKey( d->h, AT_KEYEXCHANGE, &key ) )
+		return QByteArray();
+
+	QByteArray reverse;
+	for( QByteArray::const_iterator i = data.constEnd(); i != data.constBegin(); )
+	{
+		--i;
+		reverse += *i;
+	}
+	DWORD size = reverse.size();
+	bool result = CryptDecrypt( key, 0, true, 0, (BYTE*)reverse.data(), &size );
+	CryptDestroyKey( key );
+
+	return result ? reverse : QByteArray();
+}
+
 QCSP::PinStatus QCSP::login( const TokenData &t )
 {
 	if( !d->h )
@@ -96,7 +115,7 @@ QCSP::PinStatus QCSP::login( const TokenData &t )
 	return CryptSetProvParam( d->h, PP_SIGNATURE_PIN, (BYTE*)dialog.text().utf16(), 0 ) ? PinOK : PinUnknown;
 }
 
-QStringList QCSP::containers()
+QStringList QCSP::containers( SslCertificate::KeyUsage usage )
 {
 	qWarning() << "Start enumerationg providers";
 	QHash<QString,QPair<QString,QString> > certs;
@@ -148,15 +167,24 @@ QStringList QCSP::containers()
 
 			qWarning() << "Geting provider" << prov << "container" << container << "key";
 			HCRYPTKEY key = 0;
-			if( !CryptGetUserKey( h, AT_SIGNATURE, &key ) )
+			if( !CryptGetUserKey( h, usage == SslCertificate::NonRepudiation ? AT_SIGNATURE : AT_KEYEXCHANGE, &key ) )
 				continue;
 
 			qWarning() << "Reading provider" << prov << "container" << container << "cert";
 			SslCertificate cert( QSslCertificate( QCSPPrivate::keyParam( key, KP_CERTIFICATE, 0 ), QSsl::Der ) );
 			CryptDestroyKey( key );
 
-			if( !cert.isNull() )
+			if( cert.isNull() )
+				continue;
+
+			switch( cert.type() )
 			{
+			case SslCertificate::EstEidType:
+			case SslCertificate::EstEidTestType:
+			case SslCertificate::DigiIDType:
+			case SslCertificate::DigiIDTestType:
+				continue;
+			default:
 				qWarning() << "Adding provider" << prov << "container" << container << "list";
 				certs.insert( cert.subjectInfo( QSslCertificate::CommonName ), QPair<QString,QString>( prov, container ) );
 			}
@@ -183,7 +211,7 @@ TokenData QCSP::selectCert( const QString &cn, SslCertificate::KeyUsage usage )
 		return t;
 
 	HCRYPTKEY key = 0;
-	if( !CryptGetUserKey( d->h, AT_SIGNATURE, &key ) )
+	if( !CryptGetUserKey( d->h, usage == SslCertificate::NonRepudiation ? AT_SIGNATURE : AT_KEYEXCHANGE, &key ) )
 		return t;
 
 	SslCertificate cert = QSslCertificate( d->keyParam( key, KP_CERTIFICATE, 0 ), QSsl::Der );
