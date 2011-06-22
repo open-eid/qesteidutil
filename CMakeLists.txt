@@ -29,7 +29,7 @@ endif(MSVC)
 
 include(${QT_USE_FILE})
 add_subdirectory( qtsingleapplication )
-set( USE_SECURTIY YES )
+set( USE_SECURITY YES )
 add_subdirectory( common )
 include( common/resources.cmake )
 

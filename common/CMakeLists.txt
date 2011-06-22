@@ -75,7 +75,7 @@ if( APPLE AND USE_SECURITY )
 			include_directories( ${dir}/Headers )
 		endforeach( dir )
 	endif( Security_FRAMEWORKS )
-	addDefines( -DUSE_SECURITY )
+	add_definitions( -DUSE_SECURITY )
 endif( APPLE AND USE_SECURITY )
 
 add_library( qdigidoccommon STATIC ${SOURCES} )
