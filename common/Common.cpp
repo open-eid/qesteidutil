@@ -234,11 +234,6 @@ void Common::initDigiDoc()
 
 	QDesktopServices::setUrlHandler( "browse", this, "browse" );
 	QDesktopServices::setUrlHandler( "mailto", this, "mailTo" );
-
-#if defined(Q_OS_LINUX)
-	QFile::setEncodingFunction( fileEncoder );
-	QFile::setDecodingFunction( fileDecoder );
-#endif
 }
 
 bool Common::event( QEvent *e )

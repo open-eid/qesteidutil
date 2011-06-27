@@ -60,10 +60,7 @@ protected:
 	void initDigiDoc();
 
 private:
-#if defined(Q_OS_LINUX)
-	static QByteArray fileEncoder( const QString &filename ) { return filename.toUtf8(); }
-	static QString fileDecoder( const QByteArray &filename ) { return QString::fromUtf8( filename ); }
-#elif defined(Q_OS_MAC)
+#if defined(Q_OS_MAC)
 	void initMacEvents();
 	void deinitMacEvents();
 	ApplicationStruct *macEvents;
