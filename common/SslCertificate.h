@@ -66,7 +66,7 @@ public:
 		TempelType,
 		UnknownType,
 	};
-
+	SslCertificate(){};
 	SslCertificate( const QSslCertificate &cert );
 
 	QByteArray	authorityKeyIdentifier() const;
