@@ -53,6 +53,19 @@
 Common::Common( int &argc, char **argv )
 :	QtSingleApplication( argc, argv )
 {
+	setStyleSheet(
+		"QDialogButtonBox { dialogbuttonbox-buttons-have-icons: 0; }\n" );
+	QPalette p = palette();
+	p.setBrush( QPalette::Link, QBrush( "#509B00" ) );
+	p.setBrush( QPalette::LinkVisited, QBrush( "#509B00" ) );
+	setPalette( p );
+
+	qRegisterMetaType<QSslCertificate>("QSslCertificate");
+	qRegisterMetaType<TokenData>("TokenData");
+
+	QDesktopServices::setUrlHandler( "browse", this, "browse" );
+	QDesktopServices::setUrlHandler( "mailto", this, "mailTo" );
+
 #if defined(Q_OS_WIN)
 	AllowSetForegroundWindow( ASFW_ANY );
 #elif defined(Q_OS_MAC)
@@ -218,22 +231,6 @@ QString Common::helpUrl()
 	if( lang == "en" ) return "http://support.sk.ee/eng/";
 	if( lang == "ru" ) return "http://support.sk.ee/ru/";
 	return "http://support.sk.ee";
-}
-
-void Common::initDigiDoc()
-{
-	setStyleSheet(
-		"QDialogButtonBox { dialogbuttonbox-buttons-have-icons: 0; }\n" );
-	QPalette p = palette();
-	p.setBrush( QPalette::Link, QBrush( "#509B00" ) );
-	p.setBrush( QPalette::LinkVisited, QBrush( "#509B00" ) );
-	setPalette( p );
-
-	qRegisterMetaType<QSslCertificate>("QSslCertificate");
-	qRegisterMetaType<TokenData>("TokenData");
-
-	QDesktopServices::setUrlHandler( "browse", this, "browse" );
-	QDesktopServices::setUrlHandler( "mailto", this, "mailTo" );
 }
 
 bool Common::event( QEvent *e )

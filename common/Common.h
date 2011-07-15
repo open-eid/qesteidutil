@@ -56,9 +56,6 @@ public Q_SLOTS:
 	void browse( const QUrl &url );
 	void mailTo( const QUrl &url );
 
-protected:
-	void initDigiDoc();
-
 private:
 #if defined(Q_OS_MAC)
 	void initMacEvents();
