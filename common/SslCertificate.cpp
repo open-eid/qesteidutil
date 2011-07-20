@@ -308,7 +308,8 @@ SslCertificate::CertType SslCertificate::type() const
 		return EstEidType;
 	if( p.indexOf( QRegExp( "^1\\.3\\.6\\.1\\.4\\.1\\.10015\\.1\\.2.*" ) ) != -1 )
 		return DigiIDType;
-	if( p.indexOf( QRegExp( "^1\\.3\\.6\\.1\\.4\\.1\\.10015\\.1\\.3.*" ) ) != -1 )
+	if( p.indexOf( QRegExp( "^1\\.3\\.6\\.1\\.4\\.1\\.10015\\.1\\.3.*" ) ) != -1 ||
+		p.indexOf( QRegExp( "^1\\.3\\.6\\.1\\.4\\.1\\.10015\\.11\\.1.*" ) ) != -1 )
 		return MobileIDType;
 	if( p.indexOf( QRegExp( "^1\\.3\\.6\\.1\\.4\\.1\\.10015\\.3\\.1.*" ) ) != -1 )
 		return EstEidTestType;
