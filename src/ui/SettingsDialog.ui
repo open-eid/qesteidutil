@@ -40,7 +40,33 @@
     </widget>
    </item>
    <item row="0" column="1">
-    <widget class="QComboBox" name="updateInterval"/>
+    <widget class="QComboBox" name="updateInterval">
+     <item>
+      <property name="text">
+       <string/>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Once a day</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Once a week</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Once a month</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Remove</string>
+      </property>
+     </item>
+    </widget>
    </item>
    <item row="3" column="0" colspan="2">
     <widget class="QDialogButtonBox" name="buttonBox">
@@ -55,24 +81,7 @@
   </layout>
  </widget>
  <resources/>
- <connections>
-  <connection>
-   <sender>buttonBox</sender>
-   <signal>clicked(QAbstractButton*)</signal>
-   <receiver>SettingsDialog</receiver>
-   <slot>buttonClicked(QAbstractButton*)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>248</x>
-     <y>254</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>157</x>
-     <y>274</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
  <slots>
   <slot>buttonClicked(QAbstractButton*)</slot>
  </slots>

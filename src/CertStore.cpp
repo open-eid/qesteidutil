@@ -103,7 +103,7 @@ bool CertStore::add( const QSslCertificate &cert, const QString &card )
 	return result;
 }
 
-Qt::HANDLE CertStore::find( const QSslCertificate &cert ) const
+bool CertStore::find( const QSslCertificate &cert ) const
 {
 	if( !d->s )
 		return false;
@@ -114,27 +114,8 @@ Qt::HANDLE CertStore::find( const QSslCertificate &cert ) const
 	PCCERT_CONTEXT result = CertFindCertificateInStore( d->s, X509_ASN_ENCODING,
 		0, CERT_FIND_SUBJECT_CERT, context->pCertInfo, 0 );
 	CertFreeCertificateContext( context );
-	return Qt::HANDLE(result);
+	return result;
 }
-
-Qt::HANDLE CertStore::findKey( const QSslCertificate &cert, bool silent )
-{
-	PCCERT_CONTEXT c = d->certContext( cert );
-	if( !c )
-		return 0;
-
-	DWORD flags = CRYPT_ACQUIRE_ONLY_NCRYPT_KEY_FLAG|CRYPT_ACQUIRE_COMPARE_KEY_FLAG;
-	if( silent ) flags |= CRYPT_ACQUIRE_SILENT_FLAG;
-
-	NCRYPT_KEY_HANDLE key = 0;
-	DWORD spec = 0;
-	BOOL ncrypt = false;
-	CryptAcquireCertificatePrivateKey( c, flags, 0, &key, &spec, &ncrypt );
-	CertFreeCertificateContext( c );
-
-	return Qt::HANDLE(key);
-}
-
 QList<QSslCertificate> CertStore::list() const
 {
 	QList<QSslCertificate> list;

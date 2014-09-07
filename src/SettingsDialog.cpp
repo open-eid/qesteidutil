@@ -18,58 +18,72 @@
  */
 
 #include "SettingsDialog.h"
+#include "ui_SettingsDialog.h"
+
+#include "CertStore.h"
+#include "QSmartCard.h"
+
+#include <common/SslCertificate.h>
 
 #include <QtCore/QProcess>
-#include <QtWidgets/QMessageBox>
 #include <QtWidgets/QPushButton>
 
 #include <qt_windows.h>
 
-SettingsDialog::SettingsDialog( QWidget *parent )
-:	QDialog( parent )
-,	update(0)
-,	sched(0)
+static void runPrivileged( const QString &program, const QString &arguments )
 {
-	setupUi( this );
+	ShellExecuteW( 0, L"runas", PCWSTR(program.utf16()), PCWSTR(arguments.utf16()), 0, SW_HIDE );
+}
+
+SettingsDialog::SettingsDialog( const QSmartCardData &data, QWidget *parent )
+	: QDialog( parent )
+{
+	Ui::SettingsDialog ui;
+	ui.setupUi( this );
 	setWindowModality( Qt::WindowModal );
 	setAttribute( Qt::WA_DeleteOnClose, true );
-	updateInterval->addItem( "" );
-	updateInterval->addItem( tr("Once a day"), "-daily" );
-	updateInterval->addItem( tr("Once a week"), "-weekly" );
-	updateInterval->addItem( tr("Once a month"), "-monthly" );
-	updateInterval->addItem( tr("Remove"), "-remove" );
-	update = buttonBox->addButton( tr("Check for updates and close utility"), QDialogButtonBox::ActionRole );
-	sched = buttonBox->addButton( tr("Run Task Scheduler"), QDialogButtonBox::ActionRole );
+	QPushButton *update = ui.buttonBox->addButton( tr("Check for updates and close utility"), QDialogButtonBox::ActionRole );
+	QPushButton *sched = ui.buttonBox->addButton( tr("Run Task Scheduler"), QDialogButtonBox::ActionRole );
+	QPushButton *clean = nullptr;
+	QString personalCode = data.signCert().subjectInfo("serialNumber");
+	if( !personalCode.isEmpty() )
+		clean = ui.buttonBox->addButton( tr("Clean certs"), QDialogButtonBox::ActionRole );
 	int selected = QProcess::execute( "id-updater", QStringList() << "-status" );
-	updateInterval->setCurrentIndex( selected > 0 && selected < 4 ? selected : 2 );
-}
-
-void SettingsDialog::buttonClicked( QAbstractButton *button )
-{
-	if( button == buttonBox->button( QDialogButtonBox::Close ) )
-		done( 0 );
-	else if( button == update )
+	ui.updateInterval->setCurrentIndex( selected > 0 && selected < 4 ? selected : 2 );
+	connect( ui.buttonBox, &QDialogButtonBox::clicked, [=](QAbstractButton *button ) {
+		if( button == ui.buttonBox->button( QDialogButtonBox::Close ) )
+			done( 0 );
+		else if( button == update )
+		{
+			QProcess::startDetached( "id-updater" );
+			done( 1 );
+			qApp->exit();
+		}
+		else if( button == sched )
+			runPrivileged( "control", "schedtasks" );
+		else if( button == clean )
+		{
+			CertStore s;
+			for( const SslCertificate &c: s.list())
+			{
+				if( c.subjectInfo( "serialNumber" ) == personalCode )
+					s.remove( c );
+			}
+			s.add( data.authCert(), data.card() );
+			s.add( data.signCert(), data.card() );
+			done( 0 );
+		}
+	});
+	connect( ui.updateInterval,
+		static_cast<void (QComboBox::*)(int)>(&QComboBox::activated), [=]( int index )
 	{
-		QProcess::startDetached( "id-updater" );
-		done( 1 );
-		qApp->exit();
-	}
-	else if( button == sched )
-		runPrivileged( "control", QStringList() << "schedtasks" );
-}
-
-void SettingsDialog::on_updateInterval_activated( int index )
-{
-	if( index == 0 )
-		return;
-	runPrivileged( "id-updater",
-		QStringList() << updateInterval->itemData( index ).toString() );
-}
-
-bool SettingsDialog::runPrivileged( const QString &program, const QStringList &arguments )
-{
-	QString params = arguments.join(" ");
-	HINSTANCE result = ShellExecuteW( 0, L"runas", PCWSTR(program.utf16()), PCWSTR(params.utf16()), 0, SW_HIDE );
-	return int(result) > 32;
-	return QProcess::startDetached( program, arguments );
+		switch( index )
+		{
+		case 1: return runPrivileged( "id-updater", "-daily" );
+		case 2: return runPrivileged( "id-updater", "-weekly" );
+		case 3: return runPrivileged( "id-updater", "-monthly" );
+		case 4: return runPrivileged( "id-updater", "-remove" );
+		default: break;
+		}
+	});
 }

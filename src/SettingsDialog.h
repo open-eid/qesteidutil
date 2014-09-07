@@ -19,20 +19,13 @@
 
 #pragma once
 
-#include "ui_SettingsDialog.h"
+#include <QDialog>
 
-class SettingsDialog: public QDialog, private Ui::SettingsDialog
+class QSmartCardData;
+
+class SettingsDialog: public QDialog
 {
 	Q_OBJECT
 public:
-	SettingsDialog( QWidget *parent = 0 );
-
-private slots:
-	void buttonClicked( QAbstractButton *button );
-	void on_updateInterval_activated( int index );
-
-private:
-	bool runPrivileged( const QString &program, const QStringList &arguments );
-
-	QPushButton *update, *sched;
+	SettingsDialog( const QSmartCardData &data, QWidget *parent = 0 );
 };

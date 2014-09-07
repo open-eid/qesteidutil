@@ -883,7 +883,7 @@ void MainWindow::showSettings()
 {
 #if defined(Q_OS_WIN)
 	if( d->headerSettings->isVisible() )
-		(new SettingsDialog( this ) )->exec();
+		(new SettingsDialog( d->smartcard->data(), this ) )->exec();
 #endif
 }
 

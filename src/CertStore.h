@@ -19,10 +19,9 @@
 
 #pragma once
 
-#include <Qt>
-
 class CertStorePrivate;
 class QSslCertificate;
+class QString;
 template <class T> class QList;
 
 class CertStore
@@ -32,9 +31,7 @@ public:
 	~CertStore();
 
 	bool add( const QSslCertificate &cert, const QString &card );
-	Qt::HANDLE find( const QSslCertificate &cert ) const;
-	QSslCertificate find( const QString &key ) const;
-	Qt::HANDLE findKey( const QSslCertificate &cert , bool silent = false );
+	bool find( const QSslCertificate &cert ) const;
 	QList<QSslCertificate> list() const;
 	bool remove( const QSslCertificate &cert );
 
