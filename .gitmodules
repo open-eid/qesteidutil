@@ -1,0 +1,7 @@
+[submodule "cmake"]
+	path = cmake
+	url = ../cmake
+[submodule "smartcardpp"]
+	path = smartcardpp
+	url = ../smartcardpp
+	branch = 3.8
