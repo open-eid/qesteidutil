@@ -21,8 +21,8 @@ else()
 endif()
 
 add_subdirectory( smartcardpp )
+include( common/BreakPad.cmake )
 add_subdirectory( common )
-include( breakpad/BreakPad.cmake )
 
 configure_file( src/translations/tr.qrc tr.qrc COPYONLY )
 set( RC_FILES ${CMAKE_BINARY_DIR}/tr.qrc src/qesteidutil.qrc )

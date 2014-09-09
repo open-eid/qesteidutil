@@ -22,7 +22,7 @@
 #include "MainWindow.h"
 
 #ifdef BREAKPAD
-#include <breakpad/QBreakPad.h>
+#include <common/QBreakPad.h>
 #include <QtCore/QVariant>
 #endif
 
