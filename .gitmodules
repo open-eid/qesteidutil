@@ -5,3 +5,6 @@
 	path = smartcardpp
 	url = ../smartcardpp
 	branch = 3.8
+[submodule "common"]
+	path = common
+	url = ../qt-common
