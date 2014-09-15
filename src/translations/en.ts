@@ -719,6 +719,34 @@ To use Mobiil-ID it is needed to use a SIM card that supports this feature. If s
     </message>
 </context>
 <context>
+    <name>SSLConnect</name>
+    <message>
+        <source>Failed to connect to host. Are you connected to the internet?</source>
+        <translation>Failed to connect to host. Are you connected to the internet?</translation>
+    </message>
+    <message>
+        <source>Loading Email info</source>
+        <translation>Loading Email info</translation>
+    </message>
+    <message>
+        <source>Loading Mobile info</source>
+        <translatorcomment>Loading Mobile info</translatorcomment>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Downloading picture</source>
+        <translation>Downloading picture</translation>
+    </message>
+    <message>
+        <source>SSL context is missing</source>
+        <translation>SSL context is missing</translation>
+    </message>
+    <message>
+        <source>Certificate is empty</source>
+        <translation>Certificate is empty</translation>
+    </message>
+</context>
+<context>
     <name>SettingsDialog</name>
     <message>
         <source>Settings</source>
@@ -751,6 +779,10 @@ To use Mobiil-ID it is needed to use a SIM card that supports this feature. If s
     <message>
         <source>Check for updates and close utility</source>
         <translation>Check for updates and close utility</translation>
+    </message>
+    <message>
+        <source>Clean certs</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

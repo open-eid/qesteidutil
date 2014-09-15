@@ -719,6 +719,33 @@ Mobiil-ID kasutamiseks on vajalik uus SIM-kaart, mille sa saad endale mobiilside
     </message>
 </context>
 <context>
+    <name>SSLConnect</name>
+    <message>
+        <source>Failed to connect to host. Are you connected to the internet?</source>
+        <translation>Puudub internetiühendus!</translation>
+    </message>
+    <message>
+        <source>Loading Email info</source>
+        <translation>Laadin e-posti seadeid</translation>
+    </message>
+    <message>
+        <source>Loading Mobile info</source>
+        <translation>Laadin Molbiil-ID seadeid</translation>
+    </message>
+    <message>
+        <source>Downloading picture</source>
+        <translation>Laadin pilti</translation>
+    </message>
+    <message>
+        <source>SSL context is missing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Certificate is empty</source>
+        <translation>Sertifikaat on tühi</translation>
+    </message>
+</context>
+<context>
     <name>SettingsDialog</name>
     <message>
         <source>Settings</source>
@@ -751,6 +778,10 @@ Mobiil-ID kasutamiseks on vajalik uus SIM-kaart, mille sa saad endale mobiilside
     <message>
         <source>Check for updates and close utility</source>
         <translation>Kontrolli uuendusi ja sulge haldusvahend</translation>
+    </message>
+    <message>
+        <source>Clean certs</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>
