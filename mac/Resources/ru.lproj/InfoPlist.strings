@@ -1,0 +1,4 @@
+/* Localized versions of Info.plist keys */
+
+CFBundleName = "Oбсуживание ID-карты";
+CFBundleDisplayName = "Oбсуживание ID-карты";

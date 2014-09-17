@@ -1,0 +1,2429 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QWidget" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>585</width>
+    <height>535</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>585</width>
+    <height>535</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>585</width>
+    <height>535</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>ID-card utility</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">#centralwidget { background-image: url(:/images/id_kaart_background.png); }</string>
+  </property>
+  <layout class="QVBoxLayout" name="MainLayout">
+   <property name="spacing">
+    <number>0</number>
+   </property>
+   <property name="margin">
+    <number>0</number>
+   </property>
+   <item>
+    <widget class="QWidget" name="centralwidget" native="true">
+     <property name="styleSheet">
+      <string notr="true">* { font: 12px &quot;Arial, Liberation Sans&quot;; color: #355670; }
+
+QPushButton {
+border-radius: 4px;
+background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #436CA1, stop: 0.75 #00355F);
+color: white;
+min-height: 20px;
+padding: 2px 4px;
+margin: 2px;
+border: 1px solid #1a4b79;
+}
+QPushButton:hover, QPushButton:focus, QPushButton:checked {
+background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #F3C863, stop:0.28 #FADF91, stop:1 #ECAB2A);
+color: #00355f;
+border: 1px solid #ce911b;
+}
+#buttonCert, #buttonEmail, #buttonMobile, #buttonPuk {
+font-weight: bold;
+font-size: 14px;
+text-align: left;
+}
+#authRevoke, #signRevoke {
+font-weight: bold
+}
+#pukLink1, #pukLink2, #changePin1InfoPinLink, #changePin2InfoPinLink, #savePicture, #loadPicture {
+background-color: transparent;
+border: 0px;
+border-radius: 0px;
+color: #509B00;
+text-align: left;
+text-decoration: underline;
+margin: 0px;
+padding: 0px;
+}
+#loadPicture {
+text-align: center;
+}
+#cardInfo, #personalInfo {
+background-color: rgba( 255, 255, 255, 178 );
+border: 1px solid #cddbeb;
+border-radius: 3px;
+}
+#personalInfo QLabel { color: #668696; font-weight: bold; }
+#personalInfo #pictureFrame
+{ font-size: 13px; font-weight: normal; border: 1px solid black; background: #FFFFFF; }
+
+#personalInfo #personalName, #personalInfo #personalRegNr, 
+#personalInfo #personalCode, #personalInfo #personalBirth, 
+#personalInfo #personalCitizen, #personalInfo #personalEmail 
+{ color: black; }
+
+#headerDiagnostics, #headerSettings, #headerHelp, #headerAbout {
+color: #afc6d1;
+font-weight: bold;
+background: transparent;
+height: 15px;
+border: 0px;
+}
+#headerLine1, #headerLine2, #headerLine3 { background-color: #325e80; }
+
+#cards, #languages
+{
+background-color: #00355F;
+border: 0px;
+margin-right: 0px;
+color: white;
+}
+#cards QListView, #languages QListView
+{
+background-color: white;
+border: 0px;
+color: #355670;
+}
+#cards::down-arrow, #languages::down-arrow
+{ image: url(&quot;:/images/languages_button.png&quot;); }
+#cards::drop-down, #languages::drop-down
+{ border: 0px; }
+
+#loading { color: #54859b; font-weight: bold; font-size: 16px; }
+#cardInfo { padding: 8px 15px; }
+
+#dataWidget { padding-top: 5px; }
+
+#signLabel, #authLabel, #emailLabel, #emailStatusLabel, #mobileLabel, #mobileStatusLabel, #PUKLabel, #PIN1ChangeLabel, #PIN2ChangeLabel, #PUKChangeLabel
+{
+color: #54859b;
+font-weight: bold;
+font-size: 16px;
+padding-bottom: 5px;
+}
+
+#authTill, #signTill { color: black; font-weight: bold;  }
+#authValidity, #signValidity { color: #509b00; font-weight: bold; }
+#authInValidity, #signInValidity, #authCertExpired, #signCertExpired, #pukLocked { color: #e80303; font-weight: bold; }
+#authCertBlocked, #signCertBlocked {
+font-size: 14px;
+font-weight: bold;
+color: #e80303;
+border: 1px solid #e80303;
+border-radius: 5px;
+padding: 5px;
+}
+
+#loading {
+background-color: rgba(255,255,255,200);
+border: 1px solid #cddbeb;
+border-radius: 5px;
+color: #509b00;
+font-weight: bold;
+font-size: 18px;
+}
+
+#savePicture {
+background-color: rgba(255,255,255,200);
+text-align: center;
+}</string>
+     </property>
+     <layout class="QGridLayout" name="centralWidgetLayout">
+      <property name="leftMargin">
+       <number>18</number>
+      </property>
+      <property name="topMargin">
+       <number>15</number>
+      </property>
+      <property name="rightMargin">
+       <number>18</number>
+      </property>
+      <property name="bottomMargin">
+       <number>15</number>
+      </property>
+      <property name="spacing">
+       <number>0</number>
+      </property>
+      <item row="0" column="0" colspan="2">
+       <layout class="QHBoxLayout" name="headerLayout">
+        <property name="spacing">
+         <number>5</number>
+        </property>
+        <item>
+         <spacer name="headerLeftSpacer">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>0</width>
+            <height>0</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QPushButton" name="headerDiagnostics">
+          <property name="text">
+           <string>Diagnostics</string>
+          </property>
+          <property name="flat">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="Line" name="headerLine1">
+          <property name="maximumSize">
+           <size>
+            <width>1</width>
+            <height>15</height>
+           </size>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Plain</enum>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="headerSettings">
+          <property name="text">
+           <string>Settings</string>
+          </property>
+          <property name="flat">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="Line" name="headerLine2">
+          <property name="maximumSize">
+           <size>
+            <width>1</width>
+            <height>15</height>
+           </size>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Plain</enum>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="headerHelp">
+          <property name="text">
+           <string>Help</string>
+          </property>
+          <property name="flat">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="Line" name="headerLine3">
+          <property name="maximumSize">
+           <size>
+            <width>1</width>
+            <height>15</height>
+           </size>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Plain</enum>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="headerAbout">
+          <property name="text">
+           <string>About</string>
+          </property>
+          <property name="flat">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="ComboBox" name="cards">
+          <property name="minimumSize">
+           <size>
+            <width>100</width>
+            <height>20</height>
+           </size>
+          </property>
+          <property name="accessibleName">
+           <string>Cards</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="ComboBox" name="languages">
+          <property name="minimumSize">
+           <size>
+            <width>75</width>
+            <height>20</height>
+           </size>
+          </property>
+          <property name="accessibleName">
+           <string>Languages</string>
+          </property>
+          <item>
+           <property name="text">
+            <string notr="true">Estonian</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string notr="true">English</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string notr="true">Russian</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item row="1" column="1">
+       <spacer name="headerSpacer">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Fixed</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>387</width>
+          <height>34</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="2" column="0" rowspan="2">
+       <widget class="QWidget" name="buttonFrame" native="true">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>223</height>
+         </size>
+        </property>
+        <layout class="QVBoxLayout" name="buttonFrameLayout">
+         <property name="spacing">
+          <number>2</number>
+         </property>
+         <property name="margin">
+          <number>0</number>
+         </property>
+         <item>
+          <spacer name="buttonSpacer">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>80</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QPushButton" name="buttonCert">
+           <property name="text">
+            <string>Certificates</string>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+           <property name="checked">
+            <bool>true</bool>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="buttonEmail">
+           <property name="text">
+            <string>@eesti.ee e-mail</string>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="buttonMobile">
+           <property name="text">
+            <string>Mobiil-ID</string>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="buttonPuk">
+           <property name="text">
+            <string>PUK code</string>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item row="2" column="1" rowspan="2">
+       <layout class="QVBoxLayout" name="frameInfoLayout">
+        <property name="spacing">
+         <number>5</number>
+        </property>
+        <property name="leftMargin">
+         <number>15</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QFrame" name="personalInfo">
+          <property name="accessibleName">
+           <string>Personal info</string>
+          </property>
+          <layout class="QGridLayout" name="personalInfoLayout">
+           <property name="leftMargin">
+            <number>15</number>
+           </property>
+           <property name="verticalSpacing">
+            <number>0</number>
+           </property>
+           <item row="0" column="0">
+            <layout class="QHBoxLayout" name="personalNameLayout">
+             <item>
+              <widget class="QLabel" name="personalNameLabel">
+               <property name="text">
+                <string>Name:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="personalName">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item row="1" column="0">
+            <layout class="QHBoxLayout" name="personalCodeLayout">
+             <item>
+              <widget class="QLabel" name="personalCodeLabel">
+               <property name="text">
+                <string>Personal Code:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="personalCode">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item row="2" column="0">
+            <layout class="QHBoxLayout" name="personalBirthLayout">
+             <item>
+              <widget class="QLabel" name="personalBirthLabel">
+               <property name="text">
+                <string>Birth:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="personalBirth">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item row="3" column="0">
+            <layout class="QHBoxLayout" name="personalCitizenLayout">
+             <item>
+              <widget class="QLabel" name="personalCitizenLabel">
+               <property name="text">
+                <string>Citizenship:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="personalCitizen">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item row="4" column="0">
+            <layout class="QHBoxLayout" name="personalEmailLayout">
+             <item>
+              <widget class="QLabel" name="personalEmailLabel">
+               <property name="text">
+                <string>E-mail:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="personalEmail">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item row="5" column="0">
+            <spacer name="personalInfoSpacer">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>0</width>
+               <height>0</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item row="0" column="1" rowspan="6">
+            <widget class="QLabel" name="pictureFrame">
+             <property name="minimumSize">
+              <size>
+               <width>90</width>
+               <height>120</height>
+              </size>
+             </property>
+             <property name="accessibleName">
+              <string>Picture</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <spacer name="frameInfoSpacer">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>0</width>
+            <height>0</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QLabel" name="cardInfo">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>85</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>85</height>
+           </size>
+          </property>
+          <property name="accessibleName">
+           <string>Card info</string>
+          </property>
+          <property name="openExternalLinks">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item row="4" column="0" colspan="2">
+       <widget class="QStackedWidget" name="dataWidget">
+        <property name="currentIndex">
+         <number>0</number>
+        </property>
+        <widget class="QLabel" name="pageEmpty">
+         <property name="pixmap">
+          <pixmap resource="../../common/images/common_images.qrc">:/images/EL_Regionaalareng_horisontaal.png</pixmap>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignBottom|Qt::AlignRight|Qt::AlignTrailing</set>
+         </property>
+        </widget>
+        <widget class="QWidget" name="pageCertificates">
+         <layout class="QHBoxLayout" name="pageCertificatesLayout">
+          <property name="spacing">
+           <number>2</number>
+          </property>
+          <property name="margin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QWidget" name="authFrame" native="true">
+            <property name="maximumSize">
+             <size>
+              <width>272</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <layout class="QGridLayout" name="authFrameLayout">
+             <property name="margin">
+              <number>0</number>
+             </property>
+             <property name="spacing">
+              <number>1</number>
+             </property>
+             <item row="0" column="0" colspan="4">
+              <widget class="QLabel" name="authLabel">
+               <property name="text">
+                <string>Authentication certificate</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0" colspan="4">
+              <layout class="QHBoxLayout" name="authValidityLayout">
+               <property name="spacing">
+                <number>3</number>
+               </property>
+               <item>
+                <widget class="QLabel" name="authValidityLabel">
+                 <property name="text">
+                  <string>Certificate is</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="authValidity">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="authInValidity">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item row="2" column="0" colspan="4">
+              <layout class="QHBoxLayout" name="authTillLayout">
+               <property name="spacing">
+                <number>3</number>
+               </property>
+               <item>
+                <widget class="QLabel" name="authTillLabel">
+                 <property name="text">
+                  <string>Certificate is valid till</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="authTill">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item row="3" column="0" colspan="4">
+              <widget class="QLabel" name="authCertExpired">
+               <property name="text">
+                <string>Certificate is expired</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="0" colspan="4">
+              <widget class="QLabel" name="authUsageCount">
+               <property name="wordWrap">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="0" colspan="4">
+              <spacer name="authSpacer">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>0</width>
+                 <height>0</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item row="6" column="0" colspan="4">
+              <widget class="QLabel" name="authCertBlocked">
+               <property name="text">
+                <string>PIN1 is blocked, because PIN1 was inserted 3 times incorrectly.</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+               <property name="wordWrap">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="7" column="0" colspan="4">
+              <widget class="QPushButton" name="updateCert">
+               <property name="text">
+                <string>Update certificates</string>
+               </property>
+               <property name="flat">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="8" column="0">
+              <widget class="QPushButton" name="authChangePin">
+               <property name="text">
+                <string>Change PIN1</string>
+               </property>
+               <property name="flat">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="8" column="1">
+              <widget class="QPushButton" name="authRevoke">
+               <property name="text">
+                <string>Revoke blocking</string>
+               </property>
+               <property name="flat">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="8" column="2">
+              <widget class="QPushButton" name="authCert">
+               <property name="text">
+                <string>View certificate</string>
+               </property>
+               <property name="flat">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="8" column="3">
+              <spacer name="authButtonSpacer">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>0</width>
+                 <height>0</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="Line" name="certsLine">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QWidget" name="signFrame" native="true">
+            <property name="maximumSize">
+             <size>
+              <width>272</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <layout class="QGridLayout" name="signFrameLayout">
+             <property name="margin">
+              <number>0</number>
+             </property>
+             <property name="spacing">
+              <number>1</number>
+             </property>
+             <item row="0" column="0" colspan="4">
+              <widget class="QLabel" name="signLabel">
+               <property name="text">
+                <string>Signature certificate</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0" colspan="4">
+              <layout class="QHBoxLayout" name="signValidityLayout">
+               <property name="spacing">
+                <number>3</number>
+               </property>
+               <item>
+                <widget class="QLabel" name="signValidityLabel">
+                 <property name="text">
+                  <string>Certificate is</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="signValidity">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="signInValidity">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item row="2" column="0" colspan="4">
+              <layout class="QHBoxLayout" name="signTillLayout">
+               <property name="spacing">
+                <number>3</number>
+               </property>
+               <item>
+                <widget class="QLabel" name="signTillLabel">
+                 <property name="text">
+                  <string>Certificate is valid till</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="signTill">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item row="3" column="0" colspan="4">
+              <widget class="QLabel" name="signCertExpired">
+               <property name="text">
+                <string>Certificate is expired</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="0" colspan="4">
+              <widget class="QLabel" name="signUsageCount">
+               <property name="wordWrap">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="0" colspan="4">
+              <spacer name="signSpacer">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>0</width>
+                 <height>0</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item row="6" column="0" colspan="4">
+              <widget class="QLabel" name="signCertBlocked">
+               <property name="text">
+                <string>PIN2 is blocked, because PIN2 was inserted 3 times incorrectly.</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+               <property name="wordWrap">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="7" column="0">
+              <widget class="QPushButton" name="signChangePin">
+               <property name="text">
+                <string>Change PIN2</string>
+               </property>
+               <property name="flat">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="7" column="1">
+              <widget class="QPushButton" name="signRevoke">
+               <property name="text">
+                <string>Revoke blocking</string>
+               </property>
+               <property name="flat">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="7" column="2">
+              <widget class="QPushButton" name="signCert">
+               <property name="text">
+                <string>View certificate</string>
+               </property>
+               <property name="flat">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="7" column="3">
+              <spacer name="signButtonSpacer">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>0</width>
+                 <height>0</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="pageEmail">
+         <layout class="QVBoxLayout" name="pageEmailLayout">
+          <property name="margin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QLabel" name="emailLabel">
+            <property name="text">
+             <string>@eesti.ee e-mail</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="emailStatus">
+            <property name="wordWrap">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QWidget" name="checkEmailFrame" native="true">
+            <layout class="QHBoxLayout" name="checkEmailFrameLayout">
+             <property name="margin">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QPushButton" name="checkEmail">
+               <property name="text">
+                <string>Check your @eesti.ee email settings</string>
+               </property>
+               <property name="flat">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="checkEmailSpacer">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>310</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="emailInfo">
+            <property name="text">
+             <string>For more detailed official email address forwarding, please visit &lt;a href=&quot;https://www.eesti.ee/eng/teemad/kodanik/riigiportaali_abi/ametliku_e_posti_seadistamine&quot;&gt;eesti.ee&lt;/a&gt;</string>
+            </property>
+            <property name="wordWrap">
+             <bool>true</bool>
+            </property>
+            <property name="openExternalLinks">
+             <bool>true</bool>
+            </property>
+            <property name="textInteractionFlags">
+             <set>Qt::LinksAccessibleByKeyboard|Qt::LinksAccessibleByMouse</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QWidget" name="activateEmailFrame" native="true">
+            <layout class="QGridLayout" name="activateEmailFrameLayout">
+             <property name="margin">
+              <number>0</number>
+             </property>
+             <item row="0" column="0" colspan="2">
+              <widget class="QLabel" name="activateEmailLabel">
+               <property name="text">
+                <string>Email address where your @eesti.ee emails will be forwarded</string>
+               </property>
+               <property name="buddy">
+                <cstring>activateEmailAddress</cstring>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="2">
+              <widget class="QLineEdit" name="activateEmailAddress"/>
+             </item>
+             <item row="1" column="0">
+              <widget class="QPushButton" name="activateEmail">
+               <property name="text">
+                <string>Activate @eesti.ee email</string>
+               </property>
+               <property name="flat">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1" colspan="2">
+              <spacer name="activateEmailSpacer">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>0</width>
+                 <height>0</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <spacer name="emailSpacer">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>74</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="pageMobile">
+         <layout class="QVBoxLayout" name="pageMobileLayout">
+          <property name="margin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QLabel" name="mobileLabel">
+            <property name="text">
+             <string>Mobiil-ID</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="mobileStatus">
+            <property name="wordWrap">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QWidget" name="checkMobileFrame" native="true">
+            <layout class="QGridLayout" name="checkMobileFrameLayout">
+             <property name="margin">
+              <number>0</number>
+             </property>
+             <item row="0" column="0" colspan="2">
+              <widget class="QLabel" name="mobileInfo">
+               <property name="text">
+                <string>Mobiil-ID is possibility to use mobile phone instead of ID-card for identification and digital signing.&lt;br /&gt;More info from &lt;a href=&quot;http://mobiil.id.ee&quot;&gt;mobiil.id.ee&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;
+To use Mobiil-ID it is needed to use a SIM card that supports this feature. If such a SIM card is already purchased, then it has to be activated.</string>
+               </property>
+               <property name="wordWrap">
+                <bool>true</bool>
+               </property>
+               <property name="openExternalLinks">
+                <bool>true</bool>
+               </property>
+               <property name="textInteractionFlags">
+                <set>Qt::LinksAccessibleByKeyboard|Qt::LinksAccessibleByMouse</set>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QPushButton" name="checkMobile">
+               <property name="text">
+                <string>Check Mobiil-ID status</string>
+               </property>
+               <property name="flat">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <spacer name="checkMobileSpacer">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>385</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QWidget" name="mobileActivateFrame" native="true">
+            <layout class="QHBoxLayout" name="mobileActivateLayout">
+             <property name="margin">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QPushButton" name="mobileActivate">
+               <property name="text">
+                <string>Activate Mobiil-ID</string>
+               </property>
+               <property name="flat">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="mobileActivateSpacer">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>434</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <spacer name="mobileSpacer">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>115</width>
+              <height>15</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="pagePuk">
+         <layout class="QGridLayout" name="pagePukLayout">
+          <property name="margin">
+           <number>0</number>
+          </property>
+          <item row="0" column="0" colspan="2">
+           <widget class="QLabel" name="PUKLabel">
+            <property name="text">
+             <string>PUK code</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0" colspan="2">
+           <widget class="QLabel" name="pukInfo">
+            <property name="text">
+             <string>&lt;p&gt;PUK code is used for unblocking certificates, when PIN1 or PIN2 has been entered 3 times incorrectly.&lt;/p&gt;
+&lt;p&gt;PUK code is written in the envelope, that is given with the ID-card.&lt;/p&gt;</string>
+            </property>
+            <property name="wordWrap">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0" colspan="2">
+           <widget class="QLabel" name="pukLocked">
+            <property name="text">
+             <string>&lt;h3&gt;PUK code is blocked!&lt;/h3&gt;
+For getting new PUK code for your ID-card, please visit service center where you can get the new codes. &lt;a href=&quot;http://www.politsei.ee/et/nouanded/id-kaart-ja-pass/kui-id-kaardi-koodid-kaovad/&quot;&gt;Additional information&lt;/a&gt;</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+            <property name="wordWrap">
+             <bool>true</bool>
+            </property>
+            <property name="openExternalLinks">
+             <bool>true</bool>
+            </property>
+            <property name="textInteractionFlags">
+             <set>Qt::LinksAccessibleByKeyboard|Qt::LinksAccessibleByMouse</set>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QPushButton" name="pukChange">
+            <property name="text">
+             <string>Change PUK</string>
+            </property>
+            <property name="flat">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <spacer name="pukChangeSpacer">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>435</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="4" column="0">
+           <widget class="QPushButton" name="pukLink1">
+            <property name="text">
+             <string>Change PIN1 using PUK code</string>
+            </property>
+            <property name="flat">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="0">
+           <widget class="QPushButton" name="pukLink2">
+            <property name="text">
+             <string>Change PIN2 using PUK code</string>
+            </property>
+            <property name="flat">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="0">
+           <spacer name="pukSpacert">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>65</width>
+              <height>7</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="pagePin1Change">
+         <layout class="QHBoxLayout" name="pagePin1ChangeLayout">
+          <property name="margin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QStackedWidget" name="changePin1Info">
+            <property name="minimumSize">
+             <size>
+              <width>267</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>267</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="currentIndex">
+             <number>2</number>
+            </property>
+            <widget class="QWidget" name="changePin1InfoPin">
+             <layout class="QVBoxLayout" name="changePin1InfoPinLayout">
+              <property name="margin">
+               <number>0</number>
+              </property>
+              <item>
+               <widget class="QLabel" name="changePin1InfoPinText">
+                <property name="text">
+                 <string>&lt;h3&gt;Change PIN1 code&lt;/h3&gt;
+&lt;p&gt;New PIN1 must be different from current PIN1.&lt;/p&gt;
+&lt;p&gt;PIN1 code is used for accessing identification certificates.&lt;/p&gt;
+&lt;p&gt;If PIN1 is inserted 3 times inccorectly, then identification certificate will be blocked and it will be impossible to use ID-card to verify identification, until it is unblocked via PUK code.&lt;/p&gt;</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+                </property>
+                <property name="wordWrap">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="changePin1InfoPinLink">
+                <property name="text">
+                 <string>Change PIN1 using PUK code</string>
+                </property>
+                <property name="flat">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+            <widget class="QLabel" name="changePin1InfoPuk">
+             <property name="text">
+              <string>&lt;h3&gt;Change PIN1 code&lt;/h3&gt;
+&lt;p&gt;New PIN1 must be different from current PIN1.&lt;/p&gt;
+&lt;p&gt;PIN1 code is used for accessing identification certificates.&lt;/p&gt;
+&lt;p&gt;If you have forgotten PIN1, but know PUK, then here you can enter new PIN1.&lt;/p&gt;</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+             </property>
+             <property name="wordWrap">
+              <bool>true</bool>
+             </property>
+            </widget>
+            <widget class="QLabel" name="changePin1InfoUnblock">
+             <property name="text">
+              <string>&lt;h3&gt;Authentication certificate is blocked.&lt;/h3&gt;
+&lt;p&gt;To unblock certificate you have to enter PUK code.&lt;/p&gt;
+&lt;p&gt;You can find your PUK code inside ID-card codes envelope.&lt;/p&gt;
+&lt;p&gt;New PIN1 must be different from current PIN1.&lt;/p&gt;
+&lt;p&gt;If you do not know PUK code for your ID-card, please visit service center where you can get the new codes.&lt;/p&gt;</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+             </property>
+             <property name="wordWrap">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </widget>
+          </item>
+          <item>
+           <widget class="Line" name="changePin1Line">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QStackedWidget" name="changePin1Stack">
+            <property name="currentIndex">
+             <number>0</number>
+            </property>
+            <widget class="QWidget" name="changePin1Reader">
+             <layout class="QGridLayout" name="changePin1ReaderLayout">
+              <property name="margin">
+               <number>0</number>
+              </property>
+              <property name="spacing">
+               <number>5</number>
+              </property>
+              <item row="0" column="0" colspan="3">
+               <widget class="QLabel" name="changePin1ValidateLabel">
+                <property name="text">
+                 <string>Current PIN1 code</string>
+                </property>
+                <property name="buddy">
+                 <cstring>changePin1Validate</cstring>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0" colspan="3">
+               <widget class="QLineEdit" name="changePin1Validate">
+                <property name="maxLength">
+                 <number>12</number>
+                </property>
+                <property name="echoMode">
+                 <enum>QLineEdit::Password</enum>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="0" colspan="3">
+               <widget class="QLabel" name="changePin1NewLabel">
+                <property name="text">
+                 <string>New PIN1 code</string>
+                </property>
+                <property name="buddy">
+                 <cstring>changePin1New</cstring>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="0" colspan="3">
+               <widget class="QLineEdit" name="changePin1New">
+                <property name="maxLength">
+                 <number>12</number>
+                </property>
+                <property name="echoMode">
+                 <enum>QLineEdit::Password</enum>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="0" colspan="3">
+               <widget class="QLabel" name="changePin1RepeatLabel">
+                <property name="text">
+                 <string>Repeat new PIN1 code</string>
+                </property>
+                <property name="buddy">
+                 <cstring>changePin1Repeat</cstring>
+                </property>
+               </widget>
+              </item>
+              <item row="5" column="0" colspan="3">
+               <widget class="QLineEdit" name="changePin1Repeat">
+                <property name="maxLength">
+                 <number>12</number>
+                </property>
+                <property name="echoMode">
+                 <enum>QLineEdit::Password</enum>
+                </property>
+               </widget>
+              </item>
+              <item row="6" column="0">
+               <widget class="QPushButton" name="changePin1Change">
+                <property name="focusPolicy">
+                 <enum>Qt::StrongFocus</enum>
+                </property>
+                <property name="text">
+                 <string>Change</string>
+                </property>
+                <property name="default">
+                 <bool>true</bool>
+                </property>
+                <property name="flat">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="6" column="1">
+               <widget class="QPushButton" name="changePin1Cancel">
+                <property name="focusPolicy">
+                 <enum>Qt::StrongFocus</enum>
+                </property>
+                <property name="text">
+                 <string>Cancel</string>
+                </property>
+                <property name="default">
+                 <bool>true</bool>
+                </property>
+                <property name="flat">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="6" column="2">
+               <spacer name="changePin1Spacer">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>0</width>
+                  <height>0</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </widget>
+            <widget class="QWidget" name="changePin1Pinpad">
+             <layout class="QGridLayout" name="changePin1PinpadLayout">
+              <property name="margin">
+               <number>0</number>
+              </property>
+              <item row="0" column="0" colspan="3">
+               <widget class="QStackedWidget" name="changePin1PinpadInfo">
+                <widget class="QLabel" name="changePin1PinpadInfoPin">
+                 <property name="text">
+                  <string>To change PIN code on PinPad reader old PIN code have to be entered first and then new PIN code twice.</string>
+                 </property>
+                 <property name="wordWrap">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="changePin1PinpadInfoPuk">
+                 <property name="text">
+                  <string>To change PIN code with PUK on PinPad reader the PUK code have to be entered first and then PIN code twice.</string>
+                 </property>
+                 <property name="wordWrap">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="changePin1PinpadInfoUnblock">
+                 <property name="text">
+                  <string>To unblock PIN code on PinPad reader the PUK code have to be entered first and then PIN code twice.</string>
+                 </property>
+                 <property name="wordWrap">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QPushButton" name="changePin1PinpadChange">
+                <property name="text">
+                 <string>Change with PinPad</string>
+                </property>
+                <property name="flat">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QPushButton" name="changePin1PinpadCancel">
+                <property name="text">
+                 <string>Cancel</string>
+                </property>
+                <property name="flat">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="2">
+               <spacer name="changePin1PinpadSpacer">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>96</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </widget>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="pagePin2Change">
+         <layout class="QHBoxLayout" name="pagePin2Change_2">
+          <property name="margin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QStackedWidget" name="changePin2Info">
+            <property name="minimumSize">
+             <size>
+              <width>267</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>267</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="currentIndex">
+             <number>0</number>
+            </property>
+            <widget class="QWidget" name="changePin2InfoPin">
+             <layout class="QVBoxLayout" name="changePin2InfoPinLayout">
+              <property name="margin">
+               <number>0</number>
+              </property>
+              <item>
+               <widget class="QLabel" name="changePin2InfoPinText">
+                <property name="text">
+                 <string>&lt;h3&gt;Change PIN2 code&lt;/h3&gt;
+&lt;p&gt;New PIN2 must be different from current PIN2.&lt;/p&gt;
+&lt;p&gt;PIN2 code is used to digitally sign documents.&lt;/p&gt;
+&lt;p&gt;If PIN2 is inserted 3 times inccorectly, then signing certificate will be blocked and it will be impossible to use ID-card to digital signing, until it is unblocked via PUK code.&lt;/p&gt;</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+                </property>
+                <property name="wordWrap">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="changePin2InfoPinLink">
+                <property name="text">
+                 <string>Change PIN2 using PUK code</string>
+                </property>
+                <property name="flat">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+            <widget class="QLabel" name="changePin2InfoPuk">
+             <property name="text">
+              <string>&lt;h3&gt;Change PIN2 code&lt;/h3&gt;
+&lt;p&gt;New PIN2 must be different from current PIN2.&lt;/p&gt;
+&lt;p&gt;PIN2 code is used to digitally sign documents.&lt;/p&gt;
+&lt;p&gt;If you have forgotten PIN2, but know PUK, then here you can enter new PIN2.&lt;/p&gt;</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+             </property>
+             <property name="wordWrap">
+              <bool>true</bool>
+             </property>
+            </widget>
+            <widget class="QLabel" name="changePin2InfoUnblock">
+             <property name="text">
+              <string>&lt;h3&gt;Signing certificate is blocked.&lt;/h3&gt;
+&lt;p&gt;To unblock certificate you have to enter PUK code.&lt;/p&gt;
+&lt;p&gt;You can find your PUK code inside ID-card codes envelope.&lt;/p&gt;
+&lt;p&gt;New PIN2 must be different from current PIN2.&lt;/p&gt;
+&lt;p&gt;If you do not know PUK code for your ID-card, please visit service center where you can get the new codes.&lt;/p&gt;</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+             </property>
+             <property name="wordWrap">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </widget>
+          </item>
+          <item>
+           <widget class="Line" name="changePin2Line">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QStackedWidget" name="changePin2Stack">
+            <property name="currentIndex">
+             <number>0</number>
+            </property>
+            <widget class="QWidget" name="changePin2Reader">
+             <layout class="QGridLayout" name="changePin2ReaderLayout">
+              <property name="margin">
+               <number>0</number>
+              </property>
+              <property name="spacing">
+               <number>5</number>
+              </property>
+              <item row="0" column="0" colspan="3">
+               <widget class="QLabel" name="changePin2ValidateLabel">
+                <property name="text">
+                 <string>Current PIN2 code</string>
+                </property>
+                <property name="buddy">
+                 <cstring>changePin2Validate</cstring>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0" colspan="3">
+               <widget class="QLineEdit" name="changePin2Validate">
+                <property name="maxLength">
+                 <number>12</number>
+                </property>
+                <property name="echoMode">
+                 <enum>QLineEdit::Password</enum>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="0" colspan="3">
+               <widget class="QLabel" name="changePin2NewLabel">
+                <property name="text">
+                 <string>New PIN2 code</string>
+                </property>
+                <property name="buddy">
+                 <cstring>changePin2New</cstring>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="0" colspan="3">
+               <widget class="QLineEdit" name="changePin2New">
+                <property name="maxLength">
+                 <number>12</number>
+                </property>
+                <property name="echoMode">
+                 <enum>QLineEdit::Password</enum>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="0" colspan="3">
+               <widget class="QLabel" name="changePin2RepeatLabel">
+                <property name="text">
+                 <string>Repeat new PIN2 code</string>
+                </property>
+                <property name="buddy">
+                 <cstring>changePin2Repeat</cstring>
+                </property>
+               </widget>
+              </item>
+              <item row="5" column="0" colspan="3">
+               <widget class="QLineEdit" name="changePin2Repeat">
+                <property name="maxLength">
+                 <number>12</number>
+                </property>
+                <property name="echoMode">
+                 <enum>QLineEdit::Password</enum>
+                </property>
+               </widget>
+              </item>
+              <item row="6" column="0">
+               <widget class="QPushButton" name="changePin2Change">
+                <property name="focusPolicy">
+                 <enum>Qt::StrongFocus</enum>
+                </property>
+                <property name="text">
+                 <string>Change</string>
+                </property>
+                <property name="default">
+                 <bool>true</bool>
+                </property>
+                <property name="flat">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="6" column="1">
+               <widget class="QPushButton" name="changePin2Cancel">
+                <property name="focusPolicy">
+                 <enum>Qt::StrongFocus</enum>
+                </property>
+                <property name="text">
+                 <string>Cancel</string>
+                </property>
+                <property name="default">
+                 <bool>true</bool>
+                </property>
+                <property name="flat">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="6" column="2">
+               <spacer name="changePin2Spacer">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>0</width>
+                  <height>0</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </widget>
+            <widget class="QWidget" name="changePin2Pinpad">
+             <layout class="QGridLayout" name="changePin2PinpadLayout">
+              <property name="margin">
+               <number>0</number>
+              </property>
+              <item row="0" column="0" colspan="3">
+               <widget class="QStackedWidget" name="changePin2PinpadInfo">
+                <widget class="QLabel" name="changePin2PinpadInfoPin">
+                 <property name="text">
+                  <string>To change PIN code on PinPad reader old PIN code have to be entered first and then new PIN code twice.</string>
+                 </property>
+                 <property name="wordWrap">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="changePin2PinpadInfoPuk">
+                 <property name="text">
+                  <string>To change PIN code with PUK on PinPad reader the PUK code have to be entered first and then PIN code twice.</string>
+                 </property>
+                 <property name="wordWrap">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="changePin2PinpadInfoUnblock">
+                 <property name="text">
+                  <string>To unblock PIN code on PinPad reader the PUK code have to be entered first and then PIN code twice.</string>
+                 </property>
+                 <property name="wordWrap">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QPushButton" name="changePin2PinpadChange">
+                <property name="text">
+                 <string>Change with PinPad</string>
+                </property>
+                <property name="flat">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QPushButton" name="changePin2PinpadCancel">
+                <property name="text">
+                 <string>Cancel</string>
+                </property>
+                <property name="flat">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="2">
+               <spacer name="changePin2PinpadSpacer">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>0</width>
+                  <height>0</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </widget>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="pagePukChange">
+         <layout class="QHBoxLayout" name="pagePukChangeLayout">
+          <property name="margin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QLabel" name="changePukInfo">
+            <property name="minimumSize">
+             <size>
+              <width>267</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>267</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>&lt;h3&gt;Change PUK code&lt;/h3&gt;
+&lt;p&gt;If you forget PUK code or certificates remain unblocked, then it is needed to turn to service provider to get yout ID-card working again.&lt;/p&gt;</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+            </property>
+            <property name="wordWrap">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="Line" name="changePukLine">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QStackedWidget" name="changePukStack">
+            <property name="currentIndex">
+             <number>0</number>
+            </property>
+            <widget class="QWidget" name="changePukReader">
+             <layout class="QGridLayout" name="changePukReaderLayout">
+              <property name="margin">
+               <number>0</number>
+              </property>
+              <property name="spacing">
+               <number>5</number>
+              </property>
+              <item row="0" column="0" colspan="3">
+               <widget class="QLabel" name="changePukValidateLabel">
+                <property name="text">
+                 <string>Current PUK code</string>
+                </property>
+                <property name="buddy">
+                 <cstring>changePukValidate</cstring>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0" colspan="3">
+               <widget class="QLineEdit" name="changePukValidate">
+                <property name="maxLength">
+                 <number>12</number>
+                </property>
+                <property name="echoMode">
+                 <enum>QLineEdit::Password</enum>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="0" colspan="3">
+               <widget class="QLabel" name="changePukNewLabel">
+                <property name="text">
+                 <string>New PUK code</string>
+                </property>
+                <property name="buddy">
+                 <cstring>changePukNew</cstring>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="0" colspan="3">
+               <widget class="QLineEdit" name="changePukNew">
+                <property name="maxLength">
+                 <number>12</number>
+                </property>
+                <property name="echoMode">
+                 <enum>QLineEdit::Password</enum>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="0" colspan="3">
+               <widget class="QLabel" name="changePukRepeatLabel">
+                <property name="text">
+                 <string>Repeat new PUK code</string>
+                </property>
+                <property name="buddy">
+                 <cstring>changePukRepeat</cstring>
+                </property>
+               </widget>
+              </item>
+              <item row="5" column="0" colspan="3">
+               <widget class="QLineEdit" name="changePukRepeat">
+                <property name="maxLength">
+                 <number>12</number>
+                </property>
+                <property name="echoMode">
+                 <enum>QLineEdit::Password</enum>
+                </property>
+               </widget>
+              </item>
+              <item row="6" column="0">
+               <widget class="QPushButton" name="changePukChange">
+                <property name="focusPolicy">
+                 <enum>Qt::StrongFocus</enum>
+                </property>
+                <property name="text">
+                 <string>Change</string>
+                </property>
+                <property name="default">
+                 <bool>true</bool>
+                </property>
+                <property name="flat">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="6" column="1">
+               <widget class="QPushButton" name="changePukCancel">
+                <property name="focusPolicy">
+                 <enum>Qt::StrongFocus</enum>
+                </property>
+                <property name="text">
+                 <string>Cancel</string>
+                </property>
+                <property name="default">
+                 <bool>true</bool>
+                </property>
+                <property name="flat">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="6" column="2">
+               <spacer name="changePukSpacer">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>0</width>
+                  <height>0</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </widget>
+            <widget class="QWidget" name="changePukPinpad">
+             <layout class="QGridLayout" name="changePukPinpadLayout">
+              <property name="margin">
+               <number>0</number>
+              </property>
+              <item row="0" column="0" colspan="3">
+               <widget class="QLabel" name="changePukPinpadInfo">
+                <property name="text">
+                 <string>To change PUK code on PinPad reader old PUK code have to be entered first and then new PUK code twice.</string>
+                </property>
+                <property name="wordWrap">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QPushButton" name="changePukPinpadChange">
+                <property name="text">
+                 <string>Change with PinPad</string>
+                </property>
+                <property name="flat">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QPushButton" name="changePukPinpadCancel">
+                <property name="text">
+                 <string>Cancel</string>
+                </property>
+                <property name="flat">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="2">
+               <spacer name="changePukPinpadSpacer">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>122</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </widget>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>ComboBox</class>
+   <extends>QComboBox</extends>
+   <header location="global">common/ComboBox.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="../../common/images/common_images.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>headerAbout</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>showAbout()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>390</x>
+     <y>39</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>292</x>
+     <y>267</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>headerDiagnostics</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>showDiagnostics()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>218</x>
+     <y>39</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>292</x>
+     <y>267</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>headerHelp</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>showHelp()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>334</x>
+     <y>39</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>292</x>
+     <y>267</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>headerSettings</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>showSettings()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>287</x>
+     <y>39</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>292</x>
+     <y>267</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>changePin1Validate</sender>
+   <signal>returnPressed()</signal>
+   <receiver>changePin1New</receiver>
+   <slot>setFocus()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>377</x>
+     <y>375</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>377</x>
+     <y>429</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>changePin1New</sender>
+   <signal>returnPressed()</signal>
+   <receiver>changePin1Repeat</receiver>
+   <slot>setFocus()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>377</x>
+     <y>429</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>377</x>
+     <y>484</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>changePin1Repeat</sender>
+   <signal>returnPressed()</signal>
+   <receiver>changePin1Change</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>377</x>
+     <y>484</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>347</x>
+     <y>519</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>changePin2Validate</sender>
+   <signal>returnPressed()</signal>
+   <receiver>changePin2New</receiver>
+   <slot>setFocus()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>377</x>
+     <y>354</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>377</x>
+     <y>408</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>changePin2New</sender>
+   <signal>returnPressed()</signal>
+   <receiver>changePin2Repeat</receiver>
+   <slot>setFocus()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>377</x>
+     <y>408</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>377</x>
+     <y>463</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>changePin2Repeat</sender>
+   <signal>returnPressed()</signal>
+   <receiver>changePin2Change</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>377</x>
+     <y>463</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>347</x>
+     <y>490</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>changePukValidate</sender>
+   <signal>returnPressed()</signal>
+   <receiver>changePukNew</receiver>
+   <slot>setFocus()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>85</x>
+     <y>325</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>85</x>
+     <y>335</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>changePukNew</sender>
+   <signal>returnPressed()</signal>
+   <receiver>changePukRepeat</receiver>
+   <slot>setFocus()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>85</x>
+     <y>335</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>85</x>
+     <y>345</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>changePukRepeat</sender>
+   <signal>returnPressed()</signal>
+   <receiver>changePukChange</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>85</x>
+     <y>345</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>55</x>
+     <y>350</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonCert</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>pageButtonClicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>83</x>
+     <y>199</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>292</x>
+     <y>267</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonEmail</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>pageButtonClicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>83</x>
+     <y>231</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>292</x>
+     <y>267</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonMobile</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>pageButtonClicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>83</x>
+     <y>263</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>292</x>
+     <y>267</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonPuk</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>pageButtonClicked()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>83</x>
+     <y>295</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>292</x>
+     <y>267</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>showSettings()</slot>
+  <slot>showDiagnostics()</slot>
+  <slot>showHelp()</slot>
+  <slot>showAbout()</slot>
+  <slot>pageButtonClicked()</slot>
+ </slots>
+</ui>

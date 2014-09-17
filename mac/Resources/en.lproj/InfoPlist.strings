@@ -1,0 +1,4 @@
+/* Localized versions of Info.plist keys */
+
+CFBundleName = "ID-card utility";
+CFBundleDisplayName = "ID-card utility";

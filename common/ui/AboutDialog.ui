@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>AboutDialog</class>
+ <widget class="QDialog" name="AboutDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>673</width>
+    <height>516</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>About</string>
+  </property>
+  <layout class="QVBoxLayout" name="mainLayout">
+   <item>
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <property name="elideMode">
+      <enum>Qt::ElideMiddle</enum>
+     </property>
+     <widget class="QWidget" name="aboutTab">
+      <attribute name="title">
+       <string>About</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="aboutLayout">
+       <item>
+        <widget class="QLabel" name="elLogo">
+         <property name="pixmap">
+          <pixmap resource="../images/common_images.qrc">:/images/EL_Regionaalareng_horisontaal.png</pixmap>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="version">
+         <property name="textFormat">
+          <enum>Qt::RichText</enum>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+         <property name="openExternalLinks">
+          <bool>true</bool>
+         </property>
+         <property name="textInteractionFlags">
+          <set>Qt::TextBrowserInteraction</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label">
+         <property name="text">
+          <string>&lt;p&gt;Estonian ID-software is released by Information Systems's Auhtority, developed by AS Sertifitseerimiskeskus&lt;br /&gt;
+Contact for assistance by email &lt;a href=&quot;mailto:abi@id.ee&quot;&gt;abi@id.ee&lt;/a&gt; or call 1777 (only from Estonia), (+372) 677 3377 when calling from abroad.&lt;/p&gt;
+Additional licenses and components</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QTextBrowser" name="licenses">
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+         <property name="html">
+          <string notr="true">&lt;p align=&quot;center&quot;&gt;&lt;b&gt;Qt cross-platform application and UI framework&lt;/b&gt;&lt;br /&gt;GNU Lesser General Public License (LGPL) version 2.1&lt;br /&gt;&lt;a href=&quot;http://qt-project.org/products/licensing&quot;&gt;http://qt-project.org/products/licensing&lt;/a&gt;&lt;/p&gt;
+&lt;p align=&quot;center&quot;&gt;&lt;b&gt;The OpenSSL project&lt;/b&gt;&lt;br /&gt;This product includes software developed by the OpenSSL Project for use in the OpenSSL Toolkit (http://www.openssl.org/)&lt;br /&gt;&lt;a href=&quot;http://www.openssl.org/source/license.html&quot;&gt;http://www.openssl.org/source/license.html&lt;/a&gt; &lt;/p&gt;
+&lt;p align=&quot;center&quot;&gt;&lt;b&gt;OpenLDAP community developed LDAP software&lt;/b&gt;&lt;br /&gt;The OpenLDAP Public License&lt;br /&gt;&lt;a href=&quot;http://www.openldap.org/software/release/license.html&quot;&gt;http://www.openldap.org/software/release/license.html&lt;/a&gt; &lt;/p&gt;
+&lt;p align=&quot;center&quot;&gt;&lt;b&gt;libdigidoc&lt;/b&gt;&lt;br /&gt;GNU Lesser General Public License (LGPL) version 2.1&lt;br /&gt;&lt;a href=&quot;http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html&quot;&gt;http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html&lt;/a&gt; &lt;/p&gt;
+&lt;p align=&quot;center&quot;&gt;&lt;b&gt;libdigidocpp&lt;/b&gt;&lt;br /&gt;GNU Lesser General Public License (LGPL) version 2.1&lt;br /&gt;&lt;a href=&quot;http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html&quot;&gt;http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html&lt;/a&gt; &lt;/p&gt;
+&lt;p align=&quot;center&quot;&gt;&lt;b&gt;libxml The XML C parser and toolkit of Gnome&lt;/b&gt;&lt;br /&gt;MIT License&lt;br /&gt;&lt;a href=&quot;http://www.opensource.org/licenses/mit-license.html&quot;&gt;http://www.opensource.org/licenses/mit-license.html&lt;/a&gt; &lt;/p&gt;
+&lt;p align=&quot;center&quot;&gt;&lt;b&gt;zlib A Massively Spiffy Yet Delicately Unobtrusive Compression Library&lt;/b&gt;&lt;br /&gt;&lt;a href=&quot;http://zlib.net/zlib_license.html&quot;&gt;http://zlib.net/zlib_license.html&lt;/a&gt; &lt;/p&gt;
+&lt;p align=&quot;center&quot;&gt;&lt;b&gt;Xerces-C++ is a validating XML parser written in a portable subset of C++&lt;/b&gt;&lt;br /&gt;Apache Software License, Version 2.0&lt;br /&gt;&lt;a href=&quot;http://www.apache.org/licenses/LICENSE-2.0.html&quot;&gt;http://www.apache.org/licenses/LICENSE-2.0.html&lt;/a&gt; &lt;/p&gt;
+&lt;p align=&quot;center&quot;&gt;&lt;b&gt;Apache XML Security for C++&lt;/b&gt;&lt;br /&gt;Apache Software License, Version 2.0&lt;br /&gt;&lt;a href=&quot;http://www.apache.org/licenses/LICENSE-2.0.html&quot;&gt;http://www.apache.org/licenses/LICENSE-2.0.html&lt;/a&gt; &lt;/p&gt;
+&lt;p align=&quot;center&quot;&gt;&lt;b&gt;XSD: XML Data Binding for C++&lt;/b&gt;&lt;br /&gt;GNU General Public License (GPL), version 2&lt;br /&gt;﻿ Free/Libre and Open Source Software (FLOSS) exception&lt;br /&gt;&lt;a href=&quot;http://www.codesynthesis.com/products/xsd/license.xhtml&quot;&gt;http://www.codesynthesis.com/products/xsd/license.xhtml&lt;/a&gt;&lt;br /&gt;&lt;a href=&quot;http://www.codesynthesis.com/projects/xsd/FLOSSE&quot;&gt;http://www.codesynthesis.com/projects/xsd/FLOSSE&lt;/a&gt;&lt;/p&gt;
+&lt;p align=&quot;center&quot;&gt;&lt;b&gt;smartcardpp&lt;/b&gt;&lt;br /&gt;GNU Lesser General Public License (LGPL) version 2.1&lt;br /&gt;New BSD License&lt;br /&gt;&lt;a href=&quot;http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html&quot;&gt;http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html&lt;/a&gt;&lt;br /&gt;&lt;a href=&quot;http://opensource.org/licenses/BSD-3-Clause&quot;&gt;http://opensource.org/licenses/BSD-3-Clause&lt;/a&gt; &lt;/p&gt;</string>
+         </property>
+         <property name="openExternalLinks">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QDialogButtonBox" name="buttonBox">
+         <property name="standardButtons">
+          <set>QDialogButtonBox::Close</set>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="diagnosticsTab">
+      <attribute name="title">
+       <string>Diagnostics</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="diagnosticsLayout">
+       <item>
+        <widget class="QTextBrowser" name="diagnostics"/>
+       </item>
+       <item>
+        <widget class="QDialogButtonBox" name="buttonBox1">
+         <property name="standardButtons">
+          <set>QDialogButtonBox::Close|QDialogButtonBox::Save</set>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="../images/common_images.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>buttonBox1</sender>
+   <signal>rejected()</signal>
+   <receiver>AboutDialog</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>423</x>
+     <y>482</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>670</x>
+     <y>55</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox1</sender>
+   <signal>accepted()</signal>
+   <receiver>AboutDialog</receiver>
+   <slot>saveDiagnostics()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>460</x>
+     <y>481</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>667</x>
+     <y>402</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>AboutDialog</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>376</x>
+     <y>472</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>376</x>
+     <y>257</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>saveDiagnostics()</slot>
+ </slots>
+</ui>

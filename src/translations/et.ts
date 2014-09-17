@@ -1,0 +1,756 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="et_EE" sourcelanguage="en">
+<context>
+    <name>CertUpdate</name>
+    <message>
+        <source>update not allowed!</source>
+        <translation>uuendamine ei ole lubatud!</translation>
+    </message>
+    <message>
+        <source>Check internet connection</source>
+        <translation>kontrollige interneti ühendust</translation>
+    </message>
+    <message>
+        <source>Server sai vale arvu baite, samm: %1</source>
+        <translation>Server sai vale arvu baite, samm: %1</translation>
+    </message>
+    <message>
+        <source>Kaardi vastuse parsimisel tekkis viga, samm: %1</source>
+        <translation>Kaardi vastuse parsimisel tekkis viga, samm: %1</translation>
+    </message>
+    <message>
+        <source>Sertifitseerimiskeskus ei vasta, samm: %1</source>
+        <translation>Sertifitseerimiskeskus ei vasta, samm: %1</translation>
+    </message>
+    <message>
+        <source>Wrong PIN1 code.</source>
+        <translation>Vale PIN1 kood.</translation>
+    </message>
+    <message>
+        <source>Server sent wrong count bytes on first step</source>
+        <translation>Server saatis vale arvu baite esimesel sammul</translation>
+    </message>
+    <message>
+        <source>Serveri töös tekkisid vead, samm: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>MainWindow</name>
+    <message>
+        <source>ID-card utility</source>
+        <translation>ID-kaardi haldusvahend</translation>
+    </message>
+    <message>
+        <source>Settings</source>
+        <translation>Seaded</translation>
+    </message>
+    <message>
+        <source>Diagnostics</source>
+        <translation>Diagnostika</translation>
+    </message>
+    <message>
+        <source>Help</source>
+        <translation>Abi</translation>
+    </message>
+    <message>
+        <source>About</source>
+        <translation>Info</translation>
+    </message>
+    <message>
+        <source>Authentication certificate</source>
+        <translation>Isikutuvastamise sertifikaat</translation>
+    </message>
+    <message>
+        <source>Certificate is</source>
+        <translation>Sertifikaat on</translation>
+    </message>
+    <message>
+        <source>Certificate is valid till</source>
+        <translation>Sertifikaat kehtib kuni</translation>
+    </message>
+    <message>
+        <source>Update certificates</source>
+        <translation>Uuenda sertifikaate</translation>
+    </message>
+    <message>
+        <source>Change PIN1</source>
+        <translation>Muuda PIN1</translation>
+    </message>
+    <message>
+        <source>Revoke blocking</source>
+        <translation>Tühista blokeering</translation>
+    </message>
+    <message>
+        <source>Signature certificate</source>
+        <translation>Allkirjastamise sertifikaat</translation>
+    </message>
+    <message>
+        <source>Change PIN2</source>
+        <translation>Muuda PIN2</translation>
+    </message>
+    <message>
+        <source>@eesti.ee e-mail</source>
+        <translation>@eesti.ee e-post</translation>
+    </message>
+    <message>
+        <source>Email address where your @eesti.ee emails will be forwarded</source>
+        <translation>E-posti aadress, kuhu suunatakse sinu @eesti.ee kirjad</translation>
+    </message>
+    <message>
+        <source>Activate @eesti.ee email</source>
+        <translation>Aktiveeri @eesti.ee e-post</translation>
+    </message>
+    <message>
+        <source>Check your @eesti.ee email settings</source>
+        <translation>Kontrolli @eesti.ee e-posti seadistust</translation>
+    </message>
+    <message>
+        <source>Mobiil-ID</source>
+        <translation>Mobiil-ID</translation>
+    </message>
+    <message>
+        <source>Check Mobiil-ID status</source>
+        <translation>Kontrolli Mobiil-ID staatust</translation>
+    </message>
+    <message>
+        <source>Change PUK</source>
+        <translation>Muuda PUK</translation>
+    </message>
+    <message>
+        <source>PUK code</source>
+        <translation>PUK kood</translation>
+    </message>
+    <message>
+        <source>&lt;h3&gt;PUK code is blocked!&lt;/h3&gt;
+For getting new PUK code for your ID-card, please visit service center where you can get the new codes. &lt;a href=&quot;http://www.politsei.ee/et/nouanded/id-kaart-ja-pass/kui-id-kaardi-koodid-kaovad/&quot;&gt;Additional information&lt;/a&gt;</source>
+        <translation>&lt;h3&gt;PUK kood on blokeeritud!&lt;/h3&gt;
+Uue PUK koodi saamiseks, külasta klienditeeninduspunkti, kust saad koodiümbriku uute koodidega. &lt;a href=&quot;http://www.politsei.ee/et/nouanded/id-kaart-ja-pass/kui-id-kaardi-koodid-kaovad/&quot;&gt;Lisainfo&lt;/a&gt;</translation>
+    </message>
+    <message>
+        <source>Change</source>
+        <translation>Muuda</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Tühista</translation>
+    </message>
+    <message>
+        <source>Repeat new PIN1 code</source>
+        <translation>Uus PIN1 kood uuesti</translation>
+    </message>
+    <message>
+        <source>Current PIN1 code</source>
+        <translation>Kehtiv PIN1 kood</translation>
+    </message>
+    <message>
+        <source>New PIN1 code</source>
+        <translation>Uus PIN1 kood</translation>
+    </message>
+    <message>
+        <source>To change PIN code on PinPad reader old PIN code have to be entered first and then new PIN code twice.</source>
+        <translation>PinPad lugejaga PIN muutmiseks tuleb kõigepealt sisestada vana PIN ning siis kaks korda uus PIN.</translation>
+    </message>
+    <message>
+        <source>Change with PinPad</source>
+        <translation>Muuda PinPad&apos;iga</translation>
+    </message>
+    <message>
+        <source>Current PIN2 code</source>
+        <translation>Kehtiv PIN2 kood</translation>
+    </message>
+    <message>
+        <source>New PIN2 code</source>
+        <translation>Uus PIN2 kood</translation>
+    </message>
+    <message>
+        <source>Repeat new PIN2 code</source>
+        <translation>Uus PIN2 kood uuesti</translation>
+    </message>
+    <message>
+        <source>&lt;h3&gt;Change PUK code&lt;/h3&gt;
+&lt;p&gt;If you forget PUK code or certificates remain unblocked, then it is needed to turn to service provider to get yout ID-card working again.&lt;/p&gt;</source>
+        <translation>&lt;h3&gt;PUK koodi vahetus&lt;/h3&gt;
+&lt;p&gt;Kui peale vahetamist PUK kood läheb meelest ära ja sertifikaat jääb blokeerituks kolme vale PIN1 või PIN2 sisetamise järel, siis ainus võimalus ID-kaart jälle tööle saada on pöörduda klienditeeninduspunkti poole.&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <source>Current PUK code</source>
+        <translation>Kehtiv PUK kood</translation>
+    </message>
+    <message>
+        <source>New PUK code</source>
+        <translation>Uus PUK kood</translation>
+    </message>
+    <message>
+        <source>Repeat new PUK code</source>
+        <translation>Uus PUK kood uuesti</translation>
+    </message>
+    <message>
+        <source>Card in reader</source>
+        <translation>Lugejas on dokument</translation>
+    </message>
+    <message>
+        <source>This is</source>
+        <translation>See on</translation>
+    </message>
+    <message>
+        <source>valid</source>
+        <translation>kehtiv</translation>
+    </message>
+    <message>
+        <source>expired</source>
+        <translation>kehtetu</translation>
+    </message>
+    <message>
+        <source>document</source>
+        <translation>dokument</translation>
+    </message>
+    <message>
+        <source>Card is valid till</source>
+        <translation>Kaart on kehtiv kuni</translation>
+    </message>
+    <message>
+        <source>Instructions how to get a new document you can find &lt;a href=&quot;http://www.politsei.ee/en/teenused/isikut-toendavad-dokumendid/id-kaart/taiskasvanule/&quot;&gt;here&lt;/a&gt;</source>
+        <translation>Juhised uue dokumendi taotlemiseks leiad &lt;a href=&quot;http://www.politsei.ee/et/teenused/isikut-toendavad-dokumendid/id-kaart/taiskasvanule/&quot;&gt;siit&lt;/a&gt;</translation>
+    </message>
+    <message>
+        <source>No card found</source>
+        <translation>Ei leitud ühtegi ID-kaarti</translation>
+    </message>
+    <message>
+        <source>No reader found</source>
+        <translation>Ühtegi kiipkaardi lugejat pole ühendatud</translation>
+    </message>
+    <message>
+        <source>Certificates</source>
+        <translation>Sertifikaadid</translation>
+    </message>
+    <message>
+        <source>Activating e-mail settings</source>
+        <translation>Aktiveerin e-posti seadeid</translation>
+    </message>
+    <message>
+        <source>Loading e-mail settings</source>
+        <translation>Laadin e-posti seadeid</translation>
+    </message>
+    <message>
+        <source>Requesting Mobiil-ID status</source>
+        <translation>Laadin Mobiil-ID staatuse infot</translation>
+    </message>
+    <message>
+        <source>Loading picture</source>
+        <translation>Laadin pilti</translation>
+    </message>
+    <message>
+        <source>Loading data</source>
+        <translation>Laen andmeid</translation>
+    </message>
+    <message>
+        <source>Failed activating e-mail forwards.</source>
+        <translation>E-posti suunamise aktiveerimine ebaõnnestus.</translation>
+    </message>
+    <message>
+        <source>Failed loading e-mail settings.</source>
+        <translation>E-posti aadresside laadimine ebaõnnestus.</translation>
+    </message>
+    <message>
+        <source>Failed loading Mobiil-ID settings.</source>
+        <translation>Mobiil-ID seadete laadimine ebaõnnestus.</translation>
+    </message>
+    <message>
+        <source>Certificate update</source>
+        <translation>Sertifikaatide uuendus</translation>
+    </message>
+    <message>
+        <source>For updating certificates please close all programs which are interacting with smartcard (qdigidocclient, qdigidoccrypto, Firefox, Safari, Internet Explorer...)&lt;br /&gt;After updating certificates it will no longer be possible to decrypt documents that were encrypted with the old certificate.&lt;br /&gt;Do you want to continue?</source>
+        <translation>Sertifikaatite uuendamiseks palun sulgege kõik rakendused, mis kasutavad ID-kaarti (Klient, Krüpto, Firefox, Safari, Internet Explorer...)&lt;br /&gt;Pärast sertifikaatide uuendamist ei ole võimalik enam dekrüpteerida vana sertifikaadiga krüpteeritud dokumente!&lt; br /&gt;Kas soovite jätkata sertifikaatide uuendamisega?</translation>
+    </message>
+    <message>
+        <source>Updating certificates</source>
+        <translation>Sertifikaatide uuendamine</translation>
+    </message>
+    <message>
+        <source>Updating certificates successful</source>
+        <translation>Sertifikaatide uuendamine õnnestus</translation>
+    </message>
+    <message>
+        <source>Old certificates succesfully removed from certificate store</source>
+        <translation>Vanade sertifikaatide eemaldamine sertifikaadihoidlast õnnestus</translation>
+    </message>
+    <message>
+        <source>Failed to remove old certificates from certificate store</source>
+        <translation>Vanade sertifikaatide eemaldamine sertifikaadihoidlast ebaõnnestus</translation>
+    </message>
+    <message>
+        <source>E-mail address missing or invalid!</source>
+        <translation>E-posti aadress sisestamata või vigane!</translation>
+    </message>
+    <message>
+        <source>PIN1 length has to be between 4 and 12</source>
+        <translation>PIN1 pikkus peab olema 4-12 numbrit</translation>
+    </message>
+    <message>
+        <source>PIN2 length has to be between 5 and 12</source>
+        <translation>PIN2 pikkus peab olema 5-12 numbrit</translation>
+    </message>
+    <message>
+        <source>valid but blocked</source>
+        <translation>kehtiv kuid blokeeritud</translation>
+    </message>
+    <message>
+        <source>invalid and blocked</source>
+        <translation>kehtetu ja blokeeritud</translation>
+    </message>
+    <message>
+        <source>valid and applicable</source>
+        <translation>kehtiv ja kasutatav</translation>
+    </message>
+    <message>
+        <source>Authentication key has been used %1 times</source>
+        <translation>Sertifikaati on kasutatud isikutuvastamiseks %1 korda</translation>
+    </message>
+    <message>
+        <source>Signature key has been used %1 times</source>
+        <translation>Sertifikaati on kasutatud allkirjastamiseks %1 korda</translation>
+    </message>
+    <message>
+        <source>Certificate will expire in %1 days</source>
+        <translation>Sertifikaat aegub %1 päeva pärast</translation>
+    </message>
+    <message>
+        <source>Certificate is expired</source>
+        <translation>Sertifikaat on aegunud</translation>
+    </message>
+    <message>
+        <source>Certificate store</source>
+        <translation>Sertifikaadi hoidla</translation>
+    </message>
+    <message>
+        <source>Certificate is not registered in certificate store. Register now?</source>
+        <translation>Sertifikaat ei ole registreeritud sertifikaadi hoidlas. Registreerin kohe?</translation>
+    </message>
+    <message>
+        <source>Reading data</source>
+        <translation>Loen andmeid</translation>
+    </message>
+    <message>
+        <source>Success</source>
+        <translation>Toiming õnnestus</translation>
+    </message>
+    <message>
+        <source>ID-card has not been published by locally recognized verification provider.</source>
+        <translation>ID-kaart pole väljastatud riiklikult tunnustatud sertifitseerija poolt.</translation>
+    </message>
+    <message>
+        <source>Wrong PIN was entered or cancelled, there was a problem with certificates or browser does not support ID-card.</source>
+        <translation>Sisestati vale PIN kood, katkestati PIN koodi sisestamine, tekkisid probleemid sertifikaatidega või puudub ID-kaardi tugi brauseris.</translation>
+    </message>
+    <message>
+        <source>ID-card certificate is not valid.</source>
+        <translation>ID-kaardi sertifikaat ei kehti.</translation>
+    </message>
+    <message>
+        <source>Entrance is permitted only with Estonian personal code.</source>
+        <translation>Sisemine on lubatud ainult Eesti isikukoodiga.</translation>
+    </message>
+    <message>
+        <source>Unknown error</source>
+        <translation>Tundmatu viga</translation>
+    </message>
+    <message>
+        <source>There was an error with request to KMA.</source>
+        <translation>KMA päringu tegemisel tekkis viga.</translation>
+    </message>
+    <message>
+        <source>No official email forwarding adresses was found</source>
+        <translation>Ühtegi ametliku e-posti suunamist ei leitud</translation>
+    </message>
+    <message>
+        <source>Your email account has been blocked. To open it, please send an e-mail to toimetaja@eesti.ee or call 663 0215.</source>
+        <translation>Teie e-posti konto on suletud. Avamiseks saatke palun e-kiri aadressil toimetaja@eesti.ee või helistage telefonil 663 0215.</translation>
+    </message>
+    <message>
+        <source>Invalid e-mail address</source>
+        <translation>Vigane e-posti aadress</translation>
+    </message>
+    <message>
+        <source>Forwarding is activated and you have been sent an email with activation key. Forwarding will be activated only after confirming the key.</source>
+        <translation>Suunamine on salvestatud, ning sinule on saadetud kiri edasisuunamisaadressi aktiveerimisvõtmega. Suunamine on kasutatav ainult pärast aktiveerimisvõtme sisestamist.</translation>
+    </message>
+    <message>
+        <source>User has no Mobiil-ID certificates.</source>
+        <translation>Kasutajal puuduvad Mobiil-ID sertifikaadid.</translation>
+    </message>
+    <message>
+        <source>Server could not read or validate ID card certificate!</source>
+        <translation>Server ei suutnud lugeda või valideerida ID-kaardi sertifikaati!</translation>
+    </message>
+    <message>
+        <source>Service internal error!</source>
+        <translation>Teenuse sisemine viga!</translation>
+    </message>
+    <message>
+        <source>Mobile interface not ready!</source>
+        <translation>Liides ei ole veel töökorras!</translation>
+    </message>
+    <message>
+        <source>certificates are active and Mobiil-ID is usable.</source>
+        <translation>sertifikaadid on aktiivsed ja Mobiil-ID kasutamine on võimalik.</translation>
+    </message>
+    <message>
+        <source>certificates are inactive, to use Mobiil-ID certificates must be activated.</source>
+        <translation>sertifikaadid on aktiveerimata, Mobiil-ID kasutamiseks on vajalik sertifikaatide aktiveerimine.</translation>
+    </message>
+    <message>
+        <source>certificates are suspended. To use Mobiil-ID these must be active.</source>
+        <translation>sertifikaadid on peatatud, Mobiil-ID kasutamiseks on vajalik peatatuse lõpetamine.</translation>
+    </message>
+    <message>
+        <source>certificates are revoked. To use Mobiil-ID, a new SIM card must be requested from service provider.</source>
+        <translation>sertifikaadid on tunnistatud kehtetuks. Mobiil-ID kasutamiseks on vajalik hankida operaatorilt uus Mobiil-ID SIM kaart.</translation>
+    </message>
+    <message>
+        <source>certificates status is unknown</source>
+        <translation>sertifikaadi olek teadmata</translation>
+    </message>
+    <message>
+        <source>certificates are expired. New SIM card has to be requested from Service provider.</source>
+        <translation>sertifikaadid on aegunud. Vajalik on operaatorilt uue SIM kaardi hankimine.</translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;PUK code is used for unblocking certificates, when PIN1 or PIN2 has been entered 3 times incorrectly.&lt;/p&gt;
+&lt;p&gt;PUK code is written in the envelope, that is given with the ID-card.&lt;/p&gt;</source>
+        <translation>&lt;p&gt;PUK koodi abil saab tühistada sertifikaadi blokeeringu, kui PIN1 või PIN2 koodi on 3 korda järjest valesti sisestatud.&lt;/p&gt;
+&lt;p&gt;PUK kood on kirjas koodiümbrikus, mida väljastatakse koos ID-kaardiga.&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation>Nimi:</translation>
+    </message>
+    <message>
+        <source>Personal Code:</source>
+        <translation>Isikukood:</translation>
+    </message>
+    <message>
+        <source>Birth:</source>
+        <translation>Sündinud:</translation>
+    </message>
+    <message>
+        <source>Citizenship:</source>
+        <translation>Kodakondsus:</translation>
+    </message>
+    <message>
+        <source>E-mail:</source>
+        <translation>E-post:</translation>
+    </message>
+    <message>
+        <source>To change PUK code on PinPad reader old PUK code have to be entered first and then new PUK code twice.</source>
+        <translation>PinPad lugejaga PUK muutmiseks tuleb kõigepealt sisestada vana PUK ning siis kaks korda uus PUK.</translation>
+    </message>
+    <message>
+        <source>Failed to load data</source>
+        <translation>Andmete laadimine ebaõnnestus</translation>
+    </message>
+    <message>
+        <source>Enter PIN/PUK codes on PinPad</source>
+        <translation>Sisesta PIN/PUK koodid PinPad&apos;ilt</translation>
+    </message>
+    <message>
+        <source>Enter current %1 code</source>
+        <translation>Sisesta kehtiv %1 kood</translation>
+    </message>
+    <message>
+        <source>Enter new %1 code</source>
+        <translation>Sisesta uus %1 kood</translation>
+    </message>
+    <message>
+        <source>Retry your new %1 code</source>
+        <translation>Korda uut %1 koodi</translation>
+    </message>
+    <message>
+        <source>Old and new %1 has to be different!</source>
+        <translation>Kehtiv ja uus %1 peavad olema erinevad!</translation>
+    </message>
+    <message>
+        <source>New %1 codes doesn&apos;t match</source>
+        <translation>Uued %1 koodid on erinevad</translation>
+    </message>
+    <message>
+        <source>%1 have to be different than date of birth or year of birth</source>
+        <translation>%1 ei tohi sisaldada sünnikuupäeva ja -aastat</translation>
+    </message>
+    <message>
+        <source>%1 changed!</source>
+        <translation>%1 kood muudetud!</translation>
+    </message>
+    <message>
+        <source>PUK length has to be between 8 and 12</source>
+        <translation>PUK koodi pikkus peab olema 8-12 numbrit</translation>
+    </message>
+    <message numerus="yes">
+        <source>Wrong %1 code. You can try %n more time(s).</source>
+        <translation>
+            <numerusform>Vale %1 kood. Saad veel proovida %n kord.</numerusform>
+            <numerusform>Vale %1 kood. Saad veel proovida %n korda.</numerusform>
+        </translation>
+    </message>
+    <message>
+        <source>Changing %1 failed</source>
+        <translation>%1 muutmine ebaõnnestus</translation>
+    </message>
+    <message>
+        <source>%1 blocked</source>
+        <translation>%1 kood blokeeritud</translation>
+    </message>
+    <message>
+        <source>%1 changed and your current certificates blocking has been removed!</source>
+        <translation>%1 kood on muudetud ja sertifikaadi blokeering tühistatud!</translation>
+    </message>
+    <message>
+        <source>Enter PUK code</source>
+        <translation>Sisesta PUK kood</translation>
+    </message>
+    <message>
+        <source>Loading picture failed.</source>
+        <translation>Pildi laadimine ebaõnnestus.</translation>
+    </message>
+    <message>
+        <source>&lt;h3&gt;Change PIN1 code&lt;/h3&gt;
+&lt;p&gt;New PIN1 must be different from current PIN1.&lt;/p&gt;
+&lt;p&gt;PIN1 code is used for accessing identification certificates.&lt;/p&gt;
+&lt;p&gt;If you have forgotten PIN1, but know PUK, then here you can enter new PIN1.&lt;/p&gt;</source>
+        <translation>&lt;h3&gt;PIN1 koodi vahetus&lt;/h3&gt;
+&lt;p&gt;Uus PIN1 peab olema erinev eelmisest.&lt;/p&gt;
+&lt;p&gt;PIN1 koodi kasutatakse isikutuvastamise sertifikaadile juurdepääsemiseks.&lt;/p&gt;
+&lt;p&gt;Kui olete unustanud PIN1 koodi, kuid teate PUK koodi, siis siin saate määrata uue PIN1 koodi.&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <source>To change PIN code with PUK on PinPad reader the PUK code have to be entered first and then PIN code twice.</source>
+        <translation>PinPad lugejaga PUK abil PIN muutmiseks tuleb kõigepealt sisestada PUK ning siis kaks korda uus PIN.</translation>
+    </message>
+    <message>
+        <source>&lt;h3&gt;Change PIN2 code&lt;/h3&gt;
+&lt;p&gt;New PIN2 must be different from current PIN2.&lt;/p&gt;
+&lt;p&gt;PIN2 code is used to digitally sign documents.&lt;/p&gt;
+&lt;p&gt;If you have forgotten PIN2, but know PUK, then here you can enter new PIN2.&lt;/p&gt;</source>
+        <translation>&lt;h3&gt;PIN2 koodi vahetus&lt;/h3&gt;
+&lt;p&gt;Uus PIN2 peab olema erinev eelmisest.&lt;/p&gt;
+&lt;p&gt;PIN2 koodi kasutatakse digitaalallkirja andmiseks.&lt;/p&gt;
+&lt;p&gt;Kui olete unustanud PIN2 koodi, kuid teate PUK koodi, siis siin saate määrata uue PIN2 koodi.&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <source>To unblock PIN code on PinPad reader the PUK code have to be entered first and then PIN code twice.</source>
+        <translation>PinPad lugejaga PIN blokeeringu tühistamiseks tuleb kõigepealt sisestada PUK ning siis kaks korda PIN.</translation>
+    </message>
+    <message>
+        <source>Mobile operator</source>
+        <translation>Mobiili operaator</translation>
+    </message>
+    <message>
+        <source>Mobile status</source>
+        <translation>Staatus</translation>
+    </message>
+    <message>
+        <source>Certificates are valid till</source>
+        <translation>Sertifikaadid kehtivad kuni</translation>
+    </message>
+    <message>
+        <source>Activate Mobiil-ID</source>
+        <translation>Aktiveeri Mobiil-ID teenus</translation>
+    </message>
+    <message>
+        <source>Save picture</source>
+        <translation>Salvesta pilt</translation>
+    </message>
+    <message>
+        <source>Saving picture failed!</source>
+        <translation>Pildi salvestamine ebaõnnestus!</translation>
+    </message>
+    <message>
+        <source>Changing %1 code</source>
+        <translation>Vahetan %1 koodi</translation>
+    </message>
+    <message>
+        <source>Unblocking %1 code</source>
+        <translation>Tühistan %1 koodi blokeeringut</translation>
+    </message>
+    <message>
+        <source>http://politsei.ee/en/teenused/isikut-toendavad-dokumendid/mobiil-id/</source>
+        <translation>http://politsei.ee/et/teenused/isikut-toendavad-dokumendid/mobiil-id/</translation>
+    </message>
+    <message>
+        <source>PCSC service is not running</source>
+        <translation>SmartCard/PCSC teenus ei tööta</translation>
+    </message>
+    <message>
+        <source>Certificate update failed</source>
+        <translation>Sertifikaatide uuendamine ebaõnnestus</translation>
+    </message>
+    <message>
+        <source>Cards</source>
+        <translation>Kaardid</translation>
+    </message>
+    <message>
+        <source>Languages</source>
+        <translation>Keeled</translation>
+    </message>
+    <message>
+        <source>Mobiil-ID is possibility to use mobile phone instead of ID-card for identification and digital signing.&lt;br /&gt;More info from &lt;a href=&quot;http://mobiil.id.ee&quot;&gt;mobiil.id.ee&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;
+To use Mobiil-ID it is needed to use a SIM card that supports this feature. If such a SIM card is already purchased, then it has to be activated.</source>
+        <translation>Mobiil-ID on võimalus kasutada isikutuvastamiseks ja digitaalallkirja andmiseks ID-kaardi asemel mobiiltelefoni.&lt;br /&gt;Loe täpsemalt mobiil.id.ee kodulehelt &lt;a href=&quot;http://mobiil.id.ee&quot;&gt;mobiil.id.ee&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;
+Mobiil-ID kasutamiseks on vajalik uus SIM-kaart, mille sa saad endale mobiilsideoperaatori käest. Kui selline kaart on sul juba olemas, tuleb teenus aktiveerida.</translation>
+    </message>
+    <message>
+        <source>Load picture</source>
+        <translation>Laadi pilt</translation>
+    </message>
+    <message>
+        <source>save</source>
+        <translation>salvesta</translation>
+    </message>
+    <message>
+        <source>Personal info</source>
+        <translation>Andmefaili info</translation>
+    </message>
+    <message>
+        <source>Card info</source>
+        <translation>Kaardi info</translation>
+    </message>
+    <message>
+        <source>You&apos;re using Digital identity card</source>
+        <translation>See on digitaalne isikutunnistus</translation>
+    </message>
+    <message>
+        <source>Picture</source>
+        <translation>Pilt</translation>
+    </message>
+    <message>
+        <source>Change PIN1 using PUK code</source>
+        <translation>Muuda PIN1 kood PUK koodi abil</translation>
+    </message>
+    <message>
+        <source>Change PIN2 using PUK code</source>
+        <translation>Muuda PIN2 kood PUK koodi abil</translation>
+    </message>
+    <message>
+        <source>Check if the ID-card is inserted correctly to the reader.&lt;br /&gt;New ID-cards have chip on the back side of the card.</source>
+        <translation>Kontrolli, kas ID-kaart on õiget pidi lugejas.&lt;br /&gt;Uutel ID-kaartidel on kiip kaardi tagumisel küljel.</translation>
+    </message>
+    <message>
+        <source>For more detailed official email address forwarding, please visit &lt;a href=&quot;https://www.eesti.ee/eng/teemad/kodanik/riigiportaali_abi/ametliku_e_posti_seadistamine&quot;&gt;eesti.ee&lt;/a&gt;</source>
+        <translation>Täiuslikuma ametliku e-posti suunamise häälestamisvahendi leiad portaalist &lt;a href=&quot;https://www.eesti.ee/est/teemad/kodanik/riigiportaali_abi/ametliku_e_posti_seadistamine&quot;&gt;eesti.ee&lt;/a&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;h3&gt;Change PIN1 code&lt;/h3&gt;
+&lt;p&gt;New PIN1 must be different from current PIN1.&lt;/p&gt;
+&lt;p&gt;PIN1 code is used for accessing identification certificates.&lt;/p&gt;
+&lt;p&gt;If PIN1 is inserted 3 times inccorectly, then identification certificate will be blocked and it will be impossible to use ID-card to verify identification, until it is unblocked via PUK code.&lt;/p&gt;</source>
+        <translation>&lt;h3&gt;PIN1 koodi vahetus&lt;/h3&gt;
+&lt;p&gt;Uus PIN1 peab olema erinev eelmisest.&lt;/p&gt;
+&lt;p&gt;PIN1 koodi kasutatakse isikutuvastamise sertifikaadile juurdepääsemiseks.&lt;/p&gt;
+&lt;p&gt;Kui sisestad PIN1 koodi kolm korda valesti, siis isikutuvastamise sertifikaat blokeeritakse ning ID-kaarti pole võimalik isikutuvastamiseks kasutada enne blokeeringu tühistamist PUK koodi abil.&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;h3&gt;Change PIN2 code&lt;/h3&gt;
+&lt;p&gt;New PIN2 must be different from current PIN2.&lt;/p&gt;
+&lt;p&gt;PIN2 code is used to digitally sign documents.&lt;/p&gt;
+&lt;p&gt;If PIN2 is inserted 3 times inccorectly, then signing certificate will be blocked and it will be impossible to use ID-card to digital signing, until it is unblocked via PUK code.&lt;/p&gt;</source>
+        <translation>&lt;h3&gt;PIN2 koodi vahetus&lt;/h3&gt;
+&lt;p&gt;Uus PIN2 peab olema erinev eelmisest.&lt;/p&gt;
+&lt;p&gt;PIN2 koodi kasutatakse digitaalallkirja andmiseks.&lt;/p&gt;
+&lt;p&gt;Kui sisestad PIN2 koodi kolm korda valesti, siis allkirjastamise sertifikaat blokeeritakse ning ID-kaarti pole võimalik allkirjastamiseks kasutada enne blokeeringu tühistamist PUK koodi abil.&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <source>active</source>
+        <translation>aktiivne</translation>
+    </message>
+    <message>
+        <source>not active</source>
+        <translation>mitteaktiivne</translation>
+    </message>
+    <message>
+        <source>View certificate</source>
+        <translation>Vaata sertifikaati</translation>
+    </message>
+    <message>
+        <source>PIN1 is blocked, because PIN1 was inserted 3 times incorrectly.</source>
+        <translation>PIN1 on blokeeritud, kuna PIN1 koodi on sisestatud 3 korda valesti.</translation>
+    </message>
+    <message>
+        <source>PIN2 is blocked, because PIN2 was inserted 3 times incorrectly.</source>
+        <translation>PIN2 on blokeeritud, kuna PIN2 koodi on sisestatud 3 korda valesti.</translation>
+    </message>
+    <message>
+        <source>&lt;h3&gt;Authentication certificate is blocked.&lt;/h3&gt;
+&lt;p&gt;To unblock certificate you have to enter PUK code.&lt;/p&gt;
+&lt;p&gt;You can find your PUK code inside ID-card codes envelope.&lt;/p&gt;
+&lt;p&gt;New PIN1 must be different from current PIN1.&lt;/p&gt;
+&lt;p&gt;If you do not know PUK code for your ID-card, please visit service center where you can get the new codes.&lt;/p&gt;</source>
+        <translation>&lt;h3&gt;Isikutuvastamise sertifikaat on blokeeritud.&lt;/h3&gt;
+&lt;p&gt;Sertfikaadi blokeeringu tühistamiseks sisesta kaardi PUK kood.&lt;/p&gt;
+&lt;p&gt;PUK koodi leiad ID-kaardi koodiümbrikus, kui sa pole seda vahepeal muutnud.&lt;/p&gt;
+&lt;p&gt;Uus PIN1 peab olema erinev eelmisest.&lt;/p&gt;
+&lt;p&gt;Kui sa ei tea oma ID-kaardi PUK koodi, külasta klienditeeninduspunkti, kust saad uue koodiümbriku.&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;h3&gt;Signing certificate is blocked.&lt;/h3&gt;
+&lt;p&gt;To unblock certificate you have to enter PUK code.&lt;/p&gt;
+&lt;p&gt;You can find your PUK code inside ID-card codes envelope.&lt;/p&gt;
+&lt;p&gt;New PIN2 must be different from current PIN2.&lt;/p&gt;
+&lt;p&gt;If you do not know PUK code for your ID-card, please visit service center where you can get the new codes.&lt;/p&gt;</source>
+        <translation>&lt;h3&gt;Allkirjastamise sertifikaat on blokeeritud.&lt;/h3&gt;
+&lt;p&gt;Sertfikaadi blokeeringu tühistamiseks sisesta kaardi PUK kood.&lt;/p&gt;
+&lt;p&gt;PUK koodi leiad ID-kaardi koodiümbrikus, kui sa pole seda vahepeal muutnud.&lt;/p&gt;
+&lt;p&gt;Uus PIN2 peab olema erinev eelmisest.&lt;/p&gt;
+&lt;p&gt;Kui sa ei tea oma ID-kaardi PUK koodi, külasta klienditeeninduspunkti, kust saad uue koodiümbriku.&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <source>This document is not supported for electronic use from 24.07.13, for additional information please contact &lt;a href=&quot;http://www.politsei.ee/en/teenused/isikut-toendavad-dokumendid/id-kaardi-uuendamine.dot&quot;&gt;Police and Border Guard Board&lt;/a&gt;.</source>
+        <translation>Käesolevat dokumenti ei ole võimalik elektrooniliselt kasutada alates 24.07.13, palun pöörduge lisainfo saamiseks &lt;a href=&quot;http://www.politsei.ee/et/teenused/isikut-toendavad-dokumendid/id-kaardi-uuendamine.dot&quot;&gt;Politsei-ja Piirivalveametisse&lt;/a&gt;.</translation>
+    </message>
+    <message>
+        <source>TokenCache cleanup failed&lt;br /&gt;&lt;a href=&apos;http://www.id.ee/?id=34455&apos;&gt;Additional info&lt;/a&gt;</source>
+        <translation>TokenCache puhastamine ebaõnnestus&lt;br /&gt;&lt;a href=&apos;http://www.id.ee/?id=34230&apos;&gt;Täiendav info&lt;/a&gt;</translation>
+    </message>
+    <message>
+        <source>There was an error with request to Äriregister.</source>
+        <translation>Äriregistri päringu tegemisel tekkis viga.</translation>
+    </message>
+</context>
+<context>
+    <name>SettingsDialog</name>
+    <message>
+        <source>Settings</source>
+        <translation>Seaded</translation>
+    </message>
+    <message>
+        <source>Check updates</source>
+        <translation>Kontrolli uuendusi</translation>
+    </message>
+    <message>
+        <source>Once a day</source>
+        <translation>Kord päevas</translation>
+    </message>
+    <message>
+        <source>Once a week</source>
+        <translation>Kord nädalas</translation>
+    </message>
+    <message>
+        <source>Once a month</source>
+        <translation>Kord kuus</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation>Mitte kunagi</translation>
+    </message>
+    <message>
+        <source>Run Task Scheduler</source>
+        <translation>Käivita Task Scheduler</translation>
+    </message>
+    <message>
+        <source>Check for updates and close utility</source>
+        <translation>Kontrolli uuendusi ja sulge haldusvahend</translation>
+    </message>
+</context>
+</TS>

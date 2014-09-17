@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="/">
+    <file>images/id_kaart_background.png</file>
+    <file>images/id_icon_128x128.png</file>
+  </qresource>
+</RCC>

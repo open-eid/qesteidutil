@@ -1,0 +1,7 @@
+<RCC>
+  <qresource prefix="translations" >
+    <file alias="breakpad_en" >breakpad_en.qm</file>
+    <file alias="breakpad_et" >breakpad_et.qm</file>
+    <file alias="breakpad_ru" >breakpad_ru.qm</file>
+  </qresource>
+</RCC>

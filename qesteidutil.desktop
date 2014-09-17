@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=ID-card Utility
+Name[et]=ID-kaardi haldusvahend
+Name[ru]=Oбсуживание ID-карты
+Exec=qesteidutil %F
+Icon=qesteidutil
+Terminal=false
+Categories=Qt;Utility;

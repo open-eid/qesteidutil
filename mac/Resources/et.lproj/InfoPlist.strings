@@ -1,0 +1,4 @@
+/* Localized versions of Info.plist keys */
+
+CFBundleName = "ID-kaardi haldusvahend";
+CFBundleDisplayName = "ID-kaardi haldusvahend";
