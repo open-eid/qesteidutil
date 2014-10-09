@@ -11,9 +11,9 @@ include( VersionInfo )
 
 set_app_name( PROGNAME qesteidutil )
 
-find_package( Qt5Widgets QUIET )
+find_package( Qt5Widgets QUIET HINTS ${QTSDK} )
 if( Qt5Widgets_FOUND )
-	find_package( Qt5LinguistTools )
+	find_package( Qt5LinguistTools HINTS ${QTSDK} )
 	add_definitions( -DQT_DISABLE_DEPRECATED_BEFORE=0x040800 )
 else()
 	find_package( Qt4 4.8.0 COMPONENTS QtCore QtGui QtNetwork REQUIRED )
