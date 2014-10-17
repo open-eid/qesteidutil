@@ -934,9 +934,8 @@ void MainWindow::updateData()
 
 		d->personalName->setText( t.data( QSmartCardData::FullName ).toString() );
 		d->personalCode->setText( t.data( QSmartCardData::Id ).toString() );
-		d->personalBirth->setText( QString( "%1 %2" )
-			.arg( DateTime( t.data( QSmartCardData::BirthDate ).toDateTime() ).formatDate( "dd. MMMM yyyy" ) )
-			.arg( t.data( QSmartCardData::BirthPlace ).toString().isEmpty() ? "" : ", " + t.data( QSmartCardData::BirthPlace ).toString() ) );
+		d->personalBirth->setText( DateTime( t.data( QSmartCardData::BirthDate ).toDateTime() ).formatDate( "dd. MMMM yyyy" ) +
+			(t.data( QSmartCardData::BirthPlace ).toString().isEmpty() ? "" : ", " + t.data( QSmartCardData::BirthPlace ).toString()) );
 		d->personalCitizenLabel->setVisible( t.authCert().type() & SslCertificate::EstEidType );
 		d->personalCitizen->setVisible( t.authCert().type() & SslCertificate::EstEidType );
 		d->personalCitizen->setText( t.data( QSmartCardData::Citizen ).toString() );
