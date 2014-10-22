@@ -1,0 +1,33 @@
+before_install: if [ "${TRAVIS_OS_NAME}" = "osx" ]; then
+    brew update;
+    brew install qt5;
+  else
+    sudo add-apt-repository -y ppa:ubuntu-sdk-team/ppa;
+    sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test;
+    sudo apt-get update -qq;
+    sudo apt-get install -y gcc-4.8 g++-4.8 cmake qttools5-dev qttools5-dev-tools libpcsclite-dev libssl-dev;
+    sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.8 90;
+  fi
+script:
+- mkdir build
+- cd build
+- cmake -DBREAKPAD="" ..
+- make
+
+os:
+ - linux
+ - osx
+
+env:
+  global:
+   - secure: "bnnkOxt19gRV75WPsOYjT33wALBe/L1quzMZD8+SY6tM+H7TAZY4490pESEBN+KkrBRhUa8ro2AutVYR4GpVxwOQdXC9KdFnFCqLHsCIhZaBf9H1a/+/gL1bNMiK16XJ6Doz8RidO/m7e0OobulfbbLnBSpgJUwiFkavoO2cfJo="
+
+addons:
+  coverity_scan:
+    project:
+      name: "open-eid/qesteidutil"
+      description: "Build submitted via Travis CI"
+    notification_email: raul@metsma.ee
+    build_command_prepend: "mkdir coverity; cd coverity; cmake -DBREAKPAD='' .."
+    build_command: make
+    branch_pattern: coverity_scan
