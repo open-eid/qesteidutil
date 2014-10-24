@@ -90,9 +90,10 @@ border-radius: 3px;
 #personalInfo #pictureFrame
 { font-size: 13px; font-weight: normal; border: 1px solid black; background: #FFFFFF; }
 
-#personalInfo #personalName, #personalInfo #personalRegNr, 
-#personalInfo #personalCode, #personalInfo #personalBirth, 
-#personalInfo #personalCitizen, #personalInfo #personalEmail 
+#personalInfo #personalName, #personalInfo #personalRegNr,
+#personalInfo #personalCode, #personalInfo #personalBirth,
+#personalInfo #personalCitizen, #personalInfo #personalEmail,
+#personalInfo #surName
 { color: black; }
 
 #headerDiagnostics, #headerSettings, #headerHelp, #headerAbout {
@@ -458,28 +459,44 @@ text-align: center;
             <number>0</number>
            </property>
            <item row="0" column="0">
-            <layout class="QHBoxLayout" name="personalNameLayout">
+            <layout class="QHBoxLayout" name="personalNameLayout" stretch="0,1">
+             <property name="spacing">
+              <number>3</number>
+             </property>
              <item>
               <widget class="QLabel" name="personalNameLabel">
                <property name="text">
-                <string>Name:</string>
+                <string>Given Names:</string>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QLabel" name="personalName">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-              </widget>
+              <widget class="QLabel" name="personalName"/>
              </item>
             </layout>
            </item>
            <item row="1" column="0">
-            <layout class="QHBoxLayout" name="personalCodeLayout">
+            <layout class="QHBoxLayout" name="surNameLayout" stretch="0,1">
+             <property name="spacing">
+              <number>3</number>
+             </property>
+             <item>
+              <widget class="QLabel" name="surNameLabel">
+               <property name="text">
+                <string>Surname:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="surName"/>
+             </item>
+            </layout>
+           </item>
+           <item row="2" column="0">
+            <layout class="QHBoxLayout" name="personalCodeLayout" stretch="0,1">
+             <property name="spacing">
+              <number>3</number>
+             </property>
              <item>
               <widget class="QLabel" name="personalCodeLabel">
                <property name="text">
@@ -488,19 +505,15 @@ text-align: center;
               </widget>
              </item>
              <item>
-              <widget class="QLabel" name="personalCode">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-              </widget>
+              <widget class="QLabel" name="personalCode"/>
              </item>
             </layout>
            </item>
-           <item row="2" column="0">
-            <layout class="QHBoxLayout" name="personalBirthLayout">
+           <item row="3" column="0">
+            <layout class="QHBoxLayout" name="personalBirthLayout" stretch="0,1">
+             <property name="spacing">
+              <number>3</number>
+             </property>
              <item>
               <widget class="QLabel" name="personalBirthLabel">
                <property name="text">
@@ -509,19 +522,15 @@ text-align: center;
               </widget>
              </item>
              <item>
-              <widget class="QLabel" name="personalBirth">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-              </widget>
+              <widget class="QLabel" name="personalBirth"/>
              </item>
             </layout>
            </item>
-           <item row="3" column="0">
-            <layout class="QHBoxLayout" name="personalCitizenLayout">
+           <item row="4" column="0">
+            <layout class="QHBoxLayout" name="personalCitizenLayout" stretch="0,1">
+             <property name="spacing">
+              <number>3</number>
+             </property>
              <item>
               <widget class="QLabel" name="personalCitizenLabel">
                <property name="text">
@@ -530,19 +539,15 @@ text-align: center;
               </widget>
              </item>
              <item>
-              <widget class="QLabel" name="personalCitizen">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-              </widget>
+              <widget class="QLabel" name="personalCitizen"/>
              </item>
             </layout>
            </item>
-           <item row="4" column="0">
-            <layout class="QHBoxLayout" name="personalEmailLayout">
+           <item row="5" column="0">
+            <layout class="QHBoxLayout" name="personalEmailLayout" stretch="0,1">
+             <property name="spacing">
+              <number>3</number>
+             </property>
              <item>
               <widget class="QLabel" name="personalEmailLabel">
                <property name="text">
@@ -551,18 +556,11 @@ text-align: center;
               </widget>
              </item>
              <item>
-              <widget class="QLabel" name="personalEmail">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-              </widget>
+              <widget class="QLabel" name="personalEmail"/>
              </item>
             </layout>
            </item>
-           <item row="5" column="0">
+           <item row="6" column="0">
             <spacer name="personalInfoSpacer">
              <property name="orientation">
               <enum>Qt::Vertical</enum>
@@ -575,7 +573,7 @@ text-align: center;
              </property>
             </spacer>
            </item>
-           <item row="0" column="1" rowspan="6">
+           <item row="0" column="1" rowspan="7">
             <widget class="QLabel" name="pictureFrame">
              <property name="minimumSize">
               <size>

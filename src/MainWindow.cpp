@@ -932,7 +932,8 @@ void MainWindow::updateData()
 		d->changePin2Stack->setCurrentIndex( t.isPinpad() );
 		d->changePukStack->setCurrentIndex( t.isPinpad() );
 
-		d->personalName->setText( t.data( QSmartCardData::FullName ).toString() );
+		d->personalName->setText( t.data( QSmartCardData::FirstName ).toString() );
+		d->surName->setText( t.data( QSmartCardData::SurName ).toString() );
 		d->personalCode->setText( t.data( QSmartCardData::Id ).toString() );
 		d->personalBirth->setText( DateTime( t.data( QSmartCardData::BirthDate ).toDateTime() ).formatDate( "dd. MMMM yyyy" ) +
 			(t.data( QSmartCardData::BirthPlace ).toString().isEmpty() ? "" : ", " + t.data( QSmartCardData::BirthPlace ).toString()) );
@@ -940,6 +941,11 @@ void MainWindow::updateData()
 		d->personalCitizen->setVisible( t.authCert().type() & SslCertificate::EstEidType );
 		d->personalCitizen->setText( t.data( QSmartCardData::Citizen ).toString() );
 		d->personalEmail->setText( t.data( QSmartCardData::Email ).toString() );
+        QList<QLabel*> list({ d->personalName, d->surName, d->personalCode, d->personalBirth, d->personalCitizen, d->personalEmail });
+		for( QLabel *l: list )
+			l->setToolTip( l->text() );
+		d->personalEmail->setText( d->personalEmail->fontMetrics().elidedText(
+			d->personalEmail->text(), Qt::ElideMiddle, d->personalEmail->width() ) );
 
 		d->authTill->setText( DateTime( t.authCert().expiryDate().toLocalTime() ).formatDate( "dd. MMMM yyyy" ) );
 		d->signTill->setText( DateTime( t.signCert().expiryDate().toLocalTime() ).formatDate( "dd. MMMM yyyy" ) );
@@ -1031,6 +1037,7 @@ void MainWindow::updateData()
 	else
 	{
 		d->personalName->clear();
+		d->surName->clear();
 		d->personalCode->clear();
 		d->personalBirth->clear();
 		d->personalCitizen->clear();

@@ -425,10 +425,6 @@ For getting new PUK code for your ID-card, please visit service center where you
 &lt;p&gt;PUK код находится в конверте с кодами, который выдаётся при получении ID-карты.&lt;/p&gt;</translation>
     </message>
     <message>
-        <source>Name:</source>
-        <translation>Имя:</translation>
-    </message>
-    <message>
         <source>Personal Code:</source>
         <translation>Личный номер:</translation>
     </message>
@@ -718,6 +714,14 @@ To use Mobiil-ID it is needed to use a SIM card that supports this feature. If s
     <message>
         <source>There was an error with request to Äriregister.</source>
         <translation>В запросе к Äriregister возникла ошибка.</translation>
+    </message>
+    <message>
+        <source>Given Names:</source>
+        <translation>Имя:</translation>
+    </message>
+    <message>
+        <source>Surname:</source>
+        <translation>Фамилия:</translation>
     </message>
 </context>
 <context>

@@ -425,10 +425,6 @@ Uue PUK koodi saamiseks, külasta klienditeeninduspunkti, kust saad koodiümbrik
 &lt;p&gt;PUK kood on kirjas koodiümbrikus, mida väljastatakse koos ID-kaardiga.&lt;/p&gt;</translation>
     </message>
     <message>
-        <source>Name:</source>
-        <translation>Nimi:</translation>
-    </message>
-    <message>
         <source>Personal Code:</source>
         <translation>Isikukood:</translation>
     </message>
@@ -716,6 +712,14 @@ Mobiil-ID kasutamiseks on vajalik uus SIM-kaart, mille sa saad endale mobiilside
     <message>
         <source>There was an error with request to Äriregister.</source>
         <translation>Äriregistri päringu tegemisel tekkis viga.</translation>
+    </message>
+    <message>
+        <source>Given Names:</source>
+        <translation>Eesnimed:</translation>
+    </message>
+    <message>
+        <source>Surname:</source>
+        <translation>Perekonnanimi:</translation>
     </message>
 </context>
 <context>

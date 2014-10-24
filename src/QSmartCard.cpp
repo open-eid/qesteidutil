@@ -310,10 +310,11 @@ void QSmartCard::run()
 
 					t->data[QSmartCardData::SurName] =
 						SslCertificate::formatName( d->encode( data[EstEidCard::SURNAME] ) ).trimmed();
-					t->data[QSmartCardData::FirstName] =
-						SslCertificate::formatName( d->encode( data[EstEidCard::FIRSTNAME] ) ).trimmed();
-					t->data[QSmartCardData::MiddleName] =
-						SslCertificate::formatName( d->encode( data[EstEidCard::MIDDLENAME] ) ).trimmed();
+					QStringList name = QStringList()
+						<< SslCertificate::formatName( d->encode( data[EstEidCard::FIRSTNAME] ) ).trimmed()
+						<< SslCertificate::formatName( d->encode( data[EstEidCard::MIDDLENAME] ) ).trimmed();
+					name.removeAll( "" );
+					t->data[QSmartCardData::FirstName] = name.join(" ");
 					t->data[QSmartCardData::Sex] = d->encode( data[EstEidCard::SEX] );
 					t->data[QSmartCardData::Citizen] = d->encode( data[EstEidCard::CITIZEN] );
 					t->data[QSmartCardData::BirthDate] = QDate::fromString( d->encode( data[EstEidCard::BIRTHDATE] ), "dd.MM.yyyy" );
@@ -337,16 +338,10 @@ void QSmartCard::run()
 					QStringList mailaddresses = t->authCert.alternateSubjectNames().values( QSsl::EmailEntry );
 					t->data[QSmartCardData::Email] = !mailaddresses.isEmpty() ? mailaddresses.first() : "";
 
-					QStringList name = QStringList()
-						<< t->data[QSmartCardData::FirstName].toString()
-						<< t->data[QSmartCardData::MiddleName].toString()
-						<< t->data[QSmartCardData::SurName].toString();
-					name.removeAll( "" );
-					t->data[QSmartCardData::FullName] = name.join( " " );
-
 					if( t->authCert.type() & SslCertificate::DigiIDType )
 					{
-						t->data[QSmartCardData::FullName] = t->authCert.toString( "GN SN" );
+						t->data[QSmartCardData::FirstName] = t->authCert.toString( "GN" );
+						t->data[QSmartCardData::SurName] = t->authCert.toString( "SN" );
 						t->data[QSmartCardData::Id] = t->authCert.subjectInfo("serialNumber");
 						t->data[QSmartCardData::BirthDate] = IKValidator::birthDate( t->authCert.subjectInfo("serialNumber") );
 						t->data[QSmartCardData::IssueDate] = t->authCert.effectiveDate();

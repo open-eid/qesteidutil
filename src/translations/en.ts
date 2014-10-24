@@ -425,10 +425,6 @@ For getting new PUK code for your ID-card, please visit service center where you
 &lt;p&gt;PUK code is written in the envelope, that is given with the ID-card.&lt;/p&gt;</translation>
     </message>
     <message>
-        <source>Name:</source>
-        <translation>Name:</translation>
-    </message>
-    <message>
         <source>Personal Code:</source>
         <translation>Personal Code:</translation>
     </message>
@@ -717,6 +713,14 @@ To use Mobiil-ID it is needed to use a SIM card that supports this feature. If s
         <source>There was an error with request to Äriregister.</source>
         <translation>There was an error with request to Äriregister.</translation>
     </message>
+    <message>
+        <source>Given Names:</source>
+        <translation>Given Names:</translation>
+    </message>
+    <message>
+        <source>Surname:</source>
+        <translation>Surname:</translation>
+    </message>
 </context>
 <context>
     <name>SSLConnect</name>
@@ -782,7 +786,7 @@ To use Mobiil-ID it is needed to use a SIM card that supports this feature. If s
     </message>
     <message>
         <source>Clean certs</source>
-        <translation type="unfinished"></translation>
+        <translation>Clean certs</translation>
     </message>
 </context>
 </TS>

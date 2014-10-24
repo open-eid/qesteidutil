@@ -37,8 +37,6 @@ public:
 	{
 		SurName = 0,
 		FirstName,
-		MiddleName,
-		FullName,
 		Sex,
 		Citizen,
 		BirthDate,
