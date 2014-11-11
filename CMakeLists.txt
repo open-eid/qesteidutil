@@ -61,9 +61,42 @@ add_executable( ${PROGNAME} WIN32 MACOSX_BUNDLE
 	${SOURCES}
 	${RESOURCE_FILES}
 )
-set_target_properties( ${PROGNAME} PROPERTIES AUTOMOC TRUE )
 if( APPLE )
-	set_source_files_properties( src/QSmartCard.cpp src/CertUpdate.cpp PROPERTIES COMPILE_FLAGS "-Wno-deprecated-declarations" )
+	set_source_files_properties( src/QSmartCard.cpp src/CertUpdate.cpp
+		PROPERTIES COMPILE_FLAGS "-Wno-deprecated-declarations" )
+	add_custom_target( macdeployqt DEPENDS ${PROGNAME}
+		COMMAND ${_qt5Core_install_prefix}/bin/macdeployqt ${CMAKE_CURRENT_BINARY_DIR}/${PROGNAME}.app
+		COMMAND find $<TARGET_FILE_DIR:${PROGNAME}>/../PlugIns/imageformats -type f -a ! -name libqjpeg.dylib -delete
+		COMMAND for f in $<TARGET_FILE_DIR:${PROGNAME}>/../Frameworks/*\; do
+				name=$$\(basename $$f .framework\)\;
+				mv $$f/Resources $$f/Versions/5\;
+				ln -s Versions/Current/Resources $$f/Resources\;
+				ln -s 5 $$f/Versions/Current\;
+				ln -s Versions/Current/$$name $$f/$$name\;
+				cp ${_qt5Core_install_prefix}/lib/$$name.framework/Contents/Info.plist $$f/Resources\;
+				defaults write $$f/Resources/Info.plist CFBundleExecutable $$name\;
+			done
+	)
+	add_custom_target( codesign DEPENDS ${PROGNAME}
+		COMMAND for f in
+			$<TARGET_FILE_DIR:${PROGNAME}>/../Frameworks/*
+			$<TARGET_FILE_DIR:${PROGNAME}>/../PlugIns/*/*\; do
+				codesign -f -s \"$$SIGNCERT\" $$f\;
+			done
+		COMMAND codesign -f -s \"$$SIGNCERT\" $<TARGET_FILE_DIR:${PROGNAME}>/../..
+			--entitlements ${CMAKE_SOURCE_DIR}/src/${PROGNAME}.entitlements
+	)
+	add_custom_target( productbuild DEPENDS codesign
+		COMMAND productbuild --component ${CMAKE_CURRENT_BINARY_DIR}/${PROGNAME}.app /Applications
+			--sign \"$$INSTCERT\" ${PROGNAME}-store_${VERSION}$ENV{VER_SUFFIX}.pkg
+	)
+	add_custom_target( zip DEPENDS codesign
+		COMMAND zip --symlinks -r -D ${PROGNAME}_${VERSION}$ENV{VER_SUFFIX}.zip ${PROGNAME}.app
+	)
+	add_custom_target( zipdebug DEPENDS ${PROGNAME}
+		COMMAND dsymutil -o ${PROGNAME}.dSYM $<TARGET_FILE:${PROGNAME}>
+		COMMAND zip -r ${PROGNAME}-dbg_${VERSION}$ENV{VER_SUFFIX}.zip ${PROGNAME}.dSYM
+	)
 endif()
 
 if( Qt5Widgets_FOUND )
