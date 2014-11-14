@@ -785,7 +785,7 @@ Mobiil-ID kasutamiseks on vajalik uus SIM-kaart, mille sa saad endale mobiilside
     </message>
     <message>
         <source>Clean certs</source>
-        <translation type="unfinished"></translation>
+        <translation>Eemalda üleliigsed sertifikaadid</translation>
     </message>
 </context>
 </TS>

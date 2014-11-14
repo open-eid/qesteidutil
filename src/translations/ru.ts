@@ -787,7 +787,7 @@ To use Mobiil-ID it is needed to use a SIM card that supports this feature. If s
     </message>
     <message>
         <source>Clean certs</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить лишние сертификаты</translation>
     </message>
 </context>
 </TS>
