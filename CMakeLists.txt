@@ -113,6 +113,7 @@ dump_syms( ${PROGNAME} )
 if(UNIX AND NOT APPLE)
 	configure_file( src/qesteidutil.1.cmake qesteidutil.1 )
 	install( FILES ${CMAKE_CURRENT_BINARY_DIR}/qesteidutil.1 DESTINATION ${CMAKE_INSTALL_MANDIR}/man1 )
+	install( FILES qesteidutil.appdata.xml DESTINATION ${CMAKE_INSTALL_DATADIR}/appdata )
 	install( FILES qesteidutil.desktop DESTINATION ${CMAKE_INSTALL_DATADIR}/applications )
 	foreach( RES 16x16 32x32 48x48 128x128 )
 		install(

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2014 Mihkel Vain <mihkel@fedoraproject.org> -->
+<application>
+  <id type="desktop">qesteidutil.desktop</id>
+  <metadata_license>CC0</metadata_license>
+  <project_license>LGPL-2.0+</project_license>
+  <name>QEsteidUtil</name>
+  <summary>Estonian ID card utility</summary>
+  <description>
+    <p>
+      ID-software allows you to use your ID-card electronically – use
+      private and governmental e-services, digitally sign documents
+      and encrypt documents for safe transfer. During ID-software
+      installation 3 programs are installed into your computer:
+      ID-card utility, DigiDoc3 client and DigiDoc3 crypto.
+    </p>
+    <p>
+      With ID-card utility you can check the functioning of your
+      ID-card and certificate validity, change PIN and PUK codes. The
+      ID-card utility window displays the ID-card owner’s data and
+      ID-card validity data. This information is constantly visible
+      when ID-card utility is running. ID-card utility enables you to
+      perform actions with certificates (extend them, change and
+      unblock PIN codes and PUK code), configure @eesti.ee email
+      address.
+    </p>
+  </description>
+  <screenshots>
+    <screenshot type="default">http://mihkel.fedorapeople.org/esteid/qesteidutil.png</screenshot>
+  </screenshots>
+  <url type="homepage">http://www.id.ee/</url>
+  <updatecontact>mihkel_at_fedoraproject.org</updatecontact>
+</application>
