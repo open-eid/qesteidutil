@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 2.8)
+cmake_policy(SET CMP0020 NEW)
 project( qesteidutil )
 
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/modules")
-set(CMAKE_FIND_ROOT_PATH ${CMAKE_OSX_SYSROOT})
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
 
@@ -13,6 +13,7 @@ set_app_name( PROGNAME qesteidutil )
 
 find_package( Qt5Widgets QUIET HINTS ${QTSDK} )
 if( Qt5Widgets_FOUND )
+	find_package( Qt5Network HINTS ${QTSDK} )
 	find_package( Qt5LinguistTools HINTS ${QTSDK} )
 	add_definitions( -DQT_DISABLE_DEPRECATED_BEFORE=0x040800 )
 else()
@@ -42,6 +43,7 @@ else()
 	qt5_add_translation( SOURCES ${TS_FILES} )
 	qt5_add_resources( SOURCES ${RC_FILES} )
 	qt5_wrap_ui( SOURCES ${UI_FILES} )
+	list( APPEND QT_LIBRARIES Qt5::Widgets Qt5::Network )
 endif()
 
 include_directories(
@@ -62,7 +64,7 @@ add_executable( ${PROGNAME} WIN32 MACOSX_BUNDLE
 	${RESOURCE_FILES}
 )
 if( APPLE )
-	set_source_files_properties( src/QSmartCard.cpp src/CertUpdate.cpp
+	set_source_files_properties( src/main.cpp src/sslConnect.cpp src/QSmartCard.cpp src/CertUpdate.cpp
 		PROPERTIES COMPILE_FLAGS "-Wno-deprecated-declarations" )
 	add_custom_target( macdeployqt DEPENDS ${PROGNAME}
 		COMMAND ${_qt5Core_install_prefix}/bin/macdeployqt ${CMAKE_CURRENT_BINARY_DIR}/${PROGNAME}.app
@@ -99,12 +101,7 @@ if( APPLE )
 	)
 endif()
 
-if( Qt5Widgets_FOUND )
-	qt5_use_modules( ${PROGNAME} Widgets Network )
-endif()
-
 target_link_libraries( ${PROGNAME}
-	${Qt5Core_QTMAIN_LIBRARIES}
 	${QT_LIBRARIES}
 	${ADDITIONAL_LIBRARIES}
 	qdigidoccommon
