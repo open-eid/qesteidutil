@@ -721,6 +721,14 @@ Mobiil-ID kasutamiseks on vajalik uus SIM-kaart, mille sa saad endale mobiilside
         <source>Surname:</source>
         <translation>Perekonnanimi:</translation>
     </message>
+    <message>
+        <source>Unblock</source>
+        <translation>Tühista blokeering</translation>
+    </message>
+    <message>
+        <source>Unblock with PinPad</source>
+        <translation>Tühista blokeering PinPad&apos;iga</translation>
+    </message>
 </context>
 <context>
     <name>SSLConnect</name>

@@ -721,6 +721,14 @@ To use Mobiil-ID it is needed to use a SIM card that supports this feature. If s
         <source>Surname:</source>
         <translation>Surname:</translation>
     </message>
+    <message>
+        <source>Unblock</source>
+        <translation>Unblock</translation>
+    </message>
+    <message>
+        <source>Unblock with PinPad</source>
+        <translation>Unblock with PinPad</translation>
+    </message>
 </context>
 <context>
     <name>SSLConnect</name>

@@ -696,6 +696,8 @@ void MainWindow::setDataPage( int index )
 		d->changePin1PinpadInfo->setCurrentWidget( d->changePin1PinpadInfoPin );
 		d->changePin1ValidateLabel->setText( tr("Current PIN1 code") );
 		d->changePin1Validate->setFocus();
+		d->changePin1Change->setText( tr("Change") );
+		d->changePin1PinpadChange->setText( tr("Change with PinPad") );
 		d->b->setId( d->changePin1Change, PagePin1ChangePin );
 		d->b->setId( d->changePin1PinpadChange, PagePin1ChangePin );
 		break;
@@ -704,6 +706,8 @@ void MainWindow::setDataPage( int index )
 		d->changePin1PinpadInfo->setCurrentWidget( d->changePin1PinpadInfoPuk );
 		d->changePin1ValidateLabel->setText( tr("Current PUK code") );
 		d->changePin1Validate->setFocus();
+		d->changePin1Change->setText( tr("Change") );
+		d->changePin1PinpadChange->setText( tr("Change with PinPad") );
 		d->b->setId( d->changePin1Change, PagePin1ChangePuk );
 		d->b->setId( d->changePin1PinpadChange, PagePin1ChangePuk );
 		break;
@@ -712,6 +716,8 @@ void MainWindow::setDataPage( int index )
 		d->changePin1PinpadInfo->setCurrentWidget( d->changePin1PinpadInfoUnblock );
 		d->changePin1ValidateLabel->setText( tr("Current PUK code") );
 		d->changePin1Validate->setFocus();
+		d->changePin1Change->setText( tr("Unblock") );
+		d->changePin1PinpadChange->setText( tr("Unblock with PinPad") );
 		d->b->setId( d->changePin1Change, PagePin1ChangeUnblock );
 		d->b->setId( d->changePin1PinpadChange, PagePin1ChangeUnblock );
 		break;
@@ -772,6 +778,8 @@ void MainWindow::setDataPage( int index )
 		d->changePin2PinpadInfo->setCurrentWidget( d->changePin2PinpadInfoPin );
 		d->changePin2ValidateLabel->setText( tr("Current PIN2 code") );
 		d->changePin2Validate->setFocus();
+		d->changePin2Change->setText( tr("Change") );
+		d->changePin2PinpadChange->setText( tr("Change with PinPad") );
 		d->b->setId( d->changePin2Change, PagePin2ChangePin );
 		d->b->setId( d->changePin2PinpadChange, PagePin2ChangePin );
 		break;
@@ -780,6 +788,8 @@ void MainWindow::setDataPage( int index )
 		d->changePin2PinpadInfo->setCurrentWidget( d->changePin2PinpadInfoPuk );
 		d->changePin2ValidateLabel->setText( tr("Current PUK code") );
 		d->changePin2Validate->setFocus();
+		d->changePin2Change->setText( tr("Change") );
+		d->changePin2PinpadChange->setText( tr("Change with PinPad") );
 		d->b->setId( d->changePin2Change, PagePin2ChangePuk );
 		d->b->setId( d->changePin2PinpadChange, PagePin2ChangePuk );
 		break;
@@ -788,6 +798,8 @@ void MainWindow::setDataPage( int index )
 		d->changePin2PinpadInfo->setCurrentWidget( d->changePin2PinpadInfoUnblock );
 		d->changePin2ValidateLabel->setText( tr("Current PUK code") );
 		d->changePin2Validate->setFocus();
+		d->changePin2Change->setText( tr("Unblock") );
+		d->changePin2PinpadChange->setText( tr("Unblock with PinPad") );
 		d->b->setId( d->changePin2Change, PagePin2ChangeUnblock );
 		d->b->setId( d->changePin2PinpadChange, PagePin2ChangeUnblock );
 		break;
