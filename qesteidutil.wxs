@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+"\Program Files (x86)\WiX Toolset v3.8\bin\candle.exe" qesteidutil.wxs -dMSI_VERSION=3.9.5
+ -dqt_path=C:\Qt\5.3\msvc2013
+ -dlibs_path="C:\OpenSSL-Win32\bin"
+ -dutility_path=qesteidutil.exe
+ -dupdater_path=updater.exe
+
+"\Program Files (x86)\WiX Toolset v3.8\bin\light.exe" -out qesteidutil.msi qesteidutil.wixobj -v -ext WixUIExtension
+-->
+
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Product Name="ID-card utility" UpgradeCode="03f1549b-cab2-4029-a7d4-0806d706f870"
+      Id="*" Language="1033" Version="$(var.MSI_VERSION)" Codepage="1251" Manufacturer="RIA">
+    <Package Keywords="Installer" InstallerVersion="405" Compressed="yes"/>
+    <MediaTemplate EmbedCab="yes" CompressionLevel="high"/>
+    <Icon Id="qesteidutil.exe" SourceFile="$(var.utility_path)"/>
+    <Property Id="ARPPRODUCTICON" Value="qesteidutil.exe"/>
+    <MajorUpgrade AllowSameVersionUpgrades="yes" DowngradeErrorMessage=
+      "A newer version of [ProductName] is already installed. If you are trying to downgrade, please uninstall the newer version first."/>
+    <Condition Message="[ProductName] requires Windows 7 or higher.">
+      <![CDATA[Installed OR (VersionNT >= 601)]]>
+    </Condition>
+    <UIRef Id="WixUI_Minimal" />
+
+    <Directory Id="TARGETDIR" Name="SourceDir">
+<?ifdef env.VS120COMNTOOLS ?>
+      <Merge Id='CRT' Language='0' SourceFile='C:\Program Files (x86)\Common Files\Merge Modules\Microsoft_VC120_CRT_x86.msm' DiskId='1'/>
+<?else?>
+      <Merge Id='CRT' Language='0' SourceFile='C:\Program Files (x86)\Common Files\Merge Modules\Microsoft_VC110_CRT_x86.msm' DiskId='1'/>
+<?endif?>
+      <Directory Id="ProgramMenuFolder">
+        <Directory Id="ProgramMenuDir" Name="ID-card utility">
+          <Component Id="ProgramMenuDir" Guid="f16899e5-b0d9-4902-b0e0-350ac5ac6c2d">
+            <RemoveFolder Id="ProgramMenuDir" On="uninstall" />
+            <RegistryValue Root='HKCU' Key='Software\[Manufacturer]\[ProductName]' Type='string' Value='' KeyPath='yes' />
+          </Component>
+        </Directory>
+      </Directory>
+      <Directory Id='ProgramFilesFolder'>
+        <Directory Id="APPLICATIONFOLDER" Name="ID-card utility">
+          <Component Id="Application" Guid="810cbd57-b24d-49ee-939a-a1fc38dda46f">
+            <File Source="$(var.libs_path)\libeay32.dll"/>
+            <File Source="$(var.libs_path)\ssleay32.dll"/>
+            <File Source="$(var.qt_path)\bin\Qt5Core.dll"/>
+            <File Source="$(var.qt_path)\bin\Qt5Gui.dll"/>
+            <File Source="$(var.qt_path)\bin\Qt5Network.dll"/>
+            <File Source="$(var.qt_path)\bin\Qt5PrintSupport.dll"/>
+            <File Source="$(var.qt_path)\bin\Qt5Widgets.dll"/>
+            <File Source="$(var.qt_path)\bin\Qt5WinExtras.dll"/>
+            <File Source="$(var.qt_path)\bin\libEGL.dll"/>
+            <File Source="$(var.qt_path)\bin\libGLESv2.dll"/>
+<?ifdef env.VS120COMNTOOLS ?>
+            <File Source="$(var.qt_path)\bin\icudt52.dll"/>
+            <File Source="$(var.qt_path)\bin\icuin52.dll"/>
+            <File Source="$(var.qt_path)\bin\icuuc52.dll"/>
+            <File Source="$(var.qt_path)\bin\D3DCompiler_47.dll"/>
+<?else?>
+            <File Source="$(var.qt_path)\bin\icudt51.dll"/>
+            <File Source="$(var.qt_path)\bin\icuin51.dll"/>
+            <File Source="$(var.qt_path)\bin\icuuc51.dll"/>
+            <File Source="$(var.qt_path)\bin\D3DCompiler_46.dll"/>
+<?endif?>
+<?ifdef var.updater_path ?>
+            <File Source="$(var.updater_path)" Id="id_updater.exe"/>
+<?endif?>
+            <File Source="$(var.utility_path)" KeyPath='yes'>
+              <Shortcut Id="StartMenu" Advertise="yes" Name="ID-card utility" Icon="qesteidutil.exe"
+                Directory="ProgramMenuDir" WorkingDirectory="APPLICATIONFOLDER"/>
+            </File>
+          </Component>
+          <Directory Id="platforms" Name="platforms" FileSource="$(var.qt_path)\plugins\platforms">
+            <Component Id="qwindows.dll">
+              <File Name="qwindows.dll"/>
+            </Component>
+          </Directory>
+          <Directory Id="accessible" Name="accessible" FileSource="$(var.qt_path)\plugins\accessible">
+            <Component Id="qtaccessiblewidgets.dll">
+              <File Name="qtaccessiblewidgets.dll"/>
+            </Component>
+          </Directory>
+          <Directory Id="printsupport" Name="printsupport" FileSource="$(var.qt_path)\plugins\printsupport">
+            <Component Id="windowsprintersupport.dll">
+              <File Name="windowsprintersupport.dll"/>
+            </Component>
+          </Directory>
+          <Directory Id="imageformats" Name="imageformats" FileSource="$(var.qt_path)\plugins\imageformats">
+            <Component Id="qjpeg.dll">
+              <File Name="qjpeg.dll"/>
+            </Component>
+          </Directory>
+        </Directory>
+      </Directory>
+    </Directory>
+
+<?ifdef var.updater_path ?>
+    <CustomAction Id="ScheduleUpdater" FileKey="id_updater.exe" Impersonate="no" Execute="deferred"
+        ExeCommand="-weekly" Return="ignore"/>
+    <CustomAction Id="UnScheduleUpdater" Directory="APPLICATIONFOLDER" Impersonate="no" Execute="deferred"
+        ExeCommand="id-updater.exe -remove" Return="ignore"/>
+    <InstallExecuteSequence>
+      <Custom Action="ScheduleUpdater" Before="InstallFinalize">NOT Installed</Custom>
+      <Custom Action="UnScheduleUpdater" After="InstallInitialize">REMOVE="ALL"</Custom>
+    </InstallExecuteSequence>
+<?endif?>
+
+    <Feature Id="Install" Level="1" Title="ID-card utility" Display="expand" ConfigurableDirectory="APPLICATIONFOLDER">
+      <MergeRef Id="CRT"/>
+      <ComponentRef Id='ProgramMenuDir' />
+      <ComponentRef Id="Application"/>
+      <ComponentRef Id="qwindows.dll" />
+      <ComponentRef Id="qtaccessiblewidgets.dll" />
+      <ComponentRef Id="windowsprintersupport.dll" />
+      <ComponentRef Id="qjpeg.dll" />
+    </Feature>
+  </Product>
+</Wix>
