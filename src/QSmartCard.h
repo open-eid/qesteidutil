@@ -33,7 +33,8 @@ public:
 	enum PersonalDataType
 	{
 		SurName = 0,
-		FirstName,
+		FirstName1,
+		FirstName2,
 		Sex,
 		Citizen,
 		BirthDate,
@@ -51,7 +52,7 @@ public:
 	};
 	enum PinType
 	{
-		Pin1Type,
+		Pin1Type = 1,
 		Pin2Type,
 		PukType
 	};
@@ -118,21 +119,19 @@ public:
 		OldNewPinSameError
 	};
 
-	explicit QSmartCard( const QString &lang, QObject *parent = 0 );
+	explicit QSmartCard( QObject *parent = 0 );
 	~QSmartCard();
 
 	ErrorType change( QSmartCardData::PinType type, const QString &newpin, const QString &pin );
 	QSmartCardData data() const;
 	Qt::HANDLE key();
 	ErrorType login( QSmartCardData::PinType type );
-	void setLang( const QString &lang );
 	void logout();
 	void reload();
 	ErrorType unblock( QSmartCardData::PinType type, const QString &pin, const QString &puk );
 
 signals:
 	void dataChanged();
-	void eventStarted();
 
 private Q_SLOTS:
 	void selectCard( const QString &card );

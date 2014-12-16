@@ -390,7 +390,7 @@ MainWindow::MainWindow( QWidget *parent )
 	d->bar->addAction( MacMenuBar::CloseAction, qApp, SLOT(quit()) );
 #endif
 
-	d->smartcard = new QSmartCard( Settings::language(), this );
+	d->smartcard = new QSmartCard( this );
 	connect( d->smartcard, SIGNAL(dataChanged()), SLOT(updateData()) );
 	d->smartcard->start();
 	connect( d->cards, SIGNAL(activated(QString)), d->smartcard, SLOT(selectCard(QString)), Qt::QueuedConnection );
@@ -442,7 +442,6 @@ void MainWindow::on_languages_activated( int index )
 	else if( lang == "ru" ) QLocale::setDefault( QLocale( QLocale::Russian, QLocale::RussianFederation ) );
 	else QLocale::setDefault( QLocale( QLocale::Estonian, QLocale::Estonia ) );
 
-	d->smartcard->setLang( lang );
 	d->appTranslator.load( ":/translations/" + lang );
 	d->qtTranslator.load( ":/translations/qt_" + lang );
 	d->commonTranslator.load( ":/translations/common_" + lang );
@@ -571,7 +570,6 @@ void MainWindow::setDataPage( int index )
 #endif
 		d->showLoading( tr("Updating certificates") );
 		d->smartcard->d->m.lock();
-		d->smartcard->d->card.clear();
 		Updater(d->smartcard->data().reader(), this).exec();
 		d->smartcard->d->m.unlock();
 		d->smartcard->reload();
@@ -926,7 +924,11 @@ void MainWindow::updateData()
 		d->changePin2Stack->setCurrentIndex( t.isPinpad() );
 		d->changePukStack->setCurrentIndex( t.isPinpad() );
 
-		d->personalName->setText( t.data( QSmartCardData::FirstName ).toString() );
+		QStringList name = QStringList()
+			<< SslCertificate::formatName( t.data( QSmartCardData::FirstName1 ).toString() )
+			<< SslCertificate::formatName( t.data( QSmartCardData::FirstName2 ).toString() );
+		name.removeAll( "" );
+		d->personalName->setText( name.join(", ") );
 		d->surName->setText( t.data( QSmartCardData::SurName ).toString() );
 		d->personalCode->setText( t.data( QSmartCardData::Id ).toString() );
 		d->personalBirth->setText( DateTime( t.data( QSmartCardData::BirthDate ).toDateTime() ).formatDate( "dd. MMMM yyyy" ) +

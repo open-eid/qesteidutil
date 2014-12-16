@@ -19,9 +19,8 @@
 
 #include "QSmartCard.h"
 
+#include <common/QPCSC.h>
 #include <common/SslCertificate.h>
-
-#include <smartcardpp/EstEIDManager.h>
 
 #include <QtCore/QMutex>
 #include <QtCore/QStringList>
@@ -30,71 +29,56 @@
 
 #include <openssl/rsa.h>
 
-typedef EstEIDManager EstEidCard;
+#define APDU QByteArray::fromHex
 
 class QSmartCardPrivate
 {
 public:
-	enum Command
-	{
-		Change,
-		Unblock,
-		Validate,
-		ValidateInternal
-	};
+	QSharedPointer<QPCSCReader> connect(const QString &reader);
+	QSmartCard::ErrorType handlePinResult(QPCSCReader *reader, QPCSCReader::Result response, bool forceUpdate);
+	quint16 language() const;
+	bool updateCounters(QPCSCReader *reader, QSmartCardDataPrivate *d);
 
-	QSmartCardPrivate()
-		: codec( QTextCodec::codecForName("Windows-1252") )
-		, card(0)
-		, numReaders(0)
-		, terminate( false )
-		, method(*RSA_get_default_method())
-		, lang(EstEidCard::ENG)
-		, cmd(Change)
-		, type(QSmartCardData::Pin1Type)
-		, result(QSmartCard::NoError)
-	{
-		method.name = "QSmartCard";
-		method.rsa_sign = rsa_sign;
-	}
+	static int rsa_sign(int type, const unsigned char *m, unsigned int m_len,
+		unsigned char *sigret, unsigned int *siglen, const RSA *rsa);
 
-	QString encode( const std::string &data ) const
-	{ return data.empty() ? QString() : codec->toUnicode( QByteArray::fromRawData(data.c_str(), data.size()) ); }
-
-	QSmartCard::ErrorType handleAuthError( QSmartCardData::PinType type, const AuthError &e );
-	void updateCounters( QSmartCardDataPrivate *d );
-
-	static int rsa_sign( int type, const unsigned char *m, unsigned int m_len,
-		unsigned char *sigret, unsigned int *siglen, const RSA *rsa );
-
-	QTextCodec		*codec;
-	QSharedPointer<EstEidCard> card;
+	QSharedPointer<QPCSCReader> reader;
 	QMutex			m;
-	quint8			numReaders;
 	QSmartCardData	t;
-	volatile bool	terminate;
-	RSA_METHOD		method;
-	EstEidCard::ReaderLanguageID lang;
+	volatile bool	terminate = false;
+	RSA_METHOD		method = *RSA_get_default_method();
+	QTextCodec		*codec = QTextCodec::codecForName("Windows-1252");
 
-	// pin operations
-	QEventLoop		e;
-	Command			cmd;
-	QSmartCardData::PinType type;
-	PinString		pin, old;
-	QSmartCard::ErrorType result;
+	const QByteArray AID30 = APDU("00A40400 10 D2330000010000010000000000000000");
+	const QByteArray AID34 = APDU("00A40400 0E F04573744549442076657220312E");
+	const QByteArray AID35 = APDU("00A40400 0F D23300000045737445494420763335");
+	const QByteArray UPDATER_AID =	APDU("00A40400 0A D2330000005550443101");
+	const QByteArray MASTER_FILE =	APDU("00A4000C");// 00");
+	const QByteArray ESTEIDDF =		APDU("00A4010C 02 EEEE");
+	const QByteArray PERSONALDATA =	APDU("00A4020C 02 5044");
+	const QByteArray AUTHCERT =		APDU("00A4020C 02 AACE");
+	const QByteArray SIGNCERT =		APDU("00A4020C 02 DDCE");
+	const QByteArray KEYPOINTER =	APDU("00A4020C 02 0033");
+	const QByteArray KEYUSAGE =		APDU("00A4020C 02 0013");
+	const QByteArray PINRETRY =		APDU("00A4020C 02 0016");
+	const QByteArray READBINARY =	APDU("00B00000 00");
+	const QByteArray READRECORD =	APDU("00B20004 00");
+	const QByteArray SECENV1 =		APDU("0022F301 00");
+	const QByteArray SECENV3 =		APDU("0022F303 00");
+	const QByteArray CHANGE =		APDU("00240000 00");
+	const QByteArray REPLACE =		APDU("002C0000 00");
+	const QByteArray VERIFY =		APDU("00200000 00");
 };
 
 class QSmartCardDataPrivate: public QSharedData
 {
 public:
-	QSmartCardDataPrivate(): version(QSmartCardData::VER_INVALID), pinpad(false) {}
-
 	QString card, reader;
 	QStringList cards, readers;
 	QHash<QSmartCardData::PersonalDataType,QVariant> data;
 	SslCertificate authCert, signCert;
 	QHash<QSmartCardData::PinType,quint8> retry;
 	QHash<QSmartCardData::PinType,ulong> usage;
-	QSmartCardData::CardVersion version;
-	bool pinpad;
+	QSmartCardData::CardVersion version = QSmartCardData::VER_INVALID;
+	bool pinpad = false;
 };

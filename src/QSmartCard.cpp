@@ -19,26 +19,23 @@
 
 #include "QSmartCard_p.h"
 
-#include <common/Common.h>
 #include <common/IKValidator.h>
 #include <common/PinDialog.h>
-#include <common/QPCSC.h>
 #include <common/Settings.h>
 
 #include <QtCore/QDateTime>
 #include <QtCore/QDebug>
-#include <QtCore/QDir>
-#include <QtCore/QProcess>
 #include <QtCore/QScopedPointer>
-#include <QtNetwork/QSslCertificate>
 #include <QtNetwork/QSslKey>
+#include <QtWidgets/QApplication>
 
 #include <openssl/evp.h>
+#include <thread>
 
-QSmartCardData::QSmartCardData(): d( new QSmartCardDataPrivate ) {}
-QSmartCardData::QSmartCardData( const QSmartCardData &other ): d( other.d ) {}
+QSmartCardData::QSmartCardData(): d(new QSmartCardDataPrivate) {}
+QSmartCardData::QSmartCardData(const QSmartCardData &other): d(other.d) {}
 QSmartCardData::~QSmartCardData() {}
-QSmartCardData& QSmartCardData::operator =( const QSmartCardData &other ) { d = other.d; return *this; }
+QSmartCardData& QSmartCardData::operator =(const QSmartCardData &other) { d = other.d; return *this; }
 
 QString QSmartCardData::card() const { return d->card; }
 QStringList QSmartCardData::cards() const { return d->cards; }
@@ -47,24 +44,24 @@ bool QSmartCardData::isNull() const
 { return d->data.isEmpty() && d->authCert.isNull() && d->signCert.isNull(); }
 bool QSmartCardData::isPinpad() const { return d->pinpad; }
 bool QSmartCardData::isSecurePinpad() const
-{ return d->reader.contains( "EZIO SHIELD", Qt::CaseInsensitive ); }
+{ return d->reader.contains("EZIO SHIELD", Qt::CaseInsensitive); }
 bool QSmartCardData::isValid() const
-{ return d->data.value( Expiry ).toDateTime() >= QDateTime::currentDateTime(); }
+{ return d->data.value(Expiry).toDateTime() >= QDateTime::currentDateTime(); }
 
 QString QSmartCardData::reader() const { return d->reader; }
 QStringList QSmartCardData::readers() const { return d->readers; }
 
-QVariant QSmartCardData::data( PersonalDataType type ) const
-{ return d->data.value( type ); }
+QVariant QSmartCardData::data(PersonalDataType type) const
+{ return d->data.value(type); }
 SslCertificate QSmartCardData::authCert() const { return d->authCert; }
 SslCertificate QSmartCardData::signCert() const { return d->signCert; }
-quint8 QSmartCardData::retryCount( PinType type ) const { return d->retry.value( type ); }
-ulong QSmartCardData::usageCount( PinType type ) const { return d->usage.value( type ); }
+quint8 QSmartCardData::retryCount(PinType type) const { return d->retry.value(type); }
+ulong QSmartCardData::usageCount(PinType type) const { return d->usage.value(type); }
 QSmartCardData::CardVersion QSmartCardData::version() const { return d->version; }
 
-QString QSmartCardData::typeString( QSmartCardData::PinType type )
+QString QSmartCardData::typeString(QSmartCardData::PinType type)
 {
-	switch( type )
+	switch(type)
 	{
 	case Pin1Type: return "PIN1";
 	case Pin2Type: return "PIN2";
@@ -75,39 +72,23 @@ QString QSmartCardData::typeString( QSmartCardData::PinType type )
 
 
 
-int QSmartCardPrivate::rsa_sign( int type, const unsigned char *m, unsigned int m_len,
-		unsigned char *sigret, unsigned int *siglen, const RSA *rsa )
+QSharedPointer<QPCSCReader> QSmartCardPrivate::connect(const QString &reader)
 {
-	if( type != NID_md5_sha1 && m_len != 36 )
-		return 0;
-
-	QSmartCardPrivate *d = (QSmartCardPrivate*)RSA_get_app_data( rsa );
-	if ( !d )
-		return 0;
-
-	try
-	{
-		ByteVec vec = d->card->sign( ByteVec( m, m + m_len ), EstEidCard::SSL, EstEidCard::AUTH );
-		if( vec.size() == 0 )
-			return 0;
-		*siglen = (unsigned int)vec.size();
-		memcpy( sigret, &vec[0], vec.size() );
-		return 1;
-	}
-	catch( const std::runtime_error &e )
-	{
-		qDebug() << Q_FUNC_INFO << e.what();
-	}
-	return 0;
+	qDebug() << "Connecting to reader" << reader;
+	QSharedPointer<QPCSCReader> r(new QPCSCReader(reader, &QPCSC::instance()));
+	if(r->connect() && r->beginTransaction())
+		return r;
+	return QSharedPointer<QPCSCReader>();
 }
 
-QSmartCard::ErrorType QSmartCardPrivate::handleAuthError( QSmartCardData::PinType type, const AuthError &e )
+QSmartCard::ErrorType QSmartCardPrivate::handlePinResult(QPCSCReader *reader, QPCSCReader::Result response, bool forceUpdate)
 {
-	updateCounters( t.d );
-	if( t.retryCount( type ) < 1 ) return QSmartCard::BlockedError;
-	switch( (e.SW1 << 8) + e.SW2 )
+	if(!response.resultOk() || forceUpdate)
+		updateCounters(reader, t.d);
+	switch((quint8(response.SW[0]) << 8) + quint8(response.SW[1]))
 	{
-	case 0x63C0: return QSmartCard::BlockedError; //pin retry count 0
+	case 0x9000: return QSmartCard::NoError;
+	case 0x63C0: return QSmartCard::BlockedError;//pin retry count 0
 	case 0x63C1: // Validate error, 1 tries left
 	case 0x63C2: // Validate error, 2 tries left
 	case 0x63C3: return QSmartCard::ValidateError;
@@ -122,32 +103,99 @@ QSmartCard::ErrorType QSmartCardPrivate::handleAuthError( QSmartCardData::PinTyp
 	}
 }
 
-void QSmartCardPrivate::updateCounters( QSmartCardDataPrivate *d )
+quint16 QSmartCardPrivate::language() const
 {
-	try
+	if(Settings().language() == "en") return 0x0409;
+	if(Settings().language() == "et") return 0x0425;
+	if(Settings().language() == "ru") return 0x0419;
+	return 0x0000;
+}
+
+int QSmartCardPrivate::rsa_sign(int type, const unsigned char *m, unsigned int m_len,
+		unsigned char *sigret, unsigned int *siglen, const RSA *rsa)
+{
+	QSmartCardPrivate *d = (QSmartCardPrivate*)RSA_get_app_data(rsa);
+	if(type != NID_md5_sha1 ||
+		m_len != 36 ||
+		!d ||
+		!d->reader ||
+		!d->reader->transfer(d->SECENV1).resultOk() ||
+		!d->reader->transfer(APDU("002241B8 02 8300")).resultOk()) //Key reference, 8303801100
+		return 0;
+
+	QByteArray cmd = APDU("0088000000"); //calc signature
+	cmd[4] = m_len;
+	cmd += QByteArray::fromRawData((const char*)m, m_len);
+	QPCSCReader::Result result = d->reader->transfer(cmd);
+	if(!result.resultOk())
+		return 0;
+
+	*siglen = (unsigned int)result.data.size();
+	memcpy(sigret, result.data.constData(), result.data.size());
+	return 1;
+}
+
+bool QSmartCardPrivate::updateCounters(QPCSCReader *reader, QSmartCardDataPrivate *d)
+{
+	if(!reader->transfer(MASTER_FILE).resultOk() ||
+		!reader->transfer(PINRETRY).resultOk())
+		return false;
+
+	QByteArray cmd = READRECORD;
+	for(int i = QSmartCardData::Pin1Type; i <= QSmartCardData::PukType; ++i)
 	{
-		d->retry.clear();
-		d->usage.clear();
-		card->getRetryCounts( d->retry[QSmartCardData::PukType], d->retry[QSmartCardData::Pin1Type], d->retry[QSmartCardData::Pin2Type] );
-		card->getKeyUsageCounters( d->usage[QSmartCardData::Pin1Type], d->usage[QSmartCardData::Pin2Type] );
+		cmd[2] = i;
+		QPCSCReader::Result data = reader->transfer(cmd);
+		if(!data.resultOk())
+			return false;
+		d->retry[QSmartCardData::PinType(i)] = data.data[5];
 	}
-	catch( const std::runtime_error &e )
-	{
-		qDebug() << Q_FUNC_INFO << e.what();
-	}
+
+	if(!reader->transfer(ESTEIDDF).resultOk() ||
+		!reader->transfer(KEYPOINTER).resultOk())
+		return false;
+
+	cmd[2] = 1;
+	QPCSCReader::Result data = reader->transfer(cmd);
+	if(!data.resultOk())
+		return false;
+
+	/*
+	 * SIGN1 0100 1
+	 * SIGN2 0200 2
+	 * AUTH1 1100 3
+	 * AUTH2 1200 4
+	 */
+	quint8 signkey = data.data.at(0x13) == 0x01 && data.data.at(0x14) == 0x00 ? 1 : 2;
+	quint8 authkey = data.data.at(0x09) == 0x11 && data.data.at(0x0A) == 0x00 ? 3 : 4;
+
+	if(!reader->transfer(KEYUSAGE).resultOk())
+		return false;
+
+	cmd[2] = authkey;
+	data = reader->transfer(cmd);
+	if(!data.resultOk())
+		return false;
+	d->usage[QSmartCardData::Pin1Type] = 0xFFFFFF - ((quint8(data.data[12]) << 16) + (quint8(data.data[13]) << 8) + quint8(data.data[14]));
+
+	cmd[2] = signkey;
+	data = reader->transfer(cmd);
+	if(!data.resultOk())
+		return false;
+	d->usage[QSmartCardData::Pin2Type] = 0xFFFFFF - ((quint8(data.data[12]) << 16) + (quint8(data.data[13]) << 8) + quint8(data.data[14]));
+	return true;
 }
 
 
 
 
-QSmartCard::QSmartCard( const QString &lang, QObject *parent )
-:	QThread( parent )
-,	d( new QSmartCardPrivate )
+QSmartCard::QSmartCard(QObject *parent)
+:	QThread(parent)
+,	d(new QSmartCardPrivate)
 {
-	SCardLog::writeLog("[%s:%d] %s %s", __FUNC__, __LINE__,
-		qApp->applicationName().toUtf8().constData(), qApp->applicationVersion().toUtf8().constData());
-	setLang( lang );
-	d->t.d->readers = QStringList() << "loading";
+	d->method.name = "QSmartCard";
+	d->method.rsa_sign = QSmartCardPrivate::rsa_sign;
+	d->t.d->readers = QPCSC::instance().readers();
 	d->t.d->cards = QStringList() << "loading";
 	d->t.d->card = "loading";
 }
@@ -159,40 +207,52 @@ QSmartCard::~QSmartCard()
 	delete d;
 }
 
-QSmartCard::ErrorType QSmartCard::change( QSmartCardData::PinType type, const QString &newpin, const QString &pin )
+QSmartCard::ErrorType QSmartCard::change(QSmartCardData::PinType type, const QString &newpin, const QString &pin)
 {
-	QMutexLocker locker( &d->m );
-	if( !d->card ) return QSmartCard::UnknownError;
-	d->cmd = QSmartCardPrivate::Change;
-	d->type = type;
-	d->pin = newpin.toUtf8().constData();
-	d->old = pin.toUtf8().constData();
-	d->e.exec();
-	return d->result;
+	QMutexLocker locker(&d->m);
+	QSharedPointer<QPCSCReader> reader(d->connect(d->t.reader()));
+	if(!reader)
+		return UnknownError;
+	QByteArray cmd = d->CHANGE;
+	cmd[3] = type == QSmartCardData::PukType ? 0 : type;
+	cmd[4] = pin.size() + newpin.size();
+	QPCSCReader::Result result;
+	if(d->t.isPinpad())
+	{
+		QEventLoop l;
+		std::thread([&]{
+			result = reader->transferCTL(cmd, false, d->language(), type == QSmartCardData::Pin1Type ? 4 : 5);
+			l.quit();
+		}).detach();
+		l.exec();
+	}
+	else
+		result = reader->transfer(cmd + pin.toUtf8() + newpin.toUtf8());
+	return d->handlePinResult(reader.data(), result, true);
 }
 
 QSmartCardData QSmartCard::data() const { return d->t; }
 
 Qt::HANDLE QSmartCard::key()
 {
-	RSA *rsa = RSAPublicKey_dup( (RSA*)d->t.authCert().publicKey().handle() );
-	if ( !rsa )
+	RSA *rsa = RSAPublicKey_dup((RSA*)d->t.authCert().publicKey().handle());
+	if (!rsa)
 		return 0;
 
-	RSA_set_method( rsa, &d->method );
+	RSA_set_method(rsa, &d->method);
 	rsa->flags |= RSA_FLAG_SIGN_VER;
-	RSA_set_app_data( rsa, d );
+	RSA_set_app_data(rsa, d);
 	EVP_PKEY *key = EVP_PKEY_new();
-	EVP_PKEY_set1_RSA( key, rsa );
-	RSA_free( rsa );
+	EVP_PKEY_set1_RSA(key, rsa);
+	RSA_free(rsa);
 	return Qt::HANDLE(key);
 }
 
-QSmartCard::ErrorType QSmartCard::login( QSmartCardData::PinType type )
+QSmartCard::ErrorType QSmartCard::login(QSmartCardData::PinType type)
 {
 	PinDialog::PinFlags flags = PinDialog::Pin1Type;
 	QSslCertificate cert;
-	switch( type )
+	switch(type)
 	{
 	case QSmartCardData::Pin1Type: flags = PinDialog::Pin1Type; cert = d->t.authCert(); break;
 	case QSmartCardData::Pin2Type: flags = PinDialog::Pin2Type; cert = d->t.signCert(); break;
@@ -200,93 +260,140 @@ QSmartCard::ErrorType QSmartCard::login( QSmartCardData::PinType type )
 	}
 
 	QScopedPointer<PinDialog> p;
-	PinString pin;
-	if( !d->t.isPinpad() )
+	QByteArray pin;
+	if(!d->t.isPinpad())
 	{
-		p.reset( new PinDialog( flags, cert, 0, qApp->activeWindow() ) );
-		if( !p->exec() )
+		p.reset(new PinDialog(flags, cert, 0, qApp->activeWindow()));
+		if(!p->exec())
 			return CancelError;
-		pin = p->text().toUtf8().constData();
-	} else {
-		p.reset( new PinDialog( PinDialog::PinFlags(flags|PinDialog::PinpadFlag), cert, 0, qApp->activeWindow() ) );
-		p->open();
+		pin = p->text().toUtf8();
 	}
+	else
+		p.reset(new PinDialog(PinDialog::PinFlags(flags|PinDialog::PinpadFlag), cert, 0, qApp->activeWindow()));
 
 	d->m.lock();
-	if( !d->card ) return QSmartCard::UnknownError;
-	d->cmd = QSmartCardPrivate::Validate;
-	d->type = type;
-	d->pin = pin;
-	connect( this, SIGNAL(eventStarted()), p.data(), SIGNAL(startTimer()) );
-	d->e.exec();
-	if( d->result != QSmartCard::NoError )
+	d->reader = d->connect(d->t.reader());
+	if(!d->reader)
+		return UnknownError;
+	QByteArray cmd = d->VERIFY;
+	cmd[3] = type == QSmartCardData::PukType ? 0 : type;
+	cmd[4] = pin.size();
+	QPCSCReader::Result result;
+	if(d->t.isPinpad())
+	{
+		std::thread([&]{
+			Q_EMIT p->startTimer();
+			result = d->reader->transferCTL(cmd, true, d->language());
+			Q_EMIT p->finish(0);
+		}).detach();
+		p->exec();
+	}
+	else
+		result = d->reader->transfer(cmd + pin);
+	QSmartCard::ErrorType err = d->handlePinResult(d->reader.data(), result, false);
+	if(!result.resultOk())
+	{
+		d->updateCounters(d->reader.data(), d->t.d);
+		d->reader.clear();
 		d->m.unlock();
-	return d->result;
+	}
+	return err;
 }
 
 void QSmartCard::logout()
 {
-	d->updateCounters( d->t.d );
+	if(d->reader.isNull())
+		return;
+	d->updateCounters(d->reader.data(), d->t.d);
+	d->reader.clear();
 	d->m.unlock();
 }
 
-void QSmartCard::reload() { selectCard( d->t.card() ); }
+void QSmartCard::reload() { selectCard(d->t.card());  }
 
 void QSmartCard::run()
 {
-	const QByteArray AID35 =		QByteArray::fromHex("00A40400 0F D23300000045737445494420763335");
-	const QByteArray UPDATER_AID =	QByteArray::fromHex("00A40400 0A D2330000005550443101");
-	const QByteArray MASTER_FILE =	QByteArray::fromHex("00A4000C 00");
-	const QByteArray ESTEIDDF =		QByteArray::fromHex("00A4010C 02 EEEE");
-	const QByteArray PERSONALDATA =	QByteArray::fromHex("00A4020C 02 5044");
-	const QByteArray READRECORD =	QByteArray::fromHex("00B20004 00");
+	static const QHash<QByteArray,QSmartCardData::CardVersion> atrList{
+		{"3BFE9400FF80B1FA451F034573744549442076657220312E3043", QSmartCardData::VER_1_0}, /*ESTEID_V1_COLD_ATR*/
+		{"3B6E00FF4573744549442076657220312E30", QSmartCardData::VER_1_0}, /*ESTEID_V1_WARM_ATR*/
+		{"3BDE18FFC080B1FE451F034573744549442076657220312E302B", QSmartCardData::VER_1_0_2007}, /*ESTEID_V1_2007_COLD_ATR*/
+		{"3B5E11FF4573744549442076657220312E30", QSmartCardData::VER_1_0_2007}, /*ESTEID_V1_2007_WARM_ATR*/
+		{"3B6E00004573744549442076657220312E30", QSmartCardData::VER_1_1}, /*ESTEID_V1_1_COLD_ATR*/
+		{"3BFE1800008031FE454573744549442076657220312E30A8", QSmartCardData::VER_3_4}, /*ESTEID_V3_COLD_DEV1_ATR*/
+		{"3BFE1800008031FE45803180664090A4561B168301900086", QSmartCardData::VER_3_4}, /*ESTEID_V3_WARM_DEV1_ATR*/
+		{"3BFE1800008031FE45803180664090A4162A0083019000E1", QSmartCardData::VER_3_4}, /*ESTEID_V3_WARM_DEV2_ATR*/
+		{"3BFE1800008031FE45803180664090A4162A00830F9000EF", QSmartCardData::VER_3_4}, /*ESTEID_V3_WARM_DEV3_ATR*/
+		{"3BF9180000C00A31FE4553462D3443432D303181", QSmartCardData::VER_3_5}, /*ESTEID_V35_COLD_DEV1_ATR*/
+		{"3BF81300008131FE454A434F5076323431B7", QSmartCardData::VER_3_5}, /*ESTEID_V35_COLD_DEV2_ATR*/
+		{"3BFA1800008031FE45FE654944202F20504B4903", QSmartCardData::VER_3_5}, /*ESTEID_V35_COLD_DEV3_ATR*/
+		{"3BFE1800008031FE45803180664090A4162A00830F9000EF", QSmartCardData::VER_3_5}, /*ESTEID_V35_WARM_ATR*/
+		{"3BFE1800008031FE45803180664090A5102E03830F9000EF", QSmartCardData::VER_3_5}, /*UPDATER_TEST_CARDS*/
+	};
 
-	while( !d->terminate )
+	QByteArray cardid = d->READRECORD;
+	cardid[2] = 8;
+
+	while(!d->terminate)
 	{
-		if( d->m.tryLock() )
+		if(d->m.tryLock())
 		{
 			// Get list of available cards
-			QMap<QString,std::string> cards;
+			QMap<QString,QString> cards;
 			const QStringList readers = QPCSC::instance().readers();
-			for(const QString &reader: readers)
-			{
-				qDebug() << "Reader" << reader;
-				QScopedPointer<QPCSCReader> ctx(new QPCSCReader(reader, &QPCSC::instance()));
-				if(!ctx->connect(QPCSCReader::Shared))
-					continue;
-
-				if(!ctx->transfer(MASTER_FILE).resultOk())
+			if(![&] {
+				for(const QString &name: readers)
 				{
-					// Master file selection failed, test if it is updater applet
-					if(!ctx->transfer(UPDATER_AID).resultOk())
-						continue; // Updater applet not found
-					if(!ctx->transfer(MASTER_FILE).resultOk())
-					{	//Found updater applet but cannot select master file, select back 3.5
-						ctx->transfer(AID35);
+					qDebug() << "Connecting to reader" << name;
+					QScopedPointer<QPCSCReader> reader(new QPCSCReader(name, &QPCSC::instance()));
+					if(!reader->isPresent())
 						continue;
-					}
-				}
 
-				if(!ctx->transfer(ESTEIDDF).resultOk() ||
-					!ctx->transfer(PERSONALDATA).resultOk() )
-					continue;
-				QByteArray cardid = READRECORD;
-				cardid[2] = 8;
-				QString nr = d->codec->toUnicode( ctx->transfer( cardid ).data );
-				if(!nr.isEmpty())
-					cards[nr] = reader.toStdString();
+					if(!reader->connect() || !reader->beginTransaction())
+						return false;
+
+					QPCSCReader::Result result;
+					#define TRANSFERIFNOT(X) result = reader->transfer(X); \
+						if(result.err) return false; \
+						if(!result.resultOk())
+
+					TRANSFERIFNOT(d->MASTER_FILE)
+					{	// Master file selection failed, test if it is updater applet
+						TRANSFERIFNOT(d->UPDATER_AID)
+							continue; // Updater applet not found
+						TRANSFERIFNOT(d->MASTER_FILE)
+						{	//Found updater applet but cannot select master file, select back 3.5
+							reader->transfer(d->AID35);
+							continue;
+						}
+					}
+					TRANSFERIFNOT(d->ESTEIDDF)
+						continue;
+					TRANSFERIFNOT(d->PERSONALDATA)
+						continue;
+					TRANSFERIFNOT(cardid)
+						continue;
+					QString nr = d->codec->toUnicode(result.data);
+					if(!nr.isEmpty())
+						cards[nr] = name;
+				}
+				return true;
+			}())
+			{
+				qDebug() << "Failed to poll card, try again next round";
+				d->m.unlock();
+				sleep(5);
+				continue;
 			}
 
 			// cardlist has changed
 			QStringList order = cards.keys();
-			std::sort( order.begin(), order.end(), TokenData::cardsOrder );
+			std::sort(order.begin(), order.end(), TokenData::cardsOrder);
 			bool update = d->t.cards() != order || d->t.readers() != readers;
 
 			// check if selected card is still in slot
-			if( !d->t.card().isEmpty() && !order.contains( d->t.card() ) )
+			if(!d->t.card().isEmpty() && !order.contains(d->t.card()))
 			{
 				update = true;
-				d->card.clear();
 				d->t.d = new QSmartCardDataPrivate();
 			}
 
@@ -294,222 +401,187 @@ void QSmartCard::run()
 			d->t.d->readers = readers;
 
 			// if none is selected select first from cardlist
-			if( d->t.card().isEmpty() && !d->t.cards().isEmpty() )
-				selectCard( d->t.cards().first() );
+			if(d->t.card().isEmpty() && !d->t.cards().isEmpty())
+			{
+				QSharedDataPointer<QSmartCardDataPrivate> t = d->t.d;
+				t->card = d->t.cards().first();
+				t->data.clear();
+				t->authCert = QSslCertificate();
+				t->signCert = QSslCertificate();
+				d->t.d = t;
+				update = true;
+			}
 
 			// read card data
-			if( d->t.cards().contains( d->t.card() ) && !d->card )
+			if(d->t.cards().contains(d->t.card()) && d->t.isNull())
 			{
 				update = true;
-				try
+				QSharedPointer<QPCSCReader> reader(d->connect(cards.value(d->t.card())));
+				if(!reader.isNull())
 				{
-					QSmartCardDataPrivate *t = d->t.d;
-					std::string reader = cards.value( t->card );
-
-					d->card.reset(new EstEidCard( reader ));
-					d->card->setReaderLanguageId( d->lang );
-
-					d->updateCounters( t );
-					std::vector<std::string> data;
-					d->card->readPersonalData( data, EstEidCard::SURNAME, EstEidCard::COMMENT4 );
-					ByteVec authcert = d->card->getAuthCert();
-					ByteVec signcert = d->card->getSignCert();
-
-					t->reader = reader.c_str();
-					t->pinpad = d->card->isSecureConnection();
-					t->version = QSmartCardData::CardVersion(d->card->getCardVersion());
-					try {
-						if( t->version > QSmartCardData::VER_1_1 )
-						{
-							d->card->sendApplicationIdentifierPreV3();
-							t->version = QSmartCardData::VER_3_0;
-						}
-					} catch( const std::runtime_error &e ) {
-						qDebug() << Q_FUNC_INFO << "Card is not V3.0: " << e.what();
-					}
-					if(t->version == QSmartCardData::VER_INVALID)
+					QSharedDataPointer<QSmartCardDataPrivate> t = d->t.d;
+					t->reader = reader->name();
+					t->pinpad = reader->isPinPad();
+					t->version = atrList.value(reader->atr(), QSmartCardData::VER_INVALID);
+					if(t->version > QSmartCardData::VER_1_1)
 					{
-						QPCSCReader *ctx = new QPCSCReader(QString::fromStdString(reader), &QPCSC::instance());
-						if(ctx->connect() && ctx->transfer(QByteArray::fromHex("00A40400 0A D2330000005550443101")).resultOk())
+						if(reader->transfer(d->AID30).resultOk())
+							t->version = QSmartCardData::VER_3_0;
+						else if(reader->transfer(d->UPDATER_AID).resultOk())
 						{
 							t->version = QSmartCardData::VER_UPDATER;
 							//Found updater applet, test if it is usable
-							if(!ctx->transfer(MASTER_FILE).resultOk())
-								ctx->transfer(AID35);
+							if(!reader->transfer(d->MASTER_FILE).resultOk())
+								reader->transfer(d->AID35);
 						}
-						delete ctx;
 					}
 
-					t->data[QSmartCardData::SurName] =
-						SslCertificate::formatName( d->encode( data[EstEidCard::SURNAME] ) ).trimmed();
-					QStringList name = QStringList()
-						<< SslCertificate::formatName( d->encode( data[EstEidCard::FIRSTNAME] ) ).trimmed()
-						<< SslCertificate::formatName( d->encode( data[EstEidCard::MIDDLENAME] ) ).trimmed();
-					name.removeAll( "" );
-					t->data[QSmartCardData::FirstName] = name.join(" ");
-					t->data[QSmartCardData::Sex] = d->encode( data[EstEidCard::SEX] );
-					t->data[QSmartCardData::Citizen] = d->encode( data[EstEidCard::CITIZEN] );
-					t->data[QSmartCardData::BirthDate] = QDate::fromString( d->encode( data[EstEidCard::BIRTHDATE] ), "dd.MM.yyyy" );
-					t->data[QSmartCardData::Id] = d->encode( data[EstEidCard::ID] );
-					t->data[QSmartCardData::DocumentId] = d->encode( data[EstEidCard::DOCUMENTID] );
-					t->data[QSmartCardData::Expiry] = QDate::fromString( d->encode( data[EstEidCard::EXPIRY] ), "dd.MM.yyyy" );
-					t->data[QSmartCardData::BirthPlace] =
-						SslCertificate::formatName( d->encode( data[EstEidCard::BIRTHPLACE] ) );
-					t->data[QSmartCardData::IssueDate] = QDate::fromString( d->encode( data[EstEidCard::ISSUEDATE] ), "dd.MM.yyyy" );
-					t->data[QSmartCardData::ResidencePermit] = d->encode( data[EstEidCard::RESIDENCEPERMIT] );
-					t->data[QSmartCardData::Comment1] = d->encode( data[EstEidCard::COMMENT1] );
-					t->data[QSmartCardData::Comment2] = d->encode( data[EstEidCard::COMMENT2] );
-					t->data[QSmartCardData::Comment3] = d->encode( data[EstEidCard::COMMENT3] );
-					t->data[QSmartCardData::Comment4] = d->encode( data[EstEidCard::COMMENT4] );
-
-					if( !authcert.empty() )
-						t->authCert = QSslCertificate( QByteArray::fromRawData( (char*)authcert.data(), (int)authcert.size() ), QSsl::Der );
-					if( !signcert.empty() )
-						t->signCert = QSslCertificate( QByteArray::fromRawData( (char*)signcert.data(), (int)signcert.size() ), QSsl::Der );
-
-					QStringList mailaddresses = t->authCert.alternateSubjectNames().values( QSsl::EmailEntry );
-					t->data[QSmartCardData::Email] = !mailaddresses.isEmpty() ? mailaddresses.first() : "";
-
-					if( t->authCert.type() & SslCertificate::DigiIDType )
+					bool tryAgain = !d->updateCounters(reader.data(), t);
+					if(reader->transfer(d->PERSONALDATA).resultOk())
 					{
-						t->data[QSmartCardData::FirstName] = t->authCert.toString( "GN" );
-						t->data[QSmartCardData::SurName] = t->authCert.toString( "SN" );
+						QByteArray cmd = d->READRECORD;
+						for(int data = QSmartCardData::SurName; data != QSmartCardData::Comment4; ++data)
+						{
+							cmd[2] = data + 1;
+							QPCSCReader::Result result = reader->transfer(cmd);
+							if(!result.resultOk())
+							{
+								tryAgain = true;
+								break;
+							}
+							QString record = d->codec->toUnicode(result.data.trimmed());
+							if(record == QChar(0))
+								record.clear();
+							switch(data)
+							{
+							case QSmartCardData::SurName:
+							case QSmartCardData::FirstName1:
+							case QSmartCardData::FirstName2:
+							case QSmartCardData::BirthPlace:
+								t->data[QSmartCardData::PersonalDataType(data)] = SslCertificate::formatName(record);
+								break;
+							case QSmartCardData::BirthDate:
+							case QSmartCardData::Expiry:
+							case QSmartCardData::IssueDate:
+								t->data[QSmartCardData::PersonalDataType(data)] = QDate::fromString(record, "dd.MM.yyyy");
+								break;
+							default:
+								t->data[QSmartCardData::PersonalDataType(data)] = record;
+								break;
+							}
+						}
+					}
+
+					auto readCert = [&](const QByteArray &file) {
+						if(!reader->transfer(file).resultOk())
+							return QSslCertificate();
+						QByteArray cert;
+						while(cert.size() < 0x0600)
+						{
+							QByteArray cmd = d->READBINARY;
+							cmd[2] = cert.size() >> 8;
+							cmd[3] = cert.size();
+							QPCSCReader::Result data = reader->transfer(cmd);
+							if(!data.resultOk())
+							{
+								tryAgain = true;
+								return QSslCertificate();
+							}
+							cert += data.data;
+						}
+						return QSslCertificate(cert, QSsl::Der);
+					};
+					t->authCert = readCert(d->AUTHCERT);
+					t->signCert = readCert(d->SIGNCERT);
+
+					QStringList mailaddresses = t->authCert.alternateSubjectNames().values(QSsl::EmailEntry);
+					t->data[QSmartCardData::Email] = !mailaddresses.isEmpty() ? mailaddresses.first() : "";
+					if(t->authCert.type() & SslCertificate::DigiIDType)
+					{
+						t->data[QSmartCardData::SurName] = t->authCert.toString("SN");
+						t->data[QSmartCardData::FirstName1] = t->authCert.toString("GN");
 						t->data[QSmartCardData::Id] = t->authCert.subjectInfo("serialNumber");
-						t->data[QSmartCardData::BirthDate] = IKValidator::birthDate( t->authCert.subjectInfo("serialNumber") );
+						t->data[QSmartCardData::BirthDate] = IKValidator::birthDate(t->authCert.subjectInfo("serialNumber"));
 						t->data[QSmartCardData::IssueDate] = t->authCert.effectiveDate();
 						t->data[QSmartCardData::Expiry] = t->authCert.expiryDate();
 					}
-				}
-				catch( const std::runtime_error &e )
-				{
-					d->card.clear();
-					qDebug() << Q_FUNC_INFO << "Error on loading card data: " << e.what();
+					if(tryAgain)
+					{
+						qDebug() << "Failed to read card info, try again next round";
+						update = false;
+					}
+					else
+						d->t.d = t;
 				}
 			}
 
 			// update data if something has changed
-			if( update )
+			if(update)
 				Q_EMIT dataChanged();
 			d->m.unlock();
 		}
-		else if( d->e.isRunning() )
-		{
-			emit eventStarted();
-			try
-			{
-				byte retries = 0;
-				d->result = QSmartCard::UnknownError;
-				switch( d->cmd )
-				{
-				case QSmartCardPrivate::Change:
-					switch( d->type )
-					{
-					case QSmartCardData::Pin1Type:
-						d->card->changeAuthPin( d->pin, d->old, retries );
-						break;
-					case QSmartCardData::Pin2Type:
-						d->card->changeSignPin( d->pin, d->old, retries );
-						break;
-					case QSmartCardData::PukType:
-						d->card->changePUK( d->pin, d->old, retries );
-						break;
-					}
-					d->updateCounters( d->t.d );
-					break;
-				case QSmartCardPrivate::Unblock:
-					switch( d->type )
-					{
-					case QSmartCardData::Pin1Type:
-						d->card->unblockAuthPin( d->pin, d->old, retries );
-						break;
-					case QSmartCardData::Pin2Type:
-						d->card->unblockSignPin( d->pin, d->old, retries );
-						break;
-					default: break;
-					}
-					d->updateCounters( d->t.d );
-					break;
-				case QSmartCardPrivate::Validate:
-					switch( d->type )
-					{
-					case QSmartCardData::Pin1Type:
-						d->card->validateAuthPin( d->pin, retries );
-						break;
-					case QSmartCardData::Pin2Type:
-						d->card->validateSignPin( d->pin, retries );
-						break;
-					case QSmartCardData::PukType:
-						d->card->validatePuk( d->pin, retries );
-						break;
-					default: break;
-					}
-					break;
-				case QSmartCardPrivate::ValidateInternal:
-					switch( d->type )
-					{
-					case QSmartCardData::Pin1Type:
-						d->card->enterPin( EstEidCard::PIN_AUTH, d->pin );
-						break;
-					case QSmartCardData::Pin2Type:
-						d->card->enterPin( EstEidCard::PIN_SIGN, d->pin );
-						break;
-					case QSmartCardData::PukType:
-						d->card->enterPin( EstEidCard::PUK, d->pin );
-						break;
-					}
-					break;
-				default: break;
-				}
-				d->result = QSmartCard::NoError;
-			}
-			catch( const AuthError &e )
-			{
-				d->result = d->handleAuthError(
-					d->cmd == QSmartCardPrivate::Unblock ? QSmartCardData::PukType : d->type, e );
-			}
-			catch( const std::runtime_error &e )
-			{
-				qDebug() << Q_FUNC_INFO << e.what();
-			}
-			d->pin.clear();
-			d->old.clear();
-			d->e.quit();
-		}
-
-		sleep( 5 );
+		sleep(5);
 	}
 }
 
-void QSmartCard::selectCard( const QString &card )
+void QSmartCard::selectCard(const QString &card)
 {
-	d->t.d->card = card;
-	d->t.d->authCert = QSslCertificate();
-	d->t.d->signCert = QSslCertificate();
-	d->t.d->data.clear();
+	QMutexLocker locker(&d->m);
+	QSharedDataPointer<QSmartCardDataPrivate> t = d->t.d;
+	t->card = card;
+	t->data.clear();
+	t->authCert = QSslCertificate();
+	t->signCert = QSslCertificate();
+	d->t.d = t;
 	Q_EMIT dataChanged();
 }
 
-void QSmartCard::setLang( const QString &lang )
+QSmartCard::ErrorType QSmartCard::unblock(QSmartCardData::PinType type, const QString &pin, const QString &puk)
 {
-	d->lang = EstEidCard::EST;
-	if( lang == "en" ) d->lang = EstEidCard::ENG;
-	if( lang == "ru" ) d->lang = EstEidCard::RUS;
-	try {
-		if( d->card )
-			d->card->setReaderLanguageId( d->lang );
-	} catch(const PCSCManagerFailure &e ) {
-		qDebug() << Q_FUNC_INFO << e.what();
-	}
-}
+	QMutexLocker locker(&d->m);
+	QSharedPointer<QPCSCReader> reader(d->connect(d->t.reader()));
+	if(!reader)
+		return UnknownError;
 
-QSmartCard::ErrorType QSmartCard::unblock( QSmartCardData::PinType type, const QString &pin, const QString &puk )
-{
-	QMutexLocker locker( &d->m );
-	if( !d->card ) return QSmartCard::UnknownError;
-	d->cmd = QSmartCardPrivate::Unblock;
-	d->type = type;
-	d->pin = pin.toUtf8().constData();
-	d->old = puk.toUtf8().constData();
-	d->e.exec();
-	return d->result;
+	// Make sure pin is locked
+	QByteArray cmd = d->VERIFY;
+	cmd[3] = type;
+	cmd[4] = pin.size() + 1;
+	for(int i = 0; i < d->t.retryCount(type); ++i)
+		reader->transfer(cmd + QByteArray(pin.size(), '0') + QByteArray::number(i));
+
+	//Verify PUK
+	cmd[3] = 0;
+	cmd[4] = puk.size();
+	QPCSCReader::Result result;
+	if(d->t.isPinpad())
+	{
+		QEventLoop l;
+		std::thread([&]{
+			result = reader->transferCTL(cmd, true, d->language(), type == QSmartCardData::Pin1Type ? 4 : 5);
+			l.quit();
+		}).detach();
+		l.exec();
+	}
+	else
+		result = reader->transfer(cmd + puk.toUtf8());
+	if(!result.resultOk())
+		return d->handlePinResult(reader.data(), result, false);
+
+	//Replace PIN with PUK
+	cmd = d->REPLACE;
+	cmd[3] = type;
+	cmd[4] = puk.size() + pin.size();
+	if(d->t.isPinpad())
+	{
+		QEventLoop l;
+		std::thread([&]{
+			result = reader->transferCTL(cmd, false, d->language());
+			l.quit();
+		}).detach();
+		l.exec();
+	}
+	else
+		result = reader->transfer(cmd + puk.toUtf8() + pin.toUtf8());
+	return d->handlePinResult(reader.data(), result, true);
 }

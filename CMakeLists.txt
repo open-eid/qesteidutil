@@ -20,7 +20,6 @@ else()
 	include( ${QT_USE_FILE} )
 endif()
 
-add_subdirectory( smartcardpp )
 add_subdirectory( common )
 
 configure_file( src/translations/tr.qrc tr.qrc COPYONLY )
@@ -67,7 +66,6 @@ target_link_libraries( ${PROGNAME}
 	${ADDITIONAL_LIBRARIES}
 	${CMAKE_THREAD_LIBS_INIT}
 	qdigidoccommon
-	smartcardpp
 )
 
 if(APPLE)
