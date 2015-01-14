@@ -1,3 +1,16 @@
+ID-card utility version 3.10.1 release notes
+--------------------------------------
+Changes compared to ver 3.8
+
+- Added "Clean certs" button to "Settings" menu that enables to remove old certificates from Windows Certificate Store.
+- Created separate installation package for Windows environment
+- Fixed crash that occurred when using RDP session
+- Improved visual representation of long e-mail and name values
+- Improved representation of the certificates' validity date in the ID-card utility's main window. When the end of validity is at 00:00 then the date of the following day is shown (instead of the previous day). 
+- Development of the software can now be monitored in GitHub environment: https://github.com/open-eid/qesteidutil
+
+
+
 ID-card utility version 3.8 release notes
 
 - Changed the distribution of DigiDoc Utility program for OSX platform. DigiDoc Utility program and DigiDoc3 Client (common application for Client and Crypto) are now available only from Apple App Store. When using ID-card or both ID-card and Mobile-ID then the user is prompted to install an additional software package. 
