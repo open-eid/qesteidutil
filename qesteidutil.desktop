@@ -4,6 +4,10 @@ Type=Application
 Name=ID-card Utility
 Name[et]=ID-kaardi haldusvahend
 Name[ru]=Oбсуживание ID-карты
+
+Keywords=ID-card;Utility;
+Keywords[et_EE]=ID-kaart;Haldusvahend;
+
 Exec=qesteidutil %F
 Icon=qesteidutil
 Terminal=false
