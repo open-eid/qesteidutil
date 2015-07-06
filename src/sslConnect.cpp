@@ -20,8 +20,11 @@
 #include "sslConnect_p.h"
 
 #include <common/Common.h>
+#include <common/Configuration.h>
 #include <common/Settings.h>
 #include <common/SOAPDocument.h>
+
+#include <QtCore/QJsonObject>
 
 #if QT_VERSION >= 0x050000
 #include <QtWidgets/QProgressBar>
@@ -62,11 +65,10 @@ void SSLConnectPrivate::setError( const QString &msg )
 
 void SSLConnectPrivate::run()
 {
-	QByteArray buffer;
 	char data[4096];
 	int bytesRead = 0;
 	while( (bytesRead = SSL_read( ssl, data, sizeof(data) )) > 0 )
-		buffer.append( data, bytesRead );
+		result.append( data, bytesRead );
 	switch( SSL_get_error( ssl, bytesRead ) )
 	{
 	case SSL_ERROR_NONE:
@@ -74,11 +76,7 @@ void SSLConnectPrivate::run()
 	case SSL_ERROR_WANT_WRITE:
 	case SSL_ERROR_ZERO_RETURN: // Disconnect
 	case SSL_ERROR_SYSCALL:
-	{
-		int pos = buffer.indexOf( "\r\n\r\n" );
-		result = pos ? buffer.mid( pos + 4 ) : buffer;
 		break;
-	}
 	default: setError();
 	}
 }
@@ -113,7 +111,9 @@ QByteArray SSLConnect::getUrl( RequestType type, const QString &value )
 	if( !d->ssl )
 		return QByteArray();
 
+	QJsonObject obj = Configuration::instance().object();
 	QString label;
+	QByteArray contentType;
 	HTTPRequest req;
 	switch( type )
 	{
@@ -122,27 +122,31 @@ QByteArray SSLConnect::getUrl( RequestType type, const QString &value )
 		label = tr("Loading Mobile info");
 		SOAPDocument s( "GetMIDTokens", "urn:GetMIDTokens" );
 		s.writeEndDocument();
-		req = HTTPRequest( "POST", "1.1", "https://id.sk.ee/MIDInfoWS/" );
+		req = HTTPRequest("POST", "1.1", obj.value("MID-URL").toString("https://id.sk.ee/MIDInfoWS/"));
 		req.setRawHeader( "Content-Type", "text/xml" );
 		req.setRawHeader( "SOAPAction", QByteArray() );
 		req.setRawHeader( "Connection", "close" );
 		req.setContent( s.document() );
+		contentType = "text/xml";
 		break;
 	}
 	case EmailInfo:
 		label = tr("Loading Email info");
-		req = HTTPRequest( "GET", "1.0",
-			"https://sisene.www.eesti.ee/idportaal/postisysteem.naita_suunamised" );
+		req = HTTPRequest("GET", "1.0",
+			obj.value("EMAIL-REDIRECT-URL").toString("https://sisene.www.eesti.ee/idportaal/postisysteem.naita_suunamised"));
+		contentType = "application/xml";
 		break;
 	case ActivateEmails:
 		label = tr("Loading Email info");
-		req = HTTPRequest( "GET", "1.0",
-			QString("https://www.eesti.ee/portaal/!postisysteem.suunamised?%1").arg( value ) );
+		req = HTTPRequest("GET", "1.0",
+			obj.value("EMAIL-ACTIVATE-URL").toString("https://www.eesti.ee/portaal/!postisysteem.suunamised?%1").arg(value));
+		contentType = "application/xml";
 		break;
 	case PictureInfo:
 		label = tr("Downloading picture");
-		req = HTTPRequest( "GET", "1.0",
-			"https://sisene.www.eesti.ee/idportaal/portaal.idpilt" );
+		req = HTTPRequest("GET", "1.0",
+			obj.value("PICTURE-URL").toString("https://sisene.www.eesti.ee/idportaal/portaal.idpilt"));
+		contentType = "image/jpeg";
 		break;
 	default: return QByteArray();
 	}
@@ -180,7 +184,32 @@ QByteArray SSLConnect::getUrl( RequestType type, const QString &value )
 	connect( d, SIGNAL(finished()), &e, SLOT(quit()) );
 	d->start();
 	e.exec();
-	return d->result;
+
+	QMultiHash<QByteArray,QByteArray> headers;
+	int pos = 0, old = 0;
+	while((pos = d->result.indexOf("\r\n", old)) != -1)
+	{
+		if(pos == old)
+			break;
+		QByteArray header = d->result.mid(old, pos - old);
+		if(headers.isEmpty())
+			headers.insert("", header);
+		else
+		{
+			int find = header.indexOf(": ");
+			headers.insertMulti(header.left(find), header.mid(find + 2));
+		}
+		old = pos + 2;
+	}
+
+	if(!headers.value("").contains("200") ||
+		!headers.value("Content-Type").contains(contentType))
+	{
+		d->setError( tr("Invalid reponse") );
+		return QByteArray();
+	}
+
+	return d->result.mid( pos + 2 );
 }
 
 QString SSLConnect::errorString() const { return d->errorString; }

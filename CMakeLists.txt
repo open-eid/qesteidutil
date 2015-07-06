@@ -22,7 +22,6 @@ else()
 endif()
 
 add_subdirectory( smartcardpp )
-include( common/BreakPad.cmake )
 add_subdirectory( common )
 
 configure_file( src/translations/tr.qrc tr.qrc COPYONLY )

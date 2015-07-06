@@ -64,14 +64,6 @@ class MainWindowPrivate: public Ui::MainWindow
 	Q_DECLARE_TR_FUNCTIONS(MainWindow)
 	Q_DECLARE_PUBLIC(::MainWindow)
 public:
-	MainWindowPrivate( ::MainWindow *q )
-		: q_ptr(q)
-		, bar(0)
-		, smartcard(0)
-		, loading(0)
-		, loadPicture(0)
-		, savePicture(0)
-		, b(0) {}
 
 	void clearPins();
 	void hideLoading();
@@ -82,13 +74,13 @@ public:
 	bool validateCardError( QSmartCardData::PinType type, int flags, QSmartCard::ErrorType err );
 	bool validatePin( QSmartCardData::PinType type, bool puk, const QString &old, const QString &pin, const QString &pin2 );
 
-	::MainWindow *q_ptr;
+	::MainWindow *q_ptr = nullptr;
 	QTranslator appTranslator, qtTranslator, commonTranslator;
-	MacMenuBar *bar;
-	QSmartCard *smartcard;
-	QLabel *loading;
-	QPushButton *loadPicture, *savePicture;
-	QButtonGroup *b;
+	MacMenuBar *bar = nullptr;
+	QSmartCard *smartcard = nullptr;
+	QLabel *loading = nullptr;
+	QPushButton *loadPicture = nullptr, *savePicture = nullptr;
+	QButtonGroup *b = nullptr;
 };
 
 
@@ -294,11 +286,9 @@ bool MainWindowPrivate::validatePin( QSmartCardData::PinType type, bool puk,
 
 MainWindow::MainWindow( QWidget *parent )
 :	QWidget( parent )
-,	d( new MainWindowPrivate(this) )
+,	d( new MainWindowPrivate )
 {
-#ifdef TESTING
-	if( !qApp->arguments().contains( "-crash" ) )
-#endif
+	d->q_ptr = this;
 	d->setupUi( this );
 	setFixedSize( geometry().size() );
 	foreach( QLabel *l, QList<QLabel*>() << d->emailInfo << d->mobileInfo << d->pukLocked << d->changePukInfo
@@ -944,7 +934,7 @@ void MainWindow::updateData()
 		d->personalCitizen->setVisible( t.authCert().type() & SslCertificate::EstEidType );
 		d->personalCitizen->setText( t.data( QSmartCardData::Citizen ).toString() );
 		d->personalEmail->setText( t.data( QSmartCardData::Email ).toString() );
-        QList<QLabel*> list({ d->personalName, d->surName, d->personalCode, d->personalBirth, d->personalCitizen, d->personalEmail });
+		const QList<QLabel*> list({ d->personalName, d->surName, d->personalCode, d->personalBirth, d->personalCitizen, d->personalEmail });
 		for( QLabel *l: list )
 			l->setToolTip( l->text() );
 		d->personalEmail->setText( d->personalEmail->fontMetrics().elidedText(

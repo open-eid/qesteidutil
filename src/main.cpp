@@ -20,38 +20,16 @@
 #include <common/Common.h>
 
 #include "MainWindow.h"
-
-#ifdef BREAKPAD
-#include <common/QBreakPad.h>
-#include <QtCore/QVariant>
-#endif
-
-#include <QtGui/QIcon>
+#include <common/Configuration.h>
 
 #include <openssl/ssl.h>
 
 int main(int argc, char *argv[])
 {
-	Common app( argc, argv );
-	app.setApplicationName( APP );
-	app.setApplicationVersion( QString( "%1.%2.%3.%4%5" )
-		.arg( MAJOR_VER ).arg( MINOR_VER ).arg( RELEASE_VER ).arg( BUILD_VER ).arg( VER_SUFFIX ) );
-	app.setOrganizationDomain( DOMAINURL );
-	app.setOrganizationName( ORG );
-	app.setWindowIcon( QIcon( ":/images/id_icon_128x128.png" ) );
-	app.detectPlugins();
+	Common app( argc, argv, APP, ":/images/id_icon_128x128.png" );
 
-#ifdef BREAKPAD
-	if( QBreakPad::isCrashReport( argc, argv ) )
-	{
-		QBreakPadDialog d( app.applicationName() );
-		d.setProperty( "User-Agent", QString( "%1/%2 (%3)" )
-			.arg( app.applicationName(), app.applicationVersion(), app.applicationOs() ).toUtf8() );
-		d.show();
+	if( app.isCrashReport() )
 		return app.exec();
-	}
-	QBreakPad breakpad;
-#endif
 
 #ifndef Q_OS_MAC
 	if( app.isRunning() )
@@ -62,6 +40,9 @@ int main(int argc, char *argv[])
 #endif
 
 	SSL_library_init();
+
+	app.detectPlugins();
+	Configuration::instance().checkVersion("QESTEIDUTIL");
 
 	MainWindow w;
 #ifndef Q_OS_MAC
