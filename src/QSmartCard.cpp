@@ -259,7 +259,7 @@ void QSmartCard::run()
 
 			// cardlist has changed
 			QStringList order = cards.keys();
-			std::sort( order.begin(), order.end(), Common::cardsOrder );
+			std::sort( order.begin(), order.end(), TokenData::cardsOrder );
 			bool update = d->t.cards() != order || d->t.readers() != readers;
 
 			// check if selected card is still in slot
