@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <!--
-"\Program Files (x86)\WiX Toolset v3.8\bin\candle.exe" qesteidutil.wxs -dMSI_VERSION=3.9.5
+"%WIX%\bin\candle.exe" qesteidutil.wxs -dMSI_VERSION=3.9.5
  -dqt_path=C:\Qt\5.3\msvc2013
  -dlibs_path="C:\OpenSSL-Win32\bin"
  -dutility_path=qesteidutil.exe
  -dupdater_path=updater.exe
 
-"\Program Files (x86)\WiX Toolset v3.8\bin\light.exe" -out qesteidutil.msi qesteidutil.wixobj -v -ext WixUIExtension
+"%WIX%\bin\light.exe" -out qesteidutil.msi qesteidutil.wixobj -v -ext WixUIExtension
 -->
 
 <?ifndef Platform ?>

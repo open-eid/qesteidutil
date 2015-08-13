@@ -1,9 +1,6 @@
 /*
  * QEstEidUtil
  *
- * Copyright (C) 2011-2013 Jargo Kõster <jargo@innovaatik.ee>
- * Copyright (C) 2011-2013 Raul Metsma <raul@innovaatik.ee>
- *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
@@ -144,6 +141,8 @@ QSmartCard::QSmartCard( const QString &lang, QObject *parent )
 :	QThread( parent )
 ,	d( new QSmartCardPrivate )
 {
+	SCardLog::writeLog("[%s:%d] %s %s", __FUNC__, __LINE__,
+		qApp->applicationName().toUtf8().constData(), qApp->applicationVersion().toUtf8().constData());
 	setLang( lang );
 	d->t.d->readers = QStringList() << "loading";
 	d->t.d->cards = QStringList() << "loading";
