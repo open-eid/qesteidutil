@@ -306,7 +306,6 @@ void QSmartCard::run()
 					} catch( const std::runtime_error &e ) {
 						qDebug() << Q_FUNC_INFO << "Card is not V3.0: " << e.what();
 					}
-					d->card->disconnect();
 
 					t->data[QSmartCardData::SurName] =
 						SslCertificate::formatName( d->encode( data[EstEidCard::SURNAME] ) ).trimmed();
