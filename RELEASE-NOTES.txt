@@ -1,3 +1,7 @@
+ID-card utility version 3.12 release notes
+
+- Fixed issue with error handling on Ubuntu 
+
 ID-card utility version 3.11 release notes
 
 - Show Chrome Browser Plugin version in diagnostics
