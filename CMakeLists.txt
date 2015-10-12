@@ -99,7 +99,6 @@ target_link_libraries( ${PROGNAME}
 	smartcardpp
 )
 add_manifest( ${PROGNAME} )
-dump_syms( ${PROGNAME} )
 
 if(UNIX AND NOT APPLE)
 	configure_file( src/qesteidutil.1.cmake qesteidutil.1 )
@@ -116,3 +115,43 @@ if(UNIX AND NOT APPLE)
 endif()
 
 install(TARGETS ${PROGNAME} DESTINATION ${CMAKE_INSTALL_BINDIR})
+
+if(WIN32)
+    if(CMAKE_SIZEOF_VOID_P EQUAL 8)
+        set(PLATFORM x64)
+        list(APPEND CANDLE_EXTRA "-dlibs_path=C:/Openssl-Win64/bin")
+    else()
+        set(PLATFORM x86)
+        list(APPEND CANDLE_EXTRA "-dlibs_path=C:/Openssl-Win32/bin")
+    endif()
+    set(MSI_FILE "ID-card_utility-${VERSION}$ENV{VER_SUFFIX}.${PLATFORM}")
+    list(APPEND CANDLE_CMD "$ENV{WIX}bin\\candle.exe" -nologo -arch ${PLATFORM}
+        -dMSI_VERSION=${VERSION} -dPlatform=${PLATFORM} ${CANDLE_EXTRA}
+        -dutility_path=$<TARGET_FILE:${PROGNAME}> ${CMAKE_SOURCE_DIR}/qesteidutil.wxs)
+    list(APPEND LIGHT_CMD "$ENV{WIX}bin\\light.exe" -nologo qesteidutil.wixobj -ext WixUIExtension
+        -dWixUILicenseRtf=${CMAKE_SOURCE_DIR}/cmake/modules/LICENSE.LGPL.rtf
+        -dWixUIDialogBmp=${CMAKE_SOURCE_DIR}/cmake/modules/dlgbmp.bmp
+        -dWixUIBannerBmp=${CMAKE_SOURCE_DIR}/cmake/modules/banner.bmp)
+    add_custom_target(msi DEPENDS ${PROGNAME}
+        COMMAND ${CANDLE_CMD}
+        COMMAND ${LIGHT_CMD} -loc ${CMAKE_SOURCE_DIR}/qesteidutil.en-US.wxl -cultures:en-US -o "${MSI_FILE}.en-US.msi"
+        COMMAND ${LIGHT_CMD} -loc ${CMAKE_SOURCE_DIR}/qesteidutil.et-EE.wxl -cultures:et-EE -o "${MSI_FILE}.et-EE.msi"
+        #Build MSI with QT
+        COMMAND ${CANDLE_CMD} -dqt_path=${_qt5Core_install_prefix}
+        COMMAND ${LIGHT_CMD} -loc ${CMAKE_SOURCE_DIR}/qesteidutil.en-US.wxl -cultures:en-US -o "${MSI_FILE}.en-US.qt.msi"
+        COMMAND ${LIGHT_CMD} -loc ${CMAKE_SOURCE_DIR}/qesteidutil.et-EE.wxl -cultures:et-EE -o "${MSI_FILE}.et-EE.qt.msi"
+    )
+    if(SIGNCERT)
+        list(APPEND SIGNCMD signtool.exe sign /a /v /s MY /n "${SIGNCERT}" /fd SHA256
+            /du http://installer.id.ee /t http://timestamp.verisign.com/scripts/timstamp.dll)
+        add_custom_command(TARGET ${PROGNAME} POST_BUILD
+            COMMAND ${SIGNCMD} $<TARGET_FILE:${PROGNAME}>
+        )
+        add_custom_command(TARGET msi POST_BUILD
+            COMMAND ${SIGNCMD} "${MSI_FILE}.en-US.msi"
+            COMMAND ${SIGNCMD} "${MSI_FILE}.et-EE.msi"
+            COMMAND ${SIGNCMD} "${MSI_FILE}.en-US.qt.msi"
+            COMMAND ${SIGNCMD} "${MSI_FILE}.et-EE.qt.msi"
+        )
+    endif()
+endif()
