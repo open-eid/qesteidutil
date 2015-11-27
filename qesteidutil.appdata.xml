@@ -29,5 +29,9 @@
     <screenshot type="default">http://mihkel.fedorapeople.org/esteid/qesteidutil.png</screenshot>
   </screenshots>
   <url type="homepage">http://www.id.ee/</url>
+  <kudos>
+      <kudo>HiDpiIcon</kudo>
+      <kudo>ModernToolkit</kudo>
+  </kudos>
   <updatecontact>mihkel_at_fedoraproject.org</updatecontact>
 </application>
