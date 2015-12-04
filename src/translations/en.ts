@@ -2,41 +2,6 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="en_US" sourcelanguage="en">
 <context>
-    <name>CertUpdate</name>
-    <message>
-        <source>update not allowed!</source>
-        <translation>update not allowed!</translation>
-    </message>
-    <message>
-        <source>Check internet connection</source>
-        <translation>Check internet connection</translation>
-    </message>
-    <message>
-        <source>Server sai vale arvu baite, samm: %1</source>
-        <translation>Server got wrong amount of bytes: %1</translation>
-    </message>
-    <message>
-        <source>Kaardi vastuse parsimisel tekkis viga, samm: %1</source>
-        <translation>Failed to parse responce from card, step: %1</translation>
-    </message>
-    <message>
-        <source>Sertifitseerimiskeskus ei vasta, samm: %1</source>
-        <translation>SK server is not responding: %1</translation>
-    </message>
-    <message>
-        <source>Wrong PIN1 code.</source>
-        <translation>Wrong PIN1 code.</translation>
-    </message>
-    <message>
-        <source>Server sent wrong count bytes on first step</source>
-        <translation>Server sent wrong count bytes on first step</translation>
-    </message>
-    <message>
-        <source>Serveri töös tekkisid vead, samm: %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>MainWindow</name>
     <message>
         <source>ID-card utility</source>

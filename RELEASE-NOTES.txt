@@ -1,10 +1,13 @@
 ID-card utility version 3.12 release notes
+--------------------------------------
+- Fixed issue with error handling on Ubuntu
+- Remove option to update first generation EstEID card certificates
 
-- Fixed issue with error handling on Ubuntu 
 
 ID-card utility version 3.11 release notes
-
+--------------------------------------
 - Show Chrome Browser Plugin version in diagnostics
+
 
 ID-card utility version 3.10.1 release notes
 --------------------------------------
@@ -20,7 +23,7 @@ Changes compared to ver 3.8
 
 
 ID-card utility version 3.8 release notes
-
+--------------------------------------
 - Changed the distribution of DigiDoc Utility program for OSX platform. DigiDoc Utility program and DigiDoc3 Client (common application for Client and Crypto) are now available only from Apple App Store. When using ID-card or both ID-card and Mobile-ID then the user is prompted to install an additional software package. 
 - Added warning message which is displayed if the inserted ID-card is issued in 2011 and the card’s electronic component has not been renewed. See http://www.politsei.ee/en/teenused/isikut-toendavad-dokumendid/id-kaardi-uuendamine.dot for additional information.
 - Fixed problems with Apple App Store version of ID-card utility, including crash report system.
@@ -30,4 +33,3 @@ ID-card utility version 3.8 release notes
 - Added “Run Task Scheduler” button to the Settings window to see the schedule when the next ID-card software update is executed.
 - Started using coverity.com static analysis tool to find source code defects and vulnerabilities. Fixed the defects that were discovered.
 - Qt framework has been updated to version 5.2 in OSX, version 5.1.1 in Windows environments, version 5.0.2 in Ubuntu 13.10, version 4.8 in Ubuntu 12.04.
-

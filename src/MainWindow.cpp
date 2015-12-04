@@ -20,7 +20,6 @@
 #include "MainWindow.h"
 #include "ui_MainWindow.h"
 
-#include "CertUpdate.h"
 #include "QSmartCard.h"
 #ifdef Q_OS_WIN
 #include "CertStore.h"
@@ -562,24 +561,17 @@ void MainWindow::setDataPage( int index )
 			break;
 		QSslCertificate auth = d->smartcard->data().authCert();
 		QSslCertificate sign = d->smartcard->data().signCert();
-		try
-		{
-			CertUpdate c( d->smartcard, this );
-			if( !c.checkUpdateAllowed() )
-				break;
-			d->showLoading( tr("Updating certificates") );
-			c.startUpdate();
-			QMessageBox::information( this, tr("Certificate update"), tr("Updating certificates successful") );
-			d->smartcard->reload();
-		}
-		catch( const std::runtime_error &e )
+		d->showLoading( tr("Updating certificates") );
+		if(false)
 		{
 			QMessageBox box( QMessageBox::Warning, tr("Certificate update"),
 				tr("Certificate update failed"), QMessageBox::Ok, this );
-			box.setDetailedText( QString::fromUtf8( e.what() ) );
+			box.setDetailedText( QString() );
 			box.exec();
 			break;
 		}
+		else
+			QMessageBox::information( this, tr("Certificate update"), tr("Updating certificates successful") );
 #if defined(Q_OS_MAC)
 		QMessageBox::warning( this, tr("Certificate update"),
 			tr("TokenCache cleanup failed<br /><a href='http://www.id.ee/?id=34455'>Additional info</a>") );
@@ -1002,12 +994,7 @@ void MainWindow::updateData()
 		d->signRevoke->setVisible(
 			t.retryCount( QSmartCardData::Pin2Type ) == 0 && t.retryCount( QSmartCardData::PukType ) > 0 );
 
-		d->updateCert->setVisible(
-			t.authCert().type() & SslCertificate::EstEidType &&
-			t.version() < QSmartCardData::VER_3_0 &&
-			( authDays <= 105 || signDays <= 105 ) &&
-			t.authCert().expiryDate().addDays( 2 ).date() < t.data( QSmartCardData::Expiry ).toDate() &&
-			t.retryCount( QSmartCardData::Pin1Type ) > 0 );
+		d->updateCert->setVisible( false );
 
 		d->pukLocked->setVisible( t.retryCount( QSmartCardData::PukType ) == 0 );
 		d->pukChange->setVisible( t.retryCount( QSmartCardData::PukType ) > 0 );

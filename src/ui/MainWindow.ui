@@ -38,7 +38,16 @@
    <property name="spacing">
     <number>0</number>
    </property>
-   <property name="margin">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
     <number>0</number>
    </property>
    <item>
@@ -355,7 +364,16 @@ text-align: center;
          <property name="spacing">
           <number>2</number>
          </property>
-         <property name="margin">
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
           <number>0</number>
          </property>
          <item>
@@ -647,7 +665,16 @@ text-align: center;
           <property name="spacing">
            <number>2</number>
           </property>
-          <property name="margin">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
            <number>0</number>
           </property>
           <item>
@@ -659,7 +686,16 @@ text-align: center;
              </size>
             </property>
             <layout class="QGridLayout" name="authFrameLayout">
-             <property name="margin">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
               <number>0</number>
              </property>
              <property name="spacing">
@@ -842,7 +878,16 @@ text-align: center;
              </size>
             </property>
             <layout class="QGridLayout" name="signFrameLayout">
-             <property name="margin">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
               <number>0</number>
              </property>
              <property name="spacing">
@@ -1003,7 +1048,16 @@ text-align: center;
         </widget>
         <widget class="QWidget" name="pageEmail">
          <layout class="QVBoxLayout" name="pageEmailLayout">
-          <property name="margin">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
            <number>0</number>
           </property>
           <item>
@@ -1023,7 +1077,16 @@ text-align: center;
           <item>
            <widget class="QWidget" name="checkEmailFrame" native="true">
             <layout class="QHBoxLayout" name="checkEmailFrameLayout">
-             <property name="margin">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
               <number>0</number>
              </property>
              <item>
@@ -1071,7 +1134,16 @@ text-align: center;
           <item>
            <widget class="QWidget" name="activateEmailFrame" native="true">
             <layout class="QGridLayout" name="activateEmailFrameLayout">
-             <property name="margin">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
               <number>0</number>
              </property>
              <item row="0" column="0" colspan="2">
@@ -1130,7 +1202,16 @@ text-align: center;
         </widget>
         <widget class="QWidget" name="pageMobile">
          <layout class="QVBoxLayout" name="pageMobileLayout">
-          <property name="margin">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
            <number>0</number>
           </property>
           <item>
@@ -1150,7 +1231,16 @@ text-align: center;
           <item>
            <widget class="QWidget" name="checkMobileFrame" native="true">
             <layout class="QGridLayout" name="checkMobileFrameLayout">
-             <property name="margin">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
               <number>0</number>
              </property>
              <item row="0" column="0" colspan="2">
@@ -1199,7 +1289,16 @@ To use Mobiil-ID it is needed to use a SIM card that supports this feature. If s
           <item>
            <widget class="QWidget" name="mobileActivateFrame" native="true">
             <layout class="QHBoxLayout" name="mobileActivateLayout">
-             <property name="margin">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
               <number>0</number>
              </property>
              <item>
@@ -1245,7 +1344,16 @@ To use Mobiil-ID it is needed to use a SIM card that supports this feature. If s
         </widget>
         <widget class="QWidget" name="pagePuk">
          <layout class="QGridLayout" name="pagePukLayout">
-          <property name="margin">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
            <number>0</number>
           </property>
           <item row="0" column="0" colspan="2">
@@ -1346,7 +1454,16 @@ For getting new PUK code for your ID-card, please visit service center where you
         </widget>
         <widget class="QWidget" name="pagePin1Change">
          <layout class="QHBoxLayout" name="pagePin1ChangeLayout">
-          <property name="margin">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
            <number>0</number>
           </property>
           <item>
@@ -1368,7 +1485,16 @@ For getting new PUK code for your ID-card, please visit service center where you
             </property>
             <widget class="QWidget" name="changePin1InfoPin">
              <layout class="QVBoxLayout" name="changePin1InfoPinLayout">
-              <property name="margin">
+              <property name="leftMargin">
+               <number>0</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+              <property name="bottomMargin">
                <number>0</number>
               </property>
               <item>
@@ -1444,7 +1570,16 @@ For getting new PUK code for your ID-card, please visit service center where you
             </property>
             <widget class="QWidget" name="changePin1Reader">
              <layout class="QGridLayout" name="changePin1ReaderLayout">
-              <property name="margin">
+              <property name="leftMargin">
+               <number>0</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+              <property name="bottomMargin">
                <number>0</number>
               </property>
               <property name="spacing">
@@ -1559,7 +1694,16 @@ For getting new PUK code for your ID-card, please visit service center where you
             </widget>
             <widget class="QWidget" name="changePin1Pinpad">
              <layout class="QGridLayout" name="changePin1PinpadLayout">
-              <property name="margin">
+              <property name="leftMargin">
+               <number>0</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+              <property name="bottomMargin">
                <number>0</number>
               </property>
               <item row="0" column="0" colspan="3">
@@ -1631,7 +1775,16 @@ For getting new PUK code for your ID-card, please visit service center where you
         </widget>
         <widget class="QWidget" name="pagePin2Change">
          <layout class="QHBoxLayout" name="pagePin2Change_2">
-          <property name="margin">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
            <number>0</number>
           </property>
           <item>
@@ -1653,7 +1806,16 @@ For getting new PUK code for your ID-card, please visit service center where you
             </property>
             <widget class="QWidget" name="changePin2InfoPin">
              <layout class="QVBoxLayout" name="changePin2InfoPinLayout">
-              <property name="margin">
+              <property name="leftMargin">
+               <number>0</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+              <property name="bottomMargin">
                <number>0</number>
               </property>
               <item>
@@ -1729,7 +1891,16 @@ For getting new PUK code for your ID-card, please visit service center where you
             </property>
             <widget class="QWidget" name="changePin2Reader">
              <layout class="QGridLayout" name="changePin2ReaderLayout">
-              <property name="margin">
+              <property name="leftMargin">
+               <number>0</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+              <property name="bottomMargin">
                <number>0</number>
               </property>
               <property name="spacing">
@@ -1844,7 +2015,16 @@ For getting new PUK code for your ID-card, please visit service center where you
             </widget>
             <widget class="QWidget" name="changePin2Pinpad">
              <layout class="QGridLayout" name="changePin2PinpadLayout">
-              <property name="margin">
+              <property name="leftMargin">
+               <number>0</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+              <property name="bottomMargin">
                <number>0</number>
               </property>
               <item row="0" column="0" colspan="3">
@@ -1916,7 +2096,16 @@ For getting new PUK code for your ID-card, please visit service center where you
         </widget>
         <widget class="QWidget" name="pagePukChange">
          <layout class="QHBoxLayout" name="pagePukChangeLayout">
-          <property name="margin">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
            <number>0</number>
           </property>
           <item>
@@ -1959,7 +2148,16 @@ For getting new PUK code for your ID-card, please visit service center where you
             </property>
             <widget class="QWidget" name="changePukReader">
              <layout class="QGridLayout" name="changePukReaderLayout">
-              <property name="margin">
+              <property name="leftMargin">
+               <number>0</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+              <property name="bottomMargin">
                <number>0</number>
               </property>
               <property name="spacing">
@@ -2074,7 +2272,16 @@ For getting new PUK code for your ID-card, please visit service center where you
             </widget>
             <widget class="QWidget" name="changePukPinpad">
              <layout class="QGridLayout" name="changePukPinpadLayout">
-              <property name="margin">
+              <property name="leftMargin">
+               <number>0</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+              <property name="bottomMargin">
                <number>0</number>
               </property>
               <item row="0" column="0" colspan="3">
