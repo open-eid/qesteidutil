@@ -66,7 +66,7 @@ SettingsDialog::SettingsDialog( const QSmartCardData &data, QWidget *parent )
 			CertStore s;
 			for( const SslCertificate &c: s.list())
 			{
-				if( c.subjectInfo( "serialNumber" ) == personalCode )
+				if( c.subjectInfo( "O" ).contains("ESTEID") )
 					s.remove( c );
 			}
 			s.add( data.authCert(), data.card() );

@@ -2,6 +2,7 @@ ID-card utility version 3.12 release notes
 --------------------------------------
 - Fixed issue with error handling on Ubuntu
 - Remove option to update first generation EstEID card certificates
+- Cleanup certificates
 
 
 ID-card utility version 3.11 release notes

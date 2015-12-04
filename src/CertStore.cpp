@@ -21,10 +21,6 @@
 
 #include <common/SslCertificate.h>
 
-#include <QSettings>
-#include <QStringList>
-#include <QSysInfo>
-
 #include <qt_windows.h>
 #include <WinCrypt.h>
 #include <ncrypt.h>
@@ -67,25 +63,6 @@ bool CertStore::add( const QSslCertificate &cert, const QString &card )
 	QString cardStr = card + (keyCode == AT_SIGNATURE ? "_SIG" : "_AUT" );
 	cardStr = QCryptographicHash::hash( cardStr.toUtf8(), QCryptographicHash::Md5 ).toHex();
 
-	QString provider;
-	QSettings reg( "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Cryptography\\Calais\\SmartCards", QSettings::NativeFormat );
-	Q_FOREACH( const QString &group, reg.childGroups() )
-	{
-		if( group.contains( "esteid", Qt::CaseInsensitive ) )
-		{
-			provider = reg.value( group + "/" + "Crypto Provider" ).toString();
-			break;
-		}
-	}
-
-	if( provider.isEmpty() )
-	{
-		if( QSysInfo::windowsVersion() >= QSysInfo::WV_VISTA )
-			provider = "Microsoft Base Smart Card Crypto Provider";
-		else
-			provider = "EstEID Card CSP";
-	}
-
 	PCCERT_CONTEXT context = d->certContext( cert );
 
 	QString str = QString( "%1 %2" )
@@ -95,7 +72,7 @@ bool CertStore::add( const QSslCertificate &cert, const QString &card )
 	CertSetCertificateContextProperty( context, CERT_FRIENDLY_NAME_PROP_ID, 0, &DataBlob );
 
 	CRYPT_KEY_PROV_INFO KeyProvInfo =
-	{ LPWSTR(cardStr.utf16()), LPWSTR(provider.utf16()), PROV_RSA_FULL, 0, 0, 0, keyCode };
+	{ LPWSTR(cardStr.utf16()), L"Microsoft Base Smart Card Crypto Provider", PROV_RSA_FULL, 0, 0, 0, keyCode };
 	CertSetCertificateContextProperty( context, CERT_KEY_PROV_INFO_PROP_ID, 0, &KeyProvInfo );
 
 	bool result = CertAddCertificateContextToStore( d->s, context, CERT_STORE_ADD_REPLACE_EXISTING, 0 );

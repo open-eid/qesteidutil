@@ -1027,6 +1027,12 @@ void MainWindow::updateData()
 				tr( "Certificate is not registered in certificate store. Register now?" ),
 				QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes ) == QMessageBox::Yes )
 		{
+			QString personalCode = t.authCert().subjectInfo( "serialNumber" );
+			for( const SslCertificate &c: store.list())
+			{
+				if( c.subjectInfo( "serialNumber" ) == personalCode )
+					store.remove( c );
+			}
 			store.add( t.authCert(), t.card() );
 			store.add( t.signCert(), t.card() );
 		}
