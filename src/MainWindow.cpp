@@ -302,7 +302,6 @@ MainWindow::MainWindow( QWidget *parent )
 #endif
 	d->setupUi( this );
 	setFixedSize( geometry().size() );
-	setMaximumSize( geometry().size() );
 	foreach( QLabel *l, QList<QLabel*>() << d->emailInfo << d->mobileInfo << d->pukLocked << d->changePukInfo
 			 << d->changePin1InfoPinText << d->changePin2InfoPinText )
 		Common::setAccessibleName( l );

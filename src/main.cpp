@@ -68,5 +68,8 @@ int main(int argc, char *argv[])
 	QObject::connect( &app, SIGNAL(messageReceived(QString)), &w, SLOT(raiseAndRead()) );
 #endif
 	w.show();
+	if(QWidget *data = w.findChild<QWidget*>("dataWidget"))
+		data->setFixedSize(data->geometry().size()); // Hack for avoiding Qt Resize window IB-4242
+
 	return app.exec();
 }
