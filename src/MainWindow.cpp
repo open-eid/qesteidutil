@@ -21,16 +21,19 @@
 #include "ui_MainWindow.h"
 
 #include "QSmartCard.h"
+#include "QSmartCard_p.h"
 #ifdef Q_OS_WIN
 #include "CertStore.h"
 #include "SettingsDialog.h"
 #endif
 #include "sslConnect.h"
+#include "Updater.h"
 #include "XmlReader.h"
 
 #include <common/AboutDialog.h>
 #include <common/CertificateWidget.h>
 #include <common/Common.h>
+#include <common/Configuration.h>
 #include <common/DateTime.h>
 #include <common/QPCSC.h>
 #include <common/Settings.h>
@@ -44,6 +47,7 @@ class MacMenuBar;
 #include <QtCore/QDate>
 #include <QtCore/QTextStream>
 #include <QtCore/QTranslator>
+#include <QtCore/QJsonObject>
 #include <QtCore/QUrl>
 #include <QtGui/QDesktopServices>
 #if QT_VERSION >= 0x050000
@@ -335,7 +339,7 @@ MainWindow::MainWindow( QWidget *parent )
 	// Cert page buttons
 	d->b->addButton( d->authCert, PageCertAuthView );
 	d->b->addButton( d->signCert, PageCertSignView );
-	d->b->addButton( d->updateCert, PageCertUpdate );
+	d->b->addButton( d->certUpdateButton, PageCertUpdate );
 	d->b->addButton( d->authChangePin, PagePin1Pin );
 	d->b->addButton( d->authRevoke, PagePin1Unblock );
 	d->b->addButton( d->signChangePin, PagePin2Pin );
@@ -539,42 +543,16 @@ void MainWindow::setDataPage( int index )
 		break;
 	case PageCertUpdate:
 	{
-		QMessageBox b( QMessageBox::Warning, tr("Certificate update"),
-		   tr("For updating certificates please close all programs which are interacting with smartcard "
-			  "(qdigidocclient, qdigidoccrypto, Firefox, Safari, Internet Explorer...)<br />"
-			  "After updating certificates it will no longer be possible to decrypt documents "
-			  "that were encrypted with the old certificate.<br />Do you want to continue?"),
-			QMessageBox::Yes|QMessageBox::No, this );
-		b.setDefaultButton( QMessageBox::No );
-		if( QLabel *l = b.findChild<QLabel*>() )
-			Common::setAccessibleName( l );
-		if( b.exec() == QMessageBox::No )
-			break;
-		QSslCertificate auth = d->smartcard->data().authCert();
-		QSslCertificate sign = d->smartcard->data().signCert();
-		d->showLoading( tr("Updating certificates") );
-		if(false)
-		{
-			QMessageBox box( QMessageBox::Warning, tr("Certificate update"),
-				tr("Certificate update failed"), QMessageBox::Ok, this );
-			box.setDetailedText( QString() );
-			box.exec();
-			break;
-		}
-		else
-			QMessageBox::information( this, tr("Certificate update"), tr("Updating certificates successful") );
-#if defined(Q_OS_MAC)
-		QMessageBox::warning( this, tr("Certificate update"),
-			tr("TokenCache cleanup failed<br /><a href='http://www.id.ee/?id=34455'>Additional info</a>") );
-#elif defined(Q_OS_WIN)
+#ifdef Q_OS_WIN
 		CertStore s;
-		if( s.remove( auth ) && s.remove( sign ) )
-			QMessageBox::information( this, tr("Certificate update"),
-				tr("Old certificates succesfully removed from certificate store") );
-		else
-			QMessageBox::warning( this, tr("Certificate update"),
-				tr("Failed to remove old certificates from certificate store") );
+		s.remove(d->smartcard->data().authCert());
+		s.remove(d->smartcard->data().signCert());
 #endif
+		d->showLoading( tr("Updating certificates") );
+		d->smartcard->d->m.lock();
+		Updater(d->smartcard->data().reader(), this).exec();
+		d->smartcard->d->m.unlock();
+		d->smartcard->reload();
 		break;
 	}
 	case PageEmail:
@@ -985,7 +963,17 @@ void MainWindow::updateData()
 		d->signRevoke->setVisible(
 			t.retryCount( QSmartCardData::Pin2Type ) == 0 && t.retryCount( QSmartCardData::PukType ) > 0 );
 
-		d->updateCert->setVisible( false );
+		d->certUpdate->setVisible(
+			Settings(qApp->applicationName()).value("updateButton", false).toBool() ||
+			(
+				Configuration::instance().object().contains("EIDUPDATER-URL") &&
+				t.authCert().type() & (SslCertificate::EstEidType|SslCertificate::DigiIDType) &&
+				t.version() >= QSmartCardData::VER_3_4 &&
+				t.retryCount( QSmartCardData::Pin1Type ) > 0 &&
+				t.isValid() && t.isValid() &&
+				(!t.authCert().validateEncoding() || !t.signCert().validateEncoding() || t.version() == QSmartCardData::VER_UPDATER)
+			)
+		);
 
 		d->pukLocked->setVisible( t.retryCount( QSmartCardData::PukType ) == 0 );
 		d->pukChange->setVisible( t.retryCount( QSmartCardData::PukType ) > 0 );

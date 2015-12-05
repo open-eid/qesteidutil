@@ -36,10 +36,6 @@
         <translation>Sertifikaat kehtib kuni</translation>
     </message>
     <message>
-        <source>Update certificates</source>
-        <translation>Uuenda sertifikaate</translation>
-    </message>
-    <message>
         <source>Change PIN1</source>
         <translation>Muuda PIN1</translation>
     </message>
@@ -224,28 +220,8 @@ Uue PUK koodi saamiseks, külasta klienditeeninduspunkti, kust saad koodiümbrik
         <translation>Mobiil-ID seadete laadimine ebaõnnestus.</translation>
     </message>
     <message>
-        <source>Certificate update</source>
-        <translation>Sertifikaatide uuendus</translation>
-    </message>
-    <message>
-        <source>For updating certificates please close all programs which are interacting with smartcard (qdigidocclient, qdigidoccrypto, Firefox, Safari, Internet Explorer...)&lt;br /&gt;After updating certificates it will no longer be possible to decrypt documents that were encrypted with the old certificate.&lt;br /&gt;Do you want to continue?</source>
-        <translation>Sertifikaatite uuendamiseks palun sulgege kõik rakendused, mis kasutavad ID-kaarti (Klient, Krüpto, Firefox, Safari, Internet Explorer...)&lt;br /&gt;Pärast sertifikaatide uuendamist ei ole võimalik enam dekrüpteerida vana sertifikaadiga krüpteeritud dokumente!&lt; br /&gt;Kas soovite jätkata sertifikaatide uuendamisega?</translation>
-    </message>
-    <message>
         <source>Updating certificates</source>
         <translation>Sertifikaatide uuendamine</translation>
-    </message>
-    <message>
-        <source>Updating certificates successful</source>
-        <translation>Sertifikaatide uuendamine õnnestus</translation>
-    </message>
-    <message>
-        <source>Old certificates succesfully removed from certificate store</source>
-        <translation>Vanade sertifikaatide eemaldamine sertifikaadihoidlast õnnestus</translation>
-    </message>
-    <message>
-        <source>Failed to remove old certificates from certificate store</source>
-        <translation>Vanade sertifikaatide eemaldamine sertifikaadihoidlast ebaõnnestus</translation>
     </message>
     <message>
         <source>E-mail address missing or invalid!</source>
@@ -545,10 +521,6 @@ Uue PUK koodi saamiseks, külasta klienditeeninduspunkti, kust saad koodiümbrik
         <translation>SmartCard/PCSC teenus ei tööta</translation>
     </message>
     <message>
-        <source>Certificate update failed</source>
-        <translation>Sertifikaatide uuendamine ebaõnnestus</translation>
-    </message>
-    <message>
         <source>Cards</source>
         <translation>Kaardid</translation>
     </message>
@@ -671,10 +643,6 @@ Mobiil-ID kasutamiseks on vajalik uus SIM-kaart, mille sa saad endale mobiilside
         <translation>Käesolevat dokumenti ei ole võimalik elektrooniliselt kasutada alates 24.07.13, palun pöörduge lisainfo saamiseks &lt;a href=&quot;http://www.politsei.ee/et/teenused/isikut-toendavad-dokumendid/id-kaardi-uuendamine.dot&quot;&gt;Politsei-ja Piirivalveametisse&lt;/a&gt;.</translation>
     </message>
     <message>
-        <source>TokenCache cleanup failed&lt;br /&gt;&lt;a href=&apos;http://www.id.ee/?id=34455&apos;&gt;Additional info&lt;/a&gt;</source>
-        <translation>TokenCache puhastamine ebaõnnestus&lt;br /&gt;&lt;a href=&apos;http://www.id.ee/?id=34230&apos;&gt;Täiendav info&lt;/a&gt;</translation>
-    </message>
-    <message>
         <source>There was an error with request to Äriregister.</source>
         <translation>Äriregistri päringu tegemisel tekkis viga.</translation>
     </message>
@@ -693,6 +661,17 @@ Mobiil-ID kasutamiseks on vajalik uus SIM-kaart, mille sa saad endale mobiilside
     <message>
         <source>Unblock with PinPad</source>
         <translation>Tühista blokeering PinPad&apos;iga</translation>
+    </message>
+    <message>
+        <source>Update</source>
+        <translation>Uuenda</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;The certificates on this ID-card need renewing.&lt;/b&gt;&lt;br/&gt;
+The procedure may take form 2 to 10 minutes and you need a working internet connection. Do not remove the ID-card from the reader until the renewal procedure has completed!</source>
+        <translation>&lt;b&gt;Sel kaardil paiknevad isikusertifikaadid vajavad uuendamist.&lt;/b&gt;&lt;br/&gt;
+Uuendamise protseduur võtab aega 2-10 minutit ning eeldab toimivat internetiühendust.
+Kaarti ei tohi lugejast välja võtta enne uuenduse lõppemist.</translation>
     </message>
 </context>
 <context>
@@ -720,6 +699,10 @@ Mobiil-ID kasutamiseks on vajalik uus SIM-kaart, mille sa saad endale mobiilside
     <message>
         <source>Certificate is empty</source>
         <translation>Sertifikaat on tühi</translation>
+    </message>
+    <message>
+        <source>Invalid reponse</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -759,6 +742,25 @@ Mobiil-ID kasutamiseks on vajalik uus SIM-kaart, mille sa saad endale mobiilside
     <message>
         <source>Clean certs</source>
         <translation>Eemalda üleliigsed sertifikaadid</translation>
+    </message>
+</context>
+<context>
+    <name>Updater</name>
+    <message>
+        <source>Details</source>
+        <translation>Detailid</translation>
+    </message>
+    <message>
+        <source>Failed to read certificate</source>
+        <translation>Sertifikaadi laadimine ebaõnnestus</translation>
+    </message>
+    <message>
+        <source>Failed to connect host</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to connect proxy</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

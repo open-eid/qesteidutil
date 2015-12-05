@@ -11,6 +11,7 @@ include( VersionInfo )
 
 set_app_name( PROGNAME qesteidutil )
 
+find_package( Threads )
 find_package( Qt5Widgets QUIET HINTS ${QTSDK} )
 if( Qt5Widgets_FOUND )
 	find_package( Qt5Network HINTS ${QTSDK} )
@@ -58,6 +59,7 @@ add_executable( ${PROGNAME} WIN32 MACOSX_BUNDLE
 	src/QSmartCard.cpp
 	src/sslConnect.cpp
 	src/XmlReader.cpp
+	src/Updater.cpp
 	${SOURCES}
 	${RESOURCE_FILES}
 )
@@ -65,13 +67,14 @@ add_manifest( ${PROGNAME} )
 target_link_libraries( ${PROGNAME}
 	${QT_LIBRARIES}
 	${ADDITIONAL_LIBRARIES}
+	${CMAKE_THREAD_LIBS_INIT}
 	qdigidoccommon
 	smartcardpp
 )
 install(TARGETS ${PROGNAME} DESTINATION ${CMAKE_INSTALL_BINDIR})
 
 if(APPLE)
-	set_source_files_properties( src/main.cpp src/sslConnect.cpp src/QSmartCard.cpp src/CertUpdate.cpp
+	set_source_files_properties( src/main.cpp src/sslConnect.cpp src/QSmartCard.cpp src/Updater.cpp
 		PROPERTIES COMPILE_FLAGS "-Wno-deprecated-declarations" )
 	add_custom_target( macdeployqt DEPENDS ${PROGNAME}
 		COMMAND ${_qt5Core_install_prefix}/bin/macdeployqt ${CMAKE_CURRENT_BINARY_DIR}/${PROGNAME}.app

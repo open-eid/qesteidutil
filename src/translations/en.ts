@@ -36,10 +36,6 @@
         <translation>Certificate is valid till</translation>
     </message>
     <message>
-        <source>Update certificates</source>
-        <translation>Update certificates</translation>
-    </message>
-    <message>
         <source>Change PIN1</source>
         <translation>Change PIN1</translation>
     </message>
@@ -224,28 +220,8 @@ For getting new PUK code for your ID-card, please visit service center where you
         <translation>Failed loading Mobiil-ID settings.</translation>
     </message>
     <message>
-        <source>Certificate update</source>
-        <translation>Certificate update</translation>
-    </message>
-    <message>
-        <source>For updating certificates please close all programs which are interacting with smartcard (qdigidocclient, qdigidoccrypto, Firefox, Safari, Internet Explorer...)&lt;br /&gt;After updating certificates it will no longer be possible to decrypt documents that were encrypted with the old certificate.&lt;br /&gt;Do you want to continue?</source>
-        <translation>For updating certificates please close all programs which are interacting with smartcard (Client, Crypto, Firefox, Safari, Internet Explorer...)&lt;br /&gt;After updating certificates it will no longer be possible to decrypt documents that were encrypted with the old certificate.&lt;br /&gt;Do you want to continue?</translation>
-    </message>
-    <message>
         <source>Updating certificates</source>
         <translation>Updating certificates</translation>
-    </message>
-    <message>
-        <source>Updating certificates successful</source>
-        <translation>Updating certificates successful</translation>
-    </message>
-    <message>
-        <source>Old certificates succesfully removed from certificate store</source>
-        <translation>Old certificates succesfully removed from certificate store</translation>
-    </message>
-    <message>
-        <source>Failed to remove old certificates from certificate store</source>
-        <translation>Failed to remove old certificates from certificate store</translation>
     </message>
     <message>
         <source>E-mail address missing or invalid!</source>
@@ -545,10 +521,6 @@ For getting new PUK code for your ID-card, please visit service center where you
         <translation>SmartCard/PCSC service is not running</translation>
     </message>
     <message>
-        <source>Certificate update failed</source>
-        <translation>Certificate update failed</translation>
-    </message>
-    <message>
         <source>Cards</source>
         <translation>Cards</translation>
     </message>
@@ -671,10 +643,6 @@ To use Mobiil-ID it is needed to use a SIM card that supports this feature. If s
         <translation>This document is not supported for electronic use from 24.07.13, for additional information please contact &lt;a href=&quot;http://www.politsei.ee/en/teenused/isikut-toendavad-dokumendid/id-kaardi-uuendamine.dot&quot;&gt;Police and Border Guard Board&lt;/a&gt;.</translation>
     </message>
     <message>
-        <source>TokenCache cleanup failed&lt;br /&gt;&lt;a href=&apos;http://www.id.ee/?id=34455&apos;&gt;Additional info&lt;/a&gt;</source>
-        <translation>TokenCache cleanup failed&lt;br /&gt;&lt;a href=&apos;http://www.id.ee/?id=34455&apos;&gt;Additional info&lt;/a&gt;</translation>
-    </message>
-    <message>
         <source>There was an error with request to Äriregister.</source>
         <translation>There was an error with request to Äriregister.</translation>
     </message>
@@ -693,6 +661,16 @@ To use Mobiil-ID it is needed to use a SIM card that supports this feature. If s
     <message>
         <source>Unblock with PinPad</source>
         <translation>Unblock with PinPad</translation>
+    </message>
+    <message>
+        <source>Update</source>
+        <translation>Update</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;The certificates on this ID-card need renewing.&lt;/b&gt;&lt;br/&gt;
+The procedure may take form 2 to 10 minutes and you need a working internet connection. Do not remove the ID-card from the reader until the renewal procedure has completed!</source>
+        <translation>&lt;b&gt;The certificates on this ID-card need renewing.&lt;/b&gt;&lt;br/&gt;
+The procedure may take form 2 to 10 minutes and you need a working internet connection. Do not remove the ID-card from the reader until the renewal procedure has completed!</translation>
     </message>
 </context>
 <context>
@@ -721,6 +699,10 @@ To use Mobiil-ID it is needed to use a SIM card that supports this feature. If s
     <message>
         <source>Certificate is empty</source>
         <translation>Certificate is empty</translation>
+    </message>
+    <message>
+        <source>Invalid reponse</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -760,6 +742,25 @@ To use Mobiil-ID it is needed to use a SIM card that supports this feature. If s
     <message>
         <source>Clean certs</source>
         <translation>Clean certs</translation>
+    </message>
+</context>
+<context>
+    <name>Updater</name>
+    <message>
+        <source>Details</source>
+        <translation>Details</translation>
+    </message>
+    <message>
+        <source>Failed to read certificate</source>
+        <translation>Failed to read certificate</translation>
+    </message>
+    <message>
+        <source>Failed to connect host</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failed to connect proxy</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

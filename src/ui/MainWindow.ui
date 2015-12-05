@@ -172,7 +172,12 @@ text-align: center;
 }
 
 #version
-{ color: #668696; }</string>
+{ color: #668696; }
+
+#certUpdate {
+background-color: #F6D485;
+border-radius: 10px;
+}</string>
      </property>
      <layout class="QGridLayout" name="centralWidgetLayout">
       <property name="leftMargin">
@@ -664,10 +669,7 @@ text-align: center;
          </property>
         </widget>
         <widget class="QWidget" name="pageCertificates">
-         <layout class="QHBoxLayout" name="pageCertificatesLayout">
-          <property name="spacing">
-           <number>2</number>
-          </property>
+         <layout class="QGridLayout" name="pageCertificatesLayout">
           <property name="leftMargin">
            <number>0</number>
           </property>
@@ -680,7 +682,52 @@ text-align: center;
           <property name="bottomMargin">
            <number>0</number>
           </property>
-          <item>
+          <property name="horizontalSpacing">
+           <number>2</number>
+          </property>
+          <property name="verticalSpacing">
+           <number>5</number>
+          </property>
+          <item row="0" column="0" colspan="3">
+           <widget class="QWidget" name="certUpdate" native="true">
+            <layout class="QHBoxLayout" name="certUpdateLayout" stretch="1,0">
+             <property name="leftMargin">
+              <number>10</number>
+             </property>
+             <property name="topMargin">
+              <number>5</number>
+             </property>
+             <property name="rightMargin">
+              <number>10</number>
+             </property>
+             <property name="bottomMargin">
+              <number>5</number>
+             </property>
+             <item>
+              <widget class="QLabel" name="certUpdateLabel">
+               <property name="text">
+                <string>&lt;b&gt;The certificates on this ID-card need renewing.&lt;/b&gt;&lt;br/&gt;
+The procedure may take form 2 to 10 minutes and you need a working internet connection. Do not remove the ID-card from the reader until the renewal procedure has completed!</string>
+               </property>
+               <property name="wordWrap">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="certUpdateButton">
+               <property name="text">
+                <string>Update</string>
+               </property>
+               <property name="flat">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="1" column="0">
            <widget class="QWidget" name="authFrame" native="true">
             <property name="maximumSize">
              <size>
@@ -778,6 +825,9 @@ text-align: center;
              </item>
              <item row="4" column="0" colspan="4">
               <widget class="QLabel" name="authUsageCount">
+               <property name="text">
+                <string>Authentication key has been used %1 times</string>
+               </property>
                <property name="wordWrap">
                 <bool>true</bool>
                </property>
@@ -809,17 +859,7 @@ text-align: center;
                </property>
               </widget>
              </item>
-             <item row="7" column="0" colspan="4">
-              <widget class="QPushButton" name="updateCert">
-               <property name="text">
-                <string>Update certificates</string>
-               </property>
-               <property name="flat">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item row="8" column="0">
+             <item row="7" column="0">
               <widget class="QPushButton" name="authChangePin">
                <property name="text">
                 <string>Change PIN1</string>
@@ -829,7 +869,7 @@ text-align: center;
                </property>
               </widget>
              </item>
-             <item row="8" column="1">
+             <item row="7" column="1">
               <widget class="QPushButton" name="authRevoke">
                <property name="text">
                 <string>Revoke blocking</string>
@@ -839,7 +879,7 @@ text-align: center;
                </property>
               </widget>
              </item>
-             <item row="8" column="2">
+             <item row="7" column="2">
               <widget class="QPushButton" name="authCert">
                <property name="text">
                 <string>View certificate</string>
@@ -849,7 +889,7 @@ text-align: center;
                </property>
               </widget>
              </item>
-             <item row="8" column="3">
+             <item row="7" column="3">
               <spacer name="authButtonSpacer">
                <property name="orientation">
                 <enum>Qt::Horizontal</enum>
@@ -865,14 +905,14 @@ text-align: center;
             </layout>
            </widget>
           </item>
-          <item>
+          <item row="1" column="1">
            <widget class="Line" name="certsLine">
             <property name="orientation">
              <enum>Qt::Vertical</enum>
             </property>
            </widget>
           </item>
-          <item>
+          <item row="1" column="2">
            <widget class="QWidget" name="signFrame" native="true">
             <property name="maximumSize">
              <size>
@@ -970,6 +1010,9 @@ text-align: center;
              </item>
              <item row="4" column="0" colspan="4">
               <widget class="QLabel" name="signUsageCount">
+               <property name="text">
+                <string>Signature key has been used %1 times</string>
+               </property>
                <property name="wordWrap">
                 <bool>true</bool>
                </property>

@@ -22,6 +22,7 @@
 #include <common/Common.h>
 #include <common/IKValidator.h>
 #include <common/PinDialog.h>
+#include <common/QPCSC.h>
 #include <common/Settings.h>
 
 #include <QtCore/QDateTime>
@@ -284,7 +285,8 @@ void QSmartCard::run()
 					QSmartCardDataPrivate *t = d->t.d;
 					std::string reader = cards.value( t->card );
 					delete d->card;
-					d->card = 0;
+					d->card = nullptr;
+
 					d->card = new EstEidCard( reader );
 					d->card->setReaderLanguageId( d->lang );
 
@@ -305,6 +307,14 @@ void QSmartCard::run()
 						}
 					} catch( const std::runtime_error &e ) {
 						qDebug() << Q_FUNC_INFO << "Card is not V3.0: " << e.what();
+					}
+					if(t->version == QSmartCardData::VER_INVALID)
+					{
+						QPCSC pcsc;
+						QPCSCReader *ctx = new QPCSCReader(QString::fromStdString(reader), &pcsc);
+						if(ctx->connect() && ctx->transfer(QByteArray::fromHex("00A40400 0A D2330000005550443101")).resultOk())
+								t->version = QSmartCardData::VER_UPDATER;
+						delete ctx;
 					}
 
 					t->data[QSmartCardData::SurName] =
