@@ -26,6 +26,7 @@
     <MediaTemplate EmbedCab="yes" CompressionLevel="high"/>
     <Icon Id="qesteidutil.exe" SourceFile="$(var.utility_path)"/>
     <Property Id="ARPPRODUCTICON" Value="qesteidutil.exe"/>
+    <Property Id="RUN_UTIL" Value="0"/>
     <MajorUpgrade AllowSameVersionUpgrades="yes" Schedule="afterInstallInitialize" DowngradeErrorMessage=
       "A newer version of [ProductName] is already installed. If you are trying to downgrade, please uninstall the newer version first."/>
     <Condition Message="[ProductName] requires Windows 7 or higher.">
@@ -46,7 +47,7 @@
 
       <!-- Desktop shortcut -->
       <Directory Id="DesktopFolder">
-        <Component Id="DesktopShortcut" Guid="25ccb772-82f7-4566-b4b2-73d38ab54074">
+        <Component Id="DesktopShortcut" Guid="25ccb772-82f7-4566-b4b2-73d38ab54074" Transitive="yes">
           <Condition>DESKTOP_SHORTCUT = 1</Condition>
           <Shortcut Id="UtilityDesktopShortcut" Name="!(loc.qesteidutilLabel)"
                     Target="[!qesteidutil.exe]" WorkingDirectory="APPLICATIONFOLDER"/>
@@ -57,7 +58,7 @@
       <Directory Id='$(var.PlatformProgramFilesFolder)'>
         <Directory Id="APPLICATIONFOLDER" Name="ID-card utility">
           <Component Id="Application" Guid="0e8b0569-61e3-46c5-9a00-144f121964cc">
-            <File Source="$(var.utility_path)" KeyPath='yes'>
+            <File Id="qesteidutil.exe" Source="$(var.utility_path)" KeyPath='yes'>
               <Shortcut Id="StartMenu" Advertise="yes" Name="!(loc.qesteidutilLabel)" Icon="qesteidutil.exe"
                 Directory="ProgramMenuDir" WorkingDirectory="APPLICATIONFOLDER"/>
             </File>
@@ -112,5 +113,11 @@
       <ComponentRef Id="qjpeg.dll" />
 <?endif?>
     </Feature>
+
+    <CustomAction Id="RunUtil" FileKey="qesteidutil.exe" Impersonate="no" Execute="deferred" ExeCommand="" Return="asyncNoWait"/>
+
+    <InstallExecuteSequence>
+      <Custom Action="RunUtil" Before="InstallFinalize">NOT (NOT UPGRADINGPRODUCTCODE AND REMOVE="ALL") AND (RUN_UTIL = 1)</Custom>
+    </InstallExecuteSequence>
   </Product>
 </Wix>
