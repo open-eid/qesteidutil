@@ -27,7 +27,6 @@
 int main(int argc, char *argv[])
 {
 	Common app( argc, argv, APP, ":/images/id_icon_128x128.png" );
-
 	if( app.isCrashReport() )
 		return app.exec();
 
@@ -38,10 +37,7 @@ int main(int argc, char *argv[])
 		return 0;
 	}
 #endif
-
 	SSL_library_init();
-
-	app.detectPlugins();
 	Configuration::instance().checkVersion("QESTEIDUTIL");
 
 	MainWindow w;
