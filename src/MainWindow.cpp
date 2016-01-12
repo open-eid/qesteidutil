@@ -424,6 +424,7 @@ void MainWindow::on_languages_activated( int index )
 	d->retranslateUi( this );
 	d->loadPicture->setText( tr("Load picture") );
 	d->savePicture->setText( tr("save") );
+	d->version->setText( windowTitle() + " " + qApp->applicationVersion() );
 
 	if( d->changePin1Info->currentWidget() == d->changePin1InfoPin )
 		d->changePin1ValidateLabel->setText( tr("Current PIN1 code") );

@@ -169,7 +169,10 @@ font-size: 18px;
 #savePicture {
 background-color: rgba(255,255,255,200);
 text-align: center;
-}</string>
+}
+
+#version
+{ color: #668696; }</string>
      </property>
      <layout class="QGridLayout" name="centralWidgetLayout">
       <property name="leftMargin">
@@ -182,7 +185,7 @@ text-align: center;
        <number>18</number>
       </property>
       <property name="bottomMargin">
-       <number>15</number>
+       <number>0</number>
       </property>
       <property name="spacing">
        <number>0</number>
@@ -2333,6 +2336,25 @@ For getting new PUK code for your ID-card, please visit service center where you
           </item>
          </layout>
         </widget>
+       </widget>
+      </item>
+      <item row="5" column="0" colspan="2">
+       <widget class="QLabel" name="version">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>15</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>15</height>
+         </size>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+        </property>
        </widget>
       </item>
      </layout>
