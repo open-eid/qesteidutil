@@ -64,6 +64,8 @@ bool CertStore::add( const QSslCertificate &cert, const QString &card )
 	cardStr = QCryptographicHash::hash( cardStr.toUtf8(), QCryptographicHash::Md5 ).toHex();
 
 	PCCERT_CONTEXT context = d->certContext( cert );
+	if(!context)
+		return false;
 
 	QString str = QString( "%1 %2" )
 		.arg( keyCode == AT_SIGNATURE ? "Signature" : "Authentication" )

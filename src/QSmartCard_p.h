@@ -59,7 +59,7 @@ public:
 	}
 
 	QString encode( const std::string &data ) const
-	{ return data.empty() ? QString() : codec->toUnicode( data.c_str() ); }
+	{ return data.empty() ? QString() : codec->toUnicode( QByteArray::fromRawData(data.c_str(), data.size()) ); }
 
 	QSmartCard::ErrorType handleAuthError( QSmartCardData::PinType type, const AuthError &e );
 	void updateCounters( QSmartCardDataPrivate *d );
@@ -68,7 +68,7 @@ public:
 		unsigned char *sigret, unsigned int *siglen, const RSA *rsa );
 
 	QTextCodec		*codec;
-	EstEidCard		*card;
+	QSharedPointer<EstEidCard> card;
 	QMutex			m;
 	quint8			numReaders;
 	QSmartCardData	t;

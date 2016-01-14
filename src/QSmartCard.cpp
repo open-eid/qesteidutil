@@ -43,6 +43,8 @@ QSmartCardData& QSmartCardData::operator =( const QSmartCardData &other ) { d = 
 QString QSmartCardData::card() const { return d->card; }
 QStringList QSmartCardData::cards() const { return d->cards; }
 
+bool QSmartCardData::isNull() const
+{ return d->data.isEmpty() && d->authCert.isNull() && d->signCert.isNull(); }
 bool QSmartCardData::isPinpad() const { return d->pinpad; }
 bool QSmartCardData::isSecurePinpad() const
 { return d->reader.contains( "EZIO SHIELD", Qt::CaseInsensitive ); }
@@ -232,29 +234,47 @@ void QSmartCard::reload() { selectCard( d->t.card() ); }
 
 void QSmartCard::run()
 {
+	const QByteArray AID35 =		QByteArray::fromHex("00A40400 0F D23300000045737445494420763335");
+	const QByteArray UPDATER_AID =	QByteArray::fromHex("00A40400 0A D2330000005550443101");
+	const QByteArray MASTER_FILE =	QByteArray::fromHex("00A4000C 00");
+	const QByteArray ESTEIDDF =		QByteArray::fromHex("00A4010C 02 EEEE");
+	const QByteArray PERSONALDATA =	QByteArray::fromHex("00A4020C 02 5044");
+	const QByteArray READRECORD =	QByteArray::fromHex("00B20004 00");
+
 	while( !d->terminate )
 	{
 		if( d->m.tryLock() )
 		{
 			// Get list of available cards
 			QMap<QString,std::string> cards;
-			QStringList readers;
-			try
+			const QStringList readers = QPCSC::instance().readers();
+			for(const QString &reader: readers)
 			{
-				EstEIDManager *card = new EstEIDManager();
-				std::vector<Token> list = card->getTokenList();
-				for( std::vector<Token>::const_iterator i = list.begin(); i != list.end(); ++i )
+				qDebug() << "Reader" << reader;
+				QScopedPointer<QPCSCReader> ctx(new QPCSCReader(reader, &QPCSC::instance()));
+				if(!ctx->connect(QPCSCReader::Shared))
+					continue;
+
+				if(!ctx->transfer(MASTER_FILE).resultOk())
 				{
-					qDebug() << i->first.c_str() << i->second.c_str();
-					readers << i->first.c_str();
-					if( !i->second.empty() )
-						cards[i->second.c_str()] = i->first.c_str();
+					// Master file selection failed, test if it is updater applet
+					if(!ctx->transfer(UPDATER_AID).resultOk())
+						continue; // Updater applet not found
+					if(!ctx->transfer(MASTER_FILE).resultOk())
+					{	//Found updater applet but cannot select master file, select back 3.5
+						ctx->transfer(AID35);
+						continue;
+					}
 				}
-				delete card;
-			}
-			catch( const std::runtime_error &e )
-			{
-				qDebug() << Q_FUNC_INFO << e.what();
+
+				if(!ctx->transfer(ESTEIDDF).resultOk() ||
+					!ctx->transfer(PERSONALDATA).resultOk() )
+					continue;
+				QByteArray cardid = READRECORD;
+				cardid[2] = 8;
+				QString nr = d->codec->toUnicode( ctx->transfer( cardid ).data );
+				if(!nr.isEmpty())
+					cards[nr] = reader.toStdString();
 			}
 
 			// cardlist has changed
@@ -266,6 +286,7 @@ void QSmartCard::run()
 			if( !d->t.card().isEmpty() && !order.contains( d->t.card() ) )
 			{
 				update = true;
+				d->card.clear();
 				d->t.d = new QSmartCardDataPrivate();
 			}
 
@@ -277,17 +298,15 @@ void QSmartCard::run()
 				selectCard( d->t.cards().first() );
 
 			// read card data
-			if( d->t.cards().contains( d->t.card() ) && (!d->card || d->t.authCert().isNull() || d->t.signCert().isNull()) )
+			if( d->t.cards().contains( d->t.card() ) && !d->card )
 			{
 				update = true;
 				try
 				{
 					QSmartCardDataPrivate *t = d->t.d;
 					std::string reader = cards.value( t->card );
-					delete d->card;
-					d->card = nullptr;
 
-					d->card = new EstEidCard( reader );
+					d->card.reset(new EstEidCard( reader ));
 					d->card->setReaderLanguageId( d->lang );
 
 					d->updateCounters( t );
@@ -310,10 +329,14 @@ void QSmartCard::run()
 					}
 					if(t->version == QSmartCardData::VER_INVALID)
 					{
-						QPCSC pcsc;
-						QPCSCReader *ctx = new QPCSCReader(QString::fromStdString(reader), &pcsc);
+						QPCSCReader *ctx = new QPCSCReader(QString::fromStdString(reader), &QPCSC::instance());
 						if(ctx->connect() && ctx->transfer(QByteArray::fromHex("00A40400 0A D2330000005550443101")).resultOk())
-								t->version = QSmartCardData::VER_UPDATER;
+						{
+							t->version = QSmartCardData::VER_UPDATER;
+							//Found updater applet, test if it is usable
+							if(!ctx->transfer(MASTER_FILE).resultOk())
+								ctx->transfer(AID35);
+						}
 						delete ctx;
 					}
 
@@ -340,9 +363,9 @@ void QSmartCard::run()
 					t->data[QSmartCardData::Comment4] = d->encode( data[EstEidCard::COMMENT4] );
 
 					if( !authcert.empty() )
-						t->authCert = QSslCertificate( QByteArray( (char*)&authcert[0], (int)authcert.size() ), QSsl::Der );
+						t->authCert = QSslCertificate( QByteArray::fromRawData( (char*)authcert.data(), (int)authcert.size() ), QSsl::Der );
 					if( !signcert.empty() )
-						t->signCert = QSslCertificate( QByteArray( (char*)&signcert[0], (int)signcert.size() ), QSsl::Der );
+						t->signCert = QSslCertificate( QByteArray::fromRawData( (char*)signcert.data(), (int)signcert.size() ), QSsl::Der );
 
 					QStringList mailaddresses = t->authCert.alternateSubjectNames().values( QSsl::EmailEntry );
 					t->data[QSmartCardData::Email] = !mailaddresses.isEmpty() ? mailaddresses.first() : "";
@@ -359,6 +382,7 @@ void QSmartCard::run()
 				}
 				catch( const std::runtime_error &e )
 				{
+					d->card.clear();
 					qDebug() << Q_FUNC_INFO << "Error on loading card data: " << e.what();
 				}
 			}
@@ -460,6 +484,8 @@ void QSmartCard::selectCard( const QString &card )
 {
 	d->t.d->card = card;
 	d->t.d->authCert = QSslCertificate();
+	d->t.d->signCert = QSslCertificate();
+	d->t.d->data.clear();
 	Q_EMIT dataChanged();
 }
 

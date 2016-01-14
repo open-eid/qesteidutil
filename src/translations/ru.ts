@@ -669,9 +669,10 @@ To use Mobiil-ID it is needed to use a SIM card that supports this feature. If s
         <translation>Обновление</translation>
     </message>
     <message>
-        <source>&lt;b&gt;The certificates on this ID-card need renewing.&lt;/b&gt;&lt;br/&gt;
-The procedure may take form 2 to 10 minutes and you need a working internet connection. Do not remove the ID-card from the reader until the renewal procedure has completed!</source>
-        <translation type="unfinished"></translation>
+        <source>&lt;b&gt;Your ID card certificates need to be updated.&lt;/b&gt;&lt;br/&gt;
+Updating takes ca 2-10 minutes and requires an active internet connection. Do not remove the ID card from the smartcard reader until the update is complete.</source>
+        <translation>&lt;b&gt;Сертификаты Вашей ID-карты необходимо обновить.&lt;/b&gt;&lt;br/&gt;
+Обновление занимает около 2-10 минут и требует наличия интернет-соединения. Не извлекайте ID-карту из считывающего устройства до завершения процесса обновления.</translation>
     </message>
 </context>
 <context>
@@ -755,12 +756,20 @@ The procedure may take form 2 to 10 minutes and you need a working internet conn
         <translation>Не удалось прочитать сертификат</translation>
     </message>
     <message>
-        <source>Failed to connect host</source>
+        <source>Close</source>
+        <translation>Закрыть</translation>
+    </message>
+    <message>
+        <source>Invalid content type</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Failed to connect proxy</source>
+        <source>Request timed out</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Updating certificates has failed. The server is overloaded, try again later.</source>
+        <translation>Не удалось обновить сертификаты. Сервер перегружен, попробуйте обновить сертификаты позже.</translation>
     </message>
 </context>
 </TS>

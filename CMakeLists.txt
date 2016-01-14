@@ -5,6 +5,7 @@ project( qesteidutil )
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/modules")
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
+set(PROJECT_VERSION_PATCH 1)
 include( VersionInfo )
 set_app_name( PROGNAME qesteidutil )
 

@@ -50,13 +50,10 @@ class MacMenuBar;
 #include <QtCore/QJsonObject>
 #include <QtCore/QUrl>
 #include <QtGui/QDesktopServices>
-#if QT_VERSION >= 0x050000
+#include <QtGui/QPainter>
+#include <QtGui/QPaintEvent>
 #include <QtWidgets/QFileDialog>
 #include <QtWidgets/QMessageBox>
-#else
-#include <QtGui/QFileDialog>
-#include <QtGui/QMessageBox>
-#endif
 
 #include <stdexcept>
 
@@ -376,6 +373,7 @@ MainWindow::MainWindow( QWidget *parent )
 	connect( d->loadPicture, SIGNAL(clicked()), SLOT(loadPicture()) );
 	connect( d->savePicture, SIGNAL(clicked()), SLOT(savePicture()) );
 
+	d->buttonCert->installEventFilter(this);
 	qApp->installTranslator( &d->appTranslator );
 	qApp->installTranslator( &d->qtTranslator );
 	qApp->installTranslator( &d->commonTranslator );
@@ -412,6 +410,29 @@ MainWindow::~MainWindow()
 	delete d->bar;
 #endif
 	delete d;
+}
+
+bool MainWindow::eventFilter(QObject *obj, QEvent *event)
+{
+	if(obj != d->buttonCert || event->type() != QEvent::Paint || !d->certUpdate->property("updateEnabled").toBool())
+		return false;
+	static bool recursive = false;
+	if(recursive)
+		return false;
+	recursive = true;
+	QCoreApplication::sendEvent(obj, event);
+	recursive = false;
+
+	QRect r(0, 0, 12, 12);
+	r.moveRight(d->buttonCert->rect().right() - 7);
+	QPainter p(d->buttonCert);
+	p.setRenderHints(QPainter::Antialiasing);
+	p.setPen(Qt::red);
+	p.setBrush(Qt::red);
+	p.drawEllipse(r);
+	p.setPen(Qt::white);
+	p.drawText(r, Qt::AlignCenter, "!");
+	return true;
 }
 
 void MainWindow::on_languages_activated( int index )
@@ -521,12 +542,12 @@ void MainWindow::setDataPage( int index )
 {
 	QSmartCardData t = d->smartcard->data();
 	ButtonTypes page = ButtonTypes( index & 0x0f );
-	d->dataWidget->setCurrentIndex( t.authCert().isNull() ? PageEmpty : page );
+	d->dataWidget->setCurrentIndex( t.isNull() ? PageEmpty : page );
 	d->buttonCert->setChecked( page == PageCert );
 	d->buttonEmail->setChecked( page == PageEmail );
 	d->buttonMobile->setChecked( page == PageMobile );
 	d->buttonPuk->setChecked( page == PagePukInfo );
-	if( t.authCert().isNull() )
+	if( t.isNull() )
 		return;
 
 	switch( index )
@@ -550,6 +571,7 @@ void MainWindow::setDataPage( int index )
 #endif
 		d->showLoading( tr("Updating certificates") );
 		d->smartcard->d->m.lock();
+		d->smartcard->d->card.clear();
 		Updater(d->smartcard->data().reader(), this).exec();
 		d->smartcard->d->m.unlock();
 		d->smartcard->reload();
@@ -869,7 +891,7 @@ void MainWindow::updateData()
 	d->hideLoading();
 	QSmartCardData t = d->smartcard->data();
 
-	if( !t.authCert().isNull() )
+	if( !t.isNull() )
 	{
 		QString text;
 		QTextStream st( &text );
@@ -962,22 +984,21 @@ void MainWindow::updateData()
 			t.retryCount( QSmartCardData::Pin1Type ) == 0 && t.retryCount( QSmartCardData::PukType ) > 0 );
 		d->signRevoke->setVisible(
 			t.retryCount( QSmartCardData::Pin2Type ) == 0 && t.retryCount( QSmartCardData::PukType ) > 0 );
+		d->authFrame->setVisible( !t.authCert().isNull() );
+		d->signFrame->setVisible( !t.signCert().isNull() );
+		d->certsLine->setVisible( !t.authCert().isNull() || !t.signCert().isNull() );
 
-#if 0
-		d->certUpdate->setVisible(
+		d->certUpdate->setProperty("updateEnabled",
 			Settings(qApp->applicationName()).value("updateButton", false).toBool() ||
 			(
 				Configuration::instance().object().contains("EIDUPDATER-URL") &&
-				t.authCert().type() & (SslCertificate::EstEidType|SslCertificate::DigiIDType) &&
 				t.version() >= QSmartCardData::VER_3_4 &&
 				t.retryCount( QSmartCardData::Pin1Type ) > 0 &&
-				t.isValid() && t.isValid() &&
+				t.isValid() &&
 				(!t.authCert().validateEncoding() || !t.signCert().validateEncoding() || t.version() == QSmartCardData::VER_UPDATER)
 			)
 		);
-#else
-		d->certUpdate->setVisible(false);
-#endif
+		d->certUpdate->setVisible(d->certUpdate->property("updateEnabled").toBool());
 
 		d->pukLocked->setVisible( t.retryCount( QSmartCardData::PukType ) == 0 );
 		d->pukChange->setVisible( t.retryCount( QSmartCardData::PukType ) > 0 );
@@ -1023,6 +1044,7 @@ void MainWindow::updateData()
 	}
 	else
 	{
+		d->certUpdate->setProperty("updateEnabled", false);
 		d->personalName->clear();
 		d->surName->clear();
 		d->personalCode->clear();
@@ -1035,7 +1057,7 @@ void MainWindow::updateData()
 
 		QString text;
 		QString additional;
-		if( !QPCSC().serviceRunning() )
+		if( !QPCSC::instance().serviceRunning() )
 			text = tr("PCSC service is not running");
 		else if( t.readers().isEmpty() )
 			text = tr("No reader found");

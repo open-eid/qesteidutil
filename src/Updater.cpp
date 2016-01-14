@@ -1,3 +1,22 @@
+/*
+ * QEstEidUtil
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+ *
+ */
+
 #include "Updater.h"
 #include "common/Common.h"
 #include "common/Configuration.h"
@@ -5,98 +24,121 @@
 #include "common/PinDialog.h"
 #include "common/Settings.h"
 
-#include <QApplication>
-#include <QComboBox>
-#include <QInputDialog>
-#include <QJsonDocument>
-#include <QJsonObject>
-#include <QLabel>
-#include <QMessageBox>
-#include <QNetworkProxy>
-#include <QPainter>
-#include <QPushButton>
-#include <QSslKey>
-#include <QSslSocket>
-#include <QtEndian>
-#include <QTextBrowser>
-#include <QGridLayout>
-#ifdef Q_OS_WIN
-#include <qt_windows.h>
-#endif
+#include <QtCore/QTimer>
+#include <QtCore/QJsonArray>
+#include <QtCore/QJsonDocument>
+#include <QtCore/QJsonObject>
+#include <QtNetwork/QNetworkAccessManager>
+#include <QtNetwork/QNetworkProxy>
+#include <QtNetwork/QNetworkReply>
+#include <QtNetwork/QSslKey>
+#include <QtGui/QPainter>
+#include <QtWidgets/QComboBox>
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QMessageBox>
+#include <QtWidgets/QPushButton>
+#include <QtWidgets/QTextBrowser>
+#include <QtWidgets/QGridLayout>
 
-#include <openssl/bio.h>
-#include <openssl/ssl.h>
+#include <openssl/evp.h>
+#include <openssl/rsa.h>
 
 #include <thread>
 
-#define APDU QByteArray::fromHex
-#if QT_VERSION >= 0x050400
-#define DEBUG qDebug().noquote()
-#else
-#define DEBUG qDebug()
-#endif
+#define APDU(hex) QByteArray::fromHex(hex)
 
 class UpdaterPrivate
 {
 public:
+	Updater *parent = nullptr;
 	QPCSCReader *reader = nullptr;
 	QLabel *label = nullptr;
-	BIO *bio = nullptr;
-	SSL *ssl = SSL_new(SSL_CTX_new(TLSv1_client_method()));
+	QPushButton *close = nullptr;
 	RSA_METHOD method = *RSA_get_default_method();
 	QSslCertificate cert;
-	RSA *key = nullptr;
 	QString session;
-	bool isRunning = true;
+	QNetworkRequest request;
+	QByteArray signature;
+	template<class T>
+	QPCSCReader::Result verifyPIN(const T &cert, int p1) const;
+	QtMessageHandler oldMsgHandler = nullptr;
 
 	static int rsa_sign(int type, const unsigned char *m, unsigned int m_len,
-		unsigned char *sigret, unsigned int *siglen, const RSA *rsa);
+		unsigned char *sigret, unsigned int *siglen, const RSA *rsa)
+	{
+		UpdaterPrivate *d = (UpdaterPrivate*)RSA_get_app_data(rsa);
+		if(type != NID_md5_sha1 || m_len != 36 || !d)
+			return 0;
+		QEventLoop loop;
+		d->signature.clear();
+		Q_EMIT d->parent->signReq(&loop, QByteArray::fromRawData((const char*)m, m_len));
+		if(loop.exec() != 1)
+			return 0;
+		*siglen = (unsigned int)d->signature.size();
+		memcpy(sigret, d->signature.constData(), d->signature.size());
+		return 1;
+	}
 };
 
-int UpdaterPrivate::rsa_sign(int type, const unsigned char *m, unsigned int m_len,
-	unsigned char *sigret, unsigned int *siglen, const RSA *rsa)
+template<class T>
+QPCSCReader::Result UpdaterPrivate::verifyPIN(const T &title, int p1) const
 {
-	UpdaterPrivate *d = (UpdaterPrivate*)RSA_get_app_data(rsa);
-	if(type != NID_md5_sha1 ||
-		m_len != 36 ||
-		!d ||
-		!d->reader ||
+	QByteArray verify = APDU("00200000 00");
+	verify[3] = p1;
+	int flags = (p1 == 1 ? PinDialog::Pin1Type : PinDialog::Pin2Type);
+	if(reader->isPinPad())
+		flags |= PinDialog::PinpadFlag;
+	TokenData::TokenFlags token = 0;
+
+	Q_FOREVER
+	{
+		PinDialog pin(PinDialog::PinFlags(flags), title, token, parent);
+		QPCSCReader::Result result;
+		if(flags & PinDialog::PinpadFlag)
+		{
+			std::thread([&]{
+				Q_EMIT pin.startTimer();
+				result = reader->transferCTL(verify, true);
+				Q_EMIT pin.finish(0);
+			}).detach();
+			pin.exec();
+		}
+		else if(pin.exec() != 0)
+		{
+			verify[4] = pin.text().size();
+			result = reader->transfer(verify + pin.text().toLatin1());
+		}
+		switch( (quint8(result.SW[0]) << 8) + quint8(result.SW[1]) )
+		{
+		case 0x63C1: token = TokenData::PinFinalTry; continue; // Validate error, 1 tries left
+		case 0x63C2: token = TokenData::PinCountLow; continue; // Validate error, 2 tries left
+		case 0x63C3: continue;
+		case 0x63C0: // Blocked
+		case 0x6400: // Timeout
+		case 0x6401: // Cancel
+		case 0x6402: // Mismatch
+		case 0x6403: // Lenght error
+		case 0x6983: // Blocked
+		case 0x9000: // No error
+		default: return result;
+		}
+	}
+}
+
+void Updater::sign(QEventLoop *loop, const QByteArray &in)
+{
+	if(!d->reader ||
 		!d->reader->connect() ||
 		!d->reader->beginTransaction())
-		return 0;
+		return loop->exit(0);
 
 	// Verify PIN
-	QByteArray verify = APDU("00200001 00");
-	if(d->reader->isPinPad())
+	if(!d->verifyPIN(d->cert, 1).resultOk())
 	{
-		PinDialog pin(PinDialog::Pin1PinpadType, d->cert, 0, 0);
-		Q_EMIT pin.startTimer();
-		std::thread([&]{
-			pin.done(d->reader->transferCTL(verify, true).resultOk() ? 1 : 0);
-		}).detach();
-		if(pin.exec() == 0)
-		{
-			d->reader->endTransaction();
-			d->reader->disconnect();
-			return 0;
-		}
+		d->reader->endTransaction();
+		d->reader->disconnect();
+		return loop->exit(0);
 	}
-	else
-	{
-		PinDialog pin(PinDialog::Pin1Type, d->cert, 0, 0);
-		if(pin.exec() == 0)
-			return 0;
-		verify[4] = pin.text().size();
-		QPCSCReader::Result result = d->reader->transfer(verify + pin.text().toLatin1());
-		if(!result.resultOk())
-		{
-			d->reader->endTransaction();
-			d->reader->disconnect();
-			return 0;
-		}
-	}
-
-	// TODO: handle invalid pin
 
 	// Set card parameters
 	if(!d->reader->transfer(APDU("0022F301 00")).resultOk() || // SecENV 1
@@ -104,22 +146,21 @@ int UpdaterPrivate::rsa_sign(int type, const unsigned char *m, unsigned int m_le
 	{
 		d->reader->endTransaction();
 		d->reader->disconnect();
-		return 0;
+		return loop->exit(0);
 	}
 
 	// calc signature
 	QByteArray cmd = APDU("00880000 00");
-	cmd[4] = m_len;
-	cmd += QByteArray::fromRawData((const char*)m, m_len);
+	cmd[4] = in.length();
+	cmd += in;
 	QPCSCReader::Result result = d->reader->transfer(cmd);
 	d->reader->endTransaction();
 	d->reader->disconnect();
 	if(!result.resultOk())
-		return 0;
+		return loop->exit(0);
 
-	*siglen = (unsigned int)result.data.size();
-	memcpy(sigret, result.data.constData(), result.data.size());
-	return 1;
+	d->signature = result.data;
+	return loop->exit(1);
 }
 
 
@@ -128,59 +169,64 @@ Updater::Updater(const QString &reader, QWidget *parent)
 	: QDialog(parent)
 	, d(new UpdaterPrivate)
 {
-	resize(600, 20);
+	d->parent = this;
+	setWindowTitle(parent->windowTitle());
+	setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
+	connect(this, &Updater::signReq, this, &Updater::sign, Qt::QueuedConnection);
 
-	QPCSC *pcsc = new QPCSC(QPCSC::APDULog, this);
-	d->reader = new QPCSCReader(reader, pcsc);
-
-	SSL_CTX_set_mode(d->ssl->ctx, SSL_MODE_AUTO_RETRY);
-	SSL_CTX_set_quiet_shutdown(d->ssl->ctx, 1);
+	d->reader = new QPCSCReader(reader, &QPCSC::instance());
 
 	d->method.name = "Updater";
 	d->method.rsa_sign = UpdaterPrivate::rsa_sign;
 
 	d->label = new QLabel(this);
+	d->label->setWordWrap(true);
+	d->label->setMinimumHeight(30);
 	QPushButton *details = new QPushButton(tr("Details"), this);
+	d->close = new QPushButton(tr("Close"), this);
+	d->close->hide();
 	QTextBrowser *log = new QTextBrowser(this);
 	log->hide();
 	connect(details, &QPushButton::clicked, [=]{
 		log->setVisible(!log->isVisible());
 		qApp->processEvents();
-		resize(600, log->isVisible() ? 600 : 20);
+		resize(width(), log->isVisible() ? 600 : 20);
 	});
+	connect(d->close, &QPushButton::clicked, this, &Updater::accept);
 	connect(this, &Updater::log, log, &QTextBrowser::append, Qt::QueuedConnection);
 
 	QGridLayout *layout = new QGridLayout(this);
 	layout->addWidget(d->label, 0, 0);
 	layout->addWidget(details, 0, 1);
-	layout->addWidget(log, 1, 0, 1, 2);
+	layout->addWidget(d->close, 0, 2);
+	layout->addWidget(log, 1, 0, 1, 3);
 	layout->setColumnStretch(0, 1);
+	move(parent->geometry().left(), parent->geometry().center().y() - height());
+	resize(parent->width(), height());
 
 	static Updater *instance = nullptr;
 	instance = this;
-	qInstallMessageHandler([](QtMsgType, const QMessageLogContext &, const QString &msg){
-		Q_EMIT instance->log(msg);
+	d->oldMsgHandler = qInstallMessageHandler([](QtMsgType, const QMessageLogContext &, const QString &msg){
+		if(!msg.contains("QObject")) //Silence Qt warnings
+			Q_EMIT instance->log(msg);
 	});
-
-	connect(this, &Updater::handle, this, &Updater::process, Qt::QueuedConnection);
 }
 
 Updater::~Updater()
 {
-	if(d->bio && !SSL_get_rbio(d->ssl))
-		BIO_free(d->bio);
-	SSL_CTX_free(d->ssl->ctx);
-	SSL_free(d->ssl);
-	if(d->key)
-		RSA_free(d->key);
 	d->reader->endTransaction();
-	qInstallMessageHandler(nullptr);
+	delete d->reader;
+	qInstallMessageHandler(d->oldMsgHandler);
 	delete d;
 }
 
 void Updater::process(const QByteArray &data)
 {
-	DEBUG << ">" << data;
+#if QT_VERSION >= 0x050400
+	qDebug().noquote() << ">" << data;
+#else
+	qDebug() << ">" << data;
+#endif
 	QJsonObject obj = QJsonDocument::fromJson(data).object();
 
 	if(d->session.isEmpty())
@@ -188,23 +234,30 @@ void Updater::process(const QByteArray &data)
 	QString cmd = obj.value("cmd").toString();
 	if(cmd == "CONNECT")
 	{
-		DEBUG << "CONNECT";
 		QPCSCReader::Mode mode = QPCSCReader::Mode(QPCSCReader::T0|QPCSCReader::T1);
 		if(obj.value("protocol").toString() == "T=0") mode = QPCSCReader::T0;
 		if(obj.value("protocol").toString() == "T=1") mode = QPCSCReader::T1;
-		if(d->reader->connect(QPCSCReader::Shared, mode))
+		quint32 err = 0;
+#ifdef Q_OS_WIN
+		err = d->reader->connectEx(QPCSCReader::Exclusive, mode);
+#else
+		if((err = d->reader->connectEx(QPCSCReader::Exclusive, mode)) == 0 ||
+			(err = d->reader->connectEx(QPCSCReader::Shared, mode)) == 0)
 			d->reader->beginTransaction();
-		Q_EMIT send({
+#endif
+		QVariantHash ret{
 			{"CONNECT", d->reader->isConnected() ? "OK" : "NOK"},
 			{"reader", d->reader->name()},
 			{"atr", d->reader->atr()},
 			{"protocol", d->reader->protocol() == 2 ? "T=1" : "T=0"},
 			{"pinpad", d->reader->isPinPad()}
-		});
+		};
+		if(err)
+			ret["ERROR"] = QString::number(err, 16);
+		Q_EMIT send(ret);
 	}
 	else if(cmd == "DISCONNECT")
 	{
-		DEBUG << "DISCONNECT";
 		d->reader->endTransaction();
 		d->reader->disconnect([](const QString &action) {
 			if(action == "leave") return QPCSCReader::LeaveCard;
@@ -221,14 +274,13 @@ void Updater::process(const QByteArray &data)
 			ret["APDU"] = result.err ? "NOK" : "OK";
 			ret["bytes"] = QByteArray(result.data + result.SW).toHex();
 			if(result.err)
-				ret["ERROR"] = result.err;
+				ret["ERROR"] = QString::number(result.err, 16);
 			Q_EMIT send(ret);
 		}).detach();
 	}
 	else if(cmd == "MESSAGE")
 	{
 		d->label->setText(obj.value("text").toString());
-		DEBUG << "MESSAGE" << d->label->text();
 		Q_EMIT send({{"MESSAGE", "OK"}});
 	}
 	else if(cmd == "DIALOG")
@@ -241,52 +293,15 @@ void Updater::process(const QByteArray &data)
 	}
 	else if(cmd == "VERIFY")
 	{
-		QByteArray verify = APDU("0020000000");
-		verify[3] = obj.value("p2").toInt(1);
-		if(d->reader->isPinPad())
-		{
-			PinDialog pin(PinDialog::Pin1PinpadType, obj.value("text").toString(), 0, this);
-			Q_EMIT pin.startTimer();
-			std::thread([&]{
-				QPCSCReader::Result result = d->reader->transferCTL(verify, true);
-				Q_EMIT send({
-					{"VERIFY", result.resultOk() ? "OK" : "NOK"},
-					{"bytes", QByteArray(result.data + result.SW).toHex()}
-				});
-				pin.done(0);
-			}).detach();
-			pin.exec();
-		}
-		else
-		{
-			PinDialog pin(PinDialog::Pin1Type, obj.value("text").toString(), 0, this);
-			if(pin.exec() != 0)
-			{
-				verify[4] = pin.text().size();
-				QPCSCReader::Result result = d->reader->transfer(verify + pin.text().toLatin1());
-				Q_EMIT send({
-					{"VERIFY", result.resultOk() ? "OK" : "NOK"},
-					{"bytes", QByteArray(result.data + result.SW).toHex()}
-				});
-			}
-			else
-				Q_EMIT send({{"VERIFY", "NOK"}});
-		}
+		QPCSCReader::Result result = d->verifyPIN(obj.value("text").toString(), obj.value("p2").toInt(1));
+		Q_EMIT send({
+			{"VERIFY", result.resultOk() ? "OK" : "NOK"},
+			{"bytes", QByteArray(result.data + result.SW).toHex()}
+		});
 	}
 	else if(cmd == "DECRYPT")
 	{
-		QByteArray data = APDU(obj.value("payload").toString().toLatin1());
-		if(!d->reader->transfer(APDU("00A40000 00")).resultOk() ||
-			!d->reader->transfer(APDU("00A40100 02 EEEE")).resultOk() ||
-			!d->reader->transfer(APDU("0022F306 00")).resultOk() ||
-			!d->reader->transfer(APDU("002241B8 02 8300")).resultOk() ||
-			!d->reader->transfer(APDU("102A8086 FF 00") + data.left(data.length() - 2)).resultOk())
-		{
-			Q_EMIT send({{"DECRYPT", "NOK"}});
-			return;
-		}
-
-		QPCSCReader::Result result = d->reader->transfer(APDU("002A8086 02") + data.right(2));
+		QPCSCReader::Result result = d->reader->transfer(APDU(obj.value("bytes").toString().toLatin1()));
 		if(result.resultOk())
 		{
 			QMessageBox box(QMessageBox::Information, windowTitle(),
@@ -301,15 +316,23 @@ void Updater::process(const QByteArray &data)
 				if(!l->pixmap())
 					l->setPixmap(pinEnvelope);
 			}
-			Q_EMIT send({{"DECRYPT", box.exec() == QMessageBox::Yes ? "OK" : "NOK"}});
+			Q_EMIT send({{"DECRYPT", "OK"}, {"button", box.exec() == QMessageBox::Yes ? "green" : "red"}});
 		}
 		else
-			Q_EMIT send({{"DECRYPT", "NOK"}});
+		{
+			QVariantHash ret;
+			ret["APDU"] = "NOK";
+			ret["bytes"] = QByteArray(result.data + result.SW).toHex();
+			if(result.err)
+				ret["ERROR"] = QString::number(result.err, 16);
+			Q_EMIT send(ret);
+		}
 	}
 	else if(cmd == "STOP")
 	{
-		d->isRunning = false;
-		Q_EMIT send({{"STOP", "OK"}});
+		if(obj.contains("text"))
+			d->label->setText(obj.value("text").toString());
+		d->close->show();
 	}
 	else
 		Q_EMIT send({{"CMD", "UNKNOWN"}});
@@ -320,6 +343,12 @@ int Updater::exec()
 	// Read certificate
 	d->reader->connect();
 	d->reader->beginTransaction();
+	if(!d->reader->transfer(APDU("00A40000 00")).resultOk())
+	{
+		// Master file selection failed, test if it is updater applet
+		d->reader->transfer(APDU("00A40400 0A D2330000005550443101"));
+		d->reader->transfer(APDU("00A40000 00"));
+	}
 	d->reader->transfer(APDU("00A40000 00"));
 	d->reader->transfer(APDU("00A40100 02 EEEE"));
 	d->reader->transfer(APDU("00A40200 02 AACE"));
@@ -339,170 +368,139 @@ int Updater::exec()
 	}
 	d->reader->endTransaction();
 	d->reader->disconnect();
-	
+
 	// Associate certificate and key with operation.
 	d->cert = QSslCertificate(certData, QSsl::Der);
-
-	d->key = RSAPublicKey_dup((RSA*)d->cert.publicKey().handle());
-	RSA_set_method(d->key, &d->method);
-	d->key->flags |= RSA_FLAG_SIGN_VER;
-	RSA_set_app_data(d->key, d);
-
-	// Get proxy settings
-	QByteArray proxyHost, proxyUser, proxyPass;
-	for(const QNetworkProxy &proxy: QNetworkProxyFactory::systemProxyForQuery())
+	EVP_PKEY *key = nullptr;
+	if(!d->cert.isNull())
 	{
-		if(proxy.type() != QNetworkProxy::HttpProxy)
-			continue;
-		proxyHost = QString("%1:%2").arg(proxy.hostName()).arg(proxy.port()).toLatin1();
-		proxyUser = proxy.user().toLatin1();
-		proxyPass = proxy.password().toLatin1();
-		break;
+		RSA *rsa = RSAPublicKey_dup((RSA*)d->cert.publicKey().handle());
+		RSA_set_method(rsa, &d->method);
+		rsa->flags |= RSA_FLAG_SIGN_VER;
+		RSA_set_app_data(rsa, d);
+		key = EVP_PKEY_new();
+		EVP_PKEY_set1_RSA(key, rsa);
+		//RSA_free(rsa);
 	}
-	proxyHost = Settings(qApp->applicationName()).value("PROXY-HOST", proxyHost).toByteArray();
-	proxyUser = Settings(qApp->applicationName()).value("PROXY-USER", proxyUser).toByteArray();
-	proxyPass = Settings(qApp->applicationName()).value("PROXY-PASS", proxyPass).toByteArray();
 
 	// Do connection
-	QUrl url(Configuration::instance().object().value("EIDUPDATER-URL").toString());
-	QByteArray host = QString("%1:%2").arg(url.host()).arg(url.port(443)).toLatin1();
-	QByteArray header = QString("POST %1 HTTP/1.1\r\nHost: %2\r\nContent-Type: application/json\r\nContent-Length: ")
-		.arg(url.path()).arg(host.constData()).toLatin1();
+	QNetworkAccessManager *net = new QNetworkAccessManager(this);
+	d->request = QNetworkRequest(QUrl(
+		Configuration::instance().object().value("EIDUPDATER-URL").toString()));
+	d->request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+	d->request.setRawHeader("User-Agent", QString("%1/%2 (%3)")
+		.arg(qApp->applicationName()).arg(qApp->applicationVersion()).arg(Common::applicationOs()).toUtf8());
+	qDebug() << "Connecting to" << d->request.url().toString();
 
-	if(!SSL_use_certificate(d->ssl, (X509*)d->cert.handle()) ||
-		!SSL_use_RSAPrivateKey(d->ssl, d->key) ||
-		!SSL_check_private_key(d->ssl) ||
-		!SSL_set_tlsext_host_name(d->ssl, url.host().toLatin1().data()))
+	QSslConfiguration ssl = QSslConfiguration::defaultConfiguration();
+	QList<QSslCertificate> trusted;
+	for(const QJsonValue &cert: Configuration::instance().object().value("CERT-BUNDLE").toArray())
+		trusted << QSslCertificate(QByteArray::fromBase64(cert.toString().toLatin1()), QSsl::Der);
+	ssl.setCaCertificates(QList<QSslCertificate>());
+	ssl.setProtocol(QSsl::TlsV1);
+	if(key)
 	{
-		d->label->setText(tr("Failed to connect host"));
-		return QDialog::exec();
+		ssl.setPrivateKey(QSslKey(key));
+		ssl.setLocalCertificate(d->cert);
 	}
+	d->request.setSslConfiguration(ssl);
 
-	d->bio = BIO_new_connect(const_cast<char*>(proxyHost.isEmpty() ? host.constData() : proxyHost.constData()));
-
-	// Do proxy
+	// Get proxy settings
+	QNetworkProxy proxy = []() -> const QNetworkProxy {
+		for(const QNetworkProxy &proxy: QNetworkProxyFactory::systemProxyForQuery())
+			if(proxy.type() == QNetworkProxy::HttpProxy)
+				return proxy;
+		return QNetworkProxy();
+	}();
+	Settings s(qApp->applicationName());
+	QString proxyHost = s.value("PROXY-HOST").toString();
 	if(!proxyHost.isEmpty())
 	{
-		if(BIO_do_connect(d->bio) != 1)
-		{
-			d->label->setText(tr("Failed to connect host"));
-			return QDialog::exec();
-		}
-		BIO_printf(d->bio, "CONNECT %s HTTP/1.0\r\n", host.constData());
-		BIO_printf(d->bio, "Host: %s\r\n", host.constData());
-		if(!proxyUser.isEmpty())
-			BIO_printf(d->bio, "Proxy-Authorization: Basic %s\r\n", (proxyUser + ":" + proxyPass).toBase64().constData());
-		BIO_printf(d->bio, "\r\n");
-		QByteArray line(1024, 0);
-		int res = BIO_read(d->bio, line.data(), line.size());
-		line.resize(std::max(res, 0));
-		if(res <= 0 || !line.contains("200") || !line.contains("established") || line.right(4) != "\r\n\r\n")
-		{
-			d->label->setText(tr("Failed to connect proxy"));
-			return QDialog::exec();
-		}
+		proxy.setHostName(proxyHost.split(':').at(0));
+		proxy.setPort(proxyHost.split(':').at(1).toUInt());
 	}
+	proxy.setUser(s.value("PROXY-USER", proxy.user()).toString());
+	proxy.setPassword(s.value("PROXY-PASS", proxy.password()).toString());
+	proxy.setType(QNetworkProxy::HttpProxy);
+	net->setProxy(proxy.hostName().isEmpty() ? QNetworkProxy() : proxy);
+	qDebug() << "Proxy" << proxy.hostName() << ":" << proxy.port() << "User" << proxy.user();
 
-	// Do SSL
-	SSL_set_bio(d->ssl, d->bio, d->bio);
-	if(SSL_connect(d->ssl) != 1)
-	{
-		d->label->setText(tr("Failed to connect host"));
-		return QDialog::exec();
-	}
-
-	// Processing thread
-	std::thread([&]{
-		QEventLoop e;
-		quint32 lenght = 0;
-		QByteArray data(1024, 0);
-		char *p = data.data();
-
-		connect(this, &Updater::send, [&](const QVariantHash &response){
-			QJsonObject resp;
+	connect(net, &QNetworkAccessManager::sslErrors, this, [=](QNetworkReply *reply, const QList<QSslError> &errors){
+		QList<QSslError> ignore;
+		for(const QSslError &error: errors)
+		{
+			switch(error.error())
+			{
+			case QSslError::UnableToGetLocalIssuerCertificate:
+			case QSslError::CertificateUntrusted:
+				if(trusted.contains(reply->sslConfiguration().peerCertificate()))
+					ignore << error;
+				break;
+			default: break;
+			}
+		}
+		reply->ignoreSslErrors(ignore);
+	});
+	connect(this, &Updater::send, net, [=](const QVariantHash &response){
+		QJsonObject resp;
+		if(!d->session.isEmpty())
 			resp["session"] = d->session;
-			for(QVariantHash::const_iterator i = response.constBegin(); i != response.constEnd(); ++i)
-				resp[i.key()] = QJsonValue::fromVariant(i.value());
-			data = QJsonDocument(resp).toJson(QJsonDocument::Compact);
-			DEBUG << "<" << data;
-			e.quit();
+		for(QVariantHash::const_iterator i = response.constBegin(); i != response.constEnd(); ++i)
+			resp[i.key()] = QJsonValue::fromVariant(i.value());
+		QByteArray data = QJsonDocument(resp).toJson(QJsonDocument::Compact);
+#if QT_VERSION >= 0x050400
+		qDebug().noquote() << "<" << data;
+#else
+		qDebug() << "<" << data;
+#endif
+		QNetworkReply *reply = net->post(d->request, data);
+		QTimer *timer = new QTimer(this);
+		timer->setSingleShot(true);
+		connect(timer, &QTimer::timeout, reply, [=]{
+			d->label->setText(tr("Request timed out"));
+			d->close->show();
 		});
-
-		QComboBox *lang = parent()->findChild<QComboBox*>("languages");
-		QJsonObject req;
-		req["cmd"] = QString("START");
-		req["lang"] = lang ? lang->currentData().toString() : "et";
-		req["platform"] = qApp->applicationOs();
-		QByteArray request = QJsonDocument(req).toJson(QJsonDocument::Compact);
-		DEBUG << "<" << request;
-		request.prepend(header + QByteArray::number(request.size()) + "\r\n\r\n");
-		int size = SSL_write(d->ssl, request.constData(), request.size());
-
-		while(d->isRunning) {
-			size = SSL_read(d->ssl, p, data.constEnd() - p);
-			if(size <= 0)
+		connect(timer, &QTimer::timeout, timer, &QTimer::deleteLater);
+		timer->start(30*1000);
+	}, Qt::QueuedConnection);
+	connect(net, &QNetworkAccessManager::finished, this, [=](QNetworkReply *reply){
+		switch(reply->error())
+		{
+		case QNetworkReply::NoError:
+			if(reply->header(QNetworkRequest::ContentTypeHeader) == "application/json")
 			{
-				switch(SSL_get_error(d->ssl, size))
-				{
-				case SSL_ERROR_NONE:
-				case SSL_ERROR_WANT_READ:
-				case SSL_ERROR_WANT_WRITE:
-					continue;
-				case SSL_ERROR_ZERO_RETURN: // Close
-				default: // Error
-					d->isRunning = false;
-					continue;
-				}
-			}
-
-			if(lenght == 0)
-			{
-				int pos = data.indexOf("\r\n\r\n");
-				if(pos == -1)
-					continue;
-
-				const QList<QByteArray> headers = data.mid(0, pos).split('\n');
-				if(!headers.value(0).contains("200"))
-				{
-					DEBUG << "Invalid HTTP result";
-					DEBUG << headers;
-					return;
-				}
-
-				for(const QByteArray &line : headers)
-				{
-					if(line.startsWith("Content-length: ") || line.startsWith("Content-Length: "))
-						lenght = line.mid(16).trimmed().toUInt();
-				}
-				if(lenght == 0)
-				{
-					DEBUG << "Failed to Content-Length header";
-					DEBUG << headers;
-					return;
-				}
-
-				data.remove(0, pos + 4);
-				data.resize(lenght);
-				p = data.data();
-				size -= (pos + 4);
-			}
-
-			if((p += size) - data.constBegin() != data.size())
-				continue;
-
-			Q_EMIT handle(data);
-			e.exec();
-			if(!d->isRunning)
+				QByteArray data = reply->readAll();
+				delete reply;
+				process(data);
 				return;
-
-			data = data.prepend(header + QByteArray::number(data.size()) + "\r\n\r\n");
-			size = SSL_write(d->ssl, data.constData(), data.size());
-
-			data = QByteArray(1024, 0);
-			lenght = 0;
-			p = data.data();
+			}
+			else
+			{
+				d->label->setText("<b><font color=\"red\">" + tr("Invalid content type") + "</font></b>");
+				d->close->show();
+			}
+			break;
+		default:
+			switch(reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt())
+			{
+			case 503:
+			case 509:
+				d->label->setText("<b>" + tr("Updating certificates has failed. The server is overloaded, try again later.") + "</b>");
+				break;
+			default:
+				d->label->setText("<b><font color=\"red\">" + reply->errorString() + "</font></b>");
+			}
+			d->close->show();
 		}
-	}).detach();
+		reply->deleteLater();
+	}, Qt::QueuedConnection);
 
+	QComboBox *lang = parent()->findChild<QComboBox*>("languages");
+	Q_EMIT send({
+		{"cmd", "START"},
+		{"lang", lang ? lang->currentData().toString() : "et"},
+		{"platform", qApp->applicationOs()},
+		{"version", qApp->applicationVersion()}
+	});
 	return QDialog::exec();
 }

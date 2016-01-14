@@ -78,6 +78,7 @@ public:
 	QString reader() const;
 	QStringList readers() const;
 
+	bool isNull() const;
 	bool isPinpad() const;
 	bool isSecurePinpad() const;
 	bool isValid() const;

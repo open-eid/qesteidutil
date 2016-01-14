@@ -667,11 +667,10 @@ Mobiil-ID kasutamiseks on vajalik uus SIM-kaart, mille sa saad endale mobiilside
         <translation>Uuenda</translation>
     </message>
     <message>
-        <source>&lt;b&gt;The certificates on this ID-card need renewing.&lt;/b&gt;&lt;br/&gt;
-The procedure may take form 2 to 10 minutes and you need a working internet connection. Do not remove the ID-card from the reader until the renewal procedure has completed!</source>
-        <translation>&lt;b&gt;Sel kaardil paiknevad isikusertifikaadid vajavad uuendamist.&lt;/b&gt;&lt;br/&gt;
-Uuendamise protseduur võtab aega 2-10 minutit ning eeldab toimivat internetiühendust.
-Kaarti ei tohi lugejast välja võtta enne uuenduse lõppemist.</translation>
+        <source>&lt;b&gt;Your ID card certificates need to be updated.&lt;/b&gt;&lt;br/&gt;
+Updating takes ca 2-10 minutes and requires an active internet connection. Do not remove the ID card from the smartcard reader until the update is complete.</source>
+        <translation>&lt;b&gt;Kaardi sertifikaadid vajavad uuendamist.&lt;/b&gt;&lt;br/&gt;
+Uuendamise protseduur võtab aega 2-10 minutit ning eeldab toimivat internetiühendust. Kaarti ei tohi lugejast välja võtta enne uuenduse lõppu.</translation>
     </message>
 </context>
 <context>
@@ -755,12 +754,20 @@ Kaarti ei tohi lugejast välja võtta enne uuenduse lõppemist.</translation>
         <translation>Sertifikaadi laadimine ebaõnnestus</translation>
     </message>
     <message>
-        <source>Failed to connect host</source>
+        <source>Close</source>
+        <translation>Sulge</translation>
+    </message>
+    <message>
+        <source>Invalid content type</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Failed to connect proxy</source>
+        <source>Request timed out</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Updating certificates has failed. The server is overloaded, try again later.</source>
+        <translation>Sertifikaatide uuendamine ebaõnnestus. Server on ülekoormatud, proovi mõne aja pärast uuesti.</translation>
     </message>
 </context>
 </TS>

@@ -667,10 +667,10 @@ To use Mobiil-ID it is needed to use a SIM card that supports this feature. If s
         <translation>Update</translation>
     </message>
     <message>
-        <source>&lt;b&gt;The certificates on this ID-card need renewing.&lt;/b&gt;&lt;br/&gt;
-The procedure may take form 2 to 10 minutes and you need a working internet connection. Do not remove the ID-card from the reader until the renewal procedure has completed!</source>
-        <translation>&lt;b&gt;The certificates on this ID-card need renewing.&lt;/b&gt;&lt;br/&gt;
-The procedure may take form 2 to 10 minutes and you need a working internet connection. Do not remove the ID-card from the reader until the renewal procedure has completed!</translation>
+        <source>&lt;b&gt;Your ID card certificates need to be updated.&lt;/b&gt;&lt;br/&gt;
+Updating takes ca 2-10 minutes and requires an active internet connection. Do not remove the ID card from the smartcard reader until the update is complete.</source>
+        <translation>&lt;b&gt;Your ID card certificates need to be updated.&lt;/b&gt;&lt;br/&gt;
+Updating takes ca 2-10 minutes and requires an active internet connection. Do not remove the ID card from the smartcard reader until the update is complete.</translation>
     </message>
 </context>
 <context>
@@ -755,12 +755,20 @@ The procedure may take form 2 to 10 minutes and you need a working internet conn
         <translation>Failed to read certificate</translation>
     </message>
     <message>
-        <source>Failed to connect host</source>
-        <translation type="unfinished"></translation>
+        <source>Close</source>
+        <translation>Close</translation>
     </message>
     <message>
-        <source>Failed to connect proxy</source>
-        <translation type="unfinished"></translation>
+        <source>Invalid content type</source>
+        <translation>Invalid content type</translation>
+    </message>
+    <message>
+        <source>Request timed out</source>
+        <translation>Request timed out</translation>
+    </message>
+    <message>
+        <source>Updating certificates has failed. The server is overloaded, try again later.</source>
+        <translation>Updating certificates has failed. The server is overloaded, try again later.</translation>
     </message>
 </context>
 </TS>

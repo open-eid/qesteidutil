@@ -19,19 +19,14 @@
 
 #pragma once
 
-#include <QtCore/QtGlobal>
-#if QT_VERSION >= 0x050000
 #include <QtWidgets/QWidget>
-#else
-#include <QtGui/QWidget>
-#endif
 
 class MainWindowPrivate;
 class QSmartCard;
 
 class MainWindow: public QWidget
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
 	enum ButtonTypes
@@ -95,6 +90,7 @@ private slots:
 	void updateData();
 
 private:
+	bool eventFilter(QObject *obj, QEvent *event);
 	MainWindowPrivate *d;
 	QString lang;
 
