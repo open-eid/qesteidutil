@@ -963,6 +963,7 @@ void MainWindow::updateData()
 		d->signRevoke->setVisible(
 			t.retryCount( QSmartCardData::Pin2Type ) == 0 && t.retryCount( QSmartCardData::PukType ) > 0 );
 
+#if 0
 		d->certUpdate->setVisible(
 			Settings(qApp->applicationName()).value("updateButton", false).toBool() ||
 			(
@@ -974,6 +975,9 @@ void MainWindow::updateData()
 				(!t.authCert().validateEncoding() || !t.signCert().validateEncoding() || t.version() == QSmartCardData::VER_UPDATER)
 			)
 		);
+#else
+		d->certUpdate->setVisible(false);
+#endif
 
 		d->pukLocked->setVisible( t.retryCount( QSmartCardData::PukType ) == 0 );
 		d->pukChange->setVisible( t.retryCount( QSmartCardData::PukType ) > 0 );
