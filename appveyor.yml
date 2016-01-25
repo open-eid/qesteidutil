@@ -1,0 +1,28 @@
+version: 3.12.0.{build}
+
+platform:
+  - x86
+  - x64
+
+configuration:
+  - Release
+
+install:
+  - git submodule update --init --recursive
+  - ps: >-
+      If ($env:Platform -Match "x86") {
+        $env:VCVARS_PLATFORM="x86"
+        $env:OPENSSL="C:\OpenSSL-Win32"
+        $env:QTSDK="C:\Qt\5.5\msvc2013"
+      } Else {
+        $env:VCVARS_PLATFORM="amd64"
+        $env:OPENSSL="C:\OpenSSL-Win64"
+        $env:QTSDK="C:\Qt\5.5\msvc2013_64"
+      }
+  - set BUILD_NUMBER=%APPVEYOR_BUILD_NUMBER%
+  - ps: $env:VER_SUFFIX = "-" + $env:APPVEYOR_REPO_COMMIT.Substring(0, 7)
+  - call "%VS120COMNTOOLS%\..\..\VC\vcvarsall.bat" %VCVARS_PLATFORM%
+
+build_script:
+  - cmake -G"NMake Makefiles" -DCMAKE_BUILD_TYPE=Release -DOPENSSL_ROOT_DIR=%OPENSSL% -DQTSDK=%QTSDK%
+  - nmake msi
