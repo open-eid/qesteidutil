@@ -115,7 +115,7 @@
 <?endif?>
     </Feature>
 
-    <CustomAction Id="RunUtil" FileKey="qesteidutil.exe" Impersonate="no" Execute="deferred" ExeCommand="" Return="asyncNoWait"/>
+    <CustomAction Id="RunUtil" FileKey="qesteidutil.exe" Impersonate="yes" Execute="deferred" ExeCommand="" Return="asyncNoWait"/>
 
     <InstallExecuteSequence>
       <Custom Action="RunUtil" Before="InstallFinalize">NOT (NOT UPGRADINGPRODUCTCODE AND REMOVE="ALL") AND (RUN_UTIL = 1)</Custom>
