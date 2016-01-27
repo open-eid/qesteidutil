@@ -1,6 +1,6 @@
 sudo: required
 services:
- - docker
+- docker
 before_install:
 - if [ "${TRAVIS_OS_NAME}" = "osx" ]; then
     brew update;
@@ -18,21 +18,37 @@ script:
     cmake -DBREAKPAD="" ..;
   fi
 - make
+- cd ..
 
 os:
- - linux
- - osx
+- linux
+- osx
 
 env:
   global:
-   - secure: "bnnkOxt19gRV75WPsOYjT33wALBe/L1quzMZD8+SY6tM+H7TAZY4490pESEBN+KkrBRhUa8ro2AutVYR4GpVxwOQdXC9KdFnFCqLHsCIhZaBf9H1a/+/gL1bNMiK16XJ6Doz8RidO/m7e0OobulfbbLnBSpgJUwiFkavoO2cfJo="
-
+  - secure: bnnkOxt19gRV75WPsOYjT33wALBe/L1quzMZD8+SY6tM+H7TAZY4490pESEBN+KkrBRhUa8ro2AutVYR4GpVxwOQdXC9KdFnFCqLHsCIhZaBf9H1a/+/gL1bNMiK16XJ6Doz8RidO/m7e0OobulfbbLnBSpgJUwiFkavoO2cfJo=
 addons:
   coverity_scan:
     project:
-      name: "open-eid/qesteidutil"
-      description: "Build submitted via Travis CI"
+      name: open-eid/qesteidutil
+      description: Build submitted via Travis CI
     notification_email: raul@metsma.ee
-    build_command_prepend: "mkdir coverity; cd coverity; cmake -DBREAKPAD='' .."
+    build_command_prepend: mkdir coverity; cd coverity; cmake -DBREAKPAD='' ..
     build_command: make
     branch_pattern: coverity_scan
+
+before_deploy:
+- export VERSION=${TRAVIS_TAG:1}
+- rm -rf build
+- cd ..
+- mv qesteidutil qesteidutil-${VERSION}
+- tar czf qesteidutil-${VERSION}.tar.gz --exclude-vcs qesteidutil-${VERSION}
+deploy:
+  provider: releases
+  api_key:
+    secure: Mpg0hdhh8cATLbUL7WqttCv8zqfySgGOrLOAzjf8SlF/0k+H7MuOS++VILZVA6MiI2Ii1Vmswz2n+bv0BRELGUVUbvgYEVoXN/KdC7F0567MyoagtPc7mjpdzaEy2a726Rf170VaB26QWAkUiQMvpTpbQF1wliyyHHXSGmghqLQ=
+  file: qesteidutil-${VERSION}.tar.gz
+  skip_cleanup: true
+  on:
+    tags: true
+    condition: "$TRAVIS_OS_NAME = linux"
