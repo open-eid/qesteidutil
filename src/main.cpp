@@ -38,9 +38,8 @@ int main(int argc, char *argv[])
 	}
 #endif
 	SSL_library_init();
-	Configuration::instance().checkVersion("QESTEIDUTIL");
-
 	MainWindow w;
+	Configuration::instance().checkVersion("QESTEIDUTIL");
 #ifndef Q_OS_MAC
 	QObject::connect( &app, SIGNAL(messageReceived(QString)), &w, SLOT(raiseAndRead()) );
 #endif
