@@ -5,10 +5,7 @@ project( qesteidutil )
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/modules")
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
-
-include( GNUInstallDirs )
 include( VersionInfo )
-
 set_app_name( PROGNAME qesteidutil )
 
 find_package( Threads )
@@ -71,7 +68,6 @@ target_link_libraries( ${PROGNAME}
 	qdigidoccommon
 	smartcardpp
 )
-install(TARGETS ${PROGNAME} DESTINATION ${CMAKE_INSTALL_BINDIR})
 
 if(APPLE)
 	set_source_files_properties( src/main.cpp src/sslConnect.cpp src/QSmartCard.cpp src/Updater.cpp
@@ -89,11 +85,11 @@ if(APPLE)
 		COMMAND codesign -f -s \"$$SIGNCERT\" $<TARGET_FILE_DIR:${PROGNAME}>/../..
 			--entitlements ${CMAKE_SOURCE_DIR}/src/${PROGNAME}.entitlements
 	)
-	add_custom_target( productbuild DEPENDS codesign
+	add_custom_target( productbuild DEPENDS ${PROGNAME}
 		COMMAND productbuild --component ${CMAKE_CURRENT_BINARY_DIR}/${PROGNAME}.app /Applications
 			--sign \"$$INSTCERT\" ${PROGNAME}-store_${VERSION}$ENV{VER_SUFFIX}.pkg
 	)
-	add_custom_target( zip DEPENDS codesign
+	add_custom_target( zip DEPENDS ${PROGNAME}
 		COMMAND zip --symlinks -r -D ${PROGNAME}_${VERSION}$ENV{VER_SUFFIX}.zip ${PROGNAME}.app
 	)
 	add_custom_target( zipdebug DEPENDS ${PROGNAME}
@@ -139,7 +135,9 @@ elseif(WIN32)
 		)
 	endif()
 else()
+	include( GNUInstallDirs )
 	configure_file( src/qesteidutil.1.cmake qesteidutil.1 )
+	install( TARGETS ${PROGNAME} DESTINATION ${CMAKE_INSTALL_BINDIR} )
 	install( FILES ${CMAKE_CURRENT_BINARY_DIR}/qesteidutil.1 DESTINATION ${CMAKE_INSTALL_MANDIR}/man1 )
 	install( FILES qesteidutil.appdata.xml DESTINATION ${CMAKE_INSTALL_DATADIR}/appdata )
 	install( FILES qesteidutil.desktop DESTINATION ${CMAKE_INSTALL_DATADIR}/applications )
