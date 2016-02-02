@@ -8,6 +8,7 @@ before_install:
   else
     sudo apt-get update -qq;
     sudo apt-get install -y libpcsclite-dev libssl-dev qtbase5-dev qttools5-dev qttools5-dev-tools;
+    git submodule update --init --recursive;
   fi
 script:
 - mkdir build
