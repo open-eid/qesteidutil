@@ -623,8 +623,8 @@ To use Mobiil-ID it is needed to use a SIM card that supports this feature. If s
 &lt;p&gt;New PIN1 must be different from current PIN1.&lt;/p&gt;
 &lt;p&gt;If you do not know PUK code for your ID-card, please visit service center where you can get the new codes.&lt;/p&gt;</source>
         <translation>&lt;h3&gt;Идентификационный сертификат заблокирован.&lt;/h3&gt;
-&lt;p&gt;Для разблокировки сертификата введите PUK код.&lt;/p&gt;
-&lt;p&gt;PUK код находится в конверте с кодами, который выдаётся при получении ID-карты или смене сертификатов.&lt;/p&gt;
+&lt;p&gt;Для разблокировки сертификата введите PUK код.&lt;br/&gt;
+PUK код находится в конверте с кодами, который выдаётся при получении ID-карты или смене сертификатов.&lt;/p&gt;
 &lt;p&gt;Новый PIN1 должен отличаться от старого.&lt;/p&gt;
 &lt;p&gt;Если вы не знаете PUK код своей ID-карты, посетите центр обслуживания, где вы сможете получить конверт с кодами.&lt;/p&gt;</translation>
     </message>
