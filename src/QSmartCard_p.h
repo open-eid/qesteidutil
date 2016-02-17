@@ -63,7 +63,7 @@ public:
 	const QByteArray PINRETRY =		APDU("00A4020C 02 0016");
 	const QByteArray READBINARY =	APDU("00B00000 00");
 	const QByteArray READRECORD =	APDU("00B20004 00");
-	const QByteArray SECENV1 =		APDU("0022F301 00");
+	const QByteArray SECENV1 =		APDU("0022F301");// 00");
 	const QByteArray SECENV3 =		APDU("0022F303 00");
 	const QByteArray CHANGE =		APDU("00240000 00");
 	const QByteArray REPLACE =		APDU("002C0000 00");
