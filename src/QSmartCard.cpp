@@ -221,7 +221,14 @@ QSmartCard::ErrorType QSmartCard::change(QSmartCardData::PinType type, const QSt
 	{
 		QEventLoop l;
 		std::thread([&]{
-			result = reader->transferCTL(cmd, false, d->language(), type == QSmartCardData::Pin1Type ? 4 : 5);
+			result = reader->transferCTL(cmd, false, d->language(), [](QSmartCardData::PinType type){
+				switch(type)
+				{
+				case QSmartCardData::Pin1Type: return 4;
+				case QSmartCardData::Pin2Type: return 5;
+				case QSmartCardData::PukType: return 8;
+				}
+			}(type));
 			l.quit();
 		}).detach();
 		l.exec();
@@ -558,7 +565,7 @@ QSmartCard::ErrorType QSmartCard::unblock(QSmartCardData::PinType type, const QS
 	{
 		QEventLoop l;
 		std::thread([&]{
-			result = reader->transferCTL(cmd, true, d->language(), type == QSmartCardData::Pin1Type ? 4 : 5);
+			result = reader->transferCTL(cmd, true, d->language(), 8);
 			l.quit();
 		}).detach();
 		l.exec();
@@ -576,7 +583,14 @@ QSmartCard::ErrorType QSmartCard::unblock(QSmartCardData::PinType type, const QS
 	{
 		QEventLoop l;
 		std::thread([&]{
-			result = reader->transferCTL(cmd, false, d->language());
+			result = reader->transferCTL(cmd, false, d->language(), [](QSmartCardData::PinType type){
+				switch(type)
+				{
+				case QSmartCardData::Pin1Type: return 4;
+				case QSmartCardData::Pin2Type: return 5;
+				case QSmartCardData::PukType: return 8;
+				}
+			}(type));
 			l.quit();
 		}).detach();
 		l.exec();
