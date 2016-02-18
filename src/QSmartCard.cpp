@@ -554,7 +554,7 @@ QSmartCard::ErrorType QSmartCard::unblock(QSmartCardData::PinType type, const QS
 	QByteArray cmd = d->VERIFY;
 	cmd[3] = type;
 	cmd[4] = pin.size() + 1;
-	for(int i = 0; i < d->t.retryCount(type); ++i)
+	for(int i = 0; i <= d->t.retryCount(type); ++i)
 		reader->transfer(cmd + QByteArray(pin.size(), '0') + QByteArray::number(i));
 
 	//Verify PUK
