@@ -417,6 +417,7 @@ void QSmartCard::run()
 				t->signCert = QSslCertificate();
 				d->t.d = t;
 				update = true;
+				Q_EMIT dataChanged();
 			}
 
 			// read card data
