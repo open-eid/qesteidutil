@@ -353,10 +353,11 @@ int Updater::exec()
 	d->reader->transfer(APDU("00A40100 02 EEEE"));
 	d->reader->transfer(APDU("00A40200 02 AACE"));
 	QByteArray certData;
-	for(int pos = 0; pos < 0x600; pos += 256) {
+	while(certData.size() < 0x0600)
+	{
 		QByteArray apdu = APDU("00B00000 00");
-		apdu[2] = pos >> 8;
-		apdu[3] = pos;
+		apdu[2] = certData.size() >> 8;
+		apdu[3] = certData.size();
 		QPCSCReader::Result result = d->reader->transfer(apdu);
 		if(!result.resultOk())
 		{
