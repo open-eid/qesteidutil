@@ -66,7 +66,8 @@ public:
 		VER_3_4,
 		VER_3_0_UPPED_TO_3_4,
 		VER_3_5,
-		VER_UPDATER
+		VER_USABLEUPDATER,
+		VER_HASUPDATER = 128
 	};
 
 	QSmartCardData();

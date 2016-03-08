@@ -224,6 +224,7 @@ QSmartCard::ErrorType QSmartCard::change(QSmartCardData::PinType type, const QSt
 			result = reader->transferCTL(cmd, false, d->language(), [](QSmartCardData::PinType type){
 				switch(type)
 				{
+				default:
 				case QSmartCardData::Pin1Type: return 4;
 				case QSmartCardData::Pin2Type: return 5;
 				case QSmartCardData::PukType: return 8;
@@ -437,10 +438,14 @@ void QSmartCard::run()
 							t->version = QSmartCardData::VER_3_0;
 						else if(reader->transfer(d->UPDATER_AID).resultOk())
 						{
-							t->version = QSmartCardData::VER_UPDATER;
 							//Found updater applet, test if it is usable
 							if(!reader->transfer(d->MASTER_FILE).resultOk())
+							{
+								t->version = QSmartCardData::CardVersion(t->version|QSmartCardData::VER_HASUPDATER);
 								reader->transfer(d->AID35);
+							}
+							else
+								t->version = QSmartCardData::VER_USABLEUPDATER;
 						}
 					}
 
@@ -587,6 +592,7 @@ QSmartCard::ErrorType QSmartCard::unblock(QSmartCardData::PinType type, const QS
 			result = reader->transferCTL(cmd, false, d->language(), [](QSmartCardData::PinType type){
 				switch(type)
 				{
+				default:
 				case QSmartCardData::Pin1Type: return 4;
 				case QSmartCardData::Pin2Type: return 5;
 				case QSmartCardData::PukType: return 8;

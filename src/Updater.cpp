@@ -18,50 +18,49 @@
  */
 
 #include "Updater.h"
+#include "ui_Updater.h"
+
 #include "common/Common.h"
 #include "common/Configuration.h"
 #include "common/QPCSC.h"
 #include "common/PinDialog.h"
 #include "common/Settings.h"
+#include "common/SslCertificate.h"
 
 #include <QtCore/QTimer>
 #include <QtCore/QJsonArray>
 #include <QtCore/QJsonDocument>
 #include <QtCore/QJsonObject>
+#include <QtCore/QTimeLine>
 #include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkProxy>
 #include <QtNetwork/QNetworkReply>
 #include <QtNetwork/QSslKey>
 #include <QtGui/QPainter>
-#include <QtWidgets/QComboBox>
-#include <QtWidgets/QLabel>
-#include <QtWidgets/QMessageBox>
 #include <QtWidgets/QPushButton>
-#include <QtWidgets/QTextBrowser>
-#include <QtWidgets/QGridLayout>
 
 #include <openssl/evp.h>
 #include <openssl/rsa.h>
 
+#include <memory>
 #include <thread>
 
 #define APDU(hex) QByteArray::fromHex(hex)
 
-class UpdaterPrivate
+class UpdaterPrivate: public Ui::Updater
 {
 public:
-	Updater *parent = nullptr;
+	::Updater *parent = nullptr;
 	QPCSCReader *reader = nullptr;
-	QLabel *label = nullptr;
-	QPushButton *close = nullptr;
+	QPushButton *close = nullptr, *details = nullptr;
 	RSA_METHOD method = *RSA_get_default_method();
 	QSslCertificate cert;
 	QString session;
 	QNetworkRequest request;
 	QByteArray signature;
-	template<class T>
-	QPCSCReader::Result verifyPIN(const T &cert, int p1) const;
+	QPCSCReader::Result verifyPIN(const QString &title, int p1) const;
 	QtMessageHandler oldMsgHandler = nullptr;
+	QTimeLine *statusTimer = nullptr;
 
 	static int rsa_sign(int type, const unsigned char *m, unsigned int m_len,
 		unsigned char *sigret, unsigned int *siglen, const RSA *rsa)
@@ -80,33 +79,81 @@ public:
 	}
 };
 
-template<class T>
-QPCSCReader::Result UpdaterPrivate::verifyPIN(const T &title, int p1) const
+QPCSCReader::Result UpdaterPrivate::verifyPIN(const QString &title, int p1) const
 {
-	QByteArray verify = APDU("00200000 00");
-	verify[3] = p1;
-	int flags = (p1 == 1 ? PinDialog::Pin1Type : PinDialog::Pin2Type);
-	if(reader->isPinPad())
-		flags |= PinDialog::PinpadFlag;
-	TokenData::TokenFlags token = 0;
+	stackedWidget->setCurrentIndex(3);
+	QRegExp regexp;
+	QString text = "<b>" + title + "</b><br />";
+	if(p1 == 2)
+	{
+		text += PinDialog::tr("Selected action requires sign certificate.") + "<br />";
+		text += reader->isPinPad() ?
+			PinDialog::tr("For using sign certificate enter PIN2 at the reader") :
+			PinDialog::tr("For using sign certificate enter PIN2");
+		regexp.setPattern( "\\d{5,12}" );
+		pinType->setText("PIN2");
+	}
+	else
+	{
+		text += PinDialog::tr("Selected action requires authentication certificate.") + "<br />";
+		text += reader->isPinPad() ?
+			PinDialog::tr("For using authentication certificate enter PIN1 at the reader") :
+			PinDialog::tr("For using authentication certificate enter PIN1");
+		regexp.setPattern( "\\d{4,12}" );
+		pinType->setText("PIN1");
+	}
+	pinInput->setHidden(reader->isPinPad());
+	pinProgress->setVisible(reader->isPinPad());
+	QEventLoop l;
+	QPushButton *okButton = nullptr, *cancelButton = nullptr;
+	if(!reader->isPinPad())
+	{
+		okButton = buttonBox->addButton(::Updater::tr("Continue"), QDialogButtonBox::AcceptRole);
+		cancelButton = buttonBox->addButton(QDialogButtonBox::Cancel);
+		okButton->setDisabled(true);
+		pinInput->setValidator(new QRegExpValidator(regexp, pinInput));
+		::Updater::connect(pinInput, &QLineEdit::textEdited, okButton, [&](const QString &text){
+			okButton->setEnabled(regexp.exactMatch(text));
+		});
+		::Updater::connect(okButton, &QPushButton::clicked, &l, [&]{ l.exit(1); });
+		::Updater::connect(cancelButton, &QPushButton::clicked, &l, [&]{ l.exit(0); });
+	}
+	close->hide();
+	details->hide();
 
+	TokenData::TokenFlags token = 0;
 	Q_FOREVER
 	{
-		PinDialog pin(PinDialog::PinFlags(flags), title, token, parent);
+		QString error;
+		if(token & TokenData::PinFinalTry)
+			error = "<br /><font color='red'><b>" + PinDialog::tr("PIN will be locked next failed attempt") + "</b></font>";
+		else if(token & TokenData::PinCountLow)
+			error = "<br /><font color='red'><b>" + PinDialog::tr("PIN has been entered incorrectly one time") + "</b></font>";
+		pinLabel->setText(text + error + "<br />");
+		Common::setAccessibleName(pinLabel);
+
+		QByteArray verify = APDU("00200000 00");
+		verify[3] = p1;
 		QPCSCReader::Result result;
-		if(flags & PinDialog::PinpadFlag)
+		if(reader->isPinPad())
 		{
+			pinProgress->setValue(pinProgress->maximum());
 			std::thread([&]{
-				Q_EMIT pin.startTimer();
 				result = reader->transferCTL(verify, true);
-				Q_EMIT pin.finish(0);
+				l.quit();
 			}).detach();
-			pin.exec();
+			statusTimer->start();
+			l.exec();
 		}
-		else if(pin.exec() != 0)
+		else
 		{
-			verify[4] = pin.text().size();
-			result = reader->transfer(verify + pin.text().toLatin1());
+			pinInput->clear();
+			pinInput->setFocus();
+			if(l.exec() == 1)
+			{
+				verify[4] = pinInput->text().size();
+				result = reader->transfer(verify + pinInput->text().toUtf8());
+			}
 		}
 		switch( (quint8(result.SW[0]) << 8) + quint8(result.SW[1]) )
 		{
@@ -120,7 +167,21 @@ QPCSCReader::Result UpdaterPrivate::verifyPIN(const T &title, int p1) const
 		case 0x6403: // Lenght error
 		case 0x6983: // Blocked
 		case 0x9000: // No error
-		default: return result;
+		default:
+			stackedWidget->setCurrentIndex(0);
+			if(okButton)
+			{
+				buttonBox->removeButton(okButton);
+				okButton->deleteLater();
+			}
+			if(cancelButton)
+			{
+				buttonBox->removeButton(cancelButton);
+				cancelButton->deleteLater();
+			}
+			close->show();
+			details->show();
+			return result;
 		}
 	}
 }
@@ -133,7 +194,8 @@ void Updater::sign(QEventLoop *loop, const QByteArray &in)
 		return loop->exit(0);
 
 	// Verify PIN
-	if(!d->verifyPIN(d->cert, 1).resultOk())
+	SslCertificate c(d->cert);
+	if(!d->verifyPIN(c.toString( c.showCN() ? "CN serialNumber" : "GN SN serialNumber" ), 1).resultOk())
 	{
 		d->reader->endTransaction();
 		d->reader->disconnect();
@@ -169,39 +231,33 @@ Updater::Updater(const QString &reader, QWidget *parent)
 	: QDialog(parent)
 	, d(new UpdaterPrivate)
 {
+	d->setupUi(this);
 	d->parent = this;
-	setWindowTitle(parent->windowTitle());
-	setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
+	setWindowFlags(((windowFlags() & ~Qt::WindowContextHelpButtonHint) | Qt::CustomizeWindowHint) & ~Qt::WindowCloseButtonHint);
 	connect(this, &Updater::signReq, this, &Updater::sign, Qt::QueuedConnection);
+	d->statusTimer = new QTimeLine(d->pinProgress->maximum() * 1000, d->pinProgress);
+	d->statusTimer->setCurveShape(QTimeLine::LinearCurve);
+	d->statusTimer->setFrameRange(d->pinProgress->maximum(), d->pinProgress->minimum());
+	connect(d->statusTimer, &QTimeLine::frameChanged, d->pinProgress, &QProgressBar::setValue);
 
 	d->reader = new QPCSCReader(reader, &QPCSC::instance());
 
 	d->method.name = "Updater";
 	d->method.rsa_sign = UpdaterPrivate::rsa_sign;
 
-	d->label = new QLabel(this);
-	d->label->setWordWrap(true);
-	d->label->setMinimumHeight(30);
-	QPushButton *details = new QPushButton(tr("Details"), this);
-	d->close = new QPushButton(tr("Close"), this);
+	d->details = d->buttonBox->addButton(tr("Details"), QDialogButtonBox::ActionRole);
+	d->close = d->buttonBox->button(QDialogButtonBox::Close);
 	d->close->hide();
-	QTextBrowser *log = new QTextBrowser(this);
-	log->hide();
-	connect(details, &QPushButton::clicked, [=]{
-		log->setVisible(!log->isVisible());
-		qApp->processEvents();
-		resize(width(), log->isVisible() ? 600 : 20);
+	d->log->hide();
+	connect(d->details, &QPushButton::clicked, [=]{
+		d->log->setVisible(!d->log->isVisible());
+		if(d->progressRunning)
+			d->progressRunning->setVisible(d->log->isHidden());
 	});
 	connect(d->close, &QPushButton::clicked, this, &Updater::accept);
-	connect(this, &Updater::log, log, &QTextBrowser::append, Qt::QueuedConnection);
+	connect(this, &Updater::log, d->log, &QPlainTextEdit::appendPlainText, Qt::QueuedConnection);
 
-	QGridLayout *layout = new QGridLayout(this);
-	layout->addWidget(d->label, 0, 0);
-	layout->addWidget(details, 0, 1);
-	layout->addWidget(d->close, 0, 2);
-	layout->addWidget(log, 1, 0, 1, 3);
-	layout->setColumnStretch(0, 1);
-	move(parent->geometry().left(), parent->geometry().center().y() - height());
+	move(parent->geometry().left(), parent->geometry().center().y() - geometry().center().y());
 	resize(parent->width(), height());
 
 	static Updater *instance = nullptr;
@@ -285,11 +341,25 @@ void Updater::process(const QByteArray &data)
 	}
 	else if(cmd == "DIALOG")
 	{
-		QMessageBox box(QMessageBox::Information, windowTitle(),
-			obj.value("text").toString(), QMessageBox::Yes|QMessageBox::No, this);
-		for(QLabel *l: box.findChildren<QLabel*>())
-			Common::setAccessibleName(l);
-		Q_EMIT send({{"DIALOG", "OK"}, {"button", box.exec() == QMessageBox::Yes ? "green" : "red"}});
+		d->stackedWidget->setCurrentIndex(1);
+		d->message->setText(obj.value("text").toString());
+		Common::setAccessibleName(d->message);
+		QPushButton *yesButton = d->buttonBox->addButton(QDialogButtonBox::Yes);
+		QPushButton *noButton = d->buttonBox->addButton(QDialogButtonBox::No);
+		yesButton->setDisabled(true);
+		QEventLoop l;
+		connect(d->messageAgree, &QCheckBox::toggled, yesButton, &QPushButton::setEnabled);
+		connect(yesButton, &QPushButton::clicked, [&]{ l.exit(1); });
+		connect(noButton, &QPushButton::clicked, [&]{ l.exit(0); reject(); });
+		d->details->hide();
+		d->close->hide();
+		Q_EMIT send({{"DIALOG", "OK"}, {"button", l.exec() == 1 ? "green" : "red"}});
+		d->buttonBox->removeButton(yesButton);
+		yesButton->deleteLater();
+		d->buttonBox->removeButton(noButton);
+		noButton->deleteLater();
+		d->stackedWidget->setCurrentIndex(0);
+		d->details->show();
 	}
 	else if(cmd == "VERIFY")
 	{
@@ -304,24 +374,38 @@ void Updater::process(const QByteArray &data)
 		QPCSCReader::Result result = d->reader->transfer(APDU(obj.value("bytes").toString().toLatin1()));
 		if(result.resultOk())
 		{
-			QMessageBox box(QMessageBox::Information, windowTitle(),
-				QString(), QMessageBox::Yes|QMessageBox::No, this);
-			QPixmap pinEnvelope(QSize(300, 100));
+			QPixmap pinEnvelope(QSize(d->message->width(), 100));
 			QPainter p(&pinEnvelope);
 			p.fillRect(pinEnvelope.rect(), Qt::white);
 			p.setPen(Qt::black);
+			int pos = result.data.lastIndexOf('#');
+			if(pos != -1)
+				result.data = result.data.mid(0, pos - 2);
 			p.drawText(pinEnvelope.rect(), Qt::AlignCenter, QString::fromUtf8(result.data));
-			for(QLabel *l: box.findChildren<QLabel*>())
-			{
-				if(!l->pixmap())
-					l->setPixmap(pinEnvelope);
-			}
-			Q_EMIT send({{"DECRYPT", "OK"}, {"button", box.exec() == QMessageBox::Yes ? "green" : "red"}});
+			d->envelope->setPixmap(pinEnvelope);
+			d->envelopeLabel->setText(obj.value("text").toString());
+			d->stackedWidget->setCurrentIndex(2);
+			QPushButton *yesButton = d->buttonBox->addButton(tr("Continue"), QDialogButtonBox::AcceptRole);
+			QPushButton *cancelButton = d->buttonBox->addButton(QDialogButtonBox::Cancel);
+			yesButton->setDisabled(true);
+			QEventLoop l;
+			connect(d->envelopeAgree, &QCheckBox::toggled, yesButton, &QPushButton::setEnabled);
+			connect(yesButton, &QPushButton::clicked, [&]{ l.exit(1); });
+			connect(cancelButton, &QPushButton::clicked, [&]{ l.exit(0); });
+			d->details->hide();
+			d->close->hide();
+			Q_EMIT send({{"DECRYPT", "OK"}, {"button", l.exec() == 1 ? "green" : "red"}});
+			d->buttonBox->removeButton(yesButton);
+			yesButton->deleteLater();
+			d->buttonBox->removeButton(cancelButton);
+			cancelButton->deleteLater();
+			d->stackedWidget->setCurrentIndex(0);
+			d->details->show();
 		}
 		else
 		{
 			QVariantHash ret;
-			ret["APDU"] = "NOK";
+			ret["DECRYPT"] = "NOK";
 			ret["bytes"] = QByteArray(result.data + result.SW).toHex();
 			if(result.err)
 				ret["ERROR"] = QString::number(result.err, 16);
@@ -330,6 +414,9 @@ void Updater::process(const QByteArray &data)
 	}
 	else if(cmd == "STOP")
 	{
+		d->progressBar->hide();
+		d->progressRunning->deleteLater();
+		d->progressRunning = nullptr;
 		if(obj.contains("text"))
 			d->label->setText(obj.value("text").toString());
 		d->close->show();
@@ -496,10 +583,9 @@ int Updater::exec()
 		reply->deleteLater();
 	}, Qt::QueuedConnection);
 
-	QComboBox *lang = parent()->findChild<QComboBox*>("languages");
 	Q_EMIT send({
 		{"cmd", "START"},
-		{"lang", lang ? lang->currentData().toString() : "et"},
+		{"lang", Settings().language()},
 		{"platform", qApp->applicationOs()},
 		{"version", qApp->applicationVersion()}
 	});

@@ -754,10 +754,6 @@ Uuendamise protseduur võtab aega 2-10 minutit ning eeldab toimivat internetiüh
         <translation>Sertifikaadi laadimine ebaõnnestus</translation>
     </message>
     <message>
-        <source>Close</source>
-        <translation>Sulge</translation>
-    </message>
-    <message>
         <source>Invalid content type</source>
         <translation type="unfinished"></translation>
     </message>
@@ -768,6 +764,26 @@ Uuendamise protseduur võtab aega 2-10 minutit ning eeldab toimivat internetiüh
     <message>
         <source>Updating certificates has failed. The server is overloaded, try again later.</source>
         <translation>Sertifikaatide uuendamine ebaõnnestus. Server on ülekoormatud, proovi mõne aja pärast uuesti.</translation>
+    </message>
+    <message>
+        <source>I confirm I have stored the new PIN1, PIN2 and PUK code.</source>
+        <translation>Ma olen uue PIN1, PIN2 ja PUK koodi üles kirjutanud.</translation>
+    </message>
+    <message>
+        <source>Continue</source>
+        <translation>Jätka</translation>
+    </message>
+    <message>
+        <source>Certificate update</source>
+        <translation>Sertifikaatide uuendamine</translation>
+    </message>
+    <message>
+        <source>Update in progress. The process may take up to 10 minutes. Do not remove the card from reader!</source>
+        <translation>Toimub uuendamine. Uuendamise protsess kestab kuni 10 minutit. Ära eemalda kaarti lugejast!</translation>
+    </message>
+    <message>
+        <source>I agree to the terms of use of certificates.</source>
+        <translation>Nõustun sertifikaatide kasutustingimustega.</translation>
     </message>
 </context>
 </TS>

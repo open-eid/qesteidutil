@@ -989,6 +989,9 @@ void MainWindow::updateData()
 		d->authFrame->setVisible( !t.authCert().isNull() );
 		d->signFrame->setVisible( !t.signCert().isNull() );
 		d->certsLine->setVisible( !t.authCert().isNull() || !t.signCert().isNull() );
+		d->buttonEmail->setDisabled(t.version() == QSmartCardData::VER_USABLEUPDATER);
+		d->buttonMobile->setDisabled(t.version() == QSmartCardData::VER_USABLEUPDATER);
+		d->buttonPuk->setDisabled(t.version() == QSmartCardData::VER_USABLEUPDATER);
 
 		d->certUpdate->setProperty("updateEnabled",
 			Settings(qApp->applicationName()).value("updateButton", false).toBool() ||
@@ -997,7 +1000,8 @@ void MainWindow::updateData()
 				t.version() >= QSmartCardData::VER_3_4 &&
 				t.retryCount( QSmartCardData::Pin1Type ) > 0 &&
 				t.isValid() &&
-				(!t.authCert().validateEncoding() || !t.signCert().validateEncoding() || t.version() == QSmartCardData::VER_UPDATER)
+				(!t.authCert().validateEncoding() || !t.signCert().validateEncoding() ||
+				 t.version() & QSmartCardData::VER_HASUPDATER || t.version() == QSmartCardData::VER_USABLEUPDATER)
 			)
 		);
 		d->certUpdate->setVisible(d->certUpdate->property("updateEnabled").toBool());

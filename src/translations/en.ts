@@ -755,10 +755,6 @@ Updating takes ca 2-10 minutes and requires an active internet connection. Do no
         <translation>Failed to read certificate</translation>
     </message>
     <message>
-        <source>Close</source>
-        <translation>Close</translation>
-    </message>
-    <message>
         <source>Invalid content type</source>
         <translation>Invalid content type</translation>
     </message>
@@ -769,6 +765,26 @@ Updating takes ca 2-10 minutes and requires an active internet connection. Do no
     <message>
         <source>Updating certificates has failed. The server is overloaded, try again later.</source>
         <translation>Updating certificates has failed. The server is overloaded, try again later.</translation>
+    </message>
+    <message>
+        <source>I confirm I have stored the new PIN1, PIN2 and PUK code.</source>
+        <translation>I confirm I have stored the new PIN1, PIN2 and PUK code.</translation>
+    </message>
+    <message>
+        <source>Continue</source>
+        <translation>Continue</translation>
+    </message>
+    <message>
+        <source>Certificate update</source>
+        <translation>Certificate update</translation>
+    </message>
+    <message>
+        <source>Update in progress. The process may take up to 10 minutes. Do not remove the card from reader!</source>
+        <translation>Update in progress. The process may take up to 10 minutes. Do not remove the card from reader!</translation>
+    </message>
+    <message>
+        <source>I agree to the terms of use of certificates.</source>
+        <translation>I agree to the terms of use of certificates.</translation>
     </message>
 </context>
 </TS>
