@@ -362,8 +362,14 @@ void QSmartCard::run()
 						continue;
 					}
 
-					if(!reader->connect() || !reader->beginTransaction())
-						return false;
+					switch(reader->connectEx())
+					{
+					case 0x8010000CL: continue; //SCARD_E_NO_SMARTCARD
+					case 0:
+						if(reader->beginTransaction())
+							break;
+					default: return false;
+					}
 
 					QPCSCReader::Result result;
 					#define TRANSFERIFNOT(X) result = reader->transfer(X); \
