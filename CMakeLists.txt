@@ -5,7 +5,7 @@ project( qesteidutil )
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/modules")
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
-set(PROJECT_VERSION_PATCH 1)
+set(PROJECT_VERSION_PATCH 2)
 include( VersionInfo )
 set_app_name( PROGNAME qesteidutil )
 
@@ -76,11 +76,9 @@ if(APPLE)
 		COMMAND find $<TARGET_FILE_DIR:${PROGNAME}>/../PlugIns/imageformats -type f -a ! -name libqjpeg.dylib -delete
 	)
 	add_custom_target( codesign DEPENDS ${PROGNAME}
-		COMMAND for f in
+		COMMAND codesign -f -s \"$$SIGNCERT\"
 			$<TARGET_FILE_DIR:${PROGNAME}>/../Frameworks/*
-			$<TARGET_FILE_DIR:${PROGNAME}>/../PlugIns/*/*\; do
-				codesign -f -s \"$$SIGNCERT\" $$f\;
-			done
+			$<TARGET_FILE_DIR:${PROGNAME}>/../PlugIns/*/*
 		COMMAND codesign -f -s \"$$SIGNCERT\" $<TARGET_FILE_DIR:${PROGNAME}>/../..
 			--entitlements ${CMAKE_SOURCE_DIR}/src/${PROGNAME}.entitlements
 	)
@@ -127,10 +125,7 @@ elseif(WIN32)
 			COMMAND ${SIGNCMD} $<TARGET_FILE:${PROGNAME}>
 		)
 		add_custom_command(TARGET msi POST_BUILD
-			COMMAND ${SIGNCMD} "${MSI_FILE}.en-US.msi"
-			COMMAND ${SIGNCMD} "${MSI_FILE}.et-EE.msi"
-			COMMAND ${SIGNCMD} "${MSI_FILE}.en-US.qt.msi"
-			COMMAND ${SIGNCMD} "${MSI_FILE}.et-EE.qt.msi"
+			COMMAND ${SIGNCMD} "${MSI_FILE}.en-US.msi" "${MSI_FILE}.et-EE.msi" "${MSI_FILE}.en-US.qt.msi" "${MSI_FILE}.et-EE.qt.msi"
 		)
 	endif()
 else()
