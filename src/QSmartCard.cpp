@@ -436,6 +436,8 @@ void QSmartCard::run()
 					{
 						if(reader->transfer(d->AID30).resultOk())
 							t->version = QSmartCardData::VER_3_0;
+						else if(reader->transfer(d->AID34).resultOk())
+							t->version = QSmartCardData::VER_3_4;
 						else if(reader->transfer(d->UPDATER_AID).resultOk())
 						{
 							//Found updater applet, test if it is usable
