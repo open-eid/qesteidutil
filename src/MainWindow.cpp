@@ -996,11 +996,10 @@ void MainWindow::updateData()
 		d->certUpdate->setProperty("updateEnabled",
 			Settings(qApp->applicationName()).value("updateButton", false).toBool() ||
 			(
-				Configuration::instance().object().contains("EIDUPDATER-URL") &&
 				t.retryCount( QSmartCardData::Pin1Type ) > 0 &&
 				t.isValid() && (
-					(t.version() == QSmartCardData::VER_3_4 && Configuration::instance().object().value("EIDUPDATER-3_4").toBool(true)) ||
-					(t.version() >= QSmartCardData::VER_3_5 && Configuration::instance().object().value("EIDUPDATER-3_5").toBool(true))
+					(t.version() == QSmartCardData::VER_3_4 && Configuration::instance().object().contains("EIDUPDATER-URL-34")) ||
+					(t.version() >= QSmartCardData::VER_3_5 && Configuration::instance().object().contains("EIDUPDATER-URL"))
 				) && (
 					!t.authCert().validateEncoding() ||
 					!t.signCert().validateEncoding() ||
