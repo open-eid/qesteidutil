@@ -356,6 +356,12 @@ void QSmartCard::run()
 					if(!reader->isPresent())
 						continue;
 
+					if(!atrList.contains(reader->atr()))
+					{
+						qDebug() << "Unknown ATR" << reader->atr();
+						continue;
+					}
+
 					if(!reader->connect() || !reader->beginTransaction())
 						return false;
 
