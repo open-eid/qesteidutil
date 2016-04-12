@@ -22,7 +22,6 @@
 #include <QtWidgets/QWidget>
 
 class MainWindowPrivate;
-class QSmartCard;
 
 class MainWindow: public QWidget
 {
@@ -71,7 +70,6 @@ public:
 	MainWindow( QWidget *parent = 0 );
 	~MainWindow();
 
-	QSmartCard* smartCard() const;
 
 public slots:
 	void raiseAndRead();

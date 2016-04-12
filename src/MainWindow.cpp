@@ -56,8 +56,6 @@ class MacMenuBar;
 #include <QtWidgets/QFileDialog>
 #include <QtWidgets/QMessageBox>
 
-#include <stdexcept>
-
 Q_DECLARE_METATYPE(MobileStatus)
 Q_DECLARE_METATYPE(Emails)
 
@@ -293,8 +291,9 @@ MainWindow::MainWindow( QWidget *parent )
 	d->q_ptr = this;
 	d->setupUi( this );
 	setFixedSize( geometry().size() );
-	foreach( QLabel *l, QList<QLabel*>() << d->emailInfo << d->mobileInfo << d->pukLocked << d->changePukInfo
-			 << d->changePin1InfoPinText << d->changePin2InfoPinText )
+	const QList<QLabel*> labels{ d->emailInfo, d->mobileInfo, d->pukLocked,
+		d->changePukInfo, d->changePin1InfoPinText, d->changePin2InfoPinText };
+	for(QLabel *l: labels)
 		Common::setAccessibleName( l );
 
 	d->loading = new QLabel( d->centralwidget );
@@ -382,6 +381,12 @@ MainWindow::MainWindow( QWidget *parent )
 #ifndef Q_OS_WIN
 	d->headerLine1->hide();
 	d->headerSettings->hide();
+#else
+	if(Settings(QSettings::SystemScope).value("disableSave", false).toBool())
+	{
+		d->headerLine1->hide();
+		d->headerSettings->hide();
+	}
 #endif
 #ifdef Q_OS_MAC
 	d->bar = new MacMenuBar( false );
@@ -498,9 +503,9 @@ void MainWindow::loadPicture()
 		return;
 
 	QPixmap pix;
-	d->savePicture->setVisible( pix.loadFromData( buffer ) );
+	d->loadPicture->setHidden(pix.loadFromData(buffer));
 	d->pictureFrame->setProperty( "PICTURE", pix );
-	if( !d->savePicture->isVisible() )
+	if( d->loadPicture->isVisible() )
 	{
 		XmlReader xml( buffer );
 		QString error;
@@ -510,8 +515,8 @@ void MainWindow::loadPicture()
 		return;
 	}
 	d->pictureFrame->setPixmap( pix.scaled( 90, 120, Qt::IgnoreAspectRatio, Qt::SmoothTransformation ) );
-	d->loadPicture->hide();
-	d->savePicture->show();
+	d->savePicture->setVisible(d->loadPicture->isHidden() &&
+		!Settings(QSettings::SystemScope).value("disableSave", false).toBool());
 }
 
 void MainWindow::raiseAndRead()
@@ -883,8 +888,6 @@ void MainWindow::showSettings()
 void MainWindow::showWarning( const QString &msg )
 { QMessageBox::warning( this, windowTitle(), msg ); }
 
-QSmartCard* MainWindow::smartCard() const { return d->smartcard; }
-
 void MainWindow::updateData()
 {
 	d->hideLoading();
@@ -1089,7 +1092,8 @@ void MainWindow::updateData()
 	}
 	Common::setAccessibleName( d->cardInfo );
 	d->loadPicture->setVisible( !t.authCert().isNull() && d->pictureFrame->property("PICTURE").isNull() );
-	d->savePicture->setHidden( d->pictureFrame->property("PICTURE").isNull() );
+	d->savePicture->setHidden(d->pictureFrame->property("PICTURE").isNull() ||
+		Settings(QSettings::SystemScope).value("disableSave", false).toBool());
 
 	d->cards->clear();
 	d->cards->addItems( t.cards() );
