@@ -5,4 +5,4 @@ qesteidutil \- Qt based UI application for managing smart card PIN/PUK codes and
 .SH SYNOPSIS
 qesteidutil
 .SH SEE ALSO
-card-test(1), cdigidoc(1), digidoc-tool(1), qdigidocclient(1), qdigidoccrypto(1)
+digidoc-tool(1), qdigidocclient(1), qdigidoccrypto(1)

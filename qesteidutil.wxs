@@ -1,14 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<!--
-"%WIX%\bin\candle.exe" qesteidutil.wxs -dMSI_VERSION=3.9.5
- -dqt_path=C:\Qt\5.3\msvc2013
- -dlibs_path="C:\OpenSSL-Win32\bin"
- -dutility_path=qesteidutil.exe
-
-"%WIX%\bin\light.exe" -out qesteidutil.msi qesteidutil.wixobj -v -ext WixUIExtension
--->
-
 <?ifndef Platform ?>
 <?define Platform="x86" ?>
 <?endif ?>

@@ -1,6 +1,10 @@
+language: c++
 sudo: required
-services:
-- docker
+dist: trusty
+os:
+- linux
+- osx
+osx_image: xcode6.4
 before_install:
 - if [ "${TRAVIS_OS_NAME}" = "osx" ]; then
     brew update;
@@ -21,12 +25,9 @@ script:
 - make
 - cd ..
 
-os:
-- linux
-- osx
-
 env:
   global:
+  - BUILD_NUMBER=${TRAVIS_BUILD_NUMBER}
   - secure: bnnkOxt19gRV75WPsOYjT33wALBe/L1quzMZD8+SY6tM+H7TAZY4490pESEBN+KkrBRhUa8ro2AutVYR4GpVxwOQdXC9KdFnFCqLHsCIhZaBf9H1a/+/gL1bNMiK16XJ6Doz8RidO/m7e0OobulfbbLnBSpgJUwiFkavoO2cfJo=
 addons:
   coverity_scan:
