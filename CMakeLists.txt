@@ -25,9 +25,9 @@ add_subdirectory( common )
 configure_file( src/translations/tr.qrc tr.qrc COPYONLY )
 set( RC_FILES ${CMAKE_BINARY_DIR}/tr.qrc src/qesteidutil.qrc )
 set( TS_FILES src/translations/en.ts src/translations/et.ts src/translations/ru.ts )
-set( UI_FILES src/ui/MainWindow.ui src/Updater.ui )
+set( UI_FILES src/MainWindow.ui src/Updater.ui )
 if( WIN32 )
-	list( APPEND UI_FILES src/ui/SettingsDialog.ui )
+	list( APPEND UI_FILES src/SettingsDialog.ui )
 	list( APPEND SOURCES src/SettingsDialog.cpp src/CertStore.cpp )
 	list( APPEND ADDITIONAL_LIBRARIES Crypt32 )
 endif()
@@ -74,13 +74,14 @@ if(APPLE)
 	add_custom_target( macdeployqt DEPENDS ${PROGNAME}
 		COMMAND ${_qt5Core_install_prefix}/bin/macdeployqt ${CMAKE_CURRENT_BINARY_DIR}/${PROGNAME}.app
 		COMMAND find $<TARGET_FILE_DIR:${PROGNAME}>/../PlugIns/imageformats -type f -a ! -name libqjpeg.dylib -delete
+		COMMAND rm -rf $<TARGET_FILE_DIR:${PROGNAME}>/../PlugIns/bearer
 	)
 	add_custom_target( codesign DEPENDS ${PROGNAME}
 		COMMAND codesign -f -s \"$$SIGNCERT\"
 			$<TARGET_FILE_DIR:${PROGNAME}>/../Frameworks/*
 			$<TARGET_FILE_DIR:${PROGNAME}>/../PlugIns/*/*
 		COMMAND codesign -f -s \"$$SIGNCERT\" $<TARGET_FILE_DIR:${PROGNAME}>/../..
-			--entitlements ${CMAKE_SOURCE_DIR}/src/${PROGNAME}.entitlements
+			--entitlements ${CMAKE_SOURCE_DIR}/${PROGNAME}.entitlements
 	)
 	add_custom_target( productbuild DEPENDS ${PROGNAME}
 		COMMAND productbuild --component ${CMAKE_CURRENT_BINARY_DIR}/${PROGNAME}.app /Applications
@@ -130,7 +131,7 @@ elseif(WIN32)
 	endif()
 else()
 	include( GNUInstallDirs )
-	configure_file( src/qesteidutil.1.cmake qesteidutil.1 )
+	configure_file( qesteidutil.1.cmake qesteidutil.1 )
 	install( TARGETS ${PROGNAME} DESTINATION ${CMAKE_INSTALL_BINDIR} )
 	install( FILES ${CMAKE_CURRENT_BINARY_DIR}/qesteidutil.1 DESTINATION ${CMAKE_INSTALL_MANDIR}/man1 )
 	install( FILES qesteidutil.appdata.xml DESTINATION ${CMAKE_INSTALL_DATADIR}/appdata )
