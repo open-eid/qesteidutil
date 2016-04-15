@@ -139,7 +139,7 @@ QByteArray SSLConnect::getUrl( RequestType type, const QString &value )
 	case ActivateEmails:
 		label = tr("Loading Email info");
 		req = HTTPRequest("GET", "1.0",
-			obj.value("EMAIL-ACTIVATE-URL").toString("https://www.eesti.ee/portaal/!postisysteem.suunamised?%1").arg(value));
+			obj.value("EMAIL-ACTIVATE-URL").toString("https://sisene.www.eesti.ee/idportaal/postisysteem.lisa_suunamine?=%1").arg(value));
 		contentType = "application/xml";
 		break;
 	case PictureInfo:
