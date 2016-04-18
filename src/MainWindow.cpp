@@ -928,7 +928,7 @@ void MainWindow::updateData()
 			<< SslCertificate::formatName( t.data( QSmartCardData::FirstName1 ).toString() )
 			<< SslCertificate::formatName( t.data( QSmartCardData::FirstName2 ).toString() );
 		name.removeAll( "" );
-		d->personalName->setText( name.join(", ") );
+		d->personalName->setText( name.join(" ") );
 		d->surName->setText( t.data( QSmartCardData::SurName ).toString() );
 		d->personalCode->setText( t.data( QSmartCardData::Id ).toString() );
 		d->personalBirth->setText( DateTime( t.data( QSmartCardData::BirthDate ).toDateTime() ).formatDate( "dd. MMMM yyyy" ) +

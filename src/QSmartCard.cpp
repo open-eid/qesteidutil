@@ -521,12 +521,12 @@ void QSmartCard::run()
 					t->authCert = readCert(d->AUTHCERT);
 					t->signCert = readCert(d->SIGNCERT);
 
-					QStringList mailaddresses = t->authCert.alternateSubjectNames().values(QSsl::EmailEntry);
-					t->data[QSmartCardData::Email] = !mailaddresses.isEmpty() ? mailaddresses.first() : "";
+					t->data[QSmartCardData::Email] = t->authCert.alternateSubjectNames().values(QSsl::EmailEntry).value(0);
 					if(t->authCert.type() & SslCertificate::DigiIDType)
 					{
 						t->data[QSmartCardData::SurName] = t->authCert.toString("SN");
 						t->data[QSmartCardData::FirstName1] = t->authCert.toString("GN");
+						t->data[QSmartCardData::FirstName2] = QString();
 						t->data[QSmartCardData::Id] = t->authCert.subjectInfo("serialNumber");
 						t->data[QSmartCardData::BirthDate] = IKValidator::birthDate(t->authCert.subjectInfo("serialNumber"));
 						t->data[QSmartCardData::IssueDate] = t->authCert.effectiveDate();
