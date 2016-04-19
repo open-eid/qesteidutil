@@ -497,7 +497,11 @@ border-radius: 10px;
               </widget>
              </item>
              <item>
-              <widget class="QLabel" name="personalName"/>
+              <widget class="QLabel" name="personalName">
+               <property name="textInteractionFlags">
+                <set>Qt::TextBrowserInteraction</set>
+               </property>
+              </widget>
              </item>
             </layout>
            </item>
@@ -514,7 +518,11 @@ border-radius: 10px;
               </widget>
              </item>
              <item>
-              <widget class="QLabel" name="surName"/>
+              <widget class="QLabel" name="surName">
+               <property name="textInteractionFlags">
+                <set>Qt::TextBrowserInteraction</set>
+               </property>
+              </widget>
              </item>
             </layout>
            </item>
@@ -531,7 +539,11 @@ border-radius: 10px;
               </widget>
              </item>
              <item>
-              <widget class="QLabel" name="personalCode"/>
+              <widget class="QLabel" name="personalCode">
+               <property name="textInteractionFlags">
+                <set>Qt::TextBrowserInteraction</set>
+               </property>
+              </widget>
              </item>
             </layout>
            </item>
@@ -548,7 +560,11 @@ border-radius: 10px;
               </widget>
              </item>
              <item>
-              <widget class="QLabel" name="personalBirth"/>
+              <widget class="QLabel" name="personalBirth">
+               <property name="textInteractionFlags">
+                <set>Qt::TextBrowserInteraction</set>
+               </property>
+              </widget>
              </item>
             </layout>
            </item>
@@ -565,7 +581,11 @@ border-radius: 10px;
               </widget>
              </item>
              <item>
-              <widget class="QLabel" name="personalCitizen"/>
+              <widget class="QLabel" name="personalCitizen">
+               <property name="textInteractionFlags">
+                <set>Qt::TextBrowserInteraction</set>
+               </property>
+              </widget>
              </item>
             </layout>
            </item>
@@ -582,7 +602,11 @@ border-radius: 10px;
               </widget>
              </item>
              <item>
-              <widget class="QLabel" name="personalEmail"/>
+              <widget class="QLabel" name="personalEmail">
+               <property name="textInteractionFlags">
+                <set>Qt::TextBrowserInteraction</set>
+               </property>
+              </widget>
              </item>
             </layout>
            </item>
@@ -650,6 +674,9 @@ border-radius: 10px;
           </property>
           <property name="openExternalLinks">
            <bool>true</bool>
+          </property>
+          <property name="textInteractionFlags">
+           <set>Qt::TextBrowserInteraction</set>
           </property>
          </widget>
         </item>
