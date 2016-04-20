@@ -1060,7 +1060,7 @@ void MainWindow::updateData()
 		for( QLabel *l: list )
 		{
 			l->clear();
-			l->setToolTip( QString("") );
+			l->setToolTip( QString() );
 		}
 
 		d->pictureFrame->setProperty( "PICTURE", QVariant() );
