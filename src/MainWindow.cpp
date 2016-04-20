@@ -1055,12 +1055,14 @@ void MainWindow::updateData()
 	else
 	{
 		d->certUpdate->setProperty("updateEnabled", false);
-		d->personalName->clear();
-		d->surName->clear();
-		d->personalCode->clear();
-		d->personalBirth->clear();
-		d->personalCitizen->clear();
-		d->personalEmail->clear();
+
+		const QList<QLabel*> list({ d->personalName, d->surName, d->personalCode, d->personalBirth, d->personalCitizen, d->personalEmail });
+		for( QLabel *l: list )
+		{
+			l->clear();
+			l->setToolTip( QString("") );
+		}
+
 		d->pictureFrame->setProperty( "PICTURE", QVariant() );
 		d->pictureFrame->clear();
 		setDataPage( PageEmpty );
