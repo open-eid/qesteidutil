@@ -284,7 +284,7 @@ QSmartCard::ErrorType QSmartCard::login(QSmartCardData::PinType type)
 	if(!d->reader)
 		return UnknownError;
 	QByteArray cmd = d->VERIFY;
-	cmd[3] = type == QSmartCardData::PukType ? 0 : type;
+    cmd[3] = type;
 	cmd[4] = pin.size();
 	QPCSCReader::Result result;
 	if(d->t.isPinpad())
