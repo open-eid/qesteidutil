@@ -485,7 +485,7 @@ int Updater::exec()
 	for(const QJsonValue &cert: Configuration::instance().object().value("CERT-BUNDLE").toArray())
 		trusted << QSslCertificate(QByteArray::fromBase64(cert.toString().toLatin1()), QSsl::Der);
 	ssl.setCaCertificates(QList<QSslCertificate>());
-	ssl.setProtocol(QSsl::TlsV1_0OrLater);
+	ssl.setProtocol(QSsl::TlsV1_0);
 	if(key)
 	{
 		ssl.setPrivateKey(QSslKey(key));

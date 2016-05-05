@@ -25,14 +25,8 @@
 #include <common/SOAPDocument.h>
 
 #include <QtCore/QJsonObject>
-
-#if QT_VERSION >= 0x050000
 #include <QtWidgets/QProgressBar>
 #include <QtWidgets/QProgressDialog>
-#else
-#include <QtGui/QProgressBar>
-#include <QtGui/QProgressDialog>
-#endif
 
 QByteArray HTTPRequest::request() const
 {
