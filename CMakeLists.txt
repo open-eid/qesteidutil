@@ -10,37 +10,22 @@ include( VersionInfo )
 set_app_name( PROGNAME qesteidutil )
 
 find_package( Threads )
-find_package( Qt5Widgets QUIET HINTS ${QTSDK} )
-if( Qt5Widgets_FOUND )
-	find_package( Qt5Network HINTS ${QTSDK} )
-	find_package( Qt5LinguistTools HINTS ${QTSDK} )
-	add_definitions( -DQT_DISABLE_DEPRECATED_BEFORE=0x040800 )
-else()
-	find_package( Qt4 4.8.0 COMPONENTS QtCore QtGui QtNetwork REQUIRED )
-	include( ${QT_USE_FILE} )
-endif()
+find_package( Qt5Widgets HINTS ${QTSDK} )
+find_package( Qt5Network HINTS ${QTSDK} )
+find_package( Qt5LinguistTools HINTS ${QTSDK} )
+add_definitions( -DQT_DISABLE_DEPRECATED_BEFORE=0x040800 )
 
 add_subdirectory( common )
 
 configure_file( src/translations/tr.qrc tr.qrc COPYONLY )
-set( RC_FILES ${CMAKE_BINARY_DIR}/tr.qrc src/qesteidutil.qrc )
-set( TS_FILES src/translations/en.ts src/translations/et.ts src/translations/ru.ts )
-set( UI_FILES src/MainWindow.ui src/Updater.ui )
+qt5_add_translation( SOURCES src/translations/en.ts src/translations/et.ts src/translations/ru.ts )
+qt5_add_resources( SOURCES ${CMAKE_BINARY_DIR}/tr.qrc src/qesteidutil.qrc )
+qt5_wrap_ui( SOURCES src/MainWindow.ui src/Updater.ui )
+
 if( WIN32 )
-	list( APPEND UI_FILES src/SettingsDialog.ui )
+	qt5_wrap_ui( SOURCES src/SettingsDialog.ui )
 	list( APPEND SOURCES src/SettingsDialog.cpp src/CertStore.cpp )
 	list( APPEND ADDITIONAL_LIBRARIES Crypt32 )
-endif()
-
-if( NOT Qt5Widgets_FOUND )
-	qt4_add_translation( SOURCES ${TS_FILES} )
-	qt4_add_resources( SOURCES ${RC_FILES} )
-	qt4_wrap_ui( SOURCES ${UI_FILES} )
-else()
-	qt5_add_translation( SOURCES ${TS_FILES} )
-	qt5_add_resources( SOURCES ${RC_FILES} )
-	qt5_wrap_ui( SOURCES ${UI_FILES} )
-	list( APPEND QT_LIBRARIES Qt5::Widgets Qt5::Network )
 endif()
 
 include_directories(
@@ -62,7 +47,8 @@ add_executable( ${PROGNAME} WIN32 MACOSX_BUNDLE
 )
 add_manifest( ${PROGNAME} )
 target_link_libraries( ${PROGNAME}
-	${QT_LIBRARIES}
+	Qt5::Widgets
+	Qt5::Network
 	${ADDITIONAL_LIBRARIES}
 	${CMAKE_THREAD_LIBS_INIT}
 	qdigidoccommon
