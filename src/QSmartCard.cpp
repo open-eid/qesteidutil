@@ -521,7 +521,7 @@ void QSmartCard::run()
 					t->authCert = readCert(d->AUTHCERT);
 					t->signCert = readCert(d->SIGNCERT);
 
-					t->data[QSmartCardData::Email] = t->authCert.alternateSubjectNames().values(QSsl::EmailEntry).value(0);
+					t->data[QSmartCardData::Email] = t->authCert.subjectAlternativeNames().values(QSsl::EmailEntry).value(0);
 					if(t->authCert.type() & SslCertificate::DigiIDType)
 					{
 						t->data[QSmartCardData::SurName] = t->authCert.toString("SN");

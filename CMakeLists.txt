@@ -13,7 +13,6 @@ find_package( Threads )
 find_package( Qt5Widgets HINTS ${QTSDK} )
 find_package( Qt5Network HINTS ${QTSDK} )
 find_package( Qt5LinguistTools HINTS ${QTSDK} )
-add_definitions( -DQT_DISABLE_DEPRECATED_BEFORE=0x040800 )
 
 add_subdirectory( common )
 

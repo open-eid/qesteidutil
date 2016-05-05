@@ -45,6 +45,7 @@ class MacMenuBar;
 #endif
 
 #include <QtCore/QDate>
+#include <QtCore/QStandardPaths>
 #include <QtCore/QTextStream>
 #include <QtCore/QTranslator>
 #include <QtCore/QJsonObject>
@@ -523,7 +524,7 @@ void MainWindow::raiseAndRead()
 
 void MainWindow::savePicture()
 {
-	QString file = QDesktopServices::storageLocation( QDesktopServices::PicturesLocation );
+	QString file = QStandardPaths::writableLocation(QStandardPaths::PicturesLocation);
 	file += "/" + d->smartcard->data().card();
 	file = QFileDialog::getSaveFileName( this, tr("Save picture"), file,
 		"JPEG (*.jpg *.jpeg);;PNG (*.png);;TIFF (*.tif *.tiff);;24-bit Bitmap (*.bmp)" );
