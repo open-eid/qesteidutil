@@ -568,6 +568,12 @@ int Updater::exec()
 				d->close->show();
 			}
 			break;
+		case QNetworkReply::TimeoutError:
+		case QNetworkReply::HostNotFoundError:
+		case QNetworkReply::UnknownNetworkError:
+			d->label->setText("<b><font color=\"red\">" + tr("Updating certificates has failed. Check your internet connection and try again.") + "</font></b>");
+			d->close->show();
+			break;
 		default:
 			switch(reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt())
 			{

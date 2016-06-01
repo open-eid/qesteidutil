@@ -785,5 +785,9 @@ Uuendamise protseduur võtab aega 2-10 minutit ning eeldab toimivat internetiüh
         <source>I confirm I have saved new PIN1, PIN2 and PUK code.</source>
         <translation>Kinnitan, et olen uued PIN- ja PUK-koodid üles kirjutanud.</translation>
     </message>
+    <message>
+        <source>Updating certificates has failed. Check your internet connection and try again.</source>
+        <translation>Uuendamine ebaõnnestus. Kontrolli arvuti internetiühendust ja proovi uuesti.</translation>
+    </message>
 </context>
 </TS>

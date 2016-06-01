@@ -786,5 +786,9 @@ Updating takes ca 2-10 minutes and requires an active internet connection. Do no
         <source>I confirm I have saved new PIN1, PIN2 and PUK code.</source>
         <translation>I confirm I have saved new PIN1, PIN2 and PUK code.</translation>
     </message>
+    <message>
+        <source>Updating certificates has failed. Check your internet connection and try again.</source>
+        <translation>Updating certificates has failed. Check your internet connection and try again.</translation>
+    </message>
 </context>
 </TS>
