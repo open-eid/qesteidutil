@@ -111,6 +111,25 @@ quint16 QSmartCardPrivate::language() const
 	return 0x0000;
 }
 
+QHash<quint8,QByteArray> QSmartCardPrivate::parseFCI(const QByteArray &data) const
+{
+	QHash<quint8,QByteArray> result;
+	for(QByteArray::const_iterator i = data.constBegin(); i != data.constEnd(); ++i)
+	{
+		quint8 tag(*i), size(*++i);
+		result[tag] = QByteArray(i + 1, size);
+		switch(tag)
+		{
+		case 0x6F:
+		case 0x62:
+		case 0x64:
+		case 0xA1: continue;
+		default: i += size; break;
+		}
+	}
+	return result;
+}
+
 int QSmartCardPrivate::rsa_sign(int type, const unsigned char *m, unsigned int m_len,
 		unsigned char *sigret, unsigned int *siglen, const RSA *rsa)
 {
@@ -500,15 +519,18 @@ void QSmartCard::run()
 					}
 
 					auto readCert = [&](const QByteArray &file) {
-						if(!reader->transfer(file).resultOk())
+						QPCSCReader::Result data = reader->transfer(file);
+						if(!data.resultOk())
 							return QSslCertificate();
+						QHash<quint8,QByteArray> fci = d->parseFCI(data.data);
+						int size = fci.contains(0x85) ? fci[0x85][0] << 8 | fci[0x85][1] : 0x0600;
 						QByteArray cert;
-						while(cert.size() < 0x0600)
+						while(cert.size() < size)
 						{
 							QByteArray cmd = d->READBINARY;
 							cmd[2] = cert.size() >> 8;
 							cmd[3] = cert.size();
-							QPCSCReader::Result data = reader->transfer(cmd);
+							data = reader->transfer(cmd);
 							if(!data.resultOk())
 							{
 								tryAgain = true;
