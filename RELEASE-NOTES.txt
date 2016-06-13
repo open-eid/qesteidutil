@@ -1,3 +1,17 @@
+ID-card utility version 3.12.3 release notes
+--------------------------------------
+- Fix parsing certificates longer than 0x0600
+- Config option to disable save dialogs
+- Removed Qt 4.X support, upstream deprecated
+- Make personal and card information copiable in the MainWindow
+- Clear tooltips when card is removed
+- Fix Digi-ID name visual with long names
+- Don't bundle bearer plugins on OSX
+- Update E-Mail activation URL
+- Handle only cards with known ATR-s (Skip Laptop builtin 3G modems)
+- Fix polling when connect returns SCARD_E_NO_SMARTCARD 0x8010000CL
+
+
 ID-card utility version 3.12.2 release notes
 --------------------------------------
 - Updater UI changes
