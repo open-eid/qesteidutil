@@ -767,10 +767,6 @@ Updating takes ca 2-10 minutes and requires an active internet connection. Do no
         <translation>Updating certificates has failed. The server is overloaded, try again later.</translation>
     </message>
     <message>
-        <source>I confirm I have stored the new PIN1, PIN2 and PUK code.</source>
-        <translation>I confirm I have stored the new PIN1, PIN2 and PUK code.</translation>
-    </message>
-    <message>
         <source>Continue</source>
         <translation>Continue</translation>
     </message>
@@ -785,6 +781,10 @@ Updating takes ca 2-10 minutes and requires an active internet connection. Do no
     <message>
         <source>I agree to the terms of use of certificates.</source>
         <translation>I agree to the terms of use of certificates.</translation>
+    </message>
+    <message>
+        <source>I confirm I have saved new PIN1, PIN2 and PUK code.</source>
+        <translation>I confirm I have saved new PIN1, PIN2 and PUK code.</translation>
     </message>
 </context>
 </TS>

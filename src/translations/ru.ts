@@ -768,10 +768,6 @@ Updating takes ca 2-10 minutes and requires an active internet connection. Do no
         <translation>Не удалось обновить сертификаты. Сервер перегружен, попробуйте обновить сертификаты позже.</translation>
     </message>
     <message>
-        <source>I confirm I have stored the new PIN1, PIN2 and PUK code.</source>
-        <translation>Я сохранил новые PIN1, PIN2 и PUK-код.</translation>
-    </message>
-    <message>
         <source>Continue</source>
         <translation>Продолжить</translation>
     </message>
@@ -786,6 +782,10 @@ Updating takes ca 2-10 minutes and requires an active internet connection. Do no
     <message>
         <source>I agree to the terms of use of certificates.</source>
         <translation>Я согласен с условиями использования сертификатов.</translation>
+    </message>
+    <message>
+        <source>I confirm I have saved new PIN1, PIN2 and PUK code.</source>
+        <translation>Подтверждаю что записал новые значения для PIN- и PUK-кодов.</translation>
     </message>
 </context>
 </TS>

@@ -134,7 +134,7 @@
        <item>
         <widget class="QCheckBox" name="envelopeAgree">
          <property name="text">
-          <string>I confirm I have stored the new PIN1, PIN2 and PUK code.</string>
+          <string>I confirm I have saved new PIN1, PIN2 and PUK code.</string>
          </property>
         </widget>
        </item>

@@ -766,10 +766,6 @@ Uuendamise protseduur võtab aega 2-10 minutit ning eeldab toimivat internetiüh
         <translation>Sertifikaatide uuendamine ebaõnnestus. Server on ülekoormatud, proovi mõne aja pärast uuesti.</translation>
     </message>
     <message>
-        <source>I confirm I have stored the new PIN1, PIN2 and PUK code.</source>
-        <translation>Ma olen uue PIN1, PIN2 ja PUK koodi üles kirjutanud.</translation>
-    </message>
-    <message>
         <source>Continue</source>
         <translation>Jätka</translation>
     </message>
@@ -784,6 +780,10 @@ Uuendamise protseduur võtab aega 2-10 minutit ning eeldab toimivat internetiüh
     <message>
         <source>I agree to the terms of use of certificates.</source>
         <translation>Nõustun sertifikaatide kasutustingimustega.</translation>
+    </message>
+    <message>
+        <source>I confirm I have saved new PIN1, PIN2 and PUK code.</source>
+        <translation>Kinnitan, et olen uued PIN- ja PUK-koodid üles kirjutanud.</translation>
     </message>
 </context>
 </TS>
