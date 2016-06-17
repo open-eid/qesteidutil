@@ -471,14 +471,14 @@ void QSmartCard::run()
 							t->version = QSmartCardData::VER_3_4;
 						else if(reader->transfer(d->UPDATER_AID).resultOk())
 						{
-							//Found updater applet, test if it is usable
-							if(!reader->transfer(d->MASTER_FILE).resultOk())
+							t->version = QSmartCardData::CardVersion(t->version|QSmartCardData::VER_HASUPDATER);
+							//Prefer EstEID applet when if it is usable
+							if(!reader->transfer(d->AID35).resultOk() ||
+								!reader->transfer(d->MASTER_FILE).resultOk())
 							{
-								t->version = QSmartCardData::CardVersion(t->version|QSmartCardData::VER_HASUPDATER);
-								reader->transfer(d->AID35);
-							}
-							else
+								reader->transfer(d->UPDATER_AID);
 								t->version = QSmartCardData::VER_USABLEUPDATER;
+							}
 						}
 					}
 
