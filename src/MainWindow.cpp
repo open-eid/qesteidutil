@@ -1002,8 +1002,9 @@ void MainWindow::updateData()
 			(
 				t.retryCount( QSmartCardData::Pin1Type ) > 0 &&
 				t.isValid() && (
+					Configuration::instance().object().contains("EIDUPDATER-URL") ||
 					(t.version() == QSmartCardData::VER_3_4 && Configuration::instance().object().contains("EIDUPDATER-URL-34")) ||
-					(t.version() >= QSmartCardData::VER_3_5 && Configuration::instance().object().contains("EIDUPDATER-URL"))
+					(t.version() >= QSmartCardData::VER_3_5 && Configuration::instance().object().contains("EIDUPDATER-URL-35"))
 				) && (
 					!t.authCert().validateEncoding() ||
 					!t.signCert().validateEncoding() ||
