@@ -34,11 +34,11 @@ public:
 Q_SIGNALS:
 	void log(const QString &msg);
 	void send(const QVariantHash &data);
-	void signReq(QEventLoop *loop, const QByteArray &in);
+	void start();
 
 private:
 	void process(const QByteArray &data);
-	void sign(QEventLoop *loop, const QByteArray &in);
+	void run();
 
 	UpdaterPrivate *d;
 };

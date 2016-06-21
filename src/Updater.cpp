@@ -50,14 +50,12 @@
 class UpdaterPrivate: public Ui::Updater
 {
 public:
-	::Updater *parent = nullptr;
 	QPCSCReader *reader = nullptr;
 	QPushButton *close = nullptr, *details = nullptr;
 	RSA_METHOD method = *RSA_get_default_method();
 	QSslCertificate cert;
 	QString session;
 	QNetworkRequest request;
-	QByteArray signature;
 	QPCSCReader::Result verifyPIN(const QString &title, int p1) const;
 	QtMessageHandler oldMsgHandler = nullptr;
 	QTimeLine *statusTimer = nullptr;
@@ -66,15 +64,36 @@ public:
 		unsigned char *sigret, unsigned int *siglen, const RSA *rsa)
 	{
 		UpdaterPrivate *d = (UpdaterPrivate*)RSA_get_app_data(rsa);
-		if(type != NID_md5_sha1 || m_len != 36 || !d)
+		if(type != NID_md5_sha1 || m_len != 36 || !d || !d->reader || !d->reader->connect())
 			return 0;
-		QEventLoop loop;
-		d->signature.clear();
-		Q_EMIT d->parent->signReq(&loop, QByteArray::fromRawData((const char*)m, m_len));
-		if(loop.exec() != 1)
+
+		if(!d->reader->beginTransaction())
+		{
+			d->reader->disconnect();
 			return 0;
-		*siglen = (unsigned int)d->signature.size();
-		memcpy(sigret, d->signature.constData(), d->signature.size());
+		}
+
+		// Set card parameters
+		if(!d->reader->transfer(APDU("0022F301 00")).resultOk() || // SecENV 1
+			!d->reader->transfer(APDU("002241B8 02 8300")).resultOk()) //Key reference, 8303801100
+		{
+			d->reader->endTransaction();
+			d->reader->disconnect();
+			return 0;
+		}
+
+		// calc signature
+		QByteArray cmd = APDU("00880000 00");
+		cmd[4] = m_len;
+		cmd += QByteArray::fromRawData((const char*)m, m_len);
+		QPCSCReader::Result result = d->reader->transfer(cmd);
+		d->reader->endTransaction();
+		d->reader->disconnect();
+		if(!result.resultOk())
+			return 0;
+
+		*siglen = (unsigned int)result.data.size();
+		memcpy(sigret, result.data.constData(), result.data.size());
 		return 1;
 	}
 };
@@ -186,45 +205,6 @@ QPCSCReader::Result UpdaterPrivate::verifyPIN(const QString &title, int p1) cons
 	}
 }
 
-void Updater::sign(QEventLoop *loop, const QByteArray &in)
-{
-	if(!d->reader ||
-		!d->reader->connect() ||
-		!d->reader->beginTransaction())
-		return loop->exit(0);
-
-	// Verify PIN
-	SslCertificate c(d->cert);
-	if(!d->verifyPIN(c.toString( c.showCN() ? "CN serialNumber" : "GN SN serialNumber" ), 1).resultOk())
-	{
-		d->reader->endTransaction();
-		d->reader->disconnect();
-		return loop->exit(0);
-	}
-
-	// Set card parameters
-	if(!d->reader->transfer(APDU("0022F301 00")).resultOk() || // SecENV 1
-		!d->reader->transfer(APDU("002241B8 02 8300")).resultOk()) //Key reference, 8303801100
-	{
-		d->reader->endTransaction();
-		d->reader->disconnect();
-		return loop->exit(0);
-	}
-
-	// calc signature
-	QByteArray cmd = APDU("00880000 00");
-	cmd[4] = in.length();
-	cmd += in;
-	QPCSCReader::Result result = d->reader->transfer(cmd);
-	d->reader->endTransaction();
-	d->reader->disconnect();
-	if(!result.resultOk())
-		return loop->exit(0);
-
-	d->signature = result.data;
-	return loop->exit(1);
-}
-
 
 
 Updater::Updater(const QString &reader, QWidget *parent)
@@ -232,13 +212,12 @@ Updater::Updater(const QString &reader, QWidget *parent)
 	, d(new UpdaterPrivate)
 {
 	d->setupUi(this);
-	d->parent = this;
 	setWindowFlags(((windowFlags() & ~Qt::WindowContextHelpButtonHint) | Qt::CustomizeWindowHint) & ~Qt::WindowCloseButtonHint);
-	connect(this, &Updater::signReq, this, &Updater::sign, Qt::QueuedConnection);
 	d->statusTimer = new QTimeLine(d->pinProgress->maximum() * 1000, d->pinProgress);
 	d->statusTimer->setCurveShape(QTimeLine::LinearCurve);
 	d->statusTimer->setFrameRange(d->pinProgress->maximum(), d->pinProgress->minimum());
 	connect(d->statusTimer, &QTimeLine::frameChanged, d->pinProgress, &QProgressBar::setValue);
+	connect(this, &Updater::start, this, &Updater::run, Qt::QueuedConnection);
 
 	d->reader = new QPCSCReader(reader, &QPCSC::instance());
 
@@ -454,6 +433,7 @@ int Updater::exec()
 		}
 		certData += result.data;
 	}
+
 	d->reader->endTransaction();
 	d->reader->disconnect();
 
@@ -477,7 +457,7 @@ int Updater::exec()
 		Configuration::instance().object().value("EIDUPDATER-URL-34").toString())));
 	d->request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
 	d->request.setRawHeader("User-Agent", QString("%1/%2 (%3)")
-		.arg(qApp->applicationName()).arg(qApp->applicationVersion()).arg(Common::applicationOs()).toUtf8());
+		.arg(qApp->applicationName(), qApp->applicationVersion(), Common::applicationOs()).toUtf8());
 	qDebug() << "Connecting to" << d->request.url().toString();
 
 	QSslConfiguration ssl = QSslConfiguration::defaultConfiguration();
@@ -593,11 +573,27 @@ int Updater::exec()
 		reply->deleteLater();
 	}, Qt::QueuedConnection);
 
+	Q_EMIT start();
+	return QDialog::exec();
+}
+
+void Updater::run()
+{
+	if(!d->reader)
+		return;
+	d->reader->connect();
+	d->reader->beginTransaction();
+	SslCertificate c(d->cert);
+	bool result = d->verifyPIN(c.toString( c.showCN() ? "CN serialNumber" : "GN SN serialNumber" ), 1).resultOk();
+	d->reader->endTransaction();
+	d->reader->disconnect();
+	if(!result)
+		return accept();
+
 	Q_EMIT send({
 		{"cmd", "START"},
 		{"lang", Settings().language()},
 		{"platform", qApp->applicationOs()},
 		{"version", qApp->applicationVersion()}
 	});
-	return QDialog::exec();
 }
