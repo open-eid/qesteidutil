@@ -574,6 +574,10 @@ int Updater::exec()
 			d->label->setText("<b><font color=\"red\">" + tr("Updating certificates has failed. Check your internet connection and try again.") + "</font></b>");
 			d->close->show();
 			break;
+		case QNetworkReply::SslHandshakeFailedError:
+			d->label->setText("<b><font color=\"red\">" + tr("SSL handshake failed.") + "</font></b>");
+			d->close->show();
+			break;
 		default:
 			switch(reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt())
 			{

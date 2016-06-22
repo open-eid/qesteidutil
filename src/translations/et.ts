@@ -789,5 +789,9 @@ Uuendamise protseduur võtab aega 2-10 minutit ning eeldab toimivat internetiüh
         <source>Updating certificates has failed. Check your internet connection and try again.</source>
         <translation>Uuendamine ebaõnnestus. Kontrolli arvuti internetiühendust ja proovi uuesti.</translation>
     </message>
+    <message>
+        <source>SSL handshake failed.</source>
+        <translation>SSL-turvakanali loomine ebaõnnestus.</translation>
+    </message>
 </context>
 </TS>
