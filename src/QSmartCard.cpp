@@ -519,7 +519,7 @@ void QSmartCard::run()
 					}
 
 					auto readCert = [&](const QByteArray &file) {
-						QPCSCReader::Result data = reader->transfer(file);
+						QPCSCReader::Result data = reader->transfer(file + APDU(reader->protocol() == QPCSCReader::T1 ? "00" : ""));
 						if(!data.resultOk())
 							return QSslCertificate();
 						QHash<quint8,QByteArray> fci = d->parseFCI(data.data);
