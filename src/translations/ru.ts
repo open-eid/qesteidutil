@@ -792,8 +792,8 @@ Updating takes ca 2-10 minutes and requires an active internet connection. Do no
         <translation>Не удалось обновить сертификаты. Проверьте подключение к Интернету и повторите попытку.</translation>
     </message>
     <message>
-        <source>SSL handshake failed.</source>
-        <translation>Создание SSL туннеля не удалось.</translation>
+        <source>SSL handshake failed. Please restart the update process.</source>
+        <translation>Создание защищённого SSL канала не удалось. Просьба начать процесс обновления сначала.</translation>
     </message>
 </context>
 </TS>

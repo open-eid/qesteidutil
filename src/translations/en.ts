@@ -791,8 +791,8 @@ Updating takes ca 2-10 minutes and requires an active internet connection. Do no
         <translation>Updating certificates has failed. Check your internet connection and try again.</translation>
     </message>
     <message>
-        <source>SSL handshake failed.</source>
-        <translation>SSL handshake failed.</translation>
+        <source>SSL handshake failed. Please restart the update process.</source>
+        <translation>SSL handshake failed. Please restart the update process.</translation>
     </message>
 </context>
 </TS>

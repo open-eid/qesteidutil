@@ -555,7 +555,7 @@ int Updater::exec()
 			d->close->show();
 			break;
 		case QNetworkReply::SslHandshakeFailedError:
-			d->label->setText("<b><font color=\"red\">" + tr("SSL handshake failed.") + "</font></b>");
+			d->label->setText("<b><font color=\"red\">" + tr("SSL handshake failed. Please restart the update process.") + "</font></b>");
 			d->close->show();
 			break;
 		default:
