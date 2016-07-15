@@ -752,7 +752,7 @@ void MainWindow::setDataPage( int index )
 				QMessageBox::information( this, windowTitle(), tr("%1 changed!")
 					.arg( QSmartCardData::typeString( QSmartCardData::Pin1Type ) ) );
 			else
-				QMessageBox::information( this, windowTitle(), tr("%1 changed and your current certificates blocking has been removed!")
+				QMessageBox::information( this, windowTitle(), tr("%1 has been changed and the certificate has been unblocked!")
 					.arg( QSmartCardData::typeString( QSmartCardData::Pin1Type ) ) );
 			updateData();
 			setDataPage( PageCert );
@@ -834,7 +834,7 @@ void MainWindow::setDataPage( int index )
 				QMessageBox::information( this, windowTitle(), tr("%1 changed!")
 					.arg( QSmartCardData::typeString( QSmartCardData::Pin2Type ) ) );
 			else
-				QMessageBox::information( this, windowTitle(), tr("%1 changed and your current certificates blocking has been removed!")
+				QMessageBox::information( this, windowTitle(), tr("%1 has been changed and the certificate has been unblocked!")
 					.arg( QSmartCardData::typeString( QSmartCardData::Pin2Type ) ) );
 			updateData();
 			setDataPage( PageCert );
@@ -916,7 +916,7 @@ void MainWindow::updateData()
 		   << DateTime( t.data( QSmartCardData::Expiry ).toDateTime() ).formatDate( "dd. MMMM yyyy" ) << "</font>";
 		if( !t.isValid() )
 			st << "<br /><font style='color: black;'>"
-				<< tr("Instructions how to get a new document you can find "
+				<< tr("You can find instructions on how to get a new document from "
 					"<a href=\"http://www.politsei.ee/en/teenused/isikut-toendavad-dokumendid/id-kaart/taiskasvanule/\">here</a>")
 				<< "</font>";
 		st << "</font>";
@@ -1043,7 +1043,7 @@ void MainWindow::updateData()
 		if( !Settings().value( "Utility/showRegCert", false ).toBool() ||
 			(!store.find( t.authCert() ) || !store.find( t.signCert() )) &&
 			QMessageBox::question( this, tr( "Certificate store" ),
-				tr( "Certificate is not registered in certificate store. Register now?" ),
+				tr( "Certificate is not registered in the certificate store. Register now?" ),
 				QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes ) == QMessageBox::Yes )
 		{
 			QString personalCode = t.authCert().subjectInfo( "serialNumber" );
@@ -1081,7 +1081,7 @@ void MainWindow::updateData()
 		else if( t.cards().isEmpty() )
 		{
 			text = tr("No card found");
-			additional = tr("Check if the ID-card is inserted correctly to the reader.<br />New ID-cards have chip on the back side of the card.");
+			additional = tr("Check if the ID-card is inserted correctly to the reader.<br />New ID-cards have the chip on the back side of the card.");
 		}
 		else
 			text = tr( "Reading data" );

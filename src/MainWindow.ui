@@ -1319,8 +1319,8 @@ Updating takes ca 2-10 minutes and requires an active internet connection. Do no
              <item row="0" column="0" colspan="2">
               <widget class="QLabel" name="mobileInfo">
                <property name="text">
-                <string>Mobiil-ID is possibility to use mobile phone instead of ID-card for identification and digital signing.&lt;br /&gt;More info from &lt;a href=&quot;http://mobiil.id.ee&quot;&gt;mobiil.id.ee&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;
-To use Mobiil-ID it is needed to use a SIM card that supports this feature. If such a SIM card is already purchased, then it has to be activated.</string>
+                <string>Mobiil-ID is the possibility to use a mobile phone instead of an ID-card for identification and digital signing.&lt;br /&gt;More info from &lt;a href=&quot;http://mobiil.id.ee&quot;&gt;mobiil.id.ee&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;
+To use Mobiil-ID a SIM card that supports this feature has to be used. If such a SIM card is already purchased, then it has to be activated.</string>
                </property>
                <property name="wordWrap">
                 <bool>true</bool>
@@ -1439,7 +1439,7 @@ To use Mobiil-ID it is needed to use a SIM card that supports this feature. If s
           <item row="1" column="0" colspan="2">
            <widget class="QLabel" name="pukInfo">
             <property name="text">
-             <string>&lt;p&gt;PUK code is used for unblocking certificates, when PIN1 or PIN2 has been entered 3 times incorrectly.&lt;/p&gt;
+             <string>&lt;p&gt;PUK code is used for unblocking the certificates, when PIN1 or PIN2 has been entered 3 times incorrectly.&lt;/p&gt;
 &lt;p&gt;PUK code is written in the envelope, that is given with the ID-card.&lt;/p&gt;</string>
             </property>
             <property name="wordWrap">
@@ -1450,8 +1450,8 @@ To use Mobiil-ID it is needed to use a SIM card that supports this feature. If s
           <item row="2" column="0" colspan="2">
            <widget class="QLabel" name="pukLocked">
             <property name="text">
-             <string>&lt;h3&gt;PUK code is blocked!&lt;/h3&gt;
-For getting new PUK code for your ID-card, please visit service center where you can get the new codes. &lt;a href=&quot;http://www.politsei.ee/et/nouanded/id-kaart-ja-pass/kui-id-kaardi-koodid-kaovad/&quot;&gt;Additional information&lt;/a&gt;</string>
+             <string>&lt;h3&gt;The PUK code is blocked!&lt;/h3&gt;
+Please visit the service center to obtain new codes. &lt;a href=&quot;http://www.politsei.ee/et/nouanded/id-kaart-ja-pass/kui-id-kaardi-koodid-kaovad/&quot;&gt;Additional information&lt;/a&gt;</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
@@ -1576,7 +1576,7 @@ For getting new PUK code for your ID-card, please visit service center where you
                  <string>&lt;h3&gt;Change PIN1 code&lt;/h3&gt;
 &lt;p&gt;New PIN1 must be different from current PIN1.&lt;/p&gt;
 &lt;p&gt;PIN1 code is used for accessing identification certificates.&lt;/p&gt;
-&lt;p&gt;If PIN1 is inserted 3 times inccorectly, then identification certificate will be blocked and it will be impossible to use ID-card to verify identification, until it is unblocked via PUK code.&lt;/p&gt;</string>
+&lt;p&gt;If PIN1 is inserted incorrectly 3 times the identification certificate will be blocked and it will be impossible to use ID-card to verify identification, until it is unblocked via the PUK code.&lt;/p&gt;</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
@@ -1614,11 +1614,11 @@ For getting new PUK code for your ID-card, please visit service center where you
             </widget>
             <widget class="QLabel" name="changePin1InfoUnblock">
              <property name="text">
-              <string>&lt;h3&gt;Authentication certificate is blocked.&lt;/h3&gt;
-&lt;p&gt;To unblock certificate you have to enter PUK code.&lt;/p&gt;
-&lt;p&gt;You can find your PUK code inside ID-card codes envelope.&lt;/p&gt;
+              <string>&lt;h3&gt;The authentication certificate is blocked.&lt;/h3&gt;
+&lt;p&gt;To unblock the certificate you have to enter the PUK code.&lt;/p&gt;
+&lt;p&gt;You can find your PUK code inside the ID-card codes envelope.&lt;/p&gt;
 &lt;p&gt;New PIN1 must be different from current PIN1.&lt;/p&gt;
-&lt;p&gt;If you do not know PUK code for your ID-card, please visit service center where you can get the new codes.&lt;/p&gt;</string>
+&lt;p&gt;If you do not know the PUK code for your ID-card, please visit the service center to obtain new PIN codes.&lt;/p&gt;</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
@@ -1783,7 +1783,7 @@ For getting new PUK code for your ID-card, please visit service center where you
                <widget class="QStackedWidget" name="changePin1PinpadInfo">
                 <widget class="QLabel" name="changePin1PinpadInfoPin">
                  <property name="text">
-                  <string>To change PIN code on PinPad reader old PIN code have to be entered first and then new PIN code twice.</string>
+                  <string>To change PIN code on a PinPad reader the old PIN code has to be entered first and then the new PIN code twice.</string>
                  </property>
                  <property name="wordWrap">
                   <bool>true</bool>
@@ -1791,7 +1791,7 @@ For getting new PUK code for your ID-card, please visit service center where you
                 </widget>
                 <widget class="QLabel" name="changePin1PinpadInfoPuk">
                  <property name="text">
-                  <string>To change PIN code with PUK on PinPad reader the PUK code have to be entered first and then PIN code twice.</string>
+                  <string>To change PIN code with the PUK code on a PinPad reader the PUK code has to be entered first and then the PIN code twice.</string>
                  </property>
                  <property name="wordWrap">
                   <bool>true</bool>
@@ -1799,7 +1799,7 @@ For getting new PUK code for your ID-card, please visit service center where you
                 </widget>
                 <widget class="QLabel" name="changePin1PinpadInfoUnblock">
                  <property name="text">
-                  <string>To unblock PIN code on PinPad reader the PUK code have to be entered first and then PIN code twice.</string>
+                  <string>To unblock the PIN code on a PinPad reader the PUK code has to be entered first and then the PIN code twice.</string>
                  </property>
                  <property name="wordWrap">
                   <bool>true</bool>
@@ -1897,7 +1897,7 @@ For getting new PUK code for your ID-card, please visit service center where you
                  <string>&lt;h3&gt;Change PIN2 code&lt;/h3&gt;
 &lt;p&gt;New PIN2 must be different from current PIN2.&lt;/p&gt;
 &lt;p&gt;PIN2 code is used to digitally sign documents.&lt;/p&gt;
-&lt;p&gt;If PIN2 is inserted 3 times inccorectly, then signing certificate will be blocked and it will be impossible to use ID-card to digital signing, until it is unblocked via PUK code.&lt;/p&gt;</string>
+&lt;p&gt;If PIN2 is inserted incorreclty 3 times the signing certificate will be blocked and it will be impossible to use ID-card to digital signing, until it is unblocked via the PUK code.&lt;/p&gt;</string>
                 </property>
                 <property name="alignment">
                  <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
@@ -1935,11 +1935,11 @@ For getting new PUK code for your ID-card, please visit service center where you
             </widget>
             <widget class="QLabel" name="changePin2InfoUnblock">
              <property name="text">
-              <string>&lt;h3&gt;Signing certificate is blocked.&lt;/h3&gt;
-&lt;p&gt;To unblock certificate you have to enter PUK code.&lt;/p&gt;
-&lt;p&gt;You can find your PUK code inside ID-card codes envelope.&lt;/p&gt;
+              <string>&lt;h3&gt;The signing certificate is blocked.&lt;/h3&gt;
+&lt;p&gt;To unblock the certificate you have to enter the PUK code.&lt;/p&gt;
+&lt;p&gt;You can find your PUK code inside the ID-card codes envelope.&lt;/p&gt;
 &lt;p&gt;New PIN2 must be different from current PIN2.&lt;/p&gt;
-&lt;p&gt;If you do not know PUK code for your ID-card, please visit service center where you can get the new codes.&lt;/p&gt;</string>
+&lt;p&gt;If you do not know the PUK code for your ID-card, please visit service the center to obtain new PIN codes.&lt;/p&gt;</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
@@ -2112,7 +2112,7 @@ For getting new PUK code for your ID-card, please visit service center where you
                 </widget>
                 <widget class="QLabel" name="changePin2PinpadInfoPuk">
                  <property name="text">
-                  <string>To change PIN code with PUK on PinPad reader the PUK code have to be entered first and then PIN code twice.</string>
+                  <string>To change PIN code with the PUK code on a PinPad reader the PUK code has to be entered first and then the PIN code twice.</string>
                  </property>
                  <property name="wordWrap">
                   <bool>true</bool>
@@ -2120,7 +2120,7 @@ For getting new PUK code for your ID-card, please visit service center where you
                 </widget>
                 <widget class="QLabel" name="changePin2PinpadInfoUnblock">
                  <property name="text">
-                  <string>To unblock PIN code on PinPad reader the PUK code have to be entered first and then PIN code twice.</string>
+                  <string>To unblock the PIN code on a PinPad reader the PUK code has to be entered first and then the PIN code twice.</string>
                  </property>
                  <property name="wordWrap">
                   <bool>true</bool>
@@ -2196,8 +2196,8 @@ For getting new PUK code for your ID-card, please visit service center where you
              </size>
             </property>
             <property name="text">
-             <string>&lt;h3&gt;Change PUK code&lt;/h3&gt;
-&lt;p&gt;If you forget PUK code or certificates remain unblocked, then it is needed to turn to service provider to get yout ID-card working again.&lt;/p&gt;</string>
+             <string>&lt;h3&gt;Change the PUK code&lt;/h3&gt;
+&lt;p&gt;If you forget the PUK code or the certificates remain blocked, you have to visit the service center to obtain new codes.&lt;/p&gt;</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
@@ -2360,7 +2360,7 @@ For getting new PUK code for your ID-card, please visit service center where you
               <item row="0" column="0" colspan="3">
                <widget class="QLabel" name="changePukPinpadInfo">
                 <property name="text">
-                 <string>To change PUK code on PinPad reader old PUK code have to be entered first and then new PUK code twice.</string>
+                 <string>To change the PUK code on a PinPad reader the old PUK code has to be entered first and then the new PUK code twice.</string>
                 </property>
                 <property name="wordWrap">
                  <bool>true</bool>

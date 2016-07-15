@@ -84,8 +84,8 @@
         <translation>PUK kood</translation>
     </message>
     <message>
-        <source>&lt;h3&gt;PUK code is blocked!&lt;/h3&gt;
-For getting new PUK code for your ID-card, please visit service center where you can get the new codes. &lt;a href=&quot;http://www.politsei.ee/et/nouanded/id-kaart-ja-pass/kui-id-kaardi-koodid-kaovad/&quot;&gt;Additional information&lt;/a&gt;</source>
+        <source>&lt;h3&gt;The PUK code is blocked!&lt;/h3&gt;
+Please visit the service center to obtain new codes. &lt;a href=&quot;http://www.politsei.ee/et/nouanded/id-kaart-ja-pass/kui-id-kaardi-koodid-kaovad/&quot;&gt;Additional information&lt;/a&gt;</source>
         <translation>&lt;h3&gt;PUK kood on blokeeritud!&lt;/h3&gt;
 Uue PUK koodi saamiseks, külasta klienditeeninduspunkti, kust saad koodiümbriku uute koodidega. &lt;a href=&quot;http://www.politsei.ee/et/nouanded/id-kaart-ja-pass/kui-id-kaardi-koodid-kaovad/&quot;&gt;Lisainfo&lt;/a&gt;</translation>
     </message>
@@ -110,7 +110,7 @@ Uue PUK koodi saamiseks, külasta klienditeeninduspunkti, kust saad koodiümbrik
         <translation>Uus PIN1 kood</translation>
     </message>
     <message>
-        <source>To change PIN code on PinPad reader old PIN code have to be entered first and then new PIN code twice.</source>
+        <source>To change PIN code on a PinPad reader the old PIN code has to be entered first and then the new PIN code twice.</source>
         <translation>PinPad lugejaga PIN muutmiseks tuleb kõigepealt sisestada vana PIN ning siis kaks korda uus PIN.</translation>
     </message>
     <message>
@@ -130,8 +130,8 @@ Uue PUK koodi saamiseks, külasta klienditeeninduspunkti, kust saad koodiümbrik
         <translation>Uus PIN2 kood uuesti</translation>
     </message>
     <message>
-        <source>&lt;h3&gt;Change PUK code&lt;/h3&gt;
-&lt;p&gt;If you forget PUK code or certificates remain unblocked, then it is needed to turn to service provider to get yout ID-card working again.&lt;/p&gt;</source>
+        <source>&lt;h3&gt;Change the PUK code&lt;/h3&gt;
+&lt;p&gt;If you forget the PUK code or the certificates remain blocked, you have to visit the service center to obtain new codes.&lt;/p&gt;</source>
         <translation>&lt;h3&gt;PUK koodi vahetus&lt;/h3&gt;
 &lt;p&gt;Kui peale vahetamist PUK kood läheb meelest ära ja sertifikaat jääb blokeerituks kolme vale PIN1 või PIN2 sisetamise järel, siis ainus võimalus ID-kaart jälle tööle saada on pöörduda klienditeeninduspunkti poole.&lt;/p&gt;</translation>
     </message>
@@ -172,7 +172,7 @@ Uue PUK koodi saamiseks, külasta klienditeeninduspunkti, kust saad koodiümbrik
         <translation>Kaart on kehtiv kuni</translation>
     </message>
     <message>
-        <source>Instructions how to get a new document you can find &lt;a href=&quot;http://www.politsei.ee/en/teenused/isikut-toendavad-dokumendid/id-kaart/taiskasvanule/&quot;&gt;here&lt;/a&gt;</source>
+        <source>You can find instructions on how to get a new document from &lt;a href=&quot;http://www.politsei.ee/en/teenused/isikut-toendavad-dokumendid/id-kaart/taiskasvanule/&quot;&gt;here&lt;/a&gt;</source>
         <translation>Juhised uue dokumendi taotlemiseks leiad &lt;a href=&quot;http://www.politsei.ee/et/teenused/isikut-toendavad-dokumendid/id-kaart/taiskasvanule/&quot;&gt;siit&lt;/a&gt;</translation>
     </message>
     <message>
@@ -268,7 +268,7 @@ Uue PUK koodi saamiseks, külasta klienditeeninduspunkti, kust saad koodiümbrik
         <translation>Sertifikaadi hoidla</translation>
     </message>
     <message>
-        <source>Certificate is not registered in certificate store. Register now?</source>
+        <source>Certificate is not registered in the certificate store. Register now?</source>
         <translation>Sertifikaat ei ole registreeritud sertifikaadi hoidlas. Registreerin kohe?</translation>
     </message>
     <message>
@@ -356,11 +356,11 @@ Uue PUK koodi saamiseks, külasta klienditeeninduspunkti, kust saad koodiümbrik
         <translation>sertifikaadi olek teadmata</translation>
     </message>
     <message>
-        <source>certificates are expired. New SIM card has to be requested from Service provider.</source>
+        <source>certificates are expired. New SIM card has to be requested from the Service provider.</source>
         <translation>sertifikaadid on aegunud. Vajalik on operaatorilt uue SIM kaardi hankimine.</translation>
     </message>
     <message>
-        <source>&lt;p&gt;PUK code is used for unblocking certificates, when PIN1 or PIN2 has been entered 3 times incorrectly.&lt;/p&gt;
+        <source>&lt;p&gt;PUK code is used for unblocking the certificates, when PIN1 or PIN2 has been entered 3 times incorrectly.&lt;/p&gt;
 &lt;p&gt;PUK code is written in the envelope, that is given with the ID-card.&lt;/p&gt;</source>
         <translation>&lt;p&gt;PUK koodi abil saab tühistada sertifikaadi blokeeringu, kui PIN1 või PIN2 koodi on 3 korda järjest valesti sisestatud.&lt;/p&gt;
 &lt;p&gt;PUK kood on kirjas koodiümbrikus, mida väljastatakse koos ID-kaardiga.&lt;/p&gt;</translation>
@@ -382,7 +382,7 @@ Uue PUK koodi saamiseks, külasta klienditeeninduspunkti, kust saad koodiümbrik
         <translation>E-post:</translation>
     </message>
     <message>
-        <source>To change PUK code on PinPad reader old PUK code have to be entered first and then new PUK code twice.</source>
+        <source>To change the PUK code on a PinPad reader the old PUK code has to be entered first and then the new PUK code twice.</source>
         <translation>PinPad lugejaga PUK muutmiseks tuleb kõigepealt sisestada vana PUK ning siis kaks korda uus PUK.</translation>
     </message>
     <message>
@@ -441,7 +441,7 @@ Uue PUK koodi saamiseks, külasta klienditeeninduspunkti, kust saad koodiümbrik
         <translation>%1 kood blokeeritud</translation>
     </message>
     <message>
-        <source>%1 changed and your current certificates blocking has been removed!</source>
+        <source>%1 has been changed and the certificate has been unblocked!</source>
         <translation>%1 kood on muudetud ja sertifikaadi blokeering tühistatud!</translation>
     </message>
     <message>
@@ -463,7 +463,7 @@ Uue PUK koodi saamiseks, külasta klienditeeninduspunkti, kust saad koodiümbrik
 &lt;p&gt;Kui olete unustanud PIN1 koodi, kuid teate PUK koodi, siis siin saate määrata uue PIN1 koodi.&lt;/p&gt;</translation>
     </message>
     <message>
-        <source>To change PIN code with PUK on PinPad reader the PUK code have to be entered first and then PIN code twice.</source>
+        <source>To change PIN code with the PUK code on a PinPad reader the PUK code has to be entered first and then the PIN code twice.</source>
         <translation>PinPad lugejaga PUK abil PIN muutmiseks tuleb kõigepealt sisestada PUK ning siis kaks korda uus PIN.</translation>
     </message>
     <message>
@@ -477,7 +477,7 @@ Uue PUK koodi saamiseks, külasta klienditeeninduspunkti, kust saad koodiümbrik
 &lt;p&gt;Kui olete unustanud PIN2 koodi, kuid teate PUK koodi, siis siin saate määrata uue PIN2 koodi.&lt;/p&gt;</translation>
     </message>
     <message>
-        <source>To unblock PIN code on PinPad reader the PUK code have to be entered first and then PIN code twice.</source>
+        <source>To unblock the PIN code on a PinPad reader the PUK code has to be entered first and then the PIN code twice.</source>
         <translation>PinPad lugejaga PIN blokeeringu tühistamiseks tuleb kõigepealt sisestada PUK ning siis kaks korda PIN.</translation>
     </message>
     <message>
@@ -529,8 +529,8 @@ Uue PUK koodi saamiseks, külasta klienditeeninduspunkti, kust saad koodiümbrik
         <translation>Keeled</translation>
     </message>
     <message>
-        <source>Mobiil-ID is possibility to use mobile phone instead of ID-card for identification and digital signing.&lt;br /&gt;More info from &lt;a href=&quot;http://mobiil.id.ee&quot;&gt;mobiil.id.ee&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;
-To use Mobiil-ID it is needed to use a SIM card that supports this feature. If such a SIM card is already purchased, then it has to be activated.</source>
+        <source>Mobiil-ID is the possibility to use a mobile phone instead of an ID-card for identification and digital signing.&lt;br /&gt;More info from &lt;a href=&quot;http://mobiil.id.ee&quot;&gt;mobiil.id.ee&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;
+To use Mobiil-ID a SIM card that supports this feature has to be used. If such a SIM card is already purchased, then it has to be activated.</source>
         <translation>Mobiil-ID on võimalus kasutada isikutuvastamiseks ja digitaalallkirja andmiseks ID-kaardi asemel mobiiltelefoni.&lt;br /&gt;Loe täpsemalt mobiil.id.ee kodulehelt &lt;a href=&quot;http://mobiil.id.ee&quot;&gt;mobiil.id.ee&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;
 Mobiil-ID kasutamiseks on vajalik uus SIM-kaart, mille sa saad endale mobiilsideoperaatori käest. Kui selline kaart on sul juba olemas, tuleb teenus aktiveerida.</translation>
     </message>
@@ -567,7 +567,7 @@ Mobiil-ID kasutamiseks on vajalik uus SIM-kaart, mille sa saad endale mobiilside
         <translation>Muuda PIN2 kood PUK koodi abil</translation>
     </message>
     <message>
-        <source>Check if the ID-card is inserted correctly to the reader.&lt;br /&gt;New ID-cards have chip on the back side of the card.</source>
+        <source>Check if the ID-card is inserted correctly to the reader.&lt;br /&gt;New ID-cards have the chip on the back side of the card.</source>
         <translation>Kontrolli, kas ID-kaart on õiget pidi lugejas.&lt;br /&gt;Uutel ID-kaartidel on kiip kaardi tagumisel küljel.</translation>
     </message>
     <message>
@@ -578,7 +578,7 @@ Mobiil-ID kasutamiseks on vajalik uus SIM-kaart, mille sa saad endale mobiilside
         <source>&lt;h3&gt;Change PIN1 code&lt;/h3&gt;
 &lt;p&gt;New PIN1 must be different from current PIN1.&lt;/p&gt;
 &lt;p&gt;PIN1 code is used for accessing identification certificates.&lt;/p&gt;
-&lt;p&gt;If PIN1 is inserted 3 times inccorectly, then identification certificate will be blocked and it will be impossible to use ID-card to verify identification, until it is unblocked via PUK code.&lt;/p&gt;</source>
+&lt;p&gt;If PIN1 is inserted incorrectly 3 times the identification certificate will be blocked and it will be impossible to use ID-card to verify identification, until it is unblocked via the PUK code.&lt;/p&gt;</source>
         <translation>&lt;h3&gt;PIN1 koodi vahetus&lt;/h3&gt;
 &lt;p&gt;Uus PIN1 peab olema erinev eelmisest.&lt;/p&gt;
 &lt;p&gt;PIN1 koodi kasutatakse isikutuvastamise sertifikaadile juurdepääsemiseks.&lt;/p&gt;
@@ -588,7 +588,7 @@ Mobiil-ID kasutamiseks on vajalik uus SIM-kaart, mille sa saad endale mobiilside
         <source>&lt;h3&gt;Change PIN2 code&lt;/h3&gt;
 &lt;p&gt;New PIN2 must be different from current PIN2.&lt;/p&gt;
 &lt;p&gt;PIN2 code is used to digitally sign documents.&lt;/p&gt;
-&lt;p&gt;If PIN2 is inserted 3 times inccorectly, then signing certificate will be blocked and it will be impossible to use ID-card to digital signing, until it is unblocked via PUK code.&lt;/p&gt;</source>
+&lt;p&gt;If PIN2 is inserted incorreclty 3 times the signing certificate will be blocked and it will be impossible to use ID-card to digital signing, until it is unblocked via the PUK code.&lt;/p&gt;</source>
         <translation>&lt;h3&gt;PIN2 koodi vahetus&lt;/h3&gt;
 &lt;p&gt;Uus PIN2 peab olema erinev eelmisest.&lt;/p&gt;
 &lt;p&gt;PIN2 koodi kasutatakse digitaalallkirja andmiseks.&lt;/p&gt;
@@ -615,11 +615,11 @@ Mobiil-ID kasutamiseks on vajalik uus SIM-kaart, mille sa saad endale mobiilside
         <translation>PIN2 on blokeeritud, kuna PIN2 koodi on sisestatud 3 korda valesti.</translation>
     </message>
     <message>
-        <source>&lt;h3&gt;Authentication certificate is blocked.&lt;/h3&gt;
-&lt;p&gt;To unblock certificate you have to enter PUK code.&lt;/p&gt;
-&lt;p&gt;You can find your PUK code inside ID-card codes envelope.&lt;/p&gt;
+        <source>&lt;h3&gt;The authentication certificate is blocked.&lt;/h3&gt;
+&lt;p&gt;To unblock the certificate you have to enter the PUK code.&lt;/p&gt;
+&lt;p&gt;You can find your PUK code inside the ID-card codes envelope.&lt;/p&gt;
 &lt;p&gt;New PIN1 must be different from current PIN1.&lt;/p&gt;
-&lt;p&gt;If you do not know PUK code for your ID-card, please visit service center where you can get the new codes.&lt;/p&gt;</source>
+&lt;p&gt;If you do not know the PUK code for your ID-card, please visit the service center to obtain new PIN codes.&lt;/p&gt;</source>
         <translation>&lt;h3&gt;Isikutuvastamise sertifikaat on blokeeritud.&lt;/h3&gt;
 &lt;p&gt;Sertfikaadi blokeeringu tühistamiseks sisesta kaardi PUK kood.&lt;/p&gt;
 &lt;p&gt;PUK koodi leiad ID-kaardi koodiümbrikus, kui sa pole seda vahepeal muutnud.&lt;/p&gt;
@@ -627,11 +627,11 @@ Mobiil-ID kasutamiseks on vajalik uus SIM-kaart, mille sa saad endale mobiilside
 &lt;p&gt;Kui sa ei tea oma ID-kaardi PUK koodi, külasta klienditeeninduspunkti, kust saad uue koodiümbriku.&lt;/p&gt;</translation>
     </message>
     <message>
-        <source>&lt;h3&gt;Signing certificate is blocked.&lt;/h3&gt;
-&lt;p&gt;To unblock certificate you have to enter PUK code.&lt;/p&gt;
-&lt;p&gt;You can find your PUK code inside ID-card codes envelope.&lt;/p&gt;
+        <source>&lt;h3&gt;The signing certificate is blocked.&lt;/h3&gt;
+&lt;p&gt;To unblock the certificate you have to enter the PUK code.&lt;/p&gt;
+&lt;p&gt;You can find your PUK code inside the ID-card codes envelope.&lt;/p&gt;
 &lt;p&gt;New PIN2 must be different from current PIN2.&lt;/p&gt;
-&lt;p&gt;If you do not know PUK code for your ID-card, please visit service center where you can get the new codes.&lt;/p&gt;</source>
+&lt;p&gt;If you do not know the PUK code for your ID-card, please visit the service center to obtain new PIN codes.&lt;/p&gt;</source>
         <translation>&lt;h3&gt;Allkirjastamise sertifikaat on blokeeritud.&lt;/h3&gt;
 &lt;p&gt;Sertfikaadi blokeeringu tühistamiseks sisesta kaardi PUK kood.&lt;/p&gt;
 &lt;p&gt;PUK koodi leiad ID-kaardi koodiümbrikus, kui sa pole seda vahepeal muutnud.&lt;/p&gt;

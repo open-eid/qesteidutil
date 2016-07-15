@@ -84,10 +84,10 @@
         <translation>PUK code</translation>
     </message>
     <message>
-        <source>&lt;h3&gt;PUK code is blocked!&lt;/h3&gt;
-For getting new PUK code for your ID-card, please visit service center where you can get the new codes. &lt;a href=&quot;http://www.politsei.ee/et/nouanded/id-kaart-ja-pass/kui-id-kaardi-koodid-kaovad/&quot;&gt;Additional information&lt;/a&gt;</source>
-        <translation>&lt;h3&gt;PUK code is blocked!&lt;/h3&gt;
-For getting new PUK code for your ID-card, please visit service center where you can get the new codes. &lt;a href=&quot;http://www.politsei.ee/en/&quot;&gt;Additional information&lt;/a&gt;</translation>
+        <source>&lt;h3&gt;The PUK code is blocked!&lt;/h3&gt;
+Please visit the service center to obtain new codes. &lt;a href=&quot;http://www.politsei.ee/et/nouanded/id-kaart-ja-pass/kui-id-kaardi-koodid-kaovad/&quot;&gt;Additional information&lt;/a&gt;</source>
+        <translation>&lt;h3&gt;The PUK code is blocked!&lt;/h3&gt;
+Please visit the service center to obtain new codes. &lt;a href=&quot;http://www.politsei.ee/en/nouanded/isikut-toendavad-dokumendid/kui-id-kaardi-koodid-kaovad.dot&quot;&gt;Additional information&lt;/a&gt;</translation>
     </message>
     <message>
         <source>Change</source>
@@ -110,8 +110,8 @@ For getting new PUK code for your ID-card, please visit service center where you
         <translation>New PIN1 code</translation>
     </message>
     <message>
-        <source>To change PIN code on PinPad reader old PIN code have to be entered first and then new PIN code twice.</source>
-        <translation>To change PIN code on PinPad reader old PIN code have to be entered first and then new PIN code twice.</translation>
+        <source>To change PIN code on a PinPad reader the old PIN code has to be entered first and then the new PIN code twice.</source>
+        <translation>To change PIN code on a PinPad reader the old PIN code has to be entered first and then the new PIN code twice.</translation>
     </message>
     <message>
         <source>Change with PinPad</source>
@@ -130,10 +130,10 @@ For getting new PUK code for your ID-card, please visit service center where you
         <translation>Repeat new PIN2 code</translation>
     </message>
     <message>
-        <source>&lt;h3&gt;Change PUK code&lt;/h3&gt;
-&lt;p&gt;If you forget PUK code or certificates remain unblocked, then it is needed to turn to service provider to get yout ID-card working again.&lt;/p&gt;</source>
-        <translation>&lt;h3&gt;Change PUK code&lt;/h3&gt;
-&lt;p&gt;If you forget PUK code or certificates remain unblocked, then it is needed to turn to service provider to get yout ID-card working again.&lt;/p&gt;</translation>
+        <source>&lt;h3&gt;Change the PUK code&lt;/h3&gt;
+&lt;p&gt;If you forget the PUK code or the certificates remain blocked, you have to visit the service center to obtain new codes.&lt;/p&gt;</source>
+        <translation>&lt;h3&gt;Change the PUK code&lt;/h3&gt;
+&lt;p&gt;If you forget the PUK code or the certificates remain blocked, you have to visit the service center to obtain new codes.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Current PUK code</source>
@@ -172,8 +172,8 @@ For getting new PUK code for your ID-card, please visit service center where you
         <translation>Card is valid till</translation>
     </message>
     <message>
-        <source>Instructions how to get a new document you can find &lt;a href=&quot;http://www.politsei.ee/en/teenused/isikut-toendavad-dokumendid/id-kaart/taiskasvanule/&quot;&gt;here&lt;/a&gt;</source>
-        <translation>Instructions how to get a new document you can find &lt;a href=&quot;http://www.politsei.ee/en/teenused/isikut-toendavad-dokumendid/id-kaart/taiskasvanule/&quot;&gt;here&lt;/a&gt;</translation>
+        <source>You can find instructions on how to get a new document from &lt;a href=&quot;http://www.politsei.ee/en/teenused/isikut-toendavad-dokumendid/id-kaart/taiskasvanule/&quot;&gt;here&lt;/a&gt;</source>
+        <translation>You can find instructions on how to get a new document from &lt;a href=&quot;http://www.politsei.ee/en/teenused/isikut-toendavad-dokumendid/id-kaart/taiskasvanule/&quot;&gt;here&lt;/a&gt;</translation>
     </message>
     <message>
         <source>No card found</source>
@@ -268,8 +268,8 @@ For getting new PUK code for your ID-card, please visit service center where you
         <translation>Certificate store</translation>
     </message>
     <message>
-        <source>Certificate is not registered in certificate store. Register now?</source>
-        <translation>Certificate is not registered in certificate store. Register now?</translation>
+        <source>Certificate is not registered in the certificate store. Register now?</source>
+        <translation>Certificate is not registered in the certificate store. Register now?</translation>
     </message>
     <message>
         <source>Reading data</source>
@@ -356,13 +356,13 @@ For getting new PUK code for your ID-card, please visit service center where you
         <translation>certificates status is unknown</translation>
     </message>
     <message>
-        <source>certificates are expired. New SIM card has to be requested from Service provider.</source>
-        <translation>certificates are expired. New SIM card has to be requested from Service provider.</translation>
+        <source>certificates are expired. New SIM card has to be requested from the Service provider.</source>
+        <translation>certificates are expired. New SIM card has to be requested from the Service provider.</translation>
     </message>
     <message>
-        <source>&lt;p&gt;PUK code is used for unblocking certificates, when PIN1 or PIN2 has been entered 3 times incorrectly.&lt;/p&gt;
+        <source>&lt;p&gt;PUK code is used for unblocking the certificates, when PIN1 or PIN2 has been entered 3 times incorrectly.&lt;/p&gt;
 &lt;p&gt;PUK code is written in the envelope, that is given with the ID-card.&lt;/p&gt;</source>
-        <translation>&lt;p&gt;PUK code is used for unblocking certificates, when PIN1 or PIN2 has been entered 3 times incorrectly.&lt;/p&gt;
+        <translation>&lt;p&gt;PUK code is used for unblocking the certificates, when PIN1 or PIN2 has been entered 3 times incorrectly.&lt;/p&gt;
 &lt;p&gt;PUK code is written in the envelope, that is given with the ID-card.&lt;/p&gt;</translation>
     </message>
     <message>
@@ -382,8 +382,8 @@ For getting new PUK code for your ID-card, please visit service center where you
         <translation>E-mail:</translation>
     </message>
     <message>
-        <source>To change PUK code on PinPad reader old PUK code have to be entered first and then new PUK code twice.</source>
-        <translation>To change PUK code on PinPad reader old PUK code have to be entered first and then new PUK code twice.</translation>
+        <source>To change the PUK code on a PinPad reader the old PUK code has to be entered first and then the new PUK code twice.</source>
+        <translation>To change the PUK code on a PinPad reader the old PUK code has to be entered first and then the new PUK code twice.</translation>
     </message>
     <message>
         <source>Failed to load data</source>
@@ -441,8 +441,8 @@ For getting new PUK code for your ID-card, please visit service center where you
         <translation>%1 blocked</translation>
     </message>
     <message>
-        <source>%1 changed and your current certificates blocking has been removed!</source>
-        <translation>%1 changed and your current certificates blocking has been removed!</translation>
+        <source>%1 has been changed and the certificate has been unblocked!</source>
+        <translation>%1 has been changed and the certificate has been unblocked!</translation>
     </message>
     <message>
         <source>Enter PUK code</source>
@@ -463,8 +463,8 @@ For getting new PUK code for your ID-card, please visit service center where you
 &lt;p&gt;If you have forgotten PIN1, but know PUK, then here you can enter new PIN1.&lt;/p&gt;</translation>
     </message>
     <message>
-        <source>To change PIN code with PUK on PinPad reader the PUK code have to be entered first and then PIN code twice.</source>
-        <translation>To change PIN code with PUK on PinPad reader the PUK code have to be entered first and then PIN code twice.</translation>
+        <source>To change PIN code with the PUK code on a PinPad reader the PUK code has to be entered first and then the PIN code twice.</source>
+        <translation>To change PIN code with the PUK code on a PinPad reader the PUK code has to be entered first and then the PIN code twice.</translation>
     </message>
     <message>
         <source>&lt;h3&gt;Change PIN2 code&lt;/h3&gt;
@@ -477,8 +477,8 @@ For getting new PUK code for your ID-card, please visit service center where you
 &lt;p&gt;If you have forgotten PIN2, but know PUK, then here you can enter new PIN2.&lt;/p&gt;</translation>
     </message>
     <message>
-        <source>To unblock PIN code on PinPad reader the PUK code have to be entered first and then PIN code twice.</source>
-        <translation>To unblock PIN code on PinPad reader the PUK code have to be entered first and then PIN code twice.</translation>
+        <source>To unblock the PIN code on a PinPad reader the PUK code has to be entered first and then the PIN code twice.</source>
+        <translation>To unblock the PIN code on a PinPad reader the PUK code has to be entered first and then the PIN code twice.</translation>
     </message>
     <message>
         <source>Mobile operator</source>
@@ -529,10 +529,10 @@ For getting new PUK code for your ID-card, please visit service center where you
         <translation>Languages</translation>
     </message>
     <message>
-        <source>Mobiil-ID is possibility to use mobile phone instead of ID-card for identification and digital signing.&lt;br /&gt;More info from &lt;a href=&quot;http://mobiil.id.ee&quot;&gt;mobiil.id.ee&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;
-To use Mobiil-ID it is needed to use a SIM card that supports this feature. If such a SIM card is already purchased, then it has to be activated.</source>
-        <translation>Mobiil-ID is possibility to use mobile phone instead of ID-card for identification and digital signing.&lt;br /&gt;More info from &lt;a href=&quot;http://mobiil.id.ee&quot;&gt;mobiil.id.ee&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;
-To use Mobiil-ID it is needed to use a SIM card that supports this feature. If such a SIM card is already purchased, then it has to be activated.</translation>
+        <source>Mobiil-ID is the possibility to use a mobile phone instead of an ID-card for identification and digital signing.&lt;br /&gt;More info from &lt;a href=&quot;http://mobiil.id.ee&quot;&gt;mobiil.id.ee&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;
+To use Mobiil-ID a SIM card that supports this feature has to be used. If such a SIM card is already purchased, then it has to be activated.</source>
+        <translation>Mobiil-ID is the possibility to use a mobile phone instead of an ID-card for identification and digital signing.&lt;br /&gt;More info from &lt;a href=&quot;http://mobiil.id.ee&quot;&gt;mobiil.id.ee&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;
+To use Mobiil-ID a SIM card that supports this feature has to be used. If such a SIM card is already purchased, then it has to be activated.</translation>
     </message>
     <message>
         <source>Load picture</source>
@@ -567,8 +567,8 @@ To use Mobiil-ID it is needed to use a SIM card that supports this feature. If s
         <translation>Change PIN2 using PUK code</translation>
     </message>
     <message>
-        <source>Check if the ID-card is inserted correctly to the reader.&lt;br /&gt;New ID-cards have chip on the back side of the card.</source>
-        <translation>Check if the ID-card is inserted correctly to the reader.&lt;br /&gt;New ID-cards have chip on the back side of the card.</translation>
+        <source>Check if the ID-card is inserted correctly to the reader.&lt;br /&gt;New ID-cards have the chip on the back side of the card.</source>
+        <translation>Check if the ID-card is inserted correctly to the reader.&lt;br /&gt;New ID-cards have the chip on the back side of the card.</translation>
     </message>
     <message>
         <source>For more detailed official email address forwarding, please visit &lt;a href=&quot;https://www.eesti.ee/eng/teemad/kodanik/riigiportaali_abi/ametliku_e_posti_seadistamine&quot;&gt;eesti.ee&lt;/a&gt;</source>
@@ -578,21 +578,21 @@ To use Mobiil-ID it is needed to use a SIM card that supports this feature. If s
         <source>&lt;h3&gt;Change PIN1 code&lt;/h3&gt;
 &lt;p&gt;New PIN1 must be different from current PIN1.&lt;/p&gt;
 &lt;p&gt;PIN1 code is used for accessing identification certificates.&lt;/p&gt;
-&lt;p&gt;If PIN1 is inserted 3 times inccorectly, then identification certificate will be blocked and it will be impossible to use ID-card to verify identification, until it is unblocked via PUK code.&lt;/p&gt;</source>
+&lt;p&gt;If PIN1 is inserted incorrectly 3 times the identification certificate will be blocked and it will be impossible to use ID-card to verify identification, until it is unblocked via the PUK code.&lt;/p&gt;</source>
         <translation>&lt;h3&gt;Change PIN1 code&lt;/h3&gt;
 &lt;p&gt;New PIN1 must be different from current PIN1.&lt;/p&gt;
 &lt;p&gt;PIN1 code is used for accessing identification certificates.&lt;/p&gt;
-&lt;p&gt;If PIN1 is inserted 3 times inccorectly, then identification certificate will be blocked and it will be impossible to use ID-card to verify identification, until it is unblocked via PUK code.&lt;/p&gt;</translation>
+&lt;p&gt;If PIN1 is inserted incorrectly 3 times the identification certificate will be blocked and it will be impossible to use ID-card to verify identification, until it is unblocked via the PUK code.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;h3&gt;Change PIN2 code&lt;/h3&gt;
 &lt;p&gt;New PIN2 must be different from current PIN2.&lt;/p&gt;
 &lt;p&gt;PIN2 code is used to digitally sign documents.&lt;/p&gt;
-&lt;p&gt;If PIN2 is inserted 3 times inccorectly, then signing certificate will be blocked and it will be impossible to use ID-card to digital signing, until it is unblocked via PUK code.&lt;/p&gt;</source>
+&lt;p&gt;If PIN2 is inserted incorreclty 3 times the signing certificate will be blocked and it will be impossible to use ID-card to digital signing, until it is unblocked via the PUK code.&lt;/p&gt;</source>
         <translation>&lt;h3&gt;Change PIN2 code&lt;/h3&gt;
 &lt;p&gt;New PIN2 must be different from current PIN2.&lt;/p&gt;
 &lt;p&gt;PIN2 code is used to digitally sign documents.&lt;/p&gt;
-&lt;p&gt;If PIN2 is inserted 3 times inccorectly, then signing certificate will be blocked and it will be impossible to use ID-card to digital signing, until it is unblocked via PUK code.&lt;/p&gt;</translation>
+&lt;p&gt;If PIN2 is inserted incorreclty 3 times the signing certificate will be blocked and it will be impossible to use ID-card to digital signing, until it is unblocked via the PUK code.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>active</source>
@@ -615,28 +615,28 @@ To use Mobiil-ID it is needed to use a SIM card that supports this feature. If s
         <translation>PIN2 is blocked, because PIN2 was inserted 3 times incorrectly.</translation>
     </message>
     <message>
-        <source>&lt;h3&gt;Authentication certificate is blocked.&lt;/h3&gt;
-&lt;p&gt;To unblock certificate you have to enter PUK code.&lt;/p&gt;
-&lt;p&gt;You can find your PUK code inside ID-card codes envelope.&lt;/p&gt;
+        <source>&lt;h3&gt;The authentication certificate is blocked.&lt;/h3&gt;
+&lt;p&gt;To unblock the certificate you have to enter the PUK code.&lt;/p&gt;
+&lt;p&gt;You can find your PUK code inside the ID-card codes envelope.&lt;/p&gt;
 &lt;p&gt;New PIN1 must be different from current PIN1.&lt;/p&gt;
-&lt;p&gt;If you do not know PUK code for your ID-card, please visit service center where you can get the new codes.&lt;/p&gt;</source>
-        <translation>&lt;h3&gt;Authentication certificate is blocked.&lt;/h3&gt;
-&lt;p&gt;To unblock certificate you have to enter PUK code.&lt;/p&gt;
-&lt;p&gt;You can find your PUK code inside ID-card codes envelope.&lt;/p&gt;
+&lt;p&gt;If you do not know the PUK code for your ID-card, please visit the service center to obtain new PIN codes.&lt;/p&gt;</source>
+        <translation>&lt;h3&gt;The authentication certificate is blocked.&lt;/h3&gt;
+&lt;p&gt;To unblock the certificate you have to enter the PUK code.&lt;/p&gt;
+&lt;p&gt;You can find your PUK code inside the ID-card codes envelope.&lt;/p&gt;
 &lt;p&gt;New PIN1 must be different from current PIN1.&lt;/p&gt;
-&lt;p&gt;If you do not know PUK code for your ID-card, please visit service center where you can get the new codes.&lt;/p&gt;</translation>
+&lt;p&gt;If you do not know the PUK code for your ID-card, please visit the service centerto obtain new PIN codes.&lt;/p&gt;</translation>
     </message>
     <message>
-        <source>&lt;h3&gt;Signing certificate is blocked.&lt;/h3&gt;
-&lt;p&gt;To unblock certificate you have to enter PUK code.&lt;/p&gt;
-&lt;p&gt;You can find your PUK code inside ID-card codes envelope.&lt;/p&gt;
+        <source>&lt;h3&gt;The signing certificate is blocked.&lt;/h3&gt;
+&lt;p&gt;To unblock the certificate you have to enter the PUK code.&lt;/p&gt;
+&lt;p&gt;You can find your PUK code inside the ID-card codes envelope.&lt;/p&gt;
 &lt;p&gt;New PIN2 must be different from current PIN2.&lt;/p&gt;
-&lt;p&gt;If you do not know PUK code for your ID-card, please visit service center where you can get the new codes.&lt;/p&gt;</source>
-        <translation>&lt;h3&gt;Signing certificate is blocked.&lt;/h3&gt;
-&lt;p&gt;To unblock certificate you have to enter PUK code.&lt;/p&gt;
-&lt;p&gt;You can find your PUK code inside ID-card codes envelope.&lt;/p&gt;
+&lt;p&gt;If you do not know the PUK code for your ID-card, please visit the service center to obtain new PIN codes.&lt;/p&gt;</source>
+        <translation>&lt;h3&gt;The signing certificate is blocked.&lt;/h3&gt;
+&lt;p&gt;To unblock the certificate you have to enter the PUK code.&lt;/p&gt;
+&lt;p&gt;You can find your PUK code inside the ID-card codes envelope.&lt;/p&gt;
 &lt;p&gt;New PIN2 must be different from current PIN2.&lt;/p&gt;
-&lt;p&gt;If you do not know PUK code for your ID-card, please visit service center where you can get the new codes.&lt;/p&gt;</translation>
+&lt;p&gt;If you do not know the PUK code for your ID-card, please visit service center to obtain new PIN codes.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>This document is not supported for electronic use from 24.07.13, for additional information please contact &lt;a href=&quot;http://www.politsei.ee/en/teenused/isikut-toendavad-dokumendid/id-kaardi-uuendamine.dot&quot;&gt;Police and Border Guard Board&lt;/a&gt;.</source>

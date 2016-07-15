@@ -68,7 +68,7 @@ QString XmlReader::mobileStatus( const QString &status )
 	if( status == "Suspended" ) return MainWindow::tr("certificates are suspended. To use Mobiil-ID these must be active.");
 	if( status == "Revoked" ) return MainWindow::tr("certificates are revoked. To use Mobiil-ID, a new SIM card must be requested from service provider.");
 	if( status == "Unknown" ) return MainWindow::tr("certificates status is unknown");
-	if( status == "Expired" ) return MainWindow::tr("certificates are expired. New SIM card has to be requested from Service provider.");
+	if( status == "Expired" ) return MainWindow::tr("certificates are expired. New SIM card has to be requested from the Service provider.");
 	return QString();
 }
 
