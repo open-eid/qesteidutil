@@ -624,7 +624,7 @@ To use Mobiil-ID a SIM card that supports this feature has to be used. If such a
 &lt;p&gt;To unblock the certificate you have to enter the PUK code.&lt;/p&gt;
 &lt;p&gt;You can find your PUK code inside the ID-card codes envelope.&lt;/p&gt;
 &lt;p&gt;New PIN1 must be different from current PIN1.&lt;/p&gt;
-&lt;p&gt;If you do not know the PUK code for your ID-card, please visit the service centerto obtain new PIN codes.&lt;/p&gt;</translation>
+&lt;p&gt;If you do not know the PUK code for your ID-card, please visit the service center to obtain new PIN codes.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;h3&gt;The signing certificate is blocked.&lt;/h3&gt;
@@ -636,7 +636,7 @@ To use Mobiil-ID a SIM card that supports this feature has to be used. If such a
 &lt;p&gt;To unblock the certificate you have to enter the PUK code.&lt;/p&gt;
 &lt;p&gt;You can find your PUK code inside the ID-card codes envelope.&lt;/p&gt;
 &lt;p&gt;New PIN2 must be different from current PIN2.&lt;/p&gt;
-&lt;p&gt;If you do not know the PUK code for your ID-card, please visit service center to obtain new PIN codes.&lt;/p&gt;</translation>
+&lt;p&gt;If you do not know the PUK code for your ID-card, please visit the service center to obtain new PIN codes.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>This document is not supported for electronic use from 24.07.13, for additional information please contact &lt;a href=&quot;http://www.politsei.ee/en/teenused/isikut-toendavad-dokumendid/id-kaardi-uuendamine.dot&quot;&gt;Police and Border Guard Board&lt;/a&gt;.</source>

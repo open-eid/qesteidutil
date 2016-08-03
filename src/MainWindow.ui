@@ -1939,7 +1939,7 @@ Please visit the service center to obtain new codes. &lt;a href=&quot;http://www
 &lt;p&gt;To unblock the certificate you have to enter the PUK code.&lt;/p&gt;
 &lt;p&gt;You can find your PUK code inside the ID-card codes envelope.&lt;/p&gt;
 &lt;p&gt;New PIN2 must be different from current PIN2.&lt;/p&gt;
-&lt;p&gt;If you do not know the PUK code for your ID-card, please visit service the center to obtain new PIN codes.&lt;/p&gt;</string>
+&lt;p&gt;If you do not know the PUK code for your ID-card, please visit the service center to obtain new PIN codes.&lt;/p&gt;</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
