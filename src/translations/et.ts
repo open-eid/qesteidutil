@@ -588,7 +588,7 @@ Mobiil-ID kasutamiseks on vajalik uus SIM-kaart, mille sa saad endale mobiilside
         <source>&lt;h3&gt;Change PIN2 code&lt;/h3&gt;
 &lt;p&gt;New PIN2 must be different from current PIN2.&lt;/p&gt;
 &lt;p&gt;PIN2 code is used to digitally sign documents.&lt;/p&gt;
-&lt;p&gt;If PIN2 is inserted incorreclty 3 times the signing certificate will be blocked and it will be impossible to use ID-card to digital signing, until it is unblocked via the PUK code.&lt;/p&gt;</source>
+&lt;p&gt;If PIN2 is inserted incorrectly 3 times the signing certificate will be blocked and it will be impossible to use ID-card to digital signing, until it is unblocked via the PUK code.&lt;/p&gt;</source>
         <translation>&lt;h3&gt;PIN2 koodi vahetus&lt;/h3&gt;
 &lt;p&gt;Uus PIN2 peab olema erinev eelmisest.&lt;/p&gt;
 &lt;p&gt;PIN2 koodi kasutatakse digitaalallkirja andmiseks.&lt;/p&gt;
