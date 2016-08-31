@@ -44,12 +44,11 @@ SettingsDialog::SettingsDialog( const QSmartCardData &data, QWidget *parent )
 	setAttribute( Qt::WA_DeleteOnClose, true );
 	QPushButton *update = ui.buttonBox->addButton( tr("Check for updates and close utility"), QDialogButtonBox::ActionRole );
 	QPushButton *sched = ui.buttonBox->addButton( tr("Run Task Scheduler"), QDialogButtonBox::ActionRole );
-	QPushButton *clean = nullptr;
-	QString personalCode = data.signCert().subjectInfo("serialNumber");
-	if( !personalCode.isEmpty() )
-		clean = ui.buttonBox->addButton( tr("Clean certs"), QDialogButtonBox::ActionRole );
+	QPushButton *clean = ui.buttonBox->addButton( tr("Clean certs"), QDialogButtonBox::ActionRole );
+
 	int selected = QProcess::execute( "id-updater", QStringList() << "-status" );
 	ui.updateInterval->setCurrentIndex( selected > 0 && selected < 4 ? selected : 2 );
+
 	connect( ui.buttonBox, &QDialogButtonBox::clicked, [=](QAbstractButton *button ) {
 		if( button == ui.buttonBox->button( QDialogButtonBox::Close ) )
 			done( 0 );
@@ -69,8 +68,12 @@ SettingsDialog::SettingsDialog( const QSmartCardData &data, QWidget *parent )
 				if( c.subjectInfo( "O" ).contains("ESTEID") )
 					s.remove( c );
 			}
-			s.add( data.authCert(), data.card() );
-			s.add( data.signCert(), data.card() );
+			QString personalCode = data.signCert().subjectInfo("serialNumber");
+
+			if( !personalCode.isEmpty() ) {
+				s.add( data.authCert(), data.card() );
+				s.add( data.signCert(), data.card() );
+			}
 			done( 0 );
 		}
 	});
