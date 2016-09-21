@@ -181,7 +181,7 @@ Uue PUK koodi saamiseks, külasta klienditeeninduspunkti, kust saad koodiümbrik
     </message>
     <message>
         <source>No reader found</source>
-        <translation>Ühtegi kiipkaardi lugejat pole ühendatud</translation>
+        <translation>Ühtegi kiipkaardilugejat pole ühendatud</translation>
     </message>
     <message>
         <source>Certificates</source>
