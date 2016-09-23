@@ -20,12 +20,19 @@
 #include <common/Common.h>
 
 #include "MainWindow.h"
+#include <common/CliApplication.h>
 #include <common/Configuration.h>
 
 #include <openssl/ssl.h>
 
 int main(int argc, char *argv[])
 {
+	CliApplication cliApp( argc, argv );
+	if( cliApp.isDiagnosticRun() )
+	{
+		return cliApp.run();
+	}
+
 	Common app( argc, argv, APP, ":/images/id_icon_128x128.png" );
 	if( app.isCrashReport() )
 		return app.exec();
@@ -38,6 +45,7 @@ int main(int argc, char *argv[])
 	}
 #endif
 	SSL_library_init();
+
 	MainWindow w;
 	Configuration::instance().checkVersion("QESTEIDUTIL");
 #ifndef Q_OS_MAC
