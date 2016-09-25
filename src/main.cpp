@@ -27,7 +27,7 @@
 
 int main(int argc, char *argv[])
 {
-	CliApplication cliApp( argc, argv );
+	CliApplication cliApp( argc, argv, APP );
 	if( cliApp.isDiagnosticRun() )
 	{
 		return cliApp.run();
