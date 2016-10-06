@@ -929,8 +929,8 @@ void MainWindow::updateData()
 		d->changePukStack->setCurrentIndex( t.isPinpad() );
 
 		QStringList name = QStringList()
-			<< SslCertificate::formatName( t.data( QSmartCardData::FirstName1 ).toString() )
-			<< SslCertificate::formatName( t.data( QSmartCardData::FirstName2 ).toString() );
+			<< t.data( QSmartCardData::FirstName1 ).toString()
+			<< t.data( QSmartCardData::FirstName2 ).toString();
 		name.removeAll( "" );
 		d->personalName->setText( name.join(" ") );
 		d->surName->setText( t.data( QSmartCardData::SurName ).toString() );
