@@ -500,12 +500,6 @@ void QSmartCard::run()
 								record.clear();
 							switch(data)
 							{
-							case QSmartCardData::SurName:
-							case QSmartCardData::FirstName1:
-							case QSmartCardData::FirstName2:
-							case QSmartCardData::BirthPlace:
-								t->data[QSmartCardData::PersonalDataType(data)] = SslCertificate::formatName(record);
-								break;
 							case QSmartCardData::BirthDate:
 							case QSmartCardData::Expiry:
 							case QSmartCardData::IssueDate:
