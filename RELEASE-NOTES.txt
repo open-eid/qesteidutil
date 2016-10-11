@@ -1,3 +1,10 @@
+ID-card utility version 3.12.4 release notes
+--------------------------------------
+- Show names and other info from the certificates in its original form, do not capitalize
+- Added the option for getting diagnostics from command line
+- When removing certificates remove all if no card inserted
+- Spelling and grammar fixes in all languages
+
 ID-card utility version 3.12.3 release notes
 --------------------------------------
 - Fix parsing certificates longer than 0x0600
