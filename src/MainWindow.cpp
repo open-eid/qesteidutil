@@ -1009,7 +1009,11 @@ void MainWindow::updateData()
 					!t.authCert().validateEncoding() ||
 					!t.signCert().validateEncoding() ||
 					t.version() & QSmartCardData::VER_HASUPDATER ||
-					t.version() == QSmartCardData::VER_USABLEUPDATER
+					t.version() == QSmartCardData::VER_USABLEUPDATER ||
+					(Configuration::instance().object().contains("EIDUPDATER-SHA1") && (
+						t.authCert().signatureAlgorithm() == "sha1WithRSAEncryption" ||
+						t.signCert().signatureAlgorithm() == "sha1WithRSAEncryption")
+					)
 				)
 			)
 		);
