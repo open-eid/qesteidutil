@@ -1,34 +1,35 @@
 language: c++
 sudo: required
-dist: trusty
 os:
 - linux
 - osx
-osx_image: xcode6.4
+dist: trusty
+osx_image: xcode7.3
+env:
+  global:
+  - BUILD_NUMBER=${TRAVIS_BUILD_NUMBER}
+  - VERSION=3.12.4.${TRAVIS_BUILD_NUMBER}
+  - secure: bnnkOxt19gRV75WPsOYjT33wALBe/L1quzMZD8+SY6tM+H7TAZY4490pESEBN+KkrBRhUa8ro2AutVYR4GpVxwOQdXC9KdFnFCqLHsCIhZaBf9H1a/+/gL1bNMiK16XJ6Doz8RidO/m7e0OobulfbbLnBSpgJUwiFkavoO2cfJo=
 before_install:
 - if [ "${TRAVIS_OS_NAME}" = "osx" ]; then
+    sudo ln -s /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift-migrator/sdk/MacOSX.sdk/usr/include/openssl /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/usr/include;
     brew update;
     brew install qt5;
   else
     sudo apt-get update -qq;
-    sudo apt-get install -y libpcsclite-dev libssl-dev qtbase5-dev qttools5-dev qttools5-dev-tools;
+    sudo apt-get install -y libpcsclite-dev libssl-dev qtbase5-dev qttools5-dev qttools5-dev-tools dh-make devscripts dpkg-dev cdbs;
     git submodule update --init --recursive;
   fi
 script:
-- mkdir build
-- cd build
 - if [ "${TRAVIS_OS_NAME}" = "osx" ]; then
-    cmake -DBREAKPAD="" -DQTSDK=/usr/local/opt/qt5 ..;
+    mkdir build && cd build && cmake -DQt5_DIR=/usr/local/opt/qt5/lib/cmake/Qt5 -DOPENSSL_ROOT_DIR=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/usr ..;
+    make zipdebug macdeployqt zip && cd ..;
   else
-    cmake -DBREAKPAD="" ..;
+    yes | dh_make --createorig --addmissing --defaultless -p qesteidutil_${VERSION};
+    dch --distribution $(lsb_release -cs) -v ${VERSION} "Release ${VERSION}.";
+    dpkg-buildpackage -rfakeroot -us -uc;
   fi
-- make
-- cd ..
 
-env:
-  global:
-  - BUILD_NUMBER=${TRAVIS_BUILD_NUMBER}
-  - secure: bnnkOxt19gRV75WPsOYjT33wALBe/L1quzMZD8+SY6tM+H7TAZY4490pESEBN+KkrBRhUa8ro2AutVYR4GpVxwOQdXC9KdFnFCqLHsCIhZaBf9H1a/+/gL1bNMiK16XJ6Doz8RidO/m7e0OobulfbbLnBSpgJUwiFkavoO2cfJo=
 addons:
   coverity_scan:
     project:

@@ -1,5 +1,11 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 2.8.11)
 cmake_policy(SET CMP0020 NEW)
+if(POLICY CMP0043)
+	cmake_policy(SET CMP0043 NEW)
+endif()
+if(POLICY CMP0063)
+	cmake_policy(SET CMP0063 NEW)
+endif()
 project( qesteidutil )
 
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/modules")
@@ -10,9 +16,7 @@ include( VersionInfo )
 set_app_name( PROGNAME qesteidutil )
 
 find_package( Threads )
-find_package( Qt5Widgets HINTS ${QTSDK} )
-find_package( Qt5Network HINTS ${QTSDK} )
-find_package( Qt5LinguistTools HINTS ${QTSDK} )
+find_package( Qt5 COMPONENTS Core Widgets Network LinguistTools REQUIRED )
 
 add_subdirectory( common )
 
