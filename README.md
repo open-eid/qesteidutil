@@ -53,7 +53,7 @@
 
         mkdir build
         cd build
-        cmake -DQTSDK="~/Qt/5.3/clang_64" ..
+        cmake -DQt5_DIR="~/Qt/5.5/clang_64/lib/cmake/Qt5" ..
 
 4. Build
 
@@ -71,8 +71,8 @@
 
 1. Install dependencies from
     * [Visual Studio Express 2013 for Windows Desktop](http://www.visualstudio.com/en-us/products/visual-studio-express-vs.aspx)
-	* [http://www.cmake.org](http://www.cmake.org)
-	* [http://qt-project.org](http://qt-project.org)
+    * [http://www.cmake.org](http://www.cmake.org)
+    * [http://qt-project.org](http://qt-project.org)
 2. Fetch the source
 
         git clone --recursive https://github.com/open-eid/qesteidutil
@@ -82,7 +82,7 @@
 
         mkdir build
         cd build
-        cmake -G"NMAKE Makefiles" -DQTSDK="C:\Qt\5.3\msvc2013" ..
+        cmake -G"NMAKE Makefiles" -DQt5_DIR="C:\Qt\5.6\msvc2013\lib\cmake\Qt5" ..
 
 4. Build
 
