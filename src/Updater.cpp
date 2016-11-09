@@ -453,8 +453,10 @@ int Updater::exec()
 
 	// Do connection
 	QNetworkAccessManager *net = new QNetworkAccessManager(this);
-	d->request = QNetworkRequest(QUrl(Configuration::instance().object().value("EIDUPDATER-URL").toString(
-		Configuration::instance().object().value("EIDUPDATER-URL-34").toString())));
+	d->request = QNetworkRequest(QUrl(
+		Configuration::instance().object().value("EIDUPDATER-URL").toString(
+		Configuration::instance().object().value("EIDUPDATER-URL-34").toString(
+		Configuration::instance().object().value("EIDUPDATER-URL-35").toString()))));
 	d->request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
 	d->request.setRawHeader("User-Agent", QString("%1/%2 (%3)")
 		.arg(qApp->applicationName(), qApp->applicationVersion(), Common::applicationOs()).toUtf8());
