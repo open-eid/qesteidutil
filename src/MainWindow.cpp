@@ -1000,6 +1000,7 @@ void MainWindow::updateData()
 		d->certUpdate->setProperty("updateEnabled",
 			Settings(qApp->applicationName()).value("updateButton", false).toBool() ||
 			(
+				t.version() >= QSmartCardData::VER_3_4 &&
 				t.retryCount( QSmartCardData::Pin1Type ) > 0 &&
 				t.isValid() && (
 					Configuration::instance().object().contains("EIDUPDATER-URL") ||
