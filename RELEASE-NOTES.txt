@@ -4,6 +4,7 @@ ID-card utility version 3.12.4 release notes
 - Added the option for getting diagnostics from command line
 - When removing certificates remove all if no card inserted
 - Spelling and grammar fixes in all languages
+- Support for the next wave of remote certificate updating
 
 ID-card utility version 3.12.3 release notes
 --------------------------------------
