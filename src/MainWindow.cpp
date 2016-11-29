@@ -116,8 +116,8 @@ QByteArray MainWindowPrivate::sendRequest( SSLConnect::RequestType type, const Q
 	Q_Q(::MainWindow);
 	switch( type )
 	{
-	case SSLConnect::ActivateEmails: showLoading(  tr("Activating e-mail settings") ); break;
-	case SSLConnect::EmailInfo: showLoading( tr("Loading e-mail settings") ); break;
+	case SSLConnect::ActivateEmails: showLoading(  tr("Activating email settings") ); break;
+	case SSLConnect::EmailInfo: showLoading( tr("Loading email settings") ); break;
 	case SSLConnect::MobileInfo: showLoading( tr("Requesting Mobiil-ID status") ); break;
 	case SSLConnect::PictureInfo: showLoading( tr("Loading picture") ); break;
 	default: showLoading( tr( "Loading data" ) ); break;
@@ -135,8 +135,8 @@ QByteArray MainWindowPrivate::sendRequest( SSLConnect::RequestType type, const Q
 	{
 		switch( type )
 		{
-		case SSLConnect::ActivateEmails: showWarning( tr("Failed activating e-mail forwards."), ssl.errorString() ); break;
-		case SSLConnect::EmailInfo: showWarning( tr("Failed loading e-mail settings."), ssl.errorString() ); break;
+		case SSLConnect::ActivateEmails: showWarning( tr("Failed activating email forwards."), ssl.errorString() ); break;
+		case SSLConnect::EmailInfo: showWarning( tr("Failed loading email settings."), ssl.errorString() ); break;
 		case SSLConnect::MobileInfo: showWarning( tr("Failed loading Mobiil-ID settings."), ssl.errorString() ); break;
 		case SSLConnect::PictureInfo: showWarning( tr("Loading picture failed."), ssl.errorString() ); break;
 		default: showWarning( tr("Failed to load data"), ssl.errorString() ); break;
@@ -226,8 +226,8 @@ bool MainWindowPrivate::validateCardError( QSmartCardData::PinType type, int fla
 	default:
 		switch( flags )
 		{
-		case SSLConnect::ActivateEmails: showWarning( tr("Failed activating e-mail forwards.") ); break;
-		case SSLConnect::EmailInfo: showWarning( tr("Failed loading e-mail settings.") ); break;
+		case SSLConnect::ActivateEmails: showWarning( tr("Failed activating email forwards.") ); break;
+		case SSLConnect::EmailInfo: showWarning( tr("Failed loading email settings.") ); break;
 		case SSLConnect::MobileInfo: showWarning( tr("Failed loading Mobiil-ID settings.") ); break;
 		case SSLConnect::PictureInfo: showWarning( tr("Loading picture failed.") ); break;
 		default:

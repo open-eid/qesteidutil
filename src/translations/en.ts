@@ -52,8 +52,8 @@
         <translation>Change PIN2</translation>
     </message>
     <message>
-        <source>@eesti.ee e-mail</source>
-        <translation>@eesti.ee e-mail</translation>
+        <source>@eesti.ee email</source>
+        <translation>@eesti.ee email</translation>
     </message>
     <message>
         <source>Email address where your @eesti.ee emails will be forwarded</source>
@@ -188,12 +188,12 @@ Please visit the service center to obtain new codes. &lt;a href=&quot;http://www
         <translation>Certificates</translation>
     </message>
     <message>
-        <source>Activating e-mail settings</source>
-        <translation>Activating e-mail settings</translation>
+        <source>Activating email settings</source>
+        <translation>Activating email settings</translation>
     </message>
     <message>
-        <source>Loading e-mail settings</source>
-        <translation>Loading e-mail settings</translation>
+        <source>Loading email settings</source>
+        <translation>Loading email settings</translation>
     </message>
     <message>
         <source>Requesting Mobiil-ID status</source>
@@ -208,12 +208,12 @@ Please visit the service center to obtain new codes. &lt;a href=&quot;http://www
         <translation>Loading data</translation>
     </message>
     <message>
-        <source>Failed activating e-mail forwards.</source>
-        <translation>Failed activating e-mail forwards.</translation>
+        <source>Failed activating email forwards.</source>
+        <translation>Failed activating email forwards.</translation>
     </message>
     <message>
-        <source>Failed loading e-mail settings.</source>
-        <translation>Failed loading e-mail settings.</translation>
+        <source>Failed loading email settings.</source>
+        <translation>Failed loading email settings.</translation>
     </message>
     <message>
         <source>Failed loading Mobiil-ID settings.</source>
@@ -308,12 +308,12 @@ Please visit the service center to obtain new codes. &lt;a href=&quot;http://www
         <translation>No official email forwarding adresses was found</translation>
     </message>
     <message>
-        <source>Your email account has been blocked. To open it, please send an e-mail to toimetaja@eesti.ee or call 663 0215.</source>
-        <translation>Your email account has been blocked. To open it, please send an e-mail to toimetaja@eesti.ee or call 663 0215.</translation>
+        <source>Your email account has been blocked. To open it, please send an email to toimetaja@eesti.ee or call 663 0215.</source>
+        <translation>Your email account has been blocked. To open it, please send an email to toimetaja@eesti.ee or call 663 0215.</translation>
     </message>
     <message>
-        <source>Invalid e-mail address</source>
-        <translation>Invalid e-mail address</translation>
+        <source>Invalid email address</source>
+        <translation>Invalid email address</translation>
     </message>
     <message>
         <source>Forwarding is activated and you have been sent an email with activation key. Forwarding will be activated only after confirming the key.</source>
