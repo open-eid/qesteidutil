@@ -52,7 +52,7 @@
         <translation>Поменять PIN2</translation>
     </message>
     <message>
-        <source>@eesti.ee e-mail</source>
+        <source>@eesti.ee email</source>
         <translation>@eesti.ee</translation>
     </message>
     <message>
@@ -188,11 +188,11 @@ Please visit the service center to obtain new codes. &lt;a href=&quot;http://www
         <translation>Сертификаты</translation>
     </message>
     <message>
-        <source>Activating e-mail settings</source>
+        <source>Activating email settings</source>
         <translation>настройки эл. почты</translation>
     </message>
     <message>
-        <source>Loading e-mail settings</source>
+        <source>Loading email settings</source>
         <translation>Загружаю настройки эл. почты</translation>
     </message>
     <message>
@@ -208,11 +208,11 @@ Please visit the service center to obtain new codes. &lt;a href=&quot;http://www
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Failed activating e-mail forwards.</source>
+        <source>Failed activating email forwards.</source>
         <translation>Активация перенаправления с эл. почты провалилась.</translation>
     </message>
     <message>
-        <source>Failed loading e-mail settings.</source>
+        <source>Failed loading email settings.</source>
         <translation>Активация перенаправления с эл. почты провалилась.</translation>
     </message>
     <message>
@@ -308,11 +308,11 @@ Please visit the service center to obtain new codes. &lt;a href=&quot;http://www
         <translation>Не было найдено ни одной официальной пересылки эл. почты</translation>
     </message>
     <message>
-        <source>Your email account has been blocked. To open it, please send an e-mail to toimetaja@eesti.ee or call 663 0215.</source>
+        <source>Your email account has been blocked. To open it, please send an email to toimetaja@eesti.ee or call 663 0215.</source>
         <translation>Ваша учётная запись эл. почты закрыта. Для открытия пошлите письмо на toimetaja@eesti.ee или позвоните по телефону 663 0215.</translation>
     </message>
     <message>
-        <source>Invalid e-mail address</source>
+        <source>Invalid email address</source>
         <translation>Неверный адрес эл. почты</translation>
     </message>
     <message>

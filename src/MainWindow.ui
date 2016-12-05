@@ -416,7 +416,7 @@ border-radius: 10px;
          <item>
           <widget class="QPushButton" name="buttonEmail">
            <property name="text">
-            <string>@eesti.ee e-mail</string>
+            <string>@eesti.ee email</string>
            </property>
            <property name="checkable">
             <bool>true</bool>
@@ -1136,7 +1136,7 @@ Updating takes ca 2-10 minutes and requires an active internet connection. Do no
           <item>
            <widget class="QLabel" name="emailLabel">
             <property name="text">
-             <string>@eesti.ee e-mail</string>
+             <string>@eesti.ee email</string>
             </property>
            </widget>
           </item>

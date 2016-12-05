@@ -52,7 +52,7 @@
         <translation>Muuda PIN2</translation>
     </message>
     <message>
-        <source>@eesti.ee e-mail</source>
+        <source>@eesti.ee email</source>
         <translation>@eesti.ee e-post</translation>
     </message>
     <message>
@@ -188,11 +188,11 @@ Uue PUK koodi saamiseks, külasta klienditeeninduspunkti, kust saad koodiümbrik
         <translation>Sertifikaadid</translation>
     </message>
     <message>
-        <source>Activating e-mail settings</source>
+        <source>Activating email settings</source>
         <translation>Aktiveerin e-posti seadeid</translation>
     </message>
     <message>
-        <source>Loading e-mail settings</source>
+        <source>Loading email settings</source>
         <translation>Laadin e-posti seadeid</translation>
     </message>
     <message>
@@ -208,11 +208,11 @@ Uue PUK koodi saamiseks, külasta klienditeeninduspunkti, kust saad koodiümbrik
         <translation>Laen andmeid</translation>
     </message>
     <message>
-        <source>Failed activating e-mail forwards.</source>
+        <source>Failed activating email forwards.</source>
         <translation>E-posti suunamise aktiveerimine ebaõnnestus.</translation>
     </message>
     <message>
-        <source>Failed loading e-mail settings.</source>
+        <source>Failed loading email settings.</source>
         <translation>E-posti aadresside laadimine ebaõnnestus.</translation>
     </message>
     <message>
@@ -308,11 +308,11 @@ Uue PUK koodi saamiseks, külasta klienditeeninduspunkti, kust saad koodiümbrik
         <translation>Ühtegi ametliku e-posti suunamist ei leitud</translation>
     </message>
     <message>
-        <source>Your email account has been blocked. To open it, please send an e-mail to toimetaja@eesti.ee or call 663 0215.</source>
+        <source>Your email account has been blocked. To open it, please send an email to toimetaja@eesti.ee or call 663 0215.</source>
         <translation>Teie e-posti konto on suletud. Avamiseks saatke palun e-kiri aadressil toimetaja@eesti.ee või helistage telefonil 663 0215.</translation>
     </message>
     <message>
-        <source>Invalid e-mail address</source>
+        <source>Invalid email address</source>
         <translation>Vigane e-posti aadress</translation>
     </message>
     <message>

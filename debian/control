@@ -32,7 +32,7 @@ Description: Estonian ID card management desktop utility
  ID-card utility allows you check the ID-card operation and the validity of the
  certificates, change as well as unblock locked PIN codes and change the PUK
  code. In addition, the utility enables you to renew the certificates, create
- and configure @eesti.ee e-mail address and check validity of the Mobile-ID
+ and configure @eesti.ee email address and check validity of the Mobile-ID
  certificates.
 
 Package: qesteidutil-dbg
