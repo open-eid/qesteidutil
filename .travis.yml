@@ -1,40 +1,48 @@
 language: c++
-sudo: required
-os:
-- linux
-- osx
+sudo: false
 dist: trusty
 osx_image: xcode7.3
+services:
+- docker
+matrix:
+  include:
+  - os: osx
+    env: IMAGE=OSX
+    sudo: true
+  - os: linux
+    env: IMAGE=ubuntu:16.04
+  - os: linux
+    env: IMAGE=ubuntu:16.10
+  - os: linux
+    env: IMAGE=32bit/ubuntu:16.04
 env:
   global:
   - BUILD_NUMBER=${TRAVIS_BUILD_NUMBER}
   - VERSION=3.12.4.${TRAVIS_BUILD_NUMBER}
   - secure: bnnkOxt19gRV75WPsOYjT33wALBe/L1quzMZD8+SY6tM+H7TAZY4490pESEBN+KkrBRhUa8ro2AutVYR4GpVxwOQdXC9KdFnFCqLHsCIhZaBf9H1a/+/gL1bNMiK16XJ6Doz8RidO/m7e0OobulfbbLnBSpgJUwiFkavoO2cfJo=
+
 before_install:
-- if [ "${TRAVIS_OS_NAME}" = "osx" ]; then
+- git submodule update --init --recursive && if [ "${TRAVIS_OS_NAME}" = "osx" ]; then
     sudo ln -s /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift-migrator/sdk/MacOSX.sdk/usr/include/openssl /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/usr/include;
     brew update;
     brew install qt5;
-  else
-    sudo apt-get update -qq;
-    sudo apt-get install -y libpcsclite-dev libssl-dev qtbase5-dev qttools5-dev qttools5-dev-tools dh-make devscripts dpkg-dev cdbs;
-    git submodule update --init --recursive;
   fi
-script:
-- if [ "${TRAVIS_OS_NAME}" = "osx" ]; then
+script: if [ "${TRAVIS_OS_NAME}" = "osx" ]; then
     mkdir build && cd build && cmake -DQt5_DIR=/usr/local/opt/qt5/lib/cmake/Qt5 -DOPENSSL_ROOT_DIR=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/usr ..;
     make zipdebug macdeployqt zip && cd ..;
   else
-    yes | dh_make --createorig --addmissing --defaultless -p qesteidutil_${VERSION};
-    dch --distribution $(lsb_release -cs) -v ${VERSION} "Release ${VERSION}.";
-    dpkg-buildpackage -rfakeroot -us -uc;
+    docker run -e BUILD_NUMBER=${TRAVIS_BUILD_NUMBER} -e VERSION=${VERSION} -e DEBFULLNAME="Travis" -e DEBEMAIL="travis-ci@travis" -v $(pwd):$(pwd) -t "${IMAGE}" /bin/bash -c "export LC_ALL=en_US.UTF-8; locale-gen en_US.UTF-8; cd $(pwd);"'
+      apt-get update -qq;
+      apt-get install -y apt-transport-https curl dh-make devscripts dpkg-dev cdbs cmake libpcsclite-dev libssl-dev qtbase5-dev qttools5-dev qttools5-dev-tools;
+      dh_make --createorig --addmissing --defaultless -y -p qesteidutil_${VERSION};
+      dch --distribution $(lsb_release -cs) -v ${VERSION} "Release ${VERSION}.";
+      dpkg-buildpackage -rfakeroot -us -uc';
   fi
 
 addons:
   coverity_scan:
     project:
       name: open-eid/qesteidutil
-      description: Build submitted via Travis CI
     notification_email: raul@metsma.ee
     build_command_prepend: mkdir coverity; cd coverity; cmake -DBREAKPAD='' ..
     build_command: make
@@ -42,7 +50,7 @@ addons:
 
 before_deploy:
 - export VERSION=${TRAVIS_TAG:1}
-- rm -rf build
+- git clean -d -x -f
 - cd ..
 - mv qesteidutil qesteidutil-${VERSION}
 - tar czf qesteidutil-${VERSION}.tar.gz --exclude-vcs qesteidutil-${VERSION}
