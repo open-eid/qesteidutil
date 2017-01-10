@@ -8,6 +8,9 @@
 [![Build Status](https://travis-ci.org/open-eid/qesteidutil.svg?branch=master)](https://travis-ci.org/open-eid/qesteidutil)
 [![Build Status](https://ci.appveyor.com/api/projects/status/github/open-eid/qesteidutil?branch=master&svg=true)](https://ci.appveyor.com/project/open-eid/qesteidutil)
 [![Coverity Scan Build Status](https://scan.coverity.com/projects/737/badge.svg)](https://scan.coverity.com/projects/737)
+* [Ubuntu](#ubuntu)
+* [OS X](#osx)
+* [Windows](#windows)
 
 ### Ubuntu
 
@@ -44,6 +47,8 @@
    * [XCode](https://itunes.apple.com/en/app/xcode/id497799835?mt=12)
    * [http://www.cmake.org](http://www.cmake.org)
    * [http://qt-project.org](http://qt-project.org)
+       Since Qt 5.6 default SSL backend is SecureTransport and this project depends openssl.
+       See how to build [OSX Qt from source](#building-osx-qt-from-source)
 2. Fetch the source
 
         git clone --recursive https://github.com/open-eid/qesteidutil
@@ -66,6 +71,26 @@
 6. Execute
 
         open /usr/local/bin/qesteidutil.app
+
+#### Building OSX Qt from source
+
+    curl -O -L http://download.qt.io/official_releases/qt/5.7/5.7.1/submodules/qtbase-opensource-src-5.7.1.tar.gz
+    tar xf qtbase-opensource-src-5.7.1.tar.gz
+    cd qtbase-opensource-src-5.7.1
+    ./configure -prefix /Developer/Qt-5.7.1 -opensource -nomake tests -nomake examples -no-securetransport -confirm-license
+    make
+    sudo make install
+    cd ..
+    rm -rf qtbase-opensource-src-5.7.1
+
+    curl -O -L http://download.qt.io/official_releases/qt/5.7/5.7.1/submodules/qttools-opensource-src-5.7.1.tar.gz
+    tar xf qttools-opensource-src-5.7.1.tar.gz
+    cd qttools-opensource-src-5.7.1
+    /Developer/Qt-5.7.1/bin/qmake
+    make
+    sudo make install
+    cd ..
+    rm -rf qttools-opensource-src-5.7.1
 
 ### Windows
 
