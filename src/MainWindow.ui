@@ -32,7 +32,7 @@
    <string>ID-card utility</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">#centralwidget { background-image: url(:/images/id_kaart_background.png); }</string>
+   <string notr="true">#centralwidget { border-image: url(:/images/id_kaart_background.png) 0 0 0 0 stretch stretch;  }</string>
   </property>
   <layout class="QVBoxLayout" name="MainLayout">
    <property name="spacing">
@@ -689,7 +689,7 @@ border-radius: 10px;
         </property>
         <widget class="QLabel" name="pageEmpty">
          <property name="pixmap">
-          <pixmap resource="../../common/images/common_images.qrc">:/images/EL_Regionaalareng_horisontaal.png</pixmap>
+          <pixmap resource="../common/images/common_images.qrc">:/images/EL_Regionaalareng_horisontaal@2x.png</pixmap>
          </property>
          <property name="alignment">
           <set>Qt::AlignBottom|Qt::AlignRight|Qt::AlignTrailing</set>
@@ -2440,7 +2440,7 @@ Please visit the service center to obtain new codes. &lt;a href=&quot;http://www
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../../common/images/common_images.qrc"/>
+  <include location="../common/images/common_images.qrc"/>
  </resources>
  <connections>
   <connection>
