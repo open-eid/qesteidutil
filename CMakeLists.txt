@@ -1,21 +1,18 @@
-cmake_minimum_required(VERSION 2.8.11)
-cmake_policy(SET CMP0020 NEW)
+cmake_minimum_required(VERSION 3.0)
 if(POLICY CMP0043)
 	cmake_policy(SET CMP0043 NEW)
 endif()
 if(POLICY CMP0063)
 	cmake_policy(SET CMP0063 NEW)
 endif()
-project( qesteidutil )
+project(qesteidutil VERSION 3.12.4)
 
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/modules")
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
-set(PROJECT_VERSION_PATCH 4)
 include( VersionInfo )
 set_app_name( PROGNAME qesteidutil )
 
-find_package( Threads )
 find_package( Qt5 COMPONENTS Core Widgets Network LinguistTools REQUIRED )
 
 add_subdirectory( common )
@@ -31,11 +28,7 @@ if( WIN32 )
 	list( APPEND ADDITIONAL_LIBRARIES Crypt32 )
 endif()
 
-include_directories(
-	${OPENSSL_INCLUDE_DIR}
-	${PCSCLITE_INCLUDE_DIR}
-	qtsingleapplication/src
-)
+include_directories(${OPENSSL_INCLUDE_DIR})
 
 add_executable( ${PROGNAME} WIN32 MACOSX_BUNDLE
 	src/qesteidutil.rc
@@ -49,17 +42,9 @@ add_executable( ${PROGNAME} WIN32 MACOSX_BUNDLE
 	${RESOURCE_FILES}
 )
 add_manifest( ${PROGNAME} )
-target_link_libraries( ${PROGNAME}
-	Qt5::Widgets
-	Qt5::Network
-	${ADDITIONAL_LIBRARIES}
-	${CMAKE_THREAD_LIBS_INIT}
-	qdigidoccommon
-)
+target_link_libraries(${PROGNAME} ${ADDITIONAL_LIBRARIES} qdigidoccommon)
 
 if(APPLE)
-	set_source_files_properties( src/main.cpp src/sslConnect.cpp src/QSmartCard.cpp src/Updater.cpp
-		PROPERTIES COMPILE_FLAGS "-Wno-deprecated-declarations" )
 	add_custom_target( macdeployqt DEPENDS ${PROGNAME}
 		COMMAND ${_qt5Core_install_prefix}/bin/macdeployqt ${CMAKE_CURRENT_BINARY_DIR}/${PROGNAME}.app
 		COMMAND find $<TARGET_FILE_DIR:${PROGNAME}>/../PlugIns/imageformats -type f -a ! -name libqjpeg.dylib -delete

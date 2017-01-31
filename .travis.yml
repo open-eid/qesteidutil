@@ -1,7 +1,7 @@
 language: c++
 sudo: false
 dist: trusty
-osx_image: xcode7.3
+osx_image: xcode8.2
 services:
 - docker
 matrix:
@@ -23,12 +23,10 @@ env:
 
 before_install:
 - git submodule update --init --recursive && if [ "${TRAVIS_OS_NAME}" = "osx" ]; then
-    sudo ln -s /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift-migrator/sdk/MacOSX.sdk/usr/include/openssl /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/usr/include;
-    brew update;
-    brew install qt5;
+    brew install qt5 openssl;
   fi
 script: if [ "${TRAVIS_OS_NAME}" = "osx" ]; then
-    mkdir build && cd build && cmake -DQt5_DIR=/usr/local/opt/qt5/lib/cmake/Qt5 -DOPENSSL_ROOT_DIR=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/usr ..;
+    mkdir build && cd build && cmake -DQt5_DIR=/usr/local/opt/qt5/lib/cmake/Qt5 -DOPENSSL_ROOT_DIR=/usr/local/opt/openssl ..;
     make zipdebug macdeployqt zip && cd ..;
   else
     docker run -e BUILD_NUMBER=${TRAVIS_BUILD_NUMBER} -e VERSION=${VERSION} -e DEBFULLNAME="Travis" -e DEBEMAIL="travis-ci@travis" -v $(pwd):$(pwd) -t "${IMAGE}" /bin/bash -c "export LC_ALL=en_US.UTF-8; locale-gen en_US.UTF-8; cd $(pwd);"'
