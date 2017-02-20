@@ -52,7 +52,11 @@ class UpdaterPrivate: public Ui::Updater
 public:
 	QPCSCReader *reader = nullptr;
 	QPushButton *close = nullptr, *details = nullptr;
+#if OPENSSL_VERSION_NUMBER < 0x10010000L
 	RSA_METHOD method = *RSA_get_default_method();
+#else
+	RSA_METHOD *method = RSA_meth_dup(RSA_get_default_method());
+#endif
 	QSslCertificate cert;
 	QString session;
 	QNetworkRequest request;
@@ -221,8 +225,13 @@ Updater::Updater(const QString &reader, QWidget *parent)
 
 	d->reader = new QPCSCReader(reader, &QPCSC::instance());
 
+#if OPENSSL_VERSION_NUMBER < 0x10010000L
 	d->method.name = "Updater";
 	d->method.rsa_sign = UpdaterPrivate::rsa_sign;
+#else
+	RSA_meth_set1_name(d->method, "Updater");
+	RSA_meth_set_sign(d->method, UpdaterPrivate::rsa_sign);
+#endif
 
 	d->details = d->buttonBox->addButton(tr("Details"), QDialogButtonBox::ActionRole);
 	d->close = d->buttonBox->button(QDialogButtonBox::Close);
@@ -443,8 +452,12 @@ int Updater::exec()
 	if(!d->cert.isNull())
 	{
 		RSA *rsa = RSAPublicKey_dup((RSA*)d->cert.publicKey().handle());
+#if OPENSSL_VERSION_NUMBER < 0x10010000L
 		RSA_set_method(rsa, &d->method);
 		rsa->flags |= RSA_FLAG_SIGN_VER;
+#else
+		RSA_set_method(rsa, d->method);
+#endif
 		RSA_set_app_data(rsa, d);
 		key = EVP_PKEY_new();
 		EVP_PKEY_set1_RSA(key, rsa);
