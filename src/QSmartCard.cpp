@@ -212,8 +212,13 @@ QSmartCard::QSmartCard(QObject *parent)
 :	QThread(parent)
 ,	d(new QSmartCardPrivate)
 {
+#if OPENSSL_VERSION_NUMBER < 0x10010000L
 	d->method.name = "QSmartCard";
 	d->method.rsa_sign = QSmartCardPrivate::rsa_sign;
+#else
+	RSA_meth_set1_name(d->method, "QSmartCard");
+	RSA_meth_set_sign(d->method, QSmartCardPrivate::rsa_sign);
+#endif
 	d->t.d->readers = QPCSC::instance().readers();
 	d->t.d->cards = QStringList() << "loading";
 	d->t.d->card = "loading";
@@ -266,8 +271,12 @@ Qt::HANDLE QSmartCard::key()
 	if (!rsa)
 		return 0;
 
+#if OPENSSL_VERSION_NUMBER < 0x10010000L
 	RSA_set_method(rsa, &d->method);
 	rsa->flags |= RSA_FLAG_SIGN_VER;
+#else
+	RSA_set_method(rsa, d->method);
+#endif
 	RSA_set_app_data(rsa, d);
 	EVP_PKEY *key = EVP_PKEY_new();
 	EVP_PKEY_set1_RSA(key, rsa);
@@ -303,7 +312,7 @@ QSmartCard::ErrorType QSmartCard::login(QSmartCardData::PinType type)
 	if(!d->reader)
 		return UnknownError;
 	QByteArray cmd = d->VERIFY;
-    cmd[3] = type;
+	cmd[3] = type;
 	cmd[4] = pin.size();
 	QPCSCReader::Result result;
 	if(d->t.isPinpad())
