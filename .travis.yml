@@ -18,7 +18,6 @@ matrix:
 env:
   global:
   - BUILD_NUMBER=${TRAVIS_BUILD_NUMBER}
-  - VERSION=3.12.4.${TRAVIS_BUILD_NUMBER}
   - secure: bnnkOxt19gRV75WPsOYjT33wALBe/L1quzMZD8+SY6tM+H7TAZY4490pESEBN+KkrBRhUa8ro2AutVYR4GpVxwOQdXC9KdFnFCqLHsCIhZaBf9H1a/+/gL1bNMiK16XJ6Doz8RidO/m7e0OobulfbbLnBSpgJUwiFkavoO2cfJo=
 
 before_install:
@@ -29,12 +28,14 @@ script: if [ "${TRAVIS_OS_NAME}" = "osx" ]; then
     mkdir build && cd build && cmake -DQt5_DIR=/usr/local/opt/qt5/lib/cmake/Qt5 -DOPENSSL_ROOT_DIR=/usr/local/opt/openssl ..;
     make zipdebug macdeployqt zip && cd ..;
   else
-    docker run -e BUILD_NUMBER=${TRAVIS_BUILD_NUMBER} -e VERSION=${VERSION} -e DEBFULLNAME="Travis" -e DEBEMAIL="travis-ci@travis" -v $(pwd):$(pwd) -t "${IMAGE}" /bin/bash -c "export LC_ALL=en_US.UTF-8; locale-gen en_US.UTF-8; cd $(pwd);"'
+    docker run -e BUILD_NUMBER=${TRAVIS_BUILD_NUMBER} -e DEBFULLNAME="Travis" -e DEBEMAIL="travis-ci@travis" -v $(pwd):$(pwd) -t "${IMAGE}" /bin/bash -c "cd $(pwd);"'
       apt-get update -qq;
-      apt-get install -y apt-transport-https curl dh-make devscripts dpkg-dev cdbs cmake libpcsclite-dev libssl-dev qtbase5-dev qttools5-dev qttools5-dev-tools;
+      apt-get install -y apt-transport-https curl dh-make devscripts dpkg-dev cdbs cmake libpcsclite-dev libssl-dev qtbase5-dev qttools5-dev qttools5-dev-tools git;
+      export VERSION=$(grep project CMakeLists.txt | egrep -o "([0-9]{1,}\.)+[0-9]{1,}").${BUILD_NUMBER};
       dh_make --createorig --addmissing --defaultless -y -p qesteidutil_${VERSION};
       dch --distribution $(lsb_release -cs) -v ${VERSION} "Release ${VERSION}.";
-      dpkg-buildpackage -rfakeroot -us -uc';
+      dpkg-buildpackage -rfakeroot -us -uc;
+      git clean -d -x -f';
   fi
 
 addons:
