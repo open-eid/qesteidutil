@@ -161,6 +161,7 @@ void MainWindowPrivate::showWarning( const QString &msg, const QString &details 
 	QMessageBox d( QMessageBox::Warning, tr("ID-card utility"), msg, QMessageBox::Close, qApp->activeWindow() );
 	d.setWindowModality( Qt::WindowModal );
 	d.setDetailedText(details);
+	d.exec();
 }
 
 void MainWindowPrivate::updateMobileStatusText( const QVariant &data, bool set )
