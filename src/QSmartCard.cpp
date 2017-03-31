@@ -586,30 +586,24 @@ QSmartCard::ErrorType QSmartCard::unblock(QSmartCardData::PinType type, const QS
 	if(!reader)
 		return UnknownError;
 
-	// Make sure pin is locked
 	QByteArray cmd = d->VERIFY;
+	QPCSCReader::Result result;
+
+	if(!d->t.isPinpad())
+	{
+		//Verify PUK. Not for pinpad.
+		cmd[3] = 0;
+		cmd[4] = puk.size();
+		result = reader->transfer(cmd + puk.toUtf8());
+		if(!result.resultOk())
+			return d->handlePinResult(reader.data(), result, false);
+	}
+
+	// Make sure pin is locked. ID card is designed so that only blocked PIN could be unblocked with PUK!
 	cmd[3] = type;
 	cmd[4] = pin.size() + 1;
 	for(int i = 0; i <= d->t.retryCount(type); ++i)
 		reader->transfer(cmd + QByteArray(pin.size(), '0') + QByteArray::number(i));
-
-	//Verify PUK
-	cmd[3] = 0;
-	cmd[4] = puk.size();
-	QPCSCReader::Result result;
-	if(d->t.isPinpad())
-	{
-		QEventLoop l;
-		std::thread([&]{
-			result = reader->transferCTL(cmd, true, d->language(), 8);
-			l.quit();
-		}).detach();
-		l.exec();
-	}
-	else
-		result = reader->transfer(cmd + puk.toUtf8());
-	if(!result.resultOk())
-		return d->handlePinResult(reader.data(), result, false);
 
 	//Replace PIN with PUK
 	cmd = d->REPLACE;
