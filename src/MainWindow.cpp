@@ -438,6 +438,7 @@ bool MainWindow::eventFilter(QObject *obj, QEvent *event)
 
 void MainWindow::on_languages_activated( int index )
 {
+	QSmartCardData t = d->smartcard->data();
 	lang = d->languages->itemData( index ).toString();
 	if( lang == "en" ) QLocale::setDefault( QLocale( QLocale::English, QLocale::UnitedKingdom ) );
 	else if( lang == "ru" ) QLocale::setDefault( QLocale( QLocale::Russian, QLocale::RussianFederation ) );
@@ -452,14 +453,58 @@ void MainWindow::on_languages_activated( int index )
 	d->version->setText( windowTitle() + " " + qApp->applicationVersion() );
 
 	if( d->changePin1Info->currentWidget() == d->changePin1InfoPin )
+	{
 		d->changePin1ValidateLabel->setText( tr("Current PIN1 code") );
+		if( !t.isNull() )
+		{
+			d->changePin1AttemptsLable->setText( tr("Attempts left: %1").arg( t.retryCount( QSmartCardData::Pin1Type ) ) );
+			d->changePin1AttemptsLable->setVisible( t.retryCount( QSmartCardData::Pin1Type ) < THREE_ATTEMPTS );
+			d->changePin1PinpadAttemptsLable->setText( tr("Attempts left: %1").arg( t.retryCount( QSmartCardData::Pin1Type ) ) );
+			d->changePin1PinpadAttemptsLable->setVisible( t.retryCount( QSmartCardData::Pin1Type ) < THREE_ATTEMPTS );
+		}
+	}
 	else
+	{
 		d->changePin1ValidateLabel->setText( tr("Current PUK code") );
+		if( !t.isNull() )
+		{
+			d->changePin1AttemptsLable->setText( tr("Attempts left: %1").arg( t.retryCount( QSmartCardData::PukType ) ) );
+			d->changePin1AttemptsLable->setVisible( t.retryCount( QSmartCardData::PukType ) < THREE_ATTEMPTS );
+			d->changePin1PinpadAttemptsLable->setText( tr("Attempts left: %1").arg( t.retryCount( QSmartCardData::PukType ) ) );
+			d->changePin1PinpadAttemptsLable->setVisible( t.retryCount( QSmartCardData::PukType ) < THREE_ATTEMPTS );
+		}
+	}
+	if( d->changePin1Info->currentWidget() == d->changePin1InfoUnblock )
+		d->changePin1Change->setText( tr("Unblock") );
+	else
+		d->changePin1Change->setText( tr("Change") );
 
 	if( d->changePin2Info->currentWidget() == d->changePin2InfoPin )
+	{
 		d->changePin2ValidateLabel->setText( tr("Current PIN2 code") );
+		if( !t.isNull() )
+		{
+			d->changePin2AttemptsLable->setText( tr("Attempts left: %1").arg( t.retryCount( QSmartCardData::Pin2Type ) ) );
+			d->changePin2AttemptsLable->setVisible( t.retryCount( QSmartCardData::Pin2Type ) < THREE_ATTEMPTS );
+			d->changePin2PinpadAttemptsLable->setText( tr("Attempts left: %1").arg( t.retryCount( QSmartCardData::Pin2Type ) ) );
+			d->changePin2PinpadAttemptsLable->setVisible( t.retryCount( QSmartCardData::Pin2Type ) < THREE_ATTEMPTS );
+		}
+	}
 	else
+	{
 		d->changePin2ValidateLabel->setText( tr("Current PUK code") );
+		if( !t.isNull() )
+		{
+			d->changePin2AttemptsLable->setText( tr("Attempts left: %1").arg( t.retryCount( QSmartCardData::PukType ) ) );
+			d->changePin2AttemptsLable->setVisible( t.retryCount( QSmartCardData::PukType ) < THREE_ATTEMPTS );
+			d->changePin2PinpadAttemptsLable->setText( tr("Attempts left: %1").arg( t.retryCount( QSmartCardData::PukType) ) );
+			d->changePin2PinpadAttemptsLable->setVisible( t.retryCount( QSmartCardData::PukType ) < THREE_ATTEMPTS );
+		}
+	}
+	if( d->changePin2Info->currentWidget() == d->changePin2InfoUnblock )
+		d->changePin2Change->setText( tr("Unblock") );
+	else
+		d->changePin2Change->setText( tr("Change") );
 
 	updateData();
 	d->updateMobileStatusText( QVariant(), false );
@@ -676,6 +721,10 @@ void MainWindow::setDataPage( int index )
 		d->changePin1Info->setCurrentWidget( d->changePin1InfoPin );
 		d->changePin1PinpadInfo->setCurrentWidget( d->changePin1PinpadInfoPin );
 		d->changePin1ValidateLabel->setText( tr("Current PIN1 code") );
+		d->changePin1AttemptsLable->setText( tr("Attempts left: %1").arg( t.retryCount( QSmartCardData::Pin1Type ) ) );
+		d->changePin1AttemptsLable->setVisible( t.retryCount( QSmartCardData::Pin1Type ) < THREE_ATTEMPTS );
+		d->changePin1PinpadAttemptsLable->setText( tr("Attempts left: %1").arg( t.retryCount( QSmartCardData::Pin1Type ) ) );
+		d->changePin1PinpadAttemptsLable->setVisible( t.retryCount( QSmartCardData::Pin1Type ) < THREE_ATTEMPTS );
 		d->changePin1Validate->setFocus();
 		d->changePin1Change->setText( tr("Change") );
 		d->changePin1PinpadChange->setText( tr("Change with PinPad") );
@@ -686,6 +735,10 @@ void MainWindow::setDataPage( int index )
 		d->changePin1Info->setCurrentWidget( d->changePin1InfoPuk );
 		d->changePin1PinpadInfo->setCurrentWidget( d->changePin1PinpadInfoPuk );
 		d->changePin1ValidateLabel->setText( tr("Current PUK code") );
+		d->changePin1AttemptsLable->setText( tr("Attempts left: %1").arg( t.retryCount( QSmartCardData::PukType ) ) );
+		d->changePin1AttemptsLable->setVisible( t.retryCount( QSmartCardData::PukType ) < THREE_ATTEMPTS );
+		d->changePin1PinpadAttemptsLable->setText( tr("Attempts left: %1").arg( t.retryCount( QSmartCardData::PukType ) ) );
+		d->changePin1PinpadAttemptsLable->setVisible( t.retryCount( QSmartCardData::PukType ) < THREE_ATTEMPTS );
 		d->changePin1Validate->setFocus();
 		d->changePin1Change->setText( tr("Change") );
 		d->changePin1PinpadChange->setText( tr("Change with PinPad") );
@@ -696,6 +749,10 @@ void MainWindow::setDataPage( int index )
 		d->changePin1Info->setCurrentWidget( d->changePin1InfoUnblock );
 		d->changePin1PinpadInfo->setCurrentWidget( d->changePin1PinpadInfoUnblock );
 		d->changePin1ValidateLabel->setText( tr("Current PUK code") );
+		d->changePin1AttemptsLable->setText( tr("Attempts left: %1").arg( t.retryCount( QSmartCardData::PukType ) ) );
+		d->changePin1AttemptsLable->setVisible( t.retryCount( QSmartCardData::PukType ) < THREE_ATTEMPTS );
+		d->changePin1PinpadAttemptsLable->setText( tr("Attempts left: %1").arg( t.retryCount( QSmartCardData::PukType ) ) );
+		d->changePin1PinpadAttemptsLable->setVisible( t.retryCount( QSmartCardData::PukType ) < THREE_ATTEMPTS );
 		d->changePin1Validate->setFocus();
 		d->changePin1Change->setText( tr("Unblock") );
 		d->changePin1PinpadChange->setText( tr("Unblock with PinPad") );
@@ -752,12 +809,24 @@ void MainWindow::setDataPage( int index )
 			updateData();
 			setDataPage( PageCert );
 		}
+		else
+		{
+			t = d->smartcard->data();	// refresh modified object's data
+			d->changePin1AttemptsLable->setText( tr("Attempts left: %1").arg( t.retryCount( QSmartCardData::PukType ) ) );
+			d->changePin1AttemptsLable->setVisible( t.retryCount( QSmartCardData::PukType ) < THREE_ATTEMPTS );
+			d->changePin1PinpadAttemptsLable->setText( tr("Attempts left: %1").arg( t.retryCount( QSmartCardData::PukType ) ) );
+			d->changePin1PinpadAttemptsLable->setVisible( t.retryCount( QSmartCardData::PukType ) < THREE_ATTEMPTS );
+		}
 		d->clearPins();
 		break;
 	case PagePin2Pin:
 		d->changePin2Info->setCurrentWidget( d->changePin2InfoPin );
 		d->changePin2PinpadInfo->setCurrentWidget( d->changePin2PinpadInfoPin );
 		d->changePin2ValidateLabel->setText( tr("Current PIN2 code") );
+		d->changePin2AttemptsLable->setText( tr("Attempts left: %1").arg( t.retryCount( QSmartCardData::Pin2Type ) ) );
+		d->changePin2AttemptsLable->setVisible( t.retryCount( QSmartCardData::Pin2Type ) < THREE_ATTEMPTS );
+		d->changePin2PinpadAttemptsLable->setText( tr("Attempts left: %1").arg( t.retryCount( QSmartCardData::Pin2Type ) ) );
+		d->changePin2PinpadAttemptsLable->setVisible( t.retryCount( QSmartCardData::Pin2Type ) < THREE_ATTEMPTS );
 		d->changePin2Validate->setFocus();
 		d->changePin2Change->setText( tr("Change") );
 		d->changePin2PinpadChange->setText( tr("Change with PinPad") );
@@ -768,6 +837,10 @@ void MainWindow::setDataPage( int index )
 		d->changePin2Info->setCurrentWidget( d->changePin2InfoPuk );
 		d->changePin2PinpadInfo->setCurrentWidget( d->changePin2PinpadInfoPuk );
 		d->changePin2ValidateLabel->setText( tr("Current PUK code") );
+		d->changePin2AttemptsLable->setText( tr("Attempts left: %1").arg( t.retryCount( QSmartCardData::PukType ) ) );
+		d->changePin2AttemptsLable->setVisible( t.retryCount( QSmartCardData::PukType ) < THREE_ATTEMPTS );
+		d->changePin2PinpadAttemptsLable->setText( tr("Attempts left: %1").arg( t.retryCount( QSmartCardData::PukType ) ) );
+		d->changePin2PinpadAttemptsLable->setVisible( t.retryCount( QSmartCardData::PukType ) < THREE_ATTEMPTS );
 		d->changePin2Validate->setFocus();
 		d->changePin2Change->setText( tr("Change") );
 		d->changePin2PinpadChange->setText( tr("Change with PinPad") );
@@ -778,6 +851,10 @@ void MainWindow::setDataPage( int index )
 		d->changePin2Info->setCurrentWidget( d->changePin2InfoUnblock );
 		d->changePin2PinpadInfo->setCurrentWidget( d->changePin2PinpadInfoUnblock );
 		d->changePin2ValidateLabel->setText( tr("Current PUK code") );
+		d->changePin2AttemptsLable->setText( tr("Attempts left: %1").arg( t.retryCount( QSmartCardData::PukType ) ) );
+		d->changePin2AttemptsLable->setVisible( t.retryCount( QSmartCardData::PukType ) < THREE_ATTEMPTS );
+		d->changePin2PinpadAttemptsLable->setText( tr("Attempts left: %1").arg( t.retryCount( QSmartCardData::PukType ) ) );
+		d->changePin2PinpadAttemptsLable->setVisible( t.retryCount( QSmartCardData::PukType ) < THREE_ATTEMPTS );
 		d->changePin2Validate->setFocus();
 		d->changePin2Change->setText( tr("Unblock") );
 		d->changePin2PinpadChange->setText( tr("Unblock with PinPad") );
@@ -834,10 +911,22 @@ void MainWindow::setDataPage( int index )
 			updateData();
 			setDataPage( PageCert );
 		}
+		else
+		{
+			t = d->smartcard->data();	// refresh modified object's data
+			d->changePin2AttemptsLable->setText( tr("Attempts left: %1").arg( t.retryCount( QSmartCardData::PukType ) ) );
+			d->changePin2AttemptsLable->setVisible( t.retryCount( QSmartCardData::PukType ) < THREE_ATTEMPTS );
+			d->changePin2PinpadAttemptsLable->setText( tr("Attempts left: %1").arg( t.retryCount( QSmartCardData::PukType ) ) );
+			d->changePin2PinpadAttemptsLable->setVisible( t.retryCount( QSmartCardData::PukType ) < THREE_ATTEMPTS );
+		}
 		d->clearPins();
 		break;
 	case PagePuk:
 		d->changePukValidate->setFocus();
+		d->changePukAttemptsLable->setText( tr("Attempts left: %1").arg( t.retryCount( QSmartCardData::PukType ) ) );
+		d->changePukAttemptsLable->setVisible( t.retryCount( QSmartCardData::PukType ) < THREE_ATTEMPTS );
+		d->changePukPinpadAttemptsLable->setText( tr("Attempts left: %1").arg( t.retryCount( QSmartCardData::PukType ) ) );
+		d->changePukPinpadAttemptsLable->setVisible( t.retryCount( QSmartCardData::PukType ) < THREE_ATTEMPTS );
 		break;
 	case PagePukChange:
 		if( !t.isPinpad() && !d->validatePin( QSmartCardData::PukType, false,
@@ -976,6 +1065,29 @@ void MainWindow::updateData()
 			tr("Certificate will expire in %1 days").arg( signDays ) : tr("Certificate is expired") );
 		d->authCertExpired->setVisible( authDays <= 105 && t.retryCount( QSmartCardData::Pin1Type ) != 0 );
 		d->signCertExpired->setVisible( signDays <= 105 && t.retryCount( QSmartCardData::Pin2Type ) != 0 );
+
+		if( d->changePin1Info->currentWidget() == d->changePin1InfoPin )
+		{
+			d->changePin1AttemptsLable->setText( tr("Attempts left: %1").arg( t.retryCount( QSmartCardData::Pin1Type ) ) );
+			d->changePin1AttemptsLable->setVisible( t.retryCount( QSmartCardData::Pin1Type ) < THREE_ATTEMPTS );
+			d->changePin1PinpadAttemptsLable->setText( tr("Attempts left: %1").arg( t.retryCount( QSmartCardData::Pin1Type ) ) );
+			d->changePin1PinpadAttemptsLable->setVisible( t.retryCount( QSmartCardData::Pin1Type ) < THREE_ATTEMPTS );
+		}
+		if( d->changePin2Info->currentWidget() == d->changePin2InfoPin )
+		{
+			d->changePin2AttemptsLable->setText( tr("Attempts left: %1").arg( t.retryCount( QSmartCardData::Pin2Type ) ) );
+			d->changePin2AttemptsLable->setVisible( t.retryCount( QSmartCardData::Pin2Type ) < THREE_ATTEMPTS );
+			d->changePin2PinpadAttemptsLable->setText( tr("Attempts left: %1").arg( t.retryCount( QSmartCardData::Pin2Type ) ) );
+			d->changePin2PinpadAttemptsLable->setVisible( t.retryCount( QSmartCardData::Pin2Type ) < THREE_ATTEMPTS );
+		}
+		if( ( d->changePin1Info->currentWidget() != d->changePin1InfoPin ) &&
+			( d->changePin2Info->currentWidget() != d->changePin2InfoPin ) )
+		{
+			d->changePukAttemptsLable->setText( tr("Attempts left: %1").arg( t.retryCount( QSmartCardData::PukType ) ) );
+			d->changePukAttemptsLable->setVisible( t.retryCount( QSmartCardData::PukType ) < THREE_ATTEMPTS );
+			d->changePukPinpadAttemptsLable->setText( tr("Attempts left: %1").arg( t.retryCount( QSmartCardData::PukType ) ) );
+			d->changePukPinpadAttemptsLable->setVisible( t.retryCount( QSmartCardData::PukType ) < THREE_ATTEMPTS );
+		}
 
 		d->authChangePin->setVisible( t.retryCount( QSmartCardData::Pin1Type ) > 0 );
 		d->signChangePin->setVisible( t.retryCount( QSmartCardData::Pin2Type ) > 0 );
