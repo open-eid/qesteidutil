@@ -672,6 +672,10 @@ Updating takes ca 2-10 minutes and requires an active internet connection. Do no
         <translation>&lt;b&gt;Kaardi sertifikaadid vajavad uuendamist.&lt;/b&gt;&lt;br/&gt;
 Uuendamise protseduur võtab aega 2-10 minutit ning eeldab toimivat internetiühendust. Kaarti ei tohi lugejast välja võtta enne uuenduse lõppu.</translation>
     </message>
+    <message>
+        <source>Attempts left: %1</source>
+        <translation>Katsed jäänud: %1</translation>
+    </message>
 </context>
 <context>
     <name>SSLConnect</name>

@@ -672,6 +672,10 @@ Updating takes ca 2-10 minutes and requires an active internet connection. Do no
         <translation>&lt;b&gt;Your ID card certificates need to be updated.&lt;/b&gt;&lt;br/&gt;
 Updating takes ca 2-10 minutes and requires an active internet connection. Do not remove the ID card from the smartcard reader until the update is complete.</translation>
     </message>
+    <message>
+        <source>Attempts left: %1</source>
+        <translation>Attempts left: %1</translation>
+    </message>
 </context>
 <context>
     <name>SSLConnect</name>
