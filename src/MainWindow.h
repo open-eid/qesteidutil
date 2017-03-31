@@ -21,6 +21,8 @@
 
 #include <QtWidgets/QWidget>
 
+#define THREE_ATTEMPTS	3		// user has three attempts to enter a correct PIN1/PIN2/PUK code
+
 class MainWindowPrivate;
 
 class MainWindow: public QWidget
