@@ -205,7 +205,7 @@ Please visit the service center to obtain new codes. &lt;a href=&quot;http://www
     </message>
     <message>
         <source>Loading data</source>
-        <translation type="unfinished"></translation>
+        <translation>Загрузка данных</translation>
     </message>
     <message>
         <source>Failed activating email forwards.</source>
@@ -387,7 +387,7 @@ Please visit the service center to obtain new codes. &lt;a href=&quot;http://www
     </message>
     <message>
         <source>Failed to load data</source>
-        <translation type="unfinished"></translation>
+        <translation>Данные загрузить не получилось></translation>
     </message>
     <message>
         <source>Enter PIN/PUK codes on PinPad</source>
@@ -523,11 +523,11 @@ Please visit the service center to obtain new codes. &lt;a href=&quot;http://www
     </message>
     <message>
         <source>Cards</source>
-        <translation type="unfinished"></translation>
+        <translation>Карты></translation>
     </message>
     <message>
         <source>Languages</source>
-        <translation type="unfinished"></translation>
+        <translation>Языки></translation>
     </message>
     <message>
         <source>Mobiil-ID is the possibility to use a mobile phone instead of an ID-card for identification and digital signing.&lt;br /&gt;More info from &lt;a href=&quot;http://mobiil.id.ee&quot;&gt;mobiil.id.ee&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;
@@ -546,11 +546,11 @@ To use Mobiil-ID a SIM card that supports this feature has to be used. If such a
     </message>
     <message>
         <source>Personal info</source>
-        <translation type="unfinished"></translation>
+        <translation>Данные файла</translation>
     </message>
     <message>
         <source>Card info</source>
-        <translation type="unfinished"></translation>
+        <translation>Данные карты</translation>
     </message>
     <message>
         <source>You&apos;re using Digital identity card</source>
@@ -558,7 +558,7 @@ To use Mobiil-ID a SIM card that supports this feature has to be used. If such a
     </message>
     <message>
         <source>Picture</source>
-        <translation type="unfinished"></translation>
+        <translation>Фотография</translation>
     </message>
     <message>
         <source>Change PIN1 using PUK code</source>
@@ -674,6 +674,10 @@ Updating takes ca 2-10 minutes and requires an active internet connection. Do no
         <translation>&lt;b&gt;Сертификаты Вашей ID-карты необходимо обновить.&lt;/b&gt;&lt;br/&gt;
 Обновление занимает около 2-10 минут и требует наличия интернет-соединения. Не извлекайте ID-карту из считывающего устройства до завершения процесса обновления.</translation>
     </message>
+    <message>
+        <source>Attempts left: %1</source>
+        <translation>Осталось попыток: %1</translation>
+    </message>
 </context>
 <context>
     <name>SSLConnect</name>
@@ -699,7 +703,7 @@ Updating takes ca 2-10 minutes and requires an active internet connection. Do no
     </message>
     <message>
         <source>Certificate is empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Сертификат пустой</translation>
     </message>
     <message>
         <source>Invalid reponse</source>
