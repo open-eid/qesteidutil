@@ -811,6 +811,7 @@ void MainWindow::setDataPage( int index )
 		}
 		else
 		{
+			t = d->smartcard->data();	// refresh modified object's data
 			d->changePin1AttemptsLable->setText( tr("Attempts left: %1").arg( t.retryCount( QSmartCardData::PukType ) ) );
 			d->changePin1AttemptsLable->setVisible( t.retryCount( QSmartCardData::PukType ) < THREE_ATTEMPTS );
 			d->changePin1PinpadAttemptsLable->setText( tr("Attempts left: %1").arg( t.retryCount( QSmartCardData::PukType ) ) );
@@ -912,6 +913,7 @@ void MainWindow::setDataPage( int index )
 		}
 		else
 		{
+			t = d->smartcard->data();	// refresh modified object's data
 			d->changePin2AttemptsLable->setText( tr("Attempts left: %1").arg( t.retryCount( QSmartCardData::PukType ) ) );
 			d->changePin2AttemptsLable->setVisible( t.retryCount( QSmartCardData::PukType ) < THREE_ATTEMPTS );
 			d->changePin2PinpadAttemptsLable->setText( tr("Attempts left: %1").arg( t.retryCount( QSmartCardData::PukType ) ) );

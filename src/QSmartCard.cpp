@@ -594,18 +594,7 @@ QSmartCard::ErrorType QSmartCard::unblock(QSmartCardData::PinType type, const QS
 		//Verify PUK. Not for pinpad.
 		cmd[3] = 0;
 		cmd[4] = puk.size();
-		QPCSCReader::Result result;
-		if(d->t.isPinpad())
-		{
-			QEventLoop l;
-			std::thread([&]{
-				result = reader->transferCTL(cmd, true, d->language(), 8);
-				l.quit();
-			}).detach();
-			l.exec();
-		}
-		else
-			result = reader->transfer(cmd + puk.toUtf8());
+		result = reader->transfer(cmd + puk.toUtf8());
 		if(!result.resultOk())
 			return d->handlePinResult(reader.data(), result, false);
 	}
