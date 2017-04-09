@@ -304,8 +304,8 @@ Please visit the service center to obtain new codes. &lt;a href=&quot;http://www
         <translation>There was an error with request to KMA.</translation>
     </message>
     <message>
-        <source>No official email forwarding adresses was found</source>
-        <translation>No official email forwarding adresses was found</translation>
+        <source>No official email forwarding addresses was found</source>
+        <translation>No official email forwarding addresses was found</translation>
     </message>
     <message>
         <source>Your email account has been blocked. To open it, please send an email to toimetaja@eesti.ee or call 663 0215.</source>
@@ -705,7 +705,7 @@ Updating takes ca 2-10 minutes and requires an active internet connection. Do no
         <translation>Certificate is empty</translation>
     </message>
     <message>
-        <source>Invalid reponse</source>
+        <source>Invalid response</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
