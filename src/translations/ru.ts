@@ -304,7 +304,7 @@ Please visit the service center to obtain new codes. &lt;a href=&quot;http://www
         <translation>В запросе КМА возникла ошибка.</translation>
     </message>
     <message>
-        <source>No official email forwarding adresses was found</source>
+        <source>No official email forwarding addresses was found</source>
         <translation>Не было найдено ни одной официальной пересылки эл. почты</translation>
     </message>
     <message>
@@ -706,7 +706,7 @@ Updating takes ca 2-10 minutes and requires an active internet connection. Do no
         <translation>Сертификат пустой</translation>
     </message>
     <message>
-        <source>Invalid reponse</source>
+        <source>Invalid response</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
