@@ -945,6 +945,14 @@ void MainWindow::setDataPage( int index )
 			QMessageBox::information( this, windowTitle(), tr("%1 changed!").arg( QSmartCardData::typeString( QSmartCardData::PukType ) ) );
 			setDataPage( PageCert );
 		}
+		else
+		{
+			t = d->smartcard->data();	// refresh modified object's data
+			d->changePukAttemptsLable->setText(tr("Attempts left: %1").arg(t.retryCount(QSmartCardData::PukType)));
+			d->changePukAttemptsLable->setVisible(t.retryCount(QSmartCardData::PukType) < THREE_ATTEMPTS);
+			d->changePukPinpadAttemptsLable->setText(tr("Attempts left: %1").arg(t.retryCount(QSmartCardData::PukType)));
+			d->changePukPinpadAttemptsLable->setVisible(t.retryCount(QSmartCardData::PukType) < THREE_ATTEMPTS);
+		}
 		d->clearPins();
 		break;
 	default: break;
@@ -1080,14 +1088,10 @@ void MainWindow::updateData()
 			d->changePin2PinpadAttemptsLable->setText( tr("Attempts left: %1").arg( t.retryCount( QSmartCardData::Pin2Type ) ) );
 			d->changePin2PinpadAttemptsLable->setVisible( t.retryCount( QSmartCardData::Pin2Type ) < THREE_ATTEMPTS );
 		}
-		if( ( d->changePin1Info->currentWidget() != d->changePin1InfoPin ) &&
-			( d->changePin2Info->currentWidget() != d->changePin2InfoPin ) )
-		{
-			d->changePukAttemptsLable->setText( tr("Attempts left: %1").arg( t.retryCount( QSmartCardData::PukType ) ) );
-			d->changePukAttemptsLable->setVisible( t.retryCount( QSmartCardData::PukType ) < THREE_ATTEMPTS );
-			d->changePukPinpadAttemptsLable->setText( tr("Attempts left: %1").arg( t.retryCount( QSmartCardData::PukType ) ) );
-			d->changePukPinpadAttemptsLable->setVisible( t.retryCount( QSmartCardData::PukType ) < THREE_ATTEMPTS );
-		}
+		d->changePukAttemptsLable->setText( tr("Attempts left: %1").arg( t.retryCount( QSmartCardData::PukType ) ) );
+		d->changePukAttemptsLable->setVisible( t.retryCount( QSmartCardData::PukType ) < THREE_ATTEMPTS );
+		d->changePukPinpadAttemptsLable->setText( tr("Attempts left: %1").arg( t.retryCount( QSmartCardData::PukType ) ) );
+		d->changePukPinpadAttemptsLable->setVisible( t.retryCount( QSmartCardData::PukType ) < THREE_ATTEMPTS );
 
 		d->authChangePin->setVisible( t.retryCount( QSmartCardData::Pin1Type ) > 0 );
 		d->signChangePin->setVisible( t.retryCount( QSmartCardData::Pin2Type ) > 0 );
