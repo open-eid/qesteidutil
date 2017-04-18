@@ -212,7 +212,7 @@ QSmartCard::QSmartCard(QObject *parent)
 :	QThread(parent)
 ,	d(new QSmartCardPrivate)
 {
-#if OPENSSL_VERSION_NUMBER < 0x10010000L
+#if OPENSSL_VERSION_NUMBER < 0x10010000L || defined(LIBRESSL_VERSION_NUMBER)
 	d->method.name = "QSmartCard";
 	d->method.rsa_sign = QSmartCardPrivate::rsa_sign;
 #else
@@ -271,7 +271,7 @@ Qt::HANDLE QSmartCard::key()
 	if (!rsa)
 		return 0;
 
-#if OPENSSL_VERSION_NUMBER < 0x10010000L
+#if OPENSSL_VERSION_NUMBER < 0x10010000L || defined(LIBRESSL_VERSION_NUMBER)
 	RSA_set_method(rsa, &d->method);
 	rsa->flags |= RSA_FLAG_SIGN_VER;
 #else

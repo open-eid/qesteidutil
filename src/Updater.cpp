@@ -52,7 +52,7 @@ class UpdaterPrivate: public Ui::Updater
 public:
 	QPCSCReader *reader = nullptr;
 	QPushButton *close = nullptr, *details = nullptr;
-#if OPENSSL_VERSION_NUMBER < 0x10010000L
+#if OPENSSL_VERSION_NUMBER < 0x10010000L || defined(LIBRESSL_VERSION_NUMBER)
 	RSA_METHOD method = *RSA_get_default_method();
 #else
 	RSA_METHOD *method = RSA_meth_dup(RSA_get_default_method());
@@ -225,7 +225,7 @@ Updater::Updater(const QString &reader, QWidget *parent)
 
 	d->reader = new QPCSCReader(reader, &QPCSC::instance());
 
-#if OPENSSL_VERSION_NUMBER < 0x10010000L
+#if OPENSSL_VERSION_NUMBER < 0x10010000L || defined(LIBRESSL_VERSION_NUMBER)
 	d->method.name = "Updater";
 	d->method.rsa_sign = UpdaterPrivate::rsa_sign;
 #else
@@ -452,7 +452,7 @@ int Updater::exec()
 	if(!d->cert.isNull())
 	{
 		RSA *rsa = RSAPublicKey_dup((RSA*)d->cert.publicKey().handle());
-#if OPENSSL_VERSION_NUMBER < 0x10010000L
+#if OPENSSL_VERSION_NUMBER < 0x10010000L || defined(LIBRESSL_VERSION_NUMBER)
 		RSA_set_method(rsa, &d->method);
 		rsa->flags |= RSA_FLAG_SIGN_VER;
 #else
