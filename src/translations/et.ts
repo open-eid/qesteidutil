@@ -304,7 +304,7 @@ Uue PUK koodi saamiseks, külasta klienditeeninduspunkti, kust saad koodiümbrik
         <translation>KMA päringu tegemisel tekkis viga.</translation>
     </message>
     <message>
-        <source>No official email forwarding adresses was found</source>
+        <source>No official email forwarding addresses was found</source>
         <translation>Ühtegi ametliku e-posti suunamist ei leitud</translation>
     </message>
     <message>
@@ -674,7 +674,7 @@ Uuendamise protseduur võtab aega 2-10 minutit ning eeldab toimivat internetiüh
     </message>
     <message>
         <source>Attempts left: %1</source>
-        <translation>Katsed jäänud: %1</translation>
+        <translation>Katseid jäänud: %1</translation>
     </message>
 </context>
 <context>
@@ -704,7 +704,7 @@ Uuendamise protseduur võtab aega 2-10 minutit ning eeldab toimivat internetiüh
         <translation>Sertifikaat on tühi</translation>
     </message>
     <message>
-        <source>Invalid reponse</source>
+        <source>Invalid response</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

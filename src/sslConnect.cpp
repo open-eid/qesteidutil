@@ -199,7 +199,7 @@ QByteArray SSLConnect::getUrl( RequestType type, const QString &value )
 	if(!headers.value("").contains("200") ||
 		!headers.value("Content-Type").contains(contentType))
 	{
-		d->setError( tr("Invalid reponse") );
+		d->setError( tr("Invalid response") );
 		return QByteArray();
 	}
 

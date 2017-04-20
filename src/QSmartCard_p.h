@@ -47,7 +47,11 @@ public:
 	QMutex			m;
 	QSmartCardData	t;
 	volatile bool	terminate = false;
+#if OPENSSL_VERSION_NUMBER < 0x10010000L
 	RSA_METHOD		method = *RSA_get_default_method();
+#else
+	RSA_METHOD		*method = RSA_meth_dup(RSA_get_default_method());
+#endif
 	QTextCodec		*codec = QTextCodec::codecForName("Windows-1252");
 
 	const QByteArray AID30 = APDU("00A40400 10 D2330000010000010000000000000000");
