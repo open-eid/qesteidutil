@@ -1088,7 +1088,6 @@ void MainWindow::updateData()
 			d->changePin2PinpadAttemptsLable->setText( tr("Attempts left: %1").arg( t.retryCount( QSmartCardData::Pin2Type ) ) );
 			d->changePin2PinpadAttemptsLable->setVisible( t.retryCount( QSmartCardData::Pin2Type ) < THREE_ATTEMPTS );
 		}
-
 		d->changePukAttemptsLable->setText( tr("Attempts left: %1").arg( t.retryCount( QSmartCardData::PukType ) ) );
 		d->changePukAttemptsLable->setVisible( t.retryCount( QSmartCardData::PukType ) < THREE_ATTEMPTS );
 		d->changePukPinpadAttemptsLable->setText( tr("Attempts left: %1").arg( t.retryCount( QSmartCardData::PukType ) ) );
