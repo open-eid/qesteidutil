@@ -47,7 +47,7 @@ public:
 	QMutex			m;
 	QSmartCardData	t;
 	volatile bool	terminate = false;
-#if OPENSSL_VERSION_NUMBER < 0x10010000L
+#if OPENSSL_VERSION_NUMBER < 0x10010000L || defined(LIBRESSL_VERSION_NUMBER)
 	RSA_METHOD		method = *RSA_get_default_method();
 #else
 	RSA_METHOD		*method = RSA_meth_dup(RSA_get_default_method());

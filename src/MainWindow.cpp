@@ -946,13 +946,13 @@ void MainWindow::setDataPage( int index )
 			setDataPage( PageCert );
 		}
 		else
-		{
-			t = d->smartcard->data();	// refresh modified object's data
-			d->changePukAttemptsLable->setText(tr("Attempts left: %1").arg(t.retryCount(QSmartCardData::PukType)));
-			d->changePukAttemptsLable->setVisible(t.retryCount(QSmartCardData::PukType) < THREE_ATTEMPTS);
-			d->changePukPinpadAttemptsLable->setText(tr("Attempts left: %1").arg(t.retryCount(QSmartCardData::PukType)));
-			d->changePukPinpadAttemptsLable->setVisible(t.retryCount(QSmartCardData::PukType) < THREE_ATTEMPTS);
-		}
+ 		{
+ 			t = d->smartcard->data();	// refresh modified object's data
+ 			d->changePukAttemptsLable->setText( tr("Attempts left: %1").arg( t.retryCount( QSmartCardData::PukType ) ) );
+ 			d->changePukAttemptsLable->setVisible( t.retryCount( QSmartCardData::PukType ) < THREE_ATTEMPTS );
+ 			d->changePukPinpadAttemptsLable->setText( tr("Attempts left: %1").arg( t.retryCount( QSmartCardData::PukType) ) );
+ 			d->changePukPinpadAttemptsLable->setVisible( t.retryCount( QSmartCardData::PukType ) < THREE_ATTEMPTS );
+ 		}
 		d->clearPins();
 		break;
 	default: break;
