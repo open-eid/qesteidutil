@@ -610,9 +610,13 @@ void MainWindow::setDataPage( int index )
 	case PageCertUpdate:
 	{
 #ifdef Q_OS_WIN
+		// remove certificates (having %ESTEID% text) from browsing history of Internet Explorer and/or Google Chrome, and do it for all users.
 		CertStore s;
-		s.remove(d->smartcard->data().authCert());
-		s.remove(d->smartcard->data().signCert());
+		for (const SslCertificate &c : s.list())
+		{
+			if (c.subjectInfo("O").contains("ESTEID"))
+				s.remove(c);
+		}
 #endif
 		d->showLoading( tr("Updating certificates") );
 		d->smartcard->d->m.lock();
