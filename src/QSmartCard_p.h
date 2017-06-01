@@ -35,7 +35,7 @@ class QSmartCardPrivate
 {
 public:
 	QSharedPointer<QPCSCReader> connect(const QString &reader);
-	QSmartCard::ErrorType handlePinResult(QPCSCReader *reader, QPCSCReader::Result response, bool forceUpdate);
+	QSmartCard::ErrorType handlePinResult(QPCSCReader *reader, const QPCSCReader::Result &response, bool forceUpdate);
 	quint16 language() const;
 	QHash<quint8,QByteArray> parseFCI(const QByteArray &data) const;
 	bool updateCounters(QPCSCReader *reader, QSmartCardDataPrivate *d);
