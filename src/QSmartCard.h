@@ -72,8 +72,10 @@ public:
 
 	QSmartCardData();
 	QSmartCardData( const QSmartCardData &other );
+	QSmartCardData( QSmartCardData &&other );
 	~QSmartCardData();
 	QSmartCardData& operator=( const QSmartCardData &other );
+	QSmartCardData& operator=( QSmartCardData &&other );
 
 	QString card() const;
 	QStringList cards() const;

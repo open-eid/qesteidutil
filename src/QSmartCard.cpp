@@ -33,9 +33,11 @@
 #include <thread>
 
 QSmartCardData::QSmartCardData(): d(new QSmartCardDataPrivate) {}
-QSmartCardData::QSmartCardData(const QSmartCardData &other): d(other.d) {}
-QSmartCardData::~QSmartCardData() {}
-QSmartCardData& QSmartCardData::operator =(const QSmartCardData &other) { d = other.d; return *this; }
+QSmartCardData::QSmartCardData(const QSmartCardData &other) = default;
+QSmartCardData::QSmartCardData(QSmartCardData &&other): d(other.d) {}
+QSmartCardData::~QSmartCardData() = default;
+QSmartCardData& QSmartCardData::operator =(const QSmartCardData &other) = default;
+QSmartCardData& QSmartCardData::operator =(QSmartCardData &&other) { qSwap(d, other.d); return *this; }
 
 QString QSmartCardData::card() const { return d->card; }
 QStringList QSmartCardData::cards() const { return d->cards; }
@@ -81,7 +83,7 @@ QSharedPointer<QPCSCReader> QSmartCardPrivate::connect(const QString &reader)
 	return QSharedPointer<QPCSCReader>();
 }
 
-QSmartCard::ErrorType QSmartCardPrivate::handlePinResult(QPCSCReader *reader, QPCSCReader::Result response, bool forceUpdate)
+QSmartCard::ErrorType QSmartCardPrivate::handlePinResult(QPCSCReader *reader, const QPCSCReader::Result &response, bool forceUpdate)
 {
 	if(!response.resultOk() || forceUpdate)
 		updateCounters(reader, t.d);
@@ -143,7 +145,7 @@ int QSmartCardPrivate::rsa_sign(int type, const unsigned char *m, unsigned int m
 		return 0;
 
 	QByteArray cmd = APDU("0088000000"); //calc signature
-	cmd[4] = m_len;
+	cmd[4] = char(m_len);
 	cmd += QByteArray::fromRawData((const char*)m, m_len);
 	QPCSCReader::Result result = d->reader->transfer(cmd);
 	if(!result.resultOk())
@@ -163,7 +165,7 @@ bool QSmartCardPrivate::updateCounters(QPCSCReader *reader, QSmartCardDataPrivat
 	QByteArray cmd = READRECORD;
 	for(int i = QSmartCardData::Pin1Type; i <= QSmartCardData::PukType; ++i)
 	{
-		cmd[2] = i;
+		cmd[2] = char(i);
 		QPCSCReader::Result data = reader->transfer(cmd);
 		if(!data.resultOk())
 			return false;
@@ -191,13 +193,13 @@ bool QSmartCardPrivate::updateCounters(QPCSCReader *reader, QSmartCardDataPrivat
 	if(!reader->transfer(KEYUSAGE).resultOk())
 		return false;
 
-	cmd[2] = authkey;
+	cmd[2] = char(authkey);
 	data = reader->transfer(cmd);
 	if(!data.resultOk())
 		return false;
 	d->usage[QSmartCardData::Pin1Type] = 0xFFFFFF - ((quint8(data.data[12]) << 16) + (quint8(data.data[13]) << 8) + quint8(data.data[14]));
 
-	cmd[2] = signkey;
+	cmd[2] = char(signkey);
 	data = reader->transfer(cmd);
 	if(!data.resultOk())
 		return false;
@@ -239,13 +241,13 @@ QSmartCard::ErrorType QSmartCard::change(QSmartCardData::PinType type, const QSt
 		return UnknownError;
 	QByteArray cmd = d->CHANGE;
 	cmd[3] = type == QSmartCardData::PukType ? 0 : type;
-	cmd[4] = pin.size() + newpin.size();
+	cmd[4] = char(pin.size() + newpin.size());
 	QPCSCReader::Result result;
 	if(d->t.isPinpad())
 	{
 		QEventLoop l;
 		std::thread([&]{
-			result = reader->transferCTL(cmd, false, d->language(), [](QSmartCardData::PinType type){
+			result = reader->transferCTL(cmd, false, d->language(), [&]() -> quint8 {
 				switch(type)
 				{
 				default:
@@ -253,7 +255,7 @@ QSmartCard::ErrorType QSmartCard::change(QSmartCardData::PinType type, const QSt
 				case QSmartCardData::Pin2Type: return 5;
 				case QSmartCardData::PukType: return 8;
 				}
-			}(type));
+			}());
 			l.quit();
 		}).detach();
 		l.exec();
@@ -313,7 +315,7 @@ QSmartCard::ErrorType QSmartCard::login(QSmartCardData::PinType type)
 		return UnknownError;
 	QByteArray cmd = d->VERIFY;
 	cmd[3] = type;
-	cmd[4] = pin.size();
+	cmd[4] = char(pin.size());
 	QPCSCReader::Result result;
 	if(d->t.isPinpad())
 	{
@@ -497,7 +499,7 @@ void QSmartCard::run()
 						QByteArray cmd = d->READRECORD;
 						for(int data = QSmartCardData::SurName; data != QSmartCardData::Comment4; ++data)
 						{
-							cmd[2] = data + 1;
+							cmd[2] = char(data + 1);
 							QPCSCReader::Result result = reader->transfer(cmd);
 							if(!result.resultOk())
 							{
@@ -531,8 +533,8 @@ void QSmartCard::run()
 						while(cert.size() < size)
 						{
 							QByteArray cmd = d->READBINARY;
-							cmd[2] = cert.size() >> 8;
-							cmd[3] = cert.size();
+							cmd[2] = char(cert.size() >> 8);
+							cmd[3] = char(cert.size());
 							data = reader->transfer(cmd);
 							if(!data.resultOk())
 							{
@@ -602,7 +604,7 @@ QSmartCard::ErrorType QSmartCard::unblock(QSmartCardData::PinType type, const QS
 	{
 		//Verify PUK. Not for pinpad.
 		cmd[3] = 0;
-		cmd[4] = puk.size();
+		cmd[4] = char(puk.size());
 		result = reader->transfer(cmd + puk.toUtf8());
 		if(!result.resultOk())
 			return d->handlePinResult(reader.data(), result, false);
@@ -610,19 +612,19 @@ QSmartCard::ErrorType QSmartCard::unblock(QSmartCardData::PinType type, const QS
 
 	// Make sure pin is locked. ID card is designed so that only blocked PIN could be unblocked with PUK!
 	cmd[3] = type;
-	cmd[4] = pin.size() + 1;
-	for(int i = 0; i <= d->t.retryCount(type); ++i)
+	cmd[4] = char(pin.size() + 1);
+	for(quint8 i = 0; i <= d->t.retryCount(type); ++i)
 		reader->transfer(cmd + QByteArray(pin.size(), '0') + QByteArray::number(i));
 
 	//Replace PIN with PUK
 	cmd = d->REPLACE;
 	cmd[3] = type;
-	cmd[4] = puk.size() + pin.size();
+	cmd[4] = char(puk.size() + pin.size());
 	if(d->t.isPinpad())
 	{
 		QEventLoop l;
 		std::thread([&]{
-			result = reader->transferCTL(cmd, false, d->language(), [](QSmartCardData::PinType type){
+			result = reader->transferCTL(cmd, false, d->language(), [&]() -> quint8 {
 				switch(type)
 				{
 				default:
@@ -630,7 +632,7 @@ QSmartCard::ErrorType QSmartCard::unblock(QSmartCardData::PinType type, const QS
 				case QSmartCardData::Pin2Type: return 5;
 				case QSmartCardData::PukType: return 8;
 				}
-			}(type));
+			}());
 			l.quit();
 		}).detach();
 		l.exec();
