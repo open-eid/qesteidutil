@@ -28,24 +28,24 @@ script: if [ "${TRAVIS_OS_NAME}" = "osx" ]; then
     mkdir build && cd build && cmake -DQt5_DIR=/usr/local/opt/qt5/lib/cmake/Qt5 -DOPENSSL_ROOT_DIR=/usr/local/opt/openssl ..;
     make zipdebug macdeployqt zip && cd ..;
   else
-    docker run -e BUILD_NUMBER=${TRAVIS_BUILD_NUMBER} -e DEBFULLNAME="Travis" -e DEBEMAIL="travis-ci@travis" -v $(pwd):$(pwd) -t "${IMAGE}" /bin/bash -c "cd $(pwd);"'
+    docker run -e BUILD_NUMBER=${TRAVIS_BUILD_NUMBER} -e DEBFULLNAME="Travis" -e DEBEMAIL="travis-ci@travis" -e COVERITY_SCAN_TOKEN=${COVERITY_SCAN_TOKEN} -e TRAVIS_BRANCH:${TRAVIS_BRANCH} -e TARGET=${TARGET} -v $(pwd):$(pwd) -t "${IMAGE}" /bin/bash -c "cd $(pwd);"'
       apt-get update -qq;
-      apt-get install -y apt-transport-https curl dh-make devscripts dpkg-dev cdbs cmake libpcsclite-dev libssl-dev qtbase5-dev qttools5-dev qttools5-dev-tools git;
+      apt-get install -y apt-transport-https curl dh-make devscripts dpkg-dev cdbs cmake libpcsclite-dev libssl-dev qtbase5-dev qttools5-dev qttools5-dev-tools git curl wget;
       export VERSION=$(grep project CMakeLists.txt | egrep -o "([0-9]{1,}\.)+[0-9]{1,}").${BUILD_NUMBER};
       dh_make --createorig --addmissing --defaultless -y -p qesteidutil_${VERSION};
       dch --distribution $(lsb_release -cs) -v ${VERSION} "Release ${VERSION}.";
       dpkg-buildpackage -rfakeroot -us -uc;
+      if [ "${TARGET}" = "ubuntu:16.04" ]; then
+        export COVERITY_SCAN_PROJECT_NAME="open-eid/qesteidutil";
+        export COVERITY_SCAN_NOTIFICATION_EMAIL="raul@metsma.ee";
+        export COVERITY_SCAN_BRANCH_PATTERN=coverity_scan;
+        export COVERITY_SCAN_BUILD_COMMAND_PREPEND="cmake .";
+        export COVERITY_SCAN_BUILD_COMMAND=make;
+        wget https://scan.coverity.com/scripts/travisci_build_coverity_scan.sh;
+        bash travisci_build_coverity_scan.sh;
+      fi;
       git clean -d -x -f';
   fi
-
-addons:
-  coverity_scan:
-    project:
-      name: open-eid/qesteidutil
-    notification_email: raul@metsma.ee
-    build_command_prepend: mkdir coverity; cd coverity; cmake -DBREAKPAD='' -DQt5_DIR=/usr/local/opt/qt5/lib/cmake/Qt5 -DOPENSSL_ROOT_DIR=/usr/local/opt/openssl ..
-    build_command: make
-    branch_pattern: coverity_scan
 
 before_deploy:
 - export VERSION=${TRAVIS_TAG:1}
