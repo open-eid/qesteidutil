@@ -1,3 +1,9 @@
+ID-card utility version [3.12.6](https://github.com/open-eid/qesteidutil/releases/tag/v3.12.6) release notes
+--------------------------------------
+- Minor fixes
+
+[Full Changelog](https://github.com/open-eid/qesteidutil/compare/v3.12.5...v3.12.6)
+
 ID-card utility version [3.12.5](https://github.com/open-eid/qesteidutil/releases/tag/v3.12.5) release notes
 --------------------------------------
 - macOS Retina support
