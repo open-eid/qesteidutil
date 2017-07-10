@@ -25,7 +25,6 @@
     <MediaTemplate EmbedCab="yes" CompressionLevel="high"/>
     <Icon Id="qesteidutil.exe" SourceFile="$(var.utility_path)"/>
     <Property Id="ARPPRODUCTICON" Value="qesteidutil.exe"/>
-    <Property Id="RUN_UTIL" Value="0"/>
     <Property Id="DESKTOP_SHORTCUT" Value="0"/>
     <MajorUpgrade AllowSameVersionUpgrades="yes" Schedule="afterInstallInitialize" DowngradeErrorMessage=
       "A newer version of [ProductName] is already installed. If you are trying to downgrade, please uninstall the newer version first."/>
@@ -110,11 +109,5 @@
       <ComponentRef Id="qjpeg.dll" />
 <?endif?>
     </Feature>
-
-    <CustomAction Id="RunUtil" FileKey="qesteidutil.exe" Impersonate="yes" Execute="deferred" ExeCommand="" Return="asyncNoWait"/>
-
-    <InstallExecuteSequence>
-      <Custom Action="RunUtil" Before="InstallFinalize">NOT (NOT UPGRADINGPRODUCTCODE AND REMOVE="ALL") AND (RUN_UTIL = 1)</Custom>
-    </InstallExecuteSequence>
   </Product>
 </Wix>
