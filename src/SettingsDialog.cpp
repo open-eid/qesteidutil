@@ -25,15 +25,11 @@
 
 #include <common/SslCertificate.h>
 
+#include <QtCore/QFile>
 #include <QtCore/QProcess>
 #include <QtWidgets/QPushButton>
 
 #include <qt_windows.h>
-
-static void runPrivileged( const QString &program, const QString &arguments )
-{
-	ShellExecuteW( 0, L"runas", PCWSTR(program.utf16()), PCWSTR(arguments.utf16()), 0, SW_HIDE );
-}
 
 SettingsDialog::SettingsDialog( const QSmartCardData &data, QWidget *parent )
 	: QDialog( parent )
@@ -42,12 +38,28 @@ SettingsDialog::SettingsDialog( const QSmartCardData &data, QWidget *parent )
 	ui.setupUi( this );
 	setWindowModality( Qt::WindowModal );
 	setAttribute( Qt::WA_DeleteOnClose, true );
-	QPushButton *update = ui.buttonBox->addButton( tr("Check for updates and close utility"), QDialogButtonBox::ActionRole );
-	QPushButton *sched = ui.buttonBox->addButton( tr("Run Task Scheduler"), QDialogButtonBox::ActionRole );
+
+	QPushButton *update = nullptr;
+	QPushButton *sched = nullptr;
 	QPushButton *clean = ui.buttonBox->addButton( tr("Clean certs"), QDialogButtonBox::ActionRole );
+
+	if (QFile::exists(qApp->applicationDirPath() + "/id-updater.exe"))
+	{
+		update = ui.buttonBox->addButton(tr("Check for updates and close utility"), QDialogButtonBox::ActionRole);
+		sched = ui.buttonBox->addButton(tr("Run Task Scheduler"), QDialogButtonBox::ActionRole);
+	}
+	else
+	{
+		ui.updateInterval->hide();
+		ui.updateIntervalLabel->hide();
+	}
 
 	int selected = QProcess::execute( "id-updater", QStringList() << "-status" );
 	ui.updateInterval->setCurrentIndex( selected > 0 && selected < 4 ? selected : 2 );
+
+	auto runPrivileged = [](const QString &program, const QString &arguments) {
+		ShellExecuteW(0, L"runas", PCWSTR(program.utf16()), PCWSTR(arguments.utf16()), 0, SW_HIDE);
+	};
 
 	connect( ui.buttonBox, &QDialogButtonBox::clicked, [=](QAbstractButton *button ) {
 		if( button == ui.buttonBox->button( QDialogButtonBox::Close ) )
