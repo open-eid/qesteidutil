@@ -23,14 +23,36 @@
 #include <common/CliApplication.h>
 #include <common/Configuration.h>
 
+#ifdef Q_OS_WIN32
+#include <QtCore/QDebug>
+#include <QtCore/qt_windows.h>
+#endif
+
 #include <openssl/ssl.h>
 
 int main(int argc, char *argv[])
 {
 #if QT_VERSION > QT_VERSION_CHECK(5, 6, 0)
 	QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps, true);
+#ifdef Q_OS_WIN32
+	char **newv = (char**)malloc((argc + 3) * sizeof(*newv));
+	memmove(newv, argv, sizeof(*newv) * argc);
+	newv[argc++] = (char*)"-platform";
+	newv[argc++] = (char*)"windows:dpiawareness=1";
+	newv[argc] = 0;
+	argv = newv;
+
+	HDC screen = GetDC(0);
+	qreal dpi = GetDeviceCaps(screen, LOGPIXELSY);
+	qreal scale = dpi / qreal(96);
+	qputenv("QT_SCALE_FACTOR", QByteArray::number(scale));
+	ReleaseDC(NULL, screen);
+	qDebug() << "Current DPI:" << dpi << " setting scale:" << scale;
+#else
 	QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling, true);
 #endif
+#endif
+
 	CliApplication cliApp( argc, argv, APP );
 	if( cliApp.isDiagnosticRun() )
 	{
