@@ -678,6 +678,18 @@ Updating takes ca 2-10 minutes and requires an active internet connection. Do no
         <source>Attempts left: %1</source>
         <translation>Осталось попыток: %1</translation>
     </message>
+    <message>
+        <source>PIN1 timeout</source>
+        <translation>PIN1 тайм-аут</translation>
+    </message>
+    <message>
+        <source>PIN2 timeout</source>
+        <translation>PIN2 тайм-аут</translation>
+    </message>
+    <message>
+        <source>PUK timeout</source>
+        <translation>PUK тайм-аут</translation>
+    </message>
 </context>
 <context>
     <name>SSLConnect</name>

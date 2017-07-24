@@ -196,7 +196,17 @@ bool MainWindowPrivate::validateCardError( QSmartCardData::PinType type, int fla
 	switch( err )
 	{
 	case QSmartCard::NoError: return true;
-	case QSmartCard::CancelError: break;
+	case QSmartCard::CancelError:
+		if ( q->d->smartcard->data().isPinpad() )
+		{
+			switch ( type )
+			{
+			case QSmartCardData::Pin1Type: showWarning( tr("PIN1 timeout") ); break;
+			case QSmartCardData::Pin2Type: showWarning( tr("PIN2 timeout") ); break;
+			case QSmartCardData::PukType: showWarning( tr("PUK timeout") ); break;
+			}
+		}
+		break;
 	case QSmartCard::BlockedError:
 		showWarning( tr("%1 blocked").arg( QSmartCardData::typeString( t ) ) );
 		q->setDataPage( ::MainWindow::PageCert );

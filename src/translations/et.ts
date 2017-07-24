@@ -676,6 +676,18 @@ Uuendamise protseduur võtab aega 2-10 minutit ning eeldab toimivat internetiüh
         <source>Attempts left: %1</source>
         <translation>Katseid jäänud: %1</translation>
     </message>
+    <message>
+        <source>PIN1 timeout</source>
+        <translation>PIN1 aegumine</translation>
+    </message>
+    <message>
+        <source>PIN2 timeout</source>
+        <translation>PIN2 aegumine</translation>
+    </message>
+    <message>
+        <source>PUK timeout</source>
+        <translation>PUK aegumine</translation>
+    </message>
 </context>
 <context>
     <name>SSLConnect</name>
