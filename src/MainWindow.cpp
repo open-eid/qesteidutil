@@ -597,6 +597,7 @@ void MainWindow::setDataPage( int index )
 {
 	QSmartCardData t = d->smartcard->data();
 	ButtonTypes page = ButtonTypes( index & 0x0f );
+	QString title, textBody;
 	d->dataWidget->setCurrentIndex( t.isNull() ? PageEmpty : page );
 	d->buttonCert->setChecked( page == PageCert );
 	d->buttonEmail->setChecked( page == PageEmail );
@@ -780,12 +781,12 @@ void MainWindow::setDataPage( int index )
 			d->clearPins();
 			break;
 		}
-		if( t.isPinpad() )
-			d->showLoading( tr("Enter PIN/PUK codes on PinPad") );
-		else
-			d->showLoading( tr("Changing %1 code").arg( QSmartCardData::typeString( QSmartCardData::Pin1Type ) ) );
+		title = tr("Changing %1 code").arg( QSmartCardData::typeString( QSmartCardData::Pin1Type ) );
+		d->showLoading( title );
+        
 		if( d->validateCardError( QSmartCardData::Pin1Type, 1024,
-				d->smartcard->change( QSmartCardData::Pin1Type, d->changePin1New->text(), d->changePin1Validate->text() ) ) )
+				d->smartcard->change( QSmartCardData::Pin1Type, d->changePin1New->text(), d->changePin1Validate->text(),
+                    title, tr("To change PIN1 code on a PinPad reader the old PIN1 code has to be entered first and then the new PIN1 code twice.") ) ) )
 		{
 			QMessageBox::information( this, windowTitle(), tr("%1 changed!").arg( QSmartCardData::typeString( QSmartCardData::Pin1Type ) ) );
 			setDataPage( PageCert );
@@ -800,19 +801,17 @@ void MainWindow::setDataPage( int index )
 			d->clearPins();
 			break;
 		}
+		title = tr("Unblocking %1 code").arg( QSmartCardData::typeString( QSmartCardData::Pin1Type ) );
+		textBody = tr("To change PIN1 code with the PUK code on a PinPad reader the PUK code has to be entered first and then the PIN1 code twice.");
 
-		if( !t.isPinpad() )
-		{
-			if( index == PagePin1ChangePuk )
-				d->showLoading( tr("Changing %1 code")	.arg( QSmartCardData::typeString( QSmartCardData::Pin1Type ) ) );
-			else
-				d->showLoading( tr("Unblocking %1 code").arg( QSmartCardData::typeString( QSmartCardData::Pin1Type ) ) );
-		}
-		else
-			d->showLoading( tr("Enter PIN/PUK codes on PinPad") );
+		if( index == PagePin1ChangePuk )
+			title = tr("Changing %1 code").arg( QSmartCardData::typeString( QSmartCardData::Pin1Type ) );
+
+		d->showLoading( title );
 
 		if( d->validateCardError( QSmartCardData::Pin1Type, 1025,
-				d->smartcard->unblock( QSmartCardData::Pin1Type, d->changePin1New->text(), d->changePin1Validate->text() ) ) )
+				d->smartcard->unblock( QSmartCardData::Pin1Type, d->changePin1New->text(), d->changePin1Validate->text(),
+                    title, textBody ) ) )
 		{
 			if( index == PagePin1ChangePuk )
 				QMessageBox::information( this, windowTitle(), tr("%1 changed!")
@@ -882,12 +881,12 @@ void MainWindow::setDataPage( int index )
 			d->clearPins();
 			break;
 		}
-		if( t.isPinpad() )
-			d->showLoading( tr("Enter PIN/PUK codes on PinPad") );
-		else
-			d->showLoading( tr("Changing %1 code").arg( QSmartCardData::typeString( QSmartCardData::Pin2Type ) ) );
+		title = tr("Changing %1 code").arg( QSmartCardData::typeString( QSmartCardData::Pin2Type ) );
+		d->showLoading( title );
+        
 		if( d->validateCardError( QSmartCardData::Pin2Type, 1024,
-				d->smartcard->change( QSmartCardData::Pin2Type, d->changePin2New->text(), d->changePin2Validate->text() ) ) )
+				d->smartcard->change( QSmartCardData::Pin2Type, d->changePin2New->text(), d->changePin2Validate->text(),
+                    title, tr("To change PIN2 code on a PinPad reader the old PIN2 code has to be entered first and then the new PIN2 code twice.") ) ) )
 		{
 			QMessageBox::information( this, windowTitle(), tr("%1 changed!").arg( QSmartCardData::typeString( QSmartCardData::Pin2Type ) ) );
 			setDataPage( PageCert );
@@ -902,19 +901,17 @@ void MainWindow::setDataPage( int index )
 			d->clearPins();
 			break;
 		}
+		title = tr("Unblocking %1 code").arg( QSmartCardData::typeString( QSmartCardData::Pin2Type ) );
+		textBody = tr("To change PIN2 code with the PUK code on a PinPad reader the PUK code has to be entered first and then the PIN2 code twice.");
 
-		if( !t.isPinpad() )
-		{
-			if( index == PagePin2ChangePuk )
-				d->showLoading( tr("Changing %1 code").arg( QSmartCardData::typeString( QSmartCardData::Pin2Type ) ) );
-			else
-				d->showLoading( tr("Unblocking %1 code").arg( QSmartCardData::typeString( QSmartCardData::Pin2Type ) ) );
-		}
-		else
-			d->showLoading( tr("Enter PIN/PUK codes on PinPad") );
+		if( index == PagePin2ChangePuk )
+			title = tr("Changing %1 code").arg( QSmartCardData::typeString( QSmartCardData::Pin2Type ) );
+
+		d->showLoading( title );
 
 		if( d->validateCardError( QSmartCardData::Pin2Type, 1025,
-				d->smartcard->unblock( QSmartCardData::Pin2Type, d->changePin2New->text(), d->changePin2Validate->text() ) ) )
+				d->smartcard->unblock( QSmartCardData::Pin2Type, d->changePin2New->text(), d->changePin2Validate->text(),
+                    title, textBody ) ) )
 		{
 			if( index == PagePin2ChangePuk )
 				QMessageBox::information( this, windowTitle(), tr("%1 changed!")
@@ -949,12 +946,12 @@ void MainWindow::setDataPage( int index )
 			d->clearPins();
 			break;
 		}
-		if( t.isPinpad() )
-			d->showLoading( tr("Enter PIN/PUK codes on PinPad") );
-		else
-			d->showLoading( tr("Changing %1 code").arg( QSmartCardData::typeString( QSmartCardData::PukType ) ) );
+		title = tr("Changing %1 code").arg( QSmartCardData::typeString( QSmartCardData::PukType ) );
+		d->showLoading( title );
+        
 		if( d->validateCardError( QSmartCardData::PukType, 1024,
-				d->smartcard->change( QSmartCardData::PukType, d->changePukNew->text(), d->changePukValidate->text() ) ) )
+				d->smartcard->change( QSmartCardData::PukType, d->changePukNew->text(), d->changePukValidate->text(),
+                    title, tr("To change the PUK code on a PinPad reader the old PUK code has to be entered first and then the new PUK code twice.") ) ) )
 		{
 			QMessageBox::information( this, windowTitle(), tr("%1 changed!").arg( QSmartCardData::typeString( QSmartCardData::PukType ) ) );
 			setDataPage( PageCert );

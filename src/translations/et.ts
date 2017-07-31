@@ -110,8 +110,12 @@ Uue PUK koodi saamiseks, külasta klienditeeninduspunkti, kust saad koodiümbrik
         <translation>Uus PIN1 kood</translation>
     </message>
     <message>
-        <source>To change PIN code on a PinPad reader the old PIN code has to be entered first and then the new PIN code twice.</source>
-        <translation>PinPad lugejaga PIN muutmiseks tuleb kõigepealt sisestada vana PIN ning siis kaks korda uus PIN.</translation>
+        <source>To change PIN1 code on a PinPad reader the old PIN1 code has to be entered first and then the new PIN1 code twice.</source>
+        <translation>PinPad lugejaga PIN1 muutmiseks tuleb kõigepealt sisestada vana PIN1 ning siis kaks korda uus PIN1.</translation>
+    </message>
+    <message>
+        <source>To change PIN2 code on a PinPad reader the old PIN2 code has to be entered first and then the new PIN2 code twice.</source>
+        <translation>PinPad lugejaga PIN2 muutmiseks tuleb kõigepealt sisestada vana PIN2 ning siis kaks korda uus PIN2.</translation>
     </message>
     <message>
         <source>Change with PinPad</source>
@@ -463,8 +467,12 @@ Uue PUK koodi saamiseks, külasta klienditeeninduspunkti, kust saad koodiümbrik
 &lt;p&gt;Kui olete unustanud PIN1 koodi, kuid teate PUK koodi, siis siin saate määrata uue PIN1 koodi.&lt;/p&gt;</translation>
     </message>
     <message>
-        <source>To change PIN code with the PUK code on a PinPad reader the PUK code has to be entered first and then the PIN code twice.</source>
-        <translation>PinPad lugejaga PUK abil PIN muutmiseks tuleb kõigepealt sisestada PUK ning siis kaks korda uus PIN.</translation>
+        <source>To change PIN1 code with the PUK code on a PinPad reader the PUK code has to be entered first and then the PIN1 code twice.</source>
+        <translation>PinPad lugejaga PUK abil PIN1 muutmiseks tuleb kõigepealt sisestada PUK ning siis kaks korda uus PIN1.</translation>
+    </message>
+    <message>
+        <source>To change PIN2 code with the PUK code on a PinPad reader the PUK code has to be entered first and then the PIN2 code twice.</source>
+        <translation>PinPad lugejaga PUK abil PIN2 muutmiseks tuleb kõigepealt sisestada PUK ning siis kaks korda uus PIN2.</translation>
     </message>
     <message>
         <source>&lt;h3&gt;Change PIN2 code&lt;/h3&gt;
@@ -477,8 +485,12 @@ Uue PUK koodi saamiseks, külasta klienditeeninduspunkti, kust saad koodiümbrik
 &lt;p&gt;Kui olete unustanud PIN2 koodi, kuid teate PUK koodi, siis siin saate määrata uue PIN2 koodi.&lt;/p&gt;</translation>
     </message>
     <message>
-        <source>To unblock the PIN code on a PinPad reader the PUK code has to be entered first and then the PIN code twice.</source>
-        <translation>PinPad lugejaga PIN blokeeringu tühistamiseks tuleb kõigepealt sisestada PUK ning siis kaks korda PIN.</translation>
+        <source>To unblock the PIN1 code on a PinPad reader the PUK code has to be entered first and then the PIN1 code twice.</source>
+        <translation>PinPad lugejaga PIN1 blokeeringu tühistamiseks tuleb kõigepealt sisestada PUK ning siis kaks korda PIN1.</translation>
+    </message>
+    <message>
+        <source>To unblock the PIN2 code on a PinPad reader the PUK code has to be entered first and then the PIN2 code twice.</source>
+        <translation>PinPad lugejaga PIN2 blokeeringu tühistamiseks tuleb kõigepealt sisestada PUK ning siis kaks korda PIN2.</translation>
     </message>
     <message>
         <source>Mobile operator</source>

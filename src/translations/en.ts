@@ -110,8 +110,12 @@ Please visit the service center to obtain new codes. &lt;a href=&quot;http://www
         <translation>New PIN1 code</translation>
     </message>
     <message>
-        <source>To change PIN code on a PinPad reader the old PIN code has to be entered first and then the new PIN code twice.</source>
-        <translation>To change PIN code on a PinPad reader the old PIN code has to be entered first and then the new PIN code twice.</translation>
+        <source>To change PIN1 code on a PinPad reader the old PIN1 code has to be entered first and then the new PIN1 code twice.</source>
+        <translation>To change PIN1 code on a PinPad reader the old PIN1 code has to be entered first and then the new PIN1 code twice.</translation>
+    </message>
+    <message>
+        <source>To change PIN2 code on a PinPad reader the old PIN2 code has to be entered first and then the new PIN2 code twice.</source>
+        <translation>To change PIN2 code on a PinPad reader the old PIN2 code has to be entered first and then the new PIN2 code twice.</translation>
     </message>
     <message>
         <source>Change with PinPad</source>
@@ -463,8 +467,12 @@ Please visit the service center to obtain new codes. &lt;a href=&quot;http://www
 &lt;p&gt;If you have forgotten PIN1, but know PUK, then here you can enter new PIN1.&lt;/p&gt;</translation>
     </message>
     <message>
-        <source>To change PIN code with the PUK code on a PinPad reader the PUK code has to be entered first and then the PIN code twice.</source>
-        <translation>To change PIN code with the PUK code on a PinPad reader the PUK code has to be entered first and then the PIN code twice.</translation>
+        <source>To change PIN1 code with the PUK code on a PinPad reader the PUK code has to be entered first and then the PIN1 code twice.</source>
+        <translation>To change PIN1 code with the PUK code on a PinPad reader the PUK code has to be entered first and then the PIN1 code twice.</translation>
+    </message>
+    <message>
+        <source>To change PIN2 code with the PUK code on a PinPad reader the PUK code has to be entered first and then the PIN2 code twice.</source>
+        <translation>To change PIN2 code with the PUK code on a PinPad reader the PUK code has to be entered first and then the PIN2 code twice.</translation>
     </message>
     <message>
         <source>&lt;h3&gt;Change PIN2 code&lt;/h3&gt;
@@ -477,8 +485,12 @@ Please visit the service center to obtain new codes. &lt;a href=&quot;http://www
 &lt;p&gt;If you have forgotten PIN2, but know PUK, then here you can enter new PIN2.&lt;/p&gt;</translation>
     </message>
     <message>
-        <source>To unblock the PIN code on a PinPad reader the PUK code has to be entered first and then the PIN code twice.</source>
-        <translation>To unblock the PIN code on a PinPad reader the PUK code has to be entered first and then the PIN code twice.</translation>
+        <source>To unblock the PIN1 code on a PinPad reader the PUK code has to be entered first and then the PIN1 code twice.</source>
+        <translation>To unblock the PIN1 code on a PinPad reader the PUK code has to be entered first and then the PIN1 code twice.</translation>
+    </message>
+    <message>
+        <source>To unblock the PIN2 code on a PinPad reader the PUK code has to be entered first and then the PIN2 code twice.</source>
+        <translation>To unblock the PIN2 code on a PinPad reader the PUK code has to be entered first and then the PIN2 code twice.</translation>
     </message>
     <message>
         <source>Mobile operator</source>

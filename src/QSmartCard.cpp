@@ -233,20 +233,33 @@ QSmartCard::~QSmartCard()
 	delete d;
 }
 
-QSmartCard::ErrorType QSmartCard::change(QSmartCardData::PinType type, const QString &newpin, const QString &pin)
+QSmartCard::ErrorType QSmartCard::change(QSmartCardData::PinType type, const QString &newpin, const QString &pin, const QString &title, const QString &bodyText)
 {
 	QMutexLocker locker(&d->m);
-	QSharedPointer<QPCSCReader> reader(d->connect(d->t.reader()));
+ 	QSharedPointer<QPCSCReader> reader(d->connect(d->t.reader()));
 	if(!reader)
 		return UnknownError;
+
 	QByteArray cmd = d->CHANGE;
 	cmd[3] = type == QSmartCardData::PukType ? 0 : type;
 	cmd[4] = char(pin.size() + newpin.size());
 	QPCSCReader::Result result;
-	if(d->t.isPinpad())
-	{
-		QEventLoop l;
+	QScopedPointer<PinDialog> p;
+
+	if(d->t.isPinpad()) {
+
+		PinDialog::PinFlags flags;
+		switch(type)
+		{
+			default:
+			case QSmartCardData::Pin1Type: flags = PinDialog::Pin1ChangePinpadType; break;
+			case QSmartCardData::Pin2Type: flags = PinDialog::Pin2ChangePinpadType; break;
+			case QSmartCardData::PukType:  flags = PinDialog::PukChangePinpadType; break;
+		}
+		p.reset(new PinDialog(flags, title, 0, qApp->activeWindow(), bodyText));
+
 		std::thread([&]{
+			Q_EMIT p->startTimer();
 			result = reader->transferCTL(cmd, false, d->language(), [&]() -> quint8 {
 				switch(type)
 				{
@@ -256,12 +269,13 @@ QSmartCard::ErrorType QSmartCard::change(QSmartCardData::PinType type, const QSt
 				case QSmartCardData::PukType: return 8;
 				}
 			}());
-			l.quit();
+			Q_EMIT p->finish(0);
 		}).detach();
-		l.exec();
+		p->exec();
 	}
 	else
 		result = reader->transfer(cmd + pin.toUtf8() + newpin.toUtf8());
+
 	return d->handlePinResult(reader.data(), result, true);
 }
 
@@ -590,7 +604,7 @@ void QSmartCard::selectCard(const QString &card)
 	Q_EMIT dataChanged();
 }
 
-QSmartCard::ErrorType QSmartCard::unblock(QSmartCardData::PinType type, const QString &pin, const QString &puk)
+QSmartCard::ErrorType QSmartCard::unblock(QSmartCardData::PinType type, const QString &pin, const QString &puk, const QString &title, const QString &bodyText)
 {
 	QMutexLocker locker(&d->m);
 	QSharedPointer<QPCSCReader> reader(d->connect(d->t.reader()));
@@ -599,6 +613,7 @@ QSmartCard::ErrorType QSmartCard::unblock(QSmartCardData::PinType type, const QS
 
 	QByteArray cmd = d->VERIFY;
 	QPCSCReader::Result result;
+	QScopedPointer<PinDialog> p;
 
 	if(!d->t.isPinpad())
 	{
@@ -620,22 +635,32 @@ QSmartCard::ErrorType QSmartCard::unblock(QSmartCardData::PinType type, const QS
 	cmd = d->REPLACE;
 	cmd[3] = type;
 	cmd[4] = char(puk.size() + pin.size());
-	if(d->t.isPinpad())
-	{
-		QEventLoop l;
+
+	if(d->t.isPinpad()) {
+
+		PinDialog::PinFlags flags;
+		switch(type)
+		{
+			default:
+			case QSmartCardData::Pin1Type: flags = PinDialog::Pin1ChangePinpadType; break;
+			case QSmartCardData::Pin2Type: flags = PinDialog::Pin2ChangePinpadType; break;
+		}
+		p.reset(new PinDialog(flags, title, 0, qApp->activeWindow(), bodyText));
+
 		std::thread([&]{
+			Q_EMIT p->startTimer();
 			result = reader->transferCTL(cmd, false, d->language(), [&]() -> quint8 {
 				switch(type)
 				{
 				default:
 				case QSmartCardData::Pin1Type: return 4;
 				case QSmartCardData::Pin2Type: return 5;
-				case QSmartCardData::PukType: return 8;
+				case QSmartCardData::PukType: return 8; // User can not unblock PUK code with application!
 				}
 			}());
-			l.quit();
+			Q_EMIT p->finish(0);
 		}).detach();
-		l.exec();
+		p->exec();
 	}
 	else
 		result = reader->transfer(cmd + puk.toUtf8() + pin.toUtf8());
