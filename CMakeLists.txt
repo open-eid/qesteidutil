@@ -79,7 +79,7 @@ elseif(WIN32)
 	set(MSI_FILE "ID-card_utility-${VERSION}$ENV{VER_SUFFIX}.${PLATFORM}")
 	list(APPEND CANDLE_CMD "$ENV{WIX}bin\\candle.exe" -nologo -arch ${PLATFORM}
 		-dMSI_VERSION=${VERSION} -dPlatform=${PLATFORM} ${CANDLE_EXTRA}
-		-dutility_path=$<TARGET_FILE:${PROGNAME}> ${CMAKE_SOURCE_DIR}/qesteidutil.wxs
+		-dutility_path=$<TARGET_FILE:${PROGNAME}> ${CMAKE_SOURCE_DIR}/qesteidutil.wxs -dqtconf=${CMAKE_SOURCE_DIR}/qt.conf
 		${CMAKE_SOURCE_DIR}/cmake/modules/WelcomeDlg2.wxs ${CMAKE_SOURCE_DIR}/cmake/modules/WixUI_Minimal2.wxs)
 	list(APPEND LIGHT_CMD "$ENV{WIX}bin\\light.exe" -nologo qesteidutil.wixobj
 		WelcomeDlg2.wixobj WixUI_Minimal2.wixobj -ext WixUIExtension

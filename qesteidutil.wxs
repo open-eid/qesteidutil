@@ -76,6 +76,7 @@
             <File Source="$(var.qt_path)\bin\libGLESv2.dll"/>
             <File Source="$(var.qt_path)\bin\D3DCompiler_47.dll"/>
             <File Source="$(var.qt_path)\bin\opengl32sw.dll" />
+            <File Source="$(var.qtconf)" />
 <?endif?>
           </Component>
 <?ifdef var.qt_path ?>
