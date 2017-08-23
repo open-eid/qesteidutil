@@ -193,11 +193,14 @@ bool MainWindowPrivate::validateCardError( QSmartCardData::PinType type, int fla
 	Q_Q(::MainWindow);
 	q->updateData();
 	QSmartCardData::PinType t = flags == 1025 ? QSmartCardData::PukType : type;
+	QSmartCardData td = smartcard->data();
 	switch( err )
 	{
 	case QSmartCard::NoError: return true;
 	case QSmartCard::CancelError:
-		if ( q->d->smartcard->data().isPinpad() )
+#ifdef Q_OS_WIN
+		if( !td.isNull() && td.isPinpad() )
+		if( td.authCert().subjectInfo( "C" ) == "EE" )	// only for Estonian ID card
 		{
 			switch ( type )
 			{
@@ -206,6 +209,7 @@ bool MainWindowPrivate::validateCardError( QSmartCardData::PinType type, int fla
 			case QSmartCardData::PukType: showWarning( tr("PUK timeout") ); break;
 			}
 		}
+#endif
 		break;
 	case QSmartCard::BlockedError:
 		showWarning( tr("%1 blocked").arg( QSmartCardData::typeString( t ) ) );

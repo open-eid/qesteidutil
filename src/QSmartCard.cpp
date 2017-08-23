@@ -236,7 +236,7 @@ QSmartCard::~QSmartCard()
 QSmartCard::ErrorType QSmartCard::change(QSmartCardData::PinType type, const QString &newpin, const QString &pin, const QString &title, const QString &bodyText)
 {
 	QMutexLocker locker(&d->m);
- 	QSharedPointer<QPCSCReader> reader(d->connect(d->t.reader()));
+	QSharedPointer<QPCSCReader> reader(d->connect(d->t.reader()));
 	if(!reader)
 		return UnknownError;
 
@@ -248,15 +248,7 @@ QSmartCard::ErrorType QSmartCard::change(QSmartCardData::PinType type, const QSt
 
 	if(d->t.isPinpad()) {
 
-		PinDialog::PinFlags flags;
-		switch(type)
-		{
-			default:
-			case QSmartCardData::Pin1Type: flags = PinDialog::Pin1ChangePinpadType; break;
-			case QSmartCardData::Pin2Type: flags = PinDialog::Pin2ChangePinpadType; break;
-			case QSmartCardData::PukType:  flags = PinDialog::PukChangePinpadType; break;
-		}
-		p.reset(new PinDialog(flags, title, 0, qApp->activeWindow(), bodyText));
+		p.reset(new PinDialog(PinDialog::PinpadFlag, title, 0, qApp->activeWindow(), bodyText));
 
 		std::thread([&]{
 			Q_EMIT p->startTimer();
@@ -638,14 +630,7 @@ QSmartCard::ErrorType QSmartCard::unblock(QSmartCardData::PinType type, const QS
 
 	if(d->t.isPinpad()) {
 
-		PinDialog::PinFlags flags;
-		switch(type)
-		{
-			default:
-			case QSmartCardData::Pin1Type: flags = PinDialog::Pin1ChangePinpadType; break;
-			case QSmartCardData::Pin2Type: flags = PinDialog::Pin2ChangePinpadType; break;
-		}
-		p.reset(new PinDialog(flags, title, 0, qApp->activeWindow(), bodyText));
+		p.reset(new PinDialog(PinDialog::PinpadFlag, title, 0, qApp->activeWindow(), bodyText));
 
 		std::thread([&]{
 			Q_EMIT p->startTimer();
