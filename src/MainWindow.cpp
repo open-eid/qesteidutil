@@ -989,6 +989,10 @@ void MainWindow::updateData()
 	d->hideLoading();
 	QSmartCardData t = d->smartcard->data();
 
+	d->buttonCert->setDisabled(t.isNull());
+	d->buttonEmail->setDisabled(t.isNull());
+	d->buttonMobile->setDisabled(t.isNull());
+	d->buttonPuk->setDisabled(t.isNull());
 	if( !t.isNull() )
 	{
 		QString text;
@@ -1109,8 +1113,8 @@ void MainWindow::updateData()
 		d->authFrame->setVisible( !t.authCert().isNull() );
 		d->signFrame->setVisible( !t.signCert().isNull() );
 		d->certsLine->setVisible( !t.authCert().isNull() || !t.signCert().isNull() );
-		d->buttonEmail->setDisabled(t.version() == QSmartCardData::VER_USABLEUPDATER);
-		d->buttonMobile->setDisabled(t.version() == QSmartCardData::VER_USABLEUPDATER);
+		d->buttonEmail->setDisabled(t.version() == QSmartCardData::VER_USABLEUPDATER || t.authCert().subjectInfo("O").contains("E-RESIDENT"));
+		d->buttonMobile->setDisabled(t.version() == QSmartCardData::VER_USABLEUPDATER || t.authCert().subjectInfo("O").contains("E-RESIDENT"));
 		d->buttonPuk->setDisabled(t.version() == QSmartCardData::VER_USABLEUPDATER);
 
 		d->certUpdate->setProperty("updateEnabled",

@@ -69,6 +69,10 @@ background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #F3C863, s
 color: #00355f;
 border: 1px solid #ce911b;
 }
+QPushButton:disabled {
+background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #A3AFC0, stop: 0.75 #80909D);
+border: 0px;
+ }
 #buttonCert, #buttonEmail, #buttonMobile, #buttonPuk {
 font-weight: bold;
 font-size: 14px;
