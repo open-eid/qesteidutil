@@ -28,6 +28,7 @@
 #include <QtCore/QVariant>
 
 #include <openssl/rsa.h>
+#include <openssl/ecdsa.h>
 
 #define APDU QByteArray::fromHex
 
@@ -40,18 +41,22 @@ public:
 	QHash<quint8,QByteArray> parseFCI(const QByteArray &data) const;
 	bool updateCounters(QPCSCReader *reader, QSmartCardDataPrivate *d);
 
+	static QByteArray sign(const unsigned char *dgst, int digst_len, QSmartCardPrivate *d);
 	static int rsa_sign(int type, const unsigned char *m, unsigned int m_len,
 		unsigned char *sigret, unsigned int *siglen, const RSA *rsa);
+	static ECDSA_SIG* ecdsa_do_sign(const unsigned char *dgst, int dgst_len,
+		const BIGNUM *inv, const BIGNUM *rp, EC_KEY *eckey);
 
 	QSharedPointer<QPCSCReader> reader;
 	QMutex			m;
 	QSmartCardData	t;
 	volatile bool	terminate = false;
 #if OPENSSL_VERSION_NUMBER < 0x10010000L || defined(LIBRESSL_VERSION_NUMBER)
-	RSA_METHOD		method = *RSA_get_default_method();
+	RSA_METHOD		rsamethod = *RSA_get_default_method();
 #else
-	RSA_METHOD		*method = RSA_meth_dup(RSA_get_default_method());
+	RSA_METHOD		*rsamethod = RSA_meth_dup(RSA_get_default_method());
 #endif
+	ECDSA_METHOD	*ecmethod = ECDSA_METHOD_new(nullptr);
 	QTextCodec		*codec = QTextCodec::codecForName("Windows-1252");
 
 	const QByteArray AID30 = APDU("00A40400 10 D2330000010000010000000000000000");

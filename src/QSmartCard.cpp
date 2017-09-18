@@ -32,6 +32,19 @@
 #include <openssl/evp.h>
 #include <thread>
 
+#if OPENSSL_VERSION_NUMBER < 0x10010000L
+int ECDSA_SIG_set0(ECDSA_SIG *sig, BIGNUM *r, BIGNUM *s)
+{
+	if(!r || !s)
+		return 0;
+	BN_clear_free(sig->r);
+	BN_clear_free(sig->s);
+	sig->r = r;
+	sig->s = s;
+	return 1;
+}
+#endif
+
 QSmartCardData::QSmartCardData(): d(new QSmartCardDataPrivate) {}
 QSmartCardData::QSmartCardData(const QSmartCardData &other) = default;
 QSmartCardData::QSmartCardData(QSmartCardData &&other): d(other.d) {}
@@ -132,28 +145,49 @@ QHash<quint8,QByteArray> QSmartCardPrivate::parseFCI(const QByteArray &data) con
 	return result;
 }
 
+QByteArray QSmartCardPrivate::sign(const unsigned char *dgst, int dgst_len, QSmartCardPrivate *d)
+{
+	if(!d ||
+		!d->reader ||
+		!d->reader->transfer(d->SECENV1) ||
+		!d->reader->transfer(APDU("002241B8 02 8300"))) //Key reference, 8303801100
+		return QByteArray();
+	QByteArray cmd = APDU("0088000000"); //calc signature
+	cmd[4] = char(dgst_len);
+	cmd += QByteArray::fromRawData((const char*)dgst, dgst_len);
+	QPCSCReader::Result result = d->reader->transfer(cmd);
+	if(!result)
+		return QByteArray();
+	return result.data;
+}
+
 int QSmartCardPrivate::rsa_sign(int type, const unsigned char *m, unsigned int m_len,
 		unsigned char *sigret, unsigned int *siglen, const RSA *rsa)
 {
-	QSmartCardPrivate *d = (QSmartCardPrivate*)RSA_get_app_data(rsa);
-	if(type != NID_md5_sha1 ||
-		m_len != 36 ||
-		!d ||
-		!d->reader ||
-		!d->reader->transfer(d->SECENV1).resultOk() ||
-		!d->reader->transfer(APDU("002241B8 02 8300")).resultOk()) //Key reference, 8303801100
+	if(type != NID_md5_sha1 || m_len != 36)
 		return 0;
-
-	QByteArray cmd = APDU("0088000000"); //calc signature
-	cmd[4] = char(m_len);
-	cmd += QByteArray::fromRawData((const char*)m, m_len);
-	QPCSCReader::Result result = d->reader->transfer(cmd);
-	if(!result.resultOk())
+	QByteArray result = sign(m, int(m_len), (QSmartCardPrivate*)RSA_get_app_data(rsa));
+	if(result.isEmpty())
 		return 0;
-
-	*siglen = (unsigned int)result.data.size();
-	memcpy(sigret, result.data.constData(), result.data.size());
+	*siglen = (unsigned int)result.size();
+	memcpy(sigret, result.constData(), size_t(result.size()));
 	return 1;
+}
+
+ECDSA_SIG* QSmartCardPrivate::ecdsa_do_sign(const unsigned char *dgst, int dgst_len,
+		const BIGNUM *, const BIGNUM *, EC_KEY *eckey)
+{
+	QByteArray result = sign(dgst, dgst_len,
+		(QSmartCardPrivate*)EC_KEY_get_key_method_data(eckey, nullptr, nullptr, nullptr));
+	if(result.isEmpty())
+		return nullptr;
+	QByteArray r = result.left(result.size()/2);
+	QByteArray s = result.right(result.size()/2);
+	ECDSA_SIG *sig = ECDSA_SIG_new();
+	ECDSA_SIG_set0(sig,
+		BN_bin2bn((const unsigned char*)r.data(), int(r.size()), 0),
+		BN_bin2bn((const unsigned char*)s.data(), int(s.size()), 0));
+	return sig;
 }
 
 bool QSmartCardPrivate::updateCounters(QPCSCReader *reader, QSmartCardDataPrivate *d)
@@ -215,12 +249,16 @@ QSmartCard::QSmartCard(QObject *parent)
 ,	d(new QSmartCardPrivate)
 {
 #if OPENSSL_VERSION_NUMBER < 0x10010000L || defined(LIBRESSL_VERSION_NUMBER)
-	d->method.name = "QSmartCard";
-	d->method.rsa_sign = QSmartCardPrivate::rsa_sign;
+	d->rsamethod.name = "QSmartCard";
+	d->rsamethod.rsa_sign = QSmartCardPrivate::rsa_sign;
 #else
-	RSA_meth_set1_name(d->method, "QSmartCard");
-	RSA_meth_set_sign(d->method, QSmartCardPrivate::rsa_sign);
+	RSA_meth_set1_name(d->rsamethod, "QSmartCard");
+	RSA_meth_set_sign(d->rsamethod, QSmartCardPrivate::rsa_sign);
 #endif
+	ECDSA_METHOD_set_app_data(d->ecmethod, d);
+	ECDSA_METHOD_set_name(d->ecmethod, const_cast<char*>("QSmartCard"));
+	ECDSA_METHOD_set_sign(d->ecmethod, QSmartCardPrivate::ecdsa_do_sign);
+
 	d->t.d->readers = QPCSC::instance().readers();
 	d->t.d->cards = QStringList() << "loading";
 	d->t.d->card = "loading";
@@ -230,6 +268,10 @@ QSmartCard::~QSmartCard()
 {
 	d->terminate = true;
 	wait();
+#if OPENSSL_VERSION_NUMBER >= 0x10010000L
+	RSA_meth_free(d->rsamethod);
+#endif
+	ECDSA_METHOD_free(d->ecmethod);
 	delete d;
 }
 
@@ -269,21 +311,36 @@ QSmartCardData QSmartCard::data() const { return d->t; }
 
 Qt::HANDLE QSmartCard::key()
 {
-	RSA *rsa = RSAPublicKey_dup((RSA*)d->t.authCert().publicKey().handle());
-	if (!rsa)
-		return 0;
+	if (d->t.authCert().publicKey().algorithm() == QSsl::Ec)
+	{
+		EC_KEY *ec = EC_KEY_dup((EC_KEY*)d->t.authCert().publicKey().handle());
+		if(!ec)
+			return nullptr;
+		EC_KEY_insert_key_method_data(ec, d, nullptr, nullptr, nullptr);
+		ECDSA_set_method(ec, d->ecmethod);
+		EVP_PKEY *key = EVP_PKEY_new();
+		EVP_PKEY_set1_EC_KEY(key, ec);
+		EC_KEY_free(ec);
+		return Qt::HANDLE(key);
+	}
+	else
+	{
+		RSA *rsa = RSAPublicKey_dup((RSA*)d->t.authCert().publicKey().handle());
+		if (!rsa)
+			return nullptr;
 
 #if OPENSSL_VERSION_NUMBER < 0x10010000L || defined(LIBRESSL_VERSION_NUMBER)
-	RSA_set_method(rsa, &d->method);
-	rsa->flags |= RSA_FLAG_SIGN_VER;
+		RSA_set_method(rsa, &d->rsamethod);
+		rsa->flags |= RSA_FLAG_SIGN_VER;
 #else
-	RSA_set_method(rsa, d->method);
+		RSA_set_method(rsa, d->method);
 #endif
-	RSA_set_app_data(rsa, d);
-	EVP_PKEY *key = EVP_PKEY_new();
-	EVP_PKEY_set1_RSA(key, rsa);
-	RSA_free(rsa);
-	return Qt::HANDLE(key);
+		RSA_set_app_data(rsa, d);
+		EVP_PKEY *key = EVP_PKEY_new();
+		EVP_PKEY_set1_RSA(key, rsa);
+		RSA_free(rsa);
+		return Qt::HANDLE(key);
+	}
 }
 
 QSmartCard::ErrorType QSmartCard::login(QSmartCardData::PinType type)
