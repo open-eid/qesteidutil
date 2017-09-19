@@ -56,7 +56,6 @@ class MacMenuBar;
 #include <QtWidgets/QFileDialog>
 #include <QtWidgets/QMessageBox>
 
-Q_DECLARE_METATYPE(MobileStatus)
 Q_DECLARE_METATYPE(Emails)
 
 class MainWindowPrivate: public Ui::MainWindow
@@ -70,7 +69,6 @@ public:
 	QByteArray sendRequest( SSLConnect::RequestType type, const QString &param = QString() );
 	void showLoading( const QString &text );
 	void showWarning( const QString &msg, const QString &details = QString() );
-	void updateMobileStatusText( const QVariant &data, bool set );
 	bool validateCardError( QSmartCardData::PinType type, int flags, QSmartCard::ErrorType err );
 	bool validatePin( QSmartCardData::PinType type, bool puk, const QString &old, const QString &pin, const QString &pin2 );
 
@@ -118,7 +116,6 @@ QByteArray MainWindowPrivate::sendRequest( SSLConnect::RequestType type, const Q
 	{
 	case SSLConnect::ActivateEmails: showLoading(  tr("Activating email settings") ); break;
 	case SSLConnect::EmailInfo: showLoading( tr("Loading email settings") ); break;
-	case SSLConnect::MobileInfo: showLoading( tr("Requesting Mobiil-ID status") ); break;
 	case SSLConnect::PictureInfo: showLoading( tr("Loading picture") ); break;
 	default: showLoading( tr( "Loading data" ) ); break;
 	}
@@ -137,7 +134,6 @@ QByteArray MainWindowPrivate::sendRequest( SSLConnect::RequestType type, const Q
 		{
 		case SSLConnect::ActivateEmails: showWarning( tr("Failed activating email forwards."), ssl.errorString() ); break;
 		case SSLConnect::EmailInfo: showWarning( tr("Failed loading email settings."), ssl.errorString() ); break;
-		case SSLConnect::MobileInfo: showWarning( tr("Failed loading Mobiil-ID settings."), ssl.errorString() ); break;
 		case SSLConnect::PictureInfo: showWarning( tr("Loading picture failed."), ssl.errorString() ); break;
 		default: showWarning( tr("Failed to load data"), ssl.errorString() ); break;
 		}
@@ -162,30 +158,6 @@ void MainWindowPrivate::showWarning( const QString &msg, const QString &details 
 	d.setWindowModality( Qt::WindowModal );
 	d.setDetailedText(details);
 	d.exec();
-}
-
-void MainWindowPrivate::updateMobileStatusText( const QVariant &data, bool set )
-{
-	if( set )
-		mobileStatus->setProperty( "STATUS", data );
-
-	if( mobileStatus->property("STATUS").isNull() )
-		return mobileStatus->clear();
-	MobileStatus mobile = mobileStatus->property("STATUS").value<MobileStatus>();
-	QString text;
-	QTextStream s( &text );
-	s << mobile.value( "MSISDN" ) << "<br />";
-	s << tr("Mobile operator") << ": " << mobile.value( "Operator" ) << "<br />";
-	s << tr("Mobile status") << ": ";
-	if( mobile.value( "Status" ) == "Active" )
-		s << "<span style='color: #509b00'>"
-			<< XmlReader::mobileStatus( mobile.value( "Status" ) ) << "</span><br />"
-			<< tr("Certificates are valid till") << ": " << mobile.value( "MIDCertsValidTo" );
-	else
-		s << "<span style='color: #e80303'>"
-			<< XmlReader::mobileStatus( mobile.value( "Status" ) ) << "</span>";
-	mobileStatus->setText( text );
-	Common::setAccessibleName( mobileStatus );
 }
 
 bool MainWindowPrivate::validateCardError( QSmartCardData::PinType type, int flags, QSmartCard::ErrorType err )
@@ -223,7 +195,6 @@ bool MainWindowPrivate::validateCardError( QSmartCardData::PinType type, int fla
 		{
 		case SSLConnect::ActivateEmails: showWarning( tr("Failed activating email forwards.") ); break;
 		case SSLConnect::EmailInfo: showWarning( tr("Failed loading email settings.") ); break;
-		case SSLConnect::MobileInfo: showWarning( tr("Failed loading Mobiil-ID settings.") ); break;
 		case SSLConnect::PictureInfo: showWarning( tr("Loading picture failed.") ); break;
 		default:
 			showWarning( tr("Changing %1 failed").arg( QSmartCardData::typeString( type ) ) ); break;
@@ -286,7 +257,7 @@ MainWindow::MainWindow( QWidget *parent )
 	d->q_ptr = this;
 	d->setupUi( this );
 	setFixedSize( geometry().size() );
-	const QList<QLabel*> labels{ d->emailInfo, d->mobileInfo, d->pukLocked,
+	const QList<QLabel*> labels{ d->emailInfo, d->pukLocked,
 		d->changePukInfo, d->changePin1InfoPinText, d->changePin2InfoPinText };
 	for(QLabel *l: labels)
 		Common::setAccessibleName( l );
@@ -343,9 +314,6 @@ MainWindow::MainWindow( QWidget *parent )
 	// Email buttons
 	d->b->addButton( d->checkEmail, PageEmailStatus );
 	d->b->addButton( d->activateEmail, PageEmailActivate );
-	// mobile buttons
-	d->b->addButton( d->checkMobile, PageMobileStatus );
-	d->b->addButton( d->mobileActivate, PageMobileActivate );
 	// pin1 buttons
 	d->b->addButton( d->changePin1InfoPinLink, PagePin1Puk );
 	d->b->addButton( d->changePin1Cancel, PageCert );
@@ -507,7 +475,6 @@ void MainWindow::on_languages_activated( int index )
 		d->changePin2Change->setText( tr("Change") );
 
 	updateData();
-	d->updateMobileStatusText( QVariant(), false );
 	if( !d->emailStatus->property( "FORWARDS" ).isNull() )
 	{
 		Emails emails = d->emailStatus->property( "FORWARDS" ).value<Emails>();
@@ -531,7 +498,6 @@ void MainWindow::pageButtonClicked()
 {
 	if( sender() == d->buttonCert ) setDataPage( PageCert );
 	if( sender() == d->buttonEmail ) setDataPage( PageEmail );
-	if( sender() == d->buttonMobile ) setDataPage( PageMobile );
 	if( sender() == d->buttonPuk ) setDataPage( PagePukInfo );
 }
 
@@ -590,7 +556,6 @@ void MainWindow::setDataPage( int index )
 	d->dataWidget->setCurrentIndex( t.isNull() ? PageEmpty : page );
 	d->buttonCert->setChecked( page == PageCert );
 	d->buttonEmail->setChecked( page == PageEmail );
-	d->buttonMobile->setChecked( page == PageMobile );
 	d->buttonPuk->setChecked( page == PagePukInfo );
 	if( t.isNull() )
 		return;
@@ -693,34 +658,6 @@ void MainWindow::setDataPage( int index )
 		d->checkEmailFrame->hide();
 		break;
 	}
-	case PageMobile:
-		d->updateMobileStatusText( QVariant(), true );
-		d->checkMobileFrame->show();
-		d->mobileActivateFrame->hide();
-		d->checkMobile->setFocus();
-		break;
-	case PageMobileStatus:
-	{
-		d->updateMobileStatusText( QVariant(), true );
-		QByteArray buffer = d->sendRequest( SSLConnect::MobileInfo );
-		if( buffer.isEmpty() )
-			break;
-		XmlReader xml( buffer );
-		int error = 0;
-		MobileStatus mobile = xml.readMobileStatus( error );
-		if( error )
-		{
-			showWarning( XmlReader::mobileErr( error ) );
-			break;
-		}
-		d->updateMobileStatusText( QVariant::fromValue( mobile ), true );
-		d->checkMobileFrame->hide();
-		d->mobileActivateFrame->setVisible( mobile.value( "Status" ) != "Active" );
-		break;
-	}
-	case PageMobileActivate:
-		QDesktopServices::openUrl( tr("http://politsei.ee/en/teenused/isikut-toendavad-dokumendid/mobiil-id/") );
-		break;
 	case PagePin1Pin:
 		d->changePin1Info->setCurrentWidget( d->changePin1InfoPin );
 		d->changePin1PinpadInfo->setCurrentWidget( d->changePin1PinpadInfoPin );
@@ -991,7 +928,6 @@ void MainWindow::updateData()
 
 	d->buttonCert->setDisabled(t.isNull());
 	d->buttonEmail->setDisabled(t.isNull());
-	d->buttonMobile->setDisabled(t.isNull());
 	d->buttonPuk->setDisabled(t.isNull());
 	if( !t.isNull() )
 	{
@@ -1114,7 +1050,6 @@ void MainWindow::updateData()
 		d->signFrame->setVisible( !t.signCert().isNull() );
 		d->certsLine->setVisible( !t.authCert().isNull() || !t.signCert().isNull() );
 		d->buttonEmail->setDisabled(t.version() == QSmartCardData::VER_USABLEUPDATER || t.authCert().subjectInfo("O").contains("E-RESIDENT"));
-		d->buttonMobile->setDisabled(t.version() == QSmartCardData::VER_USABLEUPDATER || t.authCert().subjectInfo("O").contains("E-RESIDENT"));
 		d->buttonPuk->setDisabled(t.version() == QSmartCardData::VER_USABLEUPDATER);
 
 		d->certUpdate->setProperty("updateEnabled",

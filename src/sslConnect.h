@@ -32,7 +32,6 @@ public:
 	enum RequestType {
 		EmailInfo,
 		ActivateEmails,
-		MobileInfo,
 		PictureInfo
 	};
 
