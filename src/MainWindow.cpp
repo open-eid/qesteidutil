@@ -1055,12 +1055,11 @@ void MainWindow::updateData()
 		d->certUpdate->setProperty("updateEnabled",
 			Settings(qApp->applicationName()).value("updateButton", false).toBool() ||
 			(
-				t.version() >= QSmartCardData::VER_3_4 &&
+				t.version() >= QSmartCardData::VER_3_5 &&
 				t.retryCount( QSmartCardData::Pin1Type ) > 0 &&
 				t.isValid() && (
 					Configuration::instance().object().contains("EIDUPDATER-URL") ||
-					(t.version() == QSmartCardData::VER_3_4 && Configuration::instance().object().contains("EIDUPDATER-URL-34")) ||
-					(t.version() >= QSmartCardData::VER_3_5 && Configuration::instance().object().contains("EIDUPDATER-URL-35"))
+					Configuration::instance().object().contains("EIDUPDATER-URL-35")
 				) && (
 					!t.authCert().validateEncoding() ||
 					!t.signCert().validateEncoding() ||
@@ -1085,18 +1084,24 @@ void MainWindow::updateData()
 		if( d->dataWidget->currentIndex() == PageEmpty )
 			setDataPage( t.retryCount( QSmartCardData::PukType ) == 0 ? PagePukInfo : PageCert );
 
-		if( d->smartcard->property( "lastcard" ).toString() != t.card() &&
-			t.version() == QSmartCardData::VER_3_0 )
+		if(d->smartcard->property( "lastcard" ).toString() != t.card() &&
+			t.version() == QSmartCardData::VER_3_4 && (
+				t.authCert().signatureAlgorithm() == "sha1WithRSAEncryption" ||
+				t.signCert().signatureAlgorithm() == "sha1WithRSAEncryption"
+			))
 		{
-			QMessageBox box( QMessageBox::Warning, windowTitle(), tr(
-				"This document is not supported for electronic use from 24.07.13, for additional information please contact "
-				"<a href=\"http://www.politsei.ee/en/teenused/isikut-toendavad-dokumendid/id-kaardi-uuendamine.dot\">Police and Border Guard Board</a>."),
-				QMessageBox::Ok, this );
-			if( QLabel *lbl = box.findChild<QLabel*>() )
-				lbl->setOpenExternalLinks( true );
+			QMessageBox box(QMessageBox::Warning, windowTitle(), tr(
+				"Your ID-card certificates cannot be renewed starting from 01.07.2017. Your document is still valid until "
+				"its expiring date and it can be used to login to e-services and give digital signatures. If there are "
+				"problems using Your ID-card in e-services please contact ID-card helpdesk by phone (+372) 677 3377 or "
+				"visit Police and Border Guard Board service point.<br /><br />"
+				"<a href=\"http://id.ee/?id=30519&read=38011\">More info</a>"),
+				QMessageBox::Ok, this);
+			if(QLabel *lbl = box.findChild<QLabel*>())
+				lbl->setOpenExternalLinks(true);
 			box.exec();
 		}
-		d->smartcard->setProperty( "lastcard", t.card() );
+		d->smartcard->setProperty("lastcard", t.card());
 
 #ifdef Q_OS_WIN
 		CertStore store;
