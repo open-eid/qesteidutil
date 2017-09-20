@@ -557,10 +557,6 @@ Uue PUK koodi saamiseks, külasta klienditeeninduspunkti, kust saad koodiümbrik
 &lt;p&gt;Kui sa ei tea oma ID-kaardi PUK koodi, külasta klienditeeninduspunkti, kust saad uue koodiümbriku.&lt;/p&gt;</translation>
     </message>
     <message>
-        <source>This document is not supported for electronic use from 24.07.13, for additional information please contact &lt;a href=&quot;http://www.politsei.ee/en/teenused/isikut-toendavad-dokumendid/id-kaardi-uuendamine.dot&quot;&gt;Police and Border Guard Board&lt;/a&gt;.</source>
-        <translation>Käesolevat dokumenti ei ole võimalik elektrooniliselt kasutada alates 24.07.13, palun pöörduge lisainfo saamiseks &lt;a href=&quot;http://www.politsei.ee/et/teenused/isikut-toendavad-dokumendid/id-kaardi-uuendamine.dot&quot;&gt;Politsei-ja Piirivalveametisse&lt;/a&gt;.</translation>
-    </message>
-    <message>
         <source>There was an error with request to Äriregister.</source>
         <translation>Äriregistri päringu tegemisel tekkis viga.</translation>
     </message>
@@ -597,6 +593,10 @@ Uuendamise protseduur võtab aega 2-10 minutit ning eeldab toimivat internetiüh
     <message>
         <source>To change PIN code on PinPad reader old PIN code has to be entered first and then the new PIN code twice.</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Your ID-card certificates cannot be renewed starting from 01.07.2017. Your document is still valid until its expiring date and it can be used to login to e-services and give digital signatures. If there are problems using Your ID-card in e-services please contact ID-card helpdesk by phone (+372) 677 3377 or visit Police and Border Guard Board service point.&lt;br /&gt;&lt;br /&gt;&lt;a href=&quot;http://id.ee/?id=30519&amp;read=38011&quot;&gt;More info&lt;/a&gt;</source>
+        <translation>Teie ID-kaardi sertifikaate ei ole võimalik alates 01.07.2017 uuendada. Dokument kehtib oma kehtivusaja lõpuni ning sellega saab endiselt e-teenustesse sisse logida ning digiallkirja anda. Kui e-teenuste kasutamisel tekib tõrkeid, helistage ID-kaardi infotelefonile numbril 1777 või pöörduge Politsei- ja Piirivalveameti teeninduspunkti.&lt;br /&gt;&lt;br /&gt;&lt;a href=&quot;http://id.ee/?id=30007&amp;read=38010&quot;&gt;Lisainfo&lt;/a&gt;</translation>
     </message>
 </context>
 <context>

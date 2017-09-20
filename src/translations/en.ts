@@ -557,10 +557,6 @@ Please visit the service center to obtain new codes. &lt;a href=&quot;http://www
 &lt;p&gt;If you do not know the PUK code for your ID-card, please visit the service center to obtain new PIN codes.&lt;/p&gt;</translation>
     </message>
     <message>
-        <source>This document is not supported for electronic use from 24.07.13, for additional information please contact &lt;a href=&quot;http://www.politsei.ee/en/teenused/isikut-toendavad-dokumendid/id-kaardi-uuendamine.dot&quot;&gt;Police and Border Guard Board&lt;/a&gt;.</source>
-        <translation>This document is not supported for electronic use from 24.07.13, for additional information please contact &lt;a href=&quot;http://www.politsei.ee/en/teenused/isikut-toendavad-dokumendid/id-kaardi-uuendamine.dot&quot;&gt;Police and Border Guard Board&lt;/a&gt;.</translation>
-    </message>
-    <message>
         <source>There was an error with request to Äriregister.</source>
         <translation>There was an error with request to Äriregister.</translation>
     </message>
@@ -597,6 +593,10 @@ Updating takes ca 2-10 minutes and requires an active internet connection. Do no
     <message>
         <source>To change PIN code on PinPad reader old PIN code has to be entered first and then the new PIN code twice.</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Your ID-card certificates cannot be renewed starting from 01.07.2017. Your document is still valid until its expiring date and it can be used to login to e-services and give digital signatures. If there are problems using Your ID-card in e-services please contact ID-card helpdesk by phone (+372) 677 3377 or visit Police and Border Guard Board service point.&lt;br /&gt;&lt;br /&gt;&lt;a href=&quot;http://id.ee/?id=30519&amp;read=38011&quot;&gt;More info&lt;/a&gt;</source>
+        <translation>Your ID-card certificates cannot be renewed starting from 01.07.2017. Your document is still valid until its expiring date and it can be used to login to e-services and give digital signatures. If there are problems using Your ID-card in e-services please contact ID-card helpdesk by phone (+372) 677 3377 or visit Police and Border Guard Board service point.&lt;br /&gt;&lt;br /&gt;&lt;a href=&quot;http://id.ee/?id=30519&amp;read=38011&quot;&gt;More info&lt;/a&gt;</translation>
     </message>
 </context>
 <context>
