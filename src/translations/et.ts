@@ -68,14 +68,6 @@
         <translation>Kontrolli @eesti.ee e-posti seadistust</translation>
     </message>
     <message>
-        <source>Mobiil-ID</source>
-        <translation>Mobiil-ID</translation>
-    </message>
-    <message>
-        <source>Check Mobiil-ID status</source>
-        <translation>Kontrolli Mobiil-ID staatust</translation>
-    </message>
-    <message>
         <source>Change PUK</source>
         <translation>Muuda PUK</translation>
     </message>
@@ -196,10 +188,6 @@ Uue PUK koodi saamiseks, külasta klienditeeninduspunkti, kust saad koodiümbrik
         <translation>Laadin e-posti seadeid</translation>
     </message>
     <message>
-        <source>Requesting Mobiil-ID status</source>
-        <translation>Laadin Mobiil-ID staatuse infot</translation>
-    </message>
-    <message>
         <source>Loading picture</source>
         <translation>Laadin pilti</translation>
     </message>
@@ -214,10 +202,6 @@ Uue PUK koodi saamiseks, külasta klienditeeninduspunkti, kust saad koodiümbrik
     <message>
         <source>Failed loading email settings.</source>
         <translation>E-posti aadresside laadimine ebaõnnestus.</translation>
-    </message>
-    <message>
-        <source>Failed loading Mobiil-ID settings.</source>
-        <translation>Mobiil-ID seadete laadimine ebaõnnestus.</translation>
     </message>
     <message>
         <source>Updating certificates</source>
@@ -318,46 +302,6 @@ Uue PUK koodi saamiseks, külasta klienditeeninduspunkti, kust saad koodiümbrik
     <message>
         <source>Forwarding is activated and you have been sent an email with activation key. Forwarding will be activated only after confirming the key.</source>
         <translation>Suunamine on salvestatud, ning sinule on saadetud kiri edasisuunamisaadressi aktiveerimisvõtmega. Suunamine on kasutatav ainult pärast aktiveerimisvõtme sisestamist.</translation>
-    </message>
-    <message>
-        <source>User has no Mobiil-ID certificates.</source>
-        <translation>Kasutajal puuduvad Mobiil-ID sertifikaadid.</translation>
-    </message>
-    <message>
-        <source>Server could not read or validate ID card certificate!</source>
-        <translation>Server ei suutnud lugeda või valideerida ID-kaardi sertifikaati!</translation>
-    </message>
-    <message>
-        <source>Service internal error!</source>
-        <translation>Teenuse sisemine viga!</translation>
-    </message>
-    <message>
-        <source>Mobile interface not ready!</source>
-        <translation>Liides ei ole veel töökorras!</translation>
-    </message>
-    <message>
-        <source>certificates are active and Mobiil-ID is usable.</source>
-        <translation>sertifikaadid on aktiivsed ja Mobiil-ID kasutamine on võimalik.</translation>
-    </message>
-    <message>
-        <source>certificates are inactive, to use Mobiil-ID certificates must be activated.</source>
-        <translation>sertifikaadid on aktiveerimata, Mobiil-ID kasutamiseks on vajalik sertifikaatide aktiveerimine.</translation>
-    </message>
-    <message>
-        <source>certificates are suspended. To use Mobiil-ID these must be active.</source>
-        <translation>sertifikaadid on peatatud, Mobiil-ID kasutamiseks on vajalik peatatuse lõpetamine.</translation>
-    </message>
-    <message>
-        <source>certificates are revoked. To use Mobiil-ID, a new SIM card must be requested from service provider.</source>
-        <translation>sertifikaadid on tunnistatud kehtetuks. Mobiil-ID kasutamiseks on vajalik hankida operaatorilt uus Mobiil-ID SIM kaart.</translation>
-    </message>
-    <message>
-        <source>certificates status is unknown</source>
-        <translation>sertifikaadi olek teadmata</translation>
-    </message>
-    <message>
-        <source>certificates are expired. New SIM card has to be requested from the Service provider.</source>
-        <translation>sertifikaadid on aegunud. Vajalik on operaatorilt uue SIM kaardi hankimine.</translation>
     </message>
     <message>
         <source>&lt;p&gt;PUK code is used for unblocking the certificates, when PIN1 or PIN2 has been entered 3 times incorrectly.&lt;/p&gt;
@@ -481,22 +425,6 @@ Uue PUK koodi saamiseks, külasta klienditeeninduspunkti, kust saad koodiümbrik
         <translation>PinPad lugejaga PIN blokeeringu tühistamiseks tuleb kõigepealt sisestada PUK ning siis kaks korda PIN.</translation>
     </message>
     <message>
-        <source>Mobile operator</source>
-        <translation>Mobiili operaator</translation>
-    </message>
-    <message>
-        <source>Mobile status</source>
-        <translation>Staatus</translation>
-    </message>
-    <message>
-        <source>Certificates are valid till</source>
-        <translation>Sertifikaadid kehtivad kuni</translation>
-    </message>
-    <message>
-        <source>Activate Mobiil-ID</source>
-        <translation>Aktiveeri Mobiil-ID teenus</translation>
-    </message>
-    <message>
         <source>Save picture</source>
         <translation>Salvesta pilt</translation>
     </message>
@@ -513,10 +441,6 @@ Uue PUK koodi saamiseks, külasta klienditeeninduspunkti, kust saad koodiümbrik
         <translation>Tühistan %1 koodi blokeeringut</translation>
     </message>
     <message>
-        <source>http://politsei.ee/en/teenused/isikut-toendavad-dokumendid/mobiil-id/</source>
-        <translation>http://politsei.ee/et/teenused/isikut-toendavad-dokumendid/mobiil-id/</translation>
-    </message>
-    <message>
         <source>PCSC service is not running</source>
         <translation>SmartCard/PCSC teenus ei tööta</translation>
     </message>
@@ -527,12 +451,6 @@ Uue PUK koodi saamiseks, külasta klienditeeninduspunkti, kust saad koodiümbrik
     <message>
         <source>Languages</source>
         <translation>Keeled</translation>
-    </message>
-    <message>
-        <source>Mobiil-ID is the possibility to use a mobile phone instead of an ID-card for identification and digital signing.&lt;br /&gt;More info from &lt;a href=&quot;http://mobiil.id.ee&quot;&gt;mobiil.id.ee&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;
-To use Mobiil-ID a SIM card that supports this feature has to be used. If such a SIM card is already purchased, then it has to be activated.</source>
-        <translation>Mobiil-ID on võimalus kasutada isikutuvastamiseks ja digitaalallkirja andmiseks ID-kaardi asemel mobiiltelefoni.&lt;br /&gt;Loe täpsemalt mobiil.id.ee kodulehelt &lt;a href=&quot;http://mobiil.id.ee&quot;&gt;mobiil.id.ee&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;
-Mobiil-ID kasutamiseks on vajalik uus SIM-kaart, mille sa saad endale mobiilsideoperaatori käest. Kui selline kaart on sul juba olemas, tuleb teenus aktiveerida.</translation>
     </message>
     <message>
         <source>Load picture</source>
@@ -676,6 +594,10 @@ Uuendamise protseduur võtab aega 2-10 minutit ning eeldab toimivat internetiüh
         <source>Attempts left: %1</source>
         <translation>Katseid jäänud: %1</translation>
     </message>
+    <message>
+        <source>To change PIN code on PinPad reader old PIN code has to be entered first and then the new PIN code twice.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SSLConnect</name>
@@ -686,10 +608,6 @@ Uuendamise protseduur võtab aega 2-10 minutit ning eeldab toimivat internetiüh
     <message>
         <source>Loading Email info</source>
         <translation>Laadin e-posti seadeid</translation>
-    </message>
-    <message>
-        <source>Loading Mobile info</source>
-        <translation>Laadin Molbiil-ID seadeid</translation>
     </message>
     <message>
         <source>Downloading picture</source>

@@ -111,19 +111,6 @@ QByteArray SSLConnect::getUrl( RequestType type, const QString &value )
 	HTTPRequest req;
 	switch( type )
 	{
-	case MobileInfo:
-	{
-		label = tr("Loading Mobile info");
-		SOAPDocument s( "GetMIDTokens", "urn:GetMIDTokens" );
-		s.writeEndDocument();
-		req = HTTPRequest("POST", "1.1", obj.value("MID-URL").toString("https://id.sk.ee/MIDInfoWS/"));
-		req.setRawHeader( "Content-Type", "text/xml" );
-		req.setRawHeader( "SOAPAction", QByteArray() );
-		req.setRawHeader( "Connection", "close" );
-		req.setContent( s.document() );
-		contentType = "text/xml";
-		break;
-	}
 	case EmailInfo:
 		label = tr("Loading Email info");
 		req = HTTPRequest("GET", "1.0",

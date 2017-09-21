@@ -73,7 +73,7 @@ QPushButton:disabled {
 background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #A3AFC0, stop: 0.75 #80909D);
 border: 0px;
  }
-#buttonCert, #buttonEmail, #buttonMobile, #buttonPuk {
+#buttonCert, #buttonEmail, #buttonPuk {
 font-weight: bold;
 font-size: 14px;
 text-align: left;
@@ -141,7 +141,7 @@ color: #355670;
 
 #dataWidget { padding-top: 5px; }
 
-#signLabel, #authLabel, #emailLabel, #emailStatusLabel, #mobileLabel, #mobileStatusLabel, #PUKLabel, #PIN1ChangeLabel, #PIN2ChangeLabel, #PUKChangeLabel
+#signLabel, #authLabel, #emailLabel, #emailStatusLabel, #PUKLabel, #PIN1ChangeLabel, #PIN2ChangeLabel, #PUKChangeLabel
 {
 color: #54859b;
 font-weight: bold;
@@ -431,19 +431,6 @@ border-radius: 10px;
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="buttonMobile">
-           <property name="text">
-            <string>Mobiil-ID</string>
-           </property>
-           <property name="checkable">
-            <bool>true</bool>
-           </property>
-           <property name="flat">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item>
           <widget class="QPushButton" name="buttonPuk">
            <property name="text">
             <string>PUK code</string>
@@ -689,7 +676,7 @@ border-radius: 10px;
       <item row="4" column="0" colspan="2">
        <widget class="QStackedWidget" name="dataWidget">
         <property name="currentIndex">
-         <number>6</number>
+         <number>0</number>
         </property>
         <widget class="QLabel" name="pageEmpty">
          <property name="pixmap">
@@ -1271,148 +1258,6 @@ Updating takes ca 2-10 minutes and requires an active internet connection. Do no
              <size>
               <width>20</width>
               <height>74</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-         </layout>
-        </widget>
-        <widget class="QWidget" name="pageMobile">
-         <layout class="QVBoxLayout" name="pageMobileLayout">
-          <property name="leftMargin">
-           <number>0</number>
-          </property>
-          <property name="topMargin">
-           <number>0</number>
-          </property>
-          <property name="rightMargin">
-           <number>0</number>
-          </property>
-          <property name="bottomMargin">
-           <number>0</number>
-          </property>
-          <item>
-           <widget class="QLabel" name="mobileLabel">
-            <property name="text">
-             <string>Mobiil-ID</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="mobileStatus">
-            <property name="wordWrap">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QWidget" name="checkMobileFrame" native="true">
-            <layout class="QGridLayout" name="checkMobileFrameLayout">
-             <property name="leftMargin">
-              <number>0</number>
-             </property>
-             <property name="topMargin">
-              <number>0</number>
-             </property>
-             <property name="rightMargin">
-              <number>0</number>
-             </property>
-             <property name="bottomMargin">
-              <number>0</number>
-             </property>
-             <item row="0" column="0" colspan="2">
-              <widget class="QLabel" name="mobileInfo">
-               <property name="text">
-                <string>Mobiil-ID is the possibility to use a mobile phone instead of an ID-card for identification and digital signing.&lt;br /&gt;More info from &lt;a href=&quot;http://mobiil.id.ee&quot;&gt;mobiil.id.ee&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;
-To use Mobiil-ID a SIM card that supports this feature has to be used. If such a SIM card is already purchased, then it has to be activated.</string>
-               </property>
-               <property name="wordWrap">
-                <bool>true</bool>
-               </property>
-               <property name="openExternalLinks">
-                <bool>true</bool>
-               </property>
-               <property name="textInteractionFlags">
-                <set>Qt::LinksAccessibleByKeyboard|Qt::LinksAccessibleByMouse</set>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0">
-              <widget class="QPushButton" name="checkMobile">
-               <property name="text">
-                <string>Check Mobiil-ID status</string>
-               </property>
-               <property name="flat">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="1">
-              <spacer name="checkMobileSpacer">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>385</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-            </layout>
-           </widget>
-          </item>
-          <item>
-           <widget class="QWidget" name="mobileActivateFrame" native="true">
-            <layout class="QHBoxLayout" name="mobileActivateLayout">
-             <property name="leftMargin">
-              <number>0</number>
-             </property>
-             <property name="topMargin">
-              <number>0</number>
-             </property>
-             <property name="rightMargin">
-              <number>0</number>
-             </property>
-             <property name="bottomMargin">
-              <number>0</number>
-             </property>
-             <item>
-              <widget class="QPushButton" name="mobileActivate">
-               <property name="text">
-                <string>Activate Mobiil-ID</string>
-               </property>
-               <property name="flat">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <spacer name="mobileActivateSpacer">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>434</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-            </layout>
-           </widget>
-          </item>
-          <item>
-           <spacer name="mobileSpacer">
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>115</width>
-              <height>15</height>
              </size>
             </property>
            </spacer>
@@ -2725,22 +2570,6 @@ Please visit the service center to obtain new codes. &lt;a href=&quot;http://www
     <hint type="sourcelabel">
      <x>83</x>
      <y>231</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>292</x>
-     <y>267</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>buttonMobile</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>pageButtonClicked()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>83</x>
-     <y>263</y>
     </hint>
     <hint type="destinationlabel">
      <x>292</x>
