@@ -595,7 +595,7 @@ Updating takes ca 2-10 minutes and requires an active internet connection. Do no
         <translation>Attempts left: %1</translation>
     </message>
     <message>
-        <source>To change PIN code on PinPad reader old PIN code have to be entered first and then new PIN code twice.</source>
+        <source>To change PIN code on PinPad reader old PIN code has to be entered first and then the new PIN code twice.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
