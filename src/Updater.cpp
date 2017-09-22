@@ -41,11 +41,25 @@
 
 #include <openssl/evp.h>
 #include <openssl/rsa.h>
+#include <openssl/ecdsa.h>
 
 #include <memory>
 #include <thread>
 
 #define APDU(hex) QByteArray::fromHex(hex)
+
+#if OPENSSL_VERSION_NUMBER < 0x10010000L
+static int ECDSA_SIG_set0(ECDSA_SIG *sig, BIGNUM *r, BIGNUM *s)
+{
+	if(!r || !s)
+		return 0;
+	BN_clear_free(sig->r);
+	BN_clear_free(sig->s);
+	sig->r = r;
+	sig->s = s;
+	return 1;
+}
+#endif
 
 class UpdaterPrivate: public Ui::Updater
 {
@@ -53,10 +67,11 @@ public:
 	QPCSCReader *reader = nullptr;
 	QPushButton *close = nullptr, *details = nullptr;
 #if OPENSSL_VERSION_NUMBER < 0x10010000L || defined(LIBRESSL_VERSION_NUMBER)
-	RSA_METHOD method = *RSA_get_default_method();
+	RSA_METHOD rsamethod = *RSA_get_default_method();
 #else
-	RSA_METHOD *method = RSA_meth_dup(RSA_get_default_method());
+	RSA_METHOD *rsamethod = RSA_meth_dup(RSA_get_default_method());
 #endif
+	ECDSA_METHOD *ecmethod = ECDSA_METHOD_new(nullptr);
 	QSslCertificate cert;
 	QString session;
 	QNetworkRequest request;
@@ -64,17 +79,15 @@ public:
 	QtMessageHandler oldMsgHandler = nullptr;
 	QTimeLine *statusTimer = nullptr;
 
-	static int rsa_sign(int type, const unsigned char *m, unsigned int m_len,
-		unsigned char *sigret, unsigned int *siglen, const RSA *rsa)
+	static QByteArray sign(const unsigned char *dgst, int digst_len, UpdaterPrivate *d)
 	{
-		UpdaterPrivate *d = (UpdaterPrivate*)RSA_get_app_data(rsa);
-		if(type != NID_md5_sha1 || m_len != 36 || !d || !d->reader || !d->reader->connect())
-			return 0;
+		if(!d || !d->reader || !d->reader->connect())
+			return QByteArray();
 
 		if(!d->reader->beginTransaction())
 		{
 			d->reader->disconnect();
-			return 0;
+			return QByteArray();
 		}
 
 		// Set card parameters
@@ -83,22 +96,48 @@ public:
 		{
 			d->reader->endTransaction();
 			d->reader->disconnect();
-			return 0;
+			return QByteArray();
 		}
 
 		// calc signature
 		QByteArray cmd = APDU("00880000 00");
-		cmd[4] = m_len;
-		cmd += QByteArray::fromRawData((const char*)m, m_len);
+		cmd[4] = digst_len;
+		cmd += QByteArray::fromRawData((const char*)dgst, digst_len);
 		QPCSCReader::Result result = d->reader->transfer(cmd);
 		d->reader->endTransaction();
 		d->reader->disconnect();
-		if(!result.resultOk())
-			return 0;
+		if(!result)
+			return QByteArray();
+		result.data;
+	}
 
-		*siglen = (unsigned int)result.data.size();
-		memcpy(sigret, result.data.constData(), result.data.size());
+	static int rsa_sign(int type, const unsigned char *m, unsigned int m_len,
+		unsigned char *sigret, unsigned int *siglen, const RSA *rsa)
+	{
+		if(type != NID_md5_sha1 || m_len != 36)
+			return 0;
+		QByteArray result = sign(m, int(m_len), (UpdaterPrivate*)RSA_get_app_data(rsa));
+		if(result.isEmpty())
+			return 0;
+		*siglen = (unsigned int)result.size();
+		memcpy(sigret, result.constData(), size_t(result.size()));
 		return 1;
+	}
+
+	static ECDSA_SIG* ecdsa_do_sign(const unsigned char *dgst, int dgst_len,
+		const BIGNUM *inv, const BIGNUM *rp, EC_KEY *eckey)
+	{
+		QByteArray result = sign(dgst, dgst_len,
+			(UpdaterPrivate*)EC_KEY_get_key_method_data(eckey, nullptr, nullptr, nullptr));
+		if(result.isEmpty())
+			return nullptr;
+		QByteArray r = result.left(result.size()/2);
+		QByteArray s = result.right(result.size()/2);
+		ECDSA_SIG *sig = ECDSA_SIG_new();
+		ECDSA_SIG_set0(sig,
+			BN_bin2bn((const unsigned char*)r.data(), int(r.size()), 0),
+			BN_bin2bn((const unsigned char*)s.data(), int(s.size()), 0));
+		return sig;
 	}
 };
 
@@ -226,12 +265,15 @@ Updater::Updater(const QString &reader, QWidget *parent)
 	d->reader = new QPCSCReader(reader, &QPCSC::instance());
 
 #if OPENSSL_VERSION_NUMBER < 0x10010000L || defined(LIBRESSL_VERSION_NUMBER)
-	d->method.name = "Updater";
-	d->method.rsa_sign = UpdaterPrivate::rsa_sign;
+	d->rsamethod.name = "Updater";
+	d->rsamethod.rsa_sign = UpdaterPrivate::rsa_sign;
 #else
-	RSA_meth_set1_name(d->method, "Updater");
-	RSA_meth_set_sign(d->method, UpdaterPrivate::rsa_sign);
+	RSA_meth_set1_name(d->rsamethod, "Updater");
+	RSA_meth_set_sign(d->rsamethod, UpdaterPrivate::rsa_sign);
 #endif
+	ECDSA_METHOD_set_app_data(d->ecmethod, d);
+	ECDSA_METHOD_set_name(d->ecmethod, const_cast<char*>("QSmartCard"));
+	ECDSA_METHOD_set_sign(d->ecmethod, UpdaterPrivate::ecdsa_do_sign);
 
 	d->details = d->buttonBox->addButton(tr("Details"), QDialogButtonBox::ActionRole);
 	d->close = d->buttonBox->button(QDialogButtonBox::Close);
@@ -261,6 +303,10 @@ Updater::~Updater()
 	d->reader->endTransaction();
 	delete d->reader;
 	qInstallMessageHandler(d->oldMsgHandler);
+#if OPENSSL_VERSION_NUMBER >= 0x10010000L
+	RSA_meth_free(d->rsamethod);
+#endif
+	ECDSA_METHOD_free(d->ecmethod);
 	delete d;
 }
 
@@ -451,17 +497,29 @@ int Updater::exec()
 	EVP_PKEY *key = nullptr;
 	if(!d->cert.isNull())
 	{
-		RSA *rsa = RSAPublicKey_dup((RSA*)d->cert.publicKey().handle());
+		if (d->cert.publicKey().algorithm() == QSsl::Ec)
+		{
+			EC_KEY *ec = EC_KEY_dup((EC_KEY*)d->cert.publicKey().handle());
+			EC_KEY_insert_key_method_data(ec, d, nullptr, nullptr, nullptr);
+			ECDSA_set_method(ec, d->ecmethod);
+			EVP_PKEY *key = EVP_PKEY_new();
+			EVP_PKEY_set1_EC_KEY(key, ec);
+			//EC_KEY_free(ec);
+		}
+		else
+		{
+			RSA *rsa = RSAPublicKey_dup((RSA*)d->cert.publicKey().handle());
 #if OPENSSL_VERSION_NUMBER < 0x10010000L || defined(LIBRESSL_VERSION_NUMBER)
-		RSA_set_method(rsa, &d->method);
-		rsa->flags |= RSA_FLAG_SIGN_VER;
+			RSA_set_method(rsa, &d->rsamethod);
+			rsa->flags |= RSA_FLAG_SIGN_VER;
 #else
-		RSA_set_method(rsa, d->method);
+			RSA_set_method(rsa, d->rsamethod);
 #endif
-		RSA_set_app_data(rsa, d);
-		key = EVP_PKEY_new();
-		EVP_PKEY_set1_RSA(key, rsa);
-		//RSA_free(rsa);
+			RSA_set_app_data(rsa, d);
+			key = EVP_PKEY_new();
+			EVP_PKEY_set1_RSA(key, rsa);
+			//RSA_free(rsa);
+		}
 	}
 
 	// Do connection

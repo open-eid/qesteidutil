@@ -33,7 +33,7 @@
 #include <thread>
 
 #if OPENSSL_VERSION_NUMBER < 0x10010000L
-int ECDSA_SIG_set0(ECDSA_SIG *sig, BIGNUM *r, BIGNUM *s)
+static int ECDSA_SIG_set0(ECDSA_SIG *sig, BIGNUM *r, BIGNUM *s)
 {
 	if(!r || !s)
 		return 0;
@@ -98,7 +98,7 @@ QSharedPointer<QPCSCReader> QSmartCardPrivate::connect(const QString &reader)
 
 QSmartCard::ErrorType QSmartCardPrivate::handlePinResult(QPCSCReader *reader, const QPCSCReader::Result &response, bool forceUpdate)
 {
-	if(!response.resultOk() || forceUpdate)
+	if(!response || forceUpdate)
 		updateCounters(reader, t.d);
 	switch((quint8(response.SW[0]) << 8) + quint8(response.SW[1]))
 	{
@@ -192,8 +192,8 @@ ECDSA_SIG* QSmartCardPrivate::ecdsa_do_sign(const unsigned char *dgst, int dgst_
 
 bool QSmartCardPrivate::updateCounters(QPCSCReader *reader, QSmartCardDataPrivate *d)
 {
-	if(!reader->transfer(MASTER_FILE).resultOk() ||
-		!reader->transfer(PINRETRY).resultOk())
+	if(!reader->transfer(MASTER_FILE) ||
+		!reader->transfer(PINRETRY))
 		return false;
 
 	QByteArray cmd = READRECORD;
@@ -201,18 +201,18 @@ bool QSmartCardPrivate::updateCounters(QPCSCReader *reader, QSmartCardDataPrivat
 	{
 		cmd[2] = char(i);
 		QPCSCReader::Result data = reader->transfer(cmd);
-		if(!data.resultOk())
+		if(!data)
 			return false;
-		d->retry[QSmartCardData::PinType(i)] = data.data[5];
+		d->retry[QSmartCardData::PinType(i)] = quint8(data.data[5]);
 	}
 
-	if(!reader->transfer(ESTEIDDF).resultOk() ||
-		!reader->transfer(KEYPOINTER).resultOk())
+	if(!reader->transfer(ESTEIDDF) ||
+		!reader->transfer(KEYPOINTER))
 		return false;
 
 	cmd[2] = 1;
 	QPCSCReader::Result data = reader->transfer(cmd);
-	if(!data.resultOk())
+	if(!data)
 		return false;
 
 	/*
@@ -224,18 +224,18 @@ bool QSmartCardPrivate::updateCounters(QPCSCReader *reader, QSmartCardDataPrivat
 	quint8 signkey = data.data.at(0x13) == 0x01 && data.data.at(0x14) == 0x00 ? 1 : 2;
 	quint8 authkey = data.data.at(0x09) == 0x11 && data.data.at(0x0A) == 0x00 ? 3 : 4;
 
-	if(!reader->transfer(KEYUSAGE).resultOk())
+	if(!reader->transfer(KEYUSAGE))
 		return false;
 
 	cmd[2] = char(authkey);
 	data = reader->transfer(cmd);
-	if(!data.resultOk())
+	if(!data)
 		return false;
 	d->usage[QSmartCardData::Pin1Type] = 0xFFFFFF - ((quint8(data.data[12]) << 16) + (quint8(data.data[13]) << 8) + quint8(data.data[14]));
 
 	cmd[2] = char(signkey);
 	data = reader->transfer(cmd);
-	if(!data.resultOk())
+	if(!data)
 		return false;
 	d->usage[QSmartCardData::Pin2Type] = 0xFFFFFF - ((quint8(data.data[12]) << 16) + (quint8(data.data[13]) << 8) + quint8(data.data[14]));
 	return true;
@@ -386,7 +386,7 @@ QSmartCard::ErrorType QSmartCard::login(QSmartCardData::PinType type)
 	else
 		result = d->reader->transfer(cmd + pin);
 	QSmartCard::ErrorType err = d->handlePinResult(d->reader.data(), result, false);
-	if(!result.resultOk())
+	if(!result)
 	{
 		d->updateCounters(d->reader.data(), d->t.d);
 		d->reader.clear();
@@ -461,7 +461,7 @@ void QSmartCard::run()
 					QPCSCReader::Result result;
 					#define TRANSFERIFNOT(X) result = reader->transfer(X); \
 						if(result.err) return false; \
-						if(!result.resultOk())
+						if(!result)
 
 					TRANSFERIFNOT(d->MASTER_FILE)
 					{	// Master file selection failed, test if it is updater applet
@@ -541,8 +541,8 @@ void QSmartCard::run()
 						{
 							t->version = QSmartCardData::CardVersion(t->version|QSmartCardData::VER_HASUPDATER);
 							//Prefer EstEID applet when if it is usable
-							if(!reader->transfer(d->AID35).resultOk() ||
-								!reader->transfer(d->MASTER_FILE).resultOk())
+							if(!reader->transfer(d->AID35) ||
+								!reader->transfer(d->MASTER_FILE))
 							{
 								reader->transfer(d->UPDATER_AID);
 								t->version = QSmartCardData::VER_USABLEUPDATER;
@@ -558,7 +558,7 @@ void QSmartCard::run()
 						{
 							cmd[2] = char(data + 1);
 							QPCSCReader::Result result = reader->transfer(cmd);
-							if(!result.resultOk())
+							if(!result)
 							{
 								tryAgain = true;
 								break;
@@ -582,7 +582,7 @@ void QSmartCard::run()
 
 					auto readCert = [&](const QByteArray &file) {
 						QPCSCReader::Result data = reader->transfer(file + APDU(reader->protocol() == QPCSCReader::T1 ? "00" : ""));
-						if(!data.resultOk())
+						if(!data)
 							return QSslCertificate();
 						QHash<quint8,QByteArray> fci = d->parseFCI(data.data);
 						int size = fci.contains(0x85) ? fci[0x85][0] << 8 | fci[0x85][1] : 0x0600;
@@ -593,7 +593,7 @@ void QSmartCard::run()
 							cmd[2] = char(cert.size() >> 8);
 							cmd[3] = char(cert.size());
 							data = reader->transfer(cmd);
-							if(!data.resultOk())
+							if(!data)
 							{
 								tryAgain = true;
 								return QSslCertificate();
@@ -663,7 +663,7 @@ QSmartCard::ErrorType QSmartCard::unblock(QSmartCardData::PinType type, const QS
 		cmd[3] = 0;
 		cmd[4] = char(puk.size());
 		result = reader->transfer(cmd + puk.toUtf8());
-		if(!result.resultOk())
+		if(!result)
 			return d->handlePinResult(reader.data(), result, false);
 	}
 
