@@ -1085,10 +1085,8 @@ void MainWindow::updateData()
 			setDataPage( t.retryCount( QSmartCardData::PukType ) == 0 ? PagePukInfo : PageCert );
 
 		if(d->smartcard->property( "lastcard" ).toString() != t.card() &&
-			t.version() == QSmartCardData::VER_3_4 && (
-				t.authCert().signatureAlgorithm() == "sha1WithRSAEncryption" ||
-				t.signCert().signatureAlgorithm() == "sha1WithRSAEncryption"
-			))
+			t.version() == QSmartCardData::VER_3_4 &&
+			(!t.authCert().validateEncoding() || !t.signCert().validateEncoding()))
 		{
 			QMessageBox box(QMessageBox::Warning, windowTitle(), tr(
 				"Your ID-card certificates cannot be renewed starting from 01.07.2017. Your document is still valid until "
