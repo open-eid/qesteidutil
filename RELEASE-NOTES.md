@@ -1,3 +1,11 @@
+ID-card utility version [3.12.7](https://github.com/open-eid/qesteidutil/releases/tag/v3.12.7) release notes
+--------------------------------------
+- ECDSA token support
+- Remvode M-ID service options
+- Minor fixes
+
+[Full Changelog](https://github.com/open-eid/qesteidutil/compare/v3.12.6...v3.12.7)
+
 ID-card utility version [3.12.6](https://github.com/open-eid/qesteidutil/releases/tag/v3.12.6) release notes
 --------------------------------------
 - Minor fixes
