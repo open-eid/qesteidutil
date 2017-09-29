@@ -53,6 +53,7 @@ class MacMenuBar;
 #include <QtGui/QDesktopServices>
 #include <QtGui/QPainter>
 #include <QtGui/QPaintEvent>
+#include <QtNetwork/QSslKey>
 #include <QtWidgets/QFileDialog>
 #include <QtWidgets/QMessageBox>
 
@@ -1057,18 +1058,12 @@ void MainWindow::updateData()
 			(
 				t.version() >= QSmartCardData::VER_3_5 &&
 				t.retryCount( QSmartCardData::Pin1Type ) > 0 &&
-				t.isValid() && (
-					Configuration::instance().object().contains("EIDUPDATER-URL") ||
-					Configuration::instance().object().contains("EIDUPDATER-URL-35")
-				) && (
-					!t.authCert().validateEncoding() ||
-					!t.signCert().validateEncoding() ||
+				t.isValid() &&
+				Configuration::instance().object().contains("EIDUPDATER-URL-TOECC") && (
+					t.authCert().publicKey().algorithm() == QSsl::Rsa ||
+					t.signCert().publicKey().algorithm() == QSsl::Rsa ||
 					t.version() & QSmartCardData::VER_HASUPDATER ||
-					t.version() == QSmartCardData::VER_USABLEUPDATER ||
-					(Configuration::instance().object().contains("EIDUPDATER-SHA1") && (
-						t.authCert().signatureAlgorithm() == "sha1WithRSAEncryption" ||
-						t.signCert().signatureAlgorithm() == "sha1WithRSAEncryption")
-					)
+					t.version() == QSmartCardData::VER_USABLEUPDATER
 				)
 			)
 		);

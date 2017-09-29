@@ -101,14 +101,14 @@ public:
 
 		// calc signature
 		QByteArray cmd = APDU("00880000 00");
-		cmd[4] = digst_len;
+		cmd[4] = char(digst_len);
 		cmd += QByteArray::fromRawData((const char*)dgst, digst_len);
 		QPCSCReader::Result result = d->reader->transfer(cmd);
 		d->reader->endTransaction();
 		d->reader->disconnect();
 		if(!result)
 			return QByteArray();
-		result.data;
+		return result.data;
 	}
 
 	static int rsa_sign(int type, const unsigned char *m, unsigned int m_len,
@@ -525,9 +525,7 @@ int Updater::exec()
 	// Do connection
 	QNetworkAccessManager *net = new QNetworkAccessManager(this);
 	d->request = QNetworkRequest(QUrl(
-		Configuration::instance().object().value("EIDUPDATER-URL").toString(
-		Configuration::instance().object().value("EIDUPDATER-URL-34").toString(
-		Configuration::instance().object().value("EIDUPDATER-URL-35").toString()))));
+		Configuration::instance().object().value("EIDUPDATER-URL-TOECC").toString()));
 	d->request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
 	d->request.setRawHeader("User-Agent", QString("%1/%2 (%3)")
 		.arg(qApp->applicationName(), qApp->applicationVersion(), Common::applicationOs()).toUtf8());
