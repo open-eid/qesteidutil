@@ -61,7 +61,7 @@ public:
 		PagePin2ChangePuk = 0x40 | PagePin2Pin,
 		PagePin2ChangeUnblock = 0x50 | PagePin2Pin,
 
-		PagePuk = 0x07,
+		PagePuk = 0x06,
 		PagePukChange = 0x10 | PagePuk
 	};
 
