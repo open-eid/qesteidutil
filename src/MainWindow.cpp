@@ -978,7 +978,10 @@ void MainWindow::updateData()
 		d->personalCitizen->setVisible( t.authCert().type() & SslCertificate::EstEidType );
 		d->personalCitizen->setText( t.data( QSmartCardData::Citizen ).toString() );
 		d->personalEmail->setText( t.data( QSmartCardData::Email ).toString() );
-		const QList<QLabel*> list({ d->personalName, d->surName, d->personalCode, d->personalBirth, d->personalCitizen, d->personalEmail });
+		d->personalVersion->setText(t.appletVersion());
+		d->personalVersion->setHidden(t.appletVersion().isEmpty());
+		d->personalVersionLabel->setHidden(t.appletVersion().isEmpty());
+		const QList<QLabel*> list({ d->personalName, d->surName, d->personalCode, d->personalBirth, d->personalCitizen, d->personalEmail, d->personalVersion });
 		for( QLabel *l: list )
 			l->setToolTip( l->text() );
 		d->personalEmail->setText( d->personalEmail->fontMetrics().elidedText(
@@ -1057,6 +1060,7 @@ void MainWindow::updateData()
 			Settings(qApp->applicationName()).value("updateButton", false).toBool() ||
 			(
 				t.version() >= QSmartCardData::VER_3_5 &&
+				t.appletVersion() != "3.5.8" &&
 				t.retryCount( QSmartCardData::Pin1Type ) > 0 &&
 				t.isValid() &&
 				Configuration::instance().object().contains("EIDUPDATER-URL-TOECC") && (
@@ -1119,7 +1123,7 @@ void MainWindow::updateData()
 	{
 		d->certUpdate->setProperty("updateEnabled", false);
 
-		const QList<QLabel*> list({ d->personalName, d->surName, d->personalCode, d->personalBirth, d->personalCitizen, d->personalEmail });
+		const QList<QLabel*> list({ d->personalName, d->surName, d->personalCode, d->personalBirth, d->personalCitizen, d->personalEmail, d->personalVersion });
 		for( QLabel *l: list )
 		{
 			l->clear();

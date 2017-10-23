@@ -72,6 +72,7 @@ SslCertificate QSmartCardData::authCert() const { return d->authCert; }
 SslCertificate QSmartCardData::signCert() const { return d->signCert; }
 quint8 QSmartCardData::retryCount(PinType type) const { return d->retry.value(type); }
 ulong QSmartCardData::usageCount(PinType type) const { return d->usage.value(type); }
+QString QSmartCardData::appletVersion() const { return d->appletVersion; }
 QSmartCardData::CardVersion QSmartCardData::version() const { return d->version; }
 
 QString QSmartCardData::typeString(QSmartCardData::PinType type)
@@ -604,6 +605,15 @@ void QSmartCard::run()
 					};
 					t->authCert = readCert(d->AUTHCERT);
 					t->signCert = readCert(d->SIGNCERT);
+
+					QPCSCReader::Result data = reader->transfer(d->APPLETVER);
+					if (data.resultOk())
+					{
+						if(data.data.size() == 2)
+							t->appletVersion = QString("%1.%2").arg(quint8(data.data[0])).arg(quint8(data.data[1]));
+						else if (data.data.size() == 3)
+							t->appletVersion = QString("%1.%2.%3").arg(quint8(data.data[0])).arg(quint8(data.data[1])).arg(quint8(data.data[2]));
+					}
 
 					t->data[QSmartCardData::Email] = t->authCert.subjectAlternativeNames().values(QSsl::EmailEntry).value(0);
 					if(t->authCert.type() & SslCertificate::DigiIDType)

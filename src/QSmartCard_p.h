@@ -78,12 +78,13 @@ public:
 	const QByteArray CHANGE =		APDU("00240000 00");
 	const QByteArray REPLACE =		APDU("002C0000 00");
 	const QByteArray VERIFY =		APDU("00200000 00");
+	const QByteArray APPLETVER =	APDU("00CA0100 03");
 };
 
 class QSmartCardDataPrivate: public QSharedData
 {
 public:
-	QString card, reader;
+	QString card, reader, appletVersion;
 	QStringList cards, readers;
 	QHash<QSmartCardData::PersonalDataType,QVariant> data;
 	SslCertificate authCert, signCert;
