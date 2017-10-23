@@ -600,6 +600,10 @@ Updating takes ca 2-10 minutes and requires an active internet connection. Do no
         <source>Your ID-card certificates cannot be renewed starting from 01.07.2017. Your document is still valid until its expiring date and it can be used to login to e-services and give digital signatures. If there are problems using Your ID-card in e-services please contact ID-card helpdesk by phone (+372) 677 3377 or visit Police and Border Guard Board service point.&lt;br /&gt;&lt;br /&gt;&lt;a href=&quot;http://id.ee/?id=30519&amp;read=38011&quot;&gt;More info&lt;/a&gt;</source>
         <translation>С 01.07.2017 обновление сертификатов на этой карте больше невозможно. Документ действителен до истечения срока его действия, и его можно использовать для авторизации в дигитальных сервисах и создания дигитальной подписи. Если возникнут проблемы с использованием карты в дигитальных сервисах, обратитесь в службу поддержки ID-карты по телефону (+372) 677 3377 или посетите один из пунктов обслуживания Департамента полиции и пограничной охраны.&lt;br /&gt;&lt;br /&gt;&lt;a href=&quot;http://id.ee/?id=30625&amp;read=38012&quot;&gt;Дополнительная информация&lt;/a&gt;</translation>
     </message>
+    <message>
+        <source>Applet version:</source>
+        <translation>Версия апплета:</translation>
+    </message>
 </context>
 <context>
     <name>SSLConnect</name>

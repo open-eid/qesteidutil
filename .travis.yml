@@ -1,7 +1,7 @@
 language: c++
 sudo: false
 dist: trusty
-osx_image: xcode8.3
+osx_image: xcode9
 services:
 - docker
 matrix:
@@ -18,11 +18,10 @@ matrix:
 env:
   global:
   - BUILD_NUMBER=${TRAVIS_BUILD_NUMBER}
-  - secure: bnnkOxt19gRV75WPsOYjT33wALBe/L1quzMZD8+SY6tM+H7TAZY4490pESEBN+KkrBRhUa8ro2AutVYR4GpVxwOQdXC9KdFnFCqLHsCIhZaBf9H1a/+/gL1bNMiK16XJ6Doz8RidO/m7e0OobulfbbLnBSpgJUwiFkavoO2cfJo=
 
 before_install:
 - git submodule update --init --recursive && if [ "${TRAVIS_OS_NAME}" = "osx" ]; then
-    brew install --force qt5 openssl;
+    brew update && brew install --force qt5 openssl;
   fi
 script: if [ "${TRAVIS_OS_NAME}" = "osx" ]; then
     mkdir build && cd build && cmake -DQt5_DIR=/usr/local/opt/qt5/lib/cmake/Qt5 -DOPENSSL_ROOT_DIR=/usr/local/opt/openssl ..;
@@ -55,8 +54,7 @@ before_deploy:
 - tar czf qesteidutil-${VERSION}.tar.gz --exclude-vcs qesteidutil-${VERSION}
 deploy:
   provider: releases
-  api_key:
-    secure: Mpg0hdhh8cATLbUL7WqttCv8zqfySgGOrLOAzjf8SlF/0k+H7MuOS++VILZVA6MiI2Ii1Vmswz2n+bv0BRELGUVUbvgYEVoXN/KdC7F0567MyoagtPc7mjpdzaEy2a726Rf170VaB26QWAkUiQMvpTpbQF1wliyyHHXSGmghqLQ=
+  api_key: $GITHUB_ACCESS_TOKEN
   file: qesteidutil-${VERSION}.tar.gz
   skip_cleanup: true
   on:
