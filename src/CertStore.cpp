@@ -22,6 +22,7 @@
 #include <common/SslCertificate.h>
 
 #include <QtCore/QtEndian>
+#include <QtNetwork/QSslKey>
 
 #include <qt_windows.h>
 #include <WinCrypt.h>
@@ -101,9 +102,11 @@ bool CertStore::add( const QSslCertificate &cert, const QString &card )
 	CRYPT_DATA_BLOB DataBlob = { (str.length() + 1) * sizeof(QChar), (BYTE*)str.utf16() };
 	CertSetCertificateContextProperty( context, CERT_FRIENDLY_NAME_PROP_ID, 0, &DataBlob );
 
-	CRYPT_KEY_PROV_INFO KeyProvInfo =
+	CRYPT_KEY_PROV_INFO RSAKeyProvInfo =
 	{ &guid[0], L"Microsoft Base Smart Card Crypto Provider", PROV_RSA_FULL, 0, 0, 0, keyCode };
-	CertSetCertificateContextProperty( context, CERT_KEY_PROV_INFO_PROP_ID, 0, &KeyProvInfo );
+	CRYPT_KEY_PROV_INFO ECKeyProvInfo =
+	{ &guid[0], L"Microsoft Smart Card Key Storage Provider", 0, 0, 0, 0, 0 };
+	CertSetCertificateContextProperty(context, CERT_KEY_PROV_INFO_PROP_ID, 0, cert.publicKey().algorithm() == QSsl::Rsa ? &RSAKeyProvInfo : &ECKeyProvInfo);
 
 	bool result = CertAddCertificateContextToStore( d->s, context, CERT_STORE_ADD_REPLACE_EXISTING, 0 );
 	CertFreeCertificateContext( context );
