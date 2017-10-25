@@ -53,10 +53,11 @@ public:
 	volatile bool	terminate = false;
 #if OPENSSL_VERSION_NUMBER < 0x10010000L || defined(LIBRESSL_VERSION_NUMBER)
 	RSA_METHOD		rsamethod = *RSA_get_default_method();
+	ECDSA_METHOD	*ecmethod = ECDSA_METHOD_new(nullptr);
 #else
 	RSA_METHOD		*rsamethod = RSA_meth_dup(RSA_get_default_method());
+	EC_KEY_METHOD	*ecmethod = EC_KEY_METHOD_new(nullptr);
 #endif
-	ECDSA_METHOD	*ecmethod = ECDSA_METHOD_new(nullptr);
 	QTextCodec		*codec = QTextCodec::codecForName("Windows-1252");
 
 	const QByteArray AID30 = APDU("00A40400 10 D2330000010000010000000000000000");

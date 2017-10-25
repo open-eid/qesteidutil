@@ -68,10 +68,11 @@ public:
 	QPushButton *close = nullptr, *details = nullptr;
 #if OPENSSL_VERSION_NUMBER < 0x10010000L || defined(LIBRESSL_VERSION_NUMBER)
 	RSA_METHOD rsamethod = *RSA_get_default_method();
+	ECDSA_METHOD *ecmethod = ECDSA_METHOD_new(nullptr);
 #else
 	RSA_METHOD *rsamethod = RSA_meth_dup(RSA_get_default_method());
+	EC_KEY_METHOD *ecmethod = EC_KEY_METHOD_new(nullptr);
 #endif
-	ECDSA_METHOD *ecmethod = ECDSA_METHOD_new(nullptr);
 	QSslCertificate cert;
 	QString session;
 	QNetworkRequest request;
@@ -127,8 +128,12 @@ public:
 	static ECDSA_SIG* ecdsa_do_sign(const unsigned char *dgst, int dgst_len,
 		const BIGNUM *inv, const BIGNUM *rp, EC_KEY *eckey)
 	{
-		QByteArray result = sign(dgst, dgst_len,
-			(UpdaterPrivate*)EC_KEY_get_key_method_data(eckey, nullptr, nullptr, nullptr));
+#if OPENSSL_VERSION_NUMBER < 0x10010000L
+		UpdaterPrivate *d = (UpdaterPrivate*)EC_KEY_get_key_method_data(eckey, nullptr, nullptr, nullptr);
+#else
+		UpdaterPrivate *d = (UpdaterPrivate*)EC_KEY_get_ex_data(eckey, 0);
+#endif
+		QByteArray result = sign(dgst, dgst_len, d);
 		if(result.isEmpty())
 			return nullptr;
 		QByteArray r = result.left(result.size()/2);
@@ -267,13 +272,14 @@ Updater::Updater(const QString &reader, QWidget *parent)
 #if OPENSSL_VERSION_NUMBER < 0x10010000L || defined(LIBRESSL_VERSION_NUMBER)
 	d->rsamethod.name = "Updater";
 	d->rsamethod.rsa_sign = UpdaterPrivate::rsa_sign;
-#else
-	RSA_meth_set1_name(d->rsamethod, "Updater");
-	RSA_meth_set_sign(d->rsamethod, UpdaterPrivate::rsa_sign);
-#endif
 	ECDSA_METHOD_set_app_data(d->ecmethod, d);
 	ECDSA_METHOD_set_name(d->ecmethod, const_cast<char*>("QSmartCard"));
 	ECDSA_METHOD_set_sign(d->ecmethod, UpdaterPrivate::ecdsa_do_sign);
+#else
+	RSA_meth_set1_name(d->rsamethod, "Updater");
+	RSA_meth_set_sign(d->rsamethod, UpdaterPrivate::rsa_sign);
+	EC_KEY_METHOD_set_sign(d->ecmethod, nullptr, nullptr, UpdaterPrivate::ecdsa_do_sign);
+#endif
 
 	d->details = d->buttonBox->addButton(tr("Details"), QDialogButtonBox::ActionRole);
 	d->close = d->buttonBox->button(QDialogButtonBox::Close);
@@ -305,8 +311,10 @@ Updater::~Updater()
 	qInstallMessageHandler(d->oldMsgHandler);
 #if OPENSSL_VERSION_NUMBER >= 0x10010000L
 	RSA_meth_free(d->rsamethod);
-#endif
+	EC_KEY_METHOD_free(d->ecmethod);
+#else
 	ECDSA_METHOD_free(d->ecmethod);
+#endif
 	delete d;
 }
 
@@ -500,8 +508,13 @@ int Updater::exec()
 		if (d->cert.publicKey().algorithm() == QSsl::Ec)
 		{
 			EC_KEY *ec = EC_KEY_dup((EC_KEY*)d->cert.publicKey().handle());
+#if OPENSSL_VERSION_NUMBER < 0x10010000L
 			EC_KEY_insert_key_method_data(ec, d, nullptr, nullptr, nullptr);
 			ECDSA_set_method(ec, d->ecmethod);
+#else
+			EC_KEY_set_ex_data(ec, 0, d);
+			EC_KEY_set_method(ec, d->ecmethod);
+#endif
 			EVP_PKEY *key = EVP_PKEY_new();
 			EVP_PKEY_set1_EC_KEY(key, ec);
 			//EC_KEY_free(ec);
