@@ -602,6 +602,10 @@ Uuendamise protseduur võtab aega 2-10 minutit ning eeldab toimivat internetiüh
         <source>Applet version:</source>
         <translation>Apleti versioon:</translation>
     </message>
+    <message>
+        <source>This card does not require updating</source>
+        <translation>See kaart ei vaja uuendamist</translation>
+    </message>
 </context>
 <context>
     <name>SSLConnect</name>
