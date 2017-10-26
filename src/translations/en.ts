@@ -602,6 +602,10 @@ Updating takes ca 2-10 minutes and requires an active internet connection. Do no
         <source>Applet version:</source>
         <translation>Applet version:</translation>
     </message>
+    <message>
+        <source>This card does not require updating</source>
+        <translation>This card does not require updating</translation>
+    </message>
 </context>
 <context>
     <name>SSLConnect</name>

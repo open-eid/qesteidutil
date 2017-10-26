@@ -604,6 +604,10 @@ Updating takes ca 2-10 minutes and requires an active internet connection. Do no
         <source>Applet version:</source>
         <translation>Версия апплета:</translation>
     </message>
+    <message>
+        <source>This card does not require updating</source>
+        <translation>Эта карта не нуждается в обновлении</translation>
+    </message>
 </context>
 <context>
     <name>SSLConnect</name>
