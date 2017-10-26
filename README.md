@@ -74,28 +74,30 @@
 
 #### Building OSX Qt from source
 
-    curl -O -L http://download.qt.io/official_releases/qt/5.8/5.8.0/submodules/qtbase-opensource-src-5.8.0.tar.gz
-    tar xf qtbase-opensource-src-5.8.0.tar.gz
-    cd qtbase-opensource-src-5.8.0
-    ./configure -prefix /Developer/Qt-5.8.0 -opensource -nomake tests -nomake examples -no-securetransport -confirm-license
-    make
-    sudo make install
-    cd ..
-    rm -rf qtbase-opensource-src-5.8.0
+    brew install openssl
 
-    curl -O -L http://download.qt.io/official_releases/qt/5.8/5.8.0/submodules/qttools-opensource-src-5.8.0.tar.gz
-    tar xf qttools-opensource-src-5.8.0.tar.gz
-    cd qttools-opensource-src-5.8.0
-    /Developer/Qt-5.8.0/bin/qmake
+    curl -O -L http://download.qt.io/official_releases/qt/5.9/5.9.2/submodules/qtbase-opensource-src-5.9.2.tar.xz
+    tar xf qtbase-opensource-src-5.9.2.tar.xz
+    cd qtbase-opensource-src-5.9.2
+    ./configure -prefix /Developer/Qt-5.9.2 -opensource -nomake tests -nomake examples -no-securetransport -openssl-runtime -confirm-license -I /usr/local/opt/openssl/include -L /usr/local/opt/openssl/lib
     make
     sudo make install
     cd ..
-    rm -rf qttools-opensource-src-5.8.0
+    rm -rf qtbase-opensource-src-5.9.2
+
+    curl -O -L http://download.qt.io/official_releases/qt/5.9/5.9.2/submodules/qttools-opensource-src-5.9.2.tar.xz
+    tar xf qttools-opensource-src-5.9.2.tar.xz
+    cd qttools-opensource-src-5.9.2
+    /Developer/Qt-5.9.2/bin/qmake
+    make
+    sudo make install
+    cd ..
+    rm -rf qttools-opensource-src-5.9.2
 
 ### Windows
 
 1. Install dependencies from
-    * [Visual Studio Express 2013 for Windows Desktop](http://www.visualstudio.com/en-us/products/visual-studio-express-vs.aspx)
+    * [Visual Studio Community 2015](https://www.visualstudio.com/downloads/)
     * [http://www.cmake.org](http://www.cmake.org)
     * [http://qt-project.org](http://qt-project.org)
 2. Fetch the source
