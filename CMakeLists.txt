@@ -14,6 +14,9 @@ include( VersionInfo )
 set_app_name( PROGNAME qesteidutil )
 
 find_package( Qt5 COMPONENTS Core Widgets Network LinguistTools REQUIRED )
+if(UNIX AND NOT APPLE)
+	find_package(Threads)
+endif()
 
 add_subdirectory( common )
 
@@ -42,7 +45,7 @@ add_executable( ${PROGNAME} WIN32 MACOSX_BUNDLE
 	${RESOURCE_FILES}
 )
 add_manifest( ${PROGNAME} )
-target_link_libraries(${PROGNAME} ${ADDITIONAL_LIBRARIES} qdigidoccommon)
+target_link_libraries(${PROGNAME} ${ADDITIONAL_LIBRARIES} qdigidoccommon ${CMAKE_THREAD_LIBS_INIT})
 
 if(APPLE)
 	add_custom_target( macdeployqt DEPENDS ${PROGNAME}
