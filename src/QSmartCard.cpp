@@ -127,7 +127,7 @@ quint16 QSmartCardPrivate::language() const
 	return 0x0000;
 }
 
-QHash<quint8,QByteArray> QSmartCardPrivate::parseFCI(const QByteArray &data) const
+QHash<quint8,QByteArray> QSmartCardPrivate::parseFCI(const QByteArray &data)
 {
 	QHash<quint8,QByteArray> result;
 	for(QByteArray::const_iterator i = data.constBegin(); i != data.constEnd(); ++i)
