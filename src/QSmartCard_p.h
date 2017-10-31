@@ -79,7 +79,7 @@ public:
 	const QByteArray CHANGE =		APDU("00240000 00");
 	const QByteArray REPLACE =		APDU("002C0000 00");
 	const QByteArray VERIFY =		APDU("00200000 00");
-	const QByteArray APPLETVER =	APDU("00CA0100 03");
+	const QByteArray APPLETVER =	APDU("00CA0100 00");
 };
 
 class QSmartCardDataPrivate: public QSharedData

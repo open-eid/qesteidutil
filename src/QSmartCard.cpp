@@ -619,12 +619,21 @@ void QSmartCard::run()
 					t->signCert = readCert(d->SIGNCERT);
 
 					QPCSCReader::Result data = reader->transfer(d->APPLETVER);
+					if (!data && data.SW.at(0) == 0x6C)
+					{
+						QByteArray cmd = d->APPLETVER;
+						cmd[4] = data.SW[1];
+						data = reader->transfer(cmd);
+					}
 					if (data.resultOk())
 					{
-						if(data.data.size() == 2)
-							t->appletVersion = QString("%1.%2").arg(quint8(data.data[0])).arg(quint8(data.data[1]));
-						else if (data.data.size() == 3)
-							t->appletVersion = QString("%1.%2.%3").arg(quint8(data.data[0])).arg(quint8(data.data[1])).arg(quint8(data.data[2]));
+						for(int i = 0; i < data.data.size(); ++i)
+						{
+							if(i == 0)
+								t->appletVersion += QString::number(quint8(data.data[i]));
+							else
+								t->appletVersion += QString(".%1").arg(quint8(data.data[i]));
+						}
 					}
 
 					t->data[QSmartCardData::Email] = t->authCert.subjectAlternativeNames().values(QSsl::EmailEntry).value(0);
