@@ -630,6 +630,7 @@ int Updater::exec()
 			else
 			{
 				d->label->setText("<b><font color=\"red\">" + tr("Invalid content type") + "</font></b>");
+				d->progressRunning->clear();
 				d->close->show();
 			}
 			break;
@@ -637,10 +638,12 @@ int Updater::exec()
 		case QNetworkReply::HostNotFoundError:
 		case QNetworkReply::UnknownNetworkError:
 			d->label->setText("<b><font color=\"red\">" + tr("Updating certificates has failed. Check your internet connection and try again.") + "</font></b>");
+			d->progressRunning->clear();
 			d->close->show();
 			break;
 		case QNetworkReply::SslHandshakeFailedError:
 			d->label->setText("<b><font color=\"red\">" + tr("SSL handshake failed. Please restart the update process.") + "</font></b>");
+			d->progressRunning->clear();
 			d->close->show();
 			break;
 		default:
@@ -653,6 +656,7 @@ int Updater::exec()
 			default:
 				d->label->setText("<b><font color=\"red\">" + reply->errorString() + "</font></b>");
 			}
+			d->progressRunning->clear();
 			d->close->show();
 		}
 		reply->deleteLater();
