@@ -614,7 +614,7 @@ int Updater::exec()
 			d->close->show();
 		});
 		connect(timer, &QTimer::timeout, timer, &QTimer::deleteLater);
-		timer->start(30*1000);
+		timer->start(5*60*1000);
 	}, Qt::QueuedConnection);
 	connect(net, &QNetworkAccessManager::finished, this, [=](QNetworkReply *reply){
 		switch(reply->error())
