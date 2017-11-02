@@ -526,6 +526,7 @@ void QSmartCard::run()
 				QSharedDataPointer<QSmartCardDataPrivate> t = d->t.d;
 				t->card = d->t.cards().first();
 				t->data.clear();
+				t->appletVersion.clear();
 				t->authCert = QSslCertificate();
 				t->signCert = QSslCertificate();
 				d->t.d = t;
@@ -672,6 +673,7 @@ void QSmartCard::selectCard(const QString &card)
 	QSharedDataPointer<QSmartCardDataPrivate> t = d->t.d;
 	t->card = card;
 	t->data.clear();
+	t->appletVersion.clear();
 	t->authCert = QSslCertificate();
 	t->signCert = QSslCertificate();
 	d->t.d = t;
