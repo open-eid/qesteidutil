@@ -956,8 +956,8 @@ void MainWindow::updateData()
 				<< tr("You can find instructions on how to get a new document from "
 					"<a href=\"http://www.politsei.ee/en/teenused/isikut-toendavad-dokumendid/id-kaart/taiskasvanule/\">here</a>")
 				<< "</font>";
-		else if(t.appletVersion() == "3.5.8" || (t.version() == QSmartCardData::VER_3_4 &&
-				t.authCert().validateEncoding() && t.signCert().validateEncoding()))
+		else if((t.appletVersion() == "3.5.8" && !(t.version() & QSmartCardData::VER_HASUPDATER)) ||
+				(t.version() == QSmartCardData::VER_3_4 && t.authCert().validateEncoding() && t.signCert().validateEncoding()))
 			st << "<br /><font style='color: #509b00; font-weight: bold; font-size: 16px;'>" << tr("This card does not require updating") << "</font>";
 		st << "</font>";
 
