@@ -630,7 +630,7 @@ void QSmartCard::run()
 						for(int i = 0; i < data.data.size(); ++i)
 						{
 							if(i == 0)
-								t->appletVersion += QString::number(quint8(data.data[i]));
+								t->appletVersion = QString::number(quint8(data.data[i]));
 							else
 								t->appletVersion += QString(".%1").arg(quint8(data.data[i]));
 						}
