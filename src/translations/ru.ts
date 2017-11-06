@@ -589,10 +589,6 @@ Updating takes ca 2-10 minutes and requires an active internet connection. Do no
         <translation>Осталось попыток: %1</translation>
     </message>
     <message>
-        <source>To change PIN code on PinPad reader old PIN code has to be entered first and then the new PIN code twice.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>%1 have to be different than date of birth or year of birth</source>
         <translation type="unfinished"></translation>
     </message>

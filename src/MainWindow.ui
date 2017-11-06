@@ -1998,7 +1998,7 @@ Please visit the service center to obtain new codes. &lt;a href=&quot;http://www
                 </property>
                 <widget class="QLabel" name="changePin2PinpadInfoPin">
                  <property name="text">
-                  <string>To change PIN code on PinPad reader old PIN code has to be entered first and then the new PIN code twice.</string>
+                  <string>To change PIN code on a PinPad reader the old PIN code has to be entered first and then the new PIN code twice.</string>
                  </property>
                  <property name="wordWrap">
                   <bool>true</bool>
