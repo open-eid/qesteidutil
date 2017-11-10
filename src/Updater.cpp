@@ -671,8 +671,9 @@ void Updater::run()
 	if(!d->reader)
 		return;
 	SslCertificate c(d->cert);
-	bool result = d->reader->connect() &&
+	bool result = d->reader->connect() && d->reader->beginTransaction() &&
 		d->verifyPIN(c.toString( c.showCN() ? "CN serialNumber" : "GN SN serialNumber" ), 1).resultOk();
+	d->reader->endTransaction();
 	d->reader->disconnect();
 	if(!result)
 		return accept();
