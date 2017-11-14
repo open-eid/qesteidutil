@@ -1,3 +1,9 @@
+ID-card utility version [3.12.10](https://github.com/open-eid/qesteidutil/releases/tag/v3.12.10) release notes
+--------------------------------------
+- Minor fixes and text changes
+
+[Full Changelog](https://github.com/open-eid/qesteidutil/compare/v3.12.9...v3.12.10)
+
 ID-card utility version [3.12.9](https://github.com/open-eid/qesteidutil/releases/tag/v3.12.9) release notes
 --------------------------------------
 - Minor fixes and text changes
