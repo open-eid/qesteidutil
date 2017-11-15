@@ -671,9 +671,15 @@ void Updater::run()
 	if(!d->reader)
 		return;
 	SslCertificate c(d->cert);
-	bool result = d->reader->connect() && d->reader->beginTransaction() &&
-		d->verifyPIN(c.toString( c.showCN() ? "CN serialNumber" : "GN SN serialNumber" ), 1).resultOk();
+	if(!d->reader->connect())
+		return accept();
+#ifdef Q_OS_MAC
+	d->reader->beginTransaction();
+#endif
+	bool result = d->verifyPIN(c.toString( c.showCN() ? "CN serialNumber" : "GN SN serialNumber" ), 1).resultOk();
+#ifdef Q_OS_MAC
 	d->reader->endTransaction();
+#endif
 	d->reader->disconnect();
 	if(!result)
 		return accept();
