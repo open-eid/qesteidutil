@@ -125,7 +125,7 @@ public:
 	}
 
 	static ECDSA_SIG* ecdsa_do_sign(const unsigned char *dgst, int dgst_len,
-		const BIGNUM *inv, const BIGNUM *rp, EC_KEY *eckey)
+		const BIGNUM *, const BIGNUM *, EC_KEY *eckey)
 	{
 #if OPENSSL_VERSION_NUMBER < 0x10010000L
 		UpdaterPrivate *d = (UpdaterPrivate*)EC_KEY_get_key_method_data(eckey, nullptr, nullptr, nullptr);
