@@ -38,7 +38,7 @@ script: if [ "${TRAVIS_OS_NAME}" = "osx" ]; then
         export COVERITY_SCAN_PROJECT_NAME="open-eid/qesteidutil";
         export COVERITY_SCAN_NOTIFICATION_EMAIL="raul@metsma.ee";
         export COVERITY_SCAN_BRANCH_PATTERN=coverity_scan;
-        export COVERITY_SCAN_BUILD_COMMAND_PREPEND="cmake -DBREAKPAD=\"\" .";
+        export COVERITY_SCAN_BUILD_COMMAND_PREPEND="cmake .";
         export COVERITY_SCAN_BUILD_COMMAND=make;
         wget https://scan.coverity.com/scripts/travisci_build_coverity_scan.sh;
         bash travisci_build_coverity_scan.sh;
