@@ -55,9 +55,6 @@ int main(int argc, char *argv[])
 	}
 
 	Common app( argc, argv, APP, ":/images/id_icon_128x128.png" );
-	if( app.isCrashReport() )
-		return app.exec();
-
 #ifndef Q_OS_MAC
 	if( app.isRunning() )
 	{
