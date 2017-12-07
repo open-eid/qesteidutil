@@ -32,6 +32,7 @@
 #include <QtCore/QJsonArray>
 #include <QtCore/QJsonDocument>
 #include <QtCore/QJsonObject>
+#include <QtCore/QLoggingCategory>
 #include <QtCore/QTimeLine>
 #include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkProxy>
@@ -46,6 +47,8 @@
 
 #include <memory>
 #include <thread>
+
+Q_LOGGING_CATEGORY(ULog,"qesteidutil.Updater")
 
 #if OPENSSL_VERSION_NUMBER < 0x10010000L
 static int ECDSA_SIG_set0(ECDSA_SIG *sig, BIGNUM *r, BIGNUM *s)
@@ -258,6 +261,7 @@ Updater::Updater(const QString &reader, QWidget *parent)
 	: QDialog(parent)
 	, d(new UpdaterPrivate)
 {
+	const_cast<QLoggingCategory&>(ULog()).setEnabled(QtDebugMsg, true);
 	d->setupUi(this);
 	setWindowFlags(((windowFlags() & ~Qt::WindowContextHelpButtonHint) | Qt::CustomizeWindowHint) & ~Qt::WindowCloseButtonHint);
 	d->statusTimer = new QTimeLine(d->pinProgress->maximum() * 1000, d->pinProgress);
@@ -320,9 +324,9 @@ Updater::~Updater()
 void Updater::process(const QByteArray &data)
 {
 #if QT_VERSION >= 0x050400
-	qDebug().noquote() << ">" << data;
+	qCDebug(ULog).noquote() << ">" << data;
 #else
-	qDebug() << ">" << data;
+	qCDebug(ULog) << ">" << data;
 #endif
 	QJsonObject obj = QJsonDocument::fromJson(data).object();
 
@@ -543,7 +547,7 @@ int Updater::exec()
 	d->request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
 	d->request.setRawHeader("User-Agent", QString("%1/%2 (%3)")
 		.arg(qApp->applicationName(), qApp->applicationVersion(), Common::applicationOs()).toUtf8());
-	qDebug() << "Connecting to" << d->request.url().toString();
+	qCDebug(ULog) << "Connecting to" << d->request.url().toString();
 
 	QSslConfiguration ssl = QSslConfiguration::defaultConfiguration();
 	QList<QSslCertificate> trusted;
@@ -576,7 +580,7 @@ int Updater::exec()
 	proxy.setPassword(s.value("PROXY-PASS", proxy.password()).toString());
 	proxy.setType(QNetworkProxy::HttpProxy);
 	net->setProxy(proxy.hostName().isEmpty() ? QNetworkProxy() : proxy);
-	qDebug() << "Proxy" << proxy.hostName() << ":" << proxy.port() << "User" << proxy.user();
+	qCDebug(ULog) << "Proxy" << proxy.hostName() << ":" << proxy.port() << "User" << proxy.user();
 
 	connect(net, &QNetworkAccessManager::sslErrors, this, [=](QNetworkReply *reply, const QList<QSslError> &errors){
 		QList<QSslError> ignore;
@@ -602,9 +606,9 @@ int Updater::exec()
 			resp[i.key()] = QJsonValue::fromVariant(i.value());
 		QByteArray data = QJsonDocument(resp).toJson(QJsonDocument::Compact);
 #if QT_VERSION >= 0x050400
-		qDebug().noquote() << "<" << data;
+		qCDebug(ULog).noquote() << "<" << data;
 #else
-		qDebug() << "<" << data;
+		qCDebug(ULog) << "<" << data;
 #endif
 		QNetworkReply *reply = net->post(d->request, data);
 		QTimer *timer = new QTimer(this);
