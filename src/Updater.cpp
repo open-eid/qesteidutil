@@ -422,6 +422,7 @@ void Updater::process(const QByteArray &data)
 		{
 			QPixmap pinEnvelope(QSize(d->message->width(), 100));
 			QPainter p(&pinEnvelope);
+			p.setRenderHint(QPainter::TextAntialiasing);
 			p.fillRect(pinEnvelope.rect(), Qt::white);
 			p.setPen(Qt::black);
 			int pos = result.data.lastIndexOf('#');
