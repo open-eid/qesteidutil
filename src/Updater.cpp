@@ -213,6 +213,7 @@ QPCSCReader::Result UpdaterPrivate::verifyPIN(const QString &title, int p1) cons
 			}).detach();
 			statusTimer->start();
 			l.exec();
+			statusTimer->stop();
 		}
 		else
 		{
