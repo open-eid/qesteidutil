@@ -15,8 +15,6 @@ Source2:        config.pub
 Source3:        config.rsa
 Source4:        config.qrc
 
-Patch0:         sandbox-compilation.patch
-
 BuildRequires:  cmake
 BuildRequires:  desktop-file-utils
 BuildRequires:  pkgconfig(openssl)
