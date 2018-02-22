@@ -74,14 +74,14 @@ if(APPLE)
 elseif(WIN32)
 	if(CMAKE_SIZEOF_VOID_P EQUAL 8)
 		set(PLATFORM x64)
-		list(APPEND CANDLE_EXTRA "-dlibs_path=C:/Openssl-Win64/bin")
+		set(OPENSSL_BIN_DIR "C:/Openssl-Win64/bin")
 	else()
 		set(PLATFORM x86)
-		list(APPEND CANDLE_EXTRA "-dlibs_path=C:/Openssl-Win32/bin")
+		set(OPENSSL_BIN_DIR "C:/Openssl-Win32/bin")
 	endif()
 	set(MSI_FILE "ID-card_utility-${VERSION}$ENV{VER_SUFFIX}.${PLATFORM}")
 	list(APPEND CANDLE_CMD "$ENV{WIX}bin\\candle.exe" -nologo -arch ${PLATFORM}
-		-dMSI_VERSION=${VERSION} -dPlatform=${PLATFORM} ${CANDLE_EXTRA}
+		-dMSI_VERSION=${VERSION} -dPlatform=${PLATFORM} -dlibs_path=${OPENSSL_BIN_DIR}
 		-dutility_path=$<TARGET_FILE:${PROGNAME}> ${CMAKE_SOURCE_DIR}/qesteidutil.wxs -dqtconf=${CMAKE_SOURCE_DIR}/qt.conf
 		${CMAKE_SOURCE_DIR}/cmake/modules/WelcomeDlg2.wxs ${CMAKE_SOURCE_DIR}/cmake/modules/WixUI_Minimal2.wxs)
 	list(APPEND LIGHT_CMD "$ENV{WIX}bin\\light.exe" -nologo qesteidutil.wixobj
@@ -107,6 +107,27 @@ elseif(WIN32)
 			COMMAND ${SIGNCMD} "${MSI_FILE}.en-US.msi" "${MSI_FILE}.et-EE.msi" "${MSI_FILE}.en-US.qt.msi" "${MSI_FILE}.et-EE.qt.msi"
 		)
 	endif()
+	configure_file(AppxManifest.xml.cmake appx/AppxManifest.xml)
+	add_custom_target(appx DEPENDS ${PROGNAME}
+		COMMAND ${CMAKE_COMMAND} -E remove ${MSI_FILE}.appx
+		COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:${PROGNAME}> appx
+		COMMAND ${CMAKE_COMMAND} -E copy ${OPENSSL_BIN_DIR}/libeay32.dll appx
+		COMMAND ${CMAKE_COMMAND} -E copy ${OPENSSL_BIN_DIR}/ssleay32.dll appx
+		COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/Assets appx/Assets
+		COMMAND ${_qt5Core_install_prefix}/bin/windeployqt --no-translations --no-compiler-runtime --no-patchqt appx
+		COMMAND move "appx\\imageformats\\qjpeg*" appx
+		COMMAND ${CMAKE_COMMAND} -E remove_directory appx/bearer
+		COMMAND ${CMAKE_COMMAND} -E remove_directory appx/iconengines
+		COMMAND ${CMAKE_COMMAND} -E remove_directory appx/imageformats
+		COMMAND ${CMAKE_COMMAND} -E remove_directory appx/styles
+		COMMAND ${CMAKE_COMMAND} -E make_directory appx/imageformats
+		COMMAND move "appx\\qjpeg*" "appx\\imageformats"
+		COMMAND makeappx.exe pack -d appx -p ${MSI_FILE}.appx
+		#Popups GUI
+		#COMMAND MakeCert.exe /n "CN=8BBBE4D8-620A-4884-A12A-72F1A2030D8B" /r /h 0 /eku "1.3.6.1.5.5.7.3.3,1.3.6.1.4.1.311.10.3.13" /m 120 /a sha256 /sv qesteidutil.pvk qesteidutil.cer
+		#COMMAND Pvk2Pfx.exe /pvk qesteidutil.pvk /spc qesteidutil.cer /pfx qesteidutil.pfx /f
+		COMMAND signtool.exe sign -f ${CMAKE_SOURCE_DIR}/qesteidutil.pfx -fd SHA256 -v ${MSI_FILE}.appx
+	)
 else()
 	include( GNUInstallDirs )
 	configure_file( qesteidutil.1.cmake qesteidutil.1 )
