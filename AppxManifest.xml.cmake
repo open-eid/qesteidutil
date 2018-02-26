@@ -2,7 +2,7 @@
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
     xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
     xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities">
-  <Identity Name="RiigiInfossteemiAmet.ID-cardutility" ProcessorArchitecture="x86" Version="${PROJECT_VERSION}.0"
+  <Identity Name="RiigiInfossteemiAmet.ID-cardutility" ProcessorArchitecture="${PLATFORM}" Version="${PROJECT_VERSION}.0"
     Publisher="CN=8BBBE4D8-620A-4884-A12A-72F1A2030D8B" />
   <Properties>
     <DisplayName>ID-card utility</DisplayName>
