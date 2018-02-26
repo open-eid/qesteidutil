@@ -107,10 +107,14 @@ elseif(WIN32)
 			COMMAND ${SIGNCMD} "${MSI_FILE}.en-US.msi" "${MSI_FILE}.et-EE.msi" "${MSI_FILE}.en-US.qt.msi" "${MSI_FILE}.et-EE.qt.msi"
 		)
 	endif()
-	configure_file(AppxManifest.xml.cmake appx/AppxManifest.xml)
+	configure_file(AppxManifest.xml.cmake AppxManifest.xml)
 	add_custom_target(appx DEPENDS ${PROGNAME}
 		COMMAND ${CMAKE_COMMAND} -E remove ${MSI_FILE}.appx
+		COMMAND ${CMAKE_COMMAND} -E remove_directory appx
+		COMMAND ${CMAKE_COMMAND} -E make_directory appx
+		COMMAND ${CMAKE_COMMAND} -E copy AppxManifest.xml appx
 		COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:${PROGNAME}> appx
+		COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/qt.conf appx
 		COMMAND ${CMAKE_COMMAND} -E copy ${OPENSSL_BIN_DIR}/libeay32.dll appx
 		COMMAND ${CMAKE_COMMAND} -E copy ${OPENSSL_BIN_DIR}/ssleay32.dll appx
 		COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/Assets appx/Assets
