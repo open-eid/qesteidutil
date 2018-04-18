@@ -23,14 +23,31 @@
 #include <common/CliApplication.h>
 #include <common/Configuration.h>
 
+#ifdef Q_OS_WIN32
+#include <QtCore/QDebug>
+#include <QtCore/qt_windows.h>
+#endif
+
 #include <openssl/ssl.h>
 
 int main(int argc, char *argv[])
 {
 #if QT_VERSION > QT_VERSION_CHECK(5, 6, 0)
 	QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps, true);
+#ifdef Q_OS_WIN32
+	SetProcessDPIAware();
+	HDC screen = GetDC(0);
+	qreal dpix = GetDeviceCaps(screen, LOGPIXELSX);
+	qreal dpiy = GetDeviceCaps(screen, LOGPIXELSY);
+	qreal scale = dpiy / qreal(96);
+	qputenv("QT_SCALE_FACTOR", QByteArray::number(scale));
+	ReleaseDC(NULL, screen);
+	qDebug() << "Current DPI x: " << dpix << " y: " << dpiy << " setting scale:" << scale;
+#else
 	QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling, true);
 #endif
+#endif
+
 	CliApplication cliApp( argc, argv, APP );
 	if( cliApp.isDiagnosticRun() )
 	{
@@ -38,9 +55,6 @@ int main(int argc, char *argv[])
 	}
 
 	Common app( argc, argv, APP, ":/images/id_icon_128x128.png" );
-	if( app.isCrashReport() )
-		return app.exec();
-
 #ifndef Q_OS_MAC
 	if( app.isRunning() )
 	{

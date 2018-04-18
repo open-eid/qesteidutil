@@ -28,6 +28,7 @@
 #include <QtCore/QVariant>
 
 #include <openssl/rsa.h>
+#include <openssl/ecdsa.h>
 
 #define APDU QByteArray::fromHex
 
@@ -37,20 +38,25 @@ public:
 	QSharedPointer<QPCSCReader> connect(const QString &reader);
 	QSmartCard::ErrorType handlePinResult(QPCSCReader *reader, const QPCSCReader::Result &response, bool forceUpdate);
 	quint16 language() const;
-	QHash<quint8,QByteArray> parseFCI(const QByteArray &data) const;
+	static QHash<quint8,QByteArray> parseFCI(const QByteArray &data);
 	bool updateCounters(QPCSCReader *reader, QSmartCardDataPrivate *d);
 
+	static QByteArray sign(const QByteArray &dgst, QSmartCardPrivate *d);
 	static int rsa_sign(int type, const unsigned char *m, unsigned int m_len,
 		unsigned char *sigret, unsigned int *siglen, const RSA *rsa);
+	static ECDSA_SIG* ecdsa_do_sign(const unsigned char *dgst, int dgst_len,
+		const BIGNUM *inv, const BIGNUM *rp, EC_KEY *eckey);
 
 	QSharedPointer<QPCSCReader> reader;
 	QMutex			m;
 	QSmartCardData	t;
 	volatile bool	terminate = false;
 #if OPENSSL_VERSION_NUMBER < 0x10010000L || defined(LIBRESSL_VERSION_NUMBER)
-	RSA_METHOD		method = *RSA_get_default_method();
+	RSA_METHOD		rsamethod = *RSA_get_default_method();
+	ECDSA_METHOD	*ecmethod = ECDSA_METHOD_new(nullptr);
 #else
-	RSA_METHOD		*method = RSA_meth_dup(RSA_get_default_method());
+	RSA_METHOD		*rsamethod = RSA_meth_dup(RSA_get_default_method());
+	EC_KEY_METHOD	*ecmethod = EC_KEY_METHOD_new(nullptr);
 #endif
 	QTextCodec		*codec = QTextCodec::codecForName("Windows-1252");
 
@@ -73,12 +79,13 @@ public:
 	const QByteArray CHANGE =		APDU("00240000 00");
 	const QByteArray REPLACE =		APDU("002C0000 00");
 	const QByteArray VERIFY =		APDU("00200000 00");
+	const QByteArray APPLETVER =	APDU("00CA0100 00");
 };
 
 class QSmartCardDataPrivate: public QSharedData
 {
 public:
-	QString card, reader;
+	QString card, reader, appletVersion;
 	QStringList cards, readers;
 	QHash<QSmartCardData::PersonalDataType,QVariant> data;
 	SslCertificate authCert, signCert;

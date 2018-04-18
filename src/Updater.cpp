@@ -19,6 +19,7 @@
 
 #include "Updater.h"
 #include "ui_Updater.h"
+#include "QSmartCard_p.h"
 
 #include "common/Common.h"
 #include "common/Configuration.h"
@@ -31,6 +32,7 @@
 #include <QtCore/QJsonArray>
 #include <QtCore/QJsonDocument>
 #include <QtCore/QJsonObject>
+#include <QtCore/QLoggingCategory>
 #include <QtCore/QTimeLine>
 #include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkProxy>
@@ -41,11 +43,25 @@
 
 #include <openssl/evp.h>
 #include <openssl/rsa.h>
+#include <openssl/ecdsa.h>
 
 #include <memory>
 #include <thread>
 
-#define APDU(hex) QByteArray::fromHex(hex)
+Q_LOGGING_CATEGORY(ULog,"qesteidutil.Updater")
+
+#if OPENSSL_VERSION_NUMBER < 0x10010000L
+static int ECDSA_SIG_set0(ECDSA_SIG *sig, BIGNUM *r, BIGNUM *s)
+{
+	if(!r || !s)
+		return 0;
+	BN_clear_free(sig->r);
+	BN_clear_free(sig->s);
+	sig->r = r;
+	sig->s = s;
+	return 1;
+}
+#endif
 
 class UpdaterPrivate: public Ui::Updater
 {
@@ -53,9 +69,11 @@ public:
 	QPCSCReader *reader = nullptr;
 	QPushButton *close = nullptr, *details = nullptr;
 #if OPENSSL_VERSION_NUMBER < 0x10010000L || defined(LIBRESSL_VERSION_NUMBER)
-	RSA_METHOD method = *RSA_get_default_method();
+	RSA_METHOD rsamethod = *RSA_get_default_method();
+	ECDSA_METHOD *ecmethod = ECDSA_METHOD_new(nullptr);
 #else
-	RSA_METHOD *method = RSA_meth_dup(RSA_get_default_method());
+	RSA_METHOD *rsamethod = RSA_meth_dup(RSA_get_default_method());
+	EC_KEY_METHOD *ecmethod = EC_KEY_METHOD_new(nullptr);
 #endif
 	QSslCertificate cert;
 	QString session;
@@ -64,17 +82,15 @@ public:
 	QtMessageHandler oldMsgHandler = nullptr;
 	QTimeLine *statusTimer = nullptr;
 
-	static int rsa_sign(int type, const unsigned char *m, unsigned int m_len,
-		unsigned char *sigret, unsigned int *siglen, const RSA *rsa)
+	static QByteArray sign(const unsigned char *dgst, int digst_len, UpdaterPrivate *d)
 	{
-		UpdaterPrivate *d = (UpdaterPrivate*)RSA_get_app_data(rsa);
-		if(type != NID_md5_sha1 || m_len != 36 || !d || !d->reader || !d->reader->connect())
-			return 0;
+		if(!d || !d->reader || !d->reader->connect())
+			return QByteArray();
 
 		if(!d->reader->beginTransaction())
 		{
 			d->reader->disconnect();
-			return 0;
+			return QByteArray();
 		}
 
 		// Set card parameters
@@ -83,22 +99,52 @@ public:
 		{
 			d->reader->endTransaction();
 			d->reader->disconnect();
-			return 0;
+			return QByteArray();
 		}
 
 		// calc signature
 		QByteArray cmd = APDU("00880000 00");
-		cmd[4] = m_len;
-		cmd += QByteArray::fromRawData((const char*)m, m_len);
+		cmd[4] = char(digst_len);
+		cmd += QByteArray::fromRawData((const char*)dgst, digst_len);
 		QPCSCReader::Result result = d->reader->transfer(cmd);
 		d->reader->endTransaction();
 		d->reader->disconnect();
-		if(!result.resultOk())
-			return 0;
+		if(!result)
+			return QByteArray();
+		return result.data;
+	}
 
-		*siglen = (unsigned int)result.data.size();
-		memcpy(sigret, result.data.constData(), result.data.size());
+	static int rsa_sign(int type, const unsigned char *m, unsigned int m_len,
+		unsigned char *sigret, unsigned int *siglen, const RSA *rsa)
+	{
+		if(type != NID_md5_sha1 || m_len != 36)
+			return 0;
+		QByteArray result = sign(m, int(m_len), (UpdaterPrivate*)RSA_get_app_data(rsa));
+		if(result.isEmpty())
+			return 0;
+		*siglen = (unsigned int)result.size();
+		memcpy(sigret, result.constData(), size_t(result.size()));
 		return 1;
+	}
+
+	static ECDSA_SIG* ecdsa_do_sign(const unsigned char *dgst, int dgst_len,
+		const BIGNUM *, const BIGNUM *, EC_KEY *eckey)
+	{
+#if OPENSSL_VERSION_NUMBER < 0x10010000L
+		UpdaterPrivate *d = (UpdaterPrivate*)ECDSA_get_ex_data(eckey, 0);
+#else
+		UpdaterPrivate *d = (UpdaterPrivate*)EC_KEY_get_ex_data(eckey, 0);
+#endif
+		QByteArray result = sign(dgst, dgst_len, d);
+		if(result.isEmpty())
+			return nullptr;
+		QByteArray r = result.left(result.size()/2);
+		QByteArray s = result.right(result.size()/2);
+		ECDSA_SIG *sig = ECDSA_SIG_new();
+		ECDSA_SIG_set0(sig,
+			BN_bin2bn((const unsigned char*)r.data(), int(r.size()), 0),
+			BN_bin2bn((const unsigned char*)s.data(), int(s.size()), 0));
+		return sig;
 	}
 };
 
@@ -167,6 +213,7 @@ QPCSCReader::Result UpdaterPrivate::verifyPIN(const QString &title, int p1) cons
 			}).detach();
 			statusTimer->start();
 			l.exec();
+			statusTimer->stop();
 		}
 		else
 		{
@@ -215,6 +262,7 @@ Updater::Updater(const QString &reader, QWidget *parent)
 	: QDialog(parent)
 	, d(new UpdaterPrivate)
 {
+	const_cast<QLoggingCategory&>(ULog()).setEnabled(QtDebugMsg, true);
 	d->setupUi(this);
 	setWindowFlags(((windowFlags() & ~Qt::WindowContextHelpButtonHint) | Qt::CustomizeWindowHint) & ~Qt::WindowCloseButtonHint);
 	d->statusTimer = new QTimeLine(d->pinProgress->maximum() * 1000, d->pinProgress);
@@ -226,11 +274,15 @@ Updater::Updater(const QString &reader, QWidget *parent)
 	d->reader = new QPCSCReader(reader, &QPCSC::instance());
 
 #if OPENSSL_VERSION_NUMBER < 0x10010000L || defined(LIBRESSL_VERSION_NUMBER)
-	d->method.name = "Updater";
-	d->method.rsa_sign = UpdaterPrivate::rsa_sign;
+	d->rsamethod.name = "Updater";
+	d->rsamethod.rsa_sign = UpdaterPrivate::rsa_sign;
+	ECDSA_METHOD_set_app_data(d->ecmethod, d);
+	ECDSA_METHOD_set_name(d->ecmethod, const_cast<char*>("QSmartCard"));
+	ECDSA_METHOD_set_sign(d->ecmethod, UpdaterPrivate::ecdsa_do_sign);
 #else
-	RSA_meth_set1_name(d->method, "Updater");
-	RSA_meth_set_sign(d->method, UpdaterPrivate::rsa_sign);
+	RSA_meth_set1_name(d->rsamethod, "Updater");
+	RSA_meth_set_sign(d->rsamethod, UpdaterPrivate::rsa_sign);
+	EC_KEY_METHOD_set_sign(d->ecmethod, nullptr, nullptr, UpdaterPrivate::ecdsa_do_sign);
 #endif
 
 	d->details = d->buttonBox->addButton(tr("Details"), QDialogButtonBox::ActionRole);
@@ -261,15 +313,21 @@ Updater::~Updater()
 	d->reader->endTransaction();
 	delete d->reader;
 	qInstallMessageHandler(d->oldMsgHandler);
+#if OPENSSL_VERSION_NUMBER >= 0x10010000L
+	RSA_meth_free(d->rsamethod);
+	EC_KEY_METHOD_free(d->ecmethod);
+#else
+	ECDSA_METHOD_free(d->ecmethod);
+#endif
 	delete d;
 }
 
 void Updater::process(const QByteArray &data)
 {
 #if QT_VERSION >= 0x050400
-	qDebug().noquote() << ">" << data;
+	qCDebug(ULog).noquote() << ">" << data;
 #else
-	qDebug() << ">" << data;
+	qCDebug(ULog) << ">" << data;
 #endif
 	QJsonObject obj = QJsonDocument::fromJson(data).object();
 
@@ -364,6 +422,7 @@ void Updater::process(const QByteArray &data)
 		{
 			QPixmap pinEnvelope(QSize(d->message->width(), 100));
 			QPainter p(&pinEnvelope);
+			p.setRenderHint(QPainter::TextAntialiasing);
 			p.fillRect(pinEnvelope.rect(), Qt::white);
 			p.setPen(Qt::black);
 			int pos = result.data.lastIndexOf('#');
@@ -426,9 +485,11 @@ int Updater::exec()
 	}
 	d->reader->transfer(APDU("00A40000 00"));
 	d->reader->transfer(APDU("00A40100 02 EEEE"));
-	d->reader->transfer(APDU("00A40200 02 AACE"));
+	QPCSCReader::Result data = d->reader->transfer(APDU("00A40200 02 AACE"));
+	QHash<quint8,QByteArray> fci = QSmartCardPrivate::parseFCI(data.data);
+	int size = fci.contains(0x85) ? fci[0x85][0] << 8 | fci[0x85][1] : 0x0600;
 	QByteArray certData;
-	while(certData.size() < 0x0600)
+	while(certData.size() < size)
 	{
 		QByteArray apdu = APDU("00B00000 00");
 		apdu[2] = certData.size() >> 8;
@@ -451,29 +512,44 @@ int Updater::exec()
 	EVP_PKEY *key = nullptr;
 	if(!d->cert.isNull())
 	{
-		RSA *rsa = RSAPublicKey_dup((RSA*)d->cert.publicKey().handle());
-#if OPENSSL_VERSION_NUMBER < 0x10010000L || defined(LIBRESSL_VERSION_NUMBER)
-		RSA_set_method(rsa, &d->method);
-		rsa->flags |= RSA_FLAG_SIGN_VER;
+		if (d->cert.publicKey().algorithm() == QSsl::Ec)
+		{
+			EC_KEY *ec = EC_KEY_dup((EC_KEY*)d->cert.publicKey().handle());
+#if OPENSSL_VERSION_NUMBER < 0x10010000L
+			ECDSA_set_ex_data(ec, 0, d);
+			ECDSA_set_method(ec, d->ecmethod);
 #else
-		RSA_set_method(rsa, d->method);
+			EC_KEY_set_ex_data(ec, 0, d);
+			EC_KEY_set_method(ec, d->ecmethod);
 #endif
-		RSA_set_app_data(rsa, d);
-		key = EVP_PKEY_new();
-		EVP_PKEY_set1_RSA(key, rsa);
-		//RSA_free(rsa);
+			EVP_PKEY *key = EVP_PKEY_new();
+			EVP_PKEY_set1_EC_KEY(key, ec);
+			//EC_KEY_free(ec);
+		}
+		else
+		{
+			RSA *rsa = RSAPublicKey_dup((RSA*)d->cert.publicKey().handle());
+#if OPENSSL_VERSION_NUMBER < 0x10010000L || defined(LIBRESSL_VERSION_NUMBER)
+			RSA_set_method(rsa, &d->rsamethod);
+			rsa->flags |= RSA_FLAG_SIGN_VER;
+#else
+			RSA_set_method(rsa, d->rsamethod);
+#endif
+			RSA_set_app_data(rsa, d);
+			key = EVP_PKEY_new();
+			EVP_PKEY_set1_RSA(key, rsa);
+			//RSA_free(rsa);
+		}
 	}
 
 	// Do connection
 	QNetworkAccessManager *net = new QNetworkAccessManager(this);
 	d->request = QNetworkRequest(QUrl(
-		Configuration::instance().object().value("EIDUPDATER-URL").toString(
-		Configuration::instance().object().value("EIDUPDATER-URL-34").toString(
-		Configuration::instance().object().value("EIDUPDATER-URL-35").toString()))));
+		Configuration::instance().object().value("EIDUPDATER-URL-TOECC").toString()));
 	d->request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
 	d->request.setRawHeader("User-Agent", QString("%1/%2 (%3)")
 		.arg(qApp->applicationName(), qApp->applicationVersion(), Common::applicationOs()).toUtf8());
-	qDebug() << "Connecting to" << d->request.url().toString();
+	qCDebug(ULog) << "Connecting to" << d->request.url().toString();
 
 	QSslConfiguration ssl = QSslConfiguration::defaultConfiguration();
 	QList<QSslCertificate> trusted;
@@ -506,7 +582,7 @@ int Updater::exec()
 	proxy.setPassword(s.value("PROXY-PASS", proxy.password()).toString());
 	proxy.setType(QNetworkProxy::HttpProxy);
 	net->setProxy(proxy.hostName().isEmpty() ? QNetworkProxy() : proxy);
-	qDebug() << "Proxy" << proxy.hostName() << ":" << proxy.port() << "User" << proxy.user();
+	qCDebug(ULog) << "Proxy" << proxy.hostName() << ":" << proxy.port() << "User" << proxy.user();
 
 	connect(net, &QNetworkAccessManager::sslErrors, this, [=](QNetworkReply *reply, const QList<QSslError> &errors){
 		QList<QSslError> ignore;
@@ -532,9 +608,9 @@ int Updater::exec()
 			resp[i.key()] = QJsonValue::fromVariant(i.value());
 		QByteArray data = QJsonDocument(resp).toJson(QJsonDocument::Compact);
 #if QT_VERSION >= 0x050400
-		qDebug().noquote() << "<" << data;
+		qCDebug(ULog).noquote() << "<" << data;
 #else
-		qDebug() << "<" << data;
+		qCDebug(ULog) << "<" << data;
 #endif
 		QNetworkReply *reply = net->post(d->request, data);
 		QTimer *timer = new QTimer(this);
@@ -544,7 +620,7 @@ int Updater::exec()
 			d->close->show();
 		});
 		connect(timer, &QTimer::timeout, timer, &QTimer::deleteLater);
-		timer->start(30*1000);
+		timer->start(5*60*1000);
 	}, Qt::QueuedConnection);
 	connect(net, &QNetworkAccessManager::finished, this, [=](QNetworkReply *reply){
 		switch(reply->error())
@@ -560,6 +636,7 @@ int Updater::exec()
 			else
 			{
 				d->label->setText("<b><font color=\"red\">" + tr("Invalid content type") + "</font></b>");
+				d->progressRunning->clear();
 				d->close->show();
 			}
 			break;
@@ -567,10 +644,12 @@ int Updater::exec()
 		case QNetworkReply::HostNotFoundError:
 		case QNetworkReply::UnknownNetworkError:
 			d->label->setText("<b><font color=\"red\">" + tr("Updating certificates has failed. Check your internet connection and try again.") + "</font></b>");
+			d->progressRunning->clear();
 			d->close->show();
 			break;
 		case QNetworkReply::SslHandshakeFailedError:
 			d->label->setText("<b><font color=\"red\">" + tr("SSL handshake failed. Please restart the update process.") + "</font></b>");
+			d->progressRunning->clear();
 			d->close->show();
 			break;
 		default:
@@ -583,6 +662,7 @@ int Updater::exec()
 			default:
 				d->label->setText("<b><font color=\"red\">" + reply->errorString() + "</font></b>");
 			}
+			d->progressRunning->clear();
 			d->close->show();
 		}
 		reply->deleteLater();
@@ -597,8 +677,15 @@ void Updater::run()
 	if(!d->reader)
 		return;
 	SslCertificate c(d->cert);
-	bool result = d->reader->connect() &&
-		d->verifyPIN(c.toString( c.showCN() ? "CN serialNumber" : "GN SN serialNumber" ), 1).resultOk();
+	if(!d->reader->connect())
+		return accept();
+#ifdef Q_OS_MAC
+	d->reader->beginTransaction();
+#endif
+	bool result = d->verifyPIN(c.toString( c.showCN() ? "CN serialNumber" : "GN SN serialNumber" ), 1).resultOk();
+#ifdef Q_OS_MAC
+	d->reader->endTransaction();
+#endif
 	d->reader->disconnect();
 	if(!result)
 		return accept();

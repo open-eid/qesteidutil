@@ -68,14 +68,6 @@
         <translation>Check your @eesti.ee email settings</translation>
     </message>
     <message>
-        <source>Mobiil-ID</source>
-        <translation>Mobiil-ID</translation>
-    </message>
-    <message>
-        <source>Check Mobiil-ID status</source>
-        <translation>Check Mobiil-ID status</translation>
-    </message>
-    <message>
         <source>Change PUK</source>
         <translation>Change PUK</translation>
     </message>
@@ -200,10 +192,6 @@ Please visit the service center to obtain new codes. &lt;a href=&quot;http://www
         <translation>Loading email settings</translation>
     </message>
     <message>
-        <source>Requesting Mobiil-ID status</source>
-        <translation>Requesting Mobiil-ID status</translation>
-    </message>
-    <message>
         <source>Loading picture</source>
         <translation>Loading picture</translation>
     </message>
@@ -218,10 +206,6 @@ Please visit the service center to obtain new codes. &lt;a href=&quot;http://www
     <message>
         <source>Failed loading email settings.</source>
         <translation>Failed loading email settings.</translation>
-    </message>
-    <message>
-        <source>Failed loading Mobiil-ID settings.</source>
-        <translation>Failed loading Mobiil-ID settings.</translation>
     </message>
     <message>
         <source>Updating certificates</source>
@@ -322,46 +306,6 @@ Please visit the service center to obtain new codes. &lt;a href=&quot;http://www
     <message>
         <source>Forwarding is activated and you have been sent an email with activation key. Forwarding will be activated only after confirming the key.</source>
         <translation>Forwarding is activated and you have been sent an email with activation key. Forwarding will be activated only after confirming the key.</translation>
-    </message>
-    <message>
-        <source>User has no Mobiil-ID certificates.</source>
-        <translation>User has no Mobiil-ID certificates.</translation>
-    </message>
-    <message>
-        <source>Server could not read or validate ID card certificate!</source>
-        <translation>Server could not read or validate ID card certificate!</translation>
-    </message>
-    <message>
-        <source>Service internal error!</source>
-        <translation>Service internal error!</translation>
-    </message>
-    <message>
-        <source>Mobile interface not ready!</source>
-        <translation>Mobile interface not ready!</translation>
-    </message>
-    <message>
-        <source>certificates are active and Mobiil-ID is usable.</source>
-        <translation>certificates are active and Mobiil-ID is usable.</translation>
-    </message>
-    <message>
-        <source>certificates are inactive, to use Mobiil-ID certificates must be activated.</source>
-        <translation>certificates are inactive, to use Mobiil-ID certificates must be activated.</translation>
-    </message>
-    <message>
-        <source>certificates are suspended. To use Mobiil-ID these must be active.</source>
-        <translation>certificates are suspended. To use Mobiil-ID these must be active.</translation>
-    </message>
-    <message>
-        <source>certificates are revoked. To use Mobiil-ID, a new SIM card must be requested from service provider.</source>
-        <translation>certificates are revoked. To use Mobiil-ID, a new SIM card must be requested from service provider.</translation>
-    </message>
-    <message>
-        <source>certificates status is unknown</source>
-        <translation>certificates status is unknown</translation>
-    </message>
-    <message>
-        <source>certificates are expired. New SIM card has to be requested from the Service provider.</source>
-        <translation>certificates are expired. New SIM card has to be requested from the Service provider.</translation>
     </message>
     <message>
         <source>&lt;p&gt;PUK code is used for unblocking the certificates, when PIN1 or PIN2 has been entered 3 times incorrectly.&lt;/p&gt;
@@ -493,22 +437,6 @@ Please visit the service center to obtain new codes. &lt;a href=&quot;http://www
         <translation>To unblock the PIN2 code on a PinPad reader the PUK code has to be entered first and then the PIN2 code twice.</translation>
     </message>
     <message>
-        <source>Mobile operator</source>
-        <translation>Mobile operator</translation>
-    </message>
-    <message>
-        <source>Mobile status</source>
-        <translation>Mobile status</translation>
-    </message>
-    <message>
-        <source>Certificates are valid till</source>
-        <translation>Certificates are valid till</translation>
-    </message>
-    <message>
-        <source>Activate Mobiil-ID</source>
-        <translation>Activate Mobiil-ID</translation>
-    </message>
-    <message>
         <source>Save picture</source>
         <translation>Save picture</translation>
     </message>
@@ -525,10 +453,6 @@ Please visit the service center to obtain new codes. &lt;a href=&quot;http://www
         <translation>Unblocking %1 code</translation>
     </message>
     <message>
-        <source>http://politsei.ee/en/teenused/isikut-toendavad-dokumendid/mobiil-id/</source>
-        <translation>http://politsei.ee/en/teenused/isikut-toendavad-dokumendid/mobiil-id/</translation>
-    </message>
-    <message>
         <source>PCSC service is not running</source>
         <translation>SmartCard/PCSC service is not running</translation>
     </message>
@@ -539,12 +463,6 @@ Please visit the service center to obtain new codes. &lt;a href=&quot;http://www
     <message>
         <source>Languages</source>
         <translation>Languages</translation>
-    </message>
-    <message>
-        <source>Mobiil-ID is the possibility to use a mobile phone instead of an ID-card for identification and digital signing.&lt;br /&gt;More info from &lt;a href=&quot;http://mobiil.id.ee&quot;&gt;mobiil.id.ee&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;
-To use Mobiil-ID a SIM card that supports this feature has to be used. If such a SIM card is already purchased, then it has to be activated.</source>
-        <translation>Mobiil-ID is the possibility to use a mobile phone instead of an ID-card for identification and digital signing.&lt;br /&gt;More info from &lt;a href=&quot;http://mobiil.id.ee&quot;&gt;mobiil.id.ee&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;
-To use Mobiil-ID a SIM card that supports this feature has to be used. If such a SIM card is already purchased, then it has to be activated.</translation>
     </message>
     <message>
         <source>Load picture</source>
@@ -651,10 +569,6 @@ To use Mobiil-ID a SIM card that supports this feature has to be used. If such a
 &lt;p&gt;If you do not know the PUK code for your ID-card, please visit the service center to obtain new PIN codes.&lt;/p&gt;</translation>
     </message>
     <message>
-        <source>This document is not supported for electronic use from 24.07.13, for additional information please contact &lt;a href=&quot;http://www.politsei.ee/en/teenused/isikut-toendavad-dokumendid/id-kaardi-uuendamine.dot&quot;&gt;Police and Border Guard Board&lt;/a&gt;.</source>
-        <translation>This document is not supported for electronic use from 24.07.13, for additional information please contact &lt;a href=&quot;http://www.politsei.ee/en/teenused/isikut-toendavad-dokumendid/id-kaardi-uuendamine.dot&quot;&gt;Police and Border Guard Board&lt;/a&gt;.</translation>
-    </message>
-    <message>
         <source>There was an error with request to Äriregister.</source>
         <translation>There was an error with request to Äriregister.</translation>
     </message>
@@ -700,6 +614,18 @@ Updating takes ca 2-10 minutes and requires an active internet connection. Do no
         <source>PUK timeout</source>
         <translation>PUK timeout</translation>
     </message>
+    <message>
+        <source>Your ID-card certificates cannot be renewed starting from 01.07.2017. Your document is still valid until its expiring date and it can be used to login to e-services and give digital signatures. If there are problems using Your ID-card in e-services please contact ID-card helpdesk by phone (+372) 677 3377 or visit Police and Border Guard Board service point.&lt;br /&gt;&lt;br /&gt;&lt;a href=&quot;http://id.ee/?id=30519&amp;read=38011&quot;&gt;More info&lt;/a&gt;</source>
+        <translation>Your ID-card certificates cannot be renewed starting from 01.07.2017. Your document is still valid until its expiring date and it can be used to login to e-services and give digital signatures. If there are problems using Your ID-card in e-services please contact ID-card helpdesk by phone (+372) 677 3377 or visit Police and Border Guard Board service point.&lt;br /&gt;&lt;br /&gt;&lt;a href=&quot;http://id.ee/?id=30519&amp;read=38011&quot;&gt;More info&lt;/a&gt;</translation>
+    </message>
+    <message>
+        <source>Applet version:</source>
+        <translation>Applet version:</translation>
+    </message>
+    <message>
+        <source>This card does not require updating</source>
+        <translation>This card does not require updating</translation>
+    </message>
 </context>
 <context>
     <name>SSLConnect</name>
@@ -710,11 +636,6 @@ Updating takes ca 2-10 minutes and requires an active internet connection. Do no
     <message>
         <source>Loading Email info</source>
         <translation>Loading Email info</translation>
-    </message>
-    <message>
-        <source>Loading Mobile info</source>
-        <translatorcomment>Loading Mobile info</translatorcomment>
-        <translation></translation>
     </message>
     <message>
         <source>Downloading picture</source>

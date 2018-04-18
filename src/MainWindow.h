@@ -35,38 +35,34 @@ public:
 		PageEmpty = 0x00,
 
 		PageCert = 0x01,
-		PageCertAuthView = 0x11,
-		PageCertSignView = 0x21,
-		PageCertPin1 = 0x31,
-		PageCertPin2 = 0x41,
-		PageCertUpdate = 0x51,
+		PageCertAuthView = 0x10 | PageCert,
+		PageCertSignView = 0x20 | PageCert,
+		PageCertPin1 = 0x30 | PageCert,
+		PageCertPin2 = 0x40 | PageCert,
+		PageCertUpdate = 0x50 | PageCert,
 
 		PageEmail = 0x02,
-		PageEmailStatus = 0x12,
-		PageEmailActivate = 0x22,
+		PageEmailStatus = 0x10 | PageEmail,
+		PageEmailActivate = 0x20 | PageEmail,
 
-		PageMobile = 0x03,
-		PageMobileStatus = 0x13,
-		PageMobileActivate = 0x23,
+		PagePukInfo = 0x03,
 
-		PagePukInfo = 0x04,
+		PagePin1Pin = 0x04,
+		PagePin1Puk = 0x10 | PagePin1Pin,
+		PagePin1Unblock = 0x20 | PagePin1Pin,
+		PagePin1ChangePin = 0x30 | PagePin1Pin,
+		PagePin1ChangePuk = 0x40 | PagePin1Pin,
+		PagePin1ChangeUnblock = 0x50 | PagePin1Pin,
 
-		PagePin1Pin = 0x05,
-		PagePin1Puk = 0x15,
-		PagePin1Unblock = 0x25,
-		PagePin1ChangePin = 0x35,
-		PagePin1ChangePuk = 0x45,
-		PagePin1ChangeUnblock = 0x55,
+		PagePin2Pin = 0x05,
+		PagePin2Puk = 0x10 | PagePin2Pin,
+		PagePin2Unblock = 0x20 | PagePin2Pin,
+		PagePin2ChangePin = 0x30 | PagePin2Pin,
+		PagePin2ChangePuk = 0x40 | PagePin2Pin,
+		PagePin2ChangeUnblock = 0x50 | PagePin2Pin,
 
-		PagePin2Pin = 0x06,
-		PagePin2Puk = 0x16,
-		PagePin2Unblock = 0x26,
-		PagePin2ChangePin = 0x36,
-		PagePin2ChangePuk = 0x46,
-		PagePin2ChangeUnblock = 0x56,
-
-		PagePuk = 0x07,
-		PagePukChange = 0x17
+		PagePuk = 0x06,
+		PagePukChange = 0x10 | PagePuk
 	};
 
 	MainWindow( QWidget *parent = 0 );

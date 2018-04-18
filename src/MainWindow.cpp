@@ -53,10 +53,10 @@ class MacMenuBar;
 #include <QtGui/QDesktopServices>
 #include <QtGui/QPainter>
 #include <QtGui/QPaintEvent>
+#include <QtNetwork/QSslKey>
 #include <QtWidgets/QFileDialog>
 #include <QtWidgets/QMessageBox>
 
-Q_DECLARE_METATYPE(MobileStatus)
 Q_DECLARE_METATYPE(Emails)
 
 class MainWindowPrivate: public Ui::MainWindow
@@ -70,7 +70,6 @@ public:
 	QByteArray sendRequest( SSLConnect::RequestType type, const QString &param = QString() );
 	void showLoading( const QString &text );
 	void showWarning( const QString &msg, const QString &details = QString() );
-	void updateMobileStatusText( const QVariant &data, bool set );
 	bool validateCardError( QSmartCardData::PinType type, int flags, QSmartCard::ErrorType err );
 	bool validatePin( QSmartCardData::PinType type, bool puk, const QString &old, const QString &pin, const QString &pin2 );
 
@@ -118,7 +117,6 @@ QByteArray MainWindowPrivate::sendRequest( SSLConnect::RequestType type, const Q
 	{
 	case SSLConnect::ActivateEmails: showLoading(  tr("Activating email settings") ); break;
 	case SSLConnect::EmailInfo: showLoading( tr("Loading email settings") ); break;
-	case SSLConnect::MobileInfo: showLoading( tr("Requesting Mobiil-ID status") ); break;
 	case SSLConnect::PictureInfo: showLoading( tr("Loading picture") ); break;
 	default: showLoading( tr( "Loading data" ) ); break;
 	}
@@ -137,7 +135,6 @@ QByteArray MainWindowPrivate::sendRequest( SSLConnect::RequestType type, const Q
 		{
 		case SSLConnect::ActivateEmails: showWarning( tr("Failed activating email forwards."), ssl.errorString() ); break;
 		case SSLConnect::EmailInfo: showWarning( tr("Failed loading email settings."), ssl.errorString() ); break;
-		case SSLConnect::MobileInfo: showWarning( tr("Failed loading Mobiil-ID settings."), ssl.errorString() ); break;
 		case SSLConnect::PictureInfo: showWarning( tr("Loading picture failed."), ssl.errorString() ); break;
 		default: showWarning( tr("Failed to load data"), ssl.errorString() ); break;
 		}
@@ -162,30 +159,6 @@ void MainWindowPrivate::showWarning( const QString &msg, const QString &details 
 	d.setWindowModality( Qt::WindowModal );
 	d.setDetailedText(details);
 	d.exec();
-}
-
-void MainWindowPrivate::updateMobileStatusText( const QVariant &data, bool set )
-{
-	if( set )
-		mobileStatus->setProperty( "STATUS", data );
-
-	if( mobileStatus->property("STATUS").isNull() )
-		return mobileStatus->clear();
-	MobileStatus mobile = mobileStatus->property("STATUS").value<MobileStatus>();
-	QString text;
-	QTextStream s( &text );
-	s << mobile.value( "MSISDN" ) << "<br />";
-	s << tr("Mobile operator") << ": " << mobile.value( "Operator" ) << "<br />";
-	s << tr("Mobile status") << ": ";
-	if( mobile.value( "Status" ) == "Active" )
-		s << "<span style='color: #509b00'>"
-			<< XmlReader::mobileStatus( mobile.value( "Status" ) ) << "</span><br />"
-			<< tr("Certificates are valid till") << ": " << mobile.value( "MIDCertsValidTo" );
-	else
-		s << "<span style='color: #e80303'>"
-			<< XmlReader::mobileStatus( mobile.value( "Status" ) ) << "</span>";
-	mobileStatus->setText( text );
-	Common::setAccessibleName( mobileStatus );
 }
 
 bool MainWindowPrivate::validateCardError( QSmartCardData::PinType type, int flags, QSmartCard::ErrorType err )
@@ -237,7 +210,6 @@ bool MainWindowPrivate::validateCardError( QSmartCardData::PinType type, int fla
 		{
 		case SSLConnect::ActivateEmails: showWarning( tr("Failed activating email forwards.") ); break;
 		case SSLConnect::EmailInfo: showWarning( tr("Failed loading email settings.") ); break;
-		case SSLConnect::MobileInfo: showWarning( tr("Failed loading Mobiil-ID settings.") ); break;
 		case SSLConnect::PictureInfo: showWarning( tr("Loading picture failed.") ); break;
 		default:
 			showWarning( tr("Changing %1 failed").arg( QSmartCardData::typeString( type ) ) ); break;
@@ -300,7 +272,7 @@ MainWindow::MainWindow( QWidget *parent )
 	d->q_ptr = this;
 	d->setupUi( this );
 	setFixedSize( geometry().size() );
-	const QList<QLabel*> labels{ d->emailInfo, d->mobileInfo, d->pukLocked,
+	const QList<QLabel*> labels{ d->emailInfo, d->pukLocked,
 		d->changePukInfo, d->changePin1InfoPinText, d->changePin2InfoPinText };
 	for(QLabel *l: labels)
 		Common::setAccessibleName( l );
@@ -357,9 +329,6 @@ MainWindow::MainWindow( QWidget *parent )
 	// Email buttons
 	d->b->addButton( d->checkEmail, PageEmailStatus );
 	d->b->addButton( d->activateEmail, PageEmailActivate );
-	// mobile buttons
-	d->b->addButton( d->checkMobile, PageMobileStatus );
-	d->b->addButton( d->mobileActivate, PageMobileActivate );
 	// pin1 buttons
 	d->b->addButton( d->changePin1InfoPinLink, PagePin1Puk );
 	d->b->addButton( d->changePin1Cancel, PageCert );
@@ -521,7 +490,6 @@ void MainWindow::on_languages_activated( int index )
 		d->changePin2Change->setText( tr("Change") );
 
 	updateData();
-	d->updateMobileStatusText( QVariant(), false );
 	if( !d->emailStatus->property( "FORWARDS" ).isNull() )
 	{
 		Emails emails = d->emailStatus->property( "FORWARDS" ).value<Emails>();
@@ -545,7 +513,6 @@ void MainWindow::pageButtonClicked()
 {
 	if( sender() == d->buttonCert ) setDataPage( PageCert );
 	if( sender() == d->buttonEmail ) setDataPage( PageEmail );
-	if( sender() == d->buttonMobile ) setDataPage( PageMobile );
 	if( sender() == d->buttonPuk ) setDataPage( PagePukInfo );
 }
 
@@ -605,7 +572,6 @@ void MainWindow::setDataPage( int index )
 	d->dataWidget->setCurrentIndex( t.isNull() ? PageEmpty : page );
 	d->buttonCert->setChecked( page == PageCert );
 	d->buttonEmail->setChecked( page == PageEmail );
-	d->buttonMobile->setChecked( page == PageMobile );
 	d->buttonPuk->setChecked( page == PagePukInfo );
 	if( t.isNull() )
 		return;
@@ -708,34 +674,6 @@ void MainWindow::setDataPage( int index )
 		d->checkEmailFrame->hide();
 		break;
 	}
-	case PageMobile:
-		d->updateMobileStatusText( QVariant(), true );
-		d->checkMobileFrame->show();
-		d->mobileActivateFrame->hide();
-		d->checkMobile->setFocus();
-		break;
-	case PageMobileStatus:
-	{
-		d->updateMobileStatusText( QVariant(), true );
-		QByteArray buffer = d->sendRequest( SSLConnect::MobileInfo );
-		if( buffer.isEmpty() )
-			break;
-		XmlReader xml( buffer );
-		int error = 0;
-		MobileStatus mobile = xml.readMobileStatus( error );
-		if( error )
-		{
-			showWarning( XmlReader::mobileErr( error ) );
-			break;
-		}
-		d->updateMobileStatusText( QVariant::fromValue( mobile ), true );
-		d->checkMobileFrame->hide();
-		d->mobileActivateFrame->setVisible( mobile.value( "Status" ) != "Active" );
-		break;
-	}
-	case PageMobileActivate:
-		QDesktopServices::openUrl( tr("http://politsei.ee/en/teenused/isikut-toendavad-dokumendid/mobiil-id/") );
-		break;
 	case PagePin1Pin:
 		d->changePin1Info->setCurrentWidget( d->changePin1InfoPin );
 		d->changePin1PinpadInfo->setCurrentWidget( d->changePin1PinpadInfoPin );
@@ -1000,6 +938,9 @@ void MainWindow::updateData()
 	d->hideLoading();
 	QSmartCardData t = d->smartcard->data();
 
+	d->buttonCert->setDisabled(t.isNull());
+	d->buttonEmail->setDisabled(t.isNull());
+	d->buttonPuk->setDisabled(t.isNull());
 	if( !t.isNull() )
 	{
 		QString text;
@@ -1026,6 +967,9 @@ void MainWindow::updateData()
 				<< tr("You can find instructions on how to get a new document from "
 					"<a href=\"http://www.politsei.ee/en/teenused/isikut-toendavad-dokumendid/id-kaart/taiskasvanule/\">here</a>")
 				<< "</font>";
+		else if((t.appletVersion() == "3.5.8" && !(t.version() & QSmartCardData::VER_HASUPDATER)) ||
+				(t.version() == QSmartCardData::VER_3_4 && t.authCert().validateEncoding() && t.signCert().validateEncoding()))
+			st << "<br /><font style='color: #509b00; font-weight: bold; font-size: 16px;'>" << tr("This card does not require updating") << "</font>";
 		st << "</font>";
 
 		d->cardInfo->setAlignment( Qt::AlignVCenter|Qt::AlignLeft );
@@ -1048,7 +992,10 @@ void MainWindow::updateData()
 		d->personalCitizen->setVisible( t.authCert().type() & SslCertificate::EstEidType );
 		d->personalCitizen->setText( t.data( QSmartCardData::Citizen ).toString() );
 		d->personalEmail->setText( t.data( QSmartCardData::Email ).toString() );
-		const QList<QLabel*> list({ d->personalName, d->surName, d->personalCode, d->personalBirth, d->personalCitizen, d->personalEmail });
+		d->personalVersion->setText(t.appletVersion());
+		d->personalVersion->setHidden(t.appletVersion().isEmpty());
+		d->personalVersionLabel->setHidden(t.appletVersion().isEmpty());
+		const QList<QLabel*> list({ d->personalName, d->surName, d->personalCode, d->personalBirth, d->personalCitizen, d->personalEmail, d->personalVersion });
 		for( QLabel *l: list )
 			l->setToolTip( l->text() );
 		d->personalEmail->setText( d->personalEmail->fontMetrics().elidedText(
@@ -1120,28 +1067,20 @@ void MainWindow::updateData()
 		d->authFrame->setVisible( !t.authCert().isNull() );
 		d->signFrame->setVisible( !t.signCert().isNull() );
 		d->certsLine->setVisible( !t.authCert().isNull() || !t.signCert().isNull() );
-		d->buttonEmail->setDisabled(t.version() == QSmartCardData::VER_USABLEUPDATER);
-		d->buttonMobile->setDisabled(t.version() == QSmartCardData::VER_USABLEUPDATER);
+		d->buttonEmail->setDisabled(t.version() == QSmartCardData::VER_USABLEUPDATER || t.authCert().subjectInfo("O").contains("E-RESIDENT"));
 		d->buttonPuk->setDisabled(t.version() == QSmartCardData::VER_USABLEUPDATER);
 
 		d->certUpdate->setProperty("updateEnabled",
 			Settings(qApp->applicationName()).value("updateButton", false).toBool() ||
 			(
-				t.version() >= QSmartCardData::VER_3_4 &&
+				t.version() >= QSmartCardData::VER_3_5 &&
 				t.retryCount( QSmartCardData::Pin1Type ) > 0 &&
-				t.isValid() && (
-					Configuration::instance().object().contains("EIDUPDATER-URL") ||
-					(t.version() == QSmartCardData::VER_3_4 && Configuration::instance().object().contains("EIDUPDATER-URL-34")) ||
-					(t.version() >= QSmartCardData::VER_3_5 && Configuration::instance().object().contains("EIDUPDATER-URL-35"))
-				) && (
-					!t.authCert().validateEncoding() ||
-					!t.signCert().validateEncoding() ||
+				t.isValid() &&
+				Configuration::instance().object().contains("EIDUPDATER-URL-TOECC") && (
+					t.authCert().publicKey().algorithm() == QSsl::Rsa ||
+					t.signCert().publicKey().algorithm() == QSsl::Rsa ||
 					t.version() & QSmartCardData::VER_HASUPDATER ||
-					t.version() == QSmartCardData::VER_USABLEUPDATER ||
-					(Configuration::instance().object().contains("EIDUPDATER-SHA1") && (
-						t.authCert().signatureAlgorithm() == "sha1WithRSAEncryption" ||
-						t.signCert().signatureAlgorithm() == "sha1WithRSAEncryption")
-					)
+					t.version() == QSmartCardData::VER_USABLEUPDATER
 				)
 			)
 		);
@@ -1157,18 +1096,22 @@ void MainWindow::updateData()
 		if( d->dataWidget->currentIndex() == PageEmpty )
 			setDataPage( t.retryCount( QSmartCardData::PukType ) == 0 ? PagePukInfo : PageCert );
 
-		if( d->smartcard->property( "lastcard" ).toString() != t.card() &&
-			t.version() == QSmartCardData::VER_3_0 )
+		if(d->smartcard->property( "lastcard" ).toString() != t.card() &&
+			t.version() == QSmartCardData::VER_3_4 &&
+			(!t.authCert().validateEncoding() || !t.signCert().validateEncoding()))
 		{
-			QMessageBox box( QMessageBox::Warning, windowTitle(), tr(
-				"This document is not supported for electronic use from 24.07.13, for additional information please contact "
-				"<a href=\"http://www.politsei.ee/en/teenused/isikut-toendavad-dokumendid/id-kaardi-uuendamine.dot\">Police and Border Guard Board</a>."),
-				QMessageBox::Ok, this );
-			if( QLabel *lbl = box.findChild<QLabel*>() )
-				lbl->setOpenExternalLinks( true );
+			QMessageBox box(QMessageBox::Warning, windowTitle(), tr(
+				"Your ID-card certificates cannot be renewed starting from 01.07.2017. Your document is still valid until "
+				"its expiring date and it can be used to login to e-services and give digital signatures. If there are "
+				"problems using Your ID-card in e-services please contact ID-card helpdesk by phone (+372) 677 3377 or "
+				"visit Police and Border Guard Board service point.<br /><br />"
+				"<a href=\"http://id.ee/?id=30519&read=38011\">More info</a>"),
+				QMessageBox::Ok, this);
+			if(QLabel *lbl = box.findChild<QLabel*>())
+				lbl->setOpenExternalLinks(true);
 			box.exec();
 		}
-		d->smartcard->setProperty( "lastcard", t.card() );
+		d->smartcard->setProperty("lastcard", t.card());
 
 #ifdef Q_OS_WIN
 		CertStore store;
@@ -1193,7 +1136,7 @@ void MainWindow::updateData()
 	{
 		d->certUpdate->setProperty("updateEnabled", false);
 
-		const QList<QLabel*> list({ d->personalName, d->surName, d->personalCode, d->personalBirth, d->personalCitizen, d->personalEmail });
+		const QList<QLabel*> list({ d->personalName, d->surName, d->personalCode, d->personalBirth, d->personalCitizen, d->personalEmail, d->personalVersion });
 		for( QLabel *l: list )
 		{
 			l->clear();

@@ -26,6 +26,7 @@
 template<class Key, class T> class QHash;
 class SslCertificate;
 class QSmartCardDataPrivate;
+class QSslKey;
 
 class QSmartCardData
 {
@@ -72,10 +73,10 @@ public:
 
 	QSmartCardData();
 	QSmartCardData( const QSmartCardData &other );
-	QSmartCardData( QSmartCardData &&other );
+	QSmartCardData( QSmartCardData &&other )  noexcept;
 	~QSmartCardData();
 	QSmartCardData& operator=( const QSmartCardData &other );
-	QSmartCardData& operator=( QSmartCardData &&other );
+	QSmartCardData& operator=( QSmartCardData &&other )  noexcept;
 
 	QString card() const;
 	QStringList cards() const;
@@ -92,6 +93,7 @@ public:
 	SslCertificate signCert() const;
 	quint8 retryCount( PinType type ) const;
 	ulong usageCount( PinType type ) const;
+	QString appletVersion() const;
 	CardVersion version() const;
 
 	static QString typeString( PinType type );
@@ -122,12 +124,12 @@ public:
 		OldNewPinSameError
 	};
 
-	explicit QSmartCard( QObject *parent = 0 );
+	explicit QSmartCard(QObject *parent = nullptr);
 	~QSmartCard();
 
 	ErrorType change( QSmartCardData::PinType type, const QString &newpin, const QString &pin, const QString &title, const QString &bodyText );
 	QSmartCardData data() const;
-	Qt::HANDLE key();
+	QSslKey key() const;
 	ErrorType login( QSmartCardData::PinType type );
 	void logout();
 	void reload();
@@ -140,7 +142,7 @@ private Q_SLOTS:
 	void selectCard( const QString &card );
 
 private:
-	void run();
+	void run() override;
 
 	QSmartCardPrivate *d;
 

@@ -68,14 +68,6 @@
         <translation>Проверь настройки эл. почты @eesti.ee</translation>
     </message>
     <message>
-        <source>Mobiil-ID</source>
-        <translation>Mobiil-ID</translation>
-    </message>
-    <message>
-        <source>Check Mobiil-ID status</source>
-        <translation>Проверь статус Mobiil-ID</translation>
-    </message>
-    <message>
         <source>Change PUK</source>
         <translation>Поменять PUK</translation>
     </message>
@@ -200,10 +192,6 @@ Please visit the service center to obtain new codes. &lt;a href=&quot;http://www
         <translation>Загружаю настройки эл. почты</translation>
     </message>
     <message>
-        <source>Requesting Mobiil-ID status</source>
-        <translation>Запрашиваем статус Mobiil-ID</translation>
-    </message>
-    <message>
         <source>Loading picture</source>
         <translation>Загружаю фотографию</translation>
     </message>
@@ -218,10 +206,6 @@ Please visit the service center to obtain new codes. &lt;a href=&quot;http://www
     <message>
         <source>Failed loading email settings.</source>
         <translation>Активация перенаправления с эл. почты провалилась.</translation>
-    </message>
-    <message>
-        <source>Failed loading Mobiil-ID settings.</source>
-        <translation>Неудалось проверить статус Mobiil-ID.</translation>
     </message>
     <message>
         <source>Updating certificates</source>
@@ -324,46 +308,6 @@ Please visit the service center to obtain new codes. &lt;a href=&quot;http://www
         <translation>Переадресация сохранена и Вам послано письмо с ключом активации. Переадресация активна только после введения ключа.</translation>
     </message>
     <message>
-        <source>User has no Mobiil-ID certificates.</source>
-        <translation>У пользователя отсутствуют Mobiil-ID сертификаты.</translation>
-    </message>
-    <message>
-        <source>Server could not read or validate ID card certificate!</source>
-        <translation>Сервер не смог прочитать или распознать сертификат ID карты!</translation>
-    </message>
-    <message>
-        <source>Service internal error!</source>
-        <translation>Внутренняя ошибка услуги!</translation>
-    </message>
-    <message>
-        <source>Mobile interface not ready!</source>
-        <translation>Интерфейс ещё не работает!</translation>
-    </message>
-    <message>
-        <source>certificates are active and Mobiil-ID is usable.</source>
-        <translation>сертификаты активны и использование Mobiil-ID возможно.</translation>
-    </message>
-    <message>
-        <source>certificates are inactive, to use Mobiil-ID certificates must be activated.</source>
-        <translation>сертификаты не активированы, для использования Mobiil-ID требуется активация сертификатов.</translation>
-    </message>
-    <message>
-        <source>certificates are suspended. To use Mobiil-ID these must be active.</source>
-        <translation>сертификаты приостановлены, для использования Mobiil-ID следует их возобновить.</translation>
-    </message>
-    <message>
-        <source>certificates are revoked. To use Mobiil-ID, a new SIM card must be requested from service provider.</source>
-        <translation>сертификаты признаны недействительными. Для использования Mobiil-ID следует взять новую Mobiil-ID SIM карту у оператора.</translation>
-    </message>
-    <message>
-        <source>certificates status is unknown</source>
-        <translation>сертификаты устарели. У оператора следует взять новую SIM карту</translation>
-    </message>
-    <message>
-        <source>certificates are expired. New SIM card has to be requested from the Service provider.</source>
-        <translation>сертификаты устарели. У оператора следует взять новую SIM карту.</translation>
-    </message>
-    <message>
         <source>&lt;p&gt;PUK code is used for unblocking the certificates, when PIN1 or PIN2 has been entered 3 times incorrectly.&lt;/p&gt;
 &lt;p&gt;PUK code is written in the envelope, that is given with the ID-card.&lt;/p&gt;</source>
         <translation>&lt;p&gt;PUK код - это код, разблокирующий заблокированные сертификаты, если код PIN1 или PIN2 был введён неверно 3 раза подряд.&lt;/p&gt;
@@ -391,7 +335,7 @@ Please visit the service center to obtain new codes. &lt;a href=&quot;http://www
     </message>
     <message>
         <source>Failed to load data</source>
-        <translation>Данные загрузить не получилось></translation>
+        <translation>Данные загрузить не получилось</translation>
     </message>
     <message>
         <source>Enter PIN/PUK codes on PinPad</source>
@@ -416,10 +360,6 @@ Please visit the service center to obtain new codes. &lt;a href=&quot;http://www
     <message>
         <source>New %1 codes doesn&apos;t match</source>
         <translation>Новые %1 коды не сходятся</translation>
-    </message>
-    <message>
-        <source>%1 has to be different than date of birth or year of birth</source>
-        <translation>%1 не должны содержать дату рождения</translation>
     </message>
     <message>
         <source>%1 changed!</source>
@@ -494,22 +434,6 @@ Please visit the service center to obtain new codes. &lt;a href=&quot;http://www
         <translation>Для разблокировки PIN2 кода Вам необходимо ввести один раз PUK код и два раза новый PIN2 код с помощью PinPad.</translation>
     </message>
     <message>
-        <source>Mobile operator</source>
-        <translation>Оператор моб. телефона</translation>
-    </message>
-    <message>
-        <source>Mobile status</source>
-        <translation>Статус</translation>
-    </message>
-    <message>
-        <source>Certificates are valid till</source>
-        <translation>Сертификаты действительны до</translation>
-    </message>
-    <message>
-        <source>Activate Mobiil-ID</source>
-        <translation>Активируй услугу Mobiil-ID</translation>
-    </message>
-    <message>
         <source>Save picture</source>
         <translation>Cохранить картинку</translation>
     </message>
@@ -526,26 +450,16 @@ Please visit the service center to obtain new codes. &lt;a href=&quot;http://www
         <translation>Разблокирование кода %1</translation>
     </message>
     <message>
-        <source>http://politsei.ee/en/teenused/isikut-toendavad-dokumendid/mobiil-id/</source>
-        <translation>http://politsei.ee/ru/teenused/isikut-toendavad-dokumendid/mobiil-id/</translation>
-    </message>
-    <message>
         <source>PCSC service is not running</source>
         <translation>SmartCard/PCSC сервис не работает</translation>
     </message>
     <message>
         <source>Cards</source>
-        <translation>Карты></translation>
+        <translation>Карты</translation>
     </message>
     <message>
         <source>Languages</source>
-        <translation>Языки></translation>
-    </message>
-    <message>
-        <source>Mobiil-ID is the possibility to use a mobile phone instead of an ID-card for identification and digital signing.&lt;br /&gt;More info from &lt;a href=&quot;http://mobiil.id.ee&quot;&gt;mobiil.id.ee&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;
-To use Mobiil-ID a SIM card that supports this feature has to be used. If such a SIM card is already purchased, then it has to be activated.</source>
-        <translation>Mobiil-ID - это возможность идентифицировать личность и ставить цифровую подпись при помощи мобильного телефона, наравне с ID-картой.&lt;br /&gt;Подробности - на портале &lt;a href=&quot;http://mobiil.id.ee&quot;&gt;mobiil.id.ee&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;
-Для пользования Mobiil-ID вам понадобится SIM-карта с поддержкой этой технологии. Новую карту можно получить у вашего мобильного оператора. Если такая карта уже установлена, следует активировать услугу.</translation>
+        <translation>Языки</translation>
     </message>
     <message>
         <source>Load picture</source>
@@ -653,10 +567,6 @@ PUK код находится в конверте с кодами, которы�
 &lt;p&gt;Если вы не знаете PUK код своей ID-карты, посетите центр обслуживания, где вы сможете получить конверт с кодами.&lt;/p&gt;</translation>
     </message>
     <message>
-        <source>This document is not supported for electronic use from 24.07.13, for additional information please contact &lt;a href=&quot;http://www.politsei.ee/en/teenused/isikut-toendavad-dokumendid/id-kaardi-uuendamine.dot&quot;&gt;Police and Border Guard Board&lt;/a&gt;.</source>
-        <translation>Данный документ невозможно использовать электронным образом с 24.07.2013. За дополнительной информацией, пожалуйста, обратитесь в &lt;a href=&quot;http://www.politsei.ee/ru/teenused/isikut-toendavad-dokumendid/id-kaardi-uuendamine.dot&quot;&gt;Департамент полиции и погранохраны&lt;/a&gt;.</translation>
-    </message>
-    <message>
         <source>There was an error with request to Äriregister.</source>
         <translation>В запросе к Äriregister возникла ошибка.</translation>
     </message>
@@ -702,6 +612,22 @@ Updating takes ca 2-10 minutes and requires an active internet connection. Do no
         <source>PUK timeout</source>
         <translation>PUK тайм-аут</translation>
     </message>
+    <message>
+        <source>%1 have to be different than date of birth or year of birth</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Your ID-card certificates cannot be renewed starting from 01.07.2017. Your document is still valid until its expiring date and it can be used to login to e-services and give digital signatures. If there are problems using Your ID-card in e-services please contact ID-card helpdesk by phone (+372) 677 3377 or visit Police and Border Guard Board service point.&lt;br /&gt;&lt;br /&gt;&lt;a href=&quot;http://id.ee/?id=30519&amp;read=38011&quot;&gt;More info&lt;/a&gt;</source>
+        <translation>С 01.07.2017 обновление сертификатов на этой карте больше невозможно. Документ действителен до истечения срока его действия, и его можно использовать для авторизации в дигитальных сервисах и создания дигитальной подписи. Если возникнут проблемы с использованием карты в дигитальных сервисах, обратитесь в службу поддержки ID-карты по телефону (+372) 677 3377 или посетите один из пунктов обслуживания Департамента полиции и пограничной охраны.&lt;br /&gt;&lt;br /&gt;&lt;a href=&quot;http://id.ee/?id=30625&amp;read=38012&quot;&gt;Дополнительная информация&lt;/a&gt;</translation>
+    </message>
+    <message>
+        <source>Applet version:</source>
+        <translation>Версия апплета:</translation>
+    </message>
+    <message>
+        <source>This card does not require updating</source>
+        <translation>Эта карта не нуждается в обновлении</translation>
+    </message>
 </context>
 <context>
     <name>SSLConnect</name>
@@ -712,10 +638,6 @@ Updating takes ca 2-10 minutes and requires an active internet connection. Do no
     <message>
         <source>Loading Email info</source>
         <translation>Загрузка электронной почты информации</translation>
-    </message>
-    <message>
-        <source>Loading Mobile info</source>
-        <translation>Загрузка Мобильная справка</translation>
     </message>
     <message>
         <source>Downloading picture</source>
