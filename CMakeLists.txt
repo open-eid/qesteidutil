@@ -24,6 +24,7 @@ if(UNIX AND NOT APPLE)
 	find_package(Threads)
 endif()
 
+add_definitions(-DNO_LIBDIGIDOCPP)
 add_subdirectory( common )
 
 configure_file( src/translations/tr.qrc tr.qrc COPYONLY )
@@ -37,8 +38,6 @@ if( WIN32 )
 	list( APPEND ADDITIONAL_LIBRARIES Crypt32 )
 endif()
 
-include_directories(${OPENSSL_INCLUDE_DIR})
-
 add_executable( ${PROGNAME} WIN32 MACOSX_BUNDLE
 	src/qesteidutil.rc
 	src/main.cpp
@@ -51,6 +50,7 @@ add_executable( ${PROGNAME} WIN32 MACOSX_BUNDLE
 	${RESOURCE_FILES}
 )
 add_manifest( ${PROGNAME} )
+target_include_directories(${PROGNAME} PRIVATE ${OPENSSL_INCLUDE_DIR})
 target_link_libraries(${PROGNAME} ${ADDITIONAL_LIBRARIES} qdigidoccommon ${CMAKE_THREAD_LIBS_INIT})
 
 if(APPLE)

@@ -7,40 +7,19 @@ Build-Depends:
  cmake,
  libpcsclite-dev,
  libssl-dev,
- qtbase5-dev,
- qttools5-dev,
- qttools5-dev-tools
+ qttools5-dev
 Standards-Version: 3.9.8
 Homepage: https://github.com/open-eid/qesteidutil
 
 Package: qesteidutil
-Replaces:
- smartcardpp
-Breaks:
- smartcardpp
 Architecture: any
 Depends:
  fonts-liberation,
- pcscd (>=1.5),
+ pcscd,
  ${misc:Depends},
  ${shlibs:Depends}
 Description: Estonian ID card management desktop utility
- ID-card Utility is a part of Estonian national ID-card software developed by
- Sertifitseerimiskeskus on behalf of governmental institution - Estonian
- Information System’s Authority.
- .
  ID-card utility allows you check the ID-card operation and the validity of the
  certificates, change as well as unblock locked PIN codes and change the PUK
  code. In addition, the utility enables you to renew the certificates, create
  and configure @eesti.ee email address.
-
-Package: qesteidutil-dbg
-Architecture: any
-Section: debug
-Depends:
- libssl1.0.0-dbg,
- qesteidutil (= ${binary:Version}),
- ${misc:Depends}
-Description: Debugging symbols for qesteidutil
- This package contains the debugging symbols for the Estonian ID card
- management desktop utility.
