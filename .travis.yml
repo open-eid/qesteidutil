@@ -27,9 +27,9 @@ script: if [ "${TRAVIS_OS_NAME}" = "osx" ]; then
     mkdir build && cd build && cmake -DQt5_DIR=/usr/local/opt/qt5/lib/cmake/Qt5 -DOPENSSL_ROOT_DIR=/usr/local/opt/openssl ..;
     make zipdebug macdeployqt zip && cd ..;
   else
-    docker run -e BUILD_NUMBER=${BUILD_NUMBER} -e COVERITY_SCAN_TOKEN=${COVERITY_SCAN_TOKEN} -e TRAVIS_BRANCH=${TRAVIS_BRANCH} -e IMAGE=${IMAGE} -v $(pwd):$(pwd) -t "${IMAGE}" /bin/bash -c "cd $(pwd);"'
+    docker run -e BUILD_NUMBER=${BUILD_NUMBER} -e COVERITY_SCAN_TOKEN=${COVERITY_SCAN_TOKEN} -e TRAVIS_BRANCH=${TRAVIS_BRANCH} -e IMAGE=${IMAGE} -v ${HOME}:${HOME} -t "${IMAGE}" /bin/bash -c "cd $(pwd);"'
       apt-get update -qq;
-      apt-get install -y apt-transport-https curl dh-make devscripts dpkg-dev cdbs cmake libpcsclite-dev libssl-dev qttools5-dev-tools qttools5-dev git curl wget ruby;
+      apt-get install -y apt-transport-https curl dh-make devscripts cdbs cmake libpcsclite-dev libssl-dev qttools5-dev-tools qttools5-dev git curl wget ruby;
       export VERSION=$(grep project CMakeLists.txt | egrep -o "([0-9]{1,}\.)+[0-9]{1,}").${BUILD_NUMBER};
       export DEBFULLNAME="Travis";
       export DEBEMAIL="travis-ci@travis";

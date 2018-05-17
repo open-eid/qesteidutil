@@ -29,7 +29,7 @@
 #include <QtNetwork/QSslKey>
 #include <QtWidgets/QApplication>
 
-#include <openssl/evp.h>
+#include <openssl/obj_mac.h>
 #include <thread>
 
 #if OPENSSL_VERSION_NUMBER < 0x10010000L
@@ -47,10 +47,10 @@ static int ECDSA_SIG_set0(ECDSA_SIG *sig, BIGNUM *r, BIGNUM *s)
 
 QSmartCardData::QSmartCardData(): d(new QSmartCardDataPrivate) {}
 QSmartCardData::QSmartCardData(const QSmartCardData &other) = default;
-QSmartCardData::QSmartCardData(QSmartCardData &&other) noexcept: d(other.d) {}
+QSmartCardData::QSmartCardData(QSmartCardData &&other) Q_DECL_NOEXCEPT: d(other.d) {}
 QSmartCardData::~QSmartCardData() = default;
 QSmartCardData& QSmartCardData::operator =(const QSmartCardData &other) = default;
-QSmartCardData& QSmartCardData::operator =(QSmartCardData &&other) noexcept { qSwap(d, other.d); return *this; }
+QSmartCardData& QSmartCardData::operator =(QSmartCardData &&other) Q_DECL_NOEXCEPT { qSwap(d, other.d); return *this; }
 
 QString QSmartCardData::card() const { return d->card; }
 QStringList QSmartCardData::cards() const { return d->cards; }
@@ -92,9 +92,9 @@ QSharedPointer<QPCSCReader> QSmartCardPrivate::connect(const QString &reader)
 {
 	qDebug() << "Connecting to reader" << reader;
 	QSharedPointer<QPCSCReader> r(new QPCSCReader(reader, &QPCSC::instance()));
-	if(r->connect() && r->beginTransaction())
-		return r;
-	return QSharedPointer<QPCSCReader>();
+	if(!r->connect() || !r->beginTransaction())
+		r.clear();
+	return r;
 }
 
 QSmartCard::ErrorType QSmartCardPrivate::handlePinResult(QPCSCReader *reader, const QPCSCReader::Result &response, bool forceUpdate)
@@ -271,7 +271,13 @@ QSmartCard::QSmartCard(QObject *parent)
 #else
 	RSA_meth_set1_name(d->rsamethod, "QSmartCard");
 	RSA_meth_set_sign(d->rsamethod, QSmartCardPrivate::rsa_sign);
-	EC_KEY_METHOD_set_sign(d->ecmethod, nullptr, nullptr, QSmartCardPrivate::ecdsa_do_sign);
+	typedef int (*EC_KEY_sign)(int type, const unsigned char *dgst, int dlen, unsigned char *sig,
+		unsigned int *siglen, const BIGNUM *kinv, const BIGNUM *r, EC_KEY *eckey);
+	typedef int (*EC_KEY_sign_setup)(EC_KEY *eckey, BN_CTX *ctx_in, BIGNUM **kinvp, BIGNUM **rp);
+	EC_KEY_sign sign = nullptr;
+	EC_KEY_sign_setup sign_setup = nullptr;
+	EC_KEY_METHOD_get_sign(d->ecmethod, &sign, &sign_setup, nullptr);
+	EC_KEY_METHOD_set_sign(d->ecmethod, sign, sign_setup, QSmartCardPrivate::ecdsa_do_sign);
 #endif
 
 	d->t.d->readers = QPCSC::instance().readers();
@@ -281,7 +287,7 @@ QSmartCard::QSmartCard(QObject *parent)
 
 QSmartCard::~QSmartCard()
 {
-	d->terminate = true;
+	requestInterruption();
 	wait();
 #if OPENSSL_VERSION_NUMBER >= 0x10010000L
 	RSA_meth_free(d->rsamethod);
@@ -441,7 +447,7 @@ void QSmartCard::run()
 	QByteArray cardid = d->READRECORD;
 	cardid[2] = 8;
 
-	while(!d->terminate)
+	while(!isInterruptionRequested())
 	{
 		if(d->m.tryLock())
 		{
