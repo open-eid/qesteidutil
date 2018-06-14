@@ -45,15 +45,16 @@ class MacMenuBar;
 #endif
 
 #include <QtCore/QDate>
+#include <QtCore/QJsonObject>
 #include <QtCore/QStandardPaths>
 #include <QtCore/QTextStream>
 #include <QtCore/QTranslator>
-#include <QtCore/QJsonObject>
 #include <QtCore/QUrl>
 #include <QtGui/QDesktopServices>
-#include <QtGui/QPainter>
 #include <QtGui/QPaintEvent>
+#include <QtGui/QPainter>
 #include <QtNetwork/QSslKey>
+#include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QFileDialog>
 #include <QtWidgets/QMessageBox>
 
@@ -511,7 +512,7 @@ void MainWindow::loadPicture()
 
 	QPixmap pix;
 	d->loadPicture->setHidden(pix.loadFromData(buffer));
-	d->pictureFrame->setProperty( "PICTURE", pix );
+	d->pictureFrame->setProperty("PICTURE", buffer);
 	if( d->loadPicture->isVisible() )
 	{
 		XmlReader xml( buffer );
@@ -545,8 +546,9 @@ void MainWindow::savePicture()
 	QStringList exts = QStringList() << "png" << "jpg" << "jpeg" << "tiff" << "bmp";
 	if( !exts.contains( QFileInfo( file ).suffix(), Qt::CaseInsensitive ) )
 		file.append( ".jpg" );
-	QPixmap pix = d->pictureFrame->property( "PICTURE" ).value<QPixmap>();
-	if( !pix.save( file ) )
+	QByteArray pix = d->pictureFrame->property("PICTURE").value<QByteArray>();
+	QFile f(file);
+	if(!f.open(QFile::WriteOnly) || f.write(pix) != pix.size())
 		showWarning( tr("Saving picture failed!") );
 }
 
