@@ -32,7 +32,7 @@
 #include <openssl/obj_mac.h>
 #include <thread>
 
-#if OPENSSL_VERSION_NUMBER < 0x10010000L
+#if OPENSSL_VERSION_NUMBER < 0x10100000L
 static int ECDSA_SIG_set0(ECDSA_SIG *sig, BIGNUM *r, BIGNUM *s)
 {
 	if(!r || !s)
@@ -187,7 +187,7 @@ int QSmartCardPrivate::rsa_sign(int type, const unsigned char *m, unsigned int m
 ECDSA_SIG* QSmartCardPrivate::ecdsa_do_sign(const unsigned char *dgst, int dgst_len,
 		const BIGNUM *, const BIGNUM *, EC_KEY *eckey)
 {
-#if OPENSSL_VERSION_NUMBER < 0x10010000L
+#if OPENSSL_VERSION_NUMBER < 0x10100000L
 	QSmartCardPrivate *d = (QSmartCardPrivate*)ECDSA_get_ex_data(eckey, 0);
 #else
 	QSmartCardPrivate *d = (QSmartCardPrivate*)EC_KEY_get_ex_data(eckey, 0);
@@ -262,7 +262,7 @@ QSmartCard::QSmartCard(QObject *parent)
 :	QThread(parent)
 ,	d(new QSmartCardPrivate)
 {
-#if OPENSSL_VERSION_NUMBER < 0x10010000L || defined(LIBRESSL_VERSION_NUMBER)
+#if OPENSSL_VERSION_NUMBER < 0x10100000L || defined(LIBRESSL_VERSION_NUMBER)
 	d->rsamethod.name = "QSmartCard";
 	d->rsamethod.rsa_sign = QSmartCardPrivate::rsa_sign;
 	ECDSA_METHOD_set_name(d->ecmethod, const_cast<char*>("QSmartCard"));
@@ -289,7 +289,7 @@ QSmartCard::~QSmartCard()
 {
 	requestInterruption();
 	wait();
-#if OPENSSL_VERSION_NUMBER >= 0x10010000L
+#if OPENSSL_VERSION_NUMBER >= 0x10100000L
 	RSA_meth_free(d->rsamethod);
 	EC_KEY_METHOD_free(d->ecmethod);
 #else
@@ -340,7 +340,7 @@ QSslKey QSmartCard::key() const
 	if (key.algorithm() == QSsl::Ec)
 	{
 		EC_KEY *ec = (EC_KEY*)key.handle();
-#if OPENSSL_VERSION_NUMBER < 0x10010000L
+#if OPENSSL_VERSION_NUMBER < 0x10100000L
 		ECDSA_set_ex_data(ec, 0, d);
 		ECDSA_set_method(ec, d->ecmethod);
 #else
@@ -351,7 +351,7 @@ QSslKey QSmartCard::key() const
 	else
 	{
 		RSA *rsa = (RSA*)key.handle();
-#if OPENSSL_VERSION_NUMBER < 0x10010000L || defined(LIBRESSL_VERSION_NUMBER)
+#if OPENSSL_VERSION_NUMBER < 0x10100000L || defined(LIBRESSL_VERSION_NUMBER)
 		RSA_set_method(rsa, &d->rsamethod);
 		rsa->flags |= RSA_FLAG_SIGN_VER;
 #else
