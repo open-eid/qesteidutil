@@ -178,13 +178,7 @@ bool MainWindowPrivate::validateCardError( QSmartCardData::PinType type, int fla
 	case QSmartCard::DifferentError:
 		showWarning( tr("New %1 codes doesn't match").arg( QSmartCardData::typeString( type ) ) ); break;
 	case QSmartCard::LenghtError:
-		switch( type )
-		{
-		case QSmartCardData::Pin1Type: showWarning( tr("PIN1 length has to be between 4 and 12") ); break;
-		case QSmartCardData::Pin2Type: showWarning( tr("PIN2 length has to be between 5 and 12") ); break;
-		case QSmartCardData::PukType: showWarning( tr("PUK length has to be between 8 and 12") ); break;
-		}
-		break;
+		showWarning(tr("%1 length has to be between %2 and 12").arg(QSmartCardData::typeString(type)).arg(QSmartCardData::minPinLen(type))); break;
 	case QSmartCard::OldNewPinSameError:
 		showWarning( tr("Old and new %1 has to be different!").arg( QSmartCardData::typeString( type ) ) );
 		break;
@@ -220,22 +214,8 @@ bool MainWindowPrivate::validatePin( QSmartCardData::PinType type, bool puk,
 	{ showWarning( tr("Old and new %1 has to be different!").arg( name ) ); return false; }
 	if( pin != pin2 )
 	{ showWarning( tr("New %1 codes doesn't match").arg( name ) ); return false; }
-
-	switch( type )
-	{
-	case QSmartCardData::Pin1Type:
-		if( pin.size() < 4 || pin.size() > 12 )
-		{ showWarning( tr("PIN1 length has to be between 4 and 12") ); return false; }
-		break;
-	case QSmartCardData::Pin2Type:
-		if( pin.size() < 5 || pin.size() > 12 )
-		{ showWarning( tr("PIN2 length has to be between 5 and 12") ); return false; }
-		break;
-	case QSmartCardData::PukType:
-		if( pin.size() < 8 || pin.size() > 12 )
-		{ showWarning( tr("PUK length has to be between 8 and 12") ); return false; }
-		break;
-	}
+	if( pin.size() < QSmartCardData::minPinLen(type) || pin.size() > 12 )
+	{ showWarning(tr("%1 length has to be between %2 and 12").arg(QSmartCardData::typeString(type)).arg(QSmartCardData::minPinLen(type))); return false; }
 
 	QSmartCardData t = smartcard->data();
 	QDate date = t.data( QSmartCardData::BirthDate ).toDate();

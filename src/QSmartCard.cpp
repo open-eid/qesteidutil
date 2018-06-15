@@ -75,6 +75,16 @@ ulong QSmartCardData::usageCount(PinType type) const { return d->usage.value(typ
 QString QSmartCardData::appletVersion() const { return d->appletVersion; }
 QSmartCardData::CardVersion QSmartCardData::version() const { return d->version; }
 
+quint8 QSmartCardData::minPinLen(QSmartCardData::PinType type)
+{
+	switch(type)
+	{
+	case QSmartCardData::Pin1Type: return 4;
+	case QSmartCardData::Pin2Type: return 5;
+	case QSmartCardData::PukType: return 8;
+	}
+}
+
 QString QSmartCardData::typeString(QSmartCardData::PinType type)
 {
 	switch(type)
@@ -312,15 +322,7 @@ QSmartCard::ErrorType QSmartCard::change(QSmartCardData::PinType type, const QSt
 	{
 		QEventLoop l;
 		std::thread([&]{
-			result = reader->transferCTL(cmd, false, d->language(), [&]() -> quint8 {
-				switch(type)
-				{
-				default:
-				case QSmartCardData::Pin1Type: return 4;
-				case QSmartCardData::Pin2Type: return 5;
-				case QSmartCardData::PukType: return 8;
-				}
-			}());
+			result = reader->transferCTL(cmd, false, d->language(), QSmartCardData::minPinLen(type));
 			l.quit();
 		}).detach();
 		l.exec();
@@ -400,7 +402,7 @@ QSmartCard::ErrorType QSmartCard::login(QSmartCardData::PinType type)
 	{
 		std::thread([&]{
 			Q_EMIT p->startTimer();
-			result = d->reader->transferCTL(cmd, true, d->language());
+			result = d->reader->transferCTL(cmd, true, d->language(), QSmartCardData::minPinLen(type));
 			Q_EMIT p->finish(0);
 		}).detach();
 		p->exec();
@@ -723,15 +725,7 @@ QSmartCard::ErrorType QSmartCard::unblock(QSmartCardData::PinType type, const QS
 	{
 		QEventLoop l;
 		std::thread([&]{
-			result = reader->transferCTL(cmd, false, d->language(), [&]() -> quint8 {
-				switch(type)
-				{
-				default:
-				case QSmartCardData::Pin1Type: return 4;
-				case QSmartCardData::Pin2Type: return 5;
-				case QSmartCardData::PukType: return 8;
-				}
-			}());
+			result = reader->transferCTL(cmd, false, d->language(), QSmartCardData::minPinLen(type));
 			l.quit();
 		}).detach();
 		l.exec();

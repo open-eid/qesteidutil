@@ -212,14 +212,6 @@ Uue PUK koodi saamiseks, külasta klienditeeninduspunkti, kust saad koodiümbrik
         <translation>E-posti aadress sisestamata või vigane!</translation>
     </message>
     <message>
-        <source>PIN1 length has to be between 4 and 12</source>
-        <translation>PIN1 pikkus peab olema 4-12 numbrit</translation>
-    </message>
-    <message>
-        <source>PIN2 length has to be between 5 and 12</source>
-        <translation>PIN2 pikkus peab olema 5-12 numbrit</translation>
-    </message>
-    <message>
         <source>valid but blocked</source>
         <translation>kehtiv kuid blokeeritud</translation>
     </message>
@@ -364,10 +356,6 @@ Uue PUK koodi saamiseks, külasta klienditeeninduspunkti, kust saad koodiümbrik
     <message>
         <source>%1 changed!</source>
         <translation>%1 kood muudetud!</translation>
-    </message>
-    <message>
-        <source>PUK length has to be between 8 and 12</source>
-        <translation>PUK koodi pikkus peab olema 8-12 numbrit</translation>
     </message>
     <message numerus="yes">
         <source>Wrong %1 code. You can try %n more time(s).</source>
@@ -602,13 +590,13 @@ Uuendamise protseduur võtab aega 2-10 minutit ning eeldab toimivat internetiüh
         <source>This card does not require updating</source>
         <translation>See kaart ei vaja uuendamist</translation>
     </message>
+    <message>
+        <source>%1 length has to be between %2 and 12</source>
+        <translation>%1 pikkus peab olema %2-12 numbrit</translation>
+    </message>
 </context>
 <context>
     <name>SSLConnect</name>
-    <message>
-        <source>Failed to connect to host. Are you connected to the internet?</source>
-        <translation>Puudub internetiühendus!</translation>
-    </message>
     <message>
         <source>Loading Email info</source>
         <translation>Laadin e-posti seadeid</translation>
@@ -618,15 +606,7 @@ Uuendamise protseduur võtab aega 2-10 minutit ning eeldab toimivat internetiüh
         <translation>Laadin pilti</translation>
     </message>
     <message>
-        <source>SSL context is missing</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Certificate is empty</source>
-        <translation>Sertifikaat on tühi</translation>
-    </message>
-    <message>
-        <source>Invalid response</source>
+        <source>Invalid Content-Type</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
