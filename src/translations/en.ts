@@ -102,8 +102,12 @@ Please visit the service center to obtain new codes. &lt;a href=&quot;http://www
         <translation>New PIN1 code</translation>
     </message>
     <message>
-        <source>To change PIN code on a PinPad reader the old PIN code has to be entered first and then the new PIN code twice.</source>
-        <translation>To change PIN code on a PinPad reader the old PIN code has to be entered first and then the new PIN code twice.</translation>
+        <source>To change PIN1 code on a PinPad reader the old PIN1 code has to be entered first and then the new PIN1 code twice.</source>
+        <translation>To change PIN1 code on a PinPad reader the old PIN1 code has to be entered first and then the new PIN1 code twice.</translation>
+    </message>
+    <message>
+        <source>To change PIN2 code on a PinPad reader the old PIN2 code has to be entered first and then the new PIN2 code twice.</source>
+        <translation>To change PIN2 code on a PinPad reader the old PIN2 code has to be entered first and then the new PIN2 code twice.</translation>
     </message>
     <message>
         <source>Change with PinPad</source>
@@ -407,8 +411,12 @@ Please visit the service center to obtain new codes. &lt;a href=&quot;http://www
 &lt;p&gt;If you have forgotten PIN1, but know PUK, then here you can enter new PIN1.&lt;/p&gt;</translation>
     </message>
     <message>
-        <source>To change PIN code with the PUK code on a PinPad reader the PUK code has to be entered first and then the PIN code twice.</source>
-        <translation>To change PIN code with the PUK code on a PinPad reader the PUK code has to be entered first and then the PIN code twice.</translation>
+        <source>To change PIN1 code with the PUK code on a PinPad reader the PUK code has to be entered first and then the PIN1 code twice.</source>
+        <translation>To change PIN1 code with the PUK code on a PinPad reader the PUK code has to be entered first and then the PIN1 code twice.</translation>
+    </message>
+    <message>
+        <source>To change PIN2 code with the PUK code on a PinPad reader the PUK code has to be entered first and then the PIN2 code twice.</source>
+        <translation>To change PIN2 code with the PUK code on a PinPad reader the PUK code has to be entered first and then the PIN2 code twice.</translation>
     </message>
     <message>
         <source>&lt;h3&gt;Change PIN2 code&lt;/h3&gt;
@@ -421,8 +429,12 @@ Please visit the service center to obtain new codes. &lt;a href=&quot;http://www
 &lt;p&gt;If you have forgotten PIN2, but know PUK, then here you can enter new PIN2.&lt;/p&gt;</translation>
     </message>
     <message>
-        <source>To unblock the PIN code on a PinPad reader the PUK code has to be entered first and then the PIN code twice.</source>
-        <translation>To unblock the PIN code on a PinPad reader the PUK code has to be entered first and then the PIN code twice.</translation>
+        <source>To unblock the PIN1 code on a PinPad reader the PUK code has to be entered first and then the PIN1 code twice.</source>
+        <translation>To unblock the PIN1 code on a PinPad reader the PUK code has to be entered first and then the PIN1 code twice.</translation>
+    </message>
+    <message>
+        <source>To unblock the PIN2 code on a PinPad reader the PUK code has to be entered first and then the PIN2 code twice.</source>
+        <translation>To unblock the PIN2 code on a PinPad reader the PUK code has to be entered first and then the PIN2 code twice.</translation>
     </message>
     <message>
         <source>Save picture</source>
@@ -589,6 +601,18 @@ Updating takes ca 2-10 minutes and requires an active internet connection. Do no
     <message>
         <source>Attempts left: %1</source>
         <translation>Attempts left: %1</translation>
+    </message>
+    <message>
+        <source>PIN1 timeout</source>
+        <translation>PIN1 timeout</translation>
+    </message>
+    <message>
+        <source>PIN2 timeout</source>
+        <translation>PIN2 timeout</translation>
+    </message>
+    <message>
+        <source>PUK timeout</source>
+        <translation>PUK timeout</translation>
     </message>
     <message>
         <source>Your ID-card certificates cannot be renewed starting from 01.07.2017. Your document is still valid until its expiring date and it can be used to login to e-services and give digital signatures. If there are problems using Your ID-card in e-services please contact ID-card helpdesk by phone (+372) 677 3377 or visit Police and Border Guard Board service point.&lt;br /&gt;&lt;br /&gt;&lt;a href=&quot;http://id.ee/?id=30519&amp;read=38011&quot;&gt;More info&lt;/a&gt;</source>

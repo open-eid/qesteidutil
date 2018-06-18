@@ -102,8 +102,12 @@ Please visit the service center to obtain new codes. &lt;a href=&quot;http://www
         <translation>Новый PIN1 код</translation>
     </message>
     <message>
-        <source>To change PIN code on a PinPad reader the old PIN code has to be entered first and then the new PIN code twice.</source>
-        <translation>Для замены PIN кода Вам необходимо ввести один раз действующий PIN код и два раза новый PIN код с помощью PinPad.</translation>
+        <source>To change PIN1 code on a PinPad reader the old PIN1 code has to be entered first and then the new PIN1 code twice.</source>
+        <translation>Для замены PIN1 кода Вам необходимо ввести один раз действующий PIN1 код и два раза новый PIN1 код с помощью PinPad.</translation>
+    </message>
+    <message>
+        <source>To change PIN2 code on a PinPad reader the old PIN2 code has to be entered first and then the new PIN2 code twice.</source>
+        <translation>Для замены PIN2 кода Вам необходимо ввести один раз действующий PIN2 код и два раза новый PIN2 код с помощью PinPad.</translation>
     </message>
     <message>
         <source>Change with PinPad</source>
@@ -404,8 +408,12 @@ Please visit the service center to obtain new codes. &lt;a href=&quot;http://www
 &lt;p&gt;Если вы забыли PIN1, при помощи PUK кода можно ввести новый PIN1 код.&lt;/p&gt;</translation>
     </message>
     <message>
-        <source>To change PIN code with the PUK code on a PinPad reader the PUK code has to be entered first and then the PIN code twice.</source>
-        <translation>Для изменения PIN кода с помощью PUK кода Вам необходимо ввести один раз PUK код и два раза новый PIN код с помощью PinPad.</translation>
+        <source>To change PIN1 code with the PUK code on a PinPad reader the PUK code has to be entered first and then the PIN1 code twice.</source>
+        <translation>Для изменения PIN1 кода с помощью PUK кода Вам необходимо ввести один раз PUK код и два раза новый PIN1 код с помощью PinPad.</translation>
+    </message>
+    <message>
+        <source>To change PIN2 code with the PUK code on a PinPad reader the PUK code has to be entered first and then the PIN2 code twice.</source>
+        <translation>Для изменения PIN2 кода с помощью PUK кода Вам необходимо ввести один раз PUK код и два раза новый PIN2 код с помощью PinPad.</translation>
     </message>
     <message>
         <source>&lt;h3&gt;Change PIN2 code&lt;/h3&gt;
@@ -418,8 +426,12 @@ Please visit the service center to obtain new codes. &lt;a href=&quot;http://www
 &lt;p&gt;Если забыли PIN2 код, но знаете PUK код, тогда можете создать новый PIN2 код.&lt;/p&gt;</translation>
     </message>
     <message>
-        <source>To unblock the PIN code on a PinPad reader the PUK code has to be entered first and then the PIN code twice.</source>
-        <translation>Для разблокировки PIN кода Вам необходимо ввести один раз PUK код и два раза новый PIN код с помощью PinPad.</translation>
+        <source>To unblock the PIN1 code on a PinPad reader the PUK code has to be entered first and then the PIN1 code twice.</source>
+        <translation>Для разблокировки PIN1 кода Вам необходимо ввести один раз PUK код и два раза новый PIN1 код с помощью PinPad.</translation>
+    </message>
+    <message>
+        <source>To unblock the PIN2 code on a PinPad reader the PUK code has to be entered first and then the PIN2 code twice.</source>
+        <translation>Для разблокировки PIN2 кода Вам необходимо ввести один раз PUK код и два раза новый PIN2 код с помощью PinPad.</translation>
     </message>
     <message>
         <source>Save picture</source>
@@ -587,6 +599,18 @@ Updating takes ca 2-10 minutes and requires an active internet connection. Do no
     <message>
         <source>Attempts left: %1</source>
         <translation>Осталось попыток: %1</translation>
+    </message>
+    <message>
+        <source>PIN1 timeout</source>
+        <translation>PIN1 тайм-аут</translation>
+    </message>
+    <message>
+        <source>PIN2 timeout</source>
+        <translation>PIN2 тайм-аут</translation>
+    </message>
+    <message>
+        <source>PUK timeout</source>
+        <translation>PUK тайм-аут</translation>
     </message>
     <message>
         <source>%1 have to be different than date of birth or year of birth</source>

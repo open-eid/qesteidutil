@@ -126,13 +126,13 @@ public:
 	explicit QSmartCard(QObject *parent = nullptr);
 	~QSmartCard();
 
-	ErrorType change( QSmartCardData::PinType type, const QString &newpin, const QString &pin );
+	ErrorType change( QSmartCardData::PinType type, const QString &newpin, const QString &pin, const QString &title, const QString &bodyText );
 	QSmartCardData data() const;
 	QSslKey key() const;
 	ErrorType login( QSmartCardData::PinType type );
 	void logout();
 	void reload();
-	ErrorType unblock( QSmartCardData::PinType type, const QString &pin, const QString &puk );
+	ErrorType unblock( QSmartCardData::PinType type, const QString &pin, const QString &puk, const QString &title, const QString &bodyText );
 
 signals:
 	void dataChanged();

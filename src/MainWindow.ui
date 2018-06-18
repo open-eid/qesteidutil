@@ -1683,7 +1683,7 @@ Please visit the service center to obtain new codes. &lt;a href=&quot;http://www
                <widget class="QStackedWidget" name="changePin1PinpadInfo">
                 <widget class="QLabel" name="changePin1PinpadInfoPin">
                  <property name="text">
-                  <string>To change PIN code on a PinPad reader the old PIN code has to be entered first and then the new PIN code twice.</string>
+                  <string>To change PIN1 code on a PinPad reader the old PIN1 code has to be entered first and then the new PIN1 code twice.</string>
                  </property>
                  <property name="wordWrap">
                   <bool>true</bool>
@@ -1691,7 +1691,7 @@ Please visit the service center to obtain new codes. &lt;a href=&quot;http://www
                 </widget>
                 <widget class="QLabel" name="changePin1PinpadInfoPuk">
                  <property name="text">
-                  <string>To change PIN code with the PUK code on a PinPad reader the PUK code has to be entered first and then the PIN code twice.</string>
+                  <string>To change PIN1 code with the PUK code on a PinPad reader the PUK code has to be entered first and then the PIN1 code twice.</string>
                  </property>
                  <property name="wordWrap">
                   <bool>true</bool>
@@ -1699,7 +1699,7 @@ Please visit the service center to obtain new codes. &lt;a href=&quot;http://www
                 </widget>
                 <widget class="QLabel" name="changePin1PinpadInfoUnblock">
                  <property name="text">
-                  <string>To unblock the PIN code on a PinPad reader the PUK code has to be entered first and then the PIN code twice.</string>
+                  <string>To unblock the PIN1 code on a PinPad reader the PUK code has to be entered first and then the PIN1 code twice.</string>
                  </property>
                  <property name="wordWrap">
                   <bool>true</bool>
@@ -1998,7 +1998,7 @@ Please visit the service center to obtain new codes. &lt;a href=&quot;http://www
                 </property>
                 <widget class="QLabel" name="changePin2PinpadInfoPin">
                  <property name="text">
-                  <string>To change PIN code on a PinPad reader the old PIN code has to be entered first and then the new PIN code twice.</string>
+                  <string>To change PIN2 code on a PinPad reader the old PIN2 code has to be entered first and then the new PIN2 code twice.</string>
                  </property>
                  <property name="wordWrap">
                   <bool>true</bool>
@@ -2006,7 +2006,7 @@ Please visit the service center to obtain new codes. &lt;a href=&quot;http://www
                 </widget>
                 <widget class="QLabel" name="changePin2PinpadInfoPuk">
                  <property name="text">
-                  <string>To change PIN code with the PUK code on a PinPad reader the PUK code has to be entered first and then the PIN code twice.</string>
+                  <string>To change PIN2 code with the PUK code on a PinPad reader the PUK code has to be entered first and then the PIN2 code twice.</string>
                  </property>
                  <property name="wordWrap">
                   <bool>true</bool>
@@ -2014,7 +2014,7 @@ Please visit the service center to obtain new codes. &lt;a href=&quot;http://www
                 </widget>
                 <widget class="QLabel" name="changePin2PinpadInfoUnblock">
                  <property name="text">
-                  <string>To unblock the PIN code on a PinPad reader the PUK code has to be entered first and then the PIN code twice.</string>
+                  <string>To unblock the PIN2 code on a PinPad reader the PUK code has to be entered first and then the PIN2 code twice.</string>
                  </property>
                  <property name="wordWrap">
                   <bool>true</bool>

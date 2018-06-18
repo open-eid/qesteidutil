@@ -102,8 +102,12 @@ Uue PUK koodi saamiseks, külasta klienditeeninduspunkti, kust saad koodiümbrik
         <translation>Uus PIN1 kood</translation>
     </message>
     <message>
-        <source>To change PIN code on a PinPad reader the old PIN code has to be entered first and then the new PIN code twice.</source>
-        <translation>PinPad lugejaga PIN muutmiseks tuleb kõigepealt sisestada vana PIN ning siis kaks korda uus PIN.</translation>
+        <source>To change PIN1 code on a PinPad reader the old PIN1 code has to be entered first and then the new PIN1 code twice.</source>
+        <translation>PinPad lugejaga PIN1 muutmiseks tuleb kõigepealt sisestada vana PIN1 ning siis kaks korda uus PIN1.</translation>
+    </message>
+    <message>
+        <source>To change PIN2 code on a PinPad reader the old PIN2 code has to be entered first and then the new PIN2 code twice.</source>
+        <translation>PinPad lugejaga PIN2 muutmiseks tuleb kõigepealt sisestada vana PIN2 ning siis kaks korda uus PIN2.</translation>
     </message>
     <message>
         <source>Change with PinPad</source>
@@ -407,8 +411,12 @@ Uue PUK koodi saamiseks, külasta klienditeeninduspunkti, kust saad koodiümbrik
 &lt;p&gt;Kui olete unustanud PIN1 koodi, kuid teate PUK koodi, siis siin saate määrata uue PIN1 koodi.&lt;/p&gt;</translation>
     </message>
     <message>
-        <source>To change PIN code with the PUK code on a PinPad reader the PUK code has to be entered first and then the PIN code twice.</source>
-        <translation>PinPad lugejaga PUK abil PIN muutmiseks tuleb kõigepealt sisestada PUK ning siis kaks korda uus PIN.</translation>
+        <source>To change PIN1 code with the PUK code on a PinPad reader the PUK code has to be entered first and then the PIN1 code twice.</source>
+        <translation>PinPad lugejaga PUK abil PIN1 muutmiseks tuleb kõigepealt sisestada PUK ning siis kaks korda uus PIN1.</translation>
+    </message>
+    <message>
+        <source>To change PIN2 code with the PUK code on a PinPad reader the PUK code has to be entered first and then the PIN2 code twice.</source>
+        <translation>PinPad lugejaga PUK abil PIN2 muutmiseks tuleb kõigepealt sisestada PUK ning siis kaks korda uus PIN2.</translation>
     </message>
     <message>
         <source>&lt;h3&gt;Change PIN2 code&lt;/h3&gt;
@@ -421,8 +429,12 @@ Uue PUK koodi saamiseks, külasta klienditeeninduspunkti, kust saad koodiümbrik
 &lt;p&gt;Kui olete unustanud PIN2 koodi, kuid teate PUK koodi, siis siin saate määrata uue PIN2 koodi.&lt;/p&gt;</translation>
     </message>
     <message>
-        <source>To unblock the PIN code on a PinPad reader the PUK code has to be entered first and then the PIN code twice.</source>
-        <translation>PinPad lugejaga PIN blokeeringu tühistamiseks tuleb kõigepealt sisestada PUK ning siis kaks korda PIN.</translation>
+        <source>To unblock the PIN1 code on a PinPad reader the PUK code has to be entered first and then the PIN1 code twice.</source>
+        <translation>PinPad lugejaga PIN1 blokeeringu tühistamiseks tuleb kõigepealt sisestada PUK ning siis kaks korda PIN1.</translation>
+    </message>
+    <message>
+        <source>To unblock the PIN2 code on a PinPad reader the PUK code has to be entered first and then the PIN2 code twice.</source>
+        <translation>PinPad lugejaga PIN2 blokeeringu tühistamiseks tuleb kõigepealt sisestada PUK ning siis kaks korda PIN2.</translation>
     </message>
     <message>
         <source>Save picture</source>
@@ -589,6 +601,18 @@ Uuendamise protseduur võtab aega 2-10 minutit ning eeldab toimivat internetiüh
     <message>
         <source>Attempts left: %1</source>
         <translation>Katseid jäänud: %1</translation>
+    </message>
+    <message>
+        <source>PIN1 timeout</source>
+        <translation>PIN1 aegumine</translation>
+    </message>
+    <message>
+        <source>PIN2 timeout</source>
+        <translation>PIN2 aegumine</translation>
+    </message>
+    <message>
+        <source>PUK timeout</source>
+        <translation>PUK aegumine</translation>
     </message>
     <message>
         <source>Your ID-card certificates cannot be renewed starting from 01.07.2017. Your document is still valid until its expiring date and it can be used to login to e-services and give digital signatures. If there are problems using Your ID-card in e-services please contact ID-card helpdesk by phone (+372) 677 3377 or visit Police and Border Guard Board service point.&lt;br /&gt;&lt;br /&gt;&lt;a href=&quot;http://id.ee/?id=30519&amp;read=38011&quot;&gt;More info&lt;/a&gt;</source>
