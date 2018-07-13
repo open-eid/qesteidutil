@@ -212,14 +212,6 @@ Please visit the service center to obtain new codes. &lt;a href=&quot;http://www
         <translation>E-mail address missing or invalid!</translation>
     </message>
     <message>
-        <source>PIN1 length has to be between 4 and 12</source>
-        <translation>PIN1 length has to be between 4 and 12</translation>
-    </message>
-    <message>
-        <source>PIN2 length has to be between 5 and 12</source>
-        <translation>PIN2 length has to be between 5 and 12</translation>
-    </message>
-    <message>
         <source>valid but blocked</source>
         <translation>valid but blocked</translation>
     </message>
@@ -364,10 +356,6 @@ Please visit the service center to obtain new codes. &lt;a href=&quot;http://www
     <message>
         <source>%1 changed!</source>
         <translation>%1 changed!</translation>
-    </message>
-    <message>
-        <source>PUK length has to be between 8 and 12</source>
-        <translation>PUK length has to be between 8 and 12</translation>
     </message>
     <message numerus="yes">
         <source>Wrong %1 code. You can try %n more time(s).</source>
@@ -602,13 +590,13 @@ Updating takes ca 2-10 minutes and requires an active internet connection. Do no
         <source>This card does not require updating</source>
         <translation>This card does not require updating</translation>
     </message>
+    <message>
+        <source>%1 length has to be between %2 and 12</source>
+        <translation>%1 length has to be between %2 and 12</translation>
+    </message>
 </context>
 <context>
     <name>SSLConnect</name>
-    <message>
-        <source>Failed to connect to host. Are you connected to the internet?</source>
-        <translation>Failed to connect to host. Are you connected to the internet?</translation>
-    </message>
     <message>
         <source>Loading Email info</source>
         <translation>Loading Email info</translation>
@@ -618,15 +606,7 @@ Updating takes ca 2-10 minutes and requires an active internet connection. Do no
         <translation>Downloading picture</translation>
     </message>
     <message>
-        <source>SSL context is missing</source>
-        <translation>SSL context is missing</translation>
-    </message>
-    <message>
-        <source>Certificate is empty</source>
-        <translation>Certificate is empty</translation>
-    </message>
-    <message>
-        <source>Invalid response</source>
+        <source>Invalid Content-Type</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

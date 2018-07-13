@@ -212,14 +212,6 @@ Please visit the service center to obtain new codes. &lt;a href=&quot;http://www
         <translation>Введите адрес эл. почты!</translation>
     </message>
     <message>
-        <source>PIN1 length has to be between 4 and 12</source>
-        <translation>Длина PIN1 должна быть 4-12 номера</translation>
-    </message>
-    <message>
-        <source>PIN2 length has to be between 5 and 12</source>
-        <translation>Длина PIN2 должна быть 5-12 номера</translation>
-    </message>
-    <message>
         <source>valid but blocked</source>
         <translation>действителен, но заблокирован</translation>
     </message>
@@ -360,10 +352,6 @@ Please visit the service center to obtain new codes. &lt;a href=&quot;http://www
     <message>
         <source>%1 changed!</source>
         <translation>%1 код изменён!</translation>
-    </message>
-    <message>
-        <source>PUK length has to be between 8 and 12</source>
-        <translation>Длина PUK должна быть 8-12 номера</translation>
     </message>
     <message numerus="yes">
         <source>Wrong %1 code. You can try %n more time(s).</source>
@@ -604,13 +592,13 @@ Updating takes ca 2-10 minutes and requires an active internet connection. Do no
         <source>This card does not require updating</source>
         <translation>Эта карта не нуждается в обновлении</translation>
     </message>
+    <message>
+        <source>%1 length has to be between %2 and 12</source>
+        <translation>Длина %1 должна быть %2-12 номера</translation>
+    </message>
 </context>
 <context>
     <name>SSLConnect</name>
-    <message>
-        <source>Failed to connect to host. Are you connected to the internet?</source>
-        <translation>Отсутствует подключение к интернету!</translation>
-    </message>
     <message>
         <source>Loading Email info</source>
         <translation>Загрузка электронной почты информации</translation>
@@ -620,15 +608,7 @@ Updating takes ca 2-10 minutes and requires an active internet connection. Do no
         <translation>Загрузка картинки</translation>
     </message>
     <message>
-        <source>SSL context is missing</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Certificate is empty</source>
-        <translation>Сертификат пустой</translation>
-    </message>
-    <message>
-        <source>Invalid response</source>
+        <source>Invalid Content-Type</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
