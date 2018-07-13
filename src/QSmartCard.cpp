@@ -388,7 +388,10 @@ QSmartCard::ErrorType QSmartCard::login(QSmartCardData::PinType type)
 	d->m.lock();
 	d->reader = d->connect(d->t.reader());
 	if(!d->reader)
+	{
+		d->m.unlock();
 		return UnknownError;
+	}
 	QByteArray cmd = d->VERIFY;
 	cmd[3] = type;
 	cmd[4] = char(pin.size());
