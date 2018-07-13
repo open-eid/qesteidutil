@@ -631,12 +631,6 @@ void QSmartCard::run()
 					t->signCert = readCert(d->SIGNCERT);
 
 					QPCSCReader::Result data = reader->transfer(d->APPLETVER);
-					if (!data && data.SW.at(0) == 0x6C)
-					{
-						QByteArray cmd = d->APPLETVER;
-						cmd[4] = data.SW[1];
-						data = reader->transfer(cmd);
-					}
 					if (data.resultOk())
 					{
 						for(int i = 0; i < data.data.size(); ++i)
