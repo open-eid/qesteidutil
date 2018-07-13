@@ -19,7 +19,7 @@
 
 #include "Updater.h"
 #include "ui_Updater.h"
-#include "QSmartCard_p.h"
+#include "QSmartCard.h"
 
 #include "common/Common.h"
 #include "common/Configuration.h"
@@ -50,6 +50,8 @@
 #include <thread>
 
 Q_LOGGING_CATEGORY(ULog,"qesteidutil.Updater")
+
+#define APDU QByteArray::fromHex
 
 #if OPENSSL_VERSION_NUMBER < 0x10100000L
 static int ECDSA_SIG_set0(ECDSA_SIG *sig, BIGNUM *r, BIGNUM *s)
@@ -487,7 +489,7 @@ int Updater::exec()
 	d->reader->transfer(APDU("00A40000 00"));
 	d->reader->transfer(APDU("00A40100 02 EEEE"));
 	QPCSCReader::Result data = d->reader->transfer(APDU("00A40200 02 AACE"));
-	QHash<quint8,QByteArray> fci = QSmartCardPrivate::parseFCI(data.data);
+	QHash<quint8,QByteArray> fci = QSmartCard::parseFCI(data.data);
 	int size = fci.contains(0x85) ? fci[0x85][0] << 8 | fci[0x85][1] : 0x0600;
 	QByteArray certData;
 	while(certData.size() < size)

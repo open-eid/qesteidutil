@@ -98,7 +98,7 @@ QString QSmartCardData::typeString(QSmartCardData::PinType type)
 
 
 
-QSharedPointer<QPCSCReader> QSmartCardPrivate::connect(const QString &reader)
+QSharedPointer<QPCSCReader> QSmartCard::Private::connect(const QString &reader)
 {
 	qDebug() << "Connecting to reader" << reader;
 	QSharedPointer<QPCSCReader> r(new QPCSCReader(reader, &QPCSC::instance()));
@@ -107,7 +107,7 @@ QSharedPointer<QPCSCReader> QSmartCardPrivate::connect(const QString &reader)
 	return r;
 }
 
-QSmartCard::ErrorType QSmartCardPrivate::handlePinResult(QPCSCReader *reader, const QPCSCReader::Result &response, bool forceUpdate)
+QSmartCard::ErrorType QSmartCard::Private::handlePinResult(QPCSCReader *reader, const QPCSCReader::Result &response, bool forceUpdate)
 {
 	if(!response || forceUpdate)
 		updateCounters(reader, t.d);
@@ -129,7 +129,7 @@ QSmartCard::ErrorType QSmartCardPrivate::handlePinResult(QPCSCReader *reader, co
 	}
 }
 
-quint16 QSmartCardPrivate::language() const
+quint16 QSmartCard::Private::language() const
 {
 	if(Settings().language() == QLatin1String("en")) return 0x0409;
 	if(Settings().language() == QLatin1String("et")) return 0x0425;
@@ -137,26 +137,7 @@ quint16 QSmartCardPrivate::language() const
 	return 0x0000;
 }
 
-QHash<quint8,QByteArray> QSmartCardPrivate::parseFCI(const QByteArray &data)
-{
-	QHash<quint8,QByteArray> result;
-	for(QByteArray::const_iterator i = data.constBegin(); i != data.constEnd(); ++i)
-	{
-		quint8 tag(*i), size(*++i);
-		result[tag] = QByteArray(i + 1, size);
-		switch(tag)
-		{
-		case 0x6F:
-		case 0x62:
-		case 0x64:
-		case 0xA1: continue;
-		default: i += size; break;
-		}
-	}
-	return result;
-}
-
-QByteArray QSmartCardPrivate::sign(const QByteArray &dgst, QSmartCardPrivate *d)
+QByteArray QSmartCard::Private::sign(const QByteArray &dgst, Private *d)
 {
 	if(!d ||
 		!d->reader ||
@@ -172,7 +153,7 @@ QByteArray QSmartCardPrivate::sign(const QByteArray &dgst, QSmartCardPrivate *d)
 	return result.data;
 }
 
-int QSmartCardPrivate::rsa_sign(int type, const unsigned char *m, unsigned int m_len,
+int QSmartCard::Private::rsa_sign(int type, const unsigned char *m, unsigned int m_len,
 		unsigned char *sigret, unsigned int *siglen, const RSA *rsa)
 {
 	QByteArray data;
@@ -186,7 +167,7 @@ int QSmartCardPrivate::rsa_sign(int type, const unsigned char *m, unsigned int m
 	default: break;
 	}
 	data += QByteArray::fromRawData((const char*)m, int(m_len));
-	QByteArray result = sign(data, (QSmartCardPrivate*)RSA_get_app_data(rsa));
+	QByteArray result = sign(data, (Private*)RSA_get_app_data(rsa));
 	if(result.isEmpty())
 		return 0;
 	*siglen = (unsigned int)result.size();
@@ -194,13 +175,13 @@ int QSmartCardPrivate::rsa_sign(int type, const unsigned char *m, unsigned int m
 	return 1;
 }
 
-ECDSA_SIG* QSmartCardPrivate::ecdsa_do_sign(const unsigned char *dgst, int dgst_len,
+ECDSA_SIG* QSmartCard::Private::ecdsa_do_sign(const unsigned char *dgst, int dgst_len,
 		const BIGNUM *, const BIGNUM *, EC_KEY *eckey)
 {
 #if OPENSSL_VERSION_NUMBER < 0x10100000L
-	QSmartCardPrivate *d = (QSmartCardPrivate*)ECDSA_get_ex_data(eckey, 0);
+	Private *d = (Private*)ECDSA_get_ex_data(eckey, 0);
 #else
-	QSmartCardPrivate *d = (QSmartCardPrivate*)EC_KEY_get_ex_data(eckey, 0);
+	Private *d = (Private*)EC_KEY_get_ex_data(eckey, 0);
 #endif
 	QByteArray result = sign(QByteArray::fromRawData((const char*)dgst, dgst_len), d);
 	if(result.isEmpty())
@@ -214,7 +195,7 @@ ECDSA_SIG* QSmartCardPrivate::ecdsa_do_sign(const unsigned char *dgst, int dgst_
 	return sig;
 }
 
-bool QSmartCardPrivate::updateCounters(QPCSCReader *reader, QSmartCardDataPrivate *d)
+bool QSmartCard::Private::updateCounters(QPCSCReader *reader, QSmartCardDataPrivate *d)
 {
 	if(!reader->transfer(MASTER_FILE) ||
 		!reader->transfer(PINRETRY))
@@ -270,24 +251,24 @@ bool QSmartCardPrivate::updateCounters(QPCSCReader *reader, QSmartCardDataPrivat
 
 QSmartCard::QSmartCard(QObject *parent)
 :	QThread(parent)
-,	d(new QSmartCardPrivate)
+,	d(new Private)
 {
 #if OPENSSL_VERSION_NUMBER < 0x10100000L || defined(LIBRESSL_VERSION_NUMBER)
 	d->rsamethod.name = "QSmartCard";
-	d->rsamethod.rsa_sign = QSmartCardPrivate::rsa_sign;
+	d->rsamethod.rsa_sign = Private::rsa_sign;
 	ECDSA_METHOD_set_name(d->ecmethod, const_cast<char*>("QSmartCard"));
-	ECDSA_METHOD_set_sign(d->ecmethod, QSmartCardPrivate::ecdsa_do_sign);
+	ECDSA_METHOD_set_sign(d->ecmethod, Private::ecdsa_do_sign);
 	ECDSA_METHOD_set_app_data(d->ecmethod, d);
 #else
 	RSA_meth_set1_name(d->rsamethod, "QSmartCard");
-	RSA_meth_set_sign(d->rsamethod, QSmartCardPrivate::rsa_sign);
+	RSA_meth_set_sign(d->rsamethod, Private::rsa_sign);
 	typedef int (*EC_KEY_sign)(int type, const unsigned char *dgst, int dlen, unsigned char *sig,
 		unsigned int *siglen, const BIGNUM *kinv, const BIGNUM *r, EC_KEY *eckey);
 	typedef int (*EC_KEY_sign_setup)(EC_KEY *eckey, BN_CTX *ctx_in, BIGNUM **kinvp, BIGNUM **rp);
 	EC_KEY_sign sign = nullptr;
 	EC_KEY_sign_setup sign_setup = nullptr;
 	EC_KEY_METHOD_get_sign(d->ecmethod, &sign, &sign_setup, nullptr);
-	EC_KEY_METHOD_set_sign(d->ecmethod, sign, sign_setup, QSmartCardPrivate::ecdsa_do_sign);
+	EC_KEY_METHOD_set_sign(d->ecmethod, sign, sign_setup, Private::ecdsa_do_sign);
 #endif
 
 	d->t.d->readers = QPCSC::instance().readers();
@@ -426,6 +407,25 @@ void QSmartCard::logout()
 	d->updateCounters(d->reader.data(), d->t.d);
 	d->reader.clear();
 	d->m.unlock();
+}
+
+QHash<quint8,QByteArray> QSmartCard::parseFCI(const QByteArray &data)
+{
+	QHash<quint8,QByteArray> result;
+	for(QByteArray::const_iterator i = data.constBegin(); i != data.constEnd(); ++i)
+	{
+		quint8 tag(*i), size(*++i);
+		result[tag] = QByteArray(i + 1, size);
+		switch(tag)
+		{
+		case 0x6F:
+		case 0x62:
+		case 0x64:
+		case 0xA1: continue;
+		default: i += size; break;
+		}
+	}
+	return result;
 }
 
 void QSmartCard::reload() { selectCard(d->t.card());  }
@@ -609,7 +609,7 @@ void QSmartCard::run()
 						QPCSCReader::Result data = reader->transfer(file + APDU(reader->protocol() == QPCSCReader::T1 ? "00" : ""));
 						if(!data)
 							return QSslCertificate();
-						QHash<quint8,QByteArray> fci = d->parseFCI(data.data);
+						QHash<quint8,QByteArray> fci = parseFCI(data.data);
 						int size = fci.contains(0x85) ? fci[0x85][0] << 8 | fci[0x85][1] : 0x0600;
 						QByteArray cert;
 						while(cert.size() < size)

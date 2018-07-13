@@ -107,7 +107,6 @@ private:
 
 
 
-class QSmartCardPrivate;
 class QSmartCard: public QThread
 {
 	Q_OBJECT
@@ -135,6 +134,8 @@ public:
 	void reload();
 	ErrorType unblock( QSmartCardData::PinType type, const QString &pin, const QString &puk );
 
+	static QHash<quint8,QByteArray> parseFCI(const QByteArray &data);
+
 signals:
 	void dataChanged();
 
@@ -144,7 +145,8 @@ private Q_SLOTS:
 private:
 	void run() override;
 
-	QSmartCardPrivate *d;
+	class Private;
+	Private *d;
 
 	friend class MainWindow;
 };

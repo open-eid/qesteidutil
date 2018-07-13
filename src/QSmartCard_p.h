@@ -32,16 +32,15 @@
 
 #define APDU QByteArray::fromHex
 
-class QSmartCardPrivate
+class QSmartCard::Private
 {
 public:
 	QSharedPointer<QPCSCReader> connect(const QString &reader);
 	QSmartCard::ErrorType handlePinResult(QPCSCReader *reader, const QPCSCReader::Result &response, bool forceUpdate);
 	quint16 language() const;
-	static QHash<quint8,QByteArray> parseFCI(const QByteArray &data);
 	bool updateCounters(QPCSCReader *reader, QSmartCardDataPrivate *d);
 
-	static QByteArray sign(const QByteArray &dgst, QSmartCardPrivate *d);
+	static QByteArray sign(const QByteArray &dgst, Private *d);
 	static int rsa_sign(int type, const unsigned char *m, unsigned int m_len,
 		unsigned char *sigret, unsigned int *siglen, const RSA *rsa);
 	static ECDSA_SIG* ecdsa_do_sign(const unsigned char *dgst, int dgst_len,
