@@ -50,7 +50,7 @@ public:
 	QSharedPointer<QPCSCReader> reader;
 	QMutex			m;
 	QSmartCardData	t;
-#if OPENSSL_VERSION_NUMBER < 0x10010000L || defined(LIBRESSL_VERSION_NUMBER)
+#if OPENSSL_VERSION_NUMBER < 0x10100000L || defined(LIBRESSL_VERSION_NUMBER)
 	RSA_METHOD		rsamethod = *RSA_get_default_method();
 	ECDSA_METHOD	*ecmethod = ECDSA_METHOD_new(nullptr);
 #else
