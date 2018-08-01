@@ -11,6 +11,7 @@
 [![Build Status](https://ci.appveyor.com/api/projects/status/github/open-eid/qesteidutil?branch=master&svg=true)](https://ci.appveyor.com/project/open-eid/qesteidutil)
 [![Coverity Scan Build Status](https://scan.coverity.com/projects/737/badge.svg)](https://scan.coverity.com/projects/737)
 * [Ubuntu](#ubuntu)
+* [Fedora](#fedora)
 * [OS X](#osx)
 * [Windows](#windows)
 
@@ -42,7 +43,38 @@
 6. Execute
 
         /usr/local/bin/qesteidutil
-        
+
+
+### Fedora
+
+1. Install dependencies
+
+        sudo dnf install cmake desktop-file-utils openssl-devel qt5-qttools-devel pcsc-lite-devel libappstream-glib-devel qtsingleapplication-qt5-devel
+
+2. Fetch the source
+
+        git clone --recursive git@github.com:open-eid/qesteidutil.git
+        cd qesteidutil
+
+3. Configure
+
+        mkdir build
+        cd build
+        cmake ..
+
+4. Build
+
+        make
+
+5. Install
+
+        sudo make install
+
+6. Execute
+
+        /usr/local/bin/qesteidutil
+
+
 ### OSX
 
 1. Install dependencies from
@@ -51,7 +83,7 @@
    * [http://qt-project.org](http://qt-project.org)
        Since Qt 5.6 default SSL backend is SecureTransport and this project depends openssl.
        See how to build [OSX Qt from source](#building-osx-qt-from-source)
-2. Fetch the source
+2. Clone the source
 
         git clone --recursive https://github.com/open-eid/qesteidutil
         cd qesteidutil
@@ -102,7 +134,7 @@
     * [Visual Studio Community 2015](https://www.visualstudio.com/downloads/)
     * [http://www.cmake.org](http://www.cmake.org)
     * [http://qt-project.org](http://qt-project.org)
-2. Fetch the source
+2. Clone the source
 
         git clone --recursive https://github.com/open-eid/qesteidutil
         cd qesteidutil
