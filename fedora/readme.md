@@ -1,10 +1,11 @@
 # Guide
+
 ## to create rpm package and update distribution package
 
 ### General Information
 
-These instructions assume, that you have most/all of the tools needed for the compilation of software generally and qesteidutil specifically already installed. 
-To install the dependencies to build qesteidutil exectute `dnf install cmake desktop-file-utils base-devel openssl-devel qt5qttools-devel pcsc-lite-devel libappstream-glib-devel qtsingleapplication-qt5-devel`
+These instructions assume, that you have most/all of the tools needed for the compilation of software generally and qesteidutil specifically already installed.
+To install the dependencies to build qesteidutil exectute `dnf install cmake desktop-file-utils openssl-devel qt5-qttools-devel pcsc-lite-devel libappstream-glib-devel qtsingleapplication-qt5-devel`
 If these should have other names in your rpm based distribution, please look for the equivalent.
 RPM based distributions such as fedora create packages on the basis of a 'spec file' that contains metadata about the package and instructions on how to compile it.
 
