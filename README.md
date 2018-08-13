@@ -129,9 +129,9 @@ rm -rf qttools-opensource-src-5.9.3
 
 **1. Install dependencies from**
 
-- [Visual Studio Community 2015](https://www.visualstudio.com/downloads/)
-- [http://www.cmake.org](http://www.cmake.org)
-- [http://qt-project.org](http://qt-project.org)
+- [Visual Studio Community][vs-link]
+- [CMake]
+- [Qt]
 
 **2. Clone the source**
 ```
@@ -171,9 +171,10 @@ Source code is provided on "as is" terms with no warranty (see license for more 
 [www.id.ee]: https://www.id.ee/
 [installer.id.ee]: https://installer.id.ee
 [abi@id.ee]: mailto:abi@id.ee
-[XCode]: https://itunes.apple.com/en/app/xcode/id497799835?mt=12
+[XCode]: https://itunes.apple.com/app/xcode/id497799835?mt=12
 [CMake]: https://cmake.org/install/
 [Qt]: https://doc.qt.io/qt-5.6/osx.html
+[vs-link]: https://www.visualstudio.com/downloads/
 [travis-img]: https://travis-ci.org/open-eid/qesteidutil.svg?branch=master
 [travis-link]: https://travis-ci.org/open-eid/qesteidutil
 
