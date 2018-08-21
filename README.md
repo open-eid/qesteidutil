@@ -59,7 +59,7 @@
 **1. Install dependencies from**
 - [XCode](https://itunes.apple.com/app/xcode/id497799835?mt=12)
 - [CMake](https://cmake.org/install/)
-- [Qt](https://doc.qt.io/qt-5.6/osx.html)
+- [Qt](https://doc.qt.io/qt-5.9/osx.html)
 
 Since Qt 5.6 default SSL backend is SecureTransport and this project depends openssl.  
 See how to build [OSX Qt from source](#building-osx-qt-from-source)
@@ -75,7 +75,7 @@ See how to build [OSX Qt from source](#building-osx-qt-from-source)
 
     mkdir build
     cd build
-    cmake -DQt5_DIR="~/Qt/5.5/clang_64/lib/cmake/Qt5" ..
+    cmake -DQt5_DIR="~/Qt/5.9/clang_64/lib/cmake/Qt5" ..
 
 **4. Build**
 
@@ -93,23 +93,23 @@ See how to build [OSX Qt from source](#building-osx-qt-from-source)
 
     brew install openssl
 
-    curl -O -L http://download.qt.io/official_releases/qt/5.9/5.9.3/submodules/qtbase-opensource-src-5.9.3.tar.xz
-    tar xf qtbase-opensource-src-5.9.3.tar.xz
-    cd qtbase-opensource-src-5.9.3
-    ./configure -prefix /Developer/Qt-5.9.3 -opensource -nomake tests -nomake examples -no-securetransport -openssl-runtime -confirm-license -I/usr/local/opt/openssl/include -L/usr/local/opt/openssl/lib
+    curl -O -L http://download.qt.io/official_releases/qt/5.9/5.9.6/submodules/qtbase-opensource-src-5.9.6.tar.xz
+    tar xf qtbase-opensource-src-5.9.6.tar.xz
+    cd qtbase-opensource-src-5.9.6
+    ./configure -prefix /Developer/Qt-5.9.6 -opensource -nomake tests -nomake examples -no-securetransport -openssl-runtime -confirm-license -I/usr/local/opt/openssl/include -L/usr/local/opt/openssl/lib
     make
     sudo make install
     cd ..
-    rm -rf qtbase-opensource-src-5.9.3
+    rm -rf qtbase-opensource-src-5.9.6
 
-    curl -O -L http://download.qt.io/official_releases/qt/5.9/5.9.3/submodules/qttools-opensource-src-5.9.3.tar.xz
-    tar xf qttools-opensource-src-5.9.3.tar.xz
-    cd qttools-opensource-src-5.9.3
-    /Developer/Qt-5.9.3/bin/qmake
+    curl -O -L http://download.qt.io/official_releases/qt/5.9/5.9.6/submodules/qttools-opensource-src-5.9.6.tar.xz
+    tar xf qttools-opensource-src-5.9.6.tar.xz
+    cd qttools-opensource-src-5.9.6
+    /Developer/Qt-5.9.6/bin/qmake
     make
     sudo make install
     cd ..
-    rm -rf qttools-opensource-src-5.9.3
+    rm -rf qttools-opensource-src-5.9.6
 
 ### Windows
 
@@ -117,7 +117,7 @@ See how to build [OSX Qt from source](#building-osx-qt-from-source)
 
 - [Visual Studio Community](https://www.visualstudio.com/downloads/)
 - [CMake](https://cmake.org/install/)
-- [Qt](http://doc.qt.io/qt-5/windows-support.html)
+- [Qt](https://doc.qt.io/qt-5.9/windows-support.html)
 
 **2. Clone the source**
 
