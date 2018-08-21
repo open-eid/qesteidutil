@@ -23,45 +23,36 @@
 ### Linux
 
 **1. Install dependencies**
-```
-# Ubuntu
-sudo apt-get install cmake qttools5-dev qttools5-dev-tools libpcsclite-dev libssl-dev
-# Fedora
-sudo dnf install cmake desktop-file-utils openssl-devel qt5-qttools-devel pcsc-lite-devel libappstream-glib-devel qtsingleapplication-qt5-devel
-```
+
+    # Ubuntu
+    sudo apt-get install cmake qttools5-dev qttools5-dev-tools libpcsclite-dev libssl-dev
+    # Fedora
+    sudo dnf install cmake desktop-file-utils openssl-devel qt5-qttools-devel pcsc-lite-devel libappstream-glib-devel qtsingleapplication-qt5-devel
 
 **2. Clone the source**
-```
-git clone --recurse-submodules git@github.com:open-eid/qesteidutil.git
-## OR git < 2.13
-git clone --recursive git@github.com:open-eid/qesteidutil.git
-cd qesteidutil
-```
+
+    git clone --recurse-submodules git@github.com:open-eid/qesteidutil.git
+    ## OR git < 2.13
+    git clone --recursive git@github.com:open-eid/qesteidutil.git
+    cd qesteidutil
 
 **3. Configure**
-```
-mkdir build
-cd build
-cmake ..
-```
+
+    mkdir build
+    cd build
+    cmake ..
 
 **4. Build**
 
-```
-make
-```
+    make
 
 **5. Install**
 
-```
-sudo make install
-```
+    sudo make install
 
 **6. Execute**
 
-```
-/usr/local/bin/qesteidutil
-```
+    /usr/local/bin/qesteidutil
 
 ### OSX
 
@@ -74,58 +65,51 @@ Since Qt 5.6 default SSL backend is SecureTransport and this project depends ope
 See how to build [OSX Qt from source](#building-osx-qt-from-source)
 
 **2. Clone the source**
-```
-git clone --recurse-submodules git@github.com:open-eid/qesteidutil.git
-## OR git < 2.13
-git clone --recursive git@github.com:open-eid/qesteidutil.git
-cd qesteidutil
-```
+
+    git clone --recurse-submodules git@github.com:open-eid/qesteidutil.git
+    ## OR git < 2.13
+    git clone --recursive git@github.com:open-eid/qesteidutil.git
+    cd qesteidutil
 
 **3. Configure**
-```
-mkdir build
-cd build
-cmake -DQt5_DIR="~/Qt/5.5/clang_64/lib/cmake/Qt5" ..
-```
+
+    mkdir build
+    cd build
+    cmake -DQt5_DIR="~/Qt/5.5/clang_64/lib/cmake/Qt5" ..
 
 **4. Build**
-```
-make
-```
+
+    make
 
 **5. Install**
-```
-sudo make install
-```
+
+    sudo make install
 
 **6. Execute**
-```
-open /usr/local/bin/qesteidutil.app
-```
+
+    open /usr/local/bin/qesteidutil.app
 
 #### Building OSX Qt from source
 
-```
-brew install openssl
+    brew install openssl
 
-curl -O -L http://download.qt.io/official_releases/qt/5.9/5.9.3/submodules/qtbase-opensource-src-5.9.3.tar.xz
-tar xf qtbase-opensource-src-5.9.3.tar.xz
-cd qtbase-opensource-src-5.9.3
-./configure -prefix /Developer/Qt-5.9.3 -opensource -nomake tests -nomake examples -no-securetransport -openssl-runtime -confirm-license -I/usr/local/opt/openssl/include -L/usr/local/opt/openssl/lib
-make
-sudo make install
-cd ..
-rm -rf qtbase-opensource-src-5.9.3
+    curl -O -L http://download.qt.io/official_releases/qt/5.9/5.9.3/submodules/qtbase-opensource-src-5.9.3.tar.xz
+    tar xf qtbase-opensource-src-5.9.3.tar.xz
+    cd qtbase-opensource-src-5.9.3
+    ./configure -prefix /Developer/Qt-5.9.3 -opensource -nomake tests -nomake examples -no-securetransport -openssl-runtime -confirm-license -I/usr/local/opt/openssl/include -L/usr/local/opt/openssl/lib
+    make
+    sudo make install
+    cd ..
+    rm -rf qtbase-opensource-src-5.9.3
 
-curl -O -L http://download.qt.io/official_releases/qt/5.9/5.9.3/submodules/qttools-opensource-src-5.9.3.tar.xz
-tar xf qttools-opensource-src-5.9.3.tar.xz
-cd qttools-opensource-src-5.9.3
-/Developer/Qt-5.9.3/bin/qmake
-make
-sudo make install
-cd ..
-rm -rf qttools-opensource-src-5.9.3
-```
+    curl -O -L http://download.qt.io/official_releases/qt/5.9/5.9.3/submodules/qttools-opensource-src-5.9.3.tar.xz
+    tar xf qttools-opensource-src-5.9.3.tar.xz
+    cd qttools-opensource-src-5.9.3
+    /Developer/Qt-5.9.3/bin/qmake
+    make
+    sudo make install
+    cd ..
+    rm -rf qttools-opensource-src-5.9.3
 
 ### Windows
 
@@ -136,29 +120,25 @@ rm -rf qttools-opensource-src-5.9.3
 - [Qt](http://doc.qt.io/qt-5/windows-support.html)
 
 **2. Clone the source**
-```
-git clone --recurse-submodules git@github.com:open-eid/qesteidutil.git
-## OR git < 2.13
-git clone --recursive git@github.com:open-eid/qesteidutil.git
-cd qesteidutil
-```
+
+    git clone --recurse-submodules git@github.com:open-eid/qesteidutil.git
+    ## OR git < 2.13
+    git clone --recursive git@github.com:open-eid/qesteidutil.git
+    cd qesteidutil
 
 **3. Configure**
-```
-mkdir build
-cd build
-cmake -G"NMAKE Makefiles" -DQt5_DIR="C:\Qt\5.9\msvc2015\lib\cmake\Qt5" ..
-```
+
+    mkdir build
+    cd build
+    cmake -G"NMAKE Makefiles" -DQt5_DIR="C:\Qt\5.9\msvc2015\lib\cmake\Qt5" ..
 
 **4. Build**
-```
-nmake
-```
+
+    nmake
 
 **6. Execute**
-```
-qesteidutil.exe
-```
+
+    qesteidutil.exe
 
 ## Support
 
