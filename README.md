@@ -1,14 +1,16 @@
 # ID-card utility
 
-![European Regional Development Fund][ERDF-link]
+<!-- European Regional Development Fund - DO NOT REMOVE THIS IMAGE BEFORE 05.03.2020 -->
+![European Regional Development Fund](https://github.com/e-gov/RIHA-Frontend/raw/master/logo/EU/EU.png)
 
-* License: [LGPL 2.1][license-link]
+* License: [LGPL 2.1](LICENSE.LGPL)
 * &copy; Estonian Information System Authority
-* [Architecture of ID-software][open-eid-github-link]
+* [Architecture of ID-software](https://open-eid.github.io/)
 
-| Linux | Windows | Coverity |
-| --- | --- | --- |
-| [![Linux Build Status][travis-img]][travis-link] | [![Windows Build Status][appveyor-img]][appveyor-link] | [![Coverity Scan Build Status][coverity-img]][coverity-link] |
+[![Linux Build Status](https://travis-ci.org/open-eid/qesteidutil.svg?branch=master)](https://travis-ci.org/open-eid/qesteidutil)
+[![Windows Build Status](https://ci.appveyor.com/api/projects/status/github/open-eid/qesteidutil?branch=master&svg=true)](https://ci.appveyor.com/project/open-eid/qesteidutil)
+[![Coverity Scan Build Status](https://scan.coverity.com/projects/737/badge.svg)](https://scan.coverity.com/projects/737)
+
 
   - [Building](#building)
     - [Linux](#linux)
@@ -64,9 +66,9 @@ sudo make install
 ### OSX
 
 **1. Install dependencies from**
-- [XCode]
-- [CMake]
-- [Qt]
+- [XCode](https://itunes.apple.com/app/xcode/id497799835?mt=12)
+- [CMake](https://cmake.org/install/)
+- [Qt](https://doc.qt.io/qt-5.6/osx.html)
 
 Since Qt 5.6 default SSL backend is SecureTransport and this project depends openssl.  
 See how to build [OSX Qt from source](#building-osx-qt-from-source)
@@ -129,9 +131,9 @@ rm -rf qttools-opensource-src-5.9.3
 
 **1. Install dependencies from**
 
-- [Visual Studio Community][vs-link]
-- [CMake]
-- [Qt]
+- [Visual Studio Community](https://www.visualstudio.com/downloads/)
+- [CMake](https://cmake.org/install/)
+- [Qt](http://doc.qt.io/qt-5/windows-support.html)
 
 **2. Clone the source**
 ```
@@ -160,26 +162,6 @@ qesteidutil.exe
 
 ## Support
 
-Official builds are provided through official distribution point [installer.id.ee]. If you want support, you need to be using official builds. Contact for assistance by email [abi@id.ee] or [www.id.ee].
+Official builds are provided through official distribution point [installer.id.ee](https://installer.id.ee). If you want support, you need to be using official builds. Contact for assistance by email [abi@id.ee](mailto:abi@id.ee) or [www.id.ee](https://www.id.ee/).
 
 Source code is provided on "as is" terms with no warranty (see license for more information). Do not file Github issues with generic support requests.
-
-<!-- links -->
-[ERDF-link]: https://github.com/e-gov/RIHA-Frontend/raw/master/logo/EU/EU.png "European Regional Development Fund - DO NOT REMOVE THIS IMAGE BEFORE 05.03.2020"
-[license-link]: LICENSE.LGPL
-[open-eid-github-link]: http://open-eid.github.io
-[www.id.ee]: https://www.id.ee/
-[installer.id.ee]: https://installer.id.ee
-[abi@id.ee]: mailto:abi@id.ee
-[XCode]: https://itunes.apple.com/app/xcode/id497799835?mt=12
-[CMake]: https://cmake.org/install/
-[Qt]: https://doc.qt.io/qt-5.6/osx.html
-[vs-link]: https://www.visualstudio.com/downloads/
-[travis-img]: https://travis-ci.org/open-eid/qesteidutil.svg?branch=master
-[travis-link]: https://travis-ci.org/open-eid/qesteidutil
-
-[appveyor-img]: https://ci.appveyor.com/api/projects/status/github/open-eid/qesteidutil?branch=master&svg=true
-[appveyor-link]: https://ci.appveyor.com/project/open-eid/qesteidutil
-
-[coverity-img]: https://scan.coverity.com/projects/737/badge.svg
-[coverity-link]: https://scan.coverity.com/projects/737
