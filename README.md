@@ -1,4 +1,4 @@
-# ID-card utility
+# DEPRECATED - ID-card utility
 
 <!-- European Regional Development Fund - DO NOT REMOVE THIS IMAGE BEFORE 05.03.2020 -->
 ![European Regional Development Fund](https://github.com/e-gov/RIHA-Frontend/raw/master/logo/EU/EU.png)
@@ -17,6 +17,8 @@
     - [OSX](#osx)
     - [Windows](#windows)
   - [Support](#support)
+
+NB! This repository is not maintained and supported any more. Use [Digidoc4 client](https://github.com/open-eid/DigiDoc4-Client) for alternative solution.
 
 ## Building
 
