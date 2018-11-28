@@ -18,6 +18,8 @@
     - [Windows](#windows)
   - [Support](#support)
 
+NB! This repository is not maintained and supported any more. Use [Digidoc4 client](https://github.com/open-eid/DigiDoc4-Client) for alternative solution.
+
 ## Building
 
 ### Linux
